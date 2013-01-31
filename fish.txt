@@ -1,3 +1,0 @@
-I'm testing this to get a feel for flow and all.
-Feel free to delete, modify, and otherwise molest this file. 
-It exists only for testing purposes.
