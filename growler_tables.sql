@@ -4,7 +4,7 @@ Justin Bauguess 1/29/13
 */
 /* drop table theme; */
 create table theme (
-	theme_id			int(4)			primary key
+	theme_id			int			primary key
 	,theme_name			varchar(30)
 	,theme_description		varchar(250)
 	,theme_creator			varchar(40)
@@ -28,7 +28,7 @@ Justin Bauguess 1/29/13
 */	
 /* drop table theme_ranking; */
 create table theme_ranking (
-	user_id				varchar(40)		
+	user_id				int		
 	,theme_id			int(4)			
 	,theme_rank			int			check (theme_rank > 0 and theme_rank < 11)
 	,constraint foreign key (user_id) references users(user_id)
@@ -41,7 +41,7 @@ Justin Bauguess 1/29/13
 */
 /* drop table speaker; */
 create table speaker (
-	speaker_id			int(4)			primary key
+	speaker_id			int			primary key
 	,speaker_first			varchar(30)
 	,speaker_last			varchar(30)
 	,suggested_by			varchar(40)		
