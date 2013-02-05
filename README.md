@@ -1,17 +1,9 @@
-February 05, 2013
-
-Git Instructions:
-
-From ps11.pstcc.edu,
-File transfer into a dedicated directory on your machine.
-In the git shell, get into this directory.
-git init to initialize a git repository on your local machine
-git add [directory name]
-git commit -m "Your message explaining what this commit is for"
-git remote add origin https://github.com/fiskr/growler.git
-git push https://github.com/fiskr/growler.git
-
-Just make sure you type your user name and password correctly in the shell- you can't backspace.
-
-Adding as an example.
-
+Guide to directories:
+Web
+	dedicated to HTML, CSS, javascript, and anything that would be
+	hosted on a webserver and on the front end
+App	
+	Java, PHP, and the application source code bridging between the 
+	web front end and the database back end.
+DB
+	SQL scripts, ERDs, and anything related to databases

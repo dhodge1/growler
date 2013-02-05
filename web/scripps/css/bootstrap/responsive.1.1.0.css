@@ -1,0 +1,3 @@
+.clearFix:before,.clearFix:after{content:"";display:table;}
+.clearFix:after{clear:both;}
+@media (min-width:768px){.hidden-desktop{display:none;} .visible-phone{display:none;} .visible-tablet{display:none;}}@media (max-width:767px){.row,.span1,.span2,.span3,.span4,.span5,.span6,.span7,.span8,.span9,.span10,.span11,.span12{float:none;margin-left:0;margin-right:0;width:auto;}}@media (min-width:481px) and (max-width:767px){.hidden-tablet{display:none;} .visible-desktop{display:none;} .visible-phone{display:none;}}@media (max-width:480px){.hidden-phone{display:none;} .visible-desktop{display:none;} .visible-tablet{display:none;}}@media (max-width:767px){.globalNavigation>ul{padding-left:12px;}}
