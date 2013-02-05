@@ -9,13 +9,13 @@ Brandon Foster 02/05/13
 DROP TABLE theme; 
 
 CREATE TABLE theme (
-	theme_id			int			primary key
-	,theme_name			varchar(30)
-	,theme_description		varchar(250)
-	,theme_creator			int		references user(id)
-	,theme_year			year(4)
-	,visible			boolean
-	,active				boolean
+	 id			int		PRIMARY KEY
+	,name			varchar(30)
+	,description		varchar(250)
+	,creator		int		REFERENCES user(id)
+	,year			year(4),
+	,visible		boolean,
+	,active			boolean
 	);
 	
 /*
@@ -34,7 +34,7 @@ Justin Bauguess 1/29/13
 DROP TABLE theme_ranking;
 CREATE TABLE theme_ranking (
 	user_id				int		REFERENCES user(id)	
-	,theme_id			int(4)		REFERENCES theme(id)	
+	,theme_id			int		REFERENCES theme(id)	
 	,theme_rank			int		CHECK (theme_rank > 0 AND theme_rank < 11)
 	);
 
