@@ -1,5 +1,4 @@
-insert into theme (theme_id, theme_name, theme_description, theme_creator, theme_year, active, visible) 
-values ("0001", "Cloud Computing", "All things Cloud, from IaaS, PaaS, DaaS, SaaS, to hosting providers, brokers, and cloud-enabling appliances", "DEFAULT", "2013", true, true);
+INSERT INTO theme VALUES (1, "Cloud Computing", "All things Cloud, from IaaS, PaaS, DaaS, SaaS, to hosting providers, brokers, and cloud-enabling appliances", 2023, "2013", true, true);
 insert into theme (theme_id, theme_name, theme_description, theme_creator, theme_year, active, visible) 
 values ("0002", "Development Frameworks", "Any type of development framework, regardless of language", "DEFAULT", "2013", true, true);
 insert into theme (theme_id, theme_name, theme_description, theme_creator, theme_year, active, visible) 
