@@ -12,3 +12,6 @@ git remote add origin https://github.com/fiskr/growler.git
 git push https://github.com/fiskr/growler.git
 
 Just make sure you type your user name and password correctly in the shell- you can't backspace.
+
+Adding as an example.
+
