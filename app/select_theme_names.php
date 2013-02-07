@@ -1,7 +1,5 @@
 <?php
-//PHP script to return all Theme names
-
-//define variables for connecting to the database
+//PHP script to return all theme names
 $host = "ps11.pstcc.edu";
 $user = "c2850a01";
 $pass = "c2850a01";
@@ -14,7 +12,23 @@ mysql_select_db($db) or die ('Error selecting database');
 
 $select_statement = "SELECT name FROM theme;";
 $result = mysql_query($select_statement);
-echo $result;
+if (!$result) {
+    $message  = 'Invalid query: ' . mysql_error() . "\n";
+    $message .= 'Whole query: ' . $query;
+    die($message);
+}
+
+
+//get the number of rows returned from the query
+$num_rows = mysql_num_rows($result);
+
+//process the result by fetching rows
+for($i = 0; $i < $num_rows; $i++){
+
+        $row = mysql_fetch_row($result);
+        echo $row[0];
+}
+
 
 mysql_close($connection);
 
