@@ -26,7 +26,7 @@ $num_rows = mysql_num_rows($result);
 for($i = 0; $i < $num_rows; $i++){
 
         $row = mysql_fetch_row($result);
-        echo $row[0];
+        echo $row[0]"<br/>";
 }
 
 
