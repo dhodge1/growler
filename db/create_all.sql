@@ -70,3 +70,49 @@ CREATE TABLE speaker_ranking (
 	,ranking		int
 	);
 	
+/*
+Creates the table for storing the survey questions, which will rate the speakers
+Justin Bauguess 2/7/13
+*/
+	
+DROP TABLE question;
+CREATE TABLE question (
+	id				int			PRIMARY KEY
+	,text			varchar(250)
+	);
+	
+/*
+Creates table for session information
+Justin Bauguess 2/7/13
+*/
+
+DROP TABLE session;
+CREATE TABLE session (
+	id				int			PRIMARY KEY
+	,name			varchar(50)
+	,description	varchar(250)
+	);
+	
+/*
+Creates the table for ranking sessions
+Justin Bauguess 2/7/13
+*/
+
+DROP TABLE session_ranking;
+CREATE TABLE session_ranking (
+	session_id		int			REFERENCES session(id)
+	,user_id		int			REFERENCES user(id)
+	,question_id	int			REFERENCES question(id)
+	,ranking		int			CHECK (ranking > 0 AND ranking < 6)
+	);
+
+/*
+Creates the table for keeping track of speaker teams
+Justin Bauguess 2/7/13
+*/
+
+DROP TABLE speaker_team;
+CREATE TABLE speaker_team (
+	session_id		int			REFERENCES session(id)
+	,speaker_id		int			REFERENCES speaker(id)
+	);
