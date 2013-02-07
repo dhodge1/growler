@@ -24,7 +24,7 @@ $num_rows = mysql_num_rows($result);
 
 //process the result by fetching rows
 for($i = 0; $i < $num_rows; $i++){
-
+	//here we display what we get back from our query
         $row = mysql_fetch_row($result);
         echo "$row[0]<br/>";
 }
