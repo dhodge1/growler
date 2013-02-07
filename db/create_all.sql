@@ -37,7 +37,16 @@ CREATE TABLE theme_ranking (
 	,theme_id			int		REFERENCES theme(id)	
 	,theme_rank			int		CHECK (theme_rank > 0 AND theme_rank < 11)
 	);
-
+/*
+Temporary Bridge table for ranking themes
+*/
+DROP TABLE test_ranks;
+CREATE TABLE test_ranks (
+	theme_id			int		REFERENCES theme(id)
+	,ranking_id			int		PRIMARY KEY
+	,ranking			int
+	);
+	
 /*
 Creates the table for storing speaker information
 Justin Bauguess 1/29/13
@@ -49,3 +58,15 @@ CREATE TABLE speaker (
 	,last_name			varchar(30)
 	,suggested_by			int			REFERENCES user(id)		
 	);
+
+/*
+Creates the table for storing speaker ranks (temporary table?)
+Justin Bauguess 2/7/13
+*/
+DROP TABLE speaker_ranking;
+CREATE TABLE speaker_ranking (
+	speaker_id		int			REFERENCES speaker(id)
+	,ranking_id		int			PRIMARY KEY
+	,ranking		int
+	);
+	
