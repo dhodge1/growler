@@ -1,5 +1,5 @@
 <?php
-//PHP script to return all theme names
+//Comment change PHP script to return all theme names
 $host = "ps11.pstcc.edu";
 $user = "c2850a01";
 $pass = "c2850a01";
