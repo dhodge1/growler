@@ -1,3 +1,6 @@
+/*
+Inserts the themes from 2012
+*/
 insert into session (id, year, name) values (1 , 2012, "Leveraging Technology for Better Deployment");
 insert into session (id, year, name) values (2 , 2012, "Cheap and Free Test Tools");
 insert into session (id, year, name) values (3 , 2012, "Cloudy with a Chance of Continous Delivery");

@@ -117,10 +117,11 @@ CREATE TABLE session (
 
 DROP TABLE session_ranking;
 CREATE TABLE session_ranking (
-	session_id		int	REFERENCES session(id) PRIMARY KEY
-	,user_id		int	REFERENCES user(id) PRIMARY KEY
-	,question_id		int	REFERENCES question(id) PRIMARY KEY
+	session_id		int	REFERENCES session(id)
+	,user_id		int	REFERENCES user(id)
+	,question_id		int	REFERENCES question(id)
 	,ranking		int	CHECK (ranking > 0 AND ranking < 6)
+	,PRIMARY KEY (session_id, user_id, question_id)
 	);
 
 /*
