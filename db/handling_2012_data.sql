@@ -14,7 +14,7 @@ create table survey_techtober_12 (
 Takes the raw data from a comma delimted file and dumps it into a table so we can process it for 
 making last year's speaker rankings
  */
-load data infile 'survey_techtober.csv'
+load data infile 'raw_data/survey_techtober.csv'
 into table 'survey_techtober_12'
 fields terminated by ','
 ignore 1 lines;
