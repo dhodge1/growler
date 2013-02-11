@@ -98,16 +98,35 @@ CREATE TABLE question (
 	);
 	
 /*
+ * Creates a table for location information
+ * A location is a room (or remote location) where a session is held
+ */	
+
+DROP TABLE location;
+CREATE TABLE location (
+	id				int			PRIMARY KEY
+	,description	varchar(50)
+	);
+	
+/*
  * Creates table for session information
  * A session is essentially a presentation given by a speaker_team (which may
- * be one or more speakers), attended by users.
+ * be one or more speakers), attended by users.  A session has a start time, a start 
+ * date, a duration, a location, and a track (which is either Technical or 
+ * Business Friendly).
  */
 
 DROP TABLE session;
 CREATE TABLE session (
-	id				int			PRIMARY KEY
-	,name			varchar(50)
-	,description		varchar(250)
+	id					int			PRIMARY KEY
+	,name				varchar(50)
+	,description		text
+	,track				varchar(20)
+	,session_date		date
+	,start_time			time
+	,duration			int
+	,location			int			REFERENCES location(id)
+	
 	);
 	
 /*
