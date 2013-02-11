@@ -2,6 +2,7 @@
 Creates a table to use to process the data from last year
 */
 create table survey_techtober_12 (
+	survey_id			AUTO_INCREMENT PRIMARY KEY
 	session_id			int
 	,question1			int
 	,question2			int
