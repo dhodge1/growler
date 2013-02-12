@@ -47,3 +47,6 @@ insert into speaker (speaker_id, speaker_first, speaker_last, suggested_by) valu
 insert into speaker (speaker_id, speaker_first, speaker_last, suggested_by) values (43,"Kabita","Nayak",8083);
 insert into speaker (speaker_id, speaker_first, speaker_last, suggested_by) values (44,"Herb","Himes",8083);
 insert into speaker (speaker_id, speaker_first, speaker_last, suggested_by) values (45,"Stefanie","Edinger",8083);
+insert into speaker (speaker_id, speaker_first, speaker_last, suggested_by) values (46,
+"Phil", "Cornell", 8083);
+insert into speaker (speaker_id, speaker_first, speaker_last, suggested_by) values (47,"Allen", "Shacklock", 8083);
