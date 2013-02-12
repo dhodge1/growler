@@ -93,8 +93,9 @@ CREATE TABLE speaker_ranking (
 	
 DROP TABLE question;
 CREATE TABLE question (
-	id				int			PRIMARY KEY
-	,text			varchar(250)
+	id			INT			PRIMARY KEY
+	,text			VARCHAR(250)
+	,year			YEAR(4) 
 	);
 	
 /*
