@@ -1,0 +1,362 @@
+﻿/* =============================================================================
+   demo.less
+   ========================================================================== */
+
+@import "bootstrap/global.less";
+@import "bootstrap/mixins.less";
+
+// Normalize overrides
+// -----------------------------------------------------------------------------
+
+section {
+    margin-bottom: @largeMargin;
+}
+
+// Layout overrides
+// -----------------------------------------------------------------------------
+
+.content {
+    padding-top: @largeMargin;
+}
+
+h3 + h4,
+h3 + table,
+h3 + .row {
+    margin-top: @smallMargin;
+}
+
+table + .row,
+.row + h3,
+.row + h4,
+.row + .row {
+    margin-top: @mediumMargin;
+}
+
+@media (max-width: 767px) { 
+  
+    [class^="span"],
+    [class*=" span"] {
+        margin-bottom: @largeMargin;
+    }
+    
+    .row + h3,
+    .row + h4,
+    .row + .row {
+        margin-top: 0;
+    }
+
+}
+
+
+// Typography
+// -----------------------------------------------------------------------------
+
+.badge-headsUp {
+    background-color: @darkBlue;
+    color: @white;
+}
+
+.masthead {
+    margin-bottom: @largeMargin * 2;
+
+    h1 {
+        font-size: 40px;
+        line-height: 48px;
+    }
+}
+
+.button.button-primary.download {
+    font-size: 24px;
+    font-weight: normal;
+    line-height: 30px;
+    margin: 0 0 @mediumMargin 0;
+    padding: 12px;
+}
+
+.pageTitle {
+    margin-bottom: @largeMargin;
+}
+
+.pageTitle > h1 {
+    font-size: 40px;
+    line-height: 48px;
+}
+
+.sectionHeader {
+    border-bottom: 2px solid @lightBlue;
+    margin-bottom: @largeMargin;
+}
+
+.sectionHeader > h2 {
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 30px;
+    margin-bottom: @smallMargin;
+}
+
+.todo {
+    color: @red;
+    font-weight: bold;
+}
+
+.well {
+    background-color: @gray2;
+    border: 1px solid @gray3;
+    .borderRadius(3px);
+    padding: @mediumMargin;
+}
+
+// Getting started
+// -----------------------------------------------------------------------------
+.folderOutline {
+	list-style: none;
+	margin-left: 0;
+}
+
+.folderOutline ul {
+	list-style: none;
+	margin-left: 22px;
+}
+
+// CSS grid examples
+// -----------------------------------------------------------------------------
+
+.showGrid [class^="span"],
+.showGrid [class*=" span"] {
+    margin-bottom: @mediumMargin;
+}
+
+.showGrid > div {
+    background-color: @gray3;
+    .borderRadius(3px);
+    padding: 3px 0;
+    text-align: center;
+}
+  
+.showGrid + .showGrid {
+    margin-top: 0;
+}
+  
+.showRow {
+    background-color: @gray3;
+    .borderRadius(3px);
+}
+        
+.showRow > p {
+    margin: 0;
+    padding: 3px;
+    text-align: center;
+}
+
+.showRow .showGrid > div {
+    background-color: @gray4;
+    margin-bottom: 0;
+}
+
+.row6 {
+    .row(6);
+}
+
+.span3of6 {
+    .column(3, 6);
+}
+
+
+// Layout previews
+// -----------------------------------------------------------------------------
+
+.mini-layout {
+    border: 1px solid @gray3;
+    .borderRadius(6px);
+    margin-bottom: 20px;
+    padding: 9px 15%;
+    .clearFix;
+}
+
+.mini-layout div {
+    .borderRadius(3px);
+}
+
+.mini-layout .mini-layout-body {
+    background-color: @lightBlue;
+    height: 240px;
+    width: 100%;
+}
+
+.mini-layout.mini-layout-fluid {
+    padding: 9px;
+}
+
+.mini-layout.mini-layout-localNavigation .mini-layout-body {
+    background-color: @lightBlue;
+    margin: 0 auto;
+    height: 240px;
+    width: 70%;
+}
+
+.mini-layout.mini-layout-localNavigation .mini-layout-sidebar,
+.mini-layout.mini-layout-localNavigation .mini-layout-body {
+    float: left;
+}
+
+.mini-layout.mini-layout-localNavigation .mini-layout-sidebar {
+    background-color: @blue;
+    height: 240px;
+    width: 28.6%;
+}
+
+.mini-layout.mini-layout-localNavigation .mini-layout-body {
+    margin-left: 3.6%;
+    width: 67.8%;
+}
+
+.mini-layout.mini-layout-fluid.mini-layout-localNavigation .mini-layout-sidebar {
+    width: 20%;
+}
+
+.mini-layout.mini-layout-fluid.mini-layout-localNavigation .mini-layout-body {
+    margin-left: 2.5%;
+    width: 77.5%;
+}
+
+// Vertical spacing examples
+// -----------------------------------------------------------------------------
+
+.clearFixExample {
+    background-color: @gray3;
+    .borderRadius(6px);
+}
+
+.clearFixExample-content {
+    padding: @largeMargin 0; 
+    text-align: center; 
+    vertical-align: middle;
+}
+
+.clearFixExample-float {
+    background-color: @lightBlue; 
+    .borderRadius(6px);
+    float: left; 
+    padding: @largeMargin;
+}
+
+.marginExample td {
+    vertical-align: top;
+}
+
+.marginExample-bottom {
+    background-color: @gray3; 
+    .borderRadius(3px);
+    padding: @smallMargin;
+    text-align: center; 
+}
+
+.marginExample-top {
+    background-color: @lightBlue; 
+    .borderRadius(3px);
+    padding: @smallMargin;
+    text-align: center; 
+}
+
+// Responsive layout examples
+// -----------------------------------------------------------------------------
+
+.isHidden {
+    background-color: @gray2;
+    color: @gray4;
+    text-align: center;
+}
+
+.isVisible {
+    background-color: @lightGreen;
+    color: @darkGreen;
+    text-align: center;
+}
+
+.responsiveUtilities small {
+    display: block;
+    font-weight: normal;
+}
+
+.responsiveUtilitiesTest {
+    list-style: none;
+    margin-left: 0;
+    .clearFix;
+}
+
+.responsiveUtilitiesTest li {
+    border: 1px solid @gray4;
+    .borderRadius(3px);
+    color: @gray4;
+    float: left;
+    font-size: 14px;
+    height: 40px;
+    line-height: 40px;
+    position: relative;
+    text-align: center;
+    width: 25%;
+}
+
+.responsiveUtilitiesTest li + li {
+    margin-left: @mediumMargin;
+}
+
+.responsiveUtilitiesTest span {
+    background-color: @lightGreen;
+    bottom: -1px;
+    border: 1px solid @darkGreen;
+    .borderRadius(3px);
+    color: @darkGreen;
+    left: -1px;
+    position: absolute;
+    right: -1px;
+    top: -1px;
+}
+
+@media (max-width: 767px) { 
+    .row6,
+    .span3of6 {
+        float: none;
+        margin: 0;
+        width: auto;
+    }
+}
+
+
+// Base CSS demo tweaks
+// -----------------------------------------------------------------------------
+
+// Remove the margin between h3 and h4 for the heading list
+#typography .headings h3 + h4 {
+    margin-top: 0px;
+}
+
+// Component demo tweaks
+// -----------------------------------------------------------------------------
+
+#localNavigation .localNavigation {
+    float: none;
+    margin-left: 0;
+    right: auto;
+}
+ 
+#pageHeader .globalNavigation {
+    background-position: 0px -52px;
+}
+ 
+#pageHeader .globalNavigation > ul {
+    background-position: 0px -52px;
+    padding-top: @mediumMargin;
+}
+
+#pageHeader .pageHeader-search,
+#pageHeader .pageHeader-utility {
+    margin-bottom: @mediumMargin;
+}
+.content h3{
+    padding-bottom: @smallMargin;
+}
+.linkToTop{
+    float: right;
+	margin-top: @smallMargin;
+}

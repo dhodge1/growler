@@ -1,0 +1,81 @@
+/* =============================================================================
+   mixins.less
+   ========================================================================== */
+
+// Layout
+// -----------------------------------------------------------------------------
+   
+// The micro clearfix http://nicolasgallagher.com/micro-clearfix-hack/
+.clearFix {
+  
+    &:before,
+    &:after {
+        content:"";
+        display:table;
+    }
+    &:after {
+        clear:both;
+    }
+}
+
+.column(@x, @c:@columns) {
+    display: block;
+    float: left;
+    margin: 0 percentage((@mediumMargin / (@pageWidth * (@c / @columns))));
+    width: percentage((((@x / @c) * (@pageWidth * (@c / @columns))) - @largeMargin) / (@pageWidth * (@c / @columns)));
+}
+
+.offset(@x, @c:@columns) {
+    margin-left: percentage((((@x / @c) * (@pageWidth * (@c / @columns))) + @mediumMargin) / (@pageWidth * (@c / @columns))); 
+}
+
+.row(@c:@columns) {
+    display: block;
+    margin: 0 percentage(-@mediumMargin / ((@pageWidth * (@c / @columns)) - @largeMargin));
+    width: percentage(@pageWidth * (@c / @columns)) / ((@pageWidth * (@c / @columns)) - @largeMargin); 
+    .clearFix;
+}
+   
+// CSS3
+// -----------------------------------------------------------------------------
+
+// Border Radius
+.borderRadius(@radius) {
+  -webkit-border-radius: @radius;
+     -moz-border-radius: @radius;
+          border-radius: @radius;
+}
+
+.borderRadiusFourCorner(@topLeftRadius, @topRightRadius, @bottomRightRadius, @bottomLeftRadius) {
+  -webkit-border-radius: @topLeftRadius @topRightRadius @bottomRightRadius @bottomLeftRadius;
+     -moz-border-radius: @topLeftRadius @topRightRadius @bottomRightRadius @bottomLeftRadius;
+          border-radius: @topLeftRadius @topRightRadius @bottomRightRadius @bottomLeftRadius;
+}
+
+.backgroundGradientVertical(@startColor: #555, @endColor: #333, @fallbackColor: #333) {
+    background-color: @fallbackColor;
+    background-image: -moz-linear-gradient(top, @startColor, @endColor); // FF 3.6+
+    background-image: -ms-linear-gradient(top, @startColor, @endColor); // IE10
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@startColor), to(@endColor)); // Safari 4+, Chrome 2+
+    background-image: -webkit-linear-gradient(top, @startColor, @endColor); // Safari 5.1+, Chrome 10+
+    background-image: -o-linear-gradient(top, @startColor, @endColor); // Opera 11.10
+    background-image: linear-gradient(top, @startColor, @endColor); // The standard
+    background-repeat: repeat-x;
+}
+
+.backgroundGradientVerticalThreeColor(@startColor: #00b3ee, @midColor: #7a43b6, @colorStop: 50%, @endColor: #c3325f, @fallbackColor: #333) {
+    background-color: @fallbackColor;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@startColor), color-stop(@colorStop, @midColor), to(@endColor));
+    background-image: -webkit-linear-gradient(@startColor, @midColor @colorStop, @endColor);
+    background-image: -moz-linear-gradient(top, @startColor, @midColor @colorStop, @endColor);
+    background-image: -ms-linear-gradient(@startColor, @midColor @colorStop, @endColor);
+    background-image: -o-linear-gradient(@startColor, @midColor @colorStop, @endColor);
+    background-image: linear-gradient(@startColor, @midColor @colorStop, @endColor);
+    background-repeat: repeat-x;
+}
+
+.shadow(@offsetX, @offsetY, @radius, @color) {
+    -webkit-box-shadow: @offsetX @offsetY @radius @color;
+       -moz-box-shadow: @offsetX @offsetY @radius @color;
+            box-shadow: @offsetX @offsetY @radius @color;
+}

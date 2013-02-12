@@ -1,0 +1,686 @@
+﻿<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Scripps Bootstrap - Scaffolding</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+    <link rel="stylesheet" href="css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
+    <link rel="stylesheet" href="css/prettify/prettify.css" />
+
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.1.0.0.css" />
+    <link rel="stylesheet" href="css/bootstrap/responsive.1.0.0.css" />
+
+    <link rel="stylesheet" href="css/demo.css" />
+
+    <script src="js/libs/modernizr.2.6.2.custom.min.js"></script>
+</head>
+<body id="scaffoldingPage">
+    <header class="pageHeader">
+        <div class="pageHeader-portal">
+            <div class="pageHeader-logo">
+                <a href="/"></a>
+            </div>
+        </div>
+    </header><!-- /.pageHeader -->
+
+    <nav class="globalNavigation">
+        <ul>
+            <li><a href="index.html">Overview</a></li>
+            <li class="selected"><a href="scaffolding.html">Scaffolding</a></li>
+            <li><a href="base-css.html">Base CSS</a></li>
+            <li><a href="components.html">Components</a></li>
+            <li><a href="javascript.html">JavaScript plugins</a></li>
+            <li><a href="examples/index.html">Examples</a></li>
+        </ul>
+    </nav><!-- /.globalNavigation -->
+
+    <div class="container-fluid">
+        <div class="content" role="main">
+            <header class="pageTitle">
+                <h1>Scaffolding</h1>
+            </header>
+
+            <div class="toolbar">
+                <a class="button" href="#page-structure">Page structure</a> 
+                <a class="button" href="#layouts">Layouts</a> 
+                <a class="button" href="#grid-system">Grid system</a> 
+                <a class="button" href="#vertical">Vertical spacing</a> 
+                <a class="button" href="#responsive-design">Responsive design</a> 
+            </div>
+
+            <section id="page-structure">
+                <header class="sectionHeader">
+                  <a href="#" class="linkToTop">Back To Top</a>
+                      <h2>Page structure</h2>
+                </header>
+
+                <div class="row">
+                    <div class="span6">
+                        <h3>Requires HTML5 doctype</h3>
+                        <p>Bootstrap makes use of HTML elements and CSS properties that 
+                        require the use of the HTML5 doctype. Be sure to include it at 
+                        the beginning of every Bootstrapped page in your project.</p>
+
+<pre class="prettyprint linenums">
+&lt;!doctype html&gt;
+</pre>
+                    </div><!-- /.span6 -->
+                    <div class="span6">
+                        <h3>Detecting JavaScript</h3>
+                        <p>Sometimes you need to detect if JavaScript is enabled on the browser.
+                        By default the page will be rendered with a class of <code>no-js</code> on
+                        the <code>&lt;html&gt;</code> element, which allows specific styles to be 
+                        applied to the page.</p>
+
+<pre class="prettyprint linenums">
+&lt;html class="no-js" lang="en"&gt;
+</pre>
+
+                        <p>The class attribute will be updated to <code>js</code> when <code>Modernizer.js</code>
+                        runs to indicate that JavaScript is enabled on the browser. This allows JavaScript
+                        specific styles to be applied.</p>
+
+<pre class="prettyprint linenums">
+&lt;html class="js" lang="en"&gt;
+</pre>
+                    </div><!-- /.span6 -->
+                </div><!-- /.row -->
+
+                <h3>Conditional classes for Internet Explorer</h3>
+
+                <div class="row">
+                    <div class="span4">
+                        <p>Bootstrap uses <a href="http://msdn.microsoft.com/en-us/library/ms537512(v=vs.85).aspx">conditional comments</a> 
+                        to identify the version of IE that is being used. The conditional comments are used to 
+                        specify which <code>&lt;html&gt;</code> element should be used to start the document.</p>
+          
+                        <p>The conditional comments will apply one or more classes to the <code>&lt;html&gt;</code>
+                        element that can be used for IE specific styles. For example, IE7 would have the 
+                        classes <code>lt-ie8</code> (less than IE8) and <code>lt-ie9</code> (less than IE9).</p>
+                    </div><!-- /.span4 -->
+
+                    <div class="span8">
+<pre class="prettyprint linenums">
+&lt;!--[if lt IE 7]&gt; &lt;html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"&gt; &lt;![endif]--&gt;
+&lt;!--[if IE 7]&gt;    &lt;html class="no-js lt-ie9 lt-ie8" lang="en"&gt; &lt;![endif]--&gt;
+&lt;!--[if IE 8]&gt;    &lt;html class="no-js lt-ie9" lang="en"&gt; &lt;![endif]--&gt;
+&lt;!--[if gt IE 8]&gt;&lt;!--&gt; &lt;html class="no-js" lang="en"&gt; &lt;!--&lt;![endif]--&gt;
+</pre>
+                    </div><!-- /.span8 -->
+                </div><!-- /.row -->
+
+                <div class="row">
+                    <div class="span4">
+                        <h4>Creating an IE specific style</h4>
+                        <p>To create an IE specific style, simply create a rule that starts with a IE version
+                        selector like <code>.lt-ie8</code>. This makes the rule more specific than the default
+                        rule and ensures it will only apply to IE.</p>
+                    </div><!-- /.span4 -->
+
+                    <div class="span8">
+<pre class="prettyprint linenums">
+/* This rule will be applied to all browsers */
+.some-rule {
+  color: Red;
+}
+
+/* This rule will be applied to IE 6 and 7 */
+.lt-ie8 .some-rule {
+  color: Black;
+}
+</pre>
+                    </div><!-- /.span8 -->
+                </div><!-- /.row -->
+
+            </section><!-- /#page-structure -->
+    
+            <section id="layouts">
+                <header class="sectionHeader">
+                  <a href="#" class="linkToTop">Back To Top</a>
+                      <h2>Layouts</h2>
+                </header>
+
+                <div class="row">
+                    <div class="span6">
+                        <h3>Fixed layout</h3>
+
+                        <p>A simple 960px-wide, centered layout provided by a single <code>&lt;div class="container-fixed"&gt;</code>.</p>
+
+                        <div class="mini-layout">
+                            <div class="mini-layout-body"></div>
+                        </div>
+
+<pre class="prettyprint linenums">
+&lt;div class="container-fixed"&gt;
+  &lt;div class="content"&gt;
+    &lt;div class="row"&gt;
+      &lt;div class="span2"&gt;...&lt;/div&gt;
+      &lt;div class="span10"&gt;...&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+                    </div><!-- /.span6 -->
+                    <div class="span6">
+                        <h3>Fluid layout</h3>
+                        <p><code>&lt;div class="container-fluid"&gt;</code> resizes the page content to fill the entire screen.</p>
+          
+                        <div class="mini-layout mini-layout-fluid">
+                            <div class="mini-layout-body"></div>
+                        </div>
+
+<pre class="prettyprint linenums">
+&lt;div class="container-fluid"&gt;
+  &lt;div class="content"&gt;
+    &lt;div class="row"&gt;
+      &lt;div class="span2"&gt;...&lt;/div&gt;
+      &lt;div class="span10"&gt;...&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+                    </div><!-- /.span6 -->
+                </div><!-- /.row -->
+                
+                <div class="row">
+                  <div class="span12">
+                    <h3>Adding Local Navigation</h3>
+                    <p>When adding local navigation, in addition to the above classes, we also would need to add class <code>container-localNavigation</code>. Adding this class, allocates space for local navigation.</p>
+                    <p>
+                      <strong>Note:</strong><br/>
+                      Please note that even though local navigation is allocated space in the layout, the grid is still 12 columns with each column being reduced in size.
+                    </p>
+                  </div>
+                  <div class="span6">
+                    <h4>Fixed layout with local navigation</h4>
+                    <div class="mini-layout mini-layout-localNavigation">
+                      <div class="mini-layout-sidebar"></div>
+                        <div class="mini-layout-body"></div>
+                      </div>
+
+<pre class="prettyprint linenums">
+&lt;div class="container-fixed container-localNavigation"&gt;
+  &lt;div class="content"&gt;
+    &lt;div class="row"&gt;
+      &lt;div class="span2"&gt;...&lt;/div&gt;
+      &lt;div class="span10"&gt;...&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="localNavigation"&gt;
+    ...
+  &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+                    </div><!-- /.span6 -->
+                    <div class="span6"> 
+                      <h4>Fluid layout with local navigation</h4>    
+                        <div class="mini-layout mini-layout-localNavigation mini-layout-fluid">
+                            <div class="mini-layout-sidebar"></div>
+                            <div class="mini-layout-body"></div>
+                        </div>
+
+<pre class="prettyprint linenums">
+&lt;div class="container-fluid container-localNavigation"&gt;
+  &lt;div class="content"&gt;
+    &lt;div class="row"&gt;
+      &lt;div class="span2"&gt;...&lt;/div&gt;
+      &lt;div class="span10"&gt;...&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="localNavigation"&gt;
+    ...
+  &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+                    </div><!-- /.span6 -->
+                </div><!-- /.row -->
+
+            </section><!-- /#layouts -->
+        
+            <section id="grid-system">
+                <header class="sectionHeader">
+                  <a href="#" class="linkToTop">Back To Top</a>
+                      <h2>Grid system</h2>
+                </header>
+      
+                <div class="row showGrid">
+                    <div class="span1">1</div>
+                    <div class="span1">1</div>
+                    <div class="span1">1</div>
+                    <div class="span1">1</div>
+                    <div class="span1">1</div>
+                    <div class="span1">1</div>
+                    <div class="span1">1</div>
+                    <div class="span1">1</div>
+                    <div class="span1">1</div>
+                    <div class="span1">1</div>
+                    <div class="span1">1</div>
+                    <div class="span1">1</div>
+                </div>
+
+                <div class="row showGrid">
+                    <div class="span4">4</div>
+                    <div class="span4">4</div>
+                    <div class="span4">4</div>
+                </div>
+
+                <div class="row showGrid">
+                    <div class="span4">4</div>
+                    <div class="span8">8</div>
+                </div>
+
+                <div class="row showGrid">
+                    <div class="span6">6</div>
+                    <div class="span6">6</div>
+                </div>
+      
+                <div class="row showGrid">
+                    <div class="span12">12</div>
+                </div>
+
+                <div class="row">
+                    <div class="span4">
+                        <p>The default grid system utilizes 12 fluid columns and is based on the
+                        excellent work done by the <a href="http://semantic.gs/">Semantic Grid</a>.
+                        When the viewport is sized to exactly 960px, the column and margin sizes
+                        match up with the design guidelines of 56px columns and 24px gutters.</p>
+                    </div><!-- /.span4 -->
+        
+                    <div class="span4">
+<pre class="prettyprint linenums">
+&lt;div class="row"&gt;
+  &lt;div class="span6"&gt;...&lt;/div&gt;
+  &lt;div class="span6"&gt;...&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+                    </div><!-- /.span4 -->
+
+                    <div class="span4">
+                        <p>As shown here, a basic layout can be created with two "columns", each spanning a 
+                        number of the 12 foundational columns we defined as part of our grid system.</p>
+                    </div><!-- /.span4 -->
+                </div><!-- /.row -->
+
+                <h3>Offsetting columns</h3>
+
+                <div class="row showGrid">
+                    <div class="span4">4</div>
+                    <div class="span4 offset4">4 offset 4</div>
+                </div>
+
+                <div class="row showGrid">
+                    <div class="span3 offset3">3 offset 3</div>
+                    <div class="span3 offset3">3 offset 3</div>
+                </div>
+      
+                <div class="row showGrid">
+                    <div class="span8 offset4">8 offset 4</div>
+                </div>
+
+<pre class="prettyprint linenums">
+&lt;div class="row"&gt;
+  &lt;div class="span4"&gt;...&lt;/div&gt;
+  &lt;div class="span4 offset4"&gt;...&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+                <div class="row">
+                    <div class="span6">
+                        <h3>Nesting columns</h3>
+                        <p>Unlike top level rows, there are no styles predefined for nested rows. It would take 144 rules 
+                        to define all of the different ways of nesting rows and columns for just one level of nesting.</p>
+
+                        <p>Instead, Bootstrap provides a set of mixins that makes it easy to define the exact CSS rules needed 
+                        for nesting. Since most fluid grids don't support nested rows, the little bit of extra work to 
+                        define specific CSS rules is a small price to pay.</p>
+
+                        <p>A .row() mixin must be applied to the containing element of the nested columns. That mixin 
+                        should contain the number of columns of its parent (6, in this case), and the same number must be
+                        passed into the nested columns as a second parameter (.column(3,6) in the example ).</p>
+
+                        <div class="showRow">
+                            <p>6</p>
+                            <div class="row6 showGrid">
+                                <div class="span3of6">3</div>
+                                <div class="span3of6">3</div>
+                            </div>
+                        </div>
+
+                    </div><!-- /.span6 -->
+        
+                    <div class="span6">
+                        <h3>CSS</h3>  
+<pre class="prettyprint linenums">
+@import "layout.less";
+
+.row6 {
+  .row(6);
+}
+
+.span3of6 {
+  .column(3, 6);
+}
+</pre>
+
+                        <h3>HTML</h3>
+<pre class="prettyprint linenums">
+&lt;div class="span6"&gt;
+  ...
+  &lt;div class="row6"&gt;
+    &lt;div class="span3of6"&gt;&lt;/div&gt;
+    &lt;div class="span3of6"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+                    </div><!-- /.span6 -->
+
+                </div><!-- /.row -->
+
+            </section><!-- /#grid-system -->
+                    
+            <section id="vertical">
+                <header class="sectionHeader">
+                  <a href="#" class="linkToTop">Back To Top</a>
+                      <h2>Vertical spacing</h2>
+                </header>
+      
+                <div class="row">
+                    <div class="span4">
+                        <h3>Clearing floats</h3>
+
+                        <p>Use the <code>.clearFix</code> class to clear floats without 
+                        adding additional elements to your HTML.</p>
+
+                        <div class="clearFix clearFixExample" style="">
+                            <div class="clearFixExample-float">Float left</div>
+                            <div class="clearFixExample-content">Content</div>
+                        </div>
+                    </div>
+
+                    <div class="span8">
+                        <h3>Margins utilities</h3>
+
+                        <p>Bootstrap includes several utility classes for vertically spacing out components, rows 
+                        and widgets. Simply add the class to the top element to add the desired bottom margin.</p>
+
+                        <table class="marginExample">
+                            <tbody>
+                                <tr>
+                                    <td><code>.smallBottomMargin</code> <small>(6px)</small></td>
+                                    <td><code>.mediumBottomMargin</code> <small>(12px)</small></td>
+                                    <td><code>.largeBottomMargin</code> <small>(24px)</small></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="smallBottomMargin marginExample-top">Top</div>
+                                        <div class="marginExample-bottom">Bottom</div>
+                                    </td>
+                                    <td>
+                                        <div class="mediumBottomMargin marginExample-top">Top</div>
+                                        <div class="marginExample-bottom">Bottom</div>
+                                    </td>
+                                    <td>
+                                        <div class="largeBottomMargin marginExample-top">Top</div>
+                                        <div class="marginExample-bottom">Bottom</div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div><!-- /.row -->
+
+            </section>
+
+            <section id="responsive-design">
+                <header class="sectionHeader">
+                  <a href="#" class="linkToTop">Back To Top</a>
+                      <h2>Responsive design</h2>
+                </header>
+
+                <div class="row">
+                    <div class="span4">
+                        <h3>Do I need a responsive layout?</h3>
+
+                        <p>Projects should decide whether (and where) they need a responsive layout. Responsive 
+                        layouts require additional thought, design and development compared to "desktop only" 
+                        web applications.</p>
+          
+                        <p>Match your design requirements to the responsive requirements to find a recommended 
+                        approach. Keep in mind that not every page has the same level of requirements; you can
+                        use different techniques on different pages. Selecting the right tools for the job 
+                        ensures that design and development are simple and quick.</p>
+                    </div><!-- /.span4 -->
+
+                    <div class="span8">
+                        <table class="table table-alternatingRow table-border table-columnBorder">
+                            <thead>
+                                <tr>
+                                    <th>Responsive Requirements</th>
+                                    <th>Recommended Approach</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <p>Fluid only (not responsive)</p>
+                                    </td>
+                                    <td>
+                                        <ul>
+                                            <li>Use the built in grid classes to layout content.</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>Basic responsive layout</p>
+                                        <ul>
+                                            <li>Show/hide content based on device width</li>
+                                            <li>Reflow content into a single column for small devices</li>
+                                        </ul>
+                                    </td>
+                                    <td>
+                                        <ul>
+                                            <li>Start with the built in grid classes to layout content</li>
+                                            <li>Use the responsive utility classes to show/hide content</li>
+                                            <li>Use <code>responsive.less</code> to reflow content
+                                            into a single column when the device becomes too narrow</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>Advanced responsive layout</p>
+
+                                        <ul>
+                                            <li>Reorder content based on the device resolution</li>
+                                            <li>Change background images</li>
+                                            <li>Change apperance/behavior</li>
+                                        </ul>
+
+                                        <p>Example: <span class="todo">TODO</span></p>
+                                    </td>
+                                    <td>
+                                        <ul>
+                                            <li>Create custom styles based on the type of content (<code>.show</code>,
+                                            <code>.recipe</code>, <code>.episode</code> )</li>
+                                            <li>Leverage media queries to give the custom styles different appearances
+                                            at each resolution.</li>
+                                            <li>Leverage mixins like <code>.row()</code> and <code>.column()</code> 
+                                            from <code>layout.less</code> to quickly apply layout rules to the custom styles.</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><!-- /.span8 -->
+                </div><!-- /.row -->
+ 
+                <div class="row">
+                    <div class="span4">
+                        <h3>Media queries</h3>
+                        <p>Media queries allow for custom CSS based on a number of 
+                        conditions—ratios, widths, display type, etc—but usually 
+                        focuses around min-width and max-width.</p>
+                        <p class="todo">TODO: Review these to make sure they cover the scenarios correctly</p>
+                    </div><!-- /.span4 -->
+                    <div class="span8">
+                        <h3>Devices and resolutions</h3>
+                        <table class="table table-alternatingRow table-border table-columnBorder">
+                            <thead>
+                                <tr>
+                                    <th>Label</th>
+                                    <th>Layout width</th>
+                                    <th>Media query</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Smartphones</td>
+                                    <td>480px and below</td>
+                                    <td><pre class="prettyprint linenums">@media (max-width: 480px) { ... }</pre></td>
+                                </tr>
+                                <tr>
+                                    <td>Smartphones to tablets</td>
+                                    <td>767px and below</td>
+                                    <td><pre class="prettyprint linenums">@media (max-width: 767px) { ... }</pre></td>
+                                </tr>
+                                <tr>
+                                    <td>Portrait tablets</td>
+                                    <td>768px to 979px</td>
+                                    <td><pre class="prettyprint linenums">@media (min-width: 768px) and (max-width: 979px) { ... }</pre></td>
+                                </tr>
+                                <tr>
+                                    <td>Default</td>
+                                    <td>980px and above</td>
+                                    <td><em>No media query required</em> - this is your default appearance</td>
+                                </tr>
+                                <tr>
+                                    <td>Large display</td>
+                                    <td>1200px and above</td>
+                                    <td><pre class="prettyprint linenums">@media (min-width: 1200px) { ... }</pre></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><!-- /.span8 -->
+                </div><!-- /.row -->
+
+                <h3>Responsive utility classes</h3>
+
+                <div class="row">
+                    <div class="span4">
+                        <h4>What are they</h4>
+                        <p>For faster mobile-friendly development, use these basic utility classes for showing
+                        and hiding content by device.</p>
+
+                        <h4>When to use</h4>
+                        <p>Use on a limited basis and avoid creating entirely different versions of the same site. 
+                        Instead, use them to complement each device's presentation.</p>
+                    </div><!-- /.span4 -->
+
+                    <div class="span8">
+                        <h4>Supported classes</h4>
+                        <p>Shown here is a table of the classes we support and their effect on a given media query
+                        layout (labeled by device). They can be found in <code>responsive.less</code>.</p>
+
+                        <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder responsiveUtilities">
+                            <thead>
+                                <tr>
+                                    <th>Class</th>
+                                    <th>Phones <small>480px and below</small></th>
+                                    <th>Tablets <small>767px and below</small></th>
+                                    <th>Desktops <small>768px and above</small></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>.visible-phone</code></td>
+                                    <td class="isVisible">Visible</td>
+                                    <td class="isHidden">Hidden</td>
+                                    <td class="isHidden">Hidden</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.visible-tablet</code></td>
+                                    <td class="isHidden">Hidden</td>
+                                    <td class="isVisible">Visible</td>
+                                    <td class="isHidden">Hidden</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.visible-desktop</code></td>
+                                    <td class="isHidden">Hidden</td>
+                                    <td class="isHidden">Hidden</td>
+                                    <td class="isVisible">Visible</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.hidden-phone</code></td>
+                                    <td class="isHidden">Hidden</td>
+                                    <td class="isVisible">Visible</td>
+                                    <td class="isVisible">Visible</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.hidden-tablet</code></td>
+                                    <td class="isVisible">Visible</td>
+                                    <td class="isHidden">Hidden</td>
+                                    <td class="isVisible">Visible</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.hidden-desktop</code></td>
+                                    <td class="isVisible">Visible</td>
+                                    <td class="isVisible">Visible</td>
+                                    <td class="isHidden">Hidden</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4>Test case</h4>
+                        <p>Resize your browser or load on different devices to test the above classes.</p>
+
+                        <h5>Visible on...</h5>
+                        <p>Green checkmarks indicate that class is visible in your current viewport.</p>
+
+                        <ul class="responsiveUtilitiesTest">
+                            <li>Phone<span class="visible-phone">✔ Phone</span></li>
+                            <li>Tablet<span class="visible-tablet">✔ Tablet</span></li>
+                            <li>Desktop<span class="visible-desktop">✔ Desktop</span></li>
+                        </ul>
+
+                        <h5>Hidden on...</h5>
+                        <p>Here, green checkmarks indicate that the class is hidden in your current viewport.</p>
+
+                        <ul class="responsiveUtilitiesTest">
+                            <li>Phone<span class="hidden-phone">✔ Phone</span></li>
+                            <li>Tablet<span class="hidden-tablet">✔ Tablet</span></li>
+                            <li>Desktop<span class="hidden-desktop">✔ Desktop</span></li>
+                        </ul>
+
+                        <p>IE8 doesn't support media queries, but thats not a problem because it wouldn't be
+                        used to view websites from a phone or tablet. To see these examples in action
+                        on your desktop, use IE9, Firefox, Chrome or Safari.</p>
+                    </div><!-- /.span8 -->
+                </div><!-- /.row -->
+
+            </section><!-- /#responsive-design -->
+        </div><!-- /.content -->
+    </div><!-- /.container-fixed -->
+
+    <footer class="pageFooter">
+        <hr />
+        <p>Scripps Networks Interactive Bootstrap version 1.1.0.</p>
+        <p>Copyright &copy; 2012 Scripps Networks Interactive</p>
+    </footer><!-- /.pageFooter -->
+
+    <script src="js/libs/prettify.js" type="text/javascript"></script>
+
+    <script src="js/libs/jquery-1.8.3.min.js" type="text/javascript"></script>
+
+    <script src="js/demo.js"></script>
+</body>
+</html>

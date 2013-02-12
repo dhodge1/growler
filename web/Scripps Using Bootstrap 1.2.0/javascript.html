@@ -1,0 +1,1924 @@
+﻿<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>Scripps Bootstrap - JavaScript</title>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <link rel="stylesheet" href="css/prettify/prettify.css" />
+  <link rel="stylesheet" href="css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />  
+  <link rel="stylesheet" href="css/wijmo/jquery.wijmo-complete.all.2.3.2.min.css"/>
+  <link rel="stylesheet" href="css/bootstrap/bootstrap.1.0.0.css" />
+  <link rel="stylesheet" href="css/bootstrap/responsive.1.0.0.css" />
+  <link rel="stylesheet" href="css/demo.css" />
+  <script src="js/libs/modernizr.2.6.2.custom.min.js"></script>
+</head>
+<body id="javascriptPage">
+    <header class="pageHeader">
+      <div class="pageHeader-portal">
+        <div class="pageHeader-logo">
+          <a href="/"></a>
+        </div>
+      </div>
+    </header><!-- /.pageHeader -->
+
+    <nav class="globalNavigation">
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="scaffolding.html">Scaffolding</a></li>
+        <li><a href="base-css.html">Base CSS</a></li>
+        <li><a href="components.html">Components</a></li>
+        <li class="selected"><a href="javascript.html">JavaScript plugins</a></li>
+        <li><a href="examples/index.html">Examples</a></li>
+      </ul>
+    </nav><!-- /.globalNavigation -->
+
+    <div class="container-fluid">
+      <div class="content" role="main">
+        <header class="pageTitle">
+            <h1>JavaScript</h1>
+        </header>
+        <div class="toolbar">
+          <a class="button" href="#accordion">Accordion</a>
+          <a class="button" href="#actionMenu">Action Menu</a>
+          <a class="button" href="#auto-complete">Auto Complete</a>
+          <a class="button" href="#automaticInlineHelp">Automatic Inline Help</a>
+          <a class="button" href="#calendar">Calendar</a>
+          <a class="button" href="#date-picker">Date Picker</a>
+          <a class="button" href="#determinateProgressBar">Determinate Progress Bar</a>
+          <a class="button" href="#dialog">Dialog</a>
+          <a class="button" href="#grid">Grid</a>
+          <a class="button" href="#indeterminateProgressIndicator">Indeterminate Progress Indicator</a>
+          <a class="button" href="#multiSelectDropDown">Multi Select Drop Down</a>
+          <a class="button" href="#inlineTabs">Tabs</a>
+          <a class="button" href="#tagsSection">Tags</a>
+          <a class="button" href="#toolTip">ToolTip</a>
+          <a class="button" href="#tree-view">Tree View</a>                    
+          <a class="button" href="#userActivatedInlineHelp">User Activated Inline Help</a>
+        </div>
+          <section id="accordion">
+            <header class="sectionHeader">
+              <a href="#" class="linkToTop">Back To Top</a>
+              <h2>Accordion</h2>
+            </header>
+            <div class="row">
+              <div class="span12">
+                <p>Accordion helps to place many items in a limited space and provide easy access to every item. In this way, user can navigate through the items at their own pace.</p>
+              </div>
+            </div>
+            <h3>Dependencies</h3>
+            <h4>JavaScript</h4>
+            <pre class="prettyprint linenums">&lt;script src="<a href="js/libs/bootstrap-collapse.2.2.1.min.js">js/libs/bootstrap-collapse.2.2.1.min.js</a>" type="text/javascript"&gt; &lt;/script&gt;
+&lt;script src="<a href="js/libs/sniui.accordion.1.0.0.min.js">js/libs/sniui.accordion.min.js</a>" type="text/javascript"&gt; &lt;/script&gt; </pre>
+            <div class="row">
+              <div class="span12">
+                <p>More information about the library can be found at <a href="http://twitter.github.com/bootstrap/javascript.html#collapse">Twitter Bootstrap</a>.</p>
+              </div>
+            </div>
+            <h3>Usage</h3>
+            <div class="row">
+              <div class="span4">
+                <div class="accordion" id="accordion-parent">
+                  <div class="accordion-group">
+                    <div class="accordion-toggle accordion-selected" data-toggle="collapse" data-parent="#accordion-parent" data-target="#collapseOne">
+                      <i class="icon12-previous"></i>
+                      <a>Lorem Ipsum</a>
+                    </div><!-- /.accordion-toggle-->
+                    <div id="collapseOne" class="accordion-body collapse in">
+                      <div class="accordion-inner">Content One<br />Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. 
+                      </div>
+                    </div><!--/#collapseOne-->
+                  </div><!--/.accordion-group-->
+                  <div class="accordion-group">
+                    <div class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-parent" data-target="#collapseTwo">
+                      <i class="icon12-previous"></i>
+                      <a>Lorem Ipsum</a>
+                    </div><!-- /.accordion-toggle-->
+                    <div id="collapseTwo" class="accordion-body collapse">
+                      <div class="accordion-inner">Content Two<br />Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. 
+                      </div>
+                    </div><!--/#collapseTwo-->
+                  </div><!--/.accordion-group-->
+                  <div class="accordion-group">
+                    <div class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-parent" data-target="#collapseThree">
+                      <i class="icon12-previous"></i>
+                      <a>Lorem Ipsum</a>
+                    </div><!-- /.accordion-toggle-->
+                    <div id="collapseThree" class="accordion-body collapse">
+                      <div class="accordion-inner">Content Three<br />Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
+                      </div>
+                    </div><!--/#collapseThree-->
+                  </div><!--/.accordion-group-->
+                  <div class="accordion-group">
+                    <div class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-parent" data-target="#collapseFour">
+                      <i class="icon12-previous"></i>
+                      <a>Lorem Ipsum</a>
+                    </div><!-- /.accordion-toggle-->
+                    <div id="collapseFour" class="accordion-body collapse">
+                      <div class="accordion-inner">Content Four<br />Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
+                      </div>
+                    </div><!--/#collapseFour-->
+                  </div><!--/.accordion-group-->                
+                </div><!--/.accordion-->
+              </div><!-- /.span4 -->
+              <div class="span8">
+                <span>HTML</span>
+<pre class="prettyprint linenums">
+&lt;div class="accordion" id="accordion-parent"&gt;
+  &lt;div class="accordion-group"&gt;
+    &lt;div class="accordion-toggle accordion-selected" data-toggle="collapse" data-target="#collapseOne" data-parent="#accordion-parent"&gt;
+      &lt;i class="icon12-previous"&gt;&lt;/i&gt;
+      &lt;a&gt; Lorem Ipsum &lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div id="collapseOne" class="accordion-body collapse in"&gt;
+      &lt;div class="accordion-inner"&gt; Anim pariatur cliche reprehenderit.... &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</pre>            
+              </div><!-- /.span8 -->
+            </div><!-- /.row -->
+            <div class="row">  
+              <div class="span4">  
+                <h3>Including data-attributes</h3> 
+                <div class="row">
+                  <div class="span12">               
+                    <p>To assign control of the collapsible element, provide <code>data-target</code> attribute to the control element with the CSS selector of corresponding collapsible element.</p>
+                    <p>Provide <code>data-parent</code> attribute to the control element, with the CSS selector of the corresponding parent element, to get the Accordion like group management.</p>
+                  </div> 
+                </div>                   
+<pre class="prettyprint linenums">
+&lt;div id="accordion-parent"&gt;
+  &lt;div data-target="#collapseOne" data-parent="#accordion-parent"&gt; &lt;/div&gt;
+  &lt;div id="collapseOne"&gt; &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+              </div><!-- /.span4 -->
+              <div class="span4">
+                <h3>Getting Default Open Panel</h3>
+                <div class="row">  
+                  <div class="span12">                 
+                    <p>Make sure to add the class <code> collapse</code> to the collapsible element and class <code>in</code> if you would like it open by default. Provide <code>accordion-selected</code> class to control element which has the collapsible element expanded by default, to get the header styles.</p>
+                    <p>Make sure to add <code>accordion-toggle</code> class to control element as the header styles are handled through this class.</p>
+                  </div>
+                </div>
+<pre class="prettyprint linenums">
+&lt;div class="accordion-toggle accordion-selected"&gt;
+&lt;/div&gt;
+&lt;div id="collapseOne" class="accordion-body collapse in"&gt;
+&lt;/div&gt;
+</pre>
+              </div> <!-- /.span4 -->
+              <div class="span4">
+                <h3>Initialization</h3>                 
+                <p>Accordion behavior can be implemented in two ways.</p>
+                <h4>Through data-attributes</h4>
+                <div class="row">  
+                  <div class="span12">                 
+                    <p>Bootstrap Collapse library uses <code>data-toggle</code> attribute to get the collapsible behavior. All the control elements are provided with <code>data-toggle="collapse"</code> attribute to get Accordion behavior.</p>
+                  </div>
+                </div>
+<pre class="prettyprint linenums">
+&lt;div data-toggle="collapse"&gt; &lt;/div&gt;
+</pre>            
+                <h4>Through JavaScript</h4>
+                <div class="row">  
+                  <div class="span12">                 
+                    <p>User needs to call collapse() on the collapsible element which needs to be expanded.</p>
+                  </div>
+                </div>
+<pre class="prettyprint linenums">
+$("#collapseOne").collapse();
+</pre>  
+              </div><!-- /.span4 -->
+            </div> <!-- /.row -->
+          </section><!-- /#accordion -->
+          <section id="actionMenu">
+            <header class="sectionHeader">
+              <a href="#" class="linkToTop">Back To Top</a>
+                  <h2>Action menu</h2>
+            </header>
+
+                <div class="row">
+                  <div class="span6">
+                    <p>The action menu can be used to display links to the user in a small, compact way. It's often used with table rows to allow 
+                        users to perform actions on that row.</p>
+                    <div class="mediumBottomMargin">
+                      <div class="actionMenu mediumBottomMargin">
+                        <a class="actionMenu-toggle" data-toggle="dropdown" href="#">Actions<b class="caret"></b></a>
+                        <ul class="actionMenu-menu" role="menu">
+                          <li role="menuitem"><a href="#"><i class="icon16-approve"></i>Action 1</a></li>
+                          <li role="menuitem"><a href="#"><i class="icon16-approve"></i>Action 2</a></li>
+                          <li role="menuitem"><a href="#"><i class="icon16-approve"></i>A really really long action</a></li>
+                          <li role="menuitem"><a href="#"><i class="icon16-approve"></i>A really really long action</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                    <p>Space is automatically added to the right of icons embedded in the action panel links; there is no need to use the 
+                        <code>.inline</code> helper class.</p>
+                    <p>Simply include the Twitter Bootstrap drop down library (<code>bootstrap-dropdown.2.0.4.min.js</code>) to implement the 
+                        drop down behavior. The library will look for anchors with an attribute of <code>data-toggle="dropdown"</code> and
+                        automatically add the required behavior. More information about the library can be found on 
+                        <a href="http://twitter.github.com/bootstrap/javascript.html#dropdowns">Twitter Bootstrap</a>.</p>
+                  </div><!-- /.span6 -->
+                  <div class="span6">
+                    <p>Use the <code>.pullRight</code> class to right align the drop down menu.</p>
+                        <table class="table table-alternatingRow table-border">
+                            <colgroup>
+                                <col style="width: 33%;" />
+                                <col style="width: 33%;" />
+                                <col style="width: 33%;" />
+                                <col style="width: 1%;" />
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th>Column 1</th>
+                                    <th>Column 2</th>
+                                    <th>Column 3</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Value 1</td>
+                                    <td>Value 2</td>
+                                    <td>Value 3</td>
+                                    <td>
+                                        <div class="actionMenu pullRight">
+                                            <a class="actionMenu-toggle" data-toggle="dropdown" href="#">Actions<b class="caret"></b></a>
+                                            <ul class="actionMenu-menu" role="menu">
+                                                <li role="menuitem"><a href="#"><i class="icon16-approve"></i>Action 1</a></li>
+                                                <li role="menuitem"><a href="#"><i class="icon16-approve"></i>Action 2</a></li>
+                                                <li role="menuitem"><a href="#"><i class="icon16-approve"></i>A really really long action</a></li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+<pre class="prettyprint linenums">
+&lt;div class="actionMenu"&gt;
+  &lt;a class="actionMenu-toggle" data-toggle="dropdown" href="#"&gt;Actions&lt;b class="caret"&gt;&lt;/b&gt;&lt;/a&gt;
+  &lt;ul class="actionMenu-menu" role="menu"&gt;
+    &lt;li&gt;&lt;a href="#"&gt;&lt;i class="icon16-approve"&gt;&lt;/i&gt;Action 1&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;&lt;i class="icon16-approve"&gt;&lt;/i&gt;Action 2&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;&lt;i class="icon16-approve"&gt;&lt;/i&gt;A really really long action&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+</pre>
+                    </div><!-- /.span6 -->
+                </div><!-- /.row -->
+
+            </section><!-- /#actionMenu -->
+            <section id="auto-complete">
+              <header class="sectionHeader">
+                <a href="#" class="linkToTop">Back To Top</a>
+                <h2>Auto Complete</h2>
+              </header>
+              <div class="row">
+                <div class="span12">
+                  <p>Autocomplete helps users to locate the desired item in fewer steps by reducing the number of keystrokes and allowing faster user input.</p>
+                </div>
+              </div>
+              <h3>Dependencies</h3> 
+              <div class="row">
+                <div class="span6">
+                  <h4>JavaScript</h4>
+<pre class="prettyprint linenums">
+&lt;script src="<a href="js/libs/jquery-ui-1.9.2.custom.min.js">js/libs/jquery-ui-1.9.2.custom.min.js</a>" type="text/javascript"&gt;&lt;/script&gt; 
+</pre>
+                </div><!--/.span6-->
+                <div class="span6">
+                  <h4>CSS</h4>
+<pre class="prettyprint linenums">&lt;link rel="stylesheet" href="<a href="css/jquery-ui/jquery-ui-1.9.2.custom.min.css">css/jquery-ui/jquery-ui-1.9.2.custom.min.css</a>" /&gt;
+</pre>
+                </div><!--/.span6-->
+              </div>
+              <h3>Usage and Initialization</h3>
+              <div class="row">
+                <div class="span12">
+                  <p>Use the .autocomplete() function to convert a standard HTML input into a autocomplete dropdown. Add a <code>input</code> with some id or class and initialize the JavaScript function autocomplete() with an array as data source using jQuery, targetting the element using the id or class.</p>
+                  <p>More information about the jquery-ui autocomplete can be found at <a href="http://api.jqueryui.com/autocomplete">jquery-ui autocomplete</a>.</p>
+                </div>              
+                <div class="span6">
+                  <form class="form">
+                    <input id="autocomplete">
+                  </form>
+                </div><!--/.span6-->
+                <div class="span6">
+                  <span>Html</span>
+<pre class="prettyprint linenums">
+&lt;form class="form"&gt;
+  &lt;input id="autocomplete"/&gt;
+&lt;/form&gt;
+</pre>
+                <span>JavaScript</span>
+<pre class="prettyprint linenums">
+$("#autocomplete").autocomplete({
+  source: availableTags
+});
+</pre>
+               </div><!--/.span6-->
+              </div><!--/.row-->
+            </section><!-- /#auto-complete -->   
+            <section id="automaticInlineHelp">
+                <header class="sectionHeader">
+                  <a href="#" class="linkToTop">Back To Top</a>
+                      <h2>Automatic Inline Help</h2>
+              </header>
+              <div class="row">
+                <div class="span12">
+                  <p>Document your interface in-line with descriptive help blocks that automatically appears and disappears as the user navigates through the fields. The user will be provided with inline text related to the field that is clicked on automatically.
+                  </p>
+                </div>
+              </div>
+              <h3>Dependencies</h3>                          
+              <h4>JavaScript</h4>
+              <pre class="prettyprint linenums">&lt;script src="<a href="js/libs/bootstrap-popover.2.1.1.min.js">js/libs/bootstrap-popover.2.1.1.min.js</a>" type="text/javascript"&gt; &lt;/script&gt;
+&lt;script src="<a href="js/libs/sniui.auto-inline-help.1.0.0.min.js">js/libs/sniui.auto-inline-help.min.js</a>" type="text/javascript"&gt; &lt;/script&gt;</pre>
+              <div class="row">
+                <div class="span12">
+                  <p>More information about the library can be found at <a href="http://twitter.github.com/bootstrap/javascript.html#popovers">Twitter Bootstrap</a>.</p>
+                </div>
+              </div>
+              <h3>Usage and Initialization</h3>
+              <div class="row">
+                <div class="span12">              
+                  <p>Automatic Inline Help can be initiated using the JavaScript method <code>autoinline()</code> on the target element. The data to be displayed in the tool-tip is provided using the attribute <code>data-content</code></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="span4">    
+                  <form>
+                    <div class="form-group">
+                      <label for="emailid"><b>Enter Your Email Address</b></label>
+                      <input type="text" id="emailid" data-content="You must supply a valid email address. We will not sell or disclose your email address to third parties"/><br>
+                      <label for="password"><b>Choose a Password</b></label>
+                      <input type="text" id="password" data-content="You use at least seven letters and at least two numerical values in password."/>
+                    </div><!-- /.form-group -->
+                  </form>
+                </div><!-- /.span4 -->
+                <div class="span8">
+                  <span>HTML</span>
+<pre class="prettyprint linenums">
+&lt;input type="text" id="emailid" data-content="You must supply a valid email address. We will not sell or disclose your email address to third parties"&gt;&lt;/input&gt;&lt;br&gt;
+</pre>
+                  <span>JavaScript</span>
+<pre class="prettyprint linenums">
+$(function () {
+    $("#emailid").autoinline();
+}); 
+</pre>        
+                </div><!-- /.span8 -->
+              </div><!-- /.row -->
+            </section><!-- /#automaticinlinehelp -->
+            <section id="calendar">
+              <header class="sectionHeader">
+                <a href="#" class="linkToTop">Back To Top</a>
+                <h2>Calendar</h2>
+              </header>
+              <div class="row">
+                <div class="span12">
+                  <p>Calendar control displays a calendar from which the user can select a date.</p>
+                </div>
+              </div>
+              <h3>Dependencies</h3>
+              <div class="row">
+                <div class="span6">
+                  <h4>JavaScript</h4>
+<pre class="prettyprint linenums">&lt;script src="<a href="js/libs/jquery-1.8.3.min.js">js/libs/jquery-1.8.3.min.js</a>" type="text/javascript"&gt; &lt;/script&gt;
+&lt;script src="<a href="js/libs/jquery-ui-1.9.2.custom.min.js">js/libs/jquery-ui-1.9.2.custom.min.js</a>" type="text/javascript"&gt; &lt;/script&gt; 
+&lt;script src="<a href="js/libs/jquery.wijmo-open.all.2.3.1.min.js">js/libs/jquery.wijmo-open.all.2.3.1.min.js</a>" type="text/javascript"&gt; &lt;/script&gt;
+</pre>          </div>
+                <div class="span6">
+                  <h4>CSS</h4>
+<pre class="prettyprint linenums">&lt;link rel="stylesheet" href="<a href="css/jquery-ui/jquery-ui-1.9.2.custom.min.css">css/jquery-ui/jquery-ui-1.9.2.custom.min.css</a>" /&gt;
+&lt;link rel="stylesheet" href="<a href="css/wijmo/jquery.wijmo-complete.all.2.3.2.min.css">css/wijmo/jquery.wijmo-complete.all.2.3.2.min.css</a>" /&gt;
+&lt;link rel="stylesheet" href="<a href="css/bootstrap/bootstrap.1.0.0.css">css/bootstrap/bootstrap.css</a>" /&gt;
+</pre>
+                </div>
+              </div>  
+               <h3>Usage and Initialization</h3>
+              <div class="row">
+                <div class="span12">
+                  <p>Use the .wijcalendar() function to convert a standard HTML div or span into a calendar.</p>
+                  <p>More information about the wijmo calendar library can be found at <a href="http://wijmo.com/wiki/index.php/Calendar">wijmo calendar</a>.</p>
+                </div>
+              </div> 
+              <div class="row">
+                <div class="span6">
+                  <!-- Begin demo markup -->
+                  <div id="calendarControl"></div>
+                  <!-- End demo markup -->
+                </div>
+                <div class="span6">
+                  <span>HTML</span>
+<pre class="prettyprint linenums">
+&lt;div id="calendarControl"&gt;
+&lt;/div&gt;
+</pre>
+                  <span>Javascript</span>
+<pre class="prettyprint linenums">
+$("#calendarControl").wijcalendar();
+</pre>
+                   <!-- End demo markup -->
+                </div>
+              </div>
+            </section> <!--/#calendar-->
+            
+            <section id="date-picker">
+              <header class="sectionHeader">
+                  <a href="#" class="linkToTop">Back To Top</a>
+                      <h2>Date Picker</h2>
+              </header>
+              <div class="row">
+                <div class="span12">
+                  <p>Date Picker is used to select a date. The selection can be made by clicking on the calendar icon which enables us to navigate to the required date and select a particular date. By default, current date is highlighted in the calendar.</p>
+                </div><!--/.span12-->
+              </div> <!-- /.row -->
+              <h3>Dependencies</h3>
+              <h4>JavaScript</h4>
+<pre class="prettyprint linenums">&lt;script src="<a href="js/libs/jquery.wijmo-open.all.2.3.1.min.js">js/libs/jquery.wijmo-open.all.2.3.1.min.js</a>" type="text/javascript"&gt; &lt;/script&gt;
+&lt;script src="<a href="js/libs/jquery.wijmo-complete.all.2.3.2.min.js">js/libs/jquery.wijmo-complete.all.2.3.2.min.js</a>" type="text/javascript"&gt; &lt;/script&gt;
+&lt;script src="<a href="js/libs/sniui.wijmo.wijinputdate.1.0.0.min.js">js/libs/sniui.wijmo.wijinputdate.min.js</a>" type="text/javascript"&gt; &lt;/script&gt;  </pre>
+              <h3>Usage and Initialization</h3>
+              <div class="row">
+                <div class="span12">
+                  <p>Date Picker control is dependent on Wijmo library (which is in turn dependent on jqueryUI library). Use the inputdate() function to convert a standard HTML div or span into a datepicker. Add a <code>div</code> or <code>span</code> with some id or class and initialize the JavaScript function inputdate() using jQuery,  targetting the element using the id or class. By default <code>showTrigger</code> value is false in Wijmo. It is set to true to make the calendar button default open.</p>									
+                  <p>More information about the library can be found at <a href="http://wijmo.com/wiki/index.php/InputDate">Wijmo Date Picker</a>.</p>
+                </div>  <!-- /.span12 -->
+              </div>  <!-- /.row -->
+              <div class="row">
+                <div class="span4">
+                  <input type="text" id="datePicker"/>    
+                </div> <!-- /.span4 -->
+                <div class="span8">
+                  <span>HTML</span>
+<pre class="prettyprint linenums">
+&lt;input type="text" id="datePicker" /&gt;   
+</pre>             
+                  <span>JavaScript</span>
+<pre class="prettyprint linenums">
+$(function () {
+    $('#datePicker').inputdate({	
+        showTrigger: true,    
+        dateFormat: 'd', 
+        showNullText: true, 
+        nullText: "mm/dd/yyyy"
+    });
+});
+</pre>
+                </div> <!--  /.span8 -->
+              </div><!--/.row-->
+              <div class="header">
+                <h4>Date Picker Range</h4>
+              </div>
+              <div class="row">
+                <div class="span12">                    
+                  <p><code>minDate</code> and <code>maxDate</code> can be used to restrict the selectable dates as seen in the example below. More information about min and max date can be found at <a href="http://wijmo.com/wiki/index.php/InputDate#maxDate">Wijmo Date Picker min and max</a>.</p>
+                </div>                  
+              </div><!--/.row-->              
+              <div class="row">
+                <div class="span4">                 
+                  <input type="text" id="datePickerRange"/>
+                </div><!-- /.span4 -->
+                <div class="span8">
+                  <span>HTML for Date Picker Range</span>
+<pre class="prettyprint linenums">
+&lt;input type="text" id="datePickerRange" /&gt;     
+</pre>
+                  <span>JavaScript for Date Picker Range</span>
+<pre class="prettyprint linenums">
+$(function () {
+    $("#datePickerRange").inputdate({
+        minDate: '01/05/2013',
+        maxDate: '12/06/2013',
+    });
+});      
+</pre>
+                </div><!--/.span8-->
+              </div>  <!-- /.row --> 
+            </section><!-- /#date-picker -->            
+            <section id="determinateProgressBar">
+              <header class="sectionHeader">
+                <a href="#" class="linkToTop">Back To Top</a>              
+                <h2>Determinate Progress Bar</h2>
+              </header>
+              <div class="row">
+                <div class="span12">
+                  <p>This component can be used to show the percentage of completion of a process.</p>
+                </div>
+              </div>  
+              <h3>Dependencies</h3>
+              <h4>JavaScript</h4>
+<pre class="prettyprint linenums">
+&lt;script src="<a href="js/libs/jquery-ui-1.9.2.custom.min.js">js/libs/jquery-ui-1.9.2.custom.min.js</a>" type="text/javascript"&gt; &lt;/script&gt;
+&lt;script src="<a href="js/libs/sniui.determinate-progressbar.1.0.0.min.js">js/libs/sniui.determinate-progressbar.min.js</a>" type="text/javascript"&gt; &lt;/script&gt; 
+</pre>
+              <p>More information about the library can be found at <a href="http://jqueryui.com/progressbar/">jquery ui progressbar</a>.</p>
+              <h3>Usage & Initialization</h3>
+              <div class="row">                
+                <div class="span12">
+                  <p>Determinate Progress Bar can be initiated using the JavaScript method <code>determinateProgressBar()</code> on the target element. The attribute <code>data-content</code> is used to display the content in the data label of the progress bar.</p>
+                </div>
+                <div class="span4">
+                  <div id="determinateProgressBarGreen" data-content="Data displayed through data-attributes"></div>                                                                
+                </div><!-- /.span4 -->
+                <div class="span8">
+<pre class="prettyprint linenums">
+&lt;div id="determinateProgressBarGreen" data-content="data displayed through data-attributes"&gt;
+&lt;/div&gt;
+</pre>
+                </div> <!-- /.span8 -->
+              </div> <!-- /.row -->
+              <div class="row">
+                <div class="span4">
+                  <p>Initialize the progress bar with <code>value</code> option specified.</p>
+                </div> <!-- /.span4 -->
+                <div class="span8">   
+                  <span>JavaScript</span>
+<pre class="prettyprint linenums">
+$( "#determinateProgressBarGreen" ).determinateProgressBar({
+    value: 60
+});
+</pre>            
+                </div><!-- /.span8 -->
+              </div><!-- /.row -->
+              <div class="row">  
+                <div class="span4">  
+                  <h3>Options associated with Determinate Progress Bar</h3>            
+                  <h4>color</h4>
+                  <p>The color of the indicator by default is green. The user has the option to change it to blue through <code>color</code> option.</p>                      
+                  <h4>content</h4>
+                  <p>This option allows user to change the data label's content through JavaScript.</p>             
+                  <div id="determinateProgressBarBlue"></div>                   
+                </div><!-- /.span4 -->
+                <div class="span4">
+                  <span>JavaScript</span>
+<pre class="prettyprint linenums">
+$( "#determinateProgressBarBlue" ).determinateProgressBar({
+    value: 60,
+    color: "blue",
+    content: "data displayed through content option"     
+});
+</pre>             
+                  <p>Note: Information provided through <code>content</code> option overrides the value provided through <code>data-content</code> attribute.</p>
+                </div><!-- /.span4 -->
+                <div class="span4">
+                  <h3>Events associated with Determinate Progress Bar</h3>
+                  <h4>change()</h4>
+                  <p>Triggered when the value of the progress bar changes.</p>
+                  <h4>complete()</h4>
+                  <p>Triggered when the value of the progress bar reaches the max value.</p>
+<pre class="prettyprint linenums">
+$( "#determinateProgressBar" ).determinateProgressBar({
+    change: function( event, ui ) {},
+    complete: function( event, ui ) {}
+}); 
+</pre>                                                   
+                </div> <!-- /.span4 -->          
+              </div> <!-- /.row -->
+            </section><!-- /#determinateProgressBar -->     			
+            <section id="dialog">
+                <header class="sectionHeader">
+                  <a href="#" class="linkToTop">Back To Top</a>
+                      <h2>Dialog</h2>
+                </header>
+
+                <div class="row">
+                    <div class="span4">
+                        <p>Dialogs can be used to display popup windows without opening additional tabs or browser
+                        windows. Just add a <code>&lt;div&gt;</code> with the content that should be displayed in
+                        in the dialog. The <code>title</code> attribute can be used to control the title displayed
+                        on the dialog.</p>
+                        
+                        <p><a class="action" id="showDialog" href="#">Example Dialog</a></p>
+
+                        <p>jQuery UI provides the dialog functionality, but relies on the <code>sniui.dialog.1.1.0.js</code> 
+                        script to change the dialog buttons into links. Add the script reference after jQuery UI
+                        at the end of your HTML document.</p>
+
+                        <p>The "Example Dialog" link is initialized by the example JavaScript shown. For more information
+                        on configuration options, visit <a href="http://jqueryui.com/dialog/">jQuery UI</a>.</p>
+
+                        <div id="modalDialog" title="Modal Dialog">
+                            <p>Test dialog</p>
+                        </div>
+                    </div><!-- /.span4 -->
+                    <div class="span4">
+
+                        <h4>HTML</h4>
+
+<pre class="prettyprint linenums">
+&lt;div id="modalDialog" title="Modal Dialog"&gt;
+  ...
+&lt;/div&gt;
+</pre>
+
+                    </div><!-- /.span4 -->
+                    <div class="span4">
+
+                        <h4>JavaScript</h4>
+<pre class="prettyprint linenums">
+$('#modalDialog').dialog({
+  autoOpen: false,
+  buttons: {
+    'ok': {
+      'class': 'button button-primary',
+      click: function () {
+        $(this).dialog('close');
+      },
+      text: 'Save'
+    },
+    'cancel': {
+      click: function () {
+        $(this).dialog('close');
+      },
+      text: 'Cancel'
+    }
+  },
+  height: 200,
+  modal: true,
+  resizable: false
+});
+</pre>
+                    </div><!-- /.span4 -->
+                </div><!-- /.row -->
+
+            </section><!-- /#dialog -->
+
+            <section id="grid">
+                <header class="sectionHeader">
+                  <a href="#" class="linkToTop">Back To Top</a>
+                      <h2>Grid</h2>
+                </header>
+
+                <div class="row">
+                    <div class="span4">
+                        <p>The grid extends a basic table with advanced features like filtering, sorting and pagination. Simply start
+                        with some basic table HTML.</p>
+
+<pre class="prettyprint linenums">
+&lt;table id="myTable" class="table"&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;...&lt;/th&gt;
+      &lt;th&gt;...&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;...&lt;/td&gt;
+      &lt;td&gt;...&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</pre>
+
+                    </div><!-- /.span4 -->
+                    <div class="span8">
+                        <table id="table1" class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Username</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Larry</td>
+                                    <td>the Bird</td>
+                                    <td>@twitter</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>Larry</td>
+                                    <td>the Bird</td>
+                                    <td>@twitter</td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <td>9</td>
+                                    <td>Larry</td>
+                                    <td>the Bird</td>
+                                    <td>@twitter</td>
+                                </tr>
+                                <tr>
+                                    <td>10</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <td>11</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <td>12</td>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <td>13</td>
+                                    <td>Larry</td>
+                                    <td>the Bird</td>
+                                    <td>@twitter</td>
+                                </tr>
+                                <tr>
+                                    <td>14</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <td>15</td>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <td>16</td>
+                                    <td>Larry</td>
+                                    <td>the Bird</td>
+                                    <td>@twitter</td>
+                                </tr>
+                                <tr>
+                                    <td>17</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <td>18</td>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <td>19</td>
+                                    <td>Larry</td>
+                                    <td>the Bird</td>
+                                    <td>@twitter</td>
+                                </tr>
+                                <tr>
+                                    <td>20</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <td>21</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <td>22</td>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <td>23</td>
+                                    <td>Larry</td>
+                                    <td>the Bird</td>
+                                    <td>@twitter</td>
+                                </tr>
+                                <tr>
+                                    <td>24</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <td>25</td>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <td>26</td>
+                                    <td>Larry</td>
+                                    <td>the Bird</td>
+                                    <td>@twitter</td>
+                                </tr>
+                                <tr>
+                                    <td>27</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <td>28</td>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <td>29</td>
+                                    <td>Larry</td>
+                                    <td>the Bird</td>
+                                    <td>@twitter</td>
+                                </tr>
+                                <tr>
+                                    <td>30</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <td>31</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <td>32</td>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <td>33</td>
+                                    <td>Larry</td>
+                                    <td>the Bird</td>
+                                    <td>@twitter</td>
+                                </tr>
+                                <tr>
+                                    <td>34</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <td>35</td>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <td>36</td>
+                                    <td>Larry</td>
+                                    <td>the Bird</td>
+                                    <td>@twitter</td>
+                                </tr>
+                                <tr>
+                                    <td>37</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <td>38</td>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <td>39</td>
+                                    <td>Larry</td>
+                                    <td>the Bird</td>
+                                    <td>@twitter</td>
+                                </tr>
+                                <tr>
+                                    <td>40</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <td>41</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <td>42</td>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <td>43</td>
+                                    <td>Larry</td>
+                                    <td>the Bird</td>
+                                    <td>@twitter</td>
+                                </tr>
+                                <tr>
+                                    <td>44</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <td>45</td>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <td>46</td>
+                                    <td>Larry</td>
+                                    <td>the Bird</td>
+                                    <td>@twitter</td>
+                                </tr>
+                                <tr>
+                                    <td>47</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <td>48</td>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <td>49</td>
+                                    <td>Larry</td>
+                                    <td>the Bird</td>
+                                    <td>@twitter</td>
+                                </tr>
+                                <tr>
+                                    <td>50</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <td>51</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <td>52</td>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <td>53</td>
+                                    <td>Larry</td>
+                                    <td>the Bird</td>
+                                    <td>@twitter</td>
+                                </tr>
+                                <tr>
+                                    <td>54</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <td>55</td>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <td>56</td>
+                                    <td>Larry</td>
+                                    <td>the Bird</td>
+                                    <td>@twitter</td>
+                                </tr>
+                                <tr>
+                                    <td>57</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <td>58</td>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <td>59</td>
+                                    <td>Larry</td>
+                                    <td>the Bird</td>
+                                    <td>@twitter</td>
+                                </tr>
+                                <tr>
+                                    <td>60</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <td>61</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <td>62</td>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <td>63</td>
+                                    <td>Larry</td>
+                                    <td>the Bird</td>
+                                    <td>@twitter</td>
+                                </tr>
+                                <tr>
+                                    <td>64</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <td>65</td>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <td>66</td>
+                                    <td>Larry</td>
+                                    <td>the Bird</td>
+                                    <td>@twitter</td>
+                                </tr>
+                                <tr>
+                                    <td>67</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <td>68</td>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <td>69</td>
+                                    <td>Larry</td>
+                                    <td>the Bird</td>
+                                    <td>@twitter</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><!-- /.span8 -->
+                </div><!-- /.row -->
+
+                <div class="row">
+                    <div class="span4">
+                        <h3>Initialization</h3>
+
+                        <p>To get started with the grid, add the DataTables library (<code>jquery.dataTables.1.9.3.min.js</code>). Use the <code>.dataTable()</code>
+                        function to convert a standard HTML table into a full-featured grid.</p>
+                        
+                        <p>The <code>'bFilter': false</code> and <code>'bLengthChange': false</code> options can be used to disable the built in 
+                        filter and page size controls.</p>
+                        
+<pre class="prettyprint linenums">
+$('#myTable').dataTable({
+    'bFilter': false,
+    'bLengthChange': false
+});
+</pre>
+                        <p>Visit the <a href="http://datatables.net/">DataTables website</a> for more information about initialization options and
+                        advanced features of the control.</p>
+
+                    </div><!-- /.span4 -->
+
+                    <div class="span4">
+                        <h3>Column Sorting Indicators</h3>
+
+                        <p>The column sort indicators can be enabled by adding the SNI UI extensions for DataTables (<code>sniui.dataTables.1.1.0.min.js</code>). 
+                        The extensions provide a callback to customize the header appearance when as the grid is drawn.</p>
+                        
+<pre class="prettyprint linenums">
+$('#myTable').dataTable({
+  'fnHeaderCallback': Scripps.DataTables.fnHeaderCallback
+});
+</pre>
+
+                    </div><!-- /.span4 -->
+
+                    <div class="span4">
+                        <h3>Pagination</h3>
+
+                        <p>The SNI UI extensions include a custom pagination plug in to get the desired appearance. Simply specify the
+                        <code>'scripps'</code> pagination appearance during initialization.</p>
+                        
+<pre class="prettyprint linenums">
+$('#myTable').dataTable({
+  'sPaginationType': 'scripps'
+});
+</pre>
+
+                    </div><!-- /.span4 -->
+                </div><!-- /.row -->
+            </section><!-- /#grid -->            
+            <section id="indeterminateProgressIndicator">
+              <header class="sectionHeader">
+                <a href="#" class="linkToTop">Back To Top</a>
+                <h2>Indeterminate Progress Indicator</h2>
+              </header>
+              <p>Indeterminate Progress Indicator can be used to let the user know that something is occurring or that the system is busy. This can be associated with actions for which we are not sure about the time required for completion.</p>
+              <h3>Dependencies</h3>                          
+              <h4>JavaScript</h4>
+<pre class="prettyprint linenums">&lt;script src="<a href="js/libs/jquery-ui-1.9.2.custom.min.js">js/libs/jquery-ui-1.9.2.custom.min.js</a>" type="text/javascript"&gt; &lt;/script&gt;
+&lt;script src="<a href="js/libs/sniui.indeterminate-progress-indicator.1.0.0.min.js">js/libs/sniui.indeterminate-progress-indicator.min.js</a>" type="text/javascript"&gt; &lt;/script&gt;</pre>  
+              <h3>Usage</h3>
+              <div class="row">
+                <div class="span4">    
+                  <form>
+                    <div class="form-group">
+                      <div>
+                        <label for="emailaddress"><b>Enter Your Email Address</b></label>
+                        <div id="indicator"></div>
+                        <input type="text" id="emailaddress" title="emailid title"></input>
+                      </div>
+                    </div><!-- /.form-group -->
+                  </form>
+                  <h3>Initialization</h3>
+                  <div class="row">
+                    <div class="span12">
+                      <p>Indeterminate Progress indicator can be initialized by calling the widget constructor <code>indeterminateProgressIndicator()</code> on the target element as shown in the javascript section.</p>
+                      <p>We have the following events associated with this component which can be handled according to the requirement,</p>
+                      <table class="table table-alternatingRow table-border table-columnBorder">
+                        <thead>
+                          <tr>
+                            <th>Event</th>
+                            <th>Description</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td><code>show</code></td>
+                            <td>Raised before the indicator has been made visible</td>
+                          </tr>
+                          <tr>
+                            <td><code>shown</code></td>
+                            <td>Raised after the indicator has been made visible</td>
+                          </tr>
+                          <tr>
+                            <td><code>hide</code></td>
+                            <td>Raised before the indicator is hidden</td>
+                          </tr>
+                          <tr>
+                            <td><code>hidden</code></td>
+                            <td>Raised after the indicator has been hidden</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <p>The options available with this component are,
+                      </p>
+                      <table class="table table-alternatingRow table-border table-columnBorder">
+                        <thead>
+                          <tr>
+                            <th>Option</th>
+                            <th>Description</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td><code>modal</code></td>
+                            <td>true - hides the parent using a transparent overlay; false - no overlay is used. Default value is false.</td>
+                          </tr>
+                          <tr>
+                            <td><code>position</code></td>
+                            <td>Object (Based on the <a href="http://api.jqueryui.com/position/">jQuery UI position utility</a>)<code>my</code>: Default value is center.               <code>at</code>: Default value is center.
+                              <code>of</code>: Default value is window.
+                            </td>
+                          </tr>
+                          <tr>
+                            <td><code>zIndex</code></td>
+                            <td>The starting z-index for the dialog. Default value is 1000.</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <p>Following are the methods responsible for showing and hiding this component,</p>                
+                      <table class="table table-alternatingRow table-border table-columnBorder">
+                        <thead>
+                          <tr>
+                            <th>Method</th>
+                            <th>Description</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td><code>show()</code></td>
+                            <td>to show the component</td>
+                          </tr>
+                          <tr>
+                            <td><code>hide()</code></td>
+                            <td>to hide the component</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>           
+                </div><!-- /.span4 -->
+                <div class="span8">
+                  <span>HTML</span>
+<pre class="prettyprint linenums">
+&lt;div id="indicator"&gt;&lt;/div&gt;
+&lt;input type="text" id="emailaddress" title="emailid title" &gt;&lt;/input&gt;  
+</pre>
+                  <span>JavaScript</span>
+<pre class="prettyprint linenums">
+$(function () {
+    $("#indicator").indeterminateProgressIndicator({
+            //determines if the widget should be shown as modal or not
+            modal: false,
+            //default position of the widget
+            position: {
+                my: "left top",
+                at: "right top",
+                of: "#emailaddress"
+            }
+    });
+    $("#emailaddress").keyup(function(){
+        if($(this).val() == '') {
+            $("#indicator").indeterminateProgressIndicator("hide");
+        } else {
+            $("#indicator").indeterminateProgressIndicator("show");
+        }
+    });
+});
+</pre>         
+                </div><!-- /.span8 -->
+              </div><!-- /.row -->
+            </section><!-- /#indeterminateProgressIndicator -->
+            <section id="multiSelectDropDown">
+              <header class="sectionHeader">
+                <a href="#" class="linkToTop">Back To Top</a>
+                <h2>Multi Select Drop Down</h2>
+              </header>
+              <p>Multi Select Drop Down component helps the user to select one or more values from a range of possible values.</p>    
+              <h3>Dependencies</h3>
+              <h4>JavaScript</h4>
+<pre class="prettyprint linenums">&lt;script src="<a href="http://localhost/Scrippsbootstrap/Framework/trunk/js/libs/jquery-1.8.3.min.js">js/libs/jquery-1.8.3.min.js</a>" type="text/javascript"&gt; &lt;/script&gt;
+&lt;script src="<a href="http://localhost/Scrippsbootstrap/Framework/trunk/js/libs/jquery-ui-1.9.2.custom.min.js">js/libs/jquery-ui-1.9.2.custom.min.js</a>" type="text/javascript"&gt; &lt;/script&gt; 
+&lt;script src="<a href="http://localhost/Scrippsbootstrap/Framework/trunk/js/libs/jquery.multiselect.js">js/libs/jquery.multiselect.js</a>" type="text/javascript"&gt; &lt;/script&gt;</pre>              
+              <h3>Usage and Initialization</h3>
+              <div class="row">
+                <div class="span6">
+                  <select multiple="multiple">
+                    <option value="item1">Item 1</option>
+                    <option value="item2">Item 2</option>
+                    <option value="item3">Item 3</option>
+                    <option value="item4">Item 4</option>
+                    <option value="item5">Item 5</option>
+                    <option value="item6">Item 6</option>
+                    <option value="item7">Item 7</option>
+                  </select>          
+                  <p>Just provide the content for the Multi Select container as shown in the HTML section.</p>
+                  <p>Use the <code>.multiselect()</code> widget function to get the functionality of this component.
+                  Below are the options that we can provide while triggering the component,</p>
+                  <table class="table table-alternatingRow table-border table-columnBorder">
+                    <thead>
+                      <tr>
+                        <th>Option</th>
+                        <th>Value</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><code>selectedList</code></td>
+                        <td><code>100</code></td>
+                        <td>The text to display in the select box when options are selected. Since every selected item should be shown in the select box, provide a higher value such as 100 for this option.</td>
+                      </tr>
+                      <tr>
+                        <td><code>noneSelectedText</code></td>
+                        <td><code>''</code></td>
+                        <td>The default text in the select box when no options have been selected.</td>
+                      </tr>
+                      <tr>
+                        <td><code>checkAllText</code></td>
+                        <td><code>'Check All'</code></td>
+                        <td>The text of the "check all" link.</td>
+                      </tr>
+                      <tr>
+                        <td><code>Uncheck All</code></td>
+                        <td><code>'Uncheck All'</code></td>
+                        <td>The text of the "uncheck all" link.</td>
+                      </tr>
+                    </tbody>
+                  </table>                  
+                  <p>Visit the jquery UI Multiple Select Widget component <a href="http://www.erichynds.com/jquery/jquery-ui-multiselect-widget/">website</a> for more information about initialization options and advanced features of the component.</p>
+                </div>
+                <div class="span6">
+                  <span>HTML</span>
+<pre class="prettyprint linenums">
+&lt;select multiple="multiple"&gt;
+  &lt;option value="item1"&gt;Item 1&lt;/option&gt;
+  &lt;option value="item2"&gt;Item 2&lt;/option&gt;
+  &lt;option value="item3"&gt;Item 3&lt;/option&gt;
+  &lt;option value="item4"&gt;Item 4&lt;/option&gt;
+  &lt;option value="item5"&gt;Item 5&lt;/option&gt;
+  &lt;option value="item6"&gt;Item 6&lt;/option&gt;
+  &lt;option value="item7"&gt;Item 7&lt;/option&gt;
+&lt;/select&gt;
+</pre>
+                  <span>JavaScript</span>
+<pre class="prettyprint linenums">
+$("select").multiselect({
+    selectedList: 100, // 0-based index
+    noneSelectedText: '',
+    checkAllText: 'Check All',
+    uncheckAllText: 'Uncheck All'
+});
+</pre>         
+                </div><!-- /.span8 -->
+              </div><!-- /.row -->
+            </section><!-- /#multiSelectDropDown -->
+            <section id="inlineTabs">
+              <header class="sectionHeader">
+                <a href="#" class="linkToTop">Back To Top</a>
+                <h2>Tabs</h2>
+              </header>
+              <div class="row">
+                <div class="span12">
+                  <p>Tabs help to separate content into different panes. Tabs are arranged horizontally above the content, and the selected tab is highlighted while the panes can be viewed one at a time.</p>
+                </div>
+              </div>
+              <h3>Dependencies</h3>
+              <h4>JavaScript</h4>
+              <pre class="prettyprint linenums">&lt;script src="<a href="js/libs/jquery-1.8.3.min.js">js/libs/jquery-1.8.3.min.js</a>" type="text/javascript"&gt; &lt;/script&gt;
+&lt;script src="<a href="js/libs/jquery-ui-1.9.2.custom.min.js">js/libs/jquery-ui-1.9.2.custom.min.js</a>" type="text/javascript"&gt; &lt;/script&gt; </pre> 
+              <div class="row">
+                <div class="span12">
+                  <p>Visit the <a href="http://jqueryui.com/tabs/">jquery UI tabs component website</a> for more information about initialization options and advanced features of the component.</p>
+                </div>
+              </div>                
+              <h3>Usage</h3>
+              <div class="row">
+                <div class="span4">
+                  <div class="inlineTabs">
+                    <ul>
+                      <li><a href="#tabs-1">Label 1</a></li>
+                      <li><a href="#tabs-2">Label 2</a></li>
+                      <li><a href="#tabs-3">Label 3</a></li>
+                      <li><a href="#tabs-4">Label 4</a></li>
+                      <li><a href="#tabs-5">Label 5</a></li>
+                    </ul>
+                    <div id="tabs-1">
+                      <p>Lorem ipsum dolar adipiscing elit. Donec quis purus vel libero bibendum adipis. Suspendisse ac vene justo. Sed ac consequat eros.</p>
+                    </div>
+                    <div id="tabs-2">
+                      <p>Label 2 content.</p>
+                    </div>
+                    <div id="tabs-3">
+                      <p>Label 3 content.</p>
+                      <p>Label 3 content.</p>
+                    </div>
+                    <div id="tabs-4">
+                      <p>Label 4 content.</p>
+                    </div>
+                    <div id="tabs-5">
+                      <p>Label 5 content.</p>
+                    </div>
+                  </div><br/>
+                  <h3>Initialization</h3>
+                  <div class="row">
+                    <div class="span12">                  
+                      <p>Just provide <code>class="inlineTabs"</code> for the tabs container and provide the content as shown in the HTML section.</p>
+                      <p>Use the <code>.tabs()</code> function to get the functionality of this tabs component. The JavaScript code to trigger the component can be seen in the JavaScript section.</p>
+                    </div>
+                  </div>
+                </div><!-- /.span4 -->
+                <div class="span8">
+                  <span>HTML</span>
+<pre class="prettyprint linenums">
+&lt;div class="inlineTabs"&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href="#tabs-1"&gt;Label 1&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#tabs-2"&gt;Label 2&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;div id="tabs-1"&gt;
+    &lt;p&gt;Lorem ipsum dolar adipiscing elit. Donec quis purus vel libero bibendum adipis. 
+    Suspendisse ac vene justo. Sed ac consequat eros.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div id="tabs-2"&gt;
+    &lt;p&gt;Label 2 content.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+                  <span>JavaScript</span>
+<pre class="prettyprint linenums">
+$(function() {
+  $( ".inlineTabs" ).tabs();
+});
+</pre>         
+                </div><!-- /.span8 -->
+              </div><!-- /.row -->
+            </section><!-- /#inlineTabs -->
+            <section id="tagsSection">
+              <header class="sectionHeader">
+                <a href="#" class="linkToTop">Back To Top</a>
+                <h2>Tags</h2>
+              </header>
+              <div class="row">
+                <div class="span12">
+                  <p>A tag is a non-hierarchical keyword or term assigned to a piece of information.</p>
+                </div>
+              </div> 
+              <h3>Dependencies</h3>
+              <div class="row">
+                <div class="span6">
+                  <h4>JavaScript</h4>
+      <pre class="prettyprint linenums">&lt;script src="<a href="js/libs/jquery-1.8.3.min.js">js/libs/jquery-1.8.3.min.js</a>" type="text/javascript"&gt; &lt;/script&gt;
+&lt;script src="<a href="js/libs/jquery-ui-1.9.2.custom.min.js">js/libs/jquery-ui-1.9.2.custom.min.js</a>" type="text/javascript"&gt; &lt;/script&gt; 
+&lt;script src="<a href="js/libs/tag-it.min.js">js/libs/jquery.wijmo-open.all.2.3.1.min.js</a>" type="text/javascript"&gt; &lt;/script&gt;
+      </pre> 
+                </div>
+                <div class="span6">
+                  <h4>CSS</h4>
+        <pre class="prettyprint linenums">&lt;link rel="stylesheet" href="<a href="css/jquery-ui/jquery-ui-1.9.2.custom.min.css">css/jquery-ui/jquery-ui-1.9.2.custom.min.css</a>" /&gt;
+&lt;link rel="stylesheet" href="<a href="css/bootstrap/bootstrap.1.0.0.css">css/bootstrap/bootstrap.css</a>" /&gt;
+        </pre>
+                </div>
+              </div>
+              <h3>Usage and Initialization</h3>
+              <div class="row">
+                <div class="span12">
+                  <p>The tags serve as a means of categorizing the generated content. Use the .tagit() function to convert a standard HTML ul into a tags container.A word with a space or a new line gets converted into a tag.Clicking on close button would remove the tag.</p> 
+                  <p>More information about the  tag-it library  library can be found at <a href=" http://aehlke.github.com/tag-it/">tag-it</a>.</p>
+                </div>
+              </div> 
+              <div class="row">
+                <div class="span6">      
+                  <form class="form">
+                    <ul id="tags"></ul>
+                  </form>
+                </div>
+                <div class="span6">
+                  <span>HTML</span>
+<pre class="prettyprint linenums">
+&lt;form class="form"&gt;
+  &lt;ul id="tags"&gt;&lt;/ul&gt;
+&lt;/form&gt;
+</pre>
+                 <span>Javascript</span>
+<pre class="prettyprint linenums">
+$("#tags").tagit();
+</pre>
+                 <!-- End demo markup -->
+                </div>
+              </div>
+            </section> <!--/#tagsSection-->
+            
+            <section id="toolTip">
+              <header class="sectionHeader">
+                <a href="#" class="linkToTop">Back To Top</a>
+                  <h2>Tool Tip</h2>
+              </header>
+              <div class="row">
+                <div class="span12">              
+                  <p>This component helps to produce a tool tip on hovering over a particular target area. It is designed in such a way that, tool tip remains activated for the complete time the user has the mouser over the UI element or within the tooltip itself.</p>
+                </div>
+              </div>
+              <h3>Dependencies</h3>
+              <h4>JavaScript</h4>
+              <pre class="prettyprint linenums">&lt;script src="<a href="js/libs/bootstrap-popover.2.1.1.min.js">js/libs/bootstrap-popover.2.1.1.min.js</a>" type="text/javascript"&gt; &lt;/script&gt;
+&lt;script src="<a href="js/libs/sniui.tool-tip.1.0.0.min.js">js/libs/sniui.tool-tip.min.js</a>" type="text/javascript"&gt; &lt;/script&gt; </pre>
+              <div class="row">
+                <div class="span12">
+                  <p>More information about the library can be found at <a href="http://twitter.github.com/bootstrap/javascript.html#popovers">Twitter Bootstrap</a>.</p>
+                </div>
+              </div>
+              <h3>Usage and Initialization</h3>
+              <div class="row">
+                <div class="span12">              
+                  <p>Tool Tip can be initiated by using the method <code>.toolTip()</code>, however the target element needs the attributes <code>title</code> and <code>data-content</code> attributes to display the title and content of the tool tip respectively.</p>
+                </div>
+              </div>                 
+              <div class="row">
+                <div class="span4">                      
+                  <img src="images/toolTipTarget.jpg" id="toolTipTarget" alt="" data-content="Lorem ipsum dolar adipiscing elit. Donec quis purus vel libero bibendum adipis." title="Lorem Ipsum"/> 
+                </div><!-- /.span4 -->
+                <div class="span8">
+                  <span>HTML</span>
+<pre class="prettyprint linenums">
+&lt;img src="images/toolTipTarget.jpg" id="toolTipTarget" alt="" data-content="Lorem ipsum dolar adipiscing elit..." title="Lorem Ipsum"/&gt; 
+</pre>
+                  <span>JavaScript</span>
+<pre class="prettyprint linenums">
+$(function () { 
+  $("#toolTipTarget").toolTip();
+});
+</pre>
+                </div><!-- /.span8 -->
+              </div><!-- /.row -->
+              <div class="row">
+                <div class="span6">
+                  <h3>Customizing Position and Delay</h3>
+                  <div class="row">
+                    <div class="span12">
+                      <p><code>data-placement</code> can be used to position the tool tip in different positions viz top, bottom, left and right by providing the value accordingly. By default, the tooltip is made to appear to the right of the target element. </p>
+                      <p>The user can also set the delay in time for the tooltip to appear /disappear. This can be implemented by providing <code>data-delay</code> attribute with the desired time limit (in ms). Default value provided is 300ms.</p>
+                    </div>
+                  </div>
+                </div><!-- /.span6 -->
+                <div class="span6">
+                  <span>HTML</span>
+<pre class="prettyprint linenums">
+&lt;img src="images/toolTipTarget.jpg" id="toolTipTarget" alt="" data-placement="top" data-delay="500"/&gt; 
+</pre>
+                </div><!-- /.span6 -->
+              </div><!-- /.row -->
+            </section><!-- /#toolTip -->
+            
+            <section id="tree-view">
+              <header class="sectionHeader">
+                <a href="#" class="linkToTop">Back To Top</a>                
+                <h2>Tree View</h2>
+              </header>
+              <div class="row">
+                <div class="span12">
+                  <p>Tree View is used to view and select multiple branches and leaves in a hierarchical order. It can be used when there are many branches and can be expanded as needed by the user.</p>
+                </div>
+              </div>
+              <h3>Dependencies</h3>
+              <h4>JavaScript</h4>
+              <pre class="prettyprint linenums">&lt;script src="<a href="js/libs/jquery.wijmo-open.all.2.3.1.min.js">js/libs/jquery.wijmo-open.all.2.3.1.min.js</a>" type="text/javascript"&gt; &lt;/script&gt;
+&lt;script src="<a href="js/libs/jquery.wijmo-complete.all.2.3.2.min.js">js/libs/jquery.wijmo-complete.all.2.3.2.min.js</a>" type="text/javascript"&gt; &lt;/script&gt;
+              </pre>
+              <h3>Usage and Initialization</h3>
+              <div class="row">
+                <div class="span12">
+                  <p>Tree View  is dependent on Wijmo library (which is in turn dependent on jqueryUI library). Use the .wijtree() function to convert a standard HTML unordered list into a treeView.</p>
+                  <p>More information about the library can be found at <a href="http://wijmo.com/wiki/index.php/Tree">Wijmo Tree View</a>.</p>
+                </div><!--span12-->
+              </div><!--/.row-->
+              <div class="row">
+                <div class="span4">
+                  <ul id="tree">
+                    <li class="folder"><a><span>Value 1</span></a>
+                      <ul>
+                        <li class="folder"><a><span>Child Value 1</span></a>
+                          <ul>
+                            <li class="file"><a><span>Child Value 1</span></a></li>
+                            <li class="file"><a><span>Child Value 2</span></a></li>
+                            <li class="file"><a><span>Child Value 3</span></a></li>
+                          </ul>
+                        </li>
+                        <li class="file"><a><span>Child Value 2</span></a></li>
+                        <li class="file"><a><span>Child Value 3</span></a></li>
+                        <li class="file"><a><span>Child Value 4</span></a></li>
+                        <li class="file"><a><span>Child Value 5</span></a></li>
+                      </ul>
+                    </li>
+                    <li class="folder"><a><span>Value 2</span></a>
+                      <ul>
+                        <li class="file"><a><span>Child Value 1</span></a></li>
+                        <li class="file"><a><span>Child Value 2</span></a></li>
+                        <li class="file"><a><span>Child Value 3</span></a></li>
+                        <li class="file"><a><span>Child Value 4</span></a></li>
+                        <li class="file"><a><span>Child Value 5</span></a></li>
+                      </ul>
+                    </li>
+                    <li class="folder"><a><span>Value 3</span></a>
+                      <ul>
+                        <li class="file"><a><span>Child Value 1</span></a></li>
+                        <li class="file"><a><span>Child Value 2</span></a></li>
+                        <li class="file"><a><span>Child Value 3</span></a></li>
+                        <li class="file"><a><span>Child Value 4</span></a></li>
+                        <li class="file"><a><span>Child Value 5</span></a></li>
+                      </ul>
+                    </li>
+                    <li class="folder"><a><span>Value 4</span></a>
+                      <ul>
+                        <li class="file"><a><span>Child Value 1</span></a></li>
+                        <li class="file"><a><span>Child Value 2</span></a></li>
+                        <li class="file"><a><span>Child Value 3</span></a></li>
+                        <li class="file"><a><span>Child Value 4</span></a></li>
+                        <li class="file"><a><span>Child Value 5</span></a></li>
+                      </ul>
+                    </li>
+                    <li class="folder"><a><span>Value 5</span></a>
+                      <ul>
+                        <li class="file"><a><span>Child Value 1</span></a></li>
+                        <li class="file"><a><span>Child Value 2</span></a></li>
+                        <li class="file"><a><span>Child Value 3</span></a></li>
+                        <li class="file"><a><span>Child Value 4</span></a></li>
+                        <li class="file"><a><span>Child Value 5</span></a></li>
+                      </ul>
+                    </li>
+                    <li class="folder"><a><span>Value 6</span></a>
+                      <ul>
+                        <li class="file"><a><span>Child Value 1</span></a></li>
+                        <li class="file"><a><span>Child Value 2</span></a></li>
+                        <li class="file"><a><span>Child Value 3</span></a></li>
+                        <li class="file"><a><span>Child Value 4</span></a></li>
+                        <li class="file"><a><span>Child Value 5</span></a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div><!--/.span4-->
+                <div class="span8">
+                  <span>HTML</span>
+<pre class="prettyprint linenums">
+&lt;ul id="tree"&gt;
+    &lt;li class="folder"&gt;&lt;a&gt;&lt;span&gt;Value 1&lt;/span&gt;&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li class="folder"&gt;&lt;a&gt;&lt;span&gt;Child Value 1&lt;/span&gt;&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li class="file"&gt;&lt;a&gt;&lt;span&gt;Child Value 1&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li class="file"&gt;&lt;a&gt;&lt;span&gt;Child Value 2&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li class="file"&gt;&lt;a&gt;&lt;span&gt;Child Value 3&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li class="file"&gt;&lt;a&gt;&lt;span&gt;Child Value 4&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li class="file"&gt;&lt;a&gt;&lt;span&gt;Child Value 5&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li class="file"&gt;&lt;a&gt;&lt;span&gt;Child Value 2&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li class="file"&gt;&lt;a&gt;&lt;span&gt;Child Value 3&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li class="file"&gt;&lt;a&gt;&lt;span&gt;Child Value 4&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li class="file"&gt;&lt;a&gt;&lt;span&gt;Child Value 5&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt; 
+  &lt;/ul&gt;
+&lt;/div&gt;
+</pre>             
+                  <span>JavaScript</span>
+<pre class="prettyprint linenums">
+    $(document).ready(function () {
+        var tv = $("#tree").wijtree({
+        showCheckBoxes: true,
+        allowEdit: true
+        });
+    });
+</pre>
+                </div><!--/.span8-->
+              </div><!--/.row--> 
+              <h3>Options</h3>
+              <div class="row">
+                <div class="span12">
+                  <h4>Other Icons</h4>
+                  <p>To add customized icons, add the necessary class to the node (<code>li</code>) by providing it in the method <code>wijtreenode</code> as suggested by <a href="http://wijmo.com/wiki/index.php/Tree#TreeNode_Options">Wijmo TreeNode Options</a>. </p>                   
+                </div><!--/.span12-->
+              </div><!--/.row-->
+              <div class="row">
+                <div class="span4">
+                  <ul id="otherIconTree">
+                    <li class="folder"><a><span>Value 1</span></a>
+                      <ul>
+                        <li class="msexcel"><a><span>Child Value 1</span></a>
+                          <ul>
+                            <li class="msexcel"><a><span>Child Value 1</span></a></li>
+                            <li class="file"><a><span>Child Value 2</span></a></li>
+                            <li class="file"><a><span>Child Value 3</span></a></li>
+                          </ul>
+                        </li>
+                        <li class="flash"><a><span>Child Value 2</span></a></li>
+                        <li class="msppoint"><a><span>Child Value 3</span></a></li>
+                      </ul>
+                    </li>
+                    <li class="folder"><a><span>Value 2</span></a>
+                      <ul>
+                        <li class="msword"><a><span>Child Value 1</span></a></li>
+                        <li class="msvisio"><a><span>Child Value 2</span></a></li>
+                        <li class="xml"><a><span>Child Value 3</span></a></li>
+                      </ul>
+                    </li>
+                    <li class="folder"><a><span>Value 3</span></a>
+                      <ul>
+                        <li class="file"><a><span>Child Value 1</span></a></li>
+                        <li class="file"><a><span>Child Value 2</span></a></li>
+                        <li class="file"><a><span>Child Value 3</span></a></li>                     
+                      </ul>
+                    </li>
+                    <li class="folder"><a><span>Value 4</span></a>
+                      <ul>
+                        <li class="file"><a><span>Child Value 1</span></a></li>
+                        <li class="file"><a><span>Child Value 2</span></a></li>
+                        <li class="file"><a><span>Child Value 3</span></a></li>                     
+                      </ul>
+                    </li>
+                    <li class="folder"><a><span>Value 5</span></a>
+                      <ul>
+                        <li class="file"><a><span>Child Value 1</span></a></li>
+                        <li class="file"><a><span>Child Value 2</span></a></li>
+                        <li class="file"><a><span>Child Value 3</span></a></li>                     
+                      </ul>
+                    </li>
+                    <li class="folder"><a><span>Value 6</span></a>
+                      <ul>
+                        <li class="file"><a><span>Child Value 1</span></a></li>
+                        <li class="file"><a><span>Child Value 2</span></a></li>
+                        <li class="file"><a><span>Child Value 3</span></a></li>                     
+                      </ul>
+                    </li>
+                  </ul>
+                </div><!--/.span4--> 
+                <div class="span8">
+                  <span>JavaScript</span>
+<pre class="prettyprint linenums">
+$(document).ready(function () {
+    var tv = $("#otherIconTree").wijtree();
+    $(&quot;#otherIconTree li.folder&quot;).wijtreenode({collapsedIconClass : 'icon16-folder',expandedIconClass:'icon16-folder'});  <br>    $(&quot;#otherIconTree li.msword&quot;).wijtreenode({itemIconClass: 'icon16-msword'}); <br>    $(&quot;#otherIconTree li.xml&quot;).wijtreenode({itemIconClass: 'icon16-xml'}); 
+});
+</pre>
+                </div><!--/.span8-->
+              </div><!--/.row-->
+              <div class="row">
+                <div class="span12">
+                  <h4>Text Icons</h4>
+                  <p>For a simple text based tree view, we could initialize <code>wijtree</code> without any options. </p>
+                </div>              
+                <div class="span4">
+                  <ul id="textTree">
+                    <li class="folder"><a><span>Value 1</span></a>
+                      <ul>
+                        <li class="folder"><a><span>Child Value 1</span></a>
+                          <ul>
+                            <li class="file"><a><span>Child Value 1</span></a></li>
+                            <li class="file"><a><span>Child Value 2</span></a></li>
+                            <li class="file"><a><span>Child Value 3</span></a></li>
+                          </ul>
+                        </li>
+                        <li class="file"><a><span>Child Value 2</span></a></li>
+                        <li class="file"><a><span>Child Value 3</span></a></li>                      
+                      </ul>
+                    </li>
+                    <li class="folder"><a><span>Value 2</span></a>
+                      <ul>
+                        <li class="file"><a><span>Child Value 1</span></a></li>
+                        <li class="file"><a><span>Child Value 2</span></a></li>
+                        <li class="file"><a><span>Child Value 3</span></a></li>
+                      </ul>
+                    </li>
+                    <li class="folder"><a><span>Value 3</span></a>
+                      <ul>
+                        <li class="file"><a><span>Child Value 1</span></a></li>
+                        <li class="file"><a><span>Child Value 2</span></a></li>
+                        <li class="file"><a><span>Child Value 3</span></a></li>                     
+                      </ul>
+                    </li>
+                    <li class="folder"><a><span>Value 4</span></a>
+                      <ul>
+                        <li class="file"><a><span>Child Value 1</span></a></li>
+                        <li class="file"><a><span>Child Value 2</span></a></li>
+                        <li class="file"><a><span>Child Value 3</span></a></li>                     
+                      </ul>
+                    </li>
+                    <li class="folder"><a><span>Value 5</span></a>
+                      <ul>
+                        <li class="file"><a><span>Child Value 1</span></a></li>
+                        <li class="file"><a><span>Child Value 2</span></a></li>
+                        <li class="file"><a><span>Child Value 3</span></a></li>                     
+                      </ul>
+                    </li>
+                    <li class="folder"><a><span>Value 6</span></a>
+                      <ul>
+                        <li class="file"><a><span>Child Value 1</span></a></li>
+                        <li class="file"><a><span>Child Value 2</span></a></li>
+                        <li class="file"><a><span>Child Value 3</span></a></li>                     
+                      </ul>
+                    </li>
+                  </ul>
+                </div><!--/.span4-->
+                <div class="span8">
+                  <span>JavaScript</span>
+<pre class="prettyprint linenums">
+$(document).ready(function () {
+    var tv = $("#textTree").wijtree();
+});
+</pre>
+                </div><!--/.span8-->
+              </div><!--/.row-->
+            </section><!-- /#tree-view -->
+            
+            <section id="userActivatedInlineHelp">
+              <header class="sectionHeader">
+                <a href="#" class="linkToTop">Back To Top</a>
+                  <h2>User Activated Inline Help</h2>
+              </header>
+              <div class="row">
+                <div class="span12">              
+                  <p>User Activated Inline Help is used to display additional information which can be displayed as a popover, next to the element that is used as a trigger. The popover can be closed by clicking on the close link provided in it or by clicking anywhere outside it. </p>
+                </div>
+              </div>
+              <h3>Dependencies</h3>
+              <h4>JavaScript</h4>
+              <pre class="prettyprint linenums">&lt;script src="<a href="js/libs/bootstrap-popover.2.1.1.min.js">js/libs/bootstrap-popover.2.1.1.min.js</a>" type="text/javascript"&gt; &lt;/script&gt;
+&lt;script src="<a href="js/libs/sniui.userInlineHelp.min.js">js/libs/sniui.userInlineHelp.min.js</a>" type="text/javascript"&gt; &lt;/script&gt; </pre>
+              <div class="row">
+                <div class="span12">
+                  <p>More information about the library can be found at <a href="http://twitter.github.com/bootstrap/javascript.html#popovers">Twitter Bootstrap</a>.</p>
+                </div>
+              </div>
+              <h3>Usage and Initialization</h3>
+              <div class="row">
+                <div class="span12">               
+                  <p>User Activated Inline Help can be initiated using the JavaScript method <code>userInlineHelp()</code> on the target element. The attributes <code>title</code> and <code>data-content</code> are used to display the title and the message respectively in the popover.</p>
+                </div>
+              </div>                
+              <div class="row">
+                <div class="span4">
+                  <form>
+                    <div class="form-group">
+                      <label><strong>Credit Card Number</strong></label>
+                      <input class="input-large" type="text" name="cardnumber">          
+                      <div class="userInlineHelp-security">
+                        <label><strong>Security Code</strong> <i id="userInlineHelp" class="icon12-question" data-content='                
+                          <p>Lorem Ipsum dolar sedit.<br/> Vestis Verim Redit. Manus <br/> Manum Lavat.</p>
+                        ' title="Lorem Ipsum"></i>
+                        </label> 
+                        <input class="input-large" type="text" name="codenumber" />              
+                      </div>
+                    </div><!--/.form-group-->
+                  </form>
+                </div><!-- /.span4 -->
+                <div class="span8"><span>HTML</span>
+<pre class="prettyprint linenums">
+  &lt;i id="userInlineHelp" class="icon12-question" data-content="Lorem Ipsum dolar sedit. Vestis Verim Redit. Manus Manum Lavat." title="Lorem Ipsum"&gt;&lt;/i&gt;
+</pre>
+                  <span>JavaScript</span>
+<pre class="prettyprint linenums">
+$(function (){ 
+  $('#userInlineHelp').userInlineHelp(); 
+});
+</pre>
+                </div><!-- /.span8 -->
+              </div><!-- /.row -->
+            </section><!-- /#userActivatedInlineHelp -->
+        </div><!-- /.content -->
+    </div><!-- /.container-fluid -->
+
+  <footer class="pageFooter">
+    <hr />
+    <p>Scripps Networks Interactive Bootstrap version 1.1.0.</p>
+    <p>Copyright &copy; 2012 Scripps Networks Interactive</p>
+  </footer> <!-- /.pageFooter -->
+
+  <script src="js/libs/prettify.js" type="text/javascript"></script>
+  <script src="js/libs/jquery-1.8.3.min.js" type="text/javascript"></script>
+  <script src="js/libs/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
+  <script src="js/libs/tag-it.min.js" type="text/javascript"></script>
+  <script src="js/libs/sniui.dialog.1.0.0.min.js" type="text/javascript"></script>
+  <script src="js/libs/jquery.dataTables.1.9.3.min.js" type="text/javascript"></script>
+  <script src="js/libs/sniui.dataTables.1.0.0.min.js" type="text/javascript"></script>
+  <script src="js/libs/bootstrap-dropdown.2.0.4.min.js" type="text/javascript"></script>
+  <script src="js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>
+  <script src="js/libs/sniui.tool-tip.1.0.0.min.js" type="text/javascript"></script>
+  <script src="js/libs/sniui.user-inline-help.1.0.0.min.js" type="text/javascript"></script>
+  <script src="js/libs/jquery.wijmo-open.all.2.3.1.min.js" type="text/javascript"></script>
+  <script src="js/libs/jquery.wijmo-complete.all.2.3.2.min.js" type="text/javascript"></script> 
+  <script src="js/libs/bootstrap-collapse.2.2.1.min.js" type="text/javascript"></script>
+  <script src="js/libs/sniui.accordion.1.0.0.min.js" type="text/javascript"></script>
+  <script src="js/libs/sniui.auto-inline-help.1.0.0.min.js" type="text/javascript"></script>
+  <script src="js/libs/sniui.indeterminate-progress-indicator.1.0.0.min.js" type="text/javascript"></script>  
+  <script src="js/libs/sniui.determinate-progressbar.1.0.0.min.js" type="text/javascript"></script> 
+  <script src="js/libs/sniui.wijmo.wijinputdate.1.0.0.min.js" type="text/javascript"></script> 
+  <script src="js/libs/jquery.multiselect.min.js" type="text/javascript"></script>      
+  <script src="js/demo.js"></script>
+  <script src="js/javascript.js"></script>
+</body>
+</html>
