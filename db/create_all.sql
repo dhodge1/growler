@@ -12,8 +12,8 @@
  */
 
 /*
-Creates the table for storing theme information
-*/
+ * Creates the table for storing theme information
+ */
 
 --dropping tables before we create them
 DROP TABLE theme; 
