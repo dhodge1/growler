@@ -23,20 +23,12 @@ CREATE TABLE theme (
 	,name			varchar(30)
 	,description		varchar(250)
 	,creator		int		REFERENCES user(id)
-	,year			year(4),
-	,visible		boolean,
+	,year			year(4)
+	,visible		boolean
 	,active			boolean
+	,reason			varchar(250) /*for user-suggested themes*/
 	);
 
-/*
- * Creates a subclass of theme, that stores reasons for a user-suggested theme
- */
-DROP TABLE theme_reason;
-CREATE TABLE theme_reason (
-	theme_id	int		PRIMARY KEY REFERENCES theme(id)
-	,reason		varchar(250)
-	);
-	
 /*
 Creates the table for storing user information
 */	
@@ -96,15 +88,21 @@ CREATE TABLE speaker_ranking (
 	
 /*
  * Creates the table for attending a session
- * Final field is for keeping the integrity of survey-taking (each user can only take one survey)
- * We don't want to know what users did what surveys, but we have to enforce them taking
- * just one survey.  Hence, the need for that field.
+ * Final field is for keeping the integrity of survey-taking
+ * 	(each user can only take one survey)
+ * We don't want to know which users filled out which surveys,
+ * 	but we have to enforce them taking just one survey.
+ * Hence, when a person submits a survey, there is a condition 
+ * 	where, if isRegistered is false for that given user_id and session_id,
+ *	the attribute is made true and records are sumbitted to session_ranking
+ *	if isRegistered is true, however, there page redirects to explain
+ *	that they've already submitted a survey for that session, and no	 *	records are inserted into session_ranking.
  */	
 DROP TABLE attendance;
 CREATE TABLE attendance (
-	user_id			int			PRIMARY KEY REFERENCES user(id)
-	,session_id		int			PRIMARY KEY REFERENCES session(id)
-	,is_registered	boolean
+	user_id		int	PRIMARY KEY REFERENCES user(id)
+	,session_id	int	PRIMARY KEY REFERENCES session(id)
+	,isRegistered	boolean 
 	);
 	
 /*
@@ -123,6 +121,10 @@ CREATE TABLE question (
 /*
  * Creates a table for location information
  * A location is a room (or remote location) where a session is held
+ * This is a separate table so that the locations are centralized and
+ * sessions cannot all refer to the same place three different ways
+ * and thus cause confusion- locations, instead, can be selected from
+ * a centralized list produced from this table.
  */	
 
 DROP TABLE location;
@@ -134,32 +136,39 @@ CREATE TABLE location (
 /*
  * Creates table for session information
  * A session is essentially a presentation given by a speaker_team (which may
- * be one or more speakers), attended by users.  A session has a start time, a start 
- * date, a duration, a location, and a track (which is either Technical or 
- * Business Friendly).
+ * be one or more speakers), attended by users.
+ * A session has a start time, a start date, a duration, a location, 
+ * and a track (which is either Technical or Business Friendly).
+ * If multiple tracks need to be managed, we might centralize it with its
+ * own table as we did with location. If there are only ever two tracks, 
+ * and admin never need to add others, we will keep it as an attribute.
  */
 
 DROP TABLE session;
 CREATE TABLE session (
-	id					int			PRIMARY KEY
-	,name				varchar(50)
+	id			int			PRIMARY KEY
+	,name			varchar(50)
 	,description		text
-	,track				varchar(20)
+	,track			varchar(20)
 	,session_date		date
-	,start_time			time
-	,duration			int
-	,location			int			REFERENCES location(id)
-	
+	,start_time		time
+	,duration		int
+	,location		int		REFERENCES location(id)
 	);
 	
 /*
  * Creates the table for ranking sessions
- * There is no primary key: there is a high probability of multiple ratings given by different surveys
+ * There is no primary key: 
+ * there is a high probability of multiple ratings given by different surveys
+ * The created_on attribute is a timestamp of when the survey was submitted,
+ * which is not a primary key because two records could conceivably be
+ * submitted at the same time.
  */
 
 DROP TABLE session_ranking;
 CREATE TABLE session_ranking (
-	session_id		int	REFERENCES session(id)
+	created_on		TIMESTAMP
+	,session_id		int	REFERENCES session(id)
 	,question_id		int	REFERENCES question(id)
 	,ranking		int	CHECK (ranking > 0 AND ranking < 6)
 	);
