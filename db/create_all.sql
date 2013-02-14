@@ -95,6 +95,19 @@ CREATE TABLE speaker_ranking (
 	);
 	
 /*
+ * Creates the table for attending a session
+ * Final field is for keeping the integrity of survey-taking (each user can only take one survey)
+ * We don't want to know what users did what surveys, but we have to enforce them taking
+ * just one survey.  Hence, the need for that field.
+ */	
+DROP TABLE attendance;
+CREATE TABLE attendance (
+	user_id			int			PRIMARY KEY REFERENCES user(id)
+	,session_id		int			PRIMARY KEY REFERENCES session(id)
+	,is_registered	boolean
+	);
+	
+/*
  * Creates the table for storing the survey questions,
  * which will be tied to session rankings. (Essentially, each rank value has
  * an associated question).
@@ -141,16 +154,14 @@ CREATE TABLE session (
 	
 /*
  * Creates the table for ranking sessions
- * 
+ * There is no primary key: there is a high probability of multiple ratings given by different surveys
  */
 
 DROP TABLE session_ranking;
 CREATE TABLE session_ranking (
 	session_id		int	REFERENCES session(id)
-	,user_id		int	REFERENCES user(id)
 	,question_id		int	REFERENCES question(id)
 	,ranking		int	CHECK (ranking > 0 AND ranking < 6)
-	,PRIMARY KEY (session_id, user_id, question_id)
 	);
 
 /*
