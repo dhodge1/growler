@@ -27,6 +27,15 @@ CREATE TABLE theme (
 	,visible		boolean,
 	,active			boolean
 	);
+
+/*
+ * Creates a subclass of theme, that stores reasons for a user-suggested theme
+ */
+DROP TABLE theme_reason;
+CREATE TABLE theme_reason (
+	theme_id	int		PRIMARY KEY REFERENCES theme(id)
+	,reason		varchar(250)
+	);
 	
 /*
 Creates the table for storing user information

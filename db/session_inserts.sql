@@ -1,6 +1,11 @@
+load infile 'raw_data/session_data.csv'
+into table session
+fields terminated by ','
+ignore 1 lines;
+
 /*
  * Inserts the themes from 2012
- */
+ 
 insert into session (id, year, name) values (1 , 2012, "Leveraging Technology for Better Deployment");
 insert into session (id, year, name) values (2 , 2012, "Cheap and Free Test Tools");
 insert into session (id, year, name) values (3 , 2012, "Cloudy with a Chance of Continous Delivery");
@@ -34,3 +39,4 @@ insert into session (id, year, name) values (30 , 2012, "MAM Target State");
 insert into session (id, year, name) values (31 , 2012, "Technology Panel");
 insert into session (id, year, name) values (32 , 2012, "Network Overview");
 insert into session (id, year, name) values (33 , 2012, "Apache Camel & Spring Integration");
+*/
