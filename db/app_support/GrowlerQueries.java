@@ -92,5 +92,5 @@ public class GrowlerQueries {
 	/**
 	Updates a speaker to be inactive, user story 10350
 	*/
-	String deactivateTheme = "update speaker set active = false where id = ?";
+	String deactivateSpeaker = "update speaker set active = false where id = ?";
 }

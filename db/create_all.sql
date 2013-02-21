@@ -69,7 +69,9 @@ CREATE TABLE speaker (
 	 id			int			PRIMARY KEY
 	,first_name		varchar(30)
 	,last_name		varchar(30)
-	,suggested_by		int			REFERENCES user(id)		
+	,suggested_by		int			REFERENCES user(id)
+	,visible		boolean
+	,active			boolean
 	);
 
 /*

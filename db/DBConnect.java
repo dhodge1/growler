@@ -1,7 +1,13 @@
 import java.util.*;
 import java.io.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import javax.sql.*;
 import javax.servlet.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  @author Justin Bauguess
@@ -9,7 +15,6 @@ import javax.servlet.*;
  @since 02-21-13
  */
 public class DBConnect extends HttpServlet {
-	Connection connection = null;
 	/**
 	Connects to the growler_db database
 	
@@ -18,7 +23,7 @@ public class DBConnect extends HttpServlet {
 	public void service(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			connnection = DriverManager.getConnection("jdbc:mysql://localhost/growler_db","admin","password");
+			Connection connnection = DriverManager.getConnection("jdbc:mysql://localhost/growler_db","admin","password");
 			}
 		catch (SQLException e) {
 			throw new ServletException("Servlet Could not display records.", e);
