@@ -186,25 +186,3 @@ CREATE TABLE speaker_team (
 	session_id		int			REFERENCES session(id)
 	,speaker_id		int			REFERENCES speaker(id)
 	);
-
-/*
- * incomplete_session_survey:
- * Table stores incompleted surveys before users are willing to submit
- * Once they submit their survey, the rows for that user_id, session_id pair
- * must be deleted and the ranks must be put into session_ranking and the
- * comments, if there are any, must be submitted to session_comment
- * There are five attributes:
- * user_id
- * session_id
- * question_id
- * ranking
- * comment
- */
- DROP TABLE incomplete_session_survey;
- CREATE TABLE incomplete_session_survey(
- 	user_id 	int	PRIMARY KEY	REFERENCES user(id)
-	,session_id	int	PRIMARY KEY	REFERENCES session(id)
-	,question_id	int	PRIMARY KEY	REFERENCES question(id)
-	,ranking	int
-	,comment	varchar(250)
-	);
