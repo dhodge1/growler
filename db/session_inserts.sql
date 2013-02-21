@@ -1,3 +1,9 @@
+/*
+ * Loads a raw data file of session data from last year
+ * into the sessions table so we can analyze last year's data
+ * Session has the following fields: ID,Topic,Summary,Track,Date,Time,Duration,Location
+ */
+
 load infile 'raw_data/session_data.csv'
 into table session
 fields terminated by ','
@@ -5,6 +11,7 @@ ignore 1 lines;
 
 /*
  * Inserts the themes from 2012
+ * Not needed with the dump file, but I've saved the text just in case
  
 insert into session (id, year, name) values (1 , 2012, "Leveraging Technology for Better Deployment");
 insert into session (id, year, name) values (2 , 2012, "Cheap and Free Test Tools");

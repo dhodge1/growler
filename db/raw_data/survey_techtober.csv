@@ -72,7 +72,7 @@ Session,Session met expectations,Speaker Knowledgeable on topic,Presentation ski
 4,4,5,5,5,Great info on DV.  We need to get Tableau in house and not use trial versions.  Good info on internet tools!  Thanks.
 4,3,3,3,4,"Perhaps a bit too technical.  Put Deborah's stuff first & expand a bit.  Would have liked to have seen 4 techniques in general, perhaps contrasting and comparing the techniques. Seemed a bit dat focused and concentrating on one tool (Tableau) didn't give a clear picture of general techniques--e.g. ways to visualize, problems with tools, business and technical challenges, etc."
 4,5,5,5,5,Nice Job!
-4,4,4,,5,"There was a whole lot of information but I can see the possibilities of the tool.  The presenters went very quickly and it was a bit hard to grasp all that went on.  Also, it was very difficult to see all the detail on the screen."
+4,4,4,0,5,"There was a whole lot of information but I can see the possibilities of the tool.  The presenters went very quickly and it was a bit hard to grasp all that went on.  Also, it was very difficult to see all the detail on the screen."
 4,4,4,4,4,"Would be great if they started with a business question/problem and then demonstrated how to answer it.  The tech demo was great, but it was hard to follow all the clicks and understand how well it matched our needs"
 4,4,4,4,4,
 4,5,5,4,5,Great presentation.  Very neat topic.
@@ -124,7 +124,7 @@ Session,Session met expectations,Speaker Knowledgeable on topic,Presentation ski
 7,5,5,5,5,Great use of the elastic technology provided by Amazon and Zencoder
 7,4,5,4,5,
 7,5,5,4,5,
-7,,3,3,3,
+7,0,3,3,3,
 7,5,5,5,5,Very interesting to see how the content 'happens'
 7,4,4,4,4,
 7,5,5,5,5,"Excellent presentation, opens up a world of possibilities for Scripps to stay competetive and cost effective.  Thanks Scott, Mark, Phil & Jim."
@@ -152,7 +152,7 @@ Session,Session met expectations,Speaker Knowledgeable on topic,Presentation ski
 8,4,4,4,4,
 8,5,5,5,5,
 8,4,4,4,4,
-8,5,5,,4,
+8,5,5,0,4,
 8,5,5,5,5,
 8,5,5,5,5,"Great timing and information flow was smooth.  I liked the ""old school"" vs a new way that's faster.  Great job Deborah!"
 8,5,5,5,5,
@@ -202,7 +202,7 @@ Session,Session met expectations,Speaker Knowledgeable on topic,Presentation ski
 9,4,4,4,4,
 9,5,5,4,5,
 9,5,5,4,3,One presenter much stronger than the other.  Session was extremely useful for my role.  Complex topic was presented understandably.
-10,,5,5,5,
+10,0,5,5,5,
 10,4,4,4,4,
 10,5,5,5,5,
 10,4,4,4,4,
@@ -546,7 +546,7 @@ Session,Session met expectations,Speaker Knowledgeable on topic,Presentation ski
 30,4,4,4,4,
 30,4,5,5,5,
 30,3,4,3,5,
-31,5,5,,,
+31,5,5,0,0,
 31,2,1,2,4,Hard to view speakers.  May need to project them to the screen.  Speakers need to face the audience.  It's hard to hear.  Panel should talk to audience and less to each other.
 31,5,5,5,5,
 31,5,5,5,4,
