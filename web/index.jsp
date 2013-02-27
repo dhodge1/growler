@@ -4,17 +4,13 @@
     Author     : Chase, Justin
 --%>
 
-<%@page import="java.util.logging.Level"%>
-<%@page import="java.util.logging.Logger"%>
-<%@page import="java.sql.SQLException"%>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.util.Properties"%>
-<%@page import="java.sql.Connection"%>
-<%@page import="java.sql.Statement"%>
-<%@page import="java.sql.ResultSet" %>
+<%@page import="java.util.*"%>
+<%@page import="java.sql.*"%>
 <%@page import="com.scripps.growler.DataConnection" %>
 <jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="application" />
 <jsp:setProperty name="dataConnection" property = "*" />
+<jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="application" />
+<jsp:setProperty name="queries" property = "*" />
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
@@ -48,7 +44,7 @@
 	<nav class="globalNavigation">
         <ul>
 						<li class="selected"><a href="../index.html">Themes</a></li>
-            <li><a href="themeentry.html">Suggest a Theme</a></li>
+            <li><a href="themeentry.jsp">Suggest a Theme</a></li>
             <li><a href="">Speakers</a></li>
             <li><a href="">Suggest a Speaker</a></li>
             <li><a href="">Help</a></li>
@@ -63,88 +59,48 @@
 					<h1 class = "bordered">Themes</h1>
 					</br>
 					</br>
-                                        <%-- Here's some testing stuff Justin did --%>
-                                        <% ResultSet results = dataConnection.selectThemes();
-                                         
-                                            while (results.next()) {
-                                        %> <p> <% out.println(results.getString("name")); %></p>
-    <% }%>
-                                        <% Connection connection = dataConnection.sendConnection();
-                                        Statement other = connection.createStatement();
-                                        ResultSet descriptions = other.executeQuery("select description from theme");
-                                        while (descriptions.next()) {
-                                        %> <p><%out.println(descriptions.getString("description")); %></p>
-                                        <% } %>
+                                        
                                         
                                             
                                            
                                         
-							<h3>Drag and drop themes to rank them!<h3>
+							<h3>Drag and drop themes to rank them!</h3>
 							<h5>**Only the top ten themes will be ranked</h5>
 					</br>
-					<div id="tabs-1">
+                                        <div id="tabs-1">
 					<div class="row">
 						<div class="span3">
 						<p></p>
 						</div>
 						<div class="span1">
-							</br> 
-							<div>1</div>
 							</br>
-							</br>
-							</br>
-							<div>2</div>
-							</br>
-							</br>
-							</br>
-							<div>3</div>
-							</br>
-							</br>
-							</br>
-							<div>4</div>
-							</br>
-							</br>
-							</br>
-							<div>5</div>
-							</br>
-							</br>
-							</br>
-							<div>6</div>
-							</br>
-							</br>
-							</br>
-							<div>7</div>
-							</br>
-							</br>
-							</br>
-							<div>8</div>
-							</br>
-							</br>
-							</br>
-							<div>9</div>
-							</br>
-							</br>
-							<div>10</div>
-							</br>
-							</br>
-							<div>11</div>
-							</br>
-							</br>
+                                        <% Connection newConnect = dataConnection.sendConnection();
+                                                Statement newStatement = newConnect.createStatement();
+                                                ResultSet themeResult = newStatement.executeQuery("select name from theme");
+                                                int count = dataConnection.countRows();
+                                                int i = 1;
+  
+                                                while (i < count) {
+                                                    %>
+                                                    <div> <% out.println(i); %> </div>
+                                                    </br>
+                                                    </br>
+                                                    </br>
+                                                    <%
+                                                i++; 
+                                                }
+                                        %>
 						</div>
 					<div class="span2">
 					<section>
 						<ul class="sortable grid">
-							<li>Cloud Computing</li>
-							<li>Development Frameworks</li>
-							<li>Software Process / Lifecycle</li>
-							<li>Mobility</li>
-							<li>Social and Collaboration</li>
-							<li>Show & Tell</li>
-							<li>Cross Platform Programming</li>
-							<li>Happy Shining People</li>
-							<li>Holding Hands</li>
-							<li>It's the end of the world</li>
-							<li>and I feel fine...</li>
+						<% 
+                                                
+                                                while (themeResult.next()) {
+                                                %>
+                                                <li><% out.print(themeResult.getString("name")); %></li>
+                                                <% } %>
+							
 						</ul>
 					</section>
 					</div>

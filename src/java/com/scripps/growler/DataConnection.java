@@ -31,29 +31,22 @@ public class DataConnection {
     public Connection sendConnection() throws SQLException, ClassNotFoundException {
         Class.forName("com.mysql.jdbc.Driver");
         return (connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/growler_db", "admin", "password"));
-    }
-    public int selectThemeCount() throws SQLException, ClassNotFoundException {
-        new DataConnection();
-        Statement statement = connection.createStatement();
-        results = statement.executeQuery("select count(name) from theme");
-        return(Integer.parseInt(results.getString("count(name)")));
-    }
-    public ResultSet selectThemes() throws SQLException, ClassNotFoundException {
-        new DataConnection();
-        Statement statement = connection.createStatement();
-        results = statement.executeQuery("select name from theme");
-        return(results);
-        
-        
     }    
+    
+    public int countRows() throws SQLException, ClassNotFoundException {
+        new DataConnection();
+        Statement counter = connection.createStatement();
+        ResultSet results = counter.executeQuery("select name from theme");
+        results.last();
+        return(results.getRow() + 1);
+    }
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         
         Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/growler_db", "admin", "password");
-        Statement statement = connection.createStatement();
-        ResultSet result = statement.executeQuery("select name from theme");
-        while (result.next()){
-            System.out.println(result.getString("name"));
-        }
+        Statement counter = connection.createStatement();
+        ResultSet results = counter.executeQuery("select name from theme");
+        results.last();
+        System.out.println(results.getRow());
         
-    }
+        }
 }
