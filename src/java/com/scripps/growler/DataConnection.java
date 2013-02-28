@@ -1,22 +1,23 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * DataConnection.java
+ * Author: Justin Baugess
+ *
  */
 
 package com.scripps.growler;
 
 import java.sql.*;
 
-/**
- *
- * @author "Justin Bauguess"
- */
 public class DataConnection {
+    private final String databaseName = "growler_db";
+    private final String db_userName = "admin";
+    private final String db_password = "password";
+
     private Connection connection;
     private ResultSet results;
     public DataConnection() throws SQLException, ClassNotFoundException {
        Class.forName("com.mysql.jdbc.Driver");
-       connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/growler_db", "admin", "password"); 
+       connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + databaseName, db_userName, db_password); 
        
     }
     /**
