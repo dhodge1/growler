@@ -1,9 +1,15 @@
 <%-- 
-    Document   : template
-    Created on : Feb 26, 2013, 11:58:57 PM
+    Document   : speaker
+    Created on : Feb 27, 2013, 11:23:26 PM
     Author     : Robert Brown
 --%>
-
+<%@page import="java.util.*"%>
+<%@page import="java.sql.*"%>
+<%@page import="com.scripps.growler.DataConnection" %>
+<jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="application" />
+<jsp:setProperty name="dataConnection" property = "*" />
+<jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="application" />
+<jsp:setProperty name="queries" property = "*" />
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
@@ -23,7 +29,18 @@
 </head>
 <body id="growler1">
  <%@ include file="includes/header.jsp" %> 
-        
+ <h3>Please sort the Speakers </h3>
+ <ul class="sortable grid">
+    <% Connection connection = dataConnection.sendConnection();
+ Statement statement = connection.createStatement();
+ ResultSet speaker = statement.executeQuery("select first_name, last_name from speaker order by last_name");
+ 
+ while (speaker.next()) {
+     %>
+     <li> <% out.print(speaker.getString("first_name") + " " + speaker.getString("last_name")); %> </li>
+  <% } %>
+ </ul>
+  <input type="submit" value="Submit Ratings" class="button button-primary"/>
 <%@ include file="includes/footer.jsp" %> 
 <%@ include file="includes/scriptlist.jsp" %>
 <%@ include file="includes/draganddrop.jsp" %>

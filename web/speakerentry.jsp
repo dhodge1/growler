@@ -1,6 +1,6 @@
 <%-- 
-    Document   : themeentry
-    Created on : Feb 27, 2013, 12:17:43 AM
+    Document   : speakerentry
+    Created on : Feb 27, 2013, 11:55:19 PM
     Author     : Robert Brown
 --%>
 
@@ -31,7 +31,7 @@
 		<div class="row">
 			<div class="span8">
 			<img class="logo" src="Techtoberfest2013.png" alt="Techtoberfest 2013"/>
-			<h1 class = "bordered">Suggest a Theme</h1>
+			<h1 class = "bordered">Suggest a Speaker</h1>
 				<!-- Techtoberfest logo + "2013 Themes" -->
 			</div>
 		</div>
@@ -39,20 +39,16 @@
  
     <div class="container-fluid">
         <div class="content" role="main"> 
-            <form method="POST" action="processThemeSuggestion.jsp">
+            <form method="POST" action="processSpeakerSuggestion.jsp">
                     <div class="span4">
                         <fieldset>
                             <div class="form-group">
-                                <label class="required">Theme Name</label>
-                                <input name="name" class="input-xlarge" type="text" maxlength="30"/>
+                                <label class="required">Speaker First Name</label>
+                                <input name="first_name" class="input-xlarge" type="text" maxlength="30"/>
                             </div>
                             <div class="form-group">
-                                <label class="required">Theme Description</label>
-                                <input name="description" class="input-xlarge" type="text" maxlength="30"/>
-                            </div>
-                            <div class="form-group">
-                                <label>Why should we implement this theme?</label>
-                                <input name="reason" class="input-xlarge" type="text" maxlength="30"/>
+                                <label class="required">Speaker Last Name</label>
+                                <input name="last_name" class="input-xlarge" type="text" maxlength="30"/>
                             </div>
                         </fieldset>
                     </div>                   

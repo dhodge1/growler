@@ -1,6 +1,6 @@
 <%-- 
-    Document   : processThemeSuggestion
-    Created on : Feb 26, 2013, 11:51:27 PM
+    Document   : processSpeakerSuggestion
+    Created on : Feb 27, 2013, 11:56:46 PM
     Author     : Robert Brown
 --%>
 
@@ -30,21 +30,18 @@
 <body id="growler1">
 <%@ include file="includes/header.jsp" %> 
 
-  <% String name = request.getParameter("name");
-     String description = request.getParameter("description");
-     String reason = request.getParameter("reason");
+  <% String first_name = request.getParameter("first_name");
+     String last_name = request.getParameter("last_name");
+     
   Connection connect = dataConnection.sendConnection();
-  PreparedStatement insert = connect.prepareStatement(queries.insertTheme());
-  insert.setInt(1 , dataConnection.countRows());
-  insert.setString(2, name);
-  insert.setString(3, description);
-  insert.setString(4, reason);
-  insert.setInt(5, 2023);
-  insert.setBoolean(6, false);
-  insert.setBoolean(7, false);
+  PreparedStatement insert = connect.prepareStatement(queries.insertSpeaker());
+  insert.setInt(1 , dataConnection.countSRows());
+  insert.setString(2, first_name);
+  insert.setString(3, last_name);
+  insert.setInt(4, 0);
   insert.execute();
   %>
-  <jsp:forward page="index.jsp" />
+  <jsp:forward page="speaker.jsp" />
   
 <%@ include file="includes/footer.jsp" %>	
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>

@@ -4,9 +4,17 @@
         <servlet-name>ProcessThemeSuggestion</servlet-name>
         <servlet-class>com.scripps.growler.ProcessThemeSuggestion</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProcessQueries</servlet-name>
+        <servlet-class>com.scripps.growler.ProcessQueries</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProcessThemeSuggestion</servlet-name>
         <url-pattern>/ProcessThemeSuggestion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProcessQueries</servlet-name>
+        <url-pattern>/ProcessQueries</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

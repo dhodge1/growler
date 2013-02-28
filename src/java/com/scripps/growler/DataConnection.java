@@ -1,13 +1,16 @@
 /*
- * DataConnection.java
- * Author: Justin Baugess
- *
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
  */
 
 package com.scripps.growler;
 
 import java.sql.*;
 
+/**
+ *
+ * @author "Justin Bauguess"
+ */
 public class DataConnection {
     private final String DBNAME = "growler_db";
     private final String DBUSER = "admin";
@@ -38,6 +41,13 @@ public class DataConnection {
         new DataConnection();
         Statement counter = connection.createStatement();
         ResultSet results = counter.executeQuery("select name from theme");
+        results.last();
+        return(results.getRow() + 1);
+    }
+    public int countSRows() throws SQLException, ClassNotFoundException {
+        new DataConnection();
+        Statement counter = connection.createStatement();
+        ResultSet results = counter.executeQuery("select last_name from speaker");
         results.last();
         return(results.getRow() + 1);
     }

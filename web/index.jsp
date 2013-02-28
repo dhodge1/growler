@@ -28,28 +28,8 @@
 	<link rel="stylesheet" href="draganddrop.css" /><!--Drag and drop style-->
   <script src="js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
 </head>
-<body id="growler1">
-    
-    
-    
-
-    
-  <header class="pageHeader">
-    <div class="pageHeader-portal">
-      <div class="pageHeader-logo">
-        <a href="/"></a>
-      </div>
-    </div>
-  </header><!-- /.pageHeader -->
-	<nav class="globalNavigation">
-        <ul>
-						<li class="selected"><a href="../index.html">Themes</a></li>
-            <li><a href="themeentry.jsp">Suggest a Theme</a></li>
-            <li><a href="">Speakers</a></li>
-            <li><a href="">Suggest a Speaker</a></li>
-            <li><a href="">Help</a></li>
-        </ul>
-  </nav><!-- /.globalNavigation -->
+<body id="growler1">    
+  <%@ include file="includes/header.jsp" %> 
   <div class="container-fixed">
 		<div class="content">
 			<!-- Begin Content -->
@@ -59,13 +39,8 @@
 					<h1 class = "bordered">Themes</h1>
 					</br>
 					</br>
-                                        
-                                        
-                                            
-                                           
-                                        
-							<h3>Drag and drop themes to rank them!</h3>
-							<h5>**Only the top ten themes will be ranked</h5>
+                                            <h3>Drag and drop themes to rank them!</h3>
+						<h5>**Only the top ten themes will be ranked</h5>
 					</br>
                                         <div id="tabs-1">
 					<div class="row">
@@ -74,7 +49,7 @@
 						</div>
 						<div class="span1">
 							</br>
-                                        <% Connection newConnect = dataConnection.sendConnection();
+                                             <% Connection newConnect = dataConnection.sendConnection();
                                                 Statement newStatement = newConnect.createStatement();
                                                 ResultSet themeResult = newStatement.executeQuery("select name from theme");
                                                 int count = dataConnection.countRows();
@@ -99,7 +74,8 @@
                                                 while (themeResult.next()) {
                                                 %>
                                                 <li><% out.print(themeResult.getString("name")); %></li>
-                                                <% } %>
+                                                <% }
+                                                newConnect.close(); %>
 							
 						</ul>
 					</section>
@@ -108,55 +84,6 @@
 					<p></p>
 					</div>
 					</div>
-					<!--
-					<div id="tabs-1">
-						<div class="row">
-							<div class="span6">
-								<table class="table table-alternatingRow table-border table-columnBorder">
-									<thead>
-									<tr>
-									<th>Ranking</th>
-									<th>Suggested Themes</th>
-									</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>1</td>
-											<td>
-												<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
-													<p id="drag1" draggable="true" ondragstart="drag(event)">Cloud Computing</p>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>2</td>
-											<td>
-												<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
-													<p id="drag1" draggable="true" ondragstart="drag(event)">Development Frameworks</p>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>3</td>
-											<td id="drag1">Software Process / Lifecycle</td>
-										</tr>
-										<tr>
-											<td>4</td>
-											<td id="drag1">Mobility</td>
-										</tr>
-										<tr>
-											<td>5</td>
-											<td id="drag1">Social and Collaboration</td>
-										</tr>
-										<tr>
-											<td>6</td>
-											<td id="drag1">Show & Tell</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>-->
 					</div>
 				</div>
 			</div>
@@ -172,83 +99,11 @@
 		</div>
 	</div>	
 
-  <footer class="pageFooter">
-    <hr />
-    <p>Scripps Networks Interactive Bootstrap version 1.2.0.<!-- Application name --></p>
-    <p>Copyright &copy; 2013 Scripps Networks Interactive</p>
-  </footer><!-- /.pageFooter -->
-	
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-	<script src="jquery.sortable.js"></script><!--Drag and drop for non-iOS-->
-	<script src="js/libs/jquery-1.8.3.min.js" type="text/javascript"></script>
-	<script src="js/libs/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
-	<script src="js/libs/jquery.dataTables.1.9.3.min.js" type="text/javascript"></script>
-	<script src="js/libs/sniui.dataTables.1.0.0.min.js" type="text/javascript"></script>
+
+	<%@ include file="includes/footer.jsp" %>
+	<%@ include file="includes/scriptlist.jsp" %>
 	
 	<!--drag and drop extra script-->
-	<script>
-	$(function() {
-	$('.sortable').sortable();
-	$('.handles').sortable({
-	handle: 'span'
-	});
-	$('.connected').sortable({
-	connectWith: '.connected'
-	});
-	$('.exclude').sortable({
-	items: ':not(.disabled)'
-	});
-	});
-	</script>
-	<script type="text/javascript">
-			$(function () {
-					$("#tabs").tabs();
-
-					$('#showsTable').dataTable({
-							'aoColumns': [
-									{ 'bSortable': false },
-									{ 'bSortable': true },
-									{ 'bSortable': true },
-									{ 'bSortable': true },
-									{ 'bSortable': true },
-									{ 'bSortable': true },
-									{ 'bSortable': true }, 
-									{ 'bSortable': true },
-									{ 'bSortable': true },
-									{ 'bSortable': false }    
-							],
-							'aaSorting': [[1, 'asc']],
-							'fnHeaderCallback': Scripps.DataTables.fnHeaderCallback,
-							'bFilter': false,
-							'bLengthChange': false,
-							'sPaginationType': 'scripps'
-					});
-
-					$("#assignmentsTabs").tabs();
-
-					$('#assignmentsTable').dataTable({
-							'aoColumns': [
-									{ 'bSortable': false },
-									{ 'bSortable': true },
-									{ 'bSortable': true },
-									{ 'bSortable': true },
-									{ 'bSortable': true },
-									{ 'bSortable': true },
-									{ 'bSortable': true },
-									{ 'bSortable': false },
-							],
-							'aaSorting': [[1, 'asc']],
-							'fnHeaderCallback': Scripps.DataTables.fnHeaderCallback,
-							'bFilter': false,
-							'bLengthChange': false,
-							'sPaginationType': 'scripps'
-					});
-			});
-	</script>
-	<script type="text/javascript">
-	$(function() {
-    $( ".inlineTabs" ).tabs();
-    });
-	</script>
+	<%@ include file="includes/draganddrop.jsp" %>
 </body>
 </html>
