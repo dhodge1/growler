@@ -9,15 +9,15 @@ package com.scripps.growler;
 import java.sql.*;
 
 public class DataConnection {
-    private final String databaseName = "growler_db";
-    private final String db_userName = "admin";
-    private final String db_password = "password";
+    private final String DBNAME = "growler_db";
+    private final String DBUSER = "admin";
+    private final String DBPASS = "password";
 
     private Connection connection;
     private ResultSet results;
     public DataConnection() throws SQLException, ClassNotFoundException {
        Class.forName("com.mysql.jdbc.Driver");
-       connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + databaseName, db_userName, db_password); 
+       connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + DBNAME, DBUSER, DBPASS); 
        
     }
     /**
