@@ -5,7 +5,6 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
   <footer class="pageFooter">
     <hr />
     <p>Scripps Networks Interactive Bootstrap version 1.2.0.<!-- Application name --></p>

@@ -5,7 +5,6 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
   <header class="pageHeader">
     <div class="pageHeader-portal">
       <div class="pageHeader-logo">
@@ -15,11 +14,11 @@
   </header><!-- /.pageHeader -->
 	<nav class="globalNavigation">
         <ul>
-            <li class="selected"><a href="index.html">Themes</a></li>
-            <li><a href="themeentry.jsp">Suggest a Theme</a></li>
-            <li><a href="themedescription.jsp">Theme Descriptions</a></li>
-            <li><a href="speaker.jsp">Speakers</a></li>
-            <li><a href="speakerentry.jsp">Suggest a Speaker</a></li>
+            <li class="selected"><a href="../view/theme.jsp">Themes</a></li>
+            <li><a href="../view/themeentry.jsp">Suggest a Theme</a></li>
+            <li><a href="../view/themedescription.jsp">Theme Descriptions</a></li>
+            <li><a href="../view/speaker.jsp">Speakers</a></li>
+            <li><a href="../view/speakerentry.jsp">Suggest a Speaker</a></li>
             <li><a href="">Help</a></li>
         </ul>
   </nav><!-- /.globalNavigation -->
