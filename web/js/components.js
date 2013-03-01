@@ -43,6 +43,17 @@
                 }
             });
 
+	$("#rank_theme")
+		.click(function() {
+		var topTen = new Array();
+		var currentContent;
+		for(var i = 0; i > 10; i++){
+			//topTen[i] =
+			currentContent = $("li").next().innerHTML();
+			alert(currentContent);
+		}
+		});
+
     });
 
 } (jQuery));
