@@ -75,7 +75,8 @@
  while (speaker.next()) {
      %>
      <li> <% out.print(speaker.getString("first_name") + " " + speaker.getString("last_name")); %>
-         <% out.print(giveStars.returnStar(speaker.getInt("id"))); %>
+         <% out.print(giveStars.return2012Rank(speaker.getInt("id"))); %>
+         <% out.print(giveStars.returnCount(speaker.getInt("id"))); %>
            
          <% out.print("<input type=\"hidden\" name=\"list\" value=\"" + speaker.getInt("id") + "\" />"); %></li>
   <% } %>

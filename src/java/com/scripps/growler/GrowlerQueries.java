@@ -44,12 +44,12 @@ public class GrowlerQueries {
          * @return returns the first and last names of the speaker, as well as the id
 	*/
 	public String selectSpeakerName() {
-		return("select id, first_name, last_name from speaker order by last_name, first_name"); }
+		return("select id, first_name, last_name from speaker order by id"); }
 	/**
 	* @return Used for displaying speaker ranks from the past, user story 10362
 	*/
 	public String selectSpeakerRanking() { 
-		return("select avg(rank) from session_rank where session_rank.session_id in "
+		return("select avg(ranking) from session_ranking where session_ranking.session_id in "
                         + "(select id from session where id in (select session_id from speaker_team "
                         + "where speaker_id = ?))"); }
 	/**
