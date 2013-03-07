@@ -19,18 +19,7 @@ load data infile 'raw_data/survey_techtober.csv'
 into table 'survey_techtober_12'
 fields terminated by ','
 ignore 1 lines;
-/*
- * For some reason, the load data infile was getting hung up on null values.  I changed all the nulls
- * to 0's, and have the following update statements to change them back to nulls.
- */
-update survey_techtober_12
-set question1 = null where question1 = 0;
-update survey_techtober_12
-set question2 = null where question2 = 0;
-update survey_techtober_12
-set question3 = null where question3 = 0;
-update survey_techtober_12
-set question4 = null where question4 = 0;
+
 
 /*
 Now each record in that table has a record for each survey submitted last year.
@@ -92,41 +81,3 @@ insert into speaker_team (session_id, speaker_id) values (15 , 41);
 insert into speaker_team (session_id, speaker_id) values (32 , 37);
 insert into speaker_team (session_id, speaker_id) values (33 , 42);
 insert into speaker_team (session_id, speaker_id) values (33 , 43);
-
-/*
- * Procedure for inserting the 2012 data into our table for future use
- * This procedure will loop through every record looking at the session id, then
- * will look at each question and deposit the data into the session_ranking table appropriately
- * (A record in the speaker_ranking table is 1 session, 1 question, 1 ranking)
- */
- CREATE PROCEDURE handle_2012()
- BEGIN
-	SET int s = 0; //represents the session_id
-	SET int a = 1; //represent autoincrement value
-	sessionLoop: LOOP
-		SET s = s + 1;
-		SET int q = 0; //represents the question_id
-		questionLoop: LOOP
-			SET q = q + 1;
-			IF q > 4 THEN
-				LEAVE questionLoop;
-			//Figure out what question it is, then insert the appropriate ranking
-			ELSEIF q == 1
-				insert into session_ranking (session_id, question_id, ranking) values (s, 1, (select question1 from survey_techtober_12 where session_id = s AND survey_id = a));
-				SET a = a + 1;
-			ELSEIF q == 2
-				insert into session_ranking (session_id, question_id, ranking) values (s, 2, (select question2 from survey_techtober_12 where session_id = s AND survey_id = a));
-				SET a = a + 1;
-			ELSEIF q == 3
-				insert into session_ranking (session_id, question_id, ranking) values (s, 3, (select question3 from survey_techtober_12 where session_id = s AND survey_id = a));
-				SET a = a + 1;
-			ELSEIF q == 4
-				insert into session_ranking (session_id, question_id, ranking) values (s, 4, (select question4 from survey_techtober_12 where session_id = s AND survey_id = a));
-				SET a = a + 1;
-			END IF;
-		END LOOP questionLoop;
-		IF s < (SELECT COUNT(session_id) FROM survey_techtober_12) THEN
-			LEAVE sessionLoop;
-		END IF;
-	END LOOP sessionLoop;
- END;

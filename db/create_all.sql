@@ -19,7 +19,7 @@
 DROP TABLE theme; 
 
 CREATE TABLE theme (
-	 id			int		PRIMARY KEY
+	 id			int		PRIMARY KEY auto_increment
 	,name			varchar(30)
 	,description		varchar(250)
 	,creator		int		REFERENCES user(id)
@@ -54,7 +54,7 @@ CREATE TABLE theme_ranking (
  */
 DROP TABLE isolated_theme_ranking;
 CREATE TABLE isolated_theme_ranking (
-	ranking_id			int		PRIMARY KEY
+	ranking_id			int		PRIMARY KEY auto_increment
 	,theme_id			int		REFERENCES theme(id)
 	,ranking			int
 	);
@@ -66,7 +66,7 @@ CREATE TABLE isolated_theme_ranking (
  */
 DROP TABLE speaker; 
 CREATE TABLE speaker (
-	 id			int			PRIMARY KEY
+	 id			int			PRIMARY KEY auto_increment
 	,first_name		varchar(30)
 	,last_name		varchar(30)
 	,suggested_by		int			REFERENCES user(id)
@@ -83,7 +83,7 @@ CREATE TABLE speaker (
  */
 DROP TABLE speaker_ranking;
 CREATE TABLE speaker_ranking (
-	ranking_id		int			PRIMARY KEY
+	ranking_id		int			PRIMARY KEY auto_increment
 	,speaker_id		int			REFERENCS speaker(id)
 	,ranking		int
 	);
@@ -149,7 +149,7 @@ CREATE TABLE location (
 
 DROP TABLE session;
 CREATE TABLE session (
-	id			int			PRIMARY KEY
+	id			int			PRIMARY KEY auto_increment
 	,name			varchar(50)
 	,description		text
 	,track			varchar(20)
@@ -170,7 +170,6 @@ CREATE TABLE session (
 
 DROP TABLE session_ranking;
 CREATE TABLE session_ranking (
-	created_on		TIMESTAMP
 	,session_id		int	REFERENCES session(id)
 	,question_id		int	REFERENCES question(id)
 	,ranking		int	CHECK (ranking > 0 AND ranking < 6)

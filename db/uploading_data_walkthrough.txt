@@ -1,0 +1,17 @@
+1. Run create_all.sql -- this creates the tables.
+
+2.  Run user_insert.sql
+
+3.  Run theme_inserts.sql
+
+4.  Run speaker_inserts.sql
+
+5.  Run session_inserts.sql
+
+6.  Run question_inserts.sql
+
+7.  Run location_inserts.sql
+
+8.  Run handling_2012_data.sql
+
+9.  Use the java class Handle2012.java.  This will split the 2012 data table into our session_ranking table.
