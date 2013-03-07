@@ -10,6 +10,8 @@
 <jsp:setProperty name="dataConnection" property = "*" />
 <jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="application" />
 <jsp:setProperty name="queries" property = "*" />
+<jsp:useBean id="giveStars" class="com.scripps.growler.GiveStars" scope="application" />
+<jsp:setProperty name="giveStars" property = "*" />
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
@@ -26,6 +28,8 @@
   <link rel="stylesheet" href="../css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
 	<link rel="stylesheet" href="../css/draganddrop.css" /><!--Drag and drop style-->
   <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
+  <script src="../js/grabRanks.js"></script>
+
 </head>
 <body id="growler1">    
   <%@ include file="../includes/header.jsp" %> 
@@ -47,19 +51,19 @@
 						<p></p>
 						</div>
 						<div class="span1">
-							</br>
+							<br/>
                                              <% Connection newConnect = dataConnection.sendConnection();
                                                 Statement newStatement = newConnect.createStatement();
-                                                ResultSet themeResult = newStatement.executeQuery("select name from theme");
+                                                ResultSet themeResult = newStatement.executeQuery("select name, id, description from theme");
                                                 int count = dataConnection.countRows();
                                                 int i = 1;
   
                                                 while (i < count) {
                                                     %>
                                                     <div> <% out.println(i); %> </div>
-                                                    </br>
-                                                    </br>
-                                                    </br>
+                                                    <br/>
+                                                    <br/>
+                                                    <br/>
                                                     <%
                                                 i++; 
                                                 }
@@ -67,16 +71,21 @@
 						</div>
 					<div class="span2">
 					<section>
+                                            <form action="processThemeRanking.jsp" >
 						<ul class="sortable grid">
 						<% 
                                                 
                                                 while (themeResult.next()) {
                                                 %>
-                                                <li><% out.print(themeResult.getString("name")); %></li>
+                                                <li><% out.print(themeResult.getString("name")); %>
+                                                    <% out.print(giveStars.themeStar(themeResult.getInt("id"))); %>
+                                                
+                                                <% out.print("<input type=\"hidden\" name=\"list\" value=\"" + themeResult.getInt("id") + "\" >");%></li>
+                                                
                                                 <% }
                                                 newConnect.close(); %>
 							
-						</ul>
+						
 					</section>
 					</div>
 					<div class="span7">
@@ -94,13 +103,21 @@
 			<p></p>
 		</div>
 		<div class="span2">
-			<input type="submit" value="Submit Ratings" class="button button-primary"/>
+                    
+                        
+                        
+                        <input type="submit" value="Submit Ratings" class="button button-primary"/>
+                        </form>
+                        
+			
+                
 		</div>
 	</div>	
 
 
 	<%@ include file="../includes/footer.jsp" %>
 	<%@ include file="../includes/scriptlist.jsp" %>
+        
 	
 	<!--drag and drop extra script-->
 	<%@ include file="../includes/draganddrop.jsp" %>

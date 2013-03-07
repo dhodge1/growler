@@ -8,6 +8,8 @@
 <%@page import="com.scripps.growler.DataConnection" %>
 <jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="application" />
 <jsp:setProperty name="dataConnection" property = "*" />
+<jsp:useBean id="giveStars" class="com.scripps.growler.GiveStars" scope="application" />
+<jsp:setProperty name="giveStars" property = "*" />
 <jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="application" />
 <jsp:setProperty name="queries" property = "*" />
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -29,18 +31,76 @@
 </head>
 <body id="growler1">
  <%@ include file="../includes/header.jsp" %> 
- <h3>Please sort the Speakers </h3>
- <ul class="sortable grid">
-    <% Connection connection = dataConnection.sendConnection();
+  <div class="container-fixed">
+		<div class="content">
+			<!-- Begin Content -->
+			<div class="row">
+				<div class="span12">
+					<img class="logo" src="../images/Techtoberfest2013.png" alt="Techtoberfest 2013"/>  <!-- Techtoberfest logo-->
+					<h1 class = "bordered">Speakers</h1>
+                                        </br>
+					</br>
+                                            <h3>Drag and drop themes to rank them!</h3>
+						<h5>**Only the top ten themes will be ranked</h5>
+					</br>
+                                        <div id="tabs-1">
+					<div class="row">
+						<div class="span3">
+						<p></p>
+						</div>
+						<div class="span1">
+							</br>
+                                                        <%
+                                                        
+                                                        Connection connection = dataConnection.sendConnection();
  Statement statement = connection.createStatement();
- ResultSet speaker = statement.executeQuery("select first_name, last_name from speaker order by last_name");
+ ResultSet speaker = statement.executeQuery(queries.selectSpeakerName()); 
+ int count = dataConnection.countSRows();
+ int i = 1;
+ while (i < count) { %>
+ <div> <% out.println(i); %> </div>
+                                                    </br>
+                                                    </br>
+                                                    </br>
+ <% i++; } %>
+ </div>
+					<div class="span2">
+					<section>
+ <form action="processSpeakerRanking.jsp">
+ <ul class="sortable grid">
+     
+    
+<% 
  
  while (speaker.next()) {
      %>
-     <li> <% out.print(speaker.getString("first_name") + " " + speaker.getString("last_name")); %> </li>
+     <li> <% out.print(speaker.getString("first_name") + " " + speaker.getString("last_name")); %>
+         <% out.print(giveStars.returnStar(speaker.getInt("id"))); %>
+           
+         <% out.print("<input type=\"hidden\" name=\"list\" value=\"" + speaker.getInt("id") + "\" />"); %></li>
   <% } %>
  </ul>
+ </section>
+					</div>
+					<div class="span7">
+					<p></p>
+					</div>
+					</div>
+					</div>
+				</div>
+			</div>
+			<!-- End Content -->
+		</div>	
+  </div>
+	<div class="row">
+		<div class="span8">
+			<p></p>
+		</div>
+		<div class="span2">
+                    </div>
+	</div>	
   <input type="submit" value="Submit Ratings" class="button button-primary"/>
+  </form>
 <%@ include file="../includes/footer.jsp" %> 
 <%@ include file="../includes/scriptlist.jsp" %>
 <%@ include file="../includes/draganddrop.jsp" %>
