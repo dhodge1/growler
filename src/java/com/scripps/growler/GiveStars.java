@@ -61,22 +61,18 @@ public class GiveStars {
         return(imgTag);
     }
     
-    public String themeStar(int id) throws ClassNotFoundException, SQLException {
+    public int themeStar(int id) throws ClassNotFoundException, SQLException {
         //Do all the SQL Connection/Query Stuff
-        String imgTag = "";
-       try {
+        int ranking = 0;
         Class.forName("com.mysql.jdbc.Driver");
        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + DBNAME, DBUSER, DBPASS); 
        Statement statement = connection.createStatement();
-       ResultSet results = statement.executeQuery("select (sum(ranking)/count(theme_id))/2 from isolated_theme_ranking where theme_id IN (" + id + ") group by theme_id");
+       ResultSet results = statement.executeQuery("select sum(ranking) from isolated_theme_ranking where theme_id IN (" + id + ") group by theme_id");
        while (results.next()) {
-       imgTag = returnIMGTag(results.getDouble(1));
+       ranking = (results.getInt(1));
        }
-       }
-       catch (SQLException e) {
-           imgTag = "NOT RATED";
-       }
-        return(imgTag);
+       
+        return(ranking);
     }
     
     public String returnStar(int id) throws ClassNotFoundException, SQLException {

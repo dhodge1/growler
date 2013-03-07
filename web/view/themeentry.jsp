@@ -25,6 +25,16 @@
 </head>
     <body id="growler1">
     <%@ include file="../includes/header.jsp" %> 
+    <nav class="globalNavigation">
+        <ul>
+            <li><a href="../view/theme.jsp">Themes</a></li>
+            <li class="selected"><a href="../view/themeentry.jsp">Suggest a Theme</a></li>
+            <li><a href="../view/themedescription.jsp">Theme Descriptions</a></li>
+            <li><a href="../view/speaker.jsp">Speakers</a></li>
+            <li><a href="../view/speakerentry.jsp">Suggest a Speaker</a></li>
+            <li><a href="">Help</a></li>
+        </ul>
+  </nav><!-- /.globalNavigation -->
   <div class="container-fixed">
 		<div class="content">
 			<!-- Begin Content -->
@@ -39,7 +49,7 @@
  
     <div class="container-fluid">
         <div class="content" role="main"> 
-            <form method="POST" action="processThemeSuggestion.jsp">
+            <form method="POST" action="../model/processThemeSuggestion.jsp">
                     <div class="span4">
                         <fieldset>
                             <div class="form-group">

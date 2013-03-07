@@ -53,6 +53,7 @@
 					</br>
 					</br>
                                             <h3>Drag and drop themes to rank them!</h3>
+                                            <h4>This is the Admin View </h4>
 						<h5>**Only the top ten themes will be ranked</h5>
 					</br>
                                         <div id="tabs-1">
@@ -88,6 +89,7 @@
                                                 while (themeResult.next()) {
                                                 %>
                                                 <li><% out.print(themeResult.getString("name")); %>
+                                                    <% out.print(" : " + giveStars.themeStar(themeResult.getInt("id")) + " points"); %>
                                                 
                                                 <% out.print("<input type=\"hidden\" name=\"list\" value=\"" + themeResult.getInt("id") + "\" >");%></li>
                                                 
