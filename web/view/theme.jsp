@@ -22,6 +22,7 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>Growler Project</title><!-- Title -->
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>  <link rel="stylesheet" href="/resources/demos/style.css" />  <style>  ul { list-style-type: decimal-leading-zero; margin: 0; padding: 0; margin-bottom: 10px; }  #lisort { margin: 5px; padding: 5px; list-style-type: decimal-leading-zero; style: none; width: 600px; }  </style>  <script>  $(function() {    $( "#sortable" ).sortable({      revert: true    });    $( "#draggable" ).draggable({      connectToSortable: "#sortable",      helper: "clone",      revert: "invalid"    });    $( "ul, li" ).disableSelection();  });  </script>
   <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
@@ -57,37 +58,28 @@
 					</br>
                                         <div id="tabs-1">
 					<div class="row">
-						<div class="span3">
-						<p></p>
-						</div>
+					
 						<div class="span1">
 							<br/>
+                                                        
                                              <% Connection newConnect = dataConnection.sendConnection();
                                                 Statement newStatement = newConnect.createStatement();
                                                 ResultSet themeResult = newStatement.executeQuery("select name, id, description from theme");
-                                                int count = dataConnection.countRows();
-                                                int i = 1;
-  
-                                                while (i < count) {
-                                                    %>
-                                                    <div> <% out.println(i); %> </div>
-                                                    <br/>
-                                                    <br/>
-                                                    <br/>
-                                                    <%
-                                                i++; 
-                                                }
                                         %>
 						</div>
 					<div class="span2">
 					<section>
                                             <form action="../model/processThemeRanking.jsp" >
-						<ul class="sortable grid">
+						<ul id="sortable">
 						<% 
-                                                
+                                                                                               
                                                 while (themeResult.next()) {
                                                 %>
-                                                <li><% out.print(themeResult.getString("name")); %>
+                                                <li class="ui-state-default" id="lisort">
+                                                    <strong><% out.print(themeResult.getString("name") + " : "); %></strong>
+                                                            <% out.print(themeResult.getString("description")); %>
+                                                    
+                                                </li>
                                                 
                                                 <% out.print("<input type=\"hidden\" name=\"list\" value=\"" + themeResult.getInt("id") + "\" >");%></li>
                                                 

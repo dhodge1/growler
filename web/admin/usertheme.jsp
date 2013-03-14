@@ -35,8 +35,8 @@
   <%@ include file="../includes/header.jsp" %> 
   <nav class="globalNavigation">
         <ul>
-            <li class="selected"><a href="../view/theme.jsp">Default Themes</a></li>
-            <li><a href="../admin/usertheme.jsp">Suggested Themes</a></li>
+            <li><a href="../admin/theme.jsp">Default Themes</a></li>
+            <li class="selected"><a href="../admin/usertheme.jsp">Suggested Themes</a></li>
             <li><a href="../admin/themeentry.jsp">Add a Theme</a></li>
             <li><a href="../admin/speaker.jsp">Default Speakers</a></li>
             <li><a href="../admin/userspeaker.jsp">Suggested Speakers</a></li>
@@ -50,10 +50,10 @@
 			<div class="row">
 				<div class="span12">
 					<img class="logo" src="../images/Techtoberfest2013.png" alt="Techtoberfest 2013"/>  <!-- Techtoberfest logo-->
-					<h1 class = "bordered">Default Themes</h1>
+					<h1 class = "bordered">Suggested Themes</h1>
 					</br>
 					</br>
-                                            <h3>Default Themes</h3>
+                                            <h3>User Suggested Themes</h3>
                                             <h4>This is the Admin View </h4>
 					</br>
                                         <div id="tabs-1">
@@ -65,7 +65,7 @@
 							<br/>
                                              <% Connection newConnect = dataConnection.sendConnection();
                                                 Statement newStatement = newConnect.createStatement();
-                                                ResultSet themeResult = newStatement.executeQuery("select name, id, description from theme where creator is null");
+                                                ResultSet themeResult = newStatement.executeQuery("select name, id, description from theme where creator is not null");
                                                 int count = dataConnection.countRows();
                                                 int i = 1;
   

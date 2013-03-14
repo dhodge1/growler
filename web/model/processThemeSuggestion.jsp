@@ -32,7 +32,14 @@
 
   <% String name = request.getParameter("name");
      String description = request.getParameter("description");
-     String reason = request.getParameter("reason");
+     String reason = "";
+     if (request.getParameter("reason") != null)
+     {
+        reason = request.getParameter("reason");
+     }
+     else {
+        reason = " ";
+     }
   Connection connect = dataConnection.sendConnection();
   PreparedStatement insert = connect.prepareStatement(queries.insertTheme());
   insert.setInt(1 , dataConnection.countRows());
@@ -44,8 +51,14 @@
   insert.setBoolean(7, false);
   insert.execute();
   %>
-  
-  <jsp:forward page="theme.jsp"/>
+  <% if (request.getParameter("reason") != null) { %>
+  <jsp:forward page="../view/theme.jsp"/>
+  <%
+   }
+   else {
+     %><jsp:forward page="../admin/theme.jsp"/>
+   <% }
+  %>
  <%@ include file="../includes/footer.jsp" %> 
  <%@ include file="../includes/scriptlist.jsp" %> 
     </body>

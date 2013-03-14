@@ -28,7 +28,20 @@
 	<link rel="stylesheet" href="css/draganddrop.css" /><!--Drag and drop style-->
   <script src="js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
 </head>
-<body id="growler1">    
-    <a href="view/theme.jsp">View the Growler</a>
+<body id="growler1">
+    <%@include file="includes/header.jsp" %>
+    <h1>Log-in To Project Growler</h1>
+    <br/>
+    <br/>
+    <form action="model/login.jsp">
+        <h3>User Name: <input type="text" name="username" size="15" /></h3>
+        <br/>
+        <br/>
+        <h3>Password:  <input type="password" name="password" size="15"/></h3>
+        <br/>
+        <br/>
+    <input type="submit" value="Submit" />
+    </form>
+    <%@include file="includes/footer.jsp" %>
 </body>
 </html>
