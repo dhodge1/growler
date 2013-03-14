@@ -24,6 +24,7 @@
   <title>Growler Project</title><!-- Title -->
   <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>  ul { list-style-type: decimal-leading-zero; margin: 0; padding: 0; margin-bottom: 10px; }  #lisort { margin: 5px; padding: 5px; list-style-type: decimal-leading-zero; style: none; width: 600px; }  </style>
   <link rel="stylesheet" href="../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
   <link rel="stylesheet" href="../css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
 	<link rel="stylesheet" href="../css/draganddrop.css" /><!--Drag and drop style-->
@@ -66,29 +67,18 @@
                                              <% Connection newConnect = dataConnection.sendConnection();
                                                 Statement newStatement = newConnect.createStatement();
                                                 ResultSet themeResult = newStatement.executeQuery("select name, id, description from theme where creator is not null");
-                                                int count = dataConnection.countRows();
-                                                int i = 1;
-  
-                                                while (i < count) {
-                                                    %>
-                                                    <div> <% out.println(i); %> </div>
-                                                    <br/>
-                                                    <br/>
-                                                    <br/>
-                                                    <%
-                                                i++; 
-                                                }
+                                                
                                         %>
 						</div>
 					<div class="span2">
 					<section>
-                                            <form action="../model/processThemeRanking.jsp" >
-                                                <ul class="sortable grid">
+                                            
+                                                <ul>
 						<% 
                                                 
                                                 while (themeResult.next()) {
                                                 %>
-                                                <li><% out.print(themeResult.getString("name")); %>
+                                                <li id="lisort"><% out.print(themeResult.getString("name")); %>
                                                     <% out.print(" : " + giveStars.themeStar(themeResult.getInt("id")) + " points"); %>
                                                 
                                                 <% out.print("<input type=\"hidden\" name=\"list\" value=\"" + themeResult.getInt("id") + "\" >");%></li>
@@ -116,10 +106,6 @@
 		</div>
 		<div class="span2">
                     
-                        
-                        
-                        <input type="submit" value="Submit Ratings" class="button button-primary"/>
-                        </form>
                         
 			
                 
