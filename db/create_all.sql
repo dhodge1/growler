@@ -84,7 +84,7 @@ CREATE TABLE speaker (
 DROP TABLE speaker_ranking;
 CREATE TABLE speaker_ranking (
 	ranking_id		int			PRIMARY KEY auto_increment
-	,speaker_id		int			REFERENCS speaker(id)
+	,speaker_id		int			REFERENCES speaker(id)
 	,ranking		int
 	);
 	
@@ -103,8 +103,8 @@ CREATE TABLE speaker_ranking (
  */	
 DROP TABLE attendance;
 CREATE TABLE attendance (
-	user_id		int	PRIMARY KEY REFERENCES user(id)
-	,session_id	int	PRIMARY KEY REFERENCES session(id)
+	user_id		int	REFERENCES user(id)
+	,session_id	int	REFERENCES session(id)
 	,isRegistered	boolean 
 	);
 	
@@ -170,7 +170,7 @@ CREATE TABLE session (
 
 DROP TABLE session_ranking;
 CREATE TABLE session_ranking (
-	,session_id		int	REFERENCES session(id)
+	session_id		int	REFERENCES session(id)
 	,question_id		int	REFERENCES question(id)
 	,ranking		int	CHECK (ranking > 0 AND ranking < 6)
 	);
