@@ -1,5 +1,5 @@
 /* 
- * Does the inserts for locations table
+ * inserts locations
  */
- insert into location (id, name) values (1, "KXTC Training Room");
- insert into location (id, name) values (2, "KXOFFICE Training Room");
+ insert into location values (1, "KXTC Training Room");
+ insert into location values (2, "KXOFFICE Training Room");
