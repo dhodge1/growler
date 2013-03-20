@@ -15,7 +15,7 @@
  * Creates the table for storing theme information
  */
 
---dropping tables before we create them
+/*dropping tables before we create them*/
 DROP TABLE theme; 
 
 CREATE TABLE theme (
