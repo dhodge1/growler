@@ -28,17 +28,17 @@
   <link rel="stylesheet" href="../css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
 	<link rel="stylesheet" href="../css/draganddrop.css" /><!--Drag and drop style-->
   <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
-  <style> ul { list-style-type: decimal-leading-zero; margin: 0; padding: 0; margin-bottom: 10px; }  #lisort { margin: 5px; padding: 5px; list-style-type: decimal-leading-zero; style: none; width: 300px; height: 60px; }  </style>
 </head>
 <body id="growler1">
  <%@ include file="../includes/header.jsp" %> 
 <nav class="globalNavigation">
         <ul>
-            <li><a href="../view/theme.jsp">Themes</a></li>
-            <li><a href="../view/themeentry.jsp">Suggest a Theme</a></li>
-            <li><a href="../view/themedescription.jsp">Theme Descriptions</a></li>
-            <li class="selected"><a href="../view/speaker.jsp">Speakers</a></li>
-            <li><a href="../view/speakerentry.jsp">Suggest a Speaker</a></li>
+            <li><a href="../view/theme.jsp">Default Themes</a></li>
+            <li><a href="../admin/usertheme.jsp">Suggested Themes</a></li>
+            <li><a href="../admin/themeentry.jsp">Add a Theme</a></li>
+            <li><a href="../admin/speaker.jsp">Default Speakers</a></li>
+            <li class="selected"><a href="../admin/userspeaker.jsp">Suggested Speakers</a></li>
+            <li><a href="../admin/speakerentry.jsp">Add a Speaker</a></li>
             <li><a href="">Help</a></li>
         </ul>
   </nav><!-- /.globalNavigation -->
@@ -51,8 +51,7 @@
 					<h1 class = "bordered">Speakers</h1>
                                         </br>
 					</br>
-                                            <h3>Drag and drop themes to rank them!</h3>
-						<h5>**Only the top ten themes will be ranked</h5>
+                                        <h3>Admin Speaker Page</h3>
 					</br>
                                         <div id="tabs-1">
 					<div class="row">
@@ -65,24 +64,21 @@
                                                         
                                                         Connection connection = dataConnection.sendConnection();
  Statement statement = connection.createStatement();
- ResultSet speaker = statement.executeQuery(queries.selectSpeakerName()); 
+ ResultSet speaker = statement.executeQuery(queries.selectUserSuggestedSpeakers()); 
  %>
  </div>
 					<div class="span2">
 					<section>
- <form action="../model/processSpeakerRanking.jsp">
- <ul class="sortable">
+ <ul>
      
     
 <% 
  
  while (speaker.next()) {
      %>
-     <li id ="lisort"> <% out.print(speaker.getString("first_name") + " " + speaker.getString("last_name")); %>
+     <li> <% out.print(speaker.getString("first_name") + " " + speaker.getString("last_name")); %>
          <% out.print(giveStars.return2012Rank(speaker.getInt("id"))); %>
          <% out.print(giveStars.returnCount(speaker.getInt("id"))); %>
-           
-         <% out.print("<input type=\"hidden\" name=\"list\" value=\"" + speaker.getInt("id") + "\" />"); %></li>
   <% } 
  connection.close();%>
  </ul>
@@ -105,8 +101,6 @@
 		<div class="span2">
                     </div>
 	</div>	
-  <input type="submit" value="Submit Ratings" class="button button-primary"/>
-  </form>
 <%@ include file="../includes/footer.jsp" %> 
 <%@ include file="../includes/scriptlist.jsp" %>
 <%@ include file="../includes/draganddrop.jsp" %>

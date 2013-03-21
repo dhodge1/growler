@@ -37,8 +37,13 @@ public class GiveStars {
        Statement statement = connection.createStatement();
        ResultSet result = statement.executeQuery("select ceiling(count(r.session_id)/4), s.id from session_ranking r, speaker s, speaker_team t where t.speaker_id = " + id  + " and s.id = " + id + " and t.session_id = r.session_id");
        String count = "";
-       while (result.next()){ 
+       while (result.next()){
+           if (result.getInt(1) != 0){
        count = " / " + result.getInt(1) + " ratings";}
+           else {
+               count = "";
+           }
+       }
         return (count);
     }
     
@@ -162,12 +167,12 @@ public class GiveStars {
                    img = img + (IMAGE_START + GREY_STAR + IMAGE_END);}
            }
            // 0 *
-           else if (rating < 0.3) {
+           else if (rating < 0.3 && rating > 0) {
                for (int k = 0; k < 5; k++){
                    img = img + (IMAGE_START + GREY_STAR + IMAGE_END);}
            }
            else {
-               img = "NR";
+               img = "(No Rating in 2012)";
            }
         return(img);
     }

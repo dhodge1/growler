@@ -34,7 +34,7 @@ public class GrowlerQueries {
 	* @return Used for selecting user suggested speakers(so they can be ranked), user story 10337 & 10338
 	*/
 	public String selectUserSuggestedSpeakers() { 
-            return(selectSpeakers() + " where suggested_by is not null"); }
+            return(selectSpeakers() + " where suggested_by is not IN 8083"); }
 	/**
 	* @return  Used for selecting user suggested themes (so they can be ranked), user story 10333
 	*/

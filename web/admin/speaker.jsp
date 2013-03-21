@@ -33,11 +33,12 @@
  <%@ include file="../includes/header.jsp" %> 
 <nav class="globalNavigation">
         <ul>
-            <li><a href="../view/theme.jsp">Themes</a></li>
-            <li><a href="../view/themeentry.jsp">Suggest a Theme</a></li>
-            <li><a href="../view/themedescription.jsp">Theme Descriptions</a></li>
-            <li class="selected"><a href="../view/speaker.jsp">Speakers</a></li>
-            <li><a href="../view/speakerentry.jsp">Suggest a Speaker</a></li>
+            <li class="selected"><a href="../view/theme.jsp">Default Themes</a></li>
+            <li><a href="../admin/usertheme.jsp">Suggested Themes</a></li>
+            <li><a href="../admin/themeentry.jsp">Add a Theme</a></li>
+            <li class="selected"><a href="../admin/speaker.jsp">Default Speakers</a></li>
+            <li><a href="../admin/userspeaker.jsp">Suggested Speakers</a></li>
+            <li><a href="../admin/speakerentry.jsp">Add a Speaker</a></li>
             <li><a href="">Help</a></li>
         </ul>
   </nav><!-- /.globalNavigation -->
@@ -50,8 +51,7 @@
 					<h1 class = "bordered">Speakers</h1>
                                         </br>
 					</br>
-                                            <h3>Drag and drop themes to rank them!</h3>
-						<h5>**Only the top ten themes will be ranked</h5>
+                                            <h3>Admin View</h3>
 					</br>
                                         <div id="tabs-1">
 					<div class="row">
@@ -65,19 +65,12 @@
                                                         Connection connection = dataConnection.sendConnection();
  Statement statement = connection.createStatement();
  ResultSet speaker = statement.executeQuery(queries.selectSpeakerName()); 
- int count = dataConnection.countSRows();
- int i = 1;
- while (i < count) { %>
- <div> <% out.println(i); %> </div>
-                                                    </br>
-                                                    </br>
-                                                    </br>
- <% i++; } %>
+ %>
  </div>
 					<div class="span2">
 					<section>
- <form action="../model/processSpeakerRanking.jsp">
- <ul class="sortable grid">
+ 
+ <ul>
      
     
 <% 
@@ -88,7 +81,7 @@
          <% out.print(giveStars.return2012Rank(speaker.getInt("id"))); %>
          <% out.print(giveStars.returnCount(speaker.getInt("id"))); %>
            
-         <% out.print("<input type=\"hidden\" name=\"list\" value=\"" + speaker.getInt("id") + "\" />"); %></li>
+    
   <% } 
  connection.close();%>
  </ul>
@@ -111,8 +104,7 @@
 		<div class="span2">
                     </div>
 	</div>	
-  <input type="submit" value="Submit Ratings" class="button button-primary"/>
-  </form>
+  
 <%@ include file="../includes/footer.jsp" %> 
 <%@ include file="../includes/scriptlist.jsp" %>
 <%@ include file="../includes/draganddrop.jsp" %>

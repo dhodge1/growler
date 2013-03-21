@@ -28,7 +28,7 @@
   <nav class="globalNavigation">
         <ul>
             <li><a href="../admin/theme.jsp">Default Themes</a></li>
-            <li class="selected"><a href="../admin/usertheme.jsp">Suggested Themes</a></li>
+            <li><a href="../admin/usertheme.jsp">Suggested Themes</a></li>
             <li><a href="../admin/themeentry.jsp">Add a Theme</a></li>
             <li><a href="../admin/speaker.jsp">Default Speakers</a></li>
             <li><a href="../admin/userspeaker.jsp">Suggested Speakers</a></li>
@@ -60,6 +60,7 @@
                             <div class="form-group">
                                 <label class="required">Speaker Last Name</label>
                                 <input name="last_name" class="input-xlarge" type="text" maxlength="30"/>
+                                <input type="hidden" name="admin" value="true" />
                             </div>
                         </fieldset>
                     </div>                   
