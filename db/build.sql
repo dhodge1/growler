@@ -16,7 +16,7 @@
  */
 
 /*dropping tables before we create them*/
-DROP TABLE theme; 
+DROP TABLE IF EXISTS theme CASCADE; 
 
 CREATE TABLE theme (
 	 id			int		PRIMARY KEY auto_increment
