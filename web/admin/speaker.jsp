@@ -83,6 +83,8 @@
            
     
   <% } 
+ speaker.close();
+ statement.close();
  connection.close();%>
  </ul>
  </section>

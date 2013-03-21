@@ -38,7 +38,6 @@
         <ul>
             <li class="selected"><a href="../view/theme.jsp">Themes</a></li>
             <li><a href="../view/themeentry.jsp">Suggest a Theme</a></li>
-            <li><a href="../view/themedescription.jsp">Theme Descriptions</a></li>
             <li><a href="../view/speaker.jsp">Speakers</a></li>
             <li><a href="../view/speakerentry.jsp">Suggest a Speaker</a></li>
             <li><a href="">Help</a></li>
@@ -84,6 +83,8 @@
                                                 <% out.print("<input type=\"hidden\" name=\"list\" value=\"" + themeResult.getInt("id") + "\" >");%></li>
                                                 
                                                 <% }
+                                                themeResult.close();
+                                                newStatement.close();
                                                 newConnect.close(); %>
 							
 						

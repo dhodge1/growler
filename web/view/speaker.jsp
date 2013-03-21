@@ -36,7 +36,6 @@
         <ul>
             <li><a href="../view/theme.jsp">Themes</a></li>
             <li><a href="../view/themeentry.jsp">Suggest a Theme</a></li>
-            <li><a href="../view/themedescription.jsp">Theme Descriptions</a></li>
             <li class="selected"><a href="../view/speaker.jsp">Speakers</a></li>
             <li><a href="../view/speakerentry.jsp">Suggest a Speaker</a></li>
             <li><a href="">Help</a></li>
@@ -71,7 +70,7 @@
 					<div class="span2">
 					<section>
  <form action="../model/processSpeakerRanking.jsp">
- <ul class="sortable">
+ <ul class="sortable grid">
      
     
 <% 
@@ -84,6 +83,8 @@
            
          <% out.print("<input type=\"hidden\" name=\"list\" value=\"" + speaker.getInt("id") + "\" />"); %></li>
   <% } 
+ statement.close();
+ speaker.close();
  connection.close();%>
  </ul>
  </section>

@@ -39,7 +39,7 @@ public class GrowlerQueries {
 	* @return  Used for selecting user suggested themes (so they can be ranked), user story 10333
 	*/
 	public String selectUserSuggestedThemes() {
-		return("select name from theme where creator is not null"); }
+		return("select name from theme where creator in 0"); }
 	/**
          * @return returns the first and last names of the speaker, as well as the id
 	*/

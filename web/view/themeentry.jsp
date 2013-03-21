@@ -29,7 +29,6 @@
         <ul>
             <li><a href="../view/theme.jsp">Themes</a></li>
             <li class="selected"><a href="../view/themeentry.jsp">Suggest a Theme</a></li>
-            <li><a href="../view/themedescription.jsp">Theme Descriptions</a></li>
             <li><a href="../view/speaker.jsp">Speakers</a></li>
             <li><a href="../view/speakerentry.jsp">Suggest a Speaker</a></li>
             <li><a href="">Help</a></li>

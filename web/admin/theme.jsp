@@ -66,7 +66,7 @@
 							<br/>
                                              <% Connection newConnect = dataConnection.sendConnection();
                                                 Statement newStatement = newConnect.createStatement();
-                                                ResultSet themeResult = newStatement.executeQuery("select name, id, description from theme where creator is null");
+                                                ResultSet themeResult = newStatement.executeQuery("select name, id, description from theme where creator = 2023");
                                         %>
 						</div>
 					<div class="span2">
@@ -82,7 +82,11 @@
                                                 
                                                 <% out.print("<input type=\"hidden\" name=\"list\" value=\"" + themeResult.getInt("id") + "\" >");%></li>
                                                 
-                                                <% } %>
+                                                <% } 
+                                                newConnect.close();
+                                                themeResult.close();
+                                                newStatement.close();
+%>
                                                 </ul>
                                                 
 							

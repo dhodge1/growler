@@ -80,6 +80,8 @@
          <% out.print(giveStars.return2012Rank(speaker.getInt("id"))); %>
          <% out.print(giveStars.returnCount(speaker.getInt("id"))); %>
   <% } 
+ speaker.close();
+ statement.close();
  connection.close();%>
  </ul>
  </section>

@@ -12,9 +12,9 @@ import java.sql.*;
  * @author "Justin Bauguess"
  */
 public class GiveStars {
-    private final String DBNAME = "growler_db";
-    private final String DBUSER = "admin";
-    private final String DBPASS = "password";
+        private final String DBNAME = "c2850a01test";
+    private final String DBUSER = "c2850a01";
+    private final String DBPASS = "c2850a01";
     private final String IMAGE_START = "<img src = \"";
     private final String IMAGE_END = "\" />";
     private final String GOLD_STAR = "../images/icon16-goldstar.png";
@@ -33,7 +33,7 @@ public class GiveStars {
     
     public String returnCount(int id) throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.jdbc.Driver");
-       Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + DBNAME, DBUSER, DBPASS); 
+       Connection connection = DriverManager.getConnection("jdbc:mysql://ps11.pstcc.edu:3306/" + DBNAME, DBUSER, DBPASS); 
        Statement statement = connection.createStatement();
        ResultSet result = statement.executeQuery("select ceiling(count(r.session_id)/4), s.id from session_ranking r, speaker s, speaker_team t where t.speaker_id = " + id  + " and s.id = " + id + " and t.session_id = r.session_id");
        String count = "";
@@ -51,7 +51,7 @@ public class GiveStars {
        String imgTag = "";
             try {
         Class.forName("com.mysql.jdbc.Driver");
-       Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + DBNAME, DBUSER, DBPASS); 
+       Connection connection = DriverManager.getConnection("jdbc:mysql://ps11.pstcc.edu:3306/" + DBNAME, DBUSER, DBPASS); 
        Statement statement = connection.createStatement();
        //ResultSet result = statement.executeQuery("select avg(ranking) from session_ranking where session_ranking.session_id in (select id from session where id in (select session_id from speaker_team where speaker_id = " + id + "))");
        ResultSet result = statement.executeQuery("select avg(r.ranking), s.id, s.first_name, s.last_name from session_ranking r, speaker s, speaker_team t where t.session_id = r.session_id and t.speaker_id = " + id);
@@ -70,7 +70,7 @@ public class GiveStars {
         //Do all the SQL Connection/Query Stuff
         int ranking = 0;
         Class.forName("com.mysql.jdbc.Driver");
-       Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + DBNAME, DBUSER, DBPASS); 
+       Connection connection = DriverManager.getConnection("jdbc:mysql://ps11.pstcc.edu:3306/" + DBNAME, DBUSER, DBPASS); 
        Statement statement = connection.createStatement();
        ResultSet results = statement.executeQuery("select sum(ranking) from isolated_theme_ranking where theme_id IN (" + id + ") group by theme_id");
        while (results.next()) {
@@ -85,7 +85,7 @@ public class GiveStars {
         String imgTag = "";
        //try {
         Class.forName("com.mysql.jdbc.Driver");
-       Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + DBNAME, DBUSER, DBPASS); 
+       Connection connection = DriverManager.getConnection("jdbc:mysql://ps11.pstcc.edu:3306/" + DBNAME, DBUSER, DBPASS); 
        Statement statement = connection.createStatement();
        ResultSet results = statement.executeQuery("select (sum(r.ranking)/count(r.speaker_id))/2 from speaker_ranking r, speaker s where r.speaker_id = s.id and s.id IN (" + id + ") group by r.speaker_id");
        while (results.next()) {
