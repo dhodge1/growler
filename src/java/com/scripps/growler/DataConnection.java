@@ -12,15 +12,15 @@ import java.sql.*;
  * @author "Justin Bauguess"
  */
 public class DataConnection {
-    private final String DBNAME = "growler_db";
-    private final String DBUSER = "admin";
-    private final String DBPASS = "password";
+    private final String DBNAME = "c2850a01test";
+    private final String DBUSER = "c2850a01";
+    private final String DBPASS = "c2850a01";
 
     public Connection connection;
     private ResultSet results;
     public DataConnection() throws SQLException, ClassNotFoundException {
        Class.forName("com.mysql.jdbc.Driver");
-       connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + DBNAME, DBUSER, DBPASS); 
+       connection = DriverManager.getConnection("jdbc:mysql://ps11.pstcc.edu:3306/" + DBNAME, DBUSER, DBPASS); 
        
     }
     /**
@@ -34,7 +34,7 @@ public class DataConnection {
      */
     public Connection sendConnection() throws SQLException, ClassNotFoundException {
         Class.forName("com.mysql.jdbc.Driver");
-        return (connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/growler_db", "admin", "password"));
+        return (connection = DriverManager.getConnection("jdbc:mysql://ps11.pstcc.edu:3306/" + DBNAME, DBUSER, DBPASS));
     }    
     
     public int countRows() throws SQLException, ClassNotFoundException {
@@ -53,7 +53,7 @@ public class DataConnection {
     }
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/growler_db", "admin", "password");
+        Connection connection = DriverManager.getConnection("jdbc:mysql://ps11.pstcc.edu:3306/c2850a01test" , "c2850a01", "c2850a01");
         Statement counter = connection.createStatement();
         ResultSet results = counter.executeQuery("select session_id, question1, question2, question3, question4 from survey_techtober_12");
         Statement insert = connection.createStatement();    

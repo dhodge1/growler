@@ -21,7 +21,8 @@
         }            
         // Here you put the check on the username and password            
         if (username.toLowerCase().trim().equals("admin") && password.toLowerCase().trim().equals("admin")) {
-                   out.println("Welcome " + username + " <a href=\"index.jsp\">Back to main</a>");                
+                   out.println("Welcome " + username + " <a href=\"/ProjectGrowler/index.jsp\">Back to main</a>");                
+                   out.println("<a href=\"/ProjectGrowler/view/theme.jsp\">To themes.</a>");   
                    session.setAttribute("username", username);             
            }           
         else {                

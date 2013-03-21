@@ -37,16 +37,17 @@
      
   Connection connect = dataConnection.sendConnection();
   PreparedStatement insert = connect.prepareStatement(queries.insertSpeaker());
-  insert.setInt(1 , dataConnection.countSRows());
-  insert.setString(2, first_name);
-  insert.setString(3, last_name);
+  insert.setString(1, first_name);
+  insert.setString(2, last_name);
   //If it's an admin using, use the admin user number
   if (admin == "true") {
-      insert.setInt(4, 8083);
+      insert.setInt(3, 8083);
   }
   else { //otherwise, use the user's number (which is 0 during the pre-authentication phase)
-      insert.setInt(4, 0);
+      insert.setInt(3, 0);
    }
+  insert.setBoolean(4, true);
+  insert.setBoolean(5, true);
   insert.execute();
   %>
   <% if (admin == "true")
