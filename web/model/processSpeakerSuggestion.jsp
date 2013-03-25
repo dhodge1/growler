@@ -49,6 +49,8 @@
   insert.setBoolean(4, true);
   insert.setBoolean(5, true);
   insert.execute();
+  connect.close();
+  insert.close();
   %>
   <% if (admin == "true")
       out.print("<jsp:forward page=\"../admin/speaker.jsp\" />");

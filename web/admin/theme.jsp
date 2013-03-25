@@ -1,7 +1,7 @@
 <%-- 
     Document   : theme
     Created on : Feb 28, 2013, 7:15:03 PM
-    Author     : Robert Brown
+    Author     : Justin Bauguess
 --%>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
@@ -30,7 +30,6 @@
 	<link rel="stylesheet" href="../css/draganddrop.css" /><!--Drag and drop style-->
   <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
   <script src="../js/grabRanks.js"></script>
-
 </head>
 <body id="growler1">    
   <%@ include file="../includes/header.jsp" %> 
@@ -67,31 +66,23 @@
                                              <% Connection newConnect = dataConnection.sendConnection();
                                                 Statement newStatement = newConnect.createStatement();
                                                 ResultSet themeResult = newStatement.executeQuery("select name, id, description from theme where creator = 2023");
-                                        %>
+                                             %>
 						</div>
 					<div class="span2">
 					<section>
-                                            
                                                 <ul>
 						<% 
-                                                
                                                 while (themeResult.next()) {
                                                 %>
                                                 <li id="lisort"><% out.print(themeResult.getString("name")); %>
-                                                    <% out.print(" : " + giveStars.themeStar(themeResult.getInt("id")) + " points"); %>
-                                                
-                                                <% out.print("<input type=\"hidden\" name=\"list\" value=\"" + themeResult.getInt("id") + "\" >");%></li>
-                                                
+                                                    <% out.print(" : " + giveStars.themePoints(themeResult.getInt("id")) + " points"); %>
+                                                </li>
                                                 <% } 
                                                 newConnect.close();
                                                 themeResult.close();
-                                                newStatement.close();
-%>
+                                                newStatement.close(); %>
                                                 </ul>
-                                                
-							
-						
-					</section>
+                                        </section>
 					</div>
 					<div class="span7">
 					<p></p>
@@ -108,17 +99,12 @@
 			<p></p>
 		</div>
 		<div class="span2">
-                    
-			
-                
 		</div>
 	</div>	
 
 
 	<%@ include file="../includes/footer.jsp" %>
 	<%@ include file="../includes/scriptlist.jsp" %>
-        
-	
 	<!--drag and drop extra script-->
 	<%@ include file="../includes/draganddrop.jsp" %>
 </body>

@@ -62,6 +62,7 @@
 							<br/>
                                                         
                                              <% Connection newConnect = dataConnection.sendConnection();
+                                                     dataConnection.split2012Ranks();
                                                 Statement newStatement = newConnect.createStatement();
                                                 ResultSet themeResult = newStatement.executeQuery("select name, id, description from theme");
                                         %>

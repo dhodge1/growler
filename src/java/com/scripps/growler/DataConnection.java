@@ -15,13 +15,9 @@ public class DataConnection {
     private final String DBNAME = "c2850a01test";
     private final String DBUSER = "c2850a01";
     private final String DBPASS = "c2850a01";
-
     public Connection connection;
-    private ResultSet results;
+    
     public DataConnection() throws SQLException, ClassNotFoundException {
-       Class.forName("com.mysql.jdbc.Driver");
-       connection = DriverManager.getConnection("jdbc:mysql://ps11.pstcc.edu:3306/" + DBNAME, DBUSER, DBPASS); 
-       
     }
     /**
      * Sends our JSP page a Connection object, so it can do fun things
@@ -36,28 +32,23 @@ public class DataConnection {
         Class.forName("com.mysql.jdbc.Driver");
         return (connection = DriverManager.getConnection("jdbc:mysql://ps11.pstcc.edu:3306/" + DBNAME, DBUSER, DBPASS));
     }    
-    
-    public int countRows() throws SQLException, ClassNotFoundException {
-        new DataConnection();
-        Statement counter = connection.createStatement();
-        ResultSet results = counter.executeQuery("select name from theme");
-        results.last();
-        return(results.getRow() + 1);
-    }
-    public int countSRows() throws SQLException, ClassNotFoundException {
-        new DataConnection();
-        Statement counter = connection.createStatement();
-        ResultSet results = counter.executeQuery("select last_name from speaker");
-        results.last();
-        return(results.getRow() + 1);
-    }
+    /**
+     * 
+     * Running this main method will divide up the session data from last year so we can get speaker ratings
+     * 
+     * @param args
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         
+        }
+    
+    public void split2012Ranks() throws SQLException, ClassNotFoundException {
         Connection connection = DriverManager.getConnection("jdbc:mysql://ps11.pstcc.edu:3306/c2850a01test" , "c2850a01", "c2850a01");
         Statement counter = connection.createStatement();
         ResultSet results = counter.executeQuery("select session_id, question1, question2, question3, question4 from survey_techtober_12");
-        Statement insert = connection.createStatement();    
-        ResultSet results2;
+        Statement insert = connection.createStatement();
         while(results.next()) {
             
                 insert.execute("insert into session_ranking (session_id, question_id, ranking) "
@@ -71,8 +62,21 @@ public class DataConnection {
                 System.out.println(results.getInt("session_id") +" " + results.getInt("question3"));
                 insert.execute("insert into session_ranking (session_id, question_id, ranking) "
                         + "values (" + results.getInt("session_id") + ", 4, " + results.getInt("question4") + ")"); 
-                System.out.println(results.getInt("session_id") + " " +  results.getInt("question4"));
-            
+                System.out.println(results.getInt("session_id") + " " +  results.getInt("question4"));            
         }
-        }
+        connection.close();
+        counter.close();
+        results.close();
+        insert.close();
+        
+    }
+    
+    public void add2012RanksTable () throws SQLException, ClassNotFoundException {
+        connection = sendConnection();
+        Statement create = connection.createStatement();
+        create.executeUpdate("create table ranks_2012 as (select avg(r.ranking) as rating, s.id from session_ranking r, speaker s, speaker_team t where t.session_id = r.session_id and t.speaker_id = s.id group by s.id)");
+        
+        create.close();
+        connection.close();
+    }
 }

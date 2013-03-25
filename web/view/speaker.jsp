@@ -1,7 +1,7 @@
 <%-- 
     Document   : speaker
     Created on : Feb 27, 2013, 11:23:26 PM
-    Author     : Robert Brown
+    Author     : Justin Bauguess
 --%>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
@@ -22,6 +22,7 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>Growler Project</title><!-- Title -->
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>  <link rel="stylesheet" href="/resources/demos/style.css" />  <style>  ul { list-style-type: decimal-leading-zero; margin: 0; padding: 0; margin-bottom: 10px; }  #lisort { margin: 5px; padding: 5px; list-style-type: decimal-leading-zero; style: none; width: 600px; }  </style>  <script>  $(function() {    $( "#sortable" ).sortable({      revert: true    });    $( "#draggable" ).draggable({      connectToSortable: "#sortable",      helper: "clone",      revert: "invalid"    });    $( "ul, li" ).disableSelection();  });  </script>
   <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
@@ -70,14 +71,13 @@
 					<div class="span2">
 					<section>
  <form action="../model/processSpeakerRanking.jsp">
- <ul class="sortable grid">
+ <ul class="sortable">
      
     
 <% 
- 
  while (speaker.next()) {
      %>
-     <li id ="lisort"> <% out.print(speaker.getString("first_name") + " " + speaker.getString("last_name")); %>
+     <li id="lisort"> <% out.print(speaker.getString("first_name") + " " + speaker.getString("last_name")); %>
          <% out.print(giveStars.return2012Rank(speaker.getInt("id"))); %>
          <% out.print(giveStars.returnCount(speaker.getInt("id"))); %>
            

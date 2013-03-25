@@ -66,31 +66,23 @@
 							<br/>
                                              <% Connection newConnect = dataConnection.sendConnection();
                                                 Statement newStatement = newConnect.createStatement();
-                                                ResultSet themeResult = newStatement.executeQuery("select name, id, description from theme where creator not in 2023");
-                                                
-                                        %>
+                                                ResultSet themeResult = newStatement.executeQuery("select name, id, description from theme where creator is not null");
+                                             %>
 						</div>
 					<div class="span2">
 					<section>
-                                            
-                                                <ul>
+                                            <ul>
 						<% 
-                                                
                                                 while (themeResult.next()) {
                                                 %>
                                                 <li id="lisort"><% out.print(themeResult.getString("name")); %>
-                                                    <% out.print(" : " + giveStars.themeStar(themeResult.getInt("id")) + " points"); %>
-                                                
-                                                <% out.print("<input type=\"hidden\" name=\"list\" value=\"" + themeResult.getInt("id") + "\" >");%></li>
-                                                
+                                                    <% out.print(" : " + giveStars.themePoints(themeResult.getInt("id")) + " points"); %>
+                                                </li>
                                                 <% } 
                                                 newConnect.close();
                                                 themeResult.close();
                                                 newStatement.close();%>
                                                 </ul>
-                                                
-							
-						
 					</section>
 					</div>
 					<div class="span7">
@@ -108,18 +100,10 @@
 			<p></p>
 		</div>
 		<div class="span2">
-                    
-                        
-			
-                
 		</div>
-	</div>	
-
-
+	</div>
 	<%@ include file="../includes/footer.jsp" %>
 	<%@ include file="../includes/scriptlist.jsp" %>
-        
-	
 	<!--drag and drop extra script-->
 	<%@ include file="../includes/draganddrop.jsp" %>
 </body>

@@ -33,7 +33,6 @@
         <ul>
             <li class="selected"><a href="../view/theme.jsp">Themes</a></li>
             <li><a href="../view/themeentry.jsp">Suggest a Theme</a></li>
-            <li><a href="../view/themedescription.jsp">Theme Descriptions</a></li>
             <li><a href="../view/speaker.jsp">Speakers</a></li>
             <li><a href="../view/speakerentry.jsp">Suggest a Speaker</a></li>
             <li><a href="">Help</a></li>
@@ -54,10 +53,13 @@
      insert.execute();
  }
  Statement showRanks = connection.createStatement();
- ResultSet ranks = showRanks.executeQuery(queries.returnThemeRanking() + " order by sum(ranking) desc");
+ ResultSet ranks = showRanks.executeQuery("select sum(ranking), name from isolated_theme_ranking, theme where theme.id = isolated_theme_ranking.theme_id group by theme_id order by sum(ranking) desc");
  while(ranks.next()) {
  %><p><% out.print(ranks.getString("name") + " : " + ranks.getInt(1)); %></p><%
  }
+ connection.close();
+ statement.close();
+ insert.close();
  %>
  
 <%@ include file="../includes/footer.jsp" %> 

@@ -12,7 +12,8 @@ import java.sql.*;
  * @author "Justin Bauguess"
  */
 public class GiveStars {
-        private final String DBNAME = "c2850a01test";
+    GrowlerQueries list = new GrowlerQueries();
+    private final String DBNAME = "c2850a01test";
     private final String DBUSER = "c2850a01";
     private final String DBPASS = "c2850a01";
     private final String IMAGE_START = "<img src = \"";
@@ -25,79 +26,101 @@ public class GiveStars {
         
     }
     /**
+     * Gives a string that has the points a theme has earned so far in voting
      * 
-     * @return Gives a string array containing URLS for making image tags for the stars needed for each ranking
+     * @param id the theme id to analyze
+     * @return The numerical id of the points a theme has earned, in string form
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
+    public String themePoints(int id) throws ClassNotFoundException, SQLException {
+       Connection connection = DriverManager.getConnection("jdbc:mysql://ps11.pstcc.edu:3306/c2850a01test" , "c2850a01", "c2850a01");
+       Statement statement = connection.createStatement();
+       ResultSet result = statement.executeQuery("select sum(ranking) from isolated_theme_ranking where theme_id = " + id);
+       int c = 0;
+       while (result.next()){
+           c = result.getInt(1);
+       }
+       String count = String.valueOf(c);
+       connection.close();
+       statement.close();
+       result.close();
+       return (count);
+    }
+    /**
+     * Returns the number of ratings a speaker received in 2012
+     * 
+     * @param id The speaker id we are analyzing
+     * @return The Count of Ratings a speaker received in 2012
      * @throws SQLException
      * @throws ClassNotFoundException 
      */
-    
     public String returnCount(int id) throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.jdbc.Driver");
-       Connection connection = DriverManager.getConnection("jdbc:mysql://ps11.pstcc.edu:3306/" + DBNAME, DBUSER, DBPASS); 
+       Connection connection = DriverManager.getConnection("jdbc:mysql://ps11.pstcc.edu:3306/c2850a01test" , "c2850a01", "c2850a01");
        Statement statement = connection.createStatement();
-       ResultSet result = statement.executeQuery("select ceiling(count(r.session_id)/4), s.id from session_ranking r, speaker s, speaker_team t where t.speaker_id = " + id  + " and s.id = " + id + " and t.session_id = r.session_id");
+       ResultSet result = statement.executeQuery("select * from ranks_2012, speaker where ranks_2012.id = speaker.id and speaker.id = " + id);
        String count = "";
        while (result.next()){
-           if (result.getInt(1) != 0){
-       count = " / " + result.getInt(1) + " ratings";}
+           if (result.getInt(3) != 0){
+       count = " / " + result.getInt(3) + " ratings";}
            else {
                count = "";
            }
        }
+       connection.close();
+       statement.close();
+       result.close();
         return (count);
     }
-    
+    /**
+     * Returns the concatenated list of <img> tags for use in a web page (2012) data
+     * 
+     * @param id The Speaker id we are analyzing
+     * @return the list of tags concatenated for use in the web page
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
     public String return2012Rank(int id) throws ClassNotFoundException, SQLException {
+       ResultSet result;
        String imgTag = "";
-            try {
-        Class.forName("com.mysql.jdbc.Driver");
-       Connection connection = DriverManager.getConnection("jdbc:mysql://ps11.pstcc.edu:3306/" + DBNAME, DBUSER, DBPASS); 
+       Connection connection = DriverManager.getConnection("jdbc:mysql://ps11.pstcc.edu:3306/c2850a01test" , "c2850a01", "c2850a01");
        Statement statement = connection.createStatement();
        //ResultSet result = statement.executeQuery("select avg(ranking) from session_ranking where session_ranking.session_id in (select id from session where id in (select session_id from speaker_team where speaker_id = " + id + "))");
-       ResultSet result = statement.executeQuery("select avg(r.ranking), s.id, s.first_name, s.last_name from session_ranking r, speaker s, speaker_team t where t.session_id = r.session_id and t.speaker_id = " + id);
+       result = statement.executeQuery("select r.rating, s.id, s.first_name, s.last_name from ranks_2012 r, speaker s where s.id = r.id and s.id = " + id);
        while (result.next()){
        imgTag = returnIMGTag(result.getDouble(1));
        }
-        }
-        catch (SQLException e) {
-            imgTag = "Not Rated";
-            System.out.println(e);
-        }
-        return(imgTag);
+       connection.close();
+       statement.close();
+       result.close();
+       return(imgTag);
     }
-    
-    public int themeStar(int id) throws ClassNotFoundException, SQLException {
-        //Do all the SQL Connection/Query Stuff
-        int ranking = 0;
-        Class.forName("com.mysql.jdbc.Driver");
-       Connection connection = DriverManager.getConnection("jdbc:mysql://ps11.pstcc.edu:3306/" + DBNAME, DBUSER, DBPASS); 
-       Statement statement = connection.createStatement();
-       ResultSet results = statement.executeQuery("select sum(ranking) from isolated_theme_ranking where theme_id IN (" + id + ") group by theme_id");
-       while (results.next()) {
-       ranking = (results.getInt(1));
-       }
-       
-        return(ranking);
-    }
-    
+    /**
+     * Returns HTML tag(s) that print star graphics on the page (user votes from this year)
+     * 
+     * @param id The id of the speaker we are trying to get Stars for
+     * @return and image tag for an HTML page
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
     public String returnStar(int id) throws ClassNotFoundException, SQLException {
-        //Do all the SQL Connection/Query Stuff
-        String imgTag = "";
-       //try {
-        Class.forName("com.mysql.jdbc.Driver");
-       Connection connection = DriverManager.getConnection("jdbc:mysql://ps11.pstcc.edu:3306/" + DBNAME, DBUSER, DBPASS); 
+       String imgTag = "";
+       Connection connection = DriverManager.getConnection("jdbc:mysql://ps11.pstcc.edu:3306/c2850a01test" , "c2850a01", "c2850a01");
        Statement statement = connection.createStatement();
        ResultSet results = statement.executeQuery("select (sum(r.ranking)/count(r.speaker_id))/2 from speaker_ranking r, speaker s where r.speaker_id = s.id and s.id IN (" + id + ") group by r.speaker_id");
        while (results.next()) {
        imgTag = returnIMGTag(results.getDouble(1));
        }
-       //}
-       //catch (SQLException e) {
-       //    imgTag = "NOT RATED";
-       //}
+       connection.close();
+       statement.close();
+       results.close();
         return(imgTag);
     }
-    
+    /**
+     * Returns a list of image tags
+     * @param rating the number used to determine which tags to send back
+     * @return A list of image tags containing gold, half, or grey stars
+     */
     public String returnIMGTag(double rating) {
         String img = "";
               //5 *

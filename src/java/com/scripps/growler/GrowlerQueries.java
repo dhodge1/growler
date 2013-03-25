@@ -39,7 +39,7 @@ public class GrowlerQueries {
 	* @return  Used for selecting user suggested themes (so they can be ranked), user story 10333
 	*/
 	public String selectUserSuggestedThemes() {
-		return("select name from theme where creator in 0"); }
+		return("select name from theme where creator = 0"); }
 	/**
          * @return returns the first and last names of the speaker, as well as the id
 	*/
@@ -125,8 +125,8 @@ public class GrowlerQueries {
         /**
          * @return Returns the sum of the rankings for themes
          */
-        public String returnThemeRanking() {
-            return("select sum(ranking), name from isolated_theme_ranking, theme where theme.id = isolated_theme_ranking.theme_id group by theme_id");
+        public String returnThemeRanking(String id) {
+            return("select sum(ranking), name from isolated_theme_ranking, theme where theme.id = isolated_theme_ranking.theme_id and theme.id = " + id + " group by theme_id");
         }
         /**
          * @return returns the sum of the speaker rankings
@@ -135,17 +135,29 @@ public class GrowlerQueries {
             return("select sum(speaker_ranking.ranking), speaker.first_name, speaker.last_name from speaker_ranking, speaker where speaker.id = speaker_ranking.speaker_id group by speaker_ranking.speaker_id");
         }
         /**
+         * @return returns the 2012 speaker rankings
+         */
+        public String return2012SpeakerRanking() {
+            return("select r.id, r.rating, s.first_name, s.last_name from ranks_2012 r, speaker s where s.id = r.id");
+        }
+        /**
+         * 
+         */
+        public String return2012SpeakerRatingCount() {
+            return("select r.id, r.count, s.first_name, s.last_name from ranks_2012 r, speaker s where s.id = r.id");
+        }
+        /**
          * 
          * @return Returns the id, name and average ranking given by users (highest to lowest)
          */
         public String returnAverageSpeakerRanking() {
-            return("select s.id, s.first_name, s.last_name, (sum(r.ranking)/count(r.speaker_id))/2 from speaker_ranking r, speaker s where r.speaker_id = s.id group by speaker_id order by ((sum(r.ranking)/count(r.speaker_id))/2) desc");
+            return("select r.rating, r.id, s.first_name, s.last_name from ranks_2012 r, speaker s where r.id = s.id;");
         }
         /**
          * @return how many times a speaker was ranked 
          */
         public String returnCountofRanks() {
-            return("select speaker_id, count(speaker_id) from speaker_ranking group by speaker_id");
+            return("select r.count, r.id, s.first_name, s.last_name from ranks_2012 r, speaker s where r.id = s.id;");
         }
         /**
          * @return Returns those speakers that haven't been ranked
