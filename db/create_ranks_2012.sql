@@ -1,4 +1,5 @@
-/* This file creates the table based on last year's data
+/*
+ * This file creates the table based on last year's data
  * which can be modified by the administrator later 
  */
 DROP TABLE ranks_2012;
