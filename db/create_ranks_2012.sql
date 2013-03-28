@@ -4,7 +4,8 @@
  */
 DROP TABLE ranks_2012;
 CREATE TABLE ranks_2012 as (
-select avg(r.ranking) as rating
+select 
+cast(avg(r.ranking), 2,1) as rating
 ,s.id as id
 ,ceiling(count(r.session_id)/4) as count
 FROM session_ranking r, speaker s
