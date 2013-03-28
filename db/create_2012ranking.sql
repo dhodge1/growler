@@ -9,4 +9,4 @@ select avg(r.ranking) as rating
 ,ceiling(count(r.session_id)/4) as count
 FROM session_ranking r, speaker s, speaker_team t
 WHERE r.session_id = t.session_id AND s.id = t.speaker_id
-GROUP BY r.session_id, s.id);
+GROUP BY s.id);
