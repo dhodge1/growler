@@ -64,7 +64,8 @@
                                              <% Connection newConnect = dataConnection.sendConnection();
                                                      dataConnection.split2012Ranks();
                                                 Statement newStatement = newConnect.createStatement();
-                                                ResultSet themeResult = newStatement.executeQuery("select name, id, description from theme");
+                                                ResultSet themeResult = newStatement.executeQuery("select name, id, description from theme WHERE visible = true AND active = true");
+						 
                                         %>
 						</div>
 					<div class="span2">
