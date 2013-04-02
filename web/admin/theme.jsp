@@ -65,23 +65,37 @@
 							<br/>
                                              <% Connection newConnect = dataConnection.sendConnection();
                                                 Statement newStatement = newConnect.createStatement();
-                                                ResultSet themeResult = newStatement.executeQuery("select name, id, description from theme where creator = 2023");
+                                                ResultSet themeResult = newStatement.executeQuery(queries.returnThemeRanking());
                                              %>
 						</div>
 					<div class="span2">
 					<section>
-                                                <ul>
+                                            <form method="post" action="admintheme.jsp">
+                                                <table>
+                                                    <tr>
+                                                        <td>Name</td>
+                                                        <td>Rating</td>
+                                                        <td>Times Rated</td>
+                                                        <td>Visible?</td>
+                                                    </tr>
 						<% 
                                                 while (themeResult.next()) {
                                                 %>
-                                                <li id="lisort"><% out.print(themeResult.getString("name")); %>
-                                                    <% out.print(" : " + giveStars.themePoints(themeResult.getInt("id")) + " points"); %>
-                                                </li>
+                                                <tr>
+                                                <td><% out.print(themeResult.getString("name")); %></td>
+                                                <td><% out.print(themeResult.getInt("ranking")); %></td>
+                                                <td><% out.print(themeResult.getInt("count")); %></td>
+                                                <td><input type="checkbox" name="visible" value="<% out.print(themeResult.getInt("id")); %>"
+                                                           <% if (themeResult.getInt("visible") == 1) {
+                                                                  out.print(" checked");} %>/>
+                                                </tr>
                                                 <% } 
                                                 newConnect.close();
                                                 themeResult.close();
                                                 newStatement.close(); %>
-                                                </ul>
+                                                </table>
+                                                <input type="submit" value="Submit" class="button-primary" />
+                                            </form>
                                         </section>
 					</div>
 					<div class="span7">

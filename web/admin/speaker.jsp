@@ -1,7 +1,7 @@
 <%-- 
     Document   : speaker
     Created on : Feb 27, 2013, 11:23:26 PM
-    Author     : Robert Brown
+    Author     : Justin Bauguess
 --%>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
@@ -34,7 +34,7 @@
  <%@ include file="../includes/header.jsp" %> 
 <nav class="globalNavigation">
         <ul>
-            <li class="selected"><a href="../view/theme.jsp">Default Themes</a></li>
+            <li><a href="../view/theme.jsp">Default Themes</a></li>
             <li><a href="../admin/usertheme.jsp">Suggested Themes</a></li>
             <li><a href="../admin/themeentry.jsp">Add a Theme</a></li>
             <li class="selected"><a href="../admin/speaker.jsp">Default Speakers</a></li>
@@ -65,26 +65,45 @@
                                                         
                                                         Connection connection = dataConnection.sendConnection();
                                                         Statement statement = connection.createStatement();
-                                                       ResultSet speaker = statement.executeQuery(queries.selectSpeakerName()); 
+                                                       ResultSet speaker = statement.executeQuery(queries.return2012SpeakerInfo()); 
  %>
  </div>
 					<div class="span2">
 					<section>
- <ul> 
+                                            <form action="../model/adminspeaker.jsp" method="post">
+                                            <table>
+                                                <tr>
+                                                    <td>Speaker Name</td>
+                                                    <td>2012 Rating</td>
+                                                    <td>Times Ranked</td>
+                                                    <td>New Rating</td>
+                                                    <td>New Times Ranked</td>
+                                                    <td>Visible?</td>
+                                                </tr>
+                                                
 <% 
  while (speaker.next()) {
      %>
-     <li id="lisort"> <% out.print(speaker.getString("first_name") + " " + speaker.getString("last_name")); %>
-         <% out.print(giveStars.return2012Rank(speaker.getInt("id"))); %>
-         <% out.print(giveStars.returnCount(speaker.getInt("id"))); %>
-     </li>
+     <tr>
+         <td><% out.print(speaker.getString("first_name") + " " + speaker.getString("last_name")); %>
+         <input name="list" type="hidden" value="<% out.print(speaker.getInt("id")); %>" /></td>
+         <td><% out.print(speaker.getDouble("rating")); %></td>
+         <td><% out.print(speaker.getInt("count")); %></td>
+         <td><input name="newrank" type="text" value="<% out.print(speaker.getDouble("rating")); %>"/></td>
+         <td><input name="newrank" type="text" value="<% out.print(speaker.getInt("count")); %>"/></td>
+         <td><input name="visible" type="checkbox" value="<% out.print(speaker.getInt("id")); %>"
+                    <% if (speaker.getInt("visible") == 1) {
+                        out.print("checked"); }%> /></td>
+     </tr>
            
     
   <% } 
  speaker.close();
  statement.close();
  connection.close();%>
- </ul>
+ </table>
+ <input type="submit" value="Submit" class="button-primary" />
+  </form>
  </section>
 					</div>
 					<div class="span7">

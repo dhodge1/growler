@@ -65,7 +65,7 @@
                                                         
                                                         Connection connection = dataConnection.sendConnection();
  Statement statement = connection.createStatement();
- ResultSet speaker = statement.executeQuery(queries.selectDefaultSpeakers()); 
+ ResultSet speaker = statement.executeQuery(queries.selectVisibleSpeakers()); 
  %>
  </div>
 					<div class="span2">
