@@ -65,7 +65,12 @@
                                                      
                                                 Statement newStatement = newConnect.createStatement();
 <<<<<<< HEAD
+<<<<<<< HEAD
                                                 ResultSet themeResult = newStatement.executeQuery(queries.selectDefaultThemes());
+=======
+                                                ResultSet themeResult = newStatement.executeQuery("select name, id, description from theme WHERE visible = true AND active = true");
+						 
+>>>>>>> c2ac52c777cfa13be99330219eb4679dd9810e38
 =======
                                                 ResultSet themeResult = newStatement.executeQuery("select name, id, description from theme WHERE visible = true AND active = true");
 						 
