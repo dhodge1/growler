@@ -22,11 +22,13 @@
         // Here you put the check on the username and password            
         if (username.toLowerCase().trim().equals("admin") && password.toLowerCase().trim().equals("admin")) {
                    out.println("Welcome " + username + " <a href=\"/ProjectGrowler/index.jsp\">Back to main</a>");                
-                   out.println("<a href=\"/ProjectGrowler/view/theme.jsp\">To themes.</a>");   
-                   session.setAttribute("username", username);             
+                   session.setAttribute("Admin", username);             
+                          %><jsp:forward page="../admin/theme.jsp"/> <%
            }           
         else {                
-            out.println("Invalid username and password");           
+            out.println("Invalid username and password");
+            session.setAttribute("anon", username);
+                          %> <jsp:forward page="../view/theme.jsp"/><%
         }%> 
     </body>
 </html>

@@ -33,22 +33,23 @@
   <% String name = request.getParameter("name");
      String description = request.getParameter("description");
      String reason = "";
+     int user = 0;
      if (request.getParameter("reason") != null)
      {
         reason = request.getParameter("reason");
      }
      else {
         reason = " ";
+        user = 2023;
      }
   Connection connect = dataConnection.sendConnection();
-  PreparedStatement insert = connect.prepareStatement(queries.insertTheme());
-  insert.setInt(1 , dataConnection.countRows());
-  insert.setString(2, name);
-  insert.setString(3, description);
-  insert.setString(4, reason);
-  insert.setInt(5, 2023);
+  PreparedStatement insert = connect.prepareStatement(queries.insertUserTheme());
+  insert.setString(1, name);
+  insert.setString(2, description);
+  insert.setString(3, reason);
+  insert.setInt(4, user);
+  insert.setBoolean(5, false);
   insert.setBoolean(6, false);
-  insert.setBoolean(7, false);
   insert.execute();
   %>
   <% if (request.getParameter("reason") != null) { %>

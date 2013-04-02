@@ -41,7 +41,7 @@
   insert.setString(2, last_name);
   //If it's an admin using, use the admin user number
   if (admin == "true") {
-      insert.setInt(3, 8083);
+      insert.setInt(3, 2023);
   }
   else { //otherwise, use the user's number (which is 0 during the pre-authentication phase)
       insert.setInt(3, 0);
@@ -52,11 +52,11 @@
   connect.close();
   insert.close();
   %>
-  <% if (admin == "true")
-      out.print("<jsp:forward page=\"../admin/speaker.jsp\" />");
-       else {
-      out.print("<jsp:forward page=\"../view/speaker.jsp\" />");
-       }
+  <% if (admin == "true") {%>
+      <jsp:forward page="../admin/speaker.jsp" />
+     <%  } else { %>
+      <jsp:forward page="../view/speaker.jsp" />
+      <% }
   %>
   
 <%@ include file="../includes/footer.jsp" %>
