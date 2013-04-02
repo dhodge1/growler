@@ -1,7 +1,7 @@
 <%-- 
     Document   : processSpeakerRanking
     Created on : Mar 5, 2013, 8:13:49 PM
-    Author     : Robert Brown
+    Author     : Justin Bauguess
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@page import="java.util.*"%>
@@ -70,7 +70,12 @@
  }
  PreparedStatement visibility = connection.prepareStatement(queries.promoteSpeaker());
  for (int k = 0; k < visibles.length; k++) {
-     visibility.setInt(1, visibles[k]);
+     if (visibles[k] == ids[k]) {
+        visibility.setInt(1, visibles[k]);
+     }
+     else {
+         visibility.setInt(1, 0);
+     }
      visibility.setInt(2, ids[k]);
      visibility.execute();
  }

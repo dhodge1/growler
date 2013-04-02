@@ -64,7 +64,7 @@
                                              <% Connection newConnect = dataConnection.sendConnection();
                                                      
                                                 Statement newStatement = newConnect.createStatement();
-                                                ResultSet themeResult = newStatement.executeQuery(queries.selectDefaultThemes());
+                                                ResultSet themeResult = newStatement.executeQuery(queries.selectVisibleThemes());
                                         %>
 						</div>
 					<div class="span2">

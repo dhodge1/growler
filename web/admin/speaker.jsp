@@ -90,7 +90,7 @@
          <td><% out.print(speaker.getDouble("rating")); %></td>
          <td><% out.print(speaker.getInt("count")); %></td>
          <td><input name="newrank" type="text" value="<% out.print(speaker.getDouble("rating")); %>"/></td>
-         <td><input name="newrank" type="text" value="<% out.print(speaker.getInt("count")); %>"/></td>
+         <td><input name="newcount" type="text" value="<% out.print(speaker.getInt("count")); %>"/></td>
          <td><input name="visible" type="checkbox" value="<% out.print(speaker.getInt("id")); %>"
                     <% if (speaker.getInt("visible") == 1) {
                         out.print("checked"); }%> /></td>

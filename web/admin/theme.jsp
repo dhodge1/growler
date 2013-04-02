@@ -70,7 +70,7 @@
 						</div>
 					<div class="span2">
 					<section>
-                                            <form method="post" action="admintheme.jsp">
+                                            <form method="post" action="../model/admintheme.jsp">
                                                 <table>
                                                     <tr>
                                                         <td>Name</td>
@@ -82,7 +82,8 @@
                                                 while (themeResult.next()) {
                                                 %>
                                                 <tr>
-                                                <td><% out.print(themeResult.getString("name")); %></td>
+                                                <td><% out.print(themeResult.getString("name")); %>
+                                                <input type="hidden" name="list" value="<% out.print(themeResult.getInt("id")); %>" /></td>
                                                 <td><% out.print(themeResult.getInt("ranking")); %></td>
                                                 <td><% out.print(themeResult.getInt("count")); %></td>
                                                 <td><input type="checkbox" name="visible" value="<% out.print(themeResult.getInt("id")); %>"
