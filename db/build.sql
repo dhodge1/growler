@@ -176,15 +176,7 @@ CREATE TABLE session_ranking (
 	,ranking		int	CHECK (ranking > 0 AND ranking < 6)
 	);
 
-/*
- * Loads a raw data file of session ranking data from last year
- * into the session ranking table
- * session_ranking: session_id, question_id, and ranking
- */
-load data LOCAL infile 'raw_data/export_session_ranking.csv'
-into table session_ranking
-fields terminated by ','
-ignore 1 lines;
+
 
 /*
  * Creates the table for keeping track of speaker teams
@@ -377,8 +369,18 @@ insert into speaker_team values (33 , 43);
  */
 DROP TABLE IF EXISTS ranks_2012;
 CREATE TABLE ranks_2012 as (
-select avg(r.ranking) as rating
-,s.id as id
-,ceiling(count(r.session_id)/4) as count
-FROM session_ranking r, speaker s
-WHERE r.session_id IN (select session_id from speaker_team) and s.id IN (select speaker_id from speaker_team) group by s.id);
+
+speaker_id	int	REFERENCES speaker(id)
+,rating	cast(double, 2, 1)
+,count	int
+);
+
+/*
+ * Loads a raw data file of session ranking data from last year
+ * into the ranks_2012 table
+ * ranks_2012: speaker_id, rating, and count
+ */
+load data LOCAL infile 'raw_data/ranks_2012_out.csv'
+into table ranks_2012
+fields terminated by ','
+ignore 1 lines;
