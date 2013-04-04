@@ -187,3 +187,16 @@ CREATE TABLE speaker_team (
 	session_id		int			REFERENCES session(id)
 	,speaker_id		int			REFERENCES speaker(id)
 	);
+	
+	
+/* 
+ * This file creates the table based on last year's data
+ * which can be modified by the administrator later 
+ */
+DROP TABLE IF EXISTS ranks_2012;
+CREATE TABLE ranks_2012 as (
+
+speaker_id	int	REFERENCES speaker(id)
+,rating	cast(double, 2, 1)
+,count	int
+);

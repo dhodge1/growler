@@ -29,11 +29,14 @@ CREATE TABLE theme (
 	);
 
 /*
-Creates the table for storing user information
-*/	
+ * Creates the table for storing user information
+ */	
 DROP TABLE IF EXISTS user; 
 CREATE TABLE user (
 	id			int		primary key
+	,name			varchar(26)	
+	,password		varchar(60)
+	,corporate_id		varchar(6)
 	);
 
 /*
@@ -176,15 +179,7 @@ CREATE TABLE session_ranking (
 	,ranking		int	CHECK (ranking > 0 AND ranking < 6)
 	);
 
-/*
- * Loads a raw data file of session ranking data from last year
- * into the session ranking table
- * session_ranking: session_id, question_id, and ranking
- */
-load data LOCAL infile 'raw_data/export_session_ranking.csv'
-into table session_ranking
-fields terminated by ','
-ignore 1 lines;
+
 
 /*
  * Creates the table for keeping track of speaker teams
@@ -202,7 +197,7 @@ CREATE TABLE speaker_team (
 /*
  * Inserts the default user.  This user is typically associated with last year's data.
  */
-insert into user (id) values (2023);
+insert into user values (2023, "DEFAULT", NULL, NULL);
 
 /*Theme inserts*/
 INSERT INTO theme VALUES (1, "Cloud Computing", "All things Cloud, from IaaS, PaaS, DaaS, SaaS, to hosting providers, brokers, and cloud-enabling appliances", 2023, "2013", true, NULL);
@@ -225,8 +220,8 @@ insert into speaker values (NULL,"Mark","Kelly",2023, TRUE);
 insert into speaker values (NULL,"Jim","Senter",2023, TRUE);
 insert into speaker values (NULL,"Phil","Spann",2023, TRUE);
 insert into speaker values (NULL,"Jeffrey","Allen",2023, TRUE);
-insert into speaker  values (NULL,"Bhaumik","Shah",2023, TRUE);
-insert into speaker  values (NULL,"Panagiotis","Tzerefos",2023, TRUE);
+insert into speaker values (NULL,"Bhaumik","Shah",2023, TRUE);
+insert into speaker values (NULL,"Panagiotis","Tzerefos",2023, TRUE);
 insert into speaker values (NULL,"Ben","Pack",2023, TRUE);
 insert into speaker values (NULL,"David","Tucker",2023, TRUE);
 insert into speaker values (NULL,"Matt","Peter",2023, TRUE);
@@ -253,7 +248,7 @@ insert into speaker values (NULL,"Amy","Thomason",2023, TRUE);
 insert into speaker values (NULL,"Charles","Lewis",2023, TRUE);
 insert into speaker values (NULL,"Jonathan","Williams",2023, TRUE);
 insert into speaker values (NULL,"Scott","Gentry",2023, TRUE);
-insert into speaker  values (NULL,"Jason","Norton",2023, TRUE);
+insert into speaker values (NULL,"Jason","Norton",2023, TRUE);
 insert into speaker values (NULL,"Michael","Wehrle",2023, TRUE);
 insert into speaker values (NULL,"Shane","Closser",2023, TRUE);
 insert into speaker values (NULL,"Selene","Tolbert",2023, TRUE);
@@ -289,27 +284,6 @@ insert into question values (4, "The facility was appropriate for the presentati
  insert into location values (2, "KXOFFICE Training Room");
 
 
-/*
- * Creates a table to use to process the data from last year
- */
-DROP TABLE IF EXISTS survey_techtober_12;
-create table survey_techtober_12 (
-	survey_id			int		 PRIMARY KEY AUTO_INCREMENT
-	,session_id			int
-	,question1			int
-	,question2			int
-	,question3			int
-	,question4			int
-	,comments			varchar(250)
-	);
-/*
- * Takes the raw data from a comma delimted file and dumps it into that table so we can process it for 
- * making last year's speaker rankings
- */
-load data local infile 'raw_data/survey_techtober.csv'
-into table survey_techtober_12
-fields terminated by ','
-ignore 1 lines;
 /*
  * Now each record in that table has a record for each survey submitted last year.
  * Next we need to link the speakers from last year to their presentations.
@@ -376,9 +350,18 @@ insert into speaker_team values (33 , 43);
  * which can be modified by the administrator later 
  */
 DROP TABLE IF EXISTS ranks_2012;
-CREATE TABLE ranks_2012 as (
-select avg(r.ranking) as rating
-,s.id as id
-,ceiling(count(r.session_id)/4) as count
-FROM session_ranking r, speaker s
-WHERE r.session_id IN (select session_id from speaker_team) and s.id IN (select speaker_id from speaker_team) group by s.id);
+CREATE TABLE ranks_2012 (
+speaker_id	int	REFERENCES speaker(id)
+,rating	DECIMAL(2, 1)
+,count	int
+);
+
+/*
+ * Loads a raw data file of session ranking data from last year
+ * into the ranks_2012 table
+ * ranks_2012: speaker_id, rating, and count
+ */
+load data LOCAL infile 'raw_data/ranks_2012_out.csv'
+into table ranks_2012
+fields terminated by ','
+ignore 1 lines;
