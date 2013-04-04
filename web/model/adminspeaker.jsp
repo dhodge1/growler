@@ -3,7 +3,6 @@
     Created on : Mar 5, 2013, 8:13:49 PM
     Author     : Justin Bauguess
 --%>
-<%@page import="sun.org.mozilla.javascript.internal.IdScriptableObject"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
@@ -90,8 +89,8 @@ connection.close();
 statement.close();
 insert.close();
 visibility.close();
+response.sendRedirect("../admin/speaker.jsp");
 %>
-<jsp:forward page="../admin/speaker.jsp"/>
 <%@ include file="../includes/footer.jsp" %> 
 <%@ include file="../includes/scriptlist.jsp" %>
 <%@ include file="../includes/draganddrop.jsp" %>

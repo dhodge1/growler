@@ -65,8 +65,8 @@
 connection.close();
 statement.close();
 insert.close();
+response.sendRedirect("../admin/theme.jsp");
 %>
-<jsp:forward page="../admin/theme.jsp" /> 
 <%@ include file="../includes/footer.jsp" %> 
 <%@ include file="../includes/scriptlist.jsp" %>
 <%@ include file="../includes/draganddrop.jsp" %>
