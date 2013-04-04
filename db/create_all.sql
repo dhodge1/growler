@@ -85,6 +85,29 @@ CREATE TABLE speaker_ranking (
 	,speaker_id		int			REFERENCES speaker(id)
 	,ranking		int
 	);
+
+/*
+ * Creates table for session information
+ * A session is essentially a presentation given by a speaker_team (which may
+ * be one or more speakers), attended by users.
+ * A session has a start time, a start date, a duration, a location, 
+ * and a track (which is either Technical or Business Friendly).
+ * If multiple tracks need to be managed, we might centralize it with its
+ * own table as we did with location. If there are only ever two tracks, 
+ * and admin never need to add others, we will keep it as an attribute.
+ */
+
+DROP TABLE IF EXISTS session;
+CREATE TABLE session (
+	id			int			PRIMARY KEY auto_increment
+	,name			varchar(50)
+	,description		text
+	,track			varchar(20)
+	,session_date		date
+	,start_time		time
+	,duration		int
+	,location		int		REFERENCES location(id)
+	);
 	
 /*
  * Creates the table for attending a session
@@ -134,28 +157,7 @@ CREATE TABLE location (
 	,description	varchar(50)
 	);
 	
-/*
- * Creates table for session information
- * A session is essentially a presentation given by a speaker_team (which may
- * be one or more speakers), attended by users.
- * A session has a start time, a start date, a duration, a location, 
- * and a track (which is either Technical or Business Friendly).
- * If multiple tracks need to be managed, we might centralize it with its
- * own table as we did with location. If there are only ever two tracks, 
- * and admin never need to add others, we will keep it as an attribute.
- */
 
-DROP TABLE IF EXISTS session;
-CREATE TABLE session (
-	id			int			PRIMARY KEY auto_increment
-	,name			varchar(50)
-	,description		text
-	,track			varchar(20)
-	,session_date		date
-	,start_time		time
-	,duration		int
-	,location		int		REFERENCES location(id)
-	);
 	
 /*
  * Creates the table for ranking sessions
