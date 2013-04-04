@@ -99,11 +99,13 @@ CREATE TABLE speaker_ranking (
  * If multiple tracks need to be managed, we might centralize it with its
  * own table as we did with location. If there are only ever two tracks, 
  * and admin never need to add others, we will keep it as an attribute.
+ * Survey key is a short, unique number allowing survey-takers to register their session
+ * isAttendable is a boolean that is true only from start time to fifteen minutes past the session
  */
 
 DROP TABLE IF EXISTS session;
 CREATE TABLE session (
-	id			int			PRIMARY KEY auto_increment
+	id			int		PRIMARY KEY auto_increment
 	,name			varchar(50)
 	,description		text
 	,track			varchar(20)
@@ -111,6 +113,8 @@ CREATE TABLE session (
 	,start_time		time
 	,duration		int
 	,location		int		REFERENCES location(id)
+	,survey_key		varchar(3)
+	,isAttendable		boolean
 	);
 	
 /*
@@ -194,6 +198,7 @@ CREATE TABLE speaker_team (
 	session_id		int			REFERENCES session(id)
 	,speaker_id		int			REFERENCES speaker(id)
 	);
+
 
 /*
  * Inserts the default user.  This user is typically associated with last year's data.
