@@ -282,27 +282,6 @@ insert into question values (4, "The facility was appropriate for the presentati
 
 
 /*
- * Creates a table to use to process the data from last year
- */
-DROP TABLE IF EXISTS survey_techtober_12;
-create table survey_techtober_12 (
-	survey_id			int		 PRIMARY KEY AUTO_INCREMENT
-	,session_id			int
-	,question1			int
-	,question2			int
-	,question3			int
-	,question4			int
-	,comments			varchar(250)
-	);
-/*
- * Takes the raw data from a comma delimted file and dumps it into that table so we can process it for 
- * making last year's speaker rankings
- */
-load data local infile 'raw_data/survey_techtober.csv'
-into table survey_techtober_12
-fields terminated by ','
-ignore 1 lines;
-/*
  * Now each record in that table has a record for each survey submitted last year.
  * Next we need to link the speakers from last year to their presentations.
 */
