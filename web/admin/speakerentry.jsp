@@ -25,17 +25,7 @@
 </head>
     <body id="growler1">
     <%@ include file="../includes/header.jsp" %> 
-  <nav class="globalNavigation">
-        <ul>
-            <li><a href="../admin/theme.jsp">Default Themes</a></li>
-            <li><a href="../admin/usertheme.jsp">Suggested Themes</a></li>
-            <li><a href="../admin/themeentry.jsp">Add a Theme</a></li>
-            <li><a href="../admin/speaker.jsp">Default Speakers</a></li>
-            <li><a href="../admin/userspeaker.jsp">Suggested Speakers</a></li>
-            <li class="selected"><a href="../admin/speakerentry.jsp">Add a Speaker</a></li>
-            <li><a href="">Help</a></li>
-        </ul>
-  </nav><!-- /.globalNavigation -->
+  <%@ include file="../includes/adminnav.jsp" %>
   <div class="container-fixed">
 		<div class="content">
 			<!-- Begin Content -->

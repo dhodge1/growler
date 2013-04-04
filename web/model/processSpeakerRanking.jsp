@@ -8,9 +8,7 @@
 <%@page import="java.sql.*"%>
 <%@page import="com.scripps.growler.DataConnection" %>
 <jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="application" />
-<jsp:setProperty name="dataConnection" property = "*" />
 <jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="application" />
-<jsp:setProperty name="queries" property = "*" />
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
@@ -48,16 +46,12 @@
  Statement statement = connection.createStatement();
  PreparedStatement insert = connection.prepareStatement(queries.insertSpeakerRanking());
  //two fields to put: ID (int), ranking (int)
- for (int j = 0; j < 9; j++) {
+ for (int j = 0; j < list.length; j++) {
      insert.setInt(1, ids[j]);
      insert.setInt(2, 10-j);
      insert.execute();
  }
- Statement showRanks = connection.createStatement();
- ResultSet ranks = showRanks.executeQuery(queries.returnSpeakerRanking() + " order by sum(ranking) desc");
- while(ranks.next()) {
- %><p><% out.print(ranks.getString("first_name") + " " + ranks.getString("last_name") + " : " + ranks.getInt(1)); %></p><%
- }
+ response.sendRedirect("../view/speaker.jsp");
  %>
  
 <%@ include file="../includes/footer.jsp" %> 
