@@ -37,6 +37,7 @@ CREATE TABLE user (
 	,name			varchar(26)	
 	,password		varchar(60)
 	,corporate_id		varchar(6)
+	,email			varchar(26)
 	);
 
 /*
@@ -351,8 +352,8 @@ insert into speaker_team values (33 , 43);
  */
 DROP TABLE IF EXISTS ranks_2012;
 CREATE TABLE ranks_2012 (
-speaker_id	int	REFERENCES speaker(id)
-,rating	DECIMAL(2, 1)
+rating	DECIMAL(2, 1)
+,speaker_id	int	REFERENCES speaker(id)
 ,count	int
 );
 
@@ -363,5 +364,4 @@ speaker_id	int	REFERENCES speaker(id)
  */
 load data LOCAL infile 'raw_data/ranks_2012_out.csv'
 into table ranks_2012
-fields terminated by ','
-ignore 1 lines;
+fields terminated by ',';
