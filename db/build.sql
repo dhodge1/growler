@@ -279,7 +279,7 @@ insert into question values (4, "The facility was appropriate for the presentati
 /*
  * Creates a table to use to process the data from last year
  */
-DROP TABLE survey_techtober_12;
+DROP TABLE IF EXISTS survey_techtober_12 CASCADE;
 create table survey_techtober_12 (
 	survey_id				int		 PRIMARY KEY AUTO_INCREMENT
 	,session_id			int
@@ -362,7 +362,7 @@ insert into speaker_team values (33 , 43);
  * This file creates the table based on last year's data
  * which can be modified by the administrator later 
  */
-DROP TABLE ranks_2012;
+DROP TABLE IF EXISTS ranks_2012 CASCADE;
 CREATE TABLE ranks_2012 as (
 select avg(r.ranking) as rating
 ,s.id as id

@@ -51,7 +51,7 @@ CREATE TABLE theme_ranking (
  * Supports US10332, which specifies users are not tracked
  * Will be replaced when we start US10331: Exploration: Allow theme suggestion
  */
-DROP TABLE isolated_theme_ranking;
+DROP TABLE IF EXISTS isolated_theme_ranking;
 CREATE TABLE isolated_theme_ranking (
 	ranking_id			int		PRIMARY KEY auto_increment
 	,theme_id			int		REFERENCES theme(id)
@@ -63,7 +63,7 @@ CREATE TABLE isolated_theme_ranking (
  * Notice: suggested_by attribute is foreign key referencing
  * id attribute in user table
  */
-DROP TABLE speaker; 
+DROP TABLE IF EXISTS speaker; 
 CREATE TABLE speaker (
 	 id			int			PRIMARY KEY auto_increment
 	,first_name		varchar(30)
@@ -79,7 +79,7 @@ CREATE TABLE speaker (
  * speaker_team (which itself bridges session_ranking and speaker tables)
  * and session tables.
  */
-DROP TABLE speaker_ranking;
+DROP TABLE IF EXISTS speaker_ranking;
 CREATE TABLE speaker_ranking (
 	ranking_id		int			PRIMARY KEY auto_increment
 	,speaker_id		int			REFERENCES speaker(id)
@@ -99,7 +99,7 @@ CREATE TABLE speaker_ranking (
  *	that they've already submitted a survey for that session, and no	 
  *	records are inserted into session_ranking.
  */	
-DROP TABLE attendance;
+DROP TABLE IF EXISTS attendance;
 CREATE TABLE attendance (
 	user_id		int	REFERENCES user(id)
 	,session_id	int	REFERENCES session(id)
@@ -112,7 +112,7 @@ CREATE TABLE attendance (
  * an associated question).
  */
 	
-DROP TABLE question;
+DROP TABLE IF EXISTS question;
 CREATE TABLE question (
 	id			INT			PRIMARY KEY
 	,text			VARCHAR(250)
@@ -128,7 +128,7 @@ CREATE TABLE question (
  * a centralized list produced from this table.
  */	
 
-DROP TABLE location;
+DROP TABLE IF EXISTS location;
 CREATE TABLE location (
 	id				int			PRIMARY KEY
 	,description	varchar(50)
@@ -145,7 +145,7 @@ CREATE TABLE location (
  * and admin never need to add others, we will keep it as an attribute.
  */
 
-DROP TABLE session;
+DROP TABLE IF EXISTS session;
 CREATE TABLE session (
 	id			int			PRIMARY KEY auto_increment
 	,name			varchar(50)
@@ -166,7 +166,7 @@ CREATE TABLE session (
  * submitted at the same time.
  */
 
-DROP TABLE session_ranking;
+DROP TABLE IF EXISTS session_ranking;
 CREATE TABLE session_ranking (
 	session_id		int	REFERENCES session(id)
 	,question_id		int	REFERENCES question(id)
@@ -180,7 +180,7 @@ CREATE TABLE session_ranking (
  * sessions and speakers.
  */
 
-DROP TABLE speaker_team;
+DROP TABLE IF EXISTS speaker_team;
 CREATE TABLE speaker_team (
 	session_id		int			REFERENCES session(id)
 	,speaker_id		int			REFERENCES speaker(id)
