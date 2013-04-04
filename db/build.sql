@@ -36,7 +36,7 @@ CREATE TABLE user (
 	id			int		primary key
 	,name			varchar(26)	
 	,password		varchar(60)
-	,corporate_id		varchar(6)	NOT NULL
+	,corporate_id		varchar(6)
 	);
 
 /*
@@ -197,7 +197,7 @@ CREATE TABLE speaker_team (
 /*
  * Inserts the default user.  This user is typically associated with last year's data.
  */
-insert into user (id) values (2023);
+insert into user values (2023, "DEFAULT", NULL, NULL);
 
 /*Theme inserts*/
 INSERT INTO theme VALUES (1, "Cloud Computing", "All things Cloud, from IaaS, PaaS, DaaS, SaaS, to hosting providers, brokers, and cloud-enabling appliances", 2023, "2013", true, NULL);
@@ -248,7 +248,7 @@ insert into speaker values (NULL,"Amy","Thomason",2023, TRUE);
 insert into speaker values (NULL,"Charles","Lewis",2023, TRUE);
 insert into speaker values (NULL,"Jonathan","Williams",2023, TRUE);
 insert into speaker values (NULL,"Scott","Gentry",2023, TRUE);
-insert into speaker  values (NULL,"Jason","Norton",2023, TRUE);
+insert into speaker values (NULL,"Jason","Norton",2023, TRUE);
 insert into speaker values (NULL,"Michael","Wehrle",2023, TRUE);
 insert into speaker values (NULL,"Shane","Closser",2023, TRUE);
 insert into speaker values (NULL,"Selene","Tolbert",2023, TRUE);
@@ -352,7 +352,7 @@ insert into speaker_team values (33 , 43);
 DROP TABLE IF EXISTS ranks_2012;
 CREATE TABLE ranks_2012 (
 speaker_id	int	REFERENCES speaker(id)
-,rating	DECIMAL( 2, 1)
+,rating	cast(double, 2, 1)
 ,count	int
 );
 
