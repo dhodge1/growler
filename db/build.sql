@@ -29,11 +29,14 @@ CREATE TABLE theme (
 	);
 
 /*
-Creates the table for storing user information
-*/	
+ * Creates the table for storing user information
+ */	
 DROP TABLE IF EXISTS user; 
 CREATE TABLE user (
 	id			int		primary key
+	,name			varchar(26)	
+	,password		varchar(60)
+	,corporate_id		varchar(6)	NOT NULL
 	);
 
 /*
@@ -217,8 +220,8 @@ insert into speaker values (NULL,"Mark","Kelly",2023, TRUE);
 insert into speaker values (NULL,"Jim","Senter",2023, TRUE);
 insert into speaker values (NULL,"Phil","Spann",2023, TRUE);
 insert into speaker values (NULL,"Jeffrey","Allen",2023, TRUE);
-insert into speaker  values (NULL,"Bhaumik","Shah",2023, TRUE);
-insert into speaker  values (NULL,"Panagiotis","Tzerefos",2023, TRUE);
+insert into speaker values (NULL,"Bhaumik","Shah",2023, TRUE);
+insert into speaker values (NULL,"Panagiotis","Tzerefos",2023, TRUE);
 insert into speaker values (NULL,"Ben","Pack",2023, TRUE);
 insert into speaker values (NULL,"David","Tucker",2023, TRUE);
 insert into speaker values (NULL,"Matt","Peter",2023, TRUE);
@@ -347,10 +350,9 @@ insert into speaker_team values (33 , 43);
  * which can be modified by the administrator later 
  */
 DROP TABLE IF EXISTS ranks_2012;
-CREATE TABLE ranks_2012 as (
-
+CREATE TABLE ranks_2012 (
 speaker_id	int	REFERENCES speaker(id)
-,rating	cast(double, 2, 1)
+,rating	DECIMAL( 2, 1)
 ,count	int
 );
 
