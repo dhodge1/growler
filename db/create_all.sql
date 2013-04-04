@@ -25,7 +25,6 @@ CREATE TABLE theme (
 	,creator		int		REFERENCES user(id)
 	,year			year(4)
 	,visible		boolean
-	,active			boolean
 	,reason			varchar(250) /*for user-suggested themes*/
 	);
 
@@ -71,7 +70,6 @@ CREATE TABLE speaker (
 	,last_name		varchar(30)
 	,suggested_by		int			REFERENCES user(id)
 	,visible		boolean
-	,active			boolean
 	);
 
 /*
