@@ -35,7 +35,7 @@
   <%@ include file="../includes/header.jsp" %> 
   <nav class="globalNavigation">
         <ul>
-            <li class="selected"><a href="../view/theme.jsp">Default Themes</a></li>
+            <li class="selected"><a href="../admin/theme.jsp">Default Themes</a></li>
             <li><a href="../admin/usertheme.jsp">Suggested Themes</a></li>
             <li><a href="../admin/themeentry.jsp">Add a Theme</a></li>
             <li><a href="../admin/speaker.jsp">Default Speakers</a></li>
@@ -64,6 +64,7 @@
 						<div class="span1">
 							<br/>
                                              <% Connection newConnect = dataConnection.sendConnection();
+                                                
                                                 Statement newStatement = newConnect.createStatement();
                                                 ResultSet themeResult = newStatement.executeQuery(queries.returnThemeRanking());
                                              %>
@@ -77,6 +78,7 @@
                                                         <td>Rating</td>
                                                         <td>Times Rated</td>
                                                         <td>Visible?</td>
+                                                        <td>Created By</td>
                                                     </tr>
 						<% 
                                                 while (themeResult.next()) {
@@ -89,6 +91,7 @@
                                                 <td><input type="checkbox" name="visible" value="<% out.print(themeResult.getInt("id")); %>"
                                                            <% if (themeResult.getInt("visible") == 1) {
                                                                   out.print(" checked");} %>/>
+                                                <td><% out.print(themeResult.getString("creator")); %>
                                                 </tr>
                                                 <% } 
                                                 newConnect.close();

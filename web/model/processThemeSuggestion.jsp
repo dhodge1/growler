@@ -39,8 +39,8 @@
         reason = request.getParameter("reason");
      }
      else {
-        reason = " ";
-        user = 2023;
+        reason = "";
+        user = 8083;
      }
   Connection connect = dataConnection.sendConnection();
   PreparedStatement insert = connect.prepareStatement(queries.insertUserTheme());
@@ -48,17 +48,14 @@
   insert.setString(2, description);
   insert.setString(3, reason);
   insert.setInt(4, user);
-  insert.setBoolean(5, false);
-  insert.setBoolean(6, false);
+  insert.setInt(5, 0);
   insert.execute();
-  %>
-  <% if (request.getParameter("reason") != null) { %>
-  <jsp:forward page="../view/theme.jsp"/>
-  <%
-   }
+  if (reason == "") {
+      response.sendRedirect("../admin/theme.jsp");
+  }
    else {
-     %><jsp:forward page="../admin/theme.jsp"/>
-   <% }
+      response.sendRedirect("../view/theme.jsp");
+   }
   %>
  <%@ include file="../includes/footer.jsp" %> 
  <%@ include file="../includes/scriptlist.jsp" %> 

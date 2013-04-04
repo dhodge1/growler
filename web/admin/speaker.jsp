@@ -34,7 +34,7 @@
  <%@ include file="../includes/header.jsp" %> 
 <nav class="globalNavigation">
         <ul>
-            <li><a href="../view/theme.jsp">Default Themes</a></li>
+            <li><a href="../admin/theme.jsp">Default Themes</a></li>
             <li><a href="../admin/usertheme.jsp">Suggested Themes</a></li>
             <li><a href="../admin/themeentry.jsp">Add a Theme</a></li>
             <li class="selected"><a href="../admin/speaker.jsp">Default Speakers</a></li>
@@ -79,6 +79,7 @@
                                                     <td>New Rating</td>
                                                     <td>New Times Ranked</td>
                                                     <td>Visible?</td>
+                                                    <td>Suggested By</td>
                                                 </tr>
                                                 
 <% 
@@ -86,14 +87,17 @@
      %>
      <tr>
          <td><% out.print(speaker.getString("first_name") + " " + speaker.getString("last_name")); %>
-         <input name="list" type="hidden" value="<% out.print(speaker.getInt("id")); %>" /></td>
+         <input name="list" type="hidden" value="<% out.print(speaker.getInt("id")); %>" />
+         <input name="admin" type="hidden" value="true" /></td>
          <td><% out.print(speaker.getDouble("rating")); %></td>
          <td><% out.print(speaker.getInt("count")); %></td>
          <td><input name="newrank" type="text" value="<% out.print(speaker.getDouble("rating")); %>"/></td>
          <td><input name="newcount" type="text" value="<% out.print(speaker.getInt("count")); %>"/></td>
          <td><input name="visible" type="checkbox" value="<% out.print(speaker.getInt("id")); %>"
                     <% if (speaker.getInt("visible") == 1) {
-                        out.print("checked"); }%> /></td>
+                        out.print("checked"); }%> />
+         </td>
+         <td><% out.print(speaker.getString("suggested_by")); %></td>
      </tr>
            
     

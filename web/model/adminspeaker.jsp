@@ -3,6 +3,7 @@
     Created on : Mar 5, 2013, 8:13:49 PM
     Author     : Justin Bauguess
 --%>
+<%@page import="sun.org.mozilla.javascript.internal.IdScriptableObject"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
@@ -43,22 +44,28 @@
     String rank[] = request.getParameterValues("newrank");
     String count[] = request.getParameterValues("newcount");
     String visible[] = request.getParameterValues("visible");
+    
+ //Convert the List of IDs into integers   
  int ids[] = new int[list.length];
- for (int i = 0; i < list.length; i++) {
+ for (int i = 0; i < ids.length; i++) {
      ids[i] = Integer.parseInt(list[i]);
  }
+ //Get the list of visibles from the radio buttons
+int visibles[] = new int[visible.length];
+for (int i = 0; i < visibles.length; i++){
+    visibles[i] = Integer.parseInt(visible[i]);
+}
+ //Convert the list of Rankings into doubles
  double ranks[] = new double[rank.length];
- for (int i = 0; i < rank.length; i++) {
+ for (int i = 0; i < ranks.length; i++) {
      ranks[i] = Double.parseDouble(rank[i]);
  }
+ //Convert the list of Counts into integers
  int counts[] = new int[count.length];
- for (int i = 0; i < count.length; i++) {
+ for (int i = 0; i < counts.length; i++) {
      counts[i] = Integer.parseInt(count[i]);
  }
- int[] visibles = new int[visible.length];
- for (int i = 0; i < visible.length; i++) {
-     visibles[i] = Integer.parseInt(visible[i]);
- }
+ 
  Connection connection = dataConnection.sendConnection();
  Statement statement = connection.createStatement();
  PreparedStatement insert = connection.prepareStatement(queries.updateSpeakerRankings());
@@ -69,9 +76,9 @@
     insert.execute();
  }
  PreparedStatement visibility = connection.prepareStatement(queries.promoteSpeaker());
- for (int k = 0; k < visibles.length; k++) {
-     if (visibles[k] == ids[k]) {
-        visibility.setInt(1, visibles[k]);
+ for (int k = 0; k < list.length; k++) {
+     if (Arrays.binarySearch(visibles, ids[k]) >=0 ) {
+         visibility.setInt(1, 1);
      }
      else {
          visibility.setInt(1, 0);
@@ -84,7 +91,7 @@ statement.close();
 insert.close();
 visibility.close();
 %>
-<jsp:forward page="../admin/speaker.jsp" /> 
+<jsp:forward page="../admin/speaker.jsp"/>
 <%@ include file="../includes/footer.jsp" %> 
 <%@ include file="../includes/scriptlist.jsp" %>
 <%@ include file="../includes/draganddrop.jsp" %>

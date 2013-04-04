@@ -52,9 +52,9 @@
  Connection connection = dataConnection.sendConnection();
  Statement statement = connection.createStatement();
  PreparedStatement insert = connection.prepareStatement(queries.promoteTheme());
- for (int j = 0; j < 8; j++) {
-    if (visibles[j] == ids[j]){
-        insert.setInt(1, visibles[j]);
+ for (int j = 0; j < ids.length; j++) {
+    if (Arrays.binarySearch(visibles, ids[j]) >= 0){
+        insert.setInt(1, 1);
        }
        else {
         insert.setInt(1, 0);

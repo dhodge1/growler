@@ -46,18 +46,19 @@
   else { //otherwise, use the user's number (which is 0 during the pre-authentication phase)
       insert.setInt(3, 0);
    }
-  insert.setBoolean(4, true);
-  insert.setBoolean(5, true);
+  insert.setInt(4, 0);
+
   insert.execute();
   connect.close();
   insert.close();
+  if (admin == "true") {
+      response.sendRedirect("../admin/speaker.jsp");
+  }
+   else {
+      response.sendRedirect("../view/speaker.jsp");
+   }
   %>
-  <% if (admin == "true") {%>
-      <jsp:forward page="../admin/speaker.jsp" />
-     <%  } else { %>
-      <jsp:forward page="../view/speaker.jsp" />
-      <% }
-  %>
+ 
   
 <%@ include file="../includes/footer.jsp" %>
 <%@ include file="../includes/scriptlist.jsp" %>
