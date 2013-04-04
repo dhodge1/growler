@@ -16,7 +16,7 @@
  */
 
 /*dropping tables before we create them*/
-DROP TABLE IF EXISTS theme CASCADE; 
+DROP TABLE IF EXISTS theme; 
 
 CREATE TABLE theme (
 	 id			int		PRIMARY KEY auto_increment
@@ -31,7 +31,7 @@ CREATE TABLE theme (
 /*
 Creates the table for storing user information
 */	
-DROP TABLE IF EXISTS user CASCADE; 
+DROP TABLE IF EXISTS user; 
 CREATE TABLE user (
 	id			int		primary key
 	);
@@ -40,7 +40,7 @@ CREATE TABLE user (
  * Bridge table for the users and themes, designed to help keep track of ranks
  * Notice that theme_rank is storing ranks between 1 and 10, 1 being "best".
  */	
-DROP TABLE IF EXISTS theme_ranking CASCADE;
+DROP TABLE IF EXISTS theme_ranking;
 CREATE TABLE theme_ranking (
 	user_id				int		REFERENCES user(id)	
 	,theme_id			int		REFERENCES theme(id)	
@@ -51,7 +51,7 @@ CREATE TABLE theme_ranking (
  * Supports US10332, which specifies users are not tracked
  * Will be replaced when we start US10331: Exploration: Allow theme suggestion
  */
-DROP TABLE IF EXISTS isolated_theme_ranking CASCADE;
+DROP TABLE IF EXISTS isolated_theme_ranking;
 CREATE TABLE isolated_theme_ranking (
 	ranking_id			int		PRIMARY KEY auto_increment
 	,theme_id			int		REFERENCES theme(id)
@@ -63,7 +63,7 @@ CREATE TABLE isolated_theme_ranking (
  * Notice: suggested_by attribute is foreign key referencing
  * id attribute in user table
  */
-DROP TABLE IF EXISTS speaker CASCADE; 
+DROP TABLE IF EXISTS speaker; 
 CREATE TABLE speaker (
 	 id			int			PRIMARY KEY auto_increment
 	,first_name		varchar(30)
@@ -79,7 +79,7 @@ CREATE TABLE speaker (
  * speaker_team (which itself bridges session_ranking and speaker tables)
  * and session tables.
  */
-DROP TABLE IF EXISTS speaker_ranking CASCADE;
+DROP TABLE IF EXISTS speaker_ranking;
 CREATE TABLE speaker_ranking (
 	ranking_id		int			PRIMARY KEY auto_increment
 	,speaker_id		int			REFERENCES speaker(id)
@@ -99,7 +99,7 @@ CREATE TABLE speaker_ranking (
  *	that they've already submitted a survey for that session, and no	 
  *	records are inserted into session_ranking.
  */	
-DROP TABLE IF EXISTS attendance CASCADE;
+DROP TABLE IF EXISTS attendance;
 CREATE TABLE attendance (
 	user_id		int	REFERENCES user(id)
 	,session_id	int	REFERENCES session(id)
@@ -112,7 +112,7 @@ CREATE TABLE attendance (
  * an associated question).
  */
 	
-DROP TABLE IF EXISTS question CASCADE;
+DROP TABLE IF EXISTS question;
 CREATE TABLE question (
 	id			INT			PRIMARY KEY
 	,text			VARCHAR(250)
@@ -128,7 +128,7 @@ CREATE TABLE question (
  * a centralized list produced from this table.
  */	
 
-DROP TABLE IF EXISTS location CASCADE;
+DROP TABLE IF EXISTS location;
 CREATE TABLE location (
 	id				int			PRIMARY KEY
 	,description	varchar(50)
@@ -145,7 +145,7 @@ CREATE TABLE location (
  * and admin never need to add others, we will keep it as an attribute.
  */
 
-DROP TABLE IF EXISTS session CASCADE;
+DROP TABLE IF EXISTS session;
 CREATE TABLE session (
 	id			int			PRIMARY KEY auto_increment
 	,name			varchar(50)
@@ -166,7 +166,7 @@ CREATE TABLE session (
  * submitted at the same time.
  */
 
-DROP TABLE IF EXISTS session_ranking CASCADE;
+DROP TABLE IF EXISTS session_ranking;
 CREATE TABLE session_ranking (
 	session_id		int	REFERENCES session(id)
 	,question_id		int	REFERENCES question(id)
@@ -180,7 +180,7 @@ CREATE TABLE session_ranking (
  * sessions and speakers.
  */
 
-DROP TABLE IF EXISTS speaker_team CASCADE;
+DROP TABLE IF EXISTS speaker_team;
 CREATE TABLE speaker_team (
 	session_id		int			REFERENCES session(id)
 	,speaker_id		int			REFERENCES speaker(id)
@@ -279,9 +279,9 @@ insert into question values (4, "The facility was appropriate for the presentati
 /*
  * Creates a table to use to process the data from last year
  */
-DROP TABLE IF EXISTS survey_techtober_12 CASCADE;
+DROP TABLE IF EXISTS survey_techtober_12;
 create table survey_techtober_12 (
-	survey_id				int		 PRIMARY KEY AUTO_INCREMENT
+	survey_id			int		 PRIMARY KEY AUTO_INCREMENT
 	,session_id			int
 	,question1			int
 	,question2			int
@@ -362,7 +362,7 @@ insert into speaker_team values (33 , 43);
  * This file creates the table based on last year's data
  * which can be modified by the administrator later 
  */
-DROP TABLE IF EXISTS ranks_2012 CASCADE;
+DROP TABLE IF EXISTS ranks_2012;
 CREATE TABLE ranks_2012 as (
 select avg(r.ranking) as rating
 ,s.id as id
