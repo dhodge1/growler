@@ -2,6 +2,12 @@
     Document   : speaker
     Created on : Feb 27, 2013, 11:23:26 PM
     Author     : Justin Bauguess
+    Purpose    : The purpose of speaker is to display speaker information so a
+                user can rank them.  It uses the ranks_2012 and speaker tables. 
+                The rank is a score between 0 and 5 that was determined from 
+                historical data that was provided by Ian.  (It is not in the database, 
+                but can be accessed from raw_data and processed with the DataConnection
+                 java class.)
 --%>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>

@@ -1,7 +1,11 @@
 <%-- 
     Document   : processThemeSuggestion
     Created on : Feb 26, 2013, 11:51:27 PM
-    Author     : Robert Brown
+    Author     : Justin Bauguess
+    Purpose    : The purpose of processThemeSuggestion is to add themes to the 
+                database.  It will add the name, description, reason from user data,
+                and creator, visibility and id from other sources.  Both admins and
+                users will use this for the processing of data.
 --%>
 
 <%@page import="java.util.*"%>

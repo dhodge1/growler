@@ -1,7 +1,9 @@
 <%-- 
     Document   : speakerentry
     Created on : Feb 27, 2013, 11:55:19 PM
-    Author     : Robert Brown
+    Author     : Justin Bauguess
+    Purpose    : The purpose of speakerentry(user) is for users to suggest speakers
+                to the Techtoberfest Admins.  It uses model/processSpeakerSuggestion.
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

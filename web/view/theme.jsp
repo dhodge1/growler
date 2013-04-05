@@ -1,7 +1,13 @@
 <%-- 
     Document   : theme
     Created on : Feb 28, 2013, 7:15:03 PM
-    Author     : Robert Brown
+    Author     : Justin Bauguess
+    Purpose    : The theme (user) page is for users to rank themes according to 
+                their preferences.  The ranks are saved in the isolated_theme_ranking
+                table for now.  Once users are remembered, it will be saved in the 
+                theme_ranking table.  A record in that table will contain a user_id,
+                theme_id, and rank.  Ranks can only be between 1 and 10.  Once a user
+                has submitted rankings, they can change them later.
 --%>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>

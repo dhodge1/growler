@@ -1,7 +1,13 @@
 <%-- 
     Document   : themeentry
     Created on : Feb 27, 2013, 12:17:43 AM
-    Author     : Robert Brown
+    Author     : Justin Bauguess
+    Purpose    : This page is for users to suggest themes for review
+                it uses model/processThemeSuggestion.jsp to process the data.
+                The table used is theme.  The fields in the table that are
+                modified are name, description, reason (as entered by
+                the user), and creator and visible (which are the user id
+                 and "0" or false as default).
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

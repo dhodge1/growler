@@ -2,6 +2,11 @@
     Document   : theme
     Created on : Feb 28, 2013, 7:15:03 PM
     Author     : Justin Bauguess
+    Purpose    : The theme (admin) page is for admins to edit theme information. 
+                The editable fields are simply if the theme is visible to a user 
+                or not.  It will display the theme name, how many rating points 
+                it has earned, and how many times someone has rated it.  It will 
+                also display the creator of the theme.
 --%>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>

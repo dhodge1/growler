@@ -1,7 +1,10 @@
 <%-- 
     Document   : processSpeakerRanking
     Created on : Mar 5, 2013, 8:13:49 PM
-    Author     : Robert Brown
+    Author     : Justin Bauguess
+    Purpose    : The purpose of processSpeakerRanking is to process the data 
+                that users give us on what speakers they would like to hear.  It
+                goes into the speaker_ranking table.
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@page import="java.util.*"%>

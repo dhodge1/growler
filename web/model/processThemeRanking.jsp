@@ -1,7 +1,12 @@
 <%-- 
     Document   : processThemeRanking
     Created on : Mar 5, 2013, 3:31:47 PM
-    Author     : Robert Brown
+    Author     : Justin Bauguess
+    Purpose    : The purpose of processThemeRanking is to process the data submitted 
+                from theme.jsp.  It will rank the top ten themes only, the store them
+                in the database.  For intial user stories, it will be placed in 
+                the isolated_theme_ranking table.  Once users are remembered, it
+                will be modified to store data in the theme_ranking table.
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@page import="java.util.*"%>

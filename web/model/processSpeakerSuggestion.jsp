@@ -1,7 +1,11 @@
 <%-- 
     Document   : processSpeakerSuggestion
     Created on : Feb 27, 2013, 11:56:46 PM
-    Author     : Robert Brown
+    Author     : Justin Bauguess
+    Purpose    : The purpose of processSpeakerSuggesstion is to allow users or 
+                admins to enter a speaker into the database.  It uses the speaker 
+                table, and the fields first_name, last_name from user input, and 
+                visible and suggested_by as non-user input values.
 --%>
 
 <%@page import="java.util.*"%>

@@ -1,7 +1,10 @@
 <%-- 
     Document   : speakerentry
     Created on : Feb 27, 2013, 11:55:19 PM
-    Author     : Robert Brown
+    Author     : Justin Bauguess
+    Purpose    : The purpose of speakerentry(admin) is to enter a speaker into
+                 the speaker table.  It uses the file model/processSpeakerSuggestion
+                 , which is the same file speakerentry for regular users.
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

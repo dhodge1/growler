@@ -2,6 +2,10 @@
     Document   : speaker
     Created on : Feb 27, 2013, 11:23:26 PM
     Author     : Justin Bauguess
+    Purpose    : The purpose of speaker(admin) is the page where administrators 
+                can edit speaker information.  It uses the rank_2012 table and 
+                the speaker table.  The editable data includes: rating, count of 
+                ratings, and visibility to users.
 --%>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
