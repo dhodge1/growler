@@ -8,9 +8,7 @@
 <%@page import="java.sql.*"%>
 <%@page import="com.scripps.growler.DataConnection" %>
 <jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="application" />
-<jsp:setProperty name="dataConnection" property = "*" />
 <jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="application" />
-<jsp:setProperty name="queries" property = "*" />
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
@@ -29,16 +27,7 @@
 </head>
 <body id="growler1">
  <%@ include file="../includes/header.jsp" %> 
- <nav class="globalNavigation">
-        <ul>
-            <li><a href="../view/theme.jsp">Themes</a></li>
-            <li><a href="../view/themeentry.jsp">Suggest a Theme</a></li>
-            <li><a href="../view/themedescription.jsp">Theme Descriptions</a></li>
-            <li><a href="../view/speaker.jsp">Speakers</a></li>
-            <li><a href="../view/speakerentry.jsp">Suggest a Speaker</a></li>
-            <li><a href="">Help</a></li>
-        </ul>
-  </nav><!-- /.globalNavigation -->
+<%@ include file="../includes/adminnav.jsp" %>
   <% String list[] = request.getParameterValues("list");
     String visible[] = request.getParameterValues("visible");
  int ids[] = new int[list.length];
@@ -52,6 +41,7 @@
  Connection connection = dataConnection.sendConnection();
  Statement statement = connection.createStatement();
  PreparedStatement insert = connection.prepareStatement(queries.promoteTheme());
+ Arrays.sort(visibles);
  for (int j = 0; j < ids.length; j++) {
     if (Arrays.binarySearch(visibles, ids[j]) >= 0){
         insert.setInt(1, 1);

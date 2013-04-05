@@ -49,7 +49,7 @@
  for (int i = 0; i < ids.length; i++) {
      ids[i] = Integer.parseInt(list[i]);
  }
- //Get the list of visibles from the radio buttons
+ //Get the list of visibles from the check boxes
 int visibles[] = new int[visible.length];
 for (int i = 0; i < visibles.length; i++){
     visibles[i] = Integer.parseInt(visible[i]);
@@ -75,8 +75,9 @@ for (int i = 0; i < visibles.length; i++){
     insert.execute();
  }
  PreparedStatement visibility = connection.prepareStatement(queries.promoteSpeaker());
- for (int k = 0; k < list.length; k++) {
-     if (Arrays.binarySearch(visibles, ids[k]) >=0 ) {
+ Arrays.sort(visibles);
+ for (int k = 0; k < ids.length; k++) {
+     if (Arrays.binarySearch(visibles, ids[k]) >= 0 ) {
          visibility.setInt(1, 1);
      }
      else {

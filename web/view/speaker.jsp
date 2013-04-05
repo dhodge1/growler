@@ -31,15 +31,7 @@
 </head>
 <body id="growler1">
  <%@ include file="../includes/header.jsp" %> 
-<nav class="globalNavigation">
-        <ul>
-            <li><a href="../view/theme.jsp">Themes</a></li>
-            <li><a href="../view/themeentry.jsp">Suggest a Theme</a></li>
-            <li class="selected"><a href="../view/speaker.jsp">Speakers</a></li>
-            <li><a href="../view/speakerentry.jsp">Suggest a Speaker</a></li>
-            <li><a href="">Help</a></li>
-        </ul>
-  </nav><!-- /.globalNavigation -->
+<%@ include file="../includes/usernav.jsp" %>
   <div class="container-fixed">
 		<div class="content">
 			<!-- Begin Content -->
