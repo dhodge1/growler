@@ -1,7 +1,13 @@
 <%-- 
     Document   : themeentry
     Created on : Feb 27, 2013, 12:17:43 AM
-    Author     : Robert Brown
+    Author     : Justin Bauguess
+    Purpose    : This page is for users to suggest themes for review
+                it uses model/processThemeSuggestion.jsp to process the data.
+                The table used is theme.  The fields in the table that are
+                modified are name, description, reason (as entered by
+                the user), and creator and visible (which are the user id
+                 and "0" or false as default).
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -25,15 +31,7 @@
 </head>
     <body id="growler1">
     <%@ include file="../includes/header.jsp" %> 
-    <nav class="globalNavigation">
-        <ul>
-            <li><a href="../view/theme.jsp">Themes</a></li>
-            <li class="selected"><a href="../view/themeentry.jsp">Suggest a Theme</a></li>
-            <li><a href="../view/speaker.jsp">Speakers</a></li>
-            <li><a href="../view/speakerentry.jsp">Suggest a Speaker</a></li>
-            <li><a href="">Help</a></li>
-        </ul>
-  </nav><!-- /.globalNavigation -->
+    <%@ include file="../includes/usernav.jsp" %>
   <div class="container-fixed">
 		<div class="content">
 			<!-- Begin Content -->
@@ -57,11 +55,11 @@
                             </div>
                             <div class="form-group">
                                 <label class="required">Theme Description</label>
-                                <input name="description" class="input-xlarge" type="text" maxlength="30"/>
+                                <input name="description" class="input-xlarge" type="text" maxlength="250"/>
                             </div>
                             <div class="form-group">
                                 <label>Why should we implement this theme?</label>
-                                <input name="reason" class="input-xlarge" type="text" maxlength="30"/>
+                                <input name="reason" class="input-xlarge" type="text" maxlength="250"/>
                             </div>
                         </fieldset>
                     </div>                   

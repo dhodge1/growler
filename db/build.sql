@@ -16,7 +16,7 @@
  */
 
 /*dropping tables before we create them*/
-DROP TABLE IF EXISTS theme CASCADE; 
+DROP TABLE IF EXISTS theme; 
 
 CREATE TABLE theme (
 	 id			int		PRIMARY KEY auto_increment
@@ -25,23 +25,26 @@ CREATE TABLE theme (
 	,creator		int		REFERENCES user(id)
 	,year			year(4)
 	,visible		boolean
-	,active			boolean
 	,reason			varchar(250) /*for user-suggested themes*/
 	);
 
 /*
-Creates the table for storing user information
-*/	
-DROP TABLE IF EXISTS user CASCADE; 
+ * Creates the table for storing user information
+ */	
+DROP TABLE IF EXISTS user; 
 CREATE TABLE user (
 	id			int		primary key
+	,name			varchar(26)	
+	,password		varchar(60)
+	,corporate_id		varchar(6)
+	,email			varchar(26)
 	);
 
 /*
  * Bridge table for the users and themes, designed to help keep track of ranks
  * Notice that theme_rank is storing ranks between 1 and 10, 1 being "best".
  */	
-DROP TABLE IF EXISTS theme_ranking CASCADE;
+DROP TABLE IF EXISTS theme_ranking;
 CREATE TABLE theme_ranking (
 	user_id				int		REFERENCES user(id)	
 	,theme_id			int		REFERENCES theme(id)	
@@ -52,7 +55,7 @@ CREATE TABLE theme_ranking (
  * Supports US10332, which specifies users are not tracked
  * Will be replaced when we start US10331: Exploration: Allow theme suggestion
  */
-DROP TABLE IF EXISTS isolated_theme_ranking CASCADE;
+DROP TABLE IF EXISTS isolated_theme_ranking;
 CREATE TABLE isolated_theme_ranking (
 	ranking_id			int		PRIMARY KEY auto_increment
 	,theme_id			int		REFERENCES theme(id)
@@ -64,14 +67,13 @@ CREATE TABLE isolated_theme_ranking (
  * Notice: suggested_by attribute is foreign key referencing
  * id attribute in user table
  */
-DROP TABLE IF EXISTS speaker CASCADE; 
+DROP TABLE IF EXISTS speaker; 
 CREATE TABLE speaker (
 	 id			int			PRIMARY KEY auto_increment
 	,first_name		varchar(30)
 	,last_name		varchar(30)
 	,suggested_by		int			REFERENCES user(id)
 	,visible		boolean
-	,active			boolean
 	);
 
 /*
@@ -81,11 +83,38 @@ CREATE TABLE speaker (
  * speaker_team (which itself bridges session_ranking and speaker tables)
  * and session tables.
  */
-DROP TABLE IF EXISTS speaker_ranking CASCADE;
+DROP TABLE IF EXISTS speaker_ranking;
 CREATE TABLE speaker_ranking (
 	ranking_id		int			PRIMARY KEY auto_increment
 	,speaker_id		int			REFERENCES speaker(id)
 	,ranking		int
+	);
+
+/*
+ * Creates table for session information
+ * A session is essentially a presentation given by a speaker_team (which may
+ * be one or more speakers), attended by users.
+ * A session has a start time, a start date, a duration, a location, 
+ * and a track (which is either Technical or Business Friendly).
+ * If multiple tracks need to be managed, we might centralize it with its
+ * own table as we did with location. If there are only ever two tracks, 
+ * and admin never need to add others, we will keep it as an attribute.
+ * Survey key is a short, unique number allowing survey-takers to register their session
+ * isAttendable is a boolean that is true only from start time to fifteen minutes past the session
+ */
+
+DROP TABLE IF EXISTS session;
+CREATE TABLE session (
+	id			int		PRIMARY KEY auto_increment
+	,name			varchar(50)
+	,description		text
+	,track			varchar(20)
+	,session_date		date
+	,start_time		time
+	,duration		int
+	,location		int		REFERENCES location(id)
+	,survey_key		varchar(3)
+	,isAttendable		boolean
 	);
 	
 /*
@@ -101,7 +130,7 @@ CREATE TABLE speaker_ranking (
  *	that they've already submitted a survey for that session, and no	 
  *	records are inserted into session_ranking.
  */	
-DROP TABLE IF EXISTS attendance CASCADE;
+DROP TABLE IF EXISTS attendance;
 CREATE TABLE attendance (
 	user_id		int	REFERENCES user(id)
 	,session_id	int	REFERENCES session(id)
@@ -114,7 +143,7 @@ CREATE TABLE attendance (
  * an associated question).
  */
 	
-DROP TABLE IF EXISTS question CASCADE;
+DROP TABLE IF EXISTS question;
 CREATE TABLE question (
 	id			INT			PRIMARY KEY
 	,text			VARCHAR(250)
@@ -130,34 +159,14 @@ CREATE TABLE question (
  * a centralized list produced from this table.
  */	
 
-DROP TABLE IF EXISTS location CASCADE;
+DROP TABLE IF EXISTS location;
 CREATE TABLE location (
 	id				int			PRIMARY KEY
 	,description	varchar(50)
 	);
 	
-/*
- * Creates table for session information
- * A session is essentially a presentation given by a speaker_team (which may
- * be one or more speakers), attended by users.
- * A session has a start time, a start date, a duration, a location, 
- * and a track (which is either Technical or Business Friendly).
- * If multiple tracks need to be managed, we might centralize it with its
- * own table as we did with location. If there are only ever two tracks, 
- * and admin never need to add others, we will keep it as an attribute.
- */
 
-DROP TABLE IF EXISTS session CASCADE;
-CREATE TABLE session (
-	id			int			PRIMARY KEY auto_increment
-	,name			varchar(50)
-	,description		text
-	,track			varchar(20)
-	,session_date		date
-	,start_time		time
-	,duration		int
-	,location		int		REFERENCES location(id)
-	);
+
 	
 /*
  * Creates the table for ranking sessions
@@ -168,12 +177,14 @@ CREATE TABLE session (
  * submitted at the same time.
  */
 
-DROP TABLE IF EXISTS session_ranking CASCADE;
+DROP TABLE IF EXISTS session_ranking;
 CREATE TABLE session_ranking (
 	session_id		int	REFERENCES session(id)
 	,question_id		int	REFERENCES question(id)
 	,ranking		int	CHECK (ranking > 0 AND ranking < 6)
 	);
+
+
 
 /*
  * Creates the table for keeping track of speaker teams
@@ -182,77 +193,78 @@ CREATE TABLE session_ranking (
  * sessions and speakers.
  */
 
-DROP TABLE IF EXISTS speaker_team CASCADE;
+DROP TABLE IF EXISTS speaker_team;
 CREATE TABLE speaker_team (
 	session_id		int			REFERENCES session(id)
 	,speaker_id		int			REFERENCES speaker(id)
 	);
 
+
 /*
  * Inserts the default user.  This user is typically associated with last year's data.
  */
-insert into user (id) values (2023);
+insert into user values (2023, "DEFAULT", NULL, NULL);
 
 /*Theme inserts*/
-INSERT INTO theme VALUES (1, "Cloud Computing", "All things Cloud, from IaaS, PaaS, DaaS, SaaS, to hosting providers, brokers, and cloud-enabling appliances", 2023, "2013", true, true, NULL);
-INSERT INTO theme VALUES (2, "Development Frameworks", "Any type of development framework, regardless of language", 2023, "2013", true, true, NULL);
-INSERT INTO theme VALUES (3, "Software Process/Lifecycle", "Waterfall, Agile, Scrum, Kanban, process improvements, new techniques", 2023, "2013", true, true, NULL);
-INSERT INTO theme VALUES (4, "Mobility", "Topics related to mobile computing in the enterprise, including mobile apps, phones, tablets, and other devices", 2023, "2013", true, true, NULL);
-INSERT INTO theme VALUES (5, "Social and Collaboration", "Tools and Techniques that make the enterprise more social and allow people to better communicate and collaborate when they are not in the same room, floor, building, city, state, or country", 2023, "2013", true, true, NULL);
-INSERT INTO theme VALUES (6, "Show and Tell", "Show and Tell (Description)", 2023, "2013", true, true, NULL);
+INSERT INTO theme VALUES (1, "Cloud Computing", "All things Cloud, from IaaS, PaaS, DaaS, SaaS, to hosting providers, brokers, and cloud-enabling appliances", 2023, "2013", true, NULL);
+INSERT INTO theme VALUES (2, "Development Frameworks", "Any type of development framework, regardless of language", 2023, "2013", true, NULL);
+INSERT INTO theme VALUES (3, "Software Process/Lifecycle", "Waterfall, Agile, Scrum, Kanban, process improvements, new techniques", 2023, "2013", true, NULL);
+INSERT INTO theme VALUES (4, "Mobility", "Topics related to mobile computing in the enterprise, including mobile apps, phones, tablets, and other devices", 2023, "2013", true, NULL);
+INSERT INTO theme VALUES (5, "Social and Collaboration", "Tools and Techniques that make the enterprise more social and allow people to better communicate and collaborate when they are not in the same room, floor, building, city, state, or country", 2023, "2013", true, NULL);
+INSERT INTO theme VALUES (6, "Show and Tell", "Show and Tell (Description)", 2023, "2013", true, NULL);
 
 /*
  * Inserts the speakers from 2012
  * Notice that the first attirbute, id, is NULL. This is because it is an auto-increment.
 */
-insert into speaker values (NULL, "Ian", "Ratner", 2023, TRUE, TRUE);
-insert into speaker values (NULL, "Ram", "Karra", 2023, TRUE, TRUE);
-insert into speaker values (NULL,"Deborah","Cliburn",2023, TRUE, TRUE);
-insert into speaker values (NULL,"Prashanth","Chakrapani",2023, TRUE, TRUE);
-insert into speaker values (NULL,"Scott","Cruze",2023, TRUE, TRUE);
-insert into speaker values (NULL,"Mark","Kelly",2023, TRUE, TRUE);
-insert into speaker values (NULL,"Jim","Senter",2023, TRUE, TRUE);
-insert into speaker values (NULL,"Phil","Spann",2023, TRUE, TRUE);
-insert into speaker values (NULL,"Jeffrey","Allen",2023, TRUE, TRUE);
-insert into speaker  values (NULL,"Bhaumik","Shah",2023, TRUE, TRUE);
-insert into speaker  values (NULL,"Panagiotis","Tzerefos",2023, TRUE, TRUE);
-insert into speaker values (NULL,"Ben","Pack",2023, TRUE, TRUE);
-insert into speaker values (NULL,"David","Tucker",2023, TRUE, TRUE);
-insert into speaker values (NULL,"Matt","Peter",2023, TRUE, TRUE);
-insert into speaker values (NULL,"Pedro","Lopez",2023, TRUE, TRUE);
-insert into speaker values (NULL,"John","Hills",2023, TRUE, TRUE);
-insert into speaker values (NULL,"Bryan","Fails",2023, TRUE, TRUE);
-insert into speaker values (NULL,"Glen","Wright",2023, TRUE, TRUE);
-insert into speaker values (NULL,"Kevin","Barry",2023, TRUE, TRUE);
-insert into speaker values (NULL,"Jeffery","Kissinger",2023, TRUE, TRUE);
-insert into speaker values (NULL,"Beth","Jackson",2023, TRUE, TRUE);
-insert into speaker values (NULL,"Brian","Hinsley",2023, TRUE, TRUE);
-insert into speaker values (NULL,"Drew","Fredrick",2023, TRUE, TRUE);
-insert into speaker values (NULL,"Glen","Ireland",2023, TRUE, TRUE);
-insert into speaker values (NULL,"Robert","Clarence",2023, TRUE, TRUE);
-insert into speaker values (NULL,"Sarah","Cottay",2023, TRUE, TRUE);
-insert into speaker values (NULL,"Channing","Dawson",2023, TRUE, TRUE);
-insert into speaker values (NULL,"Mike","Campbell",2023, TRUE, TRUE);
-insert into speaker values (NULL,"Joshua","Eldridge",2023, TRUE, TRUE);
-insert into speaker values (NULL,"Bruce","Parker",2023, TRUE, TRUE);
-insert into speaker values (NULL,"Robin","Wilde",2023, TRUE, TRUE);
-insert into speaker values (NULL,"Lydia","Cordell",2023, TRUE, TRUE);
-insert into speaker values (NULL,"Team","Nirvana",2023, TRUE, TRUE);
-insert into speaker values (NULL,"Amy","Thomason",2023, TRUE, TRUE);
-insert into speaker values (NULL,"Charles","Lewis",2023, TRUE, TRUE);
-insert into speaker values (NULL,"Jonathan","Williams",2023, TRUE, TRUE);
-insert into speaker values (NULL,"Scott","Gentry",2023, TRUE, TRUE);
-insert into speaker  values (NULL,"Jason","Norton",2023, TRUE, TRUE);
-insert into speaker values (NULL,"Michael","Wehrle",2023, TRUE, TRUE);
-insert into speaker values (NULL,"Shane","Closser",2023, TRUE, TRUE);
-insert into speaker values (NULL,"Selene","Tolbert",2023, TRUE, TRUE);
-insert into speaker values (NULL,"Michael","Berger",2023, TRUE, TRUE);
-insert into speaker values (NULL,"Kamlesh","Sharma",2023, TRUE, TRUE);
-insert into speaker values (NULL,"Kabita","Nayak",2023, TRUE, TRUE);
-insert into speaker values (NULL,"Herb","Himes",2023, TRUE, TRUE);
-insert into speaker values (NULL,"Stefanie","Edinger",2023, TRUE, TRUE);
-insert into speaker values (NULL, "Phil", "Cornell", 2023, TRUE, TRUE);
-insert into speaker values (NULL,"Allen", "Shacklock", 2023, TRUE, TRUE);
+insert into speaker values (NULL, "Ian", "Ratner", 2023, TRUE);
+insert into speaker values (NULL, "Ram", "Karra", 2023, TRUE);
+insert into speaker values (NULL,"Deborah","Cliburn",2023, TRUE);
+insert into speaker values (NULL,"Prashanth","Chakrapani",2023, TRUE);
+insert into speaker values (NULL,"Scott","Cruze",2023, TRUE);
+insert into speaker values (NULL,"Mark","Kelly",2023, TRUE);
+insert into speaker values (NULL,"Jim","Senter",2023, TRUE);
+insert into speaker values (NULL,"Phil","Spann",2023, TRUE);
+insert into speaker values (NULL,"Jeffrey","Allen",2023, TRUE);
+insert into speaker values (NULL,"Bhaumik","Shah",2023, TRUE);
+insert into speaker values (NULL,"Panagiotis","Tzerefos",2023, TRUE);
+insert into speaker values (NULL,"Ben","Pack",2023, TRUE);
+insert into speaker values (NULL,"David","Tucker",2023, TRUE);
+insert into speaker values (NULL,"Matt","Peter",2023, TRUE);
+insert into speaker values (NULL,"Pedro","Lopez",2023, TRUE);
+insert into speaker values (NULL,"John","Hills",2023, TRUE);
+insert into speaker values (NULL,"Bryan","Fails",2023, TRUE);
+insert into speaker values (NULL,"Glen","Wright",2023, TRUE);
+insert into speaker values (NULL,"Kevin","Barry",2023, TRUE);
+insert into speaker values (NULL,"Jeffery","Kissinger",2023, TRUE);
+insert into speaker values (NULL,"Beth","Jackson",2023, TRUE);
+insert into speaker values (NULL,"Brian","Hinsley",2023, TRUE);
+insert into speaker values (NULL,"Drew","Fredrick",2023, TRUE);
+insert into speaker values (NULL,"Glen","Ireland",2023, TRUE);
+insert into speaker values (NULL,"Robert","Clarence",2023, TRUE);
+insert into speaker values (NULL,"Sarah","Cottay",2023, TRUE);
+insert into speaker values (NULL,"Channing","Dawson",2023, TRUE);
+insert into speaker values (NULL,"Mike","Campbell",2023, TRUE);
+insert into speaker values (NULL,"Joshua","Eldridge",2023, TRUE);
+insert into speaker values (NULL,"Bruce","Parker",2023, TRUE);
+insert into speaker values (NULL,"Robin","Wilde",2023, TRUE);
+insert into speaker values (NULL,"Lydia","Cordell",2023, TRUE);
+insert into speaker values (NULL,"Team","Nirvana",2023, TRUE);
+insert into speaker values (NULL,"Amy","Thomason",2023, TRUE);
+insert into speaker values (NULL,"Charles","Lewis",2023, TRUE);
+insert into speaker values (NULL,"Jonathan","Williams",2023, TRUE);
+insert into speaker values (NULL,"Scott","Gentry",2023, TRUE);
+insert into speaker values (NULL,"Jason","Norton",2023, TRUE);
+insert into speaker values (NULL,"Michael","Wehrle",2023, TRUE);
+insert into speaker values (NULL,"Shane","Closser",2023, TRUE);
+insert into speaker values (NULL,"Selene","Tolbert",2023, TRUE);
+insert into speaker values (NULL,"Michael","Berger",2023, TRUE);
+insert into speaker values (NULL,"Kamlesh","Sharma",2023, TRUE);
+insert into speaker values (NULL,"Kabita","Nayak",2023, TRUE);
+insert into speaker values (NULL,"Herb","Himes",2023, TRUE);
+insert into speaker values (NULL,"Stefanie","Edinger",2023, TRUE);
+insert into speaker values (NULL, "Phil", "Cornell", 2023, TRUE);
+insert into speaker values (NULL,"Allen", "Shacklock", 2023, TRUE);
 
 /*
  * Loads a raw data file of session data from last year
@@ -278,27 +290,6 @@ insert into question values (4, "The facility was appropriate for the presentati
  insert into location values (2, "KXOFFICE Training Room");
 
 
-/*
- * Creates a table to use to process the data from last year
- */
-DROP TABLE survey_techtober_12;
-create table survey_techtober_12 (
-	survey_id				int		 PRIMARY KEY AUTO_INCREMENT
-	,session_id			int
-	,question1			int
-	,question2			int
-	,question3			int
-	,question4			int
-	,comments			varchar(250)
-	);
-/*
- * Takes the raw data from a comma delimted file and dumps it into that table so we can process it for 
- * making last year's speaker rankings
- */
-load data local infile 'raw_data/survey_techtober.csv'
-into table survey_techtober_12
-fields terminated by ','
-ignore 1 lines;
 /*
  * Now each record in that table has a record for each survey submitted last year.
  * Next we need to link the speakers from last year to their presentations.
@@ -364,10 +355,18 @@ insert into speaker_team values (33 , 43);
  * This file creates the table based on last year's data
  * which can be modified by the administrator later 
  */
-DROP TABLE ranks_2012;
-CREATE TABLE ranks_2012 as (
-select avg(r.ranking) as rating
-,s.id as id
-,ceiling(count(r.session_id)/4) as count
-FROM session_ranking r, speaker s
-WHERE r.session_id IN (select session_id from speaker_team) and s.id IN (select speaker_id from speaker_team) group by s.id);
+DROP TABLE IF EXISTS ranks_2012;
+CREATE TABLE ranks_2012 (
+rating	DECIMAL(2, 1)
+,speaker_id	int	REFERENCES speaker(id)
+,count	int
+);
+
+/*
+ * Loads a raw data file of session ranking data from last year
+ * into the ranks_2012 table
+ * ranks_2012: speaker_id, rating, and count
+ */
+load data LOCAL infile 'raw_data/ranks_2012_out.csv'
+into table ranks_2012
+fields terminated by ',';

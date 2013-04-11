@@ -1,16 +1,18 @@
 <%-- 
     Document   : processThemeSuggestion
     Created on : Feb 26, 2013, 11:51:27 PM
-    Author     : Robert Brown
+    Author     : Justin Bauguess
+    Purpose    : The purpose of processThemeSuggestion is to add themes to the 
+                database.  It will add the name, description, reason from user data,
+                and creator, visibility and id from other sources.  Both admins and
+                users will use this for the processing of data.
 --%>
 
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
 <%@page import="com.scripps.growler.DataConnection" %>
-<jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="application" />
-<jsp:setProperty name="dataConnection" property = "*" />
-<jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="application" />
-<jsp:setProperty name="queries" property = "*" />
+<jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="page" />
+<jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page" />
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
@@ -33,31 +35,29 @@
   <% String name = request.getParameter("name");
      String description = request.getParameter("description");
      String reason = "";
+     int user = 0;
      if (request.getParameter("reason") != null)
      {
         reason = request.getParameter("reason");
      }
      else {
-        reason = " ";
+        reason = "";
+        user = 8083;
      }
   Connection connect = dataConnection.sendConnection();
-  PreparedStatement insert = connect.prepareStatement(queries.insertTheme());
-  insert.setInt(1 , dataConnection.countRows());
-  insert.setString(2, name);
-  insert.setString(3, description);
-  insert.setString(4, reason);
-  insert.setInt(5, 2023);
-  insert.setBoolean(6, false);
-  insert.setBoolean(7, false);
+  PreparedStatement insert = connect.prepareStatement(queries.insertUserTheme());
+  insert.setString(1, name);
+  insert.setString(2, description);
+  insert.setString(3, reason);
+  insert.setInt(4, user);
+  insert.setInt(5, 0);
   insert.execute();
-  %>
-  <% if (request.getParameter("reason") != null) { %>
-  <jsp:forward page="../view/theme.jsp"/>
-  <%
-   }
+  if (reason == "") {
+      response.sendRedirect("../admin/theme.jsp");
+  }
    else {
-     %><jsp:forward page="../admin/theme.jsp"/>
-   <% }
+      response.sendRedirect("../view/theme.jsp");
+   }
   %>
  <%@ include file="../includes/footer.jsp" %> 
  <%@ include file="../includes/scriptlist.jsp" %> 

@@ -2,16 +2,20 @@
     Document   : speaker
     Created on : Feb 27, 2013, 11:23:26 PM
     Author     : Justin Bauguess
+    Purpose    : The purpose of speaker is to display speaker information so a
+                user can rank them.  It uses the ranks_2012 and speaker tables. 
+                The rank is a score between 0 and 5 that was determined from 
+                historical data that was provided by Ian.  (It is not in the database, 
+                but can be accessed from raw_data and processed with the DataConnection
+                 java class.)
 --%>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
 <%@page import="com.scripps.growler.DataConnection" %>
-<jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="application" />
-<jsp:setProperty name="dataConnection" property = "*" />
-<jsp:useBean id="giveStars" class="com.scripps.growler.GiveStars" scope="application" />
-<jsp:setProperty name="giveStars" property = "*" />
-<jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="application" />
-<jsp:setProperty name="queries" property = "*" />
+<jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="page">
+</jsp:useBean>
+<jsp:useBean id="giveStars" class="com.scripps.growler.GiveStars" scope="page"></jsp:useBean>
+<jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page"></jsp:useBean>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
@@ -33,15 +37,7 @@
 </head>
 <body id="growler1">
  <%@ include file="../includes/header.jsp" %> 
-<nav class="globalNavigation">
-        <ul>
-            <li><a href="../view/theme.jsp">Themes</a></li>
-            <li><a href="../view/themeentry.jsp">Suggest a Theme</a></li>
-            <li class="selected"><a href="../view/speaker.jsp">Speakers</a></li>
-            <li><a href="../view/speakerentry.jsp">Suggest a Speaker</a></li>
-            <li><a href="">Help</a></li>
-        </ul>
-  </nav><!-- /.globalNavigation -->
+<%@ include file="../includes/usernav.jsp" %>
   <div class="container-fixed">
 		<div class="content">
 			<!-- Begin Content -->
@@ -65,7 +61,7 @@
                                                         
                                                         Connection connection = dataConnection.sendConnection();
  Statement statement = connection.createStatement();
- ResultSet speaker = statement.executeQuery(queries.selectSpeakerName()); 
+ ResultSet speaker = statement.executeQuery(queries.selectVisibleSpeakers()); 
  %>
  </div>
 					<div class="span2">

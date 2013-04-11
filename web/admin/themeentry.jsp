@@ -2,6 +2,11 @@
     Document   : themeentry
     Created on : Feb 27, 2013, 12:17:43 AM
     Author     : Robert Brown
+    Purpose    : The purpose of themeentry is to allow the administrator to
+                enter a theme into the database.  By default, it will not be 
+                visible.  This can be changed with the admin/theme.jsp file.  It 
+                uses the same model file (processThemeSuggestion) but will forward
+                to a different page based on being an admin (or not).
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -25,17 +30,7 @@
 </head>
     <body id="growler1">
     <%@ include file="../includes/header.jsp" %> 
-  <nav class="globalNavigation">
-        <ul>
-            <li><a href="../admin/theme.jsp">Default Themes</a></li>
-            <li><a href="../admin/usertheme.jsp">Suggested Themes</a></li>
-            <li class="selected"><a href="../admin/themeentry.jsp">Add a Theme</a></li>
-            <li><a href="../admin/speaker.jsp">Default Speakers</a></li>
-            <li><a href="../admin/userspeaker.jsp">Suggested Speakers</a></li>
-            <li><a href="../admin/speakerentry.jsp">Add a Speaker</a></li>
-            <li><a href="">Help</a></li>
-        </ul>
-  </nav><!-- /.globalNavigation -->
+  <%@ include file="../includes/adminnav.jsp" %>
   <div class="container-fixed">
 		<div class="content">
 			<!-- Begin Content -->
@@ -59,7 +54,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="required">Theme Description</label>
-                                <input name="description" class="input-xlarge" type="text" maxlength="30"/>
+                                <input name="description" class="input-xlarge" type="text" maxlength="250"/>
                             </div>
                         </fieldset>
                     </div>                   

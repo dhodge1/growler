@@ -1,9 +1,6 @@
-Guide to directories:
-Web
-	dedicated to HTML, CSS, javascript, and anything that would be
-	hosted on a webserver and on the front end
-App	
-	Java, PHP, and the application source code bridging between the 
-	web front end and the database back end.
-The DB
-	SQL scripts, ERDs, and anything related to databases
+Welcome to Project Growler- your favorite (or at least, only) technical support for Techtoberfest.
+We keep all of our database scripts under the db directory.
+Our wepages are broken into a view/model approach under the web directory.
+Other than that, checkout the java source files under the src directory.
+
+We're still figuring this whole development thing out, so give us a moment to accustom ourselves to "proper" readme files and documentation.

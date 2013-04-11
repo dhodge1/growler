@@ -1,16 +1,19 @@
 <%-- 
     Document   : processThemeRanking
     Created on : Mar 5, 2013, 3:31:47 PM
-    Author     : Robert Brown
+    Author     : Justin Bauguess
+    Purpose    : The purpose of processThemeRanking is to process the data submitted 
+                from theme.jsp.  It will rank the top ten themes only, the store them
+                in the database.  For intial user stories, it will be placed in 
+                the isolated_theme_ranking table.  Once users are remembered, it
+                will be modified to store data in the theme_ranking table.
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
 <%@page import="com.scripps.growler.DataConnection" %>
-<jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="application" />
-<jsp:setProperty name="dataConnection" property = "*" />
-<jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="application" />
-<jsp:setProperty name="queries" property = "*" />
+<jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="page" />
+<jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page" />
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
@@ -47,7 +50,7 @@
  Statement statement = connection.createStatement();
  PreparedStatement insert = connection.prepareStatement(queries.insertIsolatedThemeRanks());
  //two fields to put: ID (int), ranking (int)
- for (int j = 0; j < 9; j++) {
+ for (int j = 0; j < list.length; j++) {
      insert.setInt(1, ids[j]);
      insert.setInt(2, 10-j);
      insert.execute();
@@ -60,6 +63,7 @@
  connection.close();
  statement.close();
  insert.close();
+ response.sendRedirect("../view/theme.jsp");
  %>
  
 <%@ include file="../includes/footer.jsp" %> 

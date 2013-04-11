@@ -1,10 +1,12 @@
 <%-- 
-    Document   : processSpeakerRanking
+    Document   : adminspeaker.jsp
     Created on : Mar 5, 2013, 8:13:49 PM
     Author     : Justin Bauguess
-    Purpose    : The purpose of processSpeakerRanking is to process the data 
-                that users give us on what speakers they would like to hear.  It
-                goes into the speaker_ranking table.
+    Purpose    : The purpose of adminspeaker.jsp is for admins to be able to
+                edit the speaker data.  The data that can be edited will be:
+                2012 rank, the count of 2012 ranks, and whether or not it is 
+                visible to the regular users.  It uses the ranks_2012 table, and
+                speaker table.
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@page import="java.util.*"%>
@@ -40,27 +42,64 @@
             <li><a href="">Help</a></li>
         </ul>
   </nav><!-- /.globalNavigation -->
- <% String list[] = request.getParameterValues("list");
+  <% String list[] = request.getParameterValues("list");
+    String rank[] = request.getParameterValues("newrank");
+    String count[] = request.getParameterValues("newcount");
+    String visible[] = request.getParameterValues("visible");
+    
+ //Convert the List of IDs into integers   
  int ids[] = new int[list.length];
- for (int i = 0; i < list.length; i++) {
+ for (int i = 0; i < ids.length; i++) {
      ids[i] = Integer.parseInt(list[i]);
  }
+ //Get the list of visibles from the check boxes
+int visibles[] = new int[visible.length];
+for (int i = 0; i < visibles.length; i++){
+    visibles[i] = Integer.parseInt(visible[i]);
+}
+ //Convert the list of Rankings into doubles
+ double ranks[] = new double[rank.length];
+ for (int i = 0; i < ranks.length; i++) {
+     ranks[i] = Double.parseDouble(rank[i]);
+ }
+ //Convert the list of Counts into integers
+ int counts[] = new int[count.length];
+ for (int i = 0; i < counts.length; i++) {
+     counts[i] = Integer.parseInt(count[i]);
+ }
+ 
  Connection connection = dataConnection.sendConnection();
  Statement statement = connection.createStatement();
- PreparedStatement insert = connection.prepareStatement(queries.insertSpeakerRanking());
- //two fields to put: ID (int), ranking (int)
- for (int j = 0; j < list.length; j++) {
-     insert.setInt(1, ids[j]);
-     insert.setInt(2, 10-j);
-     insert.execute();
+ PreparedStatement insert = connection.prepareStatement(queries.updateSpeakerRankings());
+ //update all the speaker rankings and counts
+ for (int j = 0; j < ranks.length; j++) {
+    insert.setDouble(1, ranks[j]);
+    insert.setInt(2, counts[j]);
+    insert.setInt(3, ids[j]);
+    insert.execute();
  }
- response.sendRedirect("../view/speaker.jsp");
- %>
- 
+ PreparedStatement visibility = connection.prepareStatement(queries.promoteSpeaker());
+ //Sort the array before using binary search
+ Arrays.sort(visibles);
+ //If the key is in the visibles array, we know the admin wants it visible
+ for (int k = 0; k < ids.length; k++) {
+     if (Arrays.binarySearch(visibles, ids[k]) >= 0 ) {
+         visibility.setInt(1, 1);
+     }
+     else {
+         visibility.setInt(1, 0);
+     }
+     visibility.setInt(2, ids[k]);
+     visibility.execute();
+ }
+connection.close();
+statement.close();
+insert.close();
+visibility.close();
+response.sendRedirect("../admin/speaker.jsp");
+%>
 <%@ include file="../includes/footer.jsp" %> 
 <%@ include file="../includes/scriptlist.jsp" %>
 <%@ include file="../includes/draganddrop.jsp" %>
     </body>
 </html>
-
-

@@ -1,16 +1,18 @@
 <%-- 
     Document   : processSpeakerSuggestion
     Created on : Feb 27, 2013, 11:56:46 PM
-    Author     : Robert Brown
+    Author     : Justin Bauguess
+    Purpose    : The purpose of processSpeakerSuggesstion is to allow users or 
+                admins to enter a speaker into the database.  It uses the speaker 
+                table, and the fields first_name, last_name from user input, and 
+                visible and suggested_by as non-user input values.
 --%>
 
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
 <%@page import="com.scripps.growler.DataConnection" %>
-<jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="application" />
-<jsp:setProperty name="dataConnection" property = "*" />
-<jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="application" />
-<jsp:setProperty name="queries" property = "*" />
+<jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="page" />
+<jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page" />
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
@@ -41,23 +43,24 @@
   insert.setString(2, last_name);
   //If it's an admin using, use the admin user number
   if (admin == "true") {
-      insert.setInt(3, 8083);
+      insert.setInt(3, 2023);
   }
   else { //otherwise, use the user's number (which is 0 during the pre-authentication phase)
       insert.setInt(3, 0);
    }
-  insert.setBoolean(4, true);
-  insert.setBoolean(5, true);
+  insert.setInt(4, 0);
+
   insert.execute();
   connect.close();
   insert.close();
+  if (admin == "true") {
+      response.sendRedirect("../admin/speaker.jsp");
+  }
+   else {
+      response.sendRedirect("../view/speaker.jsp");
+   }
   %>
-  <% if (admin == "true")
-      out.print("<jsp:forward page=\"../admin/speaker.jsp\" />");
-       else {
-      out.print("<jsp:forward page=\"../view/speaker.jsp\" />");
-       }
-  %>
+ 
   
 <%@ include file="../includes/footer.jsp" %>
 <%@ include file="../includes/scriptlist.jsp" %>

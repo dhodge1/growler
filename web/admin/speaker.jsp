@@ -1,17 +1,18 @@
 <%-- 
     Document   : speaker
     Created on : Feb 27, 2013, 11:23:26 PM
-    Author     : Robert Brown
+    Author     : Justin Bauguess
+    Purpose    : The purpose of speaker(admin) is the page where administrators 
+                can edit speaker information.  It uses the rank_2012 table and 
+                the speaker table.  The editable data includes: rating, count of 
+                ratings, and visibility to users.
 --%>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
 <%@page import="com.scripps.growler.DataConnection" %>
-<jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="application" />
-<jsp:setProperty name="dataConnection" property = "*" />
-<jsp:useBean id="giveStars" class="com.scripps.growler.GiveStars" scope="application" />
-<jsp:setProperty name="giveStars" property = "*" />
-<jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="application" />
-<jsp:setProperty name="queries" property = "*" />
+<jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="page" />
+<jsp:useBean id="giveStars" class="com.scripps.growler.GiveStars" scope="page" />
+<jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page" />
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
@@ -32,17 +33,7 @@
 </head>
 <body id="growler1">
  <%@ include file="../includes/header.jsp" %> 
-<nav class="globalNavigation">
-        <ul>
-            <li class="selected"><a href="../view/theme.jsp">Default Themes</a></li>
-            <li><a href="../admin/usertheme.jsp">Suggested Themes</a></li>
-            <li><a href="../admin/themeentry.jsp">Add a Theme</a></li>
-            <li class="selected"><a href="../admin/speaker.jsp">Default Speakers</a></li>
-            <li><a href="../admin/userspeaker.jsp">Suggested Speakers</a></li>
-            <li><a href="../admin/speakerentry.jsp">Add a Speaker</a></li>
-            <li><a href="">Help</a></li>
-        </ul>
-  </nav><!-- /.globalNavigation -->
+<%@ include file="../includes/adminnav.jsp" %>
   <div class="container-fixed">
 		<div class="content">
 			<!-- Begin Content -->
@@ -65,26 +56,49 @@
                                                         
                                                         Connection connection = dataConnection.sendConnection();
                                                         Statement statement = connection.createStatement();
-                                                       ResultSet speaker = statement.executeQuery(queries.selectSpeakerName()); 
+                                                       ResultSet speaker = statement.executeQuery(queries.return2012SpeakerInfo()); 
  %>
  </div>
 					<div class="span2">
 					<section>
- <ul> 
+                                            <form action="../model/adminspeaker.jsp" method="post">
+                                            <table>
+                                                <tr>
+                                                    <td>Speaker Name</td>
+                                                    <td>2012 Rating</td>
+                                                    <td>Times Ranked</td>
+                                                    <td>New Rating</td>
+                                                    <td>New Times Ranked</td>
+                                                    <td>Visible?</td>
+                                                    <td>Suggested By</td>
+                                                </tr>
+                                                
 <% 
  while (speaker.next()) {
      %>
-     <li id="lisort"> <% out.print(speaker.getString("first_name") + " " + speaker.getString("last_name")); %>
-         <% out.print(giveStars.return2012Rank(speaker.getInt("id"))); %>
-         <% out.print(giveStars.returnCount(speaker.getInt("id"))); %>
-     </li>
+     <tr>
+         <td><% out.print(speaker.getString("first_name") + " " + speaker.getString("last_name")); %>
+         <input name="list" type="hidden" value="<% out.print(speaker.getInt("id")); %>" />
+         <input name="admin" type="hidden" value="true" /></td>
+         <td><% out.print(speaker.getDouble("rating")); %></td>
+         <td><% out.print(speaker.getInt("count")); %></td>
+         <td><input name="newrank" type="text" value="<% out.print(speaker.getDouble("rating")); %>"/></td>
+         <td><input name="newcount" type="text" value="<% out.print(speaker.getInt("count")); %>"/></td>
+         <td><input name="visible" type="checkbox" value="<% out.print(speaker.getInt("id")); %>"
+                    <% if (speaker.getInt("visible") == 1) {
+                        out.print("checked"); }%> />
+         </td>
+         <td><% out.print(speaker.getString("suggested_by")); %></td>
+     </tr>
            
     
   <% } 
  speaker.close();
  statement.close();
  connection.close();%>
- </ul>
+ </table>
+ <input type="submit" value="Submit" class="button-primary" />
+  </form>
  </section>
 					</div>
 					<div class="span7">

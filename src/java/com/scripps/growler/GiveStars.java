@@ -1,21 +1,14 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.scripps.growler;
 
 import java.sql.*;
 
 /**
- *
+ * A class designed to return image tags to the Growler Project website
+ * 
  * @author "Justin Bauguess"
  */
 public class GiveStars {
     GrowlerQueries list = new GrowlerQueries();
-    private final String DBNAME = "c2850a01test";
-    private final String DBUSER = "c2850a01";
-    private final String DBPASS = "c2850a01";
     private final String IMAGE_START = "<img src = \"";
     private final String IMAGE_END = "\" />";
     private final String GOLD_STAR = "../images/icon16-goldstar.png";
@@ -34,7 +27,8 @@ public class GiveStars {
      * @throws SQLException 
      */
     public String themePoints(int id) throws ClassNotFoundException, SQLException {
-       Connection connection = DriverManager.getConnection("jdbc:mysql://ps11.pstcc.edu:3306/c2850a01test" , "c2850a01", "c2850a01");
+       DataConnection data = new DataConnection();
+       Connection connection = data.sendConnection();
        Statement statement = connection.createStatement();
        ResultSet result = statement.executeQuery("select sum(ranking) from isolated_theme_ranking where theme_id = " + id);
        int c = 0;
@@ -56,9 +50,10 @@ public class GiveStars {
      * @throws ClassNotFoundException 
      */
     public String returnCount(int id) throws ClassNotFoundException, SQLException {
-       Connection connection = DriverManager.getConnection("jdbc:mysql://ps11.pstcc.edu:3306/c2850a01test" , "c2850a01", "c2850a01");
+       DataConnection data = new DataConnection();
+       Connection connection = data.sendConnection();
        Statement statement = connection.createStatement();
-       ResultSet result = statement.executeQuery("select * from ranks_2012, speaker where ranks_2012.id = speaker.id and speaker.id = " + id);
+       ResultSet result = statement.executeQuery("select * from ranks_2012, speaker where ranks_2012.speaker_id = speaker.id and speaker.id = " + id);
        String count = "";
        while (result.next()){
            if (result.getInt(3) != 0){
@@ -83,10 +78,11 @@ public class GiveStars {
     public String return2012Rank(int id) throws ClassNotFoundException, SQLException {
        ResultSet result;
        String imgTag = "";
-       Connection connection = DriverManager.getConnection("jdbc:mysql://ps11.pstcc.edu:3306/c2850a01test" , "c2850a01", "c2850a01");
+       DataConnection data = new DataConnection();
+       Connection connection = data.sendConnection();
        Statement statement = connection.createStatement();
        //ResultSet result = statement.executeQuery("select avg(ranking) from session_ranking where session_ranking.session_id in (select id from session where id in (select session_id from speaker_team where speaker_id = " + id + "))");
-       result = statement.executeQuery("select r.rating, s.id, s.first_name, s.last_name from ranks_2012 r, speaker s where s.id = r.id and s.id = " + id);
+       result = statement.executeQuery("select r.rating, s.id, s.first_name, s.last_name from ranks_2012 r, speaker s where s.id = r.speaker_id and s.id = " + id);
        while (result.next()){
        imgTag = returnIMGTag(result.getDouble(1));
        }
@@ -105,7 +101,8 @@ public class GiveStars {
      */
     public String returnStar(int id) throws ClassNotFoundException, SQLException {
        String imgTag = "";
-       Connection connection = DriverManager.getConnection("jdbc:mysql://ps11.pstcc.edu:3306/c2850a01test" , "c2850a01", "c2850a01");
+       DataConnection data = new DataConnection();
+       Connection connection = data.sendConnection();
        Statement statement = connection.createStatement();
        ResultSet results = statement.executeQuery("select (sum(r.ranking)/count(r.speaker_id))/2 from speaker_ranking r, speaker s where r.speaker_id = s.id and s.id IN (" + id + ") group by r.speaker_id");
        while (results.next()) {
@@ -118,6 +115,10 @@ public class GiveStars {
     }
     /**
      * Returns a list of image tags
+     * 
+     * Searches through a list of conditional statements to find how many 
+     * image tags to create for the rating that has been passed.
+     * 
      * @param rating the number used to determine which tags to send back
      * @return A list of image tags containing gold, half, or grey stars
      */
@@ -135,7 +136,7 @@ public class GiveStars {
                img = img + IMAGE_START + HALF_STAR + IMAGE_END;
            }
            //4 *
-           else if (rating < 4.2 && rating >= 3.7) {
+           else if (rating < 4.3 && rating >= 3.7) {
                for (int k = 0; k < 4; k++){
                img = img + (IMAGE_START + GOLD_STAR + IMAGE_END);}
                img = img + IMAGE_START + GREY_STAR + IMAGE_END;
@@ -148,7 +149,7 @@ public class GiveStars {
                img = img + IMAGE_START + GREY_STAR + IMAGE_END;
            }
            //3 *
-           else if (rating < 3.2 && rating >= 2.7) {
+           else if (rating < 3.3 && rating >= 2.7) {
                for (int k = 0; k < 3; k++){
                img = img + (IMAGE_START + GOLD_STAR + IMAGE_END);}
                img = img + IMAGE_START + GREY_STAR + IMAGE_END;
@@ -163,14 +164,14 @@ public class GiveStars {
                img = img + IMAGE_START + GREY_STAR + IMAGE_END;}
            }
            //2 *
-           else if (rating < 2.2 && rating >= 1.7) {
+           else if (rating < 2.3 && rating >= 1.7) {
                img = IMAGE_START + GOLD_STAR + IMAGE_END;
                img = img + IMAGE_START + GOLD_STAR + IMAGE_END;
                for (int k = 0; k < 3; k++){
                img = img + IMAGE_START + GREY_STAR + IMAGE_END;}
            }
            //1.5 *
-           else if (rating < 1.2 && rating >= 1.7) {
+           else if (rating < 1.7 && rating >= 1.2) {
                img = IMAGE_START + GOLD_STAR + IMAGE_END;
                img = img + IMAGE_START + HALF_STAR + IMAGE_END;
                for (int k = 0; k < 3; k++){

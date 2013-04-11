@@ -25,7 +25,6 @@ CREATE TABLE theme (
 	,creator		int		REFERENCES user(id)
 	,year			year(4)
 	,visible		boolean
-	,active			boolean
 	,reason			varchar(250) /*for user-suggested themes*/
 	);
 
@@ -52,7 +51,7 @@ CREATE TABLE theme_ranking (
  * Supports US10332, which specifies users are not tracked
  * Will be replaced when we start US10331: Exploration: Allow theme suggestion
  */
-DROP TABLE isolated_theme_ranking;
+DROP TABLE IF EXISTS isolated_theme_ranking;
 CREATE TABLE isolated_theme_ranking (
 	ranking_id			int		PRIMARY KEY auto_increment
 	,theme_id			int		REFERENCES theme(id)
@@ -64,14 +63,13 @@ CREATE TABLE isolated_theme_ranking (
  * Notice: suggested_by attribute is foreign key referencing
  * id attribute in user table
  */
-DROP TABLE speaker; 
+DROP TABLE IF EXISTS speaker; 
 CREATE TABLE speaker (
 	 id			int			PRIMARY KEY auto_increment
 	,first_name		varchar(30)
 	,last_name		varchar(30)
 	,suggested_by		int			REFERENCES user(id)
 	,visible		boolean
-	,active			boolean
 	);
 
 /*
@@ -81,11 +79,34 @@ CREATE TABLE speaker (
  * speaker_team (which itself bridges session_ranking and speaker tables)
  * and session tables.
  */
-DROP TABLE speaker_ranking;
+DROP TABLE IF EXISTS speaker_ranking;
 CREATE TABLE speaker_ranking (
 	ranking_id		int			PRIMARY KEY auto_increment
 	,speaker_id		int			REFERENCES speaker(id)
 	,ranking		int
+	);
+
+/*
+ * Creates table for session information
+ * A session is essentially a presentation given by a speaker_team (which may
+ * be one or more speakers), attended by users.
+ * A session has a start time, a start date, a duration, a location, 
+ * and a track (which is either Technical or Business Friendly).
+ * If multiple tracks need to be managed, we might centralize it with its
+ * own table as we did with location. If there are only ever two tracks, 
+ * and admin never need to add others, we will keep it as an attribute.
+ */
+
+DROP TABLE IF EXISTS session;
+CREATE TABLE session (
+	id			int			PRIMARY KEY auto_increment
+	,name			varchar(50)
+	,description		text
+	,track			varchar(20)
+	,session_date		date
+	,start_time		time
+	,duration		int
+	,location		int		REFERENCES location(id)
 	);
 	
 /*
@@ -101,7 +122,7 @@ CREATE TABLE speaker_ranking (
  *	that they've already submitted a survey for that session, and no	 
  *	records are inserted into session_ranking.
  */	
-DROP TABLE attendance;
+DROP TABLE IF EXISTS attendance;
 CREATE TABLE attendance (
 	user_id		int	REFERENCES user(id)
 	,session_id	int	REFERENCES session(id)
@@ -114,7 +135,7 @@ CREATE TABLE attendance (
  * an associated question).
  */
 	
-DROP TABLE question;
+DROP TABLE IF EXISTS question;
 CREATE TABLE question (
 	id			INT			PRIMARY KEY
 	,text			VARCHAR(250)
@@ -130,34 +151,13 @@ CREATE TABLE question (
  * a centralized list produced from this table.
  */	
 
-DROP TABLE location;
+DROP TABLE IF EXISTS location;
 CREATE TABLE location (
 	id				int			PRIMARY KEY
 	,description	varchar(50)
 	);
 	
-/*
- * Creates table for session information
- * A session is essentially a presentation given by a speaker_team (which may
- * be one or more speakers), attended by users.
- * A session has a start time, a start date, a duration, a location, 
- * and a track (which is either Technical or Business Friendly).
- * If multiple tracks need to be managed, we might centralize it with its
- * own table as we did with location. If there are only ever two tracks, 
- * and admin never need to add others, we will keep it as an attribute.
- */
 
-DROP TABLE session;
-CREATE TABLE session (
-	id			int			PRIMARY KEY auto_increment
-	,name			varchar(50)
-	,description		text
-	,track			varchar(20)
-	,session_date		date
-	,start_time		time
-	,duration		int
-	,location		int		REFERENCES location(id)
-	);
 	
 /*
  * Creates the table for ranking sessions
@@ -168,7 +168,7 @@ CREATE TABLE session (
  * submitted at the same time.
  */
 
-DROP TABLE session_ranking;
+DROP TABLE IF EXISTS session_ranking;
 CREATE TABLE session_ranking (
 	session_id		int	REFERENCES session(id)
 	,question_id		int	REFERENCES question(id)
@@ -182,8 +182,21 @@ CREATE TABLE session_ranking (
  * sessions and speakers.
  */
 
-DROP TABLE speaker_team;
+DROP TABLE IF EXISTS speaker_team;
 CREATE TABLE speaker_team (
 	session_id		int			REFERENCES session(id)
 	,speaker_id		int			REFERENCES speaker(id)
 	);
+	
+	
+/* 
+ * This file creates the table based on last year's data
+ * which can be modified by the administrator later 
+ */
+DROP TABLE IF EXISTS ranks_2012;
+CREATE TABLE ranks_2012 as (
+
+speaker_id	int	REFERENCES speaker(id)
+,rating	cast(double, 2, 1)
+,count	int
+);

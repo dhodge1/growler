@@ -1,17 +1,20 @@
 <%-- 
     Document   : theme
     Created on : Feb 28, 2013, 7:15:03 PM
-    Author     : Robert Brown
+    Author     : Justin Bauguess
+    Purpose    : The theme (user) page is for users to rank themes according to 
+                their preferences.  The ranks are saved in the isolated_theme_ranking
+                table for now.  Once users are remembered, it will be saved in the 
+                theme_ranking table.  A record in that table will contain a user_id,
+                theme_id, and rank.  Ranks can only be between 1 and 10.  Once a user
+                has submitted rankings, they can change them later.
 --%>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
 <%@page import="com.scripps.growler.DataConnection" %>
-<jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="application" />
-<jsp:setProperty name="dataConnection" property = "*" />
-<jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="application" />
-<jsp:setProperty name="queries" property = "*" />
-<jsp:useBean id="giveStars" class="com.scripps.growler.GiveStars" scope="application" />
-<jsp:setProperty name="giveStars" property = "*" />
+<jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="page" />
+<jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page" />
+<jsp:useBean id="giveStars" class="com.scripps.growler.GiveStars" scope="page" />
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
@@ -34,15 +37,7 @@
 </head>
 <body id="growler1">    
   <%@ include file="../includes/header.jsp" %> 
-  <nav class="globalNavigation">
-        <ul>
-            <li class="selected"><a href="../view/theme.jsp">Themes</a></li>
-            <li><a href="../view/themeentry.jsp">Suggest a Theme</a></li>
-            <li><a href="../view/speaker.jsp">Speakers</a></li>
-            <li><a href="../view/speakerentry.jsp">Suggest a Speaker</a></li>
-            <li><a href="">Help</a></li>
-        </ul>
-  </nav><!-- /.globalNavigation -->
+  <%@ include file="../includes/usernav.jsp" %>
   <div class="container-fixed">
 		<div class="content">
 			<!-- Begin Content -->
@@ -62,10 +57,9 @@
 							<br/>
                                                         
                                              <% Connection newConnect = dataConnection.sendConnection();
-                                                     dataConnection.split2012Ranks();
+                                                     
                                                 Statement newStatement = newConnect.createStatement();
-                                                ResultSet themeResult = newStatement.executeQuery("select name, id, description from theme WHERE visible = true AND active = true");
-						 
+                                                ResultSet themeResult = newStatement.executeQuery(queries.selectVisibleThemes());
                                         %>
 						</div>
 					<div class="span2">

@@ -2,16 +2,18 @@
     Document   : theme
     Created on : Feb 28, 2013, 7:15:03 PM
     Author     : Justin Bauguess
+    Purpose    : The theme (admin) page is for admins to edit theme information. 
+                The editable fields are simply if the theme is visible to a user 
+                or not.  It will display the theme name, how many rating points 
+                it has earned, and how many times someone has rated it.  It will 
+                also display the creator of the theme.
 --%>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
 <%@page import="com.scripps.growler.DataConnection" %>
-<jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="application" />
-<jsp:setProperty name="dataConnection" property = "*" />
-<jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="application" />
-<jsp:setProperty name="queries" property = "*" />
-<jsp:useBean id="giveStars" class="com.scripps.growler.GiveStars" scope="application" />
-<jsp:setProperty name="giveStars" property = "*" />
+<jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="page" />
+<jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page" />
+<jsp:useBean id="giveStars" class="com.scripps.growler.GiveStars" scope="page" />
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
@@ -33,17 +35,7 @@
 </head>
 <body id="growler1">    
   <%@ include file="../includes/header.jsp" %> 
-  <nav class="globalNavigation">
-        <ul>
-            <li class="selected"><a href="../view/theme.jsp">Default Themes</a></li>
-            <li><a href="../admin/usertheme.jsp">Suggested Themes</a></li>
-            <li><a href="../admin/themeentry.jsp">Add a Theme</a></li>
-            <li><a href="../admin/speaker.jsp">Default Speakers</a></li>
-            <li><a href="../admin/userspeaker.jsp">Suggested Speakers</a></li>
-            <li><a href="../admin/speakerentry.jsp">Add a Speaker</a></li>
-            <li><a href="">Help</a></li>
-        </ul>
-  </nav><!-- /.globalNavigation -->
+  <%@ include file="../includes/adminnav.jsp" %>
   <div class="container-fixed">
 		<div class="content">
 			<!-- Begin Content -->
@@ -64,24 +56,42 @@
 						<div class="span1">
 							<br/>
                                              <% Connection newConnect = dataConnection.sendConnection();
+                                                
                                                 Statement newStatement = newConnect.createStatement();
-                                                ResultSet themeResult = newStatement.executeQuery("select name, id, description from theme where creator = 2023");
+                                                ResultSet themeResult = newStatement.executeQuery(queries.returnThemeRanking());
                                              %>
 						</div>
 					<div class="span2">
 					<section>
-                                                <ul>
+                                            <form method="post" action="../model/admintheme.jsp">
+                                                <table>
+                                                    <tr>
+                                                        <td>Name</td>
+                                                        <td>Rating</td>
+                                                        <td>Times Rated</td>
+                                                        <td>Visible?</td>
+                                                        <td>Created By</td>
+                                                    </tr>
 						<% 
                                                 while (themeResult.next()) {
                                                 %>
-                                                <li id="lisort"><% out.print(themeResult.getString("name")); %>
-                                                    <% out.print(" : " + giveStars.themePoints(themeResult.getInt("id")) + " points"); %>
-                                                </li>
+                                                <tr>
+                                                <td><% out.print(themeResult.getString("name")); %>
+                                                <input type="hidden" name="list" value="<% out.print(themeResult.getInt("id")); %>" /></td>
+                                                <td><% out.print(themeResult.getInt("ranking")); %></td>
+                                                <td><% out.print(themeResult.getInt("count")); %></td>
+                                                <td><input type="checkbox" name="visible" value="<% out.print(themeResult.getInt("id")); %>"
+                                                           <% if (themeResult.getInt("visible") == 1) {
+                                                                  out.print(" checked");} %>/>
+                                                <td><% out.print(themeResult.getString("creator")); %>
+                                                </tr>
                                                 <% } 
                                                 newConnect.close();
                                                 themeResult.close();
                                                 newStatement.close(); %>
-                                                </ul>
+                                                </table>
+                                                <input type="submit" value="Submit" class="button-primary" />
+                                            </form>
                                         </section>
 					</div>
 					<div class="span7">

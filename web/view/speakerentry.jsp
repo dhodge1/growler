@@ -1,7 +1,9 @@
 <%-- 
     Document   : speakerentry
     Created on : Feb 27, 2013, 11:55:19 PM
-    Author     : Robert Brown
+    Author     : Justin Bauguess
+    Purpose    : The purpose of speakerentry(user) is for users to suggest speakers
+                to the Techtoberfest Admins.  It uses model/processSpeakerSuggestion.
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -25,15 +27,7 @@
 </head>
     <body id="growler1">
     <%@ include file="../includes/header.jsp" %> 
-    <nav class="globalNavigation">
-        <ul>
-            <li><a href="../view/theme.jsp">Themes</a></li>
-            <li><a href="../view/themeentry.jsp">Suggest a Theme</a></li>
-            <li><a href="../view/speaker.jsp">Speakers</a></li>
-            <li class="selected"><a href="../view/speakerentry.jsp">Suggest a Speaker</a></li>
-            <li><a href="">Help</a></li>
-        </ul>
-  </nav><!-- /.globalNavigation -->
+    <%@ include file="../includes/usernav.jsp" %>
   <div class="container-fixed">
 		<div class="content">
 			<!-- Begin Content -->

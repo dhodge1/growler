@@ -1,12 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.scripps.growler;
 
 /**
  * Queries for use in the Growler Web Application
+ * 
  * @author "Justin Bauguess"
  */
 public class GrowlerQueries {
@@ -25,6 +21,16 @@ public class GrowlerQueries {
 	*/
 	public String selectSpeakers() {
 		return("select id, first_name, last_name from speaker"); }
+        /**
+         * 
+         * @return The visible speakers, determined by the admin
+         */
+        public String selectVisibleSpeakers() {
+            return(selectSpeakers() + " where visible = 1"); 
+        }
+        public String selectVisibleThemes() {
+            return("select id, name, description from theme where visible = 1");
+        }
 	/**
 	* @return Used for selecting default speakers, user story 10334
 	*/
@@ -81,17 +87,17 @@ public class GrowlerQueries {
 	* @return insert statement into theme, user story 10347
 	*/
 	public String insertTheme() {
-		return("insert into theme(id, name, description, reason, creator, active, visible) values (?, ?, ?, ?, ?, ?, ?)"); }
+		return("insert into theme(id, name, description, reason, creator, visible) values (?, ?, ?, ?, ?, ?)"); }
 	/**
 	* @return insert statement into theme, user story 10331
 	*/
 	public String insertUserTheme() {
-		return("insert into theme (name, description, creator, reason, active, visible) values (?, ?, ?, ?, false, false)"); }
+		return("insert into theme (name, description, reason, creator, visible) values (?, ?, ?, ?, ?)"); }
 	/**
 	* @return insert statement into speakers, user story 10336 & user story 10348
 	*/
 	public String insertSpeaker() {
-		return("insert into speaker (first_name, last_name, suggested_by, visible, active) values (?, ?, ?, ?, ?)"); }
+		return("insert into speaker (first_name, last_name, suggested_by, visible) values (?, ?, ?, ?)"); }
 	/**
 	* @return insert statement into speaker_ranking, user story 10335
 	*/
@@ -106,12 +112,12 @@ public class GrowlerQueries {
 	* @return updates a theme to be visible, so it is "promoted", user story 10360
 	*/
 	public String promoteTheme() {
-		return("update theme set visible =  true where id =  ?"); }
+		return("update theme set visible =  ? where id =  ?"); }
 	/**
 	* @return updates a speaker to be visible, so it is "promoted", user story 10361
 	*/
 	public String promoteSpeaker() {
-		return("update speaker set visible =  true where id =  ?"); }
+		return("update speaker set visible = ? where id =  ?"); }
 	/**
 	* @return updates a theme to be inactive, user story 10351
 	*/
@@ -125,39 +131,45 @@ public class GrowlerQueries {
         /**
          * @return Returns the sum of the rankings for themes
          */
-        public String returnThemeRanking(String id) {
-            return("select sum(ranking), name from isolated_theme_ranking, theme where theme.id = isolated_theme_ranking.theme_id and theme.id = " + id + " group by theme_id");
+        public String returnThemeRanking() {
+            return("select sum(r.ranking) as ranking, count(r.theme_id) as count, t.id, t.name, t.visible, t.creator from theme t left join isolated_theme_ranking r on t.id = r.theme_id group by t.id order by ranking desc");
         }
         /**
          * @return returns the sum of the speaker rankings
          */
         public String returnSpeakerRanking() {
-            return("select sum(speaker_ranking.ranking), speaker.first_name, speaker.last_name from speaker_ranking, speaker where speaker.id = speaker_ranking.speaker_id group by speaker_ranking.speaker_id");
+            return("select sum(speaker_ranking.ranking), speaker.first_name, speaker.last_name from speaker_ranking, speaker where speaker.speaker_id = speaker_ranking.speaker_id group by speaker_ranking.speaker_id");
         }
         /**
          * @return returns the 2012 speaker rankings
          */
         public String return2012SpeakerRanking() {
-            return("select r.id, r.rating, s.first_name, s.last_name from ranks_2012 r, speaker s where s.id = r.id");
+            return("select r.speaker_id, r.rating, s.first_name, s.last_name from ranks_2012 r, speaker s where s.id = r.speaker_id");
+        }
+                /**
+         * @return returns the 2012 speaker rankings
+         */
+        public String return2012SpeakerInfo() {
+            return("select s.id, r.rating, r.count, s.first_name, s.last_name, s.visible, s.suggested_by from speaker s left join ranks_2012 r on s.id = r.speaker_id order by r.rating desc");
         }
         /**
          * 
          */
         public String return2012SpeakerRatingCount() {
-            return("select r.id, r.count, s.first_name, s.last_name from ranks_2012 r, speaker s where s.id = r.id");
+            return("select s.id, r.count, s.first_name, s.last_name from ranks_2012 r, speaker s where s.id = r.speaker_id");
         }
         /**
          * 
          * @return Returns the id, name and average ranking given by users (highest to lowest)
          */
         public String returnAverageSpeakerRanking() {
-            return("select r.rating, r.id, s.first_name, s.last_name from ranks_2012 r, speaker s where r.id = s.id;");
+            return("select r.rating, s.id, s.first_name, s.last_name from ranks_2012 r, speaker s where r.speaker_id = s.id;");
         }
         /**
          * @return how many times a speaker was ranked 
          */
         public String returnCountofRanks() {
-            return("select r.count, r.id, s.first_name, s.last_name from ranks_2012 r, speaker s where r.id = s.id;");
+            return("select r.count, r.speaker_id, s.first_name, s.last_name from ranks_2012 r, speaker s where r.speaker_id = s.id;");
         }
         /**
          * @return Returns those speakers that haven't been ranked
@@ -165,5 +177,19 @@ public class GrowlerQueries {
         public String returnUnrankedSpeakers() {
             return("select id from speaker where id NOT IN (select speaker_id from speaker_ranking)");
         }
-        
+        /**
+         * 
+         */
+        public String updateSpeakerRankings() {
+            return("update ranks_2012 set rating = ?, count = ? where speaker_id = ?");
+        }
+        /**
+         * 
+         * Returns a prepared statement that can get a specific user name
+         * 
+         * @return A query that selects a specified user name 
+         */
+        public String getUserName(){
+            return("select user_name from user where user_name = ?");
+        }
 }
