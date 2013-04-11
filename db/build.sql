@@ -357,7 +357,7 @@ insert into speaker_team values (33 , 43);
  */
 DROP TABLE IF EXISTS ranks_2012;
 CREATE TABLE ranks_2012 (
-rating	DECIMAL(2, 1)
+rating	DECIMAL(3, 2)
 ,speaker_id	int	REFERENCES speaker(id)
 ,count	int
 );
