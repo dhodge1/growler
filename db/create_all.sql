@@ -24,7 +24,7 @@ CREATE TABLE theme (
 	,description		varchar(250)
 	,creator		int		REFERENCES user(id)
 	,year			year(4)
-	,visible		tinyint
+	,visible		boolean
 	,reason			varchar(250) /*for user-suggested themes*/
 	);
 /*
@@ -73,7 +73,7 @@ CREATE TABLE speaker (
 	,first_name		varchar(30)
 	,last_name		varchar(30)
 	,suggested_by		int			REFERENCES user(id)
-	,visible		tinyint
+	,visible		boolean
 	);
 /*
  * Creates the table for storing speaker ranks
@@ -126,7 +126,7 @@ DROP TABLE IF EXISTS attendance;
 CREATE TABLE attendance (
 	user_id		int	REFERENCES user(id)
 	,session_id	int	REFERENCES session(id)
-	,isRegistered	tinyint
+	,isRegistered	boolean
 	);
 /*
  * Creates the table for storing the survey questions,
