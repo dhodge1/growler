@@ -108,6 +108,8 @@ CREATE TABLE session (
 	,start_time		time
 	,duration		int
 	,location		int		REFERENCES location(id)
+	,session_key		varchar(3)	UNIQUE
+	,isAttendable		boolean
 	);
 /*
  * Creates the table for attending a session
