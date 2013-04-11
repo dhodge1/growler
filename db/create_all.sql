@@ -8,39 +8,43 @@
  * Purpose:
  *	This script will drop and create every table designed.
  *	
+ * NOTE: MySQL doesn't have boolean type.  Therefore, tinyint is used.  0 = true, 1 = false.
  *	
  */
 
 /*
- * Creates the table for storing theme information
+ * Creates the table for storing theme 
+ * Creator references the user table as to who suggested the theme.
+ * Visible determines if a theme can be viewed by regular users.
  */
-
-/*dropping tables before we create them*/
-DROP TABLE theme; 
-
+DROP TABLE IF EXISTS theme; 
 CREATE TABLE theme (
 	 id			int		PRIMARY KEY auto_increment
 	,name			varchar(30)
 	,description		varchar(250)
 	,creator		int		REFERENCES user(id)
 	,year			year(4)
-	,visible		boolean
+	,visible		tinyint
 	,reason			varchar(250) /*for user-suggested themes*/
 	);
-
 /*
-Creates the table for storing user information
-*/	
-DROP TABLE user; 
+ * Creates the table for storing user information
+ * Corporate_id is used for leveraging corporate credentials.
+ * Email is used to contact a user in case of a lost password.
+ */	
+DROP TABLE IF EXISTS user; 
 CREATE TABLE user (
 	id			int		primary key
+	,name		varchar(26)
+	,password	varchar(60)
+	,corporate_id varchar(6)
+	,email		varchar(40)
 	);
-
 /*
  * Bridge table for the users and themes, designed to help keep track of ranks
  * Notice that theme_rank is storing ranks between 1 and 10, 1 being "best".
  */	
-DROP TABLE theme_ranking;
+DROP TABLE IF EXISTS theme_ranking;
 CREATE TABLE theme_ranking (
 	user_id				int		REFERENCES user(id)	
 	,theme_id			int		REFERENCES theme(id)	
@@ -57,11 +61,11 @@ CREATE TABLE isolated_theme_ranking (
 	,theme_id			int		REFERENCES theme(id)
 	,ranking			int
 	);
-	
 /*
  * Creates the table for storing speaker information
  * Notice: suggested_by attribute is foreign key referencing
  * id attribute in user table
+ * Visible is an attribute which determines if regular users can view the speaker.
  */
 DROP TABLE IF EXISTS speaker; 
 CREATE TABLE speaker (
@@ -69,9 +73,8 @@ CREATE TABLE speaker (
 	,first_name		varchar(30)
 	,last_name		varchar(30)
 	,suggested_by		int			REFERENCES user(id)
-	,visible		boolean
+	,visible		tinyint
 	);
-
 /*
  * Creates the table for storing speaker ranks
  * temporary table to be replaced by session_ranking upon developing 
@@ -85,7 +88,6 @@ CREATE TABLE speaker_ranking (
 	,speaker_id		int			REFERENCES speaker(id)
 	,ranking		int
 	);
-
 /*
  * Creates table for session information
  * A session is essentially a presentation given by a speaker_team (which may
@@ -96,7 +98,6 @@ CREATE TABLE speaker_ranking (
  * own table as we did with location. If there are only ever two tracks, 
  * and admin never need to add others, we will keep it as an attribute.
  */
-
 DROP TABLE IF EXISTS session;
 CREATE TABLE session (
 	id			int			PRIMARY KEY auto_increment
@@ -107,10 +108,7 @@ CREATE TABLE session (
 	,start_time		time
 	,duration		int
 	,location		int		REFERENCES location(id)
-	,survey_key		varchar(3)
-	,isAttendable		boolean
 	);
-	
 /*
  * Creates the table for attending a session
  * Final field is for keeping the integrity of survey-taking
@@ -128,22 +126,19 @@ DROP TABLE IF EXISTS attendance;
 CREATE TABLE attendance (
 	user_id		int	REFERENCES user(id)
 	,session_id	int	REFERENCES session(id)
-	,isRegistered	boolean 
+	,isRegistered	tinyint
 	);
-	
 /*
  * Creates the table for storing the survey questions,
  * which will be tied to session rankings. (Essentially, each rank value has
  * an associated question).
  */
-	
 DROP TABLE IF EXISTS question;
 CREATE TABLE question (
 	id			INT			PRIMARY KEY
 	,text			VARCHAR(250)
 	,year			YEAR(4) 
 	);
-	
 /*
  * Creates a table for location information
  * A location is a room (or remote location) where a session is held
@@ -152,15 +147,11 @@ CREATE TABLE question (
  * and thus cause confusion- locations, instead, can be selected from
  * a centralized list produced from this table.
  */	
-
 DROP TABLE IF EXISTS location;
 CREATE TABLE location (
 	id				int			PRIMARY KEY
 	,description	varchar(50)
 	);
-	
-
-	
 /*
  * Creates the table for ranking sessions
  * There is no primary key: 
@@ -169,36 +160,46 @@ CREATE TABLE location (
  * which is not a primary key because two records could conceivably be
  * submitted at the same time.
  */
-
 DROP TABLE IF EXISTS session_ranking;
 CREATE TABLE session_ranking (
 	session_id		int	REFERENCES session(id)
 	,question_id		int	REFERENCES question(id)
 	,ranking		int	CHECK (ranking > 0 AND ranking < 6)
 	);
-
 /*
  * Creates the table for keeping track of speaker teams
  * Speaker teams are a way of allowing multiple speakers for a given session,
  * where a many to many relationship would exist, this bridge table associates
  * sessions and speakers.
  */
-
 DROP TABLE IF EXISTS speaker_team;
 CREATE TABLE speaker_team (
 	session_id		int			REFERENCES session(id)
 	,speaker_id		int			REFERENCES speaker(id)
 	);
-	
-	
 /* 
  * This file creates the table based on last year's data
  * which can be modified by the administrator later 
  */
 DROP TABLE IF EXISTS ranks_2012;
-CREATE TABLE ranks_2012 as (
-
+CREATE TABLE ranks_2012(
 speaker_id	int	REFERENCES speaker(id)
 ,rating	cast(double, 2, 1)
 ,count	int
+);
+/*
+ * Session registration represents a unique session_id that
+ * presenters can give to those attending a session.
+ * The isAttendable field is a boolean that will allow an event to
+ * be registered in the Attendance table only until 15 minutes after
+ * the session has ended.
+ * Some sort of timer will need to be created in order to ensure the
+ * isAttendable field is set correctly based on the current date/time.
+ */
+DROP TABLE IF EXISTS session_registration;
+CREATE TABLE session_registration (
+key_id	varchar(3)
+,session_id int references session(id)
+,isAttendable tinyint
+,PRIMARY KEY (key_id, session_id)
 );
