@@ -83,8 +83,11 @@ public class GiveStars {
        Statement statement = connection.createStatement();
        //ResultSet result = statement.executeQuery("select avg(ranking) from session_ranking where session_ranking.session_id in (select id from session where id in (select session_id from speaker_team where speaker_id = " + id + "))");
        result = statement.executeQuery("select r.rating, s.id, s.first_name, s.last_name from ranks_2012 r, speaker s where s.id = r.speaker_id and s.id = " + id);
-       while (result.next()){
-       imgTag = returnIMGTag(result.getDouble(1));
+       if (!result.next()) {
+           imgTag = "Not Rated in 2012";
+       }
+       else {
+           imgTag = returnIMGTag(result.getDouble(1));
        }
        connection.close();
        statement.close();
@@ -104,9 +107,12 @@ public class GiveStars {
        DataConnection data = new DataConnection();
        Connection connection = data.sendConnection();
        Statement statement = connection.createStatement();
-       ResultSet results = statement.executeQuery("select (sum(r.ranking)/count(r.speaker_id))/2 from speaker_ranking r, speaker s where r.speaker_id = s.id and s.id IN (" + id + ") group by r.speaker_id");
-       while (results.next()) {
-       imgTag = returnIMGTag(results.getDouble(1));
+       ResultSet results = statement.executeQuery("select r.rating, s.id from speaker s left join ranks_2012 r on s.id = " + id);
+       if (!results.next()) {
+           imgTag = "Not Rated in 2012";
+       }
+       else {
+           imgTag = returnIMGTag(results.getDouble(1));
        }
        connection.close();
        statement.close();

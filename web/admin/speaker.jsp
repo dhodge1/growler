@@ -7,6 +7,7 @@
                 the speaker table.  The editable data includes: rating, count of 
                 ratings, and visibility to users.
 --%>
+<%@page import="sun.java2d.pipe.SpanClipRenderer"%>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
 <%@page import="com.scripps.growler.DataConnection" %>
@@ -56,7 +57,7 @@
                                                         
                                                         Connection connection = dataConnection.sendConnection();
                                                         Statement statement = connection.createStatement();
-                                                       ResultSet speaker = statement.executeQuery(queries.return2012SpeakerInfo()); 
+                                                       ResultSet speaker = statement.executeQuery("select s.id, r.rating, r.count, s.first_name, s.last_name, s.visible, s.suggested_by, u.name from speaker s, ranks_2012 r, user u where s.id = r.speaker_id and u.id = s.suggested_by order by r.rating desc, s.last_name");
  %>
  </div>
 					<div class="span2">
@@ -77,18 +78,33 @@
  while (speaker.next()) {
      %>
      <tr>
-         <td><% out.print(speaker.getString("first_name") + " " + speaker.getString("last_name")); %>
+         <td><% out.print(speaker.getString("last_name") + ", " + speaker.getString("first_name")); %>
          <input name="list" type="hidden" value="<% out.print(speaker.getInt("id")); %>" />
          <input name="admin" type="hidden" value="true" /></td>
          <td><% out.print(speaker.getDouble("rating")); %></td>
          <td><% out.print(speaker.getInt("count")); %></td>
-         <td><input name="newrank" type="text" value="<% out.print(speaker.getDouble("rating")); %>"/></td>
-         <td><input name="newcount" type="text" value="<% out.print(speaker.getInt("count")); %>"/></td>
+         <% double d = speaker.getDouble("rating");
+         if (d > 0) {
+             out.print("<td><input name=\"newrank\" type=\"text\" value=" + d + " /></td>");
+         }
+         else {
+             out.print("<td>No 2012 Rating</td>");
+         }
+         %>
+         <% int i = speaker.getInt("count");
+         if (i > 0) {
+             out.print("<td><input name=\"newrank\" type=\"text\" value=" + i + " /></td>");
+         }
+         else {
+             out.print("<td></td>");
+         }
+         %>
+         
          <td><input name="visible" type="checkbox" value="<% out.print(speaker.getInt("id")); %>"
                     <% if (speaker.getInt("visible") == 1) {
                         out.print("checked"); }%> />
          </td>
-         <td><% out.print(speaker.getString("suggested_by")); %></td>
+         <td><% out.print(speaker.getString("name")); %></td>
      </tr>
            
     

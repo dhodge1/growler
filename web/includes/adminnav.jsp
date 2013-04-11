@@ -13,9 +13,10 @@
             <li><a href="../admin/theme.jsp">Themes</a></li>
             <li><a href="../admin/themeentry.jsp">Add a Theme</a></li>
             <li><a href="../admin/speaker.jsp">Speakers</a></li>
+            <li><a href="../admin/userspeaker.jsp">Suggested Speakers</a></li>
             <li><a href="../admin/speakerentry.jsp">Add a Speaker</a></li>
             <li><a href="../admin/session.jsp">Sessions</a></li>
-            <li><a href="../admin/attendance.jsp">Attendance</a></li>
+            <li><a href="../admin/attendance.jsp"></a></li>
             <li><a href="">Help</a></li>
         </ul>
   </nav><!-- /.globalNavigation -->
