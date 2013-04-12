@@ -26,7 +26,7 @@ public class GrowlerQueries {
          * @return The visible speakers, determined by the admin
          */
         public String selectVisibleSpeakers() {
-            return(selectSpeakers() + " where visible = 1"); 
+            return(selectSpeakers() + " where visible = 1 order by last_name"); 
         }
         public String selectVisibleThemes() {
             return("select id, name, description from theme where visible = 1");
@@ -40,7 +40,7 @@ public class GrowlerQueries {
 	* @return Used for selecting user suggested speakers(so they can be ranked), user story 10337 & 10338
 	*/
 	public String selectUserSuggestedSpeakers() { 
-            return(selectSpeakers() + " where suggested_by is not null"); }
+            return("select s.id, s.first_name, s.last_name, u.name from speaker s, user u where s.suggested_by = u.id and suggested_by <> 2023"); }
 	/**
 	* @return  Used for selecting user suggested themes (so they can be ranked), user story 10333
 	*/
@@ -50,7 +50,7 @@ public class GrowlerQueries {
          * @return returns the first and last names of the speaker, as well as the id
 	*/
 	public String selectSpeakerName() {
-		return("select id, first_name, last_name from speaker order by id"); }
+		return("select id, first_name, last_name from speaker order by last_name"); }
 	/**
 	* @return Used for displaying speaker ranks from the past, user story 10362
 	*/
@@ -82,7 +82,7 @@ public class GrowlerQueries {
 	* @return Displays who suggested speakers, user story 10354
 	*/
 	public String selectWhoSuggestedSpeaker() {
-		return("select suggested_by, first_name, last_name from speaker"); }
+		return("select s.suggested_by, s.first_name, s.last_name, s.id, u.name from speaker s, user u where s.suggested_by = u.id"); }
 	/**
 	* @return insert statement into theme, user story 10347
 	*/
@@ -132,7 +132,7 @@ public class GrowlerQueries {
          * @return Returns the sum of the rankings for themes
          */
         public String returnThemeRanking() {
-            return("select sum(r.ranking) as ranking, count(r.theme_id) as count, t.id, t.name, t.visible, t.creator from theme t left join isolated_theme_ranking r on t.id = r.theme_id group by t.id order by ranking desc");
+            return("select sum(r.ranking) as ranking, count(r.theme_id) as count, t.id, t.name, t.visible, t.creator from theme t left join isolated_theme_ranking r on t.id = r.theme_id group by t.id order by ranking desc, last_name");
         }
         /**
          * @return returns the sum of the speaker rankings
@@ -150,13 +150,13 @@ public class GrowlerQueries {
          * @return returns the 2012 speaker rankings
          */
         public String return2012SpeakerInfo() {
-            return("select s.id, r.rating, r.count, s.first_name, s.last_name, s.visible, s.suggested_by from speaker s left join ranks_2012 r on s.id = r.speaker_id order by r.rating desc");
+            return("select s.id, r.rating, r.count, s.first_name, s.last_name, s.visible, s.suggested_by from speaker s left join ranks_2012 r on s.id = r.speaker_id order by r.rating desc, s.last_name");
         }
         /**
          * 
          */
         public String return2012SpeakerRatingCount() {
-            return("select s.id, r.count, s.first_name, s.last_name from ranks_2012 r, speaker s where s.id = r.speaker_id");
+            return("select s.id, r.count, s.first_name, s.last_name from ranks_2012 r, speaker s where s.id = r.speaker_id order by s.last_name");
         }
         /**
          * 
