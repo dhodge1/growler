@@ -61,7 +61,7 @@
                                                         
                                                         Connection connection = dataConnection.sendConnection();
  Statement statement = connection.createStatement();
- ResultSet speaker = statement.executeQuery(queries.selectVisibleSpeakers()); 
+ ResultSet speaker = statement.executeQuery(queries.selectVisibleSpeakers());
  %>
  </div>
 					<div class="span2">
@@ -73,7 +73,7 @@
 <% 
  while (speaker.next()) {
      %>
-     <li id="lisort"> <% out.print(speaker.getString("first_name") + " " + speaker.getString("last_name")); %>
+     <li id="lisort"> <% out.print(speaker.getString("last_name") + ", " + speaker.getString("first_name")); %>
          <% out.print(giveStars.return2012Rank(speaker.getInt("id"))); %>
          <% out.print(giveStars.returnCount(speaker.getInt("id"))); %>
            

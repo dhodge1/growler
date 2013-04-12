@@ -32,17 +32,7 @@
 </head>
 <body id="growler1">
  <%@ include file="../includes/header.jsp" %> 
-<nav class="globalNavigation">
-        <ul>
-            <li><a href="../view/theme.jsp">Default Themes</a></li>
-            <li><a href="../admin/usertheme.jsp">Suggested Themes</a></li>
-            <li><a href="../admin/themeentry.jsp">Add a Theme</a></li>
-            <li><a href="../admin/speaker.jsp">Default Speakers</a></li>
-            <li class="selected"><a href="../admin/userspeaker.jsp">Suggested Speakers</a></li>
-            <li><a href="../admin/speakerentry.jsp">Add a Speaker</a></li>
-            <li><a href="">Help</a></li>
-        </ul>
-  </nav><!-- /.globalNavigation -->
+<%@ include file="../includes/adminnav.jsp" %>
   <div class="container-fixed">
 		<div class="content">
 			<!-- Begin Content -->
@@ -52,7 +42,7 @@
 					<h1 class = "bordered">Speakers</h1>
                                         </br>
 					</br>
-                                        <h3>Admin Speaker Page</h3>
+                                        <h3>Admin Suggested Speaker Page</h3>
 					</br>
                                         <div id="tabs-1">
 					<div class="row">
@@ -77,7 +67,7 @@
  
  while (speaker.next()) {
      %>
-     <li class="lisort"> <% out.print(speaker.getString("first_name") + " " + speaker.getString("last_name")); %>
+     <li class="lisort"> <% out.print(speaker.getString("last_name") + ", " + speaker.getString("first_name")); %>
          <% out.print(giveStars.return2012Rank(speaker.getInt("id"))); %>
          <% out.print(giveStars.returnCount(speaker.getInt("id"))); %>
      </li>

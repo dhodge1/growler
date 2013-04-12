@@ -113,7 +113,7 @@ CREATE TABLE session (
 	,start_time		time
 	,duration		int
 	,location		int		REFERENCES location(id)
-	,survey_key		varchar(3)
+	,session_key		varchar(3)	UNIQUE
 	,isAttendable		boolean
 	);
 	
@@ -357,7 +357,7 @@ insert into speaker_team values (33 , 43);
  */
 DROP TABLE IF EXISTS ranks_2012;
 CREATE TABLE ranks_2012 (
-rating	DECIMAL(2, 1)
+rating	DECIMAL(3, 2)
 ,speaker_id	int	REFERENCES speaker(id)
 ,count	int
 );

@@ -31,19 +31,18 @@ public class DataConnection {
     public Connection sendConnection() throws SQLException, ClassNotFoundException {
         Class.forName("com.mysql.jdbc.Driver");
         return (connection = DriverManager.getConnection("jdbc:mysql://ps11.pstcc.edu:3306/" + DBNAME, DBUSER, DBPASS));
-    }    
-    /**
-     * 
-     * Running this main method will divide up the session data from last year so we can get speaker ratings
-     * 
-     * @param args
-     * @throws SQLException
-     * @throws ClassNotFoundException 
-     */
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        
-        }
-    
+    } 
+    public String bytesToHex(byte[] b) {
+      char hexDigit[] = {'0', '1', '2', '3', '4', '5', '6', '7',
+                         '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+      StringBuffer buf = new StringBuffer();
+      for (int j=0; j<b.length; j++) {
+         buf.append(hexDigit[(b[j] >> 4) & 0x0f]);
+         buf.append(hexDigit[b[j] & 0x0f]);
+      }
+      return buf.toString();
+   }
+
     public void split2012Ranks() throws SQLException, ClassNotFoundException {
         Connection connection = DriverManager.getConnection("jdbc:mysql://ps11.pstcc.edu:3306/c2850a01test" , "c2850a01", "c2850a01");
         Statement counter = connection.createStatement();
