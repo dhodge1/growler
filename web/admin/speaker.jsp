@@ -33,6 +33,7 @@
   <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
 </head>
 <body id="growler1">
+    <%@include file="../includes/isadmin.jsp" %>
  <%@ include file="../includes/header.jsp" %> 
 <%@ include file="../includes/adminnav.jsp" %>
   <div class="container-fixed">

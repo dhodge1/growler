@@ -132,7 +132,7 @@ public class GrowlerQueries {
          * @return Returns the sum of the rankings for themes
          */
         public String returnThemeRanking() {
-            return("select sum(r.ranking) as ranking, count(r.theme_id) as count, t.id, t.name, t.visible, t.creator from theme t left join isolated_theme_ranking r on t.id = r.theme_id group by t.id order by ranking desc, last_name");
+            return("select sum(r.ranking) as ranking, count(r.theme_id) as count, t.id, t.name, t.visible, t.creator from theme t left join isolated_theme_ranking r on t.id = r.theme_id group by t.id order by ranking desc");
         }
         /**
          * @return returns the sum of the speaker rankings

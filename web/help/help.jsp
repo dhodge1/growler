@@ -42,13 +42,13 @@
             <li><a href="#password">How Do I Set/Reset My Password?</a></li>
             <li><a href="#credentials">How Do I Leverage my Corporate Credentials?</a></li>
         </ol>
-        <a name="themerate" />
+        <a name="themerate"></a>
             <h3>How Do I Rate a Theme?</h3>
             <p>To rate a theme, drag the list of themes into the desired order.
                 Only the top ten themes will be ranked.  Once you have the themes
                 in the desired order, click "Submit".  The ratings will be saved.</p>
         
-        <a name="themesuggest" />
+        <a name="themesuggest"></a>
             <h3>How Do I Suggest a Theme?</h3>
             <p>To Suggest a theme, type in the name of the theme (30 character max),
                 the description (250 character max), and a reason (optional, 250 

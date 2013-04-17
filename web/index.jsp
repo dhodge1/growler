@@ -31,7 +31,7 @@
     <h1>Log-in To Project Growler</h1>
     <br/>
     <br/>
-    <form action="model/login.jsp">
+    <form method="post" action="model/login.jsp">
         <h3>User Name: <input type="text" name="username" size="15" /></h3>
         <br/>
         <br/>
@@ -40,6 +40,7 @@
         <br/>
     <input type="submit" value="Submit" />
     </form>
+    <a href="">Forgot Password?</a>
     <%@include file="includes/footer.jsp" %>
 </body>
 </html>

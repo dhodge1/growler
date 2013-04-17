@@ -45,10 +45,20 @@
         String pw = dataConnection.bytesToHex(pwd);
         Connection connection = dataConnection.sendConnection();
         Statement statement = connection.createStatement();
-        ResultSet result = statement.executeQuery("select lower(name), password from user where name = " + username +
-                " and password = " + pw);
+        ResultSet result = statement.executeQuery("select lower(name), password from user where name = '" + username +
+                "' and password = '" + pw + "'");
+        //Redirect, and set the user's identity in the header
         if (result.next()) {
-            response.sendRedirect("../admin/theme.jsp");
+            //If it's an admin, go to the admin side
+            if (result.getString(1).matches("admin")) {
+                response.setHeader("user", "admin");
+                response.sendRedirect("../admin/theme.jsp");
+            }
+            //Otherwise, go to the user side
+            else {
+                response.setHeader("user", result.getString(1));
+                response.sendRedirect("../view/theme.jsp");
+            }
         }
                else {
             response.sendRedirect("index.jsp");
