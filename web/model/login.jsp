@@ -51,12 +51,12 @@
         if (result.next()) {
             //If it's an admin, go to the admin side
             if (result.getString(1).matches("admin")) {
-                response.setHeader("user", "admin");
+                session.setAttribute("user", "admin");
                 response.sendRedirect("../admin/theme.jsp");
             }
             //Otherwise, go to the user side
             else {
-                response.setHeader("user", result.getString(1));
+                session.setAttribute("user", result.getString(1));
                 response.sendRedirect("../view/theme.jsp");
             }
         }
