@@ -23,7 +23,7 @@
             <caption><h2>Password Recovery</h2></caption>
             <tr>
                 <td style="font-size: 24"></td>
-                <td>Enter your email: <input colspan="2" type="text" name="recipient" align="center" size="60"/></td>
+                <td>Please Enter Your Email: <input colspan="3" type="text" name="recipient" align="center" size="60"/></td>
             </tr>
             <tr>
                 <td><textarea rows="10" cols="39" name="subject" style="display:none;">Password change</textarea> </td>
