@@ -134,7 +134,8 @@ DROP TABLE IF EXISTS attendance;
 CREATE TABLE attendance (
 	user_id		int	REFERENCES user(id)
 	,session_id	int	REFERENCES session(id)
-	,isRegistered	boolean 
+	,isRegistered	boolean	DEFAULT '0'
+	,CONSTRAINT pk_attendance PRIMARY KEY(user_id, session_id)
 	);
 	
 /*
