@@ -26,10 +26,10 @@ public class GrowlerQueries {
          * @return The visible speakers, determined by the admin
          */
         public String selectVisibleSpeakers() {
-            return(selectSpeakers() + " where visible = 1 order by last_name"); 
+            return(selectSpeakers() + " where visible = 0 order by last_name"); 
         }
         public String selectVisibleThemes() {
-            return("select id, name, description from theme where visible = 1");
+            return("select id, name, description from theme where visible = 0");
         }
 	/**
 	* @return Used for selecting default speakers, user story 10334
@@ -40,7 +40,7 @@ public class GrowlerQueries {
 	* @return Used for selecting user suggested speakers(so they can be ranked), user story 10337 & 10338
 	*/
 	public String selectUserSuggestedSpeakers() { 
-            return("select s.id, s.first_name, s.last_name, u.name from speaker s, user u where s.suggested_by = u.id and suggested_by <> 2023 order by last_name"); }
+            return("select s.id, s.first_name, s.last_name, s.visible, u.name from user u, speaker s where s.suggested_by = u.id and suggested_by <> 2023 order by last_name"); }
 	/**
 	* @return  Used for selecting user suggested themes (so they can be ranked), user story 10333
 	*/
@@ -113,7 +113,7 @@ public class GrowlerQueries {
          * @return an insert statement into the theme_ranking table (theme_id, user_id, ranking) 
          */
         public String insertThemeRanks() {
-            return("insert into theme_ranking (theme_id, user_id, ranking) values (?, ?, ?)");
+            return("insert into theme_ranking (theme_id, user_id, theme_rank) values (?, ?, ?)");
         }
 	/**
 	* @return updates a theme to be visible, so it is "promoted", user story 10360
@@ -139,7 +139,7 @@ public class GrowlerQueries {
          * @return Returns the sum of the rankings for themes
          */
         public String returnThemeRanking() {
-            return("select t.name, sum(r.ranking) as ranking, count(r.theme_id) as count,t.visible, u.name as creator from theme t left join isolated_theme_ranking r on r.theme_id = t.id left join user u on t.creator = u.id group by (t.id) order by ranking desc;");
+            return("select t.id, t.name, sum(r.theme_rank) as ranking, count(r.theme_id) as count, t.visible, u.name as creator from theme t left join theme_ranking r on r.theme_id = t.id left join user u on t.creator = u.id group by (t.id) order by ranking desc, name;");
         }
         /**
          * @return Returns the sum of the rankings for themes

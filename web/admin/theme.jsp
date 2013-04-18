@@ -82,7 +82,7 @@
                                                 <td><% out.print(themeResult.getInt("ranking")); %></td>
                                                 <td><% out.print(themeResult.getInt("count")); %></td>
                                                 <td><input type="checkbox" name="visible" value="<% out.print(themeResult.getInt("id")); %>"
-                                                           <% if (themeResult.getInt("visible") == 1) {
+                                                           <% if (themeResult.getInt("visible") == 0) {
                                                                   out.print(" checked");} %>/>
                                                 <td><% out.print(themeResult.getString("creator")); %>
                                                 </tr>

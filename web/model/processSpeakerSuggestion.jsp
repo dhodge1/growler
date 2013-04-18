@@ -35,19 +35,14 @@
   <% String first_name = request.getParameter("first_name");
      String last_name = request.getParameter("last_name");
      String admin = request.getParameter("admin");
+     int id = Integer.parseInt(String.valueOf(session.getAttribute("id")));
      
      
   Connection connect = dataConnection.sendConnection();
   PreparedStatement insert = connect.prepareStatement(queries.insertSpeaker());
   insert.setString(1, first_name);
   insert.setString(2, last_name);
-  //If it's an admin using, use the admin user number
-  if (admin == "true") {
-      insert.setInt(3, 2023);
-  }
-  else { //otherwise, use the user's number (which is 0 during the pre-authentication phase)
-      insert.setInt(3, 0);
-   }
+  insert.setInt(3, id);
   insert.setInt(4, 0);
 
   insert.execute();

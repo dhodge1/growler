@@ -102,7 +102,7 @@
          %>
          
          <td><input name="visible" type="checkbox" value="<% out.print(speaker.getInt("id")); %>"
-                    <% if (speaker.getInt("visible") == 1) {
+                    <% if (speaker.getInt("visible") == 0) {
                         out.print("checked"); }%> />
          </td>
          <td><% out.print(speaker.getString("name")); %></td>

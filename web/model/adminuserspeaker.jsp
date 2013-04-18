@@ -1,11 +1,12 @@
 <%-- 
-    Document   : admintheme
-    Created on : Apr 2, 2013, 2:56:26 PM
+    Document   : adminuserspeaker.jsp
+    Created on : Mar 5, 2013, 8:13:49 PM
     Author     : Justin Bauguess
-    Purpose    : The purpose of admintheme.jsp is to process modifications to 
-                the theme table from the admin's POV.  The fields modified will
-                be the visible field, which determines if a regular user can see
-                the theme in order to vote on it.
+    Purpose    : The purpose of adminuserspeaker.jsp is for admins to be able to
+                edit the speaker data of user suggested speakers.  The data that can be edited will be:
+                2012 rank, the count of 2012 ranks, and whether or not it is 
+                visible to the regular users.  It uses the ranks_2012 table, and
+                speaker table.
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@page import="java.util.*"%>
@@ -31,39 +32,41 @@
 </head>
 <body id="growler1">
  <%@ include file="../includes/header.jsp" %> 
-<%@ include file="../includes/adminnav.jsp" %>
+ <%@ include file="../includes/adminnav.jsp" %>
   <% String list[] = request.getParameterValues("list");
     String visible[] = request.getParameterValues("visible");
-    //Get the list of ids
+    
+ //Convert the List of IDs into integers   
  int ids[] = new int[list.length];
- for (int i = 0; i < list.length; i++) {
+ for (int i = 0; i < ids.length; i++) {
      ids[i] = Integer.parseInt(list[i]);
  }
- //Get the list of items checked visible
- int[] visibles = new int[visible.length];
- for (int i = 0; i < visible.length; i++) {
-     visibles[i] = Integer.parseInt(visible[i]);
- }
+ //Get the list of visibles from the check boxes
+int visibles[] = new int[visible.length];
+for (int i = 0; i < visibles.length; i++){
+    visibles[i] = Integer.parseInt(visible[i]);
+}
+ 
  Connection connection = dataConnection.sendConnection();
  Statement statement = connection.createStatement();
- PreparedStatement insert = connection.prepareStatement(queries.promoteTheme());
- //You have to sort the array first for binary search to work
+ PreparedStatement visibility = connection.prepareStatement(queries.promoteSpeaker());
+ //Sort the array before using binary search
  Arrays.sort(visibles);
- //If the visible value is in the visibles array, set it to 1.  Otherwise, 0.
- for (int j = 0; j < ids.length; j++) {
-    if (Arrays.binarySearch(visibles, ids[j]) >= 0){
-        insert.setInt(1, 0);
-       }
-       else {
-        insert.setInt(1, 1);
-       }
-    insert.setInt(2, ids[j]);
-    insert.execute();
+ //If the key is in the visibles array, we know the admin wants it visible
+ for (int k = 0; k < ids.length; k++) {
+     if (Arrays.binarySearch(visibles, ids[k]) >= 0 ) {
+         visibility.setInt(1, 0);
+     }
+     else {
+         visibility.setInt(1, 1);
+     }
+     visibility.setInt(2, ids[k]);
+     visibility.execute();
  }
 connection.close();
 statement.close();
-insert.close();
-response.sendRedirect("../admin/theme.jsp");
+visibility.close();
+response.sendRedirect("../admin/speaker.jsp");
 %>
 <%@ include file="../includes/footer.jsp" %> 
 <%@ include file="../includes/scriptlist.jsp" %>

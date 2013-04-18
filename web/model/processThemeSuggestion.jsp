@@ -35,24 +35,16 @@
   <% String name = request.getParameter("name");
      String description = request.getParameter("description");
      String reason = "";
-     int user = 0;
-     if (request.getParameter("reason") != null)
-     {
-        reason = request.getParameter("reason");
-     }
-     else {
-        reason = "";
-        user = 8083;
-     }
+     int user =  Integer.parseInt(String.valueOf(session.getAttribute("id")));
   Connection connect = dataConnection.sendConnection();
   PreparedStatement insert = connect.prepareStatement(queries.insertUserTheme());
   insert.setString(1, name);
   insert.setString(2, description);
   insert.setString(3, reason);
   insert.setInt(4, user);
-  insert.setInt(5, 0);
+  insert.setInt(5, 1);
   insert.execute();
-  if (reason == "") {
+  if (user == 1) {
       response.sendRedirect("../admin/theme.jsp");
   }
    else {

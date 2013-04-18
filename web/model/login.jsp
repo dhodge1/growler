@@ -50,20 +50,20 @@
         //Redirect, and set the user's identity in the header
         if (result.next()) {
             //If it's an admin, go to the admin side
-            if (result.getInt(1) == 1) {
+            if (result.getInt(1) == 8083) {
                 session.setAttribute("user", "admin");
-                session.setAttribute("id", result.getInt("id"));
+                session.setAttribute("id", new Integer(result.getInt("id")));
                 response.sendRedirect("../admin/theme.jsp");
             }
             //Otherwise, go to the user side
             else {
                 session.setAttribute("user", result.getString(2));
-                session.setAttribute("id", result.getInt("id"));
+                session.setAttribute("id", new Integer(result.getInt("id")));
                 response.sendRedirect("../view/theme.jsp");
             }
         }
                else {
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("../index.jsp");
                }
         %>
 	<%@ include file="../includes/scriptlist.jsp" %>

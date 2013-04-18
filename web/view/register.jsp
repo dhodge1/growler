@@ -19,18 +19,19 @@
   <title>Growler Project</title><!-- Title -->
   <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
-  <link rel="stylesheet" href="css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
+  <link rel="stylesheet" href="../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
+  <link rel="stylesheet" href="../css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
 	<link rel="stylesheet" href="draganddrop.css" /><!--Drag and drop style-->
-  <script src="js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
+  <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
 </head>
 <body id="growler1">
  <%@ include file="../includes/header.jsp" %> 
         <br/>
  <form method="post" action="../model/adduser.jsp">
-     Desired User Name: <input type="text" name="username"/><br/><br/>
-     Desired Password: <input type="text" name="password"/><br/><br/>
-     Email Address: <input type="text" name="email"/><br/><br/>
+     Desired User Name: <input type="text" name="username" size="20" /><br/><br/>
+     Desired Password: <input type="text" name="password" size="20"/><br/><br/>
+     Email Address: <input type="text" name="email" size="26"/><br/><br/>
+     Corporate ID: <input type="text" name="corporate" size="6"/><br/><br/>
      
  <input type="submit" value="Submit"/>    
  </form>

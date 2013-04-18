@@ -42,8 +42,9 @@
     //Add the user if they aren't already there
     String password = request.getParameter("password");
     String email = request.getParameter("email");
-    boolean success = statement.execute("insert into user (name, password, email) values ('" + 
-            user + "','" + password + "','" + email + "')");
+    String corporate = request.getParameter("corporate");
+    boolean success = statement.execute("insert into user (name, password, email, corporate_id) values ('" + 
+            user + "',sha1('" + password + "'),'" + email + "', " + corporate + ")");
     if (success) {
         result.close();
         statement.close();

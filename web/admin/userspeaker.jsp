@@ -61,22 +61,34 @@
  </div>
 					<div class="span2">
 					<section>
- <ul>
+                                        <form action="../model/adminuserspeaker.jsp" method="post">
+                                            <table>
+                                                <tr>
+                                                    <td>Speaker Name</td>
+                                                    <td>Visible?</td>
+                                                    <td>Suggested By</td>
+                                                </tr>
      
     
 <% 
  
  while (speaker.next()) {
      %>
-     <li class="lisort"> <% out.print(speaker.getString("last_name") + ", " + speaker.getString("first_name")); %>
-         <% out.print(giveStars.return2012Rank(speaker.getInt("id"))); %>
-         <% out.print(giveStars.returnCount(speaker.getInt("id"))); %>
-     </li>
+     <tr>
+     <td><% out.print(speaker.getString("last_name") + ", " + speaker.getString("first_name")); %>
+     <input type="hidden" name="list" value="<% out.print(speaker.getInt("id")); %>"/></td>
+     <td><input name="visible" type="checkbox" value="<% out.print(speaker.getInt("id")); %>"
+                    <% if (speaker.getInt("visible") == 0) {
+                        out.print("checked"); }%> /></td>
+     <td><% out.print(speaker.getString("name")); %></td>
+     </tr>
   <% } 
  speaker.close();
  statement.close();
  connection.close();%>
- </ul>
+                                            </table>
+                                            <input type="submit" value="Submit"/>
+                                        </form>
  </section>
 					</div>
 					<div class="span7">

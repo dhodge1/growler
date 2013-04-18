@@ -38,28 +38,35 @@
  for (int i = 0; i < list.length; i++) {
      ids[i] = Integer.parseInt(list[i]);
  }
- int id = Integer.getInteger(String.valueOf(session.getAttribute("id")));
+ String idString = String.valueOf(session.getAttribute("id"));
+ int id = Integer.parseInt(idString);
  Connection connection = dataConnection.sendConnection();
  Statement statement = connection.createStatement();
  ResultSet result = statement.executeQuery("select user_id from theme_ranking where user_id = " + id);
  //Check to see if the user already has voted.  If so, redirect to the theme page
+ boolean a = false;
  while(result.next()){
-     response.sendRedirect("../view/theme.jsp");
+    a = true;
  }
+ if (a) {
+     out.print("You have already voted!");
+ }
+ else {
  //If they haven't voted, take their votes and put them in the database
  PreparedStatement insert = connection.prepareStatement(queries.insertThemeRanks());
- //three fields to put: theme_ID (int), user_id (int), ranking (int)
+ //three fields to put: theme_ID (int), user_id (int), theme_rank (int)
  for (int j = 0; j < list.length; j++) {
      insert.setInt(1, ids[j]);
      insert.setInt(2, id);
      insert.setInt(3, 10-j);
      insert.execute();
  }
+ insert.close();
+ out.print("Your votes have been recorded!");
+ }
  connection.close();
  statement.close();
  result.close();
- insert.close();
- response.sendRedirect("../view/theme.jsp");
  %>
  
 <%@ include file="../includes/footer.jsp" %> 

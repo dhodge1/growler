@@ -16,7 +16,19 @@
             <li><a href="../admin/userspeaker.jsp">Suggested Speakers</a></li>
             <li><a href="../admin/speakerentry.jsp">Add a Speaker</a></li>
             <li><a href="../admin/session.jsp">Sessions</a></li>
-            <li><a href="../admin/attendance.jsp"></a></li>
+            <li><a href="../admin/attendance.jsp">Attendance</a></li>
             <li><a href="">Help</a></li>
         </ul>
+          <%
+     //Get the user's info, and post a welcome!
+     if (!String.valueOf(session.getAttribute("user")).isEmpty()) {
+        String user = String.valueOf(session.getAttribute("user"));
+        out.print("    Welcome, " + user + "!");
+        }
+     //If they aren't logged in, we want them to go back and log in.
+     else {
+        response.sendRedirect("../index.jsp");
+     }
+     %>
+     <a href="../model/logout.jsp">    Logout</a>
   </nav><!-- /.globalNavigation -->

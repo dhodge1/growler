@@ -40,7 +40,9 @@
         <br/>
     <input type="submit" value="Submit" />
     </form>
-    <a href="">Forgot Password?</a>
+    <br/>
+    <a href="view/register.jsp">Sign Up - New User</a><br/><br/>
+    <a href="view/resetpassword.jsp">Forgot Password?</a>
     <%@include file="includes/footer.jsp" %>
 </body>
 </html>

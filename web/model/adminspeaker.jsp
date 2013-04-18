@@ -32,16 +32,7 @@
 </head>
 <body id="growler1">
  <%@ include file="../includes/header.jsp" %> 
- <nav class="globalNavigation">
-        <ul>
-            <li><a href="../view/theme.jsp">Themes</a></li>
-            <li><a href="../view/themeentry.jsp">Suggest a Theme</a></li>
-            <li><a href="../view/themedescription.jsp">Theme Descriptions</a></li>
-            <li class="selected"><a href="../view/speaker.jsp">Speakers</a></li>
-            <li><a href="../view/speakerentry.jsp">Suggest a Speaker</a></li>
-            <li><a href="">Help</a></li>
-        </ul>
-  </nav><!-- /.globalNavigation -->
+ <%@ include file="../includes/adminnav.jsp" %>
   <% String list[] = request.getParameterValues("list");
     String rank[] = request.getParameterValues("newrank");
     String count[] = request.getParameterValues("newcount");
@@ -84,10 +75,10 @@ for (int i = 0; i < visibles.length; i++){
  //If the key is in the visibles array, we know the admin wants it visible
  for (int k = 0; k < ids.length; k++) {
      if (Arrays.binarySearch(visibles, ids[k]) >= 0 ) {
-         visibility.setInt(1, 1);
+         visibility.setInt(1, 0);
      }
      else {
-         visibility.setInt(1, 0);
+         visibility.setInt(1, 1);
      }
      visibility.setInt(2, ids[k]);
      visibility.execute();
