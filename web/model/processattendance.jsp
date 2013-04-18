@@ -1,9 +1,11 @@
-<%--
-	Thought it might be nice to start our reset password view file.
-	It should be the place we have the new password fields and submit.
-	It might need to be posted to with an associated ID, the post
-	coming from the link emailed from the JSP mailer.
+<%-- 
+    Document   : processattendance
+    Created on : Apr 17, 2013, 11:00:30 PM
+    Author     : Justin Bauguess
+    Purpose    : Adds the record of attendance
+                 into the database.
 --%>
+<%@page import="com.sun.org.apache.regexp.internal.REUtil"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
@@ -29,15 +31,28 @@
   <script src="js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
 </head>
     <body>
+        <%    
         
-        <form method="post" action="reset.jsp">
-            Verification: <input type="text" name="verify"/><br/><br/>
-            New Password: <input type="text" name="password"/><br/><br/>
-            Confirm: <input type="text" name="password2"/><br/><br/>
-            <input type="hidden" name="user" value="<% out.print(request.getParameter("user_name")); %>"/>
-            
-            <input type="submit" value="Submit"/>
-        </form>
+        String sessionId = request.getParameter("session");
+        
+        
+        
+        Connection connection = dataConnection.sendConnection();
+        Statement statement = connection.createStatement();
+        ResultSet result = statement.executeQuery("");
+        
+        //1 represents FALSE for the tinyint type in MySQL
+        boolean success = statement.execute("insert into attendance (user_id, session_id) values " +
+               session.getAttribute("id") + ", " + sessionId );
+        
+        
+        
+        connection.close();
+        statement.close();
+        result.close();
+        
+        response.sendRedirect("../view/attendance.jsp");
+        %>
 	<%@ include file="../includes/scriptlist.jsp" %>
     </body>
 </html>
