@@ -104,10 +104,17 @@ public class GrowlerQueries {
 	public String insertSpeakerRanking() {
 		return("insert into speaker_ranking (speaker_id, ranking) values (?, ?)"); }
 	/**
-	* @return insert statement into isolated_theme_ranks table, user story 10332 & 10359
+	* @return insert statement into isolated_theme_ranking table, user story 10332 & 10359
 	*/
 	public String insertIsolatedThemeRanks() {
 		return("insert into isolated_theme_ranking (theme_id, ranking) values (?, ?)"); }
+        /**
+         * 
+         * @return an insert statement into the theme_ranking table (theme_id, user_id, ranking) 
+         */
+        public String insertThemeRanks() {
+            return("insert into theme_ranking (theme_id, user_id, ranking) values (?, ?, ?)");
+        }
 	/**
 	* @return updates a theme to be visible, so it is "promoted", user story 10360
 	*/
@@ -132,7 +139,13 @@ public class GrowlerQueries {
          * @return Returns the sum of the rankings for themes
          */
         public String returnThemeRanking() {
-            return("select t.name, sum(r.ranking), count(r.theme_id), u.name from theme t left join isolated_theme_ranking r on r.theme_id = t.id left join user u on t.creator = u.id group by (t.id) order by ranking desc;");
+            return("select t.name, sum(r.ranking) as ranking, count(r.theme_id) as count,t.visible, u.name as creator from theme t left join isolated_theme_ranking r on r.theme_id = t.id left join user u on t.creator = u.id group by (t.id) order by ranking desc;");
+        }
+        /**
+         * @return Returns the sum of the rankings for themes
+         */
+        public String returnUsersThemeRanking() {
+            return("select t.name, sum(r.theme_rank) as ranking, count(r.theme_id) as count, t.visible, u.name as creator from theme t left join theme_ranking r on r.theme_id = t.id left join user u on t.creator = u.id group by (t.id) order by ranking desc");
         }
         /**
          * @return returns the sum of the speaker rankings

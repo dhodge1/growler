@@ -32,36 +32,32 @@
 </head>
 <body id="growler1">
  <%@ include file="../includes/header.jsp" %> 
- <nav class="globalNavigation">
-        <ul>
-            <li class="selected"><a href="../view/theme.jsp">Themes</a></li>
-            <li><a href="../view/themeentry.jsp">Suggest a Theme</a></li>
-            <li><a href="../view/speaker.jsp">Speakers</a></li>
-            <li><a href="../view/speakerentry.jsp">Suggest a Speaker</a></li>
-            <li><a href="">Help</a></li>
-        </ul>
-  </nav><!-- /.globalNavigation -->
+ <%@ include file="../includes/usernav.jsp" %>
  <% String list[] = request.getParameterValues("list");
  int ids[] = new int[list.length];
  for (int i = 0; i < list.length; i++) {
      ids[i] = Integer.parseInt(list[i]);
  }
+ int id = Integer.getInteger(String.valueOf(session.getAttribute("id")));
  Connection connection = dataConnection.sendConnection();
  Statement statement = connection.createStatement();
- PreparedStatement insert = connection.prepareStatement(queries.insertIsolatedThemeRanks());
- //two fields to put: ID (int), ranking (int)
+ ResultSet result = statement.executeQuery("select user_id from theme_ranking where user_id = " + id);
+ //Check to see if the user already has voted.  If so, redirect to the theme page
+ while(result.next()){
+     response.sendRedirect("../view/theme.jsp");
+ }
+ //If they haven't voted, take their votes and put them in the database
+ PreparedStatement insert = connection.prepareStatement(queries.insertThemeRanks());
+ //three fields to put: theme_ID (int), user_id (int), ranking (int)
  for (int j = 0; j < list.length; j++) {
      insert.setInt(1, ids[j]);
-     insert.setInt(2, 10-j);
+     insert.setInt(2, id);
+     insert.setInt(3, 10-j);
      insert.execute();
- }
- Statement showRanks = connection.createStatement();
- ResultSet ranks = showRanks.executeQuery("select sum(ranking), name from isolated_theme_ranking, theme where theme.id = isolated_theme_ranking.theme_id group by theme_id order by sum(ranking) desc");
- while(ranks.next()) {
- %><p><% out.print(ranks.getString("name") + " : " + ranks.getInt(1)); %></p><%
  }
  connection.close();
  statement.close();
+ result.close();
  insert.close();
  response.sendRedirect("../view/theme.jsp");
  %>
