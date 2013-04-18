@@ -50,14 +50,14 @@
         //Redirect, and set the user's identity in the header
         if (result.next()) {
             //If it's an admin, go to the admin side
-            if (result.getString(1).matches("admin")) {
+            if (result.getInt(1) == 1) {
                 session.setAttribute("user", "admin");
                 session.setAttribute("id", result.getInt("id"));
                 response.sendRedirect("../admin/theme.jsp");
             }
             //Otherwise, go to the user side
             else {
-                session.setAttribute("user", result.getString(1));
+                session.setAttribute("user", result.getString(2));
                 session.setAttribute("id", result.getInt("id"));
                 response.sendRedirect("../view/theme.jsp");
             }

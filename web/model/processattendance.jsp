@@ -41,7 +41,7 @@
         Statement statement = connection.createStatement();
         ResultSet result = statement.executeQuery("");
         
-        //1 represents FALSE for the tinyint type in MySQL
+        
         boolean success = statement.execute("insert into attendance (user_id, session_id) values " +
                session.getAttribute("id") + ", " + sessionId );
         

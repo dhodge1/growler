@@ -23,13 +23,14 @@
   <title>Growler Project</title><!-- Title -->
   <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
-  <link rel="stylesheet" href="css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
+  <link rel="stylesheet" href="../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
+  <link rel="stylesheet" href="../css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
 	<link rel="stylesheet" href="draganddrop.css" /><!--Drag and drop style-->
-  <script src="js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
+  <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
 </head>
 <body id="growler1">
- <%@ include file="../includes/header.jsp" %> 
+ <%@ include file="../includes/header.jsp" %>
+ <%@ include file="../includes/usernav.jsp" %>
  <form method="post" action="../model/processattendance.jsp">
  <table>
      <tr>
@@ -45,10 +46,10 @@
     while(result.next()) {
         %>
         <tr>
-            <td><% result.getString("name"); %>
+            <td><% out.print(result.getString("name")); %>
             <input type="hidden" name="session" value="<% out.print(result.getInt("id")); %>"/></td>
-            <td><% result.getDate("session_date"); %></td>
-            <td><% result.getTime("start_time"); %></td>
+            <td><% out.print(result.getDate("session_date")); %></td>
+            <td><% out.print(result.getTime("start_time")); %></td>
             <td><input type="submit" value="Attend"/></td>
         </tr>
         <%

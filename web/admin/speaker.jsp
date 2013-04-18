@@ -94,7 +94,7 @@
          %>
          <% int i = speaker.getInt("count");
          if (i > 0) {
-             out.print("<td><input name=\"newrank\" type=\"text\" value=" + i + " /></td>");
+             out.print("<td><input name=\"newcount\" type=\"text\" value=" + i + " /></td>");
          }
          else {
              out.print("<td></td>");
