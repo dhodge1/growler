@@ -32,7 +32,8 @@
   <script src="../js/grabRanks.js"></script>
 
 </head>
-<body id="growler1">    
+<body id="growler1"> 
+    <%@include file="../includes/isadmin.jsp" %>
   <%@ include file="../includes/header.jsp" %> 
   <nav class="globalNavigation">
         <ul>

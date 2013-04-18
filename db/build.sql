@@ -33,8 +33,8 @@ CREATE TABLE theme (
  */	
 DROP TABLE IF EXISTS user; 
 CREATE TABLE user (
-	id			int		primary key
-	,name			varchar(26)	
+	id			int		primary key auto_increment
+	,name			varchar(26)	UNIQUE	
 	,password		varchar(60)
 	,corporate_id		varchar(6)
 	,email			varchar(26)
@@ -134,7 +134,8 @@ DROP TABLE IF EXISTS attendance;
 CREATE TABLE attendance (
 	user_id		int	REFERENCES user(id)
 	,session_id	int	REFERENCES session(id)
-	,isRegistered	boolean 
+	,isRegistered	boolean	DEFAULT '0'
+	,CONSTRAINT pk_attendance PRIMARY KEY(user_id, session_id)
 	);
 	
 /*
