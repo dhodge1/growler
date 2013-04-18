@@ -33,7 +33,7 @@ CREATE TABLE theme (
  */	
 DROP TABLE IF EXISTS user; 
 CREATE TABLE user (
-	id			int		primary key
+	id			int		primary key auto_increment
 	,name			varchar(26)	UNIQUE	
 	,password		varchar(60)
 	,corporate_id		varchar(6)
