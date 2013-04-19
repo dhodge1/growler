@@ -52,11 +52,17 @@ for (int i = 0; i < visibles.length; i++){
  double ranks[] = new double[rank.length];
  for (int i = 0; i < ranks.length; i++) {
      ranks[i] = Double.parseDouble(rank[i]);
+     if (ranks[i] < 0 || ranks[i] > 5) {
+         ranks[i] = 0;
+     }
  }
  //Convert the list of Counts into integers
  int counts[] = new int[count.length];
  for (int i = 0; i < counts.length; i++) {
      counts[i] = Integer.parseInt(count[i]);
+     if (counts[i] < 0 || counts[i] > 100) {
+         counts[i] = 0;
+     }
  }
  
  Connection connection = dataConnection.sendConnection();

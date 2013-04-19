@@ -28,10 +28,10 @@
  <%@ include file="../includes/header.jsp" %> 
         <br/>
  <form method="post" action="../model/adduser.jsp">
-     Desired User Name: <input type="text" name="username" size="20" /><br/><br/>
-     Desired Password: <input type="text" name="password" size="20"/><br/><br/>
-     Email Address: <input type="text" name="email" size="26"/><br/><br/>
-     Corporate ID: <input type="text" name="corporate" size="6"/><br/><br/>
+     Desired User Name: <input type="text" name="username" maxlength="20" /><br/><br/>
+     Desired Password: <input type="text" name="password" maxlength="20"/><br/><br/>
+     Email Address: <input type="text" name="email" maxlength="26"/><br/><br/>
+     Corporate ID: <input type="text" name="corporate" maxlength="6"/><br/><br/>
      
  <input type="submit" value="Submit"/>    
  </form>

@@ -43,12 +43,12 @@
   insert.setString(1, first_name);
   insert.setString(2, last_name);
   insert.setInt(3, id);
-  insert.setInt(4, 0);
+  insert.setInt(4, 1);
 
   insert.execute();
   connect.close();
   insert.close();
-  if (admin == "true") {
+  if (id == 8083) {
       response.sendRedirect("../admin/speaker.jsp");
   }
    else {

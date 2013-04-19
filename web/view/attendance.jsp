@@ -40,9 +40,12 @@
          <td>Register</td>
      </tr>
     <%
+    Calendar today = Calendar.getInstance();
+    String date = today.get(Calendar.YEAR) + "-" + (today.get(Calendar.MONTH)+1) + "-" + today.get(Calendar.DATE);
     Connection connection = dataConnection.sendConnection();
     Statement statement = connection.createStatement();
-    ResultSet result = statement.executeQuery("select id, name, session_date, start_time from session");
+    ResultSet result = statement.executeQuery("select id, name, session_date, start_time from session where session_date = '" + 
+            date + "'" );
     while(result.next()) {
         %>
         <tr>

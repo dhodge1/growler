@@ -44,7 +44,7 @@
   insert.setInt(4, user);
   insert.setInt(5, 1);
   insert.execute();
-  if (user == 1) {
+  if (user == 8083) {
       response.sendRedirect("../admin/theme.jsp");
   }
    else {

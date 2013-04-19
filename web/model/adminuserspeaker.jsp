@@ -34,7 +34,10 @@
  <%@ include file="../includes/header.jsp" %> 
  <%@ include file="../includes/adminnav.jsp" %>
   <% String list[] = request.getParameterValues("list");
-    String visible[] = request.getParameterValues("visible");
+    String visible[];
+    boolean blank = false;
+    visible = request.getParameterValues("visible");
+     
     
  //Convert the List of IDs into integers   
  int ids[] = new int[list.length];
@@ -42,10 +45,23 @@
      ids[i] = Integer.parseInt(list[i]);
  }
  //Get the list of visibles from the check boxes
-int visibles[] = new int[visible.length];
-for (int i = 0; i < visibles.length; i++){
-    visibles[i] = Integer.parseInt(visible[i]);
+int visibles[];
+try {
+visibles = new int[visible.length];
 }
+catch (NullPointerException e) {
+    visibles = new int[list.length];
+    blank = true;
+}
+if (!blank) {
+    for (int i = 0; i < visibles.length; i++){
+        visibles[i] = Integer.parseInt(visible[i]);
+    }
+}
+else {
+for (int i = 0; i < visibles.length; i++){
+        visibles[i] = 1;
+    }}
  
  Connection connection = dataConnection.sendConnection();
  Statement statement = connection.createStatement();
