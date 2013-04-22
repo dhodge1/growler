@@ -1,7 +1,7 @@
 <%-- 
-    Document   : speakerentry
-    Created on : Feb 27, 2013, 11:55:19 PM
-    Author     : Justin Bauguess
+    Document   : themeentry
+    Created on : Feb 27, 2013, 12:17:43 AM
+    Author     : Justin Bauguess and Jonathan C. McCowan
     Purpose    : The purpose of speakerentry(user) is for users to suggest speakers
                 to the Techtoberfest Admins.  It uses model/processSpeakerSuggestion.
 --%>
@@ -21,51 +21,70 @@
   
     <link rel="stylesheet" href="../../css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
  
-  <link rel="stylesheet" href="../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
-  <link rel="stylesheet" href="../css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-  <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
+    <link rel="stylesheet" href="../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
+    <link rel="stylesheet" href="../css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
+    <link rel="stylesheet" type="text/css" href="../css/general.css" /><!--General CSS-->
+    <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
 </head>
-    <body id="growler1">
+<body id="growler1">
     <%@ include file="../includes/header.jsp" %> 
     <%@ include file="../includes/usernav.jsp" %>
-  <div class="container-fixed">
-		<div class="content">
-			<!-- Begin Content -->
-		<div class="row">
-			<div class="span8">
+    <div class="row">
+		<div class="span3">
 			<img class="logo" src="../images/Techtoberfest2013.png" alt="Techtoberfest 2013"/>
-			<h1 class = "bordered">Suggest a Speaker</h1>
-				<!-- Techtoberfest logo + "2013 Themes" -->
-			</div>
 		</div>
+		<div class="span5">
+			<h1 class = "bordered" >Suggest a Speaker</h1>
 		</div>
+    </div>
+    <div class="container-fixed">
+		<div class="content">
+		<!-- Begin Content -->
+		<div class="container-fluid">
+			<div class="content" role="main"> 
+				<form method="POST" action="../model/processSpeakerSuggestion.jsp">
+						<div class="span5">
+							<fieldset>
+								<div class="form-group">
+									<label class="required">Speaker First Name</label>
+									<input name="name" class="input-xlarge" type="text" type="text" id="tip" data-content="30 characters or less please" maxlength="30"/>
+								</div>
+								<div class="form-group">
+									<label class="required">Speaker Last Name</label>
+									<input name="description" class="input-xlarge" type="text" id="tip2" data-content="30 characters or less please" maxlength="30"/>
+								</div>
+								<div class="form-actions">
+									<input class ="button button-primary" id="send" type = "submit" name = "Submit" value="Send" />
+									<a class="button" id="cancel" href="index.jsp">Cancel</a>
+								</div>
+							</fieldset>
+						</div>                   
+					</div>
+				</form>
+			</div><!-- /.content -->
+		</div><!-- end content div -->
+	</div><!-- /.container-fluid -->
  
-    <div class="container-fluid">
-        <div class="content" role="main"> 
-            <form method="POST" action="../model/processSpeakerSuggestion.jsp">
-                    <div class="span4">
-                        <fieldset>
-                            <div class="form-group">
-                                <label class="required">Speaker First Name</label>
-                                <input name="first_name" class="input-xlarge" type="text" maxlength="30"/>
-                            </div>
-                            <div class="form-group">
-                                <label class="required">Speaker Last Name</label>
-                                <input name="last_name" class="input-xlarge" type="text" maxlength="30"/>
-                            </div>
-                        </fieldset>
-                    </div>                   
-                </div>
- 
-                <div class="form-actions">
-                    <input class ="button button-primary" type = "submit" name = "Submit" value="Send" />
-                    <a class="action" href="index.jsp">Cancel</a>
-                </div>
-            </form>
-        </div><!-- /.content -->
-    </div><!-- /.container-fluid -->
- 
-<%@ include file="../includes/footer.jsp" %> 
-<%@ include file="../includes/scriptlist.jsp" %>
+	<%@ include file="../includes/footer.jsp" %> 
+	<%@ include file="../includes/scriptlist.jsp" %>
+	
+	<!--additional script-->
+	<script>
+	$(function () {
+		$("input").autoinline();
+    });
+	$("#send").click(function(){
+		var emptyString = "";
+		if($("input").val() === emptyString) {
+			alert("Please enter a first and last name for the speaker!");
+			window.location.replace("http://ps11.pstcc.edu:8584/ProjectGrowler/view/speakerentry.jsp");
+		}
+	});
+	$("#cancel").click(function(){
+		alert("Are you sure you want to cancel?");
+		$(".input-xlarge").val("");
+		window.location.replace("http://ps11.pstcc.edu:8584/ProjectGrowler/view/speaker.jsp");
+	});
+	</script>
 </body>
 </html>
