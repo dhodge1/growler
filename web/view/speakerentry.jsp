@@ -1,5 +1,5 @@
 <%-- 
-    Document   : themeentry
+    Document   : speakerentry
     Created on : Feb 27, 2013, 12:17:43 AM
     Author     : Justin Bauguess and Jonathan C. McCowan
     Purpose    : The purpose of speakerentry(user) is for users to suggest speakers
