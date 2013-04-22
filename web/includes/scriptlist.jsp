@@ -1,7 +1,7 @@
 <%-- 
     Document   : scriptlist
     Created on : Feb 27, 2013, 11:31:56 PM
-    Author     : Robert Brown
+    Author     : Justin Bauguess & Jonathan C. McCowan
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -11,4 +11,6 @@
 	<script src="../js/libs/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
 	<script src="../js/libs/jquery.dataTables.1.9.3.min.js" type="text/javascript"></script>
 	<script src="../js/libs/sniui.dataTables.1.0.0.min.js" type="text/javascript"></script>
-        <script src="../js/components.js"></script>
+	<script src="../js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"> </script>
+	<script src="../js/libs/sniui.auto-inline-help.1.0.0.min.js" type="text/javascript"></script>
+    <script src="../js/components.js"></script>
