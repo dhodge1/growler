@@ -35,7 +35,7 @@
     <%@ include file="../includes/usernav.jsp" %>
    <div class="row">
 	<div class="span3">
-		<img class="logo" src="Techtoberfest2013.png" alt="Techtoberfest 2013"/>
+		<img class="logo" src="../images/Techtoberfest2013.png" alt="Techtoberfest 2013"/>
 	</div>
 	<div class="span5">
 		<h1 class = "bordered" >Suggest a Theme</h1>
