@@ -87,14 +87,16 @@
     });
 	$("#send").click(function(){
 		var emptyString = "";
-		if($("input").val() === emptyString) {
-			alert("Please enter a theme name and theme description!");
-			window.location.replace("http://ps11.pstcc.edu:8584/ProjectGrowler/view/themeentry.jsp");
+		if($("#tip").val() === emptyString || $("#tip2").val() === emptyString) {
+			alert("Please enter a theme name and description!");
+		}
+		else{
+			window.location.replace("http://ps11.pstcc.edu:8584/ProjectGrowler/view/theme.jsp");
 		}
 	});
 	$("#cancel").click(function(){
 		alert("Are you sure you want to cancel?");
-		window.location.replace("http://ps11.pstcc.edu:8584/ProjectGrowler/view/themeentry.jsp");
+		$(".input-xlarge").val("");
 	});
 	</script>
 </body>
