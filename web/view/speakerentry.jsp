@@ -75,15 +75,16 @@
     });
 	$("#send").click(function(){
 		var emptyString = "";
-		if($("input").val() === emptyString) {
+		if($("#tip").val() === emptyString || $("#tip2").val() === emptyString) {
 			alert("Please enter a first and last name for the speaker!");
-			window.location.replace("http://ps11.pstcc.edu:8584/ProjectGrowler/view/speakerentry.jsp");
+		}
+		else{
+			window.location.replace("http://ps11.pstcc.edu:8584/ProjectGrowler/view/speaker.jsp");
 		}
 	});
 	$("#cancel").click(function(){
 		alert("Are you sure you want to cancel?");
 		$(".input-xlarge").val("");
-		window.location.replace("http://ps11.pstcc.edu:8584/ProjectGrowler/view/speakerentry.jsp");
 	});
 	</script>
 </body>
