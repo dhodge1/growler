@@ -27,8 +27,8 @@
  
   <link rel="stylesheet" href="../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
   <link rel="stylesheet" href="../css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-  <script src="js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
   <link rel="stylesheet" type="text/css" href="../css/general.css" /><!--General CSS-->
+  <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
 </head>
     <body id="growler1">
     <%@ include file="../includes/header.jsp" %> 
@@ -76,9 +76,9 @@
 <%@ include file="../includes/footer.jsp" %> 
 
 	<!--Additional script references-->
-	<script src="js/libs/jquery-1.8.3.min.js" type="text/javascript"></script>
-	<script src="js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"> </script>
-	<script src="js/libs/sniui.auto-inline-help.1.0.0.min.js" type="text/javascript"></script>
+	<script src="../js/libs/jquery-1.8.3.min.js" type="text/javascript"></script>
+	<script src="../js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"> </script>
+	<script src="../js/libs/sniui.auto-inline-help.1.0.0.min.js" type="text/javascript"></script>
 	
 	<!--user inline script-->
 	<script>
