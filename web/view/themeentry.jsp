@@ -74,11 +74,7 @@
 	</div><!-- /.container-fluid -->
  
 	<%@ include file="../includes/footer.jsp" %> 
-
-	<!--Additional script references-->
-	<script src="../js/libs/jquery-1.8.3.min.js" type="text/javascript"></script>
-	<script src="../js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"> </script>
-	<script src="../js/libs/sniui.auto-inline-help.1.0.0.min.js" type="text/javascript"></script>
+	<%@ include file="../includes/scriptlist.jsp" %>
 	
 	<!--user inline script-->
 	<script>
