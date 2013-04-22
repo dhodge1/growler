@@ -32,49 +32,69 @@
     <body id="growler1">
     <%@ include file="../includes/header.jsp" %> 
     <%@ include file="../includes/usernav.jsp" %>
+   <div class="row">
+	<div class="span3">
+		<img class="logo" src="Techtoberfest2013.png" alt="Techtoberfest 2013"/>
+	</div>
+	<div class="span5">
+		<h1 class = "bordered" >Suggest a Theme</h1>
+	</div>
+  </div>
   <div class="container-fixed">
-		<div class="content">
-			<!-- Begin Content -->
-		<div class="row">
-			<div class="span8">
-			<img class="logo" src="../images/Techtoberfest2013.png" alt="Techtoberfest 2013"/>
-			<h1 class = "bordered">Suggest a Theme</h1>
-				<!-- Techtoberfest logo + "2013 Themes" -->
-			</div>
-		</div>
-		</div>
- 
+	<div class="content">
+	<!-- Begin Content -->
     <div class="container-fluid">
         <div class="content" role="main"> 
-            <form method="POST" action="../model/processThemeSuggestion.jsp">
-                    <div class="span4">
+            <form method="POST" action="processThemeSuggestion.jsp">
+                    <div class="span5">
                         <fieldset>
                             <div class="form-group">
                                 <label class="required">Theme Name</label>
-                                <input name="name" class="input-xlarge" type="text" maxlength="30"/>
+                                <input name="name" class="input-xlarge" type="text" type="text" id="tip" data-content="30 characters or less please" maxlength="30"/>
                             </div>
                             <div class="form-group">
                                 <label class="required">Theme Description</label>
-                                <input name="description" class="input-xlarge" type="text" maxlength="250"/>
+                                <input name="description" class="input-xlarge" type="text" id="tip2" data-content="30 characters or less please" maxlength="30"/>
                             </div>
                             <div class="form-group">
                                 <label>Why should we implement this theme?</label>
-                                <input name="reason" class="input-xlarge" type="text" maxlength="250"/>
+                                <input name="reason" class="input-xlarge" type="text" id="tip3" data-content="Help us understand what this theme suggestion means to you" maxlength="30"/>
                             </div>
+							<div class="form-actions">
+								<a class="button button-primary" id="send" href="processThemeSuggestion.jsp">Send</a>
+								<a class="button" id="cancel" href="index.jsp">Cancel</a>
+							</div>
                         </fieldset>
                     </div>                   
                 </div>
- 
-                <div class="form-actions">
-                    <input class ="button button-primary" type = "submit" name = "Submit" value="Send" />
-                    <a class="action" href="index.jsp">Cancel</a>
-                </div>
             </form>
         </div><!-- /.content -->
-    </div><!-- /.container-fluid -->
+	</div><!-- end content div -->
+  </div><!-- /.container-fluid -->
  
 <%@ include file="../includes/footer.jsp" %> 
- 
-    <script src="../../js/libs/jquery-1.8.3.min.js" type="text/javascript"></script>
+
+	<!--Additional script references-->
+	<script src="js/libs/jquery-1.8.3.min.js" type="text/javascript"></script>
+	<script src="js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"> </script>
+	<script src="js/libs/sniui.auto-inline-help.1.0.0.min.js" type="text/javascript"></script>
+	
+	<!--user inline script-->
+	<script>
+	$(function () {
+		$("input").autoinline();
+    });
+	$("#send").click(function(){
+		var emptyString = "";
+		if($("input").val() === emptyString) {
+			alert("Please enter a theme name and theme description!");
+			window.location.replace("http://ps11.pstcc.edu:8584/ProjectGrowler/view/themeentry.jsp");
+		}
+	});
+	$("#cancel").click(function(){
+		alert("Are you sure you want to cancel?");
+		window.location.replace("http://ps11.pstcc.edu:8584/ProjectGrowler/view/themeentry.jsp");
+	});
+	</script>
 </body>
 </html>
