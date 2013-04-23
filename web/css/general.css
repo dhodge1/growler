@@ -29,10 +29,18 @@ label
 	font-family:"Verdana", Verdana, sansserif;
 	font-size:15px;
 }
-.logo
-{
-	/*border:5px solid #000000;
-	-webkit-border-radius:20px;
-	-moz-border-radius:20px;
-	border-radius:20px;*/
+ul 
+{ 
+	list-style-type: decimal-leading-zero; 
+	margin: 0; 
+	padding: 0; 
+	margin-bottom: 10px; 
+}  
+#lisort 
+{ 
+	margin: 5px; 
+	padding: 5px; 
+	list-style-type: decimal-leading-zero; 
+	style: none; 
+	width: 600px; 
 }
