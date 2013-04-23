@@ -25,13 +25,13 @@
 	<link rel="stylesheet" href="css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
 	<link rel="stylesheet" href="css/draganddrop.css" /><!--Drag and drop style-->
 	<link rel="stylesheet" type="text/css" href="css/general.css" /><!--General CSS-->
-	<script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
+	<script src="js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
 </head>
 <body id="growler1">
     <%@include file="includes/header.jsp" %>
 	<div class="row">
 		<div class="span3">
-			<img class="logo" src="../images/Techtoberfest2013.png" alt="Techtoberfest 2013"/>
+			<img class="logo" src="images/Techtoberfest2013.png" alt="Techtoberfest 2013"/>
 		</div>
 		<div class="span5">
 			<h1 class = "bordered" >Log-in to Project Growler</h1>
