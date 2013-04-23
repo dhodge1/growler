@@ -66,7 +66,7 @@
 		</div><!-- end content div -->
 	</div><!-- /.container-fluid -->
     <%@include file="includes/footer.jsp" %>
-	<%@ include file="../includes/scriptlist.jsp" %>
+	<%@ include file="includes/scriptlist.jsp" %>
 	<!--Additional script-->
 	<script>
 	$(function () {
