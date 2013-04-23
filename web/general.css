@@ -1,0 +1,38 @@
+body
+{
+	/*background-image:url('tanweave.jpg');*/
+	background-color:#FFFFFF;
+}
+h1
+{
+	padding-top:100px;
+	padding-bottom:-10px;
+}
+.form-actions
+{
+	padding-top:30px;
+}
+.form-group
+{
+	padding-left:0px;
+}
+img
+{
+	padding-top:35px;
+	padding-left:60px;
+	padding-bottom:20px;
+	padding-right:0px;
+	opacity: 1.0;
+}
+label
+{
+	font-family:"Verdana", Verdana, sansserif;
+	font-size:15px;
+}
+.logo
+{
+	/*border:5px solid #000000;
+	-webkit-border-radius:20px;
+	-moz-border-radius:20px;
+	border-radius:20px;*/
+}
