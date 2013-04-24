@@ -2,10 +2,8 @@
     Document   : usernav
     Created on : Apr 4, 2013, 4:25:29 PM
     Author     : Justin Bauguess & Jonathan C. McCowan
-    Purpose    : The usernav file goes above the header.jsp file.  It contains 
-                the navigation for users.
-                As of 4/16, it also will send users who aren't logged in to the
-                log in page.
+    Purpose    : The usernav file goes below the header.jsp file.  It contains 
+                 the navigation for users.
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
  <nav class="globalNavigation">
@@ -19,15 +17,4 @@
             <li><a href="../help/help.jsp">Help</a></li>
 			<li><a href="../model/logout.jsp">Logout</a></li>
         </ul>
-     <%
-     //Get the user's info, and post a welcome!
-     if (!String.valueOf(session.getAttribute("user")).isEmpty()) {
-        String user = String.valueOf(session.getAttribute("user"));
-        out.print("    Welcome, " + user + "!");
-        }
-     //If they aren't logged in, we want them to go back and log in.
-     else {
-        response.sendRedirect("../index.jsp");
-     }
-     %>
   </nav><!-- /.globalNavigation -->
