@@ -85,11 +85,11 @@
          <td><% out.print(speaker.getInt("count")); %></td>
          <% double d = speaker.getDouble("rating");
          
-             out.print("<td><input id=\"" + speaker.getInt("id") +"\" type=\"number\" min=\"0\" max=\"5\" name=\"newrank\" type=\"text\" value=" + d + " /></td>");
+             out.print("<td><input id=\"" + speaker.getInt("id") +"\" type=\"number\" min=\"0\" max=\"5\" name=\"newrank\" value=" + d + " /></td>");
          %>
          <% int i = speaker.getInt("count");
          
-             out.print("<td><input id=\"" + speaker.getInt("id") +"\" type=\"number\" min=\"0\" max=\"100\" name=\"newcount\" type=\"text\" value=" + i + " /></td>");
+             out.print("<td><input id=\"" + speaker.getInt("id") +"\" type=\"number\" min=\"0\" max=\"100\" name=\"newcount\" value=" + i + " /></td>");
          
          %>
         

@@ -15,7 +15,8 @@
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> 
+<html class="no-js" lang="en"> <!--<![endif]-->
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -39,38 +40,51 @@
 			<div class="row">
 				<div class="span12">
 					<img class="logo" src="../images/Techtoberfest2013.png" alt="Techtoberfest 2013"/>  <!-- Techtoberfest logo-->
-					<h1 class = "bordered">Survey</h1>
+					<h1 class = "bordered">Surveys</h1>
                                         <div id="tabs-1">
 					<div class="row">
 					
 						<div class="span1">
 							<br/>
                                                         
-                                             <% Connection newConnect = dataConnection.sendConnection();
+                                                        <% String user = String.valueOf(request.getAttribute("id"));
+                                                        String sessionId = String.valueOf(request.getAttribute("session"));
+                                                Connection newConnect = dataConnection.sendConnection();
                                                      
                                                 Statement newStatement = newConnect.createStatement();
-                                                ResultSet qResult = newStatement.executeQuery("select id, text from question");
+                                                ResultSet qResult = newStatement.executeQuery("select text from question");
                                         %>
 						</div>
 					<div class="span2">
 					<section>
-                                            <form action="../model/processSurvey.jsp" >
-						
+                                            <form action="../model/processsurvey.jsp" method="get" >
+                                            <table>
+                                                <tr>
+                                                    <td>Question</td>
+                                                    <td>Response</td>
+                                                </tr>
 						<%                                             
                                                 while (qResult.next()) {
                                                 %>
-                                                <% out.print(qResult.getString("text")); %>
-                                                <br/><br/>
-                                                
-                                                <% out.print("<input type=\"hidden\" name=\"list\" value=\"" + qResult.getInt("id") + "\" >");%>
-                                                
+                                                <tr>
+                                                <td><% out.print(qResult.getString("text")); %></td>
+                                                <td><select>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                    </select></td>
+                                                </tr>
                                                 <% }
                                                 
                                                 qResult.close();
                                                 newStatement.close();
                                                 newConnect.close(); %>
 							
-                                            </form>
+                                            
+                                            </table>
+                                                </form>
 					</section>
 					</div>
 					<div class="span7">

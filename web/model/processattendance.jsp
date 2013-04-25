@@ -43,10 +43,15 @@
         Connection connection = dataConnection.sendConnection();
         Statement statement = connection.createStatement();
         //Ensure time is still current, so user didn't just leave page up to enter erroneous data
-        ResultSet result = statement.executeQuery("select id from session where (select addtime(start_time, '00;15:00') from " + 
+        ResultSet result = statement.executeQuery("select id, name from session where (select addtime(start_time, '00;15:00') from " + 
                 "session where id = '" + sessionId + "') < '" + time + "' and " +
                 " session_date = '" + date + "' and survey_key = '" + key + "'");
+        
         if(result.first()) {
+            session.setAttribute("message", "Invalid Session Key for session " + sessionId);
+                   }
+               else {
+            
             //Prevent the same time slot registration
             ResultSet duplicate = statement.executeQuery("select a.session_id from attendance a, session s where " +
                     "a.user_id = " + user + " and s.start_time = (select start_time from session where id = " + sessionId +
@@ -55,7 +60,12 @@
                 //if there aren't any sessions there, add attendance record to DB
                 boolean success = statement.execute("insert into attendance (user_id, session_id) values (" +
                user + ", " + sessionId + ")" );
+                session.setAttribute("message","Sucessfully registered!");
             }
+                       else {
+                
+                session.setAttribute("message", "Already registered in that time slot!");
+                       }
             duplicate.close();
         }
         
@@ -64,7 +74,6 @@
         connection.close();
         statement.close();
         result.close();
-        
         response.sendRedirect("../view/attendance.jsp");
         %>
 	<%@ include file="../includes/scriptlist.jsp" %>

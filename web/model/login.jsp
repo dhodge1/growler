@@ -53,17 +53,29 @@
             if (result.getInt(1) == 8083) {
                 session.setAttribute("user", "admin");
                 session.setAttribute("id", new Integer(result.getInt("id")));
+                connection.close();
+                statement.close();
+                result.close();
                 response.sendRedirect("../admin/theme.jsp");
             }
             //Otherwise, go to the user side
             else {
+                
                 session.setAttribute("user", result.getString(2));
                 session.setAttribute("id", new Integer(result.getInt("id")));
+                connection.close();
+                statement.close();
+                result.close();
                 response.sendRedirect("../view/theme.jsp");
             }
         }
                else {
+            connection.close();
+                statement.close();
+                result.close();
+            response.addHeader("error", "Invalid Log-In");
             response.sendRedirect("../index.jsp");
+            
                }
         %>
 	<%@ include file="../includes/scriptlist.jsp" %>

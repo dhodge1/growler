@@ -46,7 +46,7 @@
 		<!-- Begin Content -->
 		<div class="container-fluid">
 			<div class="content" role="main"> 
-				<form method="POST" action="processThemeSuggestion.jsp">
+				<form method="POST" action="../model/processThemeSuggestion.jsp">
 						<div class="span5">
 							<fieldset>
 								<div class="form-group">
@@ -63,7 +63,6 @@
 								</div>
 								<div class="form-actions">
 									<a class="button button-primary" id="send" href="processThemeSuggestion.jsp">Send</a>
-									<a class="button" id="cancel" href="index.jsp">Cancel</a>
 								</div>
 							</fieldset>
 						</div>                   

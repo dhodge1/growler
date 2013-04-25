@@ -54,7 +54,7 @@
 									<input type="password" name="password" id="tip2" data-content="Enter your password" size="15"/>
 								</div>
 								<div class="form-actions">
-									<a class="button button-primary" type="submit" value="Submit" id="send">Submit</a>
+									<input type="submit" value="Submit" /><br/><br/>
 									<a href="view/resetpassword.jsp">Forgot Password?</a><br/><br/>
 									<a href="view/register.jsp">Sign Up - New User</a>
 								</div>

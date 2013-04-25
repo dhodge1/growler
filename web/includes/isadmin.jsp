@@ -17,7 +17,7 @@
         //If there is header data, then the user is trying to access
         //Something they shouldn't.  Send them to the theme page
         else {
-            response.sendRedirect("../view/theme.jsp");
+            response.sendRedirect("../index.jsp");
         }
     }
 %>

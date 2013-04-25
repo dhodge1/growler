@@ -55,7 +55,6 @@
 								</div>
 								<div class="form-actions">
 									<input class ="button button-primary" id="send" type = "submit" name = "Submit" value="Send" />
-									<a class="button" id="cancel" href="index.jsp">Cancel</a>
 								</div>
 							</fieldset>
 						</div>                   

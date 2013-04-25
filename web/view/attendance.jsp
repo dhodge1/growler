@@ -31,7 +31,7 @@
 <body id="growler1">
  <%@ include file="../includes/header.jsp" %>
  <%@ include file="../includes/usernav.jsp" %>
- <form method="post" action="../model/processattendance.jsp">
+ <form method="get" action="../model/processattendance.jsp">
  <table>
      <tr>
          <td>Name</td>
@@ -40,6 +40,12 @@
          <td>Key</td>
          <td>Register</td>
      </tr>
+     <%
+     String message = String.valueOf(session.getAttribute("message"));
+     if (!message.equals("null")) {
+         out.print("<p>" + message + "</p>");
+             }
+     %>
     <%
     Calendar today = Calendar.getInstance();
     String date = today.get(Calendar.YEAR) + "-" + (today.get(Calendar.MONTH)+1) + "-" + today.get(Calendar.DATE);
@@ -57,7 +63,7 @@
             <td><% out.print(result.getDate("session_date")); %></td>
             <td><% out.print(result.getTime("start_time")); %></td>
             <td><input type="text" name="key"/></td>
-            <td><input type="submit" value="Attend"/></td>
+            <td><% out.print("<a href=\"../model/processattendance.jsp?session=" + result.getInt("id") + "\">" + "Attend</a>"); %></td>
         </tr>
         <%
     }

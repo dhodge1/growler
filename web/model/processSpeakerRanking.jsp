@@ -50,7 +50,7 @@
  Statement statement = connection.createStatement();
  PreparedStatement insert = connection.prepareStatement(queries.insertSpeakerRanking());
  //two fields to put: ID (int), ranking (int)
- for (int j = 0; j < list.length; j++) {
+ for (int j = 0; j < list.length && j < 10; j++) {
      insert.setInt(1, ids[j]);
      insert.setInt(2, 10-j);
      insert.setInt(3, user);

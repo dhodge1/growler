@@ -55,7 +55,7 @@
  //If they haven't voted, take their votes and put them in the database
  PreparedStatement insert = connection.prepareStatement(queries.insertThemeRanks());
  //three fields to put: theme_ID (int), user_id (int), theme_rank (int)
- for (int j = 0; j < list.length; j++) {
+ for (int j = 0; j < list.length && j < 10; j++) {
      insert.setInt(1, ids[j]);
      insert.setInt(2, id);
      insert.setInt(3, 10-j);
