@@ -63,7 +63,7 @@
  </div>
 					<div class="span2">
 					<section>
-                                            <form action="../model/adminspeaker.jsp" method="post">
+                                            <form id="entry" name="entry" action="../model/adminspeaker.jsp" method="post">
                                             <table>
                                                 <tr>
                                                     <td>Speaker Name</td>
@@ -81,12 +81,11 @@
      <tr>
          <td><% out.print(speaker.getString("last_name") + ", " + speaker.getString("first_name")); %>
          <input name="list" type="hidden" value="<% out.print(speaker.getInt("id")); %>" />
-         <input name="admin" type="hidden" value="true" /></td>
          <td><% out.print(speaker.getDouble("rating")); %></td>
          <td><% out.print(speaker.getInt("count")); %></td>
          <% double d = speaker.getDouble("rating");
          if (d > 0) {
-             out.print("<td><input name=\"newrank\" type=\"text\" value=" + d + " /></td>");
+             out.print("<td><input id=\"" + speaker.getInt("id") +"\" type=\"number\" min=\"0\" max=\"5\" name=\"newrank\" type=\"text\" value=" + d + " /></td>");
          }
          else {
              out.print("<td>No 2012 Rating</td>");
@@ -94,10 +93,10 @@
          %>
          <% int i = speaker.getInt("count");
          if (i > 0) {
-             out.print("<td><input name=\"newcount\" type=\"text\" value=" + i + " /></td>");
+             out.print("<td><input id=\"" + speaker.getInt("id") +"\" type=\"number\" min=\"0\" max=\"100\" name=\"newcount\" type=\"text\" value=" + i + " /></td>");
          }
          else {
-             out.print("<td></td>");
+             out.print("<td>No 2012 Rating</td>");
          }
          %>
          
@@ -114,7 +113,7 @@
  statement.close();
  connection.close();%>
  </table>
- <input type="submit" value="Submit" class="button-primary" />
+ <input type="submit" value="Submit" class="button button-primary" />
   </form>
  </section>
 					</div>
@@ -134,10 +133,11 @@
 		</div>
 		<div class="span2">
                     </div>
-	</div>	
+	</div>
   
 <%@ include file="../includes/footer.jsp" %> 
 <%@ include file="../includes/scriptlist.jsp" %>
 <%@ include file="../includes/draganddrop.jsp" %>
+<script src="../js/validation.js"></script>
     </body>
 </html>

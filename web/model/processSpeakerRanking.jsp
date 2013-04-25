@@ -41,6 +41,7 @@
         </ul>
   </nav><!-- /.globalNavigation -->
  <% String list[] = request.getParameterValues("list");
+ int user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
  int ids[] = new int[list.length];
  for (int i = 0; i < list.length; i++) {
      ids[i] = Integer.parseInt(list[i]);
@@ -52,6 +53,7 @@
  for (int j = 0; j < list.length; j++) {
      insert.setInt(1, ids[j]);
      insert.setInt(2, 10-j);
+     insert.setInt(3, user);
      insert.execute();
  }
  response.sendRedirect("../view/speaker.jsp");

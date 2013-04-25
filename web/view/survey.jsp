@@ -1,13 +1,8 @@
 <%-- 
-    Document   : theme
-    Created on : Feb 28, 2013, 7:15:03 PM
+    Document   : survey
+    Created on : Apr 25, 2013, 7:15:03 PM
     Author     : Justin Bauguess
-    Purpose    : The theme (user) page is for users to rank themes according to 
-                their preferences.  The ranks are saved in the isolated_theme_ranking
-                table for now.  Once users are remembered, it will be saved in the 
-                theme_ranking table.  A record in that table will contain a user_id,
-                theme_id, and rank.  Ranks can only be between 1 and 10.  Once a user
-                has submitted rankings, they can change them later.
+    Purpose    : 
 --%>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
@@ -44,63 +39,38 @@
 			<div class="row">
 				<div class="span12">
 					<img class="logo" src="../images/Techtoberfest2013.png" alt="Techtoberfest 2013"/>  <!-- Techtoberfest logo-->
-					<h1 class = "bordered">Themes</h1>
-					</br>
-					</br>
-					</br>
+					<h1 class = "bordered">Survey</h1>
                                         <div id="tabs-1">
 					<div class="row">
 					
 						<div class="span1">
 							<br/>
                                                         
-                                             <% 
-                                                String user = String.valueOf(session.getAttribute("id"));
-                                                Connection newConnect = dataConnection.sendConnection();
+                                             <% Connection newConnect = dataConnection.sendConnection();
+                                                     
                                                 Statement newStatement = newConnect.createStatement();
-                                                Statement themeStatement = newConnect.createStatement();
-                                                ResultSet preranked = newStatement.executeQuery("select r.theme_id, t.name from theme_ranking r, theme t where t.id = r.theme_id and r.user_id = " + user);
-                                                ResultSet themeResult = themeStatement.executeQuery(queries.selectVisibleThemes());
+                                                ResultSet qResult = newStatement.executeQuery("select id, text from question");
                                         %>
 						</div>
 					<div class="span2">
 					<section>
-                               
-                                            <%
-                                            int counter = 1;
-                                               while(preranked.next()) {
-                                                   out.println("Rank " + counter + ":" + preranked.getString("name") + "<br/><br/>");
-                                                   counter++;
-                                                   themeResult = null;
-                                                   
-                                               }
-                                            preranked.close();
-                                             %>
-                                            <form action="../model/processThemeRanking.jsp" >
-						<ul id="sortable">
-						<%            
-                                                    if (themeResult != null) {
-                                                        out.print("<h3>Drag and drop themes to rank them!</h3>");
-						out.print("<h5>**Only the top ten themes will be ranked</h5>");
-                                                        while (themeResult.next()) {
+                                            <form action="../model/processSurvey.jsp" >
+						
+						<%                                             
+                                                while (qResult.next()) {
                                                 %>
-                                                <li class="ui-state-default" id="lisort">
-                                                    <strong><% out.print(themeResult.getString("name") + " : "); %></strong>
-                                                            <% out.print(themeResult.getString("description")); %>
-                                                    
-                                                </li>
+                                                <% out.print(qResult.getString("text")); %>
+                                                <br/><br/>
                                                 
-                                                <% out.print("<input type=\"hidden\" name=\"list\" value=\"" + themeResult.getInt("id") + "\" >");%>
+                                                <% out.print("<input type=\"hidden\" name=\"list\" value=\"" + qResult.getInt("id") + "\" >");%>
                                                 
                                                 <% }
-                                                        themeResult.close();
-                                                   }
                                                 
+                                                qResult.close();
                                                 newStatement.close();
-                                                themeStatement.close();
                                                 newConnect.close(); %>
 							
-						
+                                            </form>
 					</section>
 					</div>
 					<div class="span7">
@@ -120,10 +90,8 @@
 		<div class="span2">
                     
                         
-                        <% if (counter == 1) {
-                        out.print("<input type=\"submit\" value=\"Submit Ratings\" class=\"button button-primary\"/>");
-                                                               }
-                                %>
+                        
+                        <input type="submit" value="Submit Ratings" class="button button-primary"/>
                         </form>
                         
 			

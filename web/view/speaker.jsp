@@ -58,29 +58,44 @@
 						<div class="span1">
 							</br>
                                                         <%
-                                                        
+                                                        String user = String.valueOf(session.getAttribute("id"));
                                                         Connection connection = dataConnection.sendConnection();
  Statement statement = connection.createStatement();
+ Statement ranked = connection.createStatement();
+ ResultSet preranked = ranked.executeQuery("select s.first_name, s.last_name from speaker s, speaker_ranking r where r.speaker_id = s.id and r.user_id = " + user);
  ResultSet speaker = statement.executeQuery(queries.selectVisibleSpeakers());
  %>
  </div>
 					<div class="span2">
 					<section>
+                                            <%
+                                            int counter = 1;
+                                               while(preranked.next()) {
+                                                   out.println("Rank " + counter + ":" + preranked.getString("last_name") + ", " + preranked.getString("first_name") + "<br/><br/>");
+                                                   counter++;
+                                                   speaker = null;
+                                                   
+                                               }
+                                            preranked.close();
+                                             %>
  <form action="../model/processSpeakerRanking.jsp">
  <ul class="sortable">
-     
-    
-<% 
- while (speaker.next()) {
-     %>
+ <%            
+                                                    if (speaker != null) {
+                                                        out.print("<h3>Drag and drop themes to rank them!</h3>");
+						out.print("<h5>**Only the top ten themes will be ranked</h5>");
+                                                        while (speaker.next()) {
+                                                     %>
      <li id="lisort"> <% out.print(speaker.getString("last_name") + ", " + speaker.getString("first_name")); %>
          <% out.print(giveStars.return2012Rank(speaker.getInt("id"))); %>
          <% out.print(giveStars.returnCount(speaker.getInt("id"))); %>
            
          <% out.print("<input type=\"hidden\" name=\"list\" value=\"" + speaker.getInt("id") + "\" />"); %></li>
   <% } 
+     speaker.close();
+     }
  statement.close();
- speaker.close();
+ ranked.close();
  connection.close();%>
  </ul>
  </section>
@@ -102,7 +117,10 @@
 		<div class="span2">
                     </div>
 	</div>	
-  <input type="submit" value="Submit Ratings" class="button button-primary"/>
+  <% if (counter == 1) {
+                        out.print("<input type=\"submit\" value=\"Submit Ratings\" class=\"button button-primary\"/>");
+                                                               }
+                                %>
   </form>
 <%@ include file="../includes/footer.jsp" %> 
 <%@ include file="../includes/scriptlist.jsp" %>

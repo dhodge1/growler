@@ -37,15 +37,18 @@
          <td>Name</td>
          <td>Date</td>
          <td>Time</td>
+         <td>Key</td>
          <td>Register</td>
      </tr>
     <%
     Calendar today = Calendar.getInstance();
     String date = today.get(Calendar.YEAR) + "-" + (today.get(Calendar.MONTH)+1) + "-" + today.get(Calendar.DATE);
+    String time = today.get(Calendar.HOUR) + ":" + today.get(Calendar.MINUTE) + ":" + today.get(Calendar.SECOND);
     Connection connection = dataConnection.sendConnection();
     Statement statement = connection.createStatement();
+    //Select sessions that are today, before the current time
     ResultSet result = statement.executeQuery("select id, name, session_date, start_time from session where session_date = '" + 
-            date + "'" );
+            date + "' and start_time > '" + time + "'" );
     while(result.next()) {
         %>
         <tr>
@@ -53,6 +56,7 @@
             <input type="hidden" name="session" value="<% out.print(result.getInt("id")); %>"/></td>
             <td><% out.print(result.getDate("session_date")); %></td>
             <td><% out.print(result.getTime("start_time")); %></td>
+            <td><input type="text" name="key"/></td>
             <td><input type="submit" value="Attend"/></td>
         </tr>
         <%

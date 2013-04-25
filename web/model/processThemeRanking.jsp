@@ -64,6 +64,7 @@
  insert.close();
  out.print("Your votes have been recorded!");
  }
+ response.sendRedirect("../view/theme.jsp");
  connection.close();
  statement.close();
  result.close();

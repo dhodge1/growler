@@ -32,18 +32,32 @@
 </head>
     <body>
         <%    
-        
+        Calendar today = Calendar.getInstance();
+        String date = today.get(Calendar.YEAR) + "-" + (today.get(Calendar.MONTH)+1) + "-" + today.get(Calendar.DATE);
+        String time = today.get(Calendar.HOUR) + ":" + today.get(Calendar.MINUTE) + ":" + today.get(Calendar.SECOND);
         String sessionId = request.getParameter("session");
-        
+        String key = request.getParameter("key");
+        String user = String.valueOf(session.getAttribute("id"));
         
         
         Connection connection = dataConnection.sendConnection();
         Statement statement = connection.createStatement();
-        ResultSet result = statement.executeQuery("");
-        
-        
-        boolean success = statement.execute("insert into attendance (user_id, session_id) values " +
-               session.getAttribute("id") + ", " + sessionId );
+        //Ensure time is still current, so user didn't just leave page up to enter erroneous data
+        ResultSet result = statement.executeQuery("select id from session where (select addtime(start_time, '00;15:00') from " + 
+                "session where id = '" + sessionId + "') < '" + time + "' and " +
+                " session_date = '" + date + "' and survey_key = '" + key + "'");
+        if(result.first()) {
+            //Prevent the same time slot registration
+            ResultSet duplicate = statement.executeQuery("select a.session_id from attendance a, session s where " +
+                    "a.user_id = " + user + " and s.start_time = (select start_time from session where id = " + sessionId +
+                    " ) and s.session_date = '" + date + "'");
+            if (!duplicate.first()){
+                //if there aren't any sessions there, add attendance record to DB
+                boolean success = statement.execute("insert into attendance (user_id, session_id) values (" +
+               user + ", " + sessionId + ")" );
+            }
+            duplicate.close();
+        }
         
         
         
