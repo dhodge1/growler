@@ -52,12 +52,12 @@
                                                 Connection newConnect = dataConnection.sendConnection();
                                                      
                                                 Statement newStatement = newConnect.createStatement();
-                                                ResultSet qResult = newStatement.executeQuery("select text from question");
+                                                ResultSet qResult = newStatement.executeQuery("select id, text from question");
                                         %>
 						</div>
 					<div class="span2">
 					<section>
-                                            <form action="../model/processsurvey.jsp" method="get" >
+                                            <form action="../model/processsurvey.jsp" method="post" >
                                             <table>
                                                 <tr>
                                                     <td>Question</td>
@@ -68,7 +68,7 @@
                                                 %>
                                                 <tr>
                                                 <td><% out.print(qResult.getString("text")); %></td>
-                                                <td><select>
+                                                <td><select <% out.print("name = " + qResult.getInt("id")); %>>
                                                         <option value="1">1</option>
                                                         <option value="2">2</option>
                                                         <option value="3">3</option>
@@ -84,6 +84,7 @@
 							
                                             
                                             </table>
+                                                <input type="submit" value="Submit" />
                                                 </form>
 					</section>
 					</div>

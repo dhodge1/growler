@@ -67,7 +67,7 @@
                                                 %>
                                                 <tr>
                                                 <td><% out.print(qResult.getString("name")); %></td>
-                                                <td><% out.print("<a href=\"../model/processsurveyrequest.jsp?session=" + qResult.getInt("id") +"\">Survey</a>");%></td>
+                                                <td><% out.print("<a href=\"../view/survey.jsp?session=" + qResult.getInt("id") +"\">Survey</a>");%></td>
                                                 </tr>
                                                 <% }
                                                 
