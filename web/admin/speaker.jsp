@@ -84,22 +84,15 @@
          <td><% out.print(speaker.getDouble("rating")); %></td>
          <td><% out.print(speaker.getInt("count")); %></td>
          <% double d = speaker.getDouble("rating");
-         if (d > 0) {
+         
              out.print("<td><input id=\"" + speaker.getInt("id") +"\" type=\"number\" min=\"0\" max=\"5\" name=\"newrank\" type=\"text\" value=" + d + " /></td>");
-         }
-         else {
-             out.print("<td>No 2012 Rating</td>");
-         }
          %>
          <% int i = speaker.getInt("count");
-         if (i > 0) {
-             out.print("<td><input id=\"" + speaker.getInt("id") +"\" type=\"number\" min=\"0\" max=\"100\" name=\"newcount\" type=\"text\" value=" + i + " /></td>");
-         }
-         else {
-             out.print("<td>No 2012 Rating</td>");
-         }
-         %>
          
+             out.print("<td><input id=\"" + speaker.getInt("id") +"\" type=\"number\" min=\"0\" max=\"100\" name=\"newcount\" type=\"text\" value=" + i + " /></td>");
+         
+         %>
+        
          <td><input name="visible" type="checkbox" value="<% out.print(speaker.getInt("id")); %>"
                     <% if (speaker.getInt("visible") == 0) {
                         out.print("checked"); }%> />
