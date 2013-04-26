@@ -31,7 +31,7 @@
   <link rel="stylesheet" href="../css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
 	<link rel="stylesheet" href="../css/draganddrop.css" /><!--Drag and drop style-->
   <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
-  <script src="../js/validation.js</script><!--Validation-->
+  <script src="../js/validation.js></script><!--Validation-->
 </head>
 <body id="growler1">
     <%@include file="../includes/isadmin.jsp" %>
@@ -89,7 +89,6 @@
              out.print("<td><input id=\"" + speaker.getInt("id") +"\" type=\"number\" min=\"0\" max=\"5\" name=\"newrank\" onblur="checkRange()" value=" + d + " /></td>");
          %>
          <% int i = speaker.getInt("count");
-         
              out.print("<td><input id=\"" + speaker.getInt("id") +"\" type=\"number\" min=\"0\" max=\"100\" name=\"newcount\" value=" + i + " /></td>");
          
          %>
