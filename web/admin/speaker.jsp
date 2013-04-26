@@ -31,6 +31,7 @@
   <link rel="stylesheet" href="../css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
 	<link rel="stylesheet" href="../css/draganddrop.css" /><!--Drag and drop style-->
   <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
+  <script src="../js/validation.js</script><!--Validation-->
 </head>
 <body id="growler1">
     <%@include file="../includes/isadmin.jsp" %>
