@@ -14,5 +14,8 @@
 	<script src="../js/libs/jquery.dataTables.1.9.3.min.js" type="text/javascript"></script>
 	<script src="../js/libs/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
 	<script src="../js/libs/prettify.js" type="text/javascript"></script>
-	<script src="../js/libs/sniui.dataTables.1.0.0.min.js" type="text/javascript"></script>
+	<script src="../js/libs/sniui.accordion.1.0.0.min.js" type="text/javascript"></script>
 	<script src="../js/libs/sniui.auto-inline-help.1.0.0.min.js" type="text/javascript"></script>
+	<script src="../js/libs/sniui.dataTables.1.0.0.min.js" type="text/javascript"></script>
+	
+	
