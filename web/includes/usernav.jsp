@@ -6,7 +6,7 @@
                  the navigation for users.
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
- <nav class="globalNavigation">
+	<nav class="globalNavigation">
         <ul>
             <li><a href="../view/theme.jsp">Themes</a></li>
             <li><a href="../view/themeentry.jsp">Suggest a Theme</a></li>
@@ -17,9 +17,9 @@
             <li><a href="../view/help.jsp">Help</a></li>
 			<li><a href="../model/logout.jsp">Logout</a></li>
         </ul>
-     <%
-        if (String.valueOf(session.getAttribute("user")).isEmpty() || String.valueOf(session.getAttribute("user")).equals("null")){
-            response.sendRedirect("../index.jsp");
-        }
-     %>
-  </nav><!-- /.globalNavigation -->
+		<%
+			if (String.valueOf(session.getAttribute("user")).isEmpty() || String.valueOf(session.getAttribute("user")).equals("null")){
+				response.sendRedirect("../index.jsp");
+			}
+		%>
+	</nav><!-- /.globalNavigation -->
