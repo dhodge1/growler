@@ -14,54 +14,53 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title></title>
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="description" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	
+	<title>Speaker Entry</title>
   
-    <link rel="stylesheet" href="../../css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
- 
-    <link rel="stylesheet" href="../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
-    <link rel="stylesheet" href="../css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-    <link rel="stylesheet" type="text/css" href="../css/general.css" /><!--General CSS-->
-    <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
+	<link rel="stylesheet" href="../css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
+	<link rel="stylesheet" href="../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
+	<link rel="stylesheet" href="../css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
+	<link rel="stylesheet" href="../css/prettify/prettify.css" /> 
+	<link rel="stylesheet" type="text/css" href="../css/general.css" /><!--General CSS-->
+  
+    <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->	
 </head>
 <body id="growler1">
     <%@ include file="../includes/header.jsp" %> 
     <%@ include file="../includes/usernav.jsp" %>
-    <div class="row">
+   <div class="row">
 		<div class="span3">
-			<img class="logo" src="../images/Techtoberfest2013.png" alt="Techtoberfest 2013"/>
+			<img class="logo" src="../images/Techtoberfest2013small.png" alt="Techtoberfest 2013 small"/>
 		</div>
 		<div class="span5">
-			<h1 class = "bordered" >Suggest a Speaker</h1>
+			<h1 class = "bordered largeBottomMargin">Suggest a Speaker</h1>
 		</div>
-    </div>
-    <div class="container-fixed">
-		<div class="content">
+	</div>
+	<div class="container-fluid">
+		<div class="content" role="main">
 		<!-- Begin Content -->
-		<div class="container-fluid">
-			<div class="content" role="main"> 
-				<form method="POST" action="../model/processSpeakerSuggestion.jsp">
-						<div class="span5">
-							<fieldset>
-								<div class="form-group">
-									<label class="required">Speaker First Name</label>
-									<input name="name" class="input-xlarge" type="text" type="text" id="tip" data-content="30 characters or less please" maxlength="30"/>
-								</div>
-								<div class="form-group">
-									<label class="required">Speaker Last Name</label>
-									<input name="description" class="input-xlarge" type="text" id="tip2" data-content="30 characters or less please" maxlength="30"/>
-								</div>
-								<div class="form-actions">
-									<input class ="button button-primary" id="send" type = "submit" name = "Submit" value="Send" />
-								</div>
-							</fieldset>
-						</div>                   
-					</div>
-				</form>
-			</div><!-- /.content -->
-		</div><!-- end content div -->
+			<form method="POST" id="action" action="../model/processSpeakerSuggestion.jsp">
+				<div class="span5 offset3">
+					<fieldset>
+						<div class="form-group">
+							<label class="required">Speaker First Name</label>
+							<input name="name" class="input-xlarge" type="text" id="tip" data-content="30 characters or less please" maxlength="30"/>
+						</div>
+						<div class="form-group">
+							<label class="required">Speaker Last Name</label>
+							<input name="description" class="input-xlarge" type="text" id="tip2" data-content="30 characters or less please" maxlength="30"/>
+						</div>
+						<div class="form-actions">
+							<a class="button button-primary" id="send">Send</a>
+							<a class="button" id="cancel" href="http://ps11.pstcc.edu:8584/ProjectGrowler/web/view/speaker.jsp">Cancel</a>
+						</div>
+					</fieldset>
+				</div>   
+			</form>		
+		</div><!-- /.content -->
 	</div><!-- /.container-fluid -->
  
 	<%@ include file="../includes/footer.jsp" %> 
@@ -75,15 +74,12 @@
 	$("#send").click(function(){
 		var emptyString = "";
 		if($("#tip").val() === emptyString || $("#tip2").val() === emptyString) {
-			alert("Please enter a first and last name for the speaker!");
+			$("#action").attr("action","");
+			alert("Please enter both a first and last name for the speaker before submitting.");
 		}
 		else{
-			window.location.replace("http://ps11.pstcc.edu:8584/ProjectGrowler/view/speaker.jsp");
+			$("#action").attr("action","../model/processSpeakerSuggestion.jsp");
 		}
-	});
-	$("#cancel").click(function(){
-		alert("Are you sure you want to cancel?");
-		$(".input-xlarge").val("");
 	});
 	</script>
 </body>
