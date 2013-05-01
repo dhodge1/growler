@@ -1,10 +1,11 @@
-ul 
-{ 
-	list-style-type: decimal-leading-zero; 
-	margin: 0; 
-	padding: 0; 
-	margin-bottom: 10px; 
-}  
+img
+{
+	padding-top:10px;
+	padding-left:20px;
+	padding-bottom:20px;
+	padding-right:0px;
+	opacity: 1.0;
+}
 #lisort 
 { 
 	margin: 5px; 
@@ -12,4 +13,12 @@ ul
 	list-style-type: decimal-leading-zero; 
 	style: none; 
 	width: 600px; 
-}
+	height: 60px; 
+}  
+ul 
+{ 
+	list-style-type: decimal-leading-zero; 
+	margin: 0; 
+	padding: 0; 
+	margin-bottom: 10px; 
+} 
