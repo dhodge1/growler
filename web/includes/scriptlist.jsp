@@ -19,4 +19,5 @@
 	<script src="../js/libs/sniui.auto-inline-help.min.js" type="text/javascript"> </script>
 	<script src="../js/libs/sniui.auto-inline-help.1.0.0.min.js" type="text/javascript"></script>
 	<script src="../js/libs/sniui.dataTables.1.0.0.min.js" type="text/javascript"></script>
+	<script src="../js/libs/sniui.dialog.1.1.0.js" type="text/javascript"></script>
 	
