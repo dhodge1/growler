@@ -1,7 +1,7 @@
 <%-- 
     Document   : speaker
     Created on : Feb 27, 2013, 11:23:26 PM
-    Author     : Justin Bauguess
+    Author     : Justin Bauguess & Jonathan C. McCowan
     Purpose    : The purpose of speaker is to display speaker information so a
                 user can rank them.  It uses the ranks_2012 and speaker tables. 
                 The rank is a score between 0 and 5 that was determined from 
@@ -24,106 +24,111 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
   <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <title>Growler Project</title><!-- Title -->
-  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>  <link rel="stylesheet" href="/resources/demos/style.css" />  <style>  ul { list-style-type: decimal-leading-zero; margin: 0; padding: 0; margin-bottom: 10px; }  #lisort { margin: 5px; padding: 5px; list-style-type: decimal-leading-zero; style: none; width: 600px; }  </style>  <script>  $(function() {    $( "#sortable" ).sortable({      revert: true    });    $( "#draggable" ).draggable({      connectToSortable: "#sortable",      helper: "clone",      revert: "invalid"    });    $( "ul, li" ).disableSelection();  });  </script>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />  
   <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Speakers</title><!-- Title -->
+  
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
   <link rel="stylesheet" href="../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
   <link rel="stylesheet" href="../css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-	<link rel="stylesheet" href="../css/draganddrop.css" /><!--Drag and drop style-->
-  <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
-  <style> ul { list-style-type: decimal-leading-zero; margin: 0; padding: 0; margin-bottom: 10px; }  #lisort { margin: 5px; padding: 5px; list-style-type: decimal-leading-zero; style: none; width: 300px; height: 60px; }  </style>
+  <link rel="stylesheet" href="../css/demo.css" />  
+  <link rel="stylesheet" href="../css/draganddrop.css" /><!--Drag and drop style-->
+  <link rel="stylesheet" type="text/css" href="../css/general.css" /><!--General CSS-->
+  <link rel="stylesheet" type="text/css" href="../css/speaker.css" /><!--Speaker CSS-->
 </head>
 <body id="growler1">
- <%@ include file="../includes/header.jsp" %> 
-<%@ include file="../includes/usernav.jsp" %>
-  <div class="container-fixed">
+	<%@ include file="../includes/header.jsp" %> 
+	<%@ include file="../includes/usernav.jsp" %>
+	<div class="row">
+		<div class="span3">
+			<img class="logo" src="../images/Techtoberfest2013small.png" alt="Techtoberfest 2013 small"/><!-- Techtoberfest logo-->
+		</div>
+		<div class="span6 largeBottomMargin">
+			<h1 class = "bordered">Speakers</h1>
+		</div>
+		<div class="span5 offset3">
+			<h3>Drag and drop speakers to rank them!</h3>
+			</br>	
+			<h5>**Only the top ten speakers will be ranked</h5>
+		</div>
+    </div>
+	<div class="container-fluid">
 		<div class="content">
 			<!-- Begin Content -->
-			<div class="row">
-				<div class="span12">
-					<img class="logo" src="../images/Techtoberfest2013.png" alt="Techtoberfest 2013"/>  <!-- Techtoberfest logo-->
-					<h1 class = "bordered">Speakers</h1>
-                                        </br>
-					</br>
-                                            <h3>Drag and drop themes to rank them!</h3>
-						<h5>**Only the top ten themes will be ranked</h5>
-					</br>
-                                        <div id="tabs-1">
-					<div class="row">
-						<div class="span3">
-						<p></p>
-						</div>
-						<div class="span1">
+			<div class="row"><!--row-->
+				<div class="span6 offset3"><!--span-->
+                    <div id="tabs-1">
+						<div class="row">
+							<div class="span1">
+								<br/>					
+								<%  Connection newConnect = dataConnection.sendConnection();
+										 
+									Statement newStatement = newConnect.createStatement();
+									ResultSet themeResult = newStatement.executeQuery(queries.selectVisibleThemes());
+								%>
+							</div>
+							<div class="span2">
+								<section>
+									<%
+									int counter = 1;
+									   while(preranked.next()) {
+										   out.println("Rank " + counter + ":" + preranked.getString("last_name") + ", " + preranked.getString("first_name") + "<br/><br/>");
+										   counter++;
+										   speaker = null;
+										   
+									   }
+									preranked.close();
+									%>
+									 <form action="../model/processSpeakerRanking.jsp">
+										<ul class="sortable">
+											<%
+											if (speaker != null) {
+											while (speaker.next()) {
+											%>
+											<li id="lisort"> 
+											<% out.print(speaker.getString("last_name") + ", " + speaker.getString("first_name")); %>
+											<% out.print(giveStars.return2012Rank(speaker.getInt("id"))); %>
+											<% out.print(giveStars.returnCount(speaker.getInt("id"))); %>
+											<% out.print("<input type=\"hidden\" name=\"list\" value=\"" + speaker.getInt("id") + "\" />"); %>
+											</li>
+											<% } 
+											speaker.close();
+											}
+											statement.close();
+											ranked.close();
+											connection.close();
+											%>
+										</ul>
+									 </form>
+								</section>
+							</div>
 							</br>
-                                                        <%
-                                                        String user = String.valueOf(session.getAttribute("id"));
-                                                        Connection connection = dataConnection.sendConnection();
- Statement statement = connection.createStatement();
- Statement ranked = connection.createStatement();
- ResultSet preranked = ranked.executeQuery("select s.first_name, s.last_name from speaker s, speaker_ranking r where r.speaker_id = s.id and r.user_id = " + user);
- ResultSet speaker = statement.executeQuery(queries.selectVisibleSpeakers());
- %>
- </div>
-					<div class="span2">
-					<section>
-                                            <%
-                                            int counter = 1;
-                                               while(preranked.next()) {
-                                                   out.println("Rank " + counter + ":" + preranked.getString("last_name") + ", " + preranked.getString("first_name") + "<br/><br/>");
-                                                   counter++;
-                                                   speaker = null;
-                                                   
-                                               }
-                                            preranked.close();
-                                             %>
- <form action="../model/processSpeakerRanking.jsp">
- <ul class="sortable">
- <%            
-                                                    if (speaker != null) {
-                                                        out.print("<h3>Drag and drop themes to rank them!</h3>");
-						out.print("<h5>**Only the top ten themes will be ranked</h5>");
-                                                        while (speaker.next()) {
-                                                     %>
-     <li id="lisort"> <% out.print(speaker.getString("last_name") + ", " + speaker.getString("first_name")); %>
-         <% out.print(giveStars.return2012Rank(speaker.getInt("id"))); %>
-         <% out.print(giveStars.returnCount(speaker.getInt("id"))); %>
-           
-         <% out.print("<input type=\"hidden\" name=\"list\" value=\"" + speaker.getInt("id") + "\" />"); %></li>
-  <% } 
-     speaker.close();
-     }
- statement.close();
- ranked.close();
- connection.close();%>
- </ul>
- </section>
+						</div>
 					</div>
-					<div class="span7">
-					<p></p>
-					</div>
-					</div>
-					</div>
-				</div>
-			</div>
-			<!-- End Content -->
-		</div>	
-  </div>
-	<div class="row">
-		<div class="span8">
-			<p></p>
-		</div>
-		<div class="span2">
-                    </div>
-	</div>	
-  <% if (counter == 1) {
+				</div><!--end span-->
+			</div><!--end row-->
+			<div class="span2 offset3"><!--button div-->
+				<% if (counter == 1) {
                         out.print("<input type=\"submit\" value=\"Submit Ratings\" class=\"button button-primary\"/>");
-                                                               }
-                                %>
-  </form>
-<%@ include file="../includes/footer.jsp" %> 
-<%@ include file="../includes/scriptlist.jsp" %>
-<%@ include file="../includes/draganddrop.jsp" %>
-    </body>
+				   }
+				%>
+			</div>
+		</div><!-- End Content -->
+	</div><!--/.container-fluid-->
+	
+	<%@ include file="../includes/footer.jsp" %> 
+	<%@ include file="../includes/scriptlist.jsp" %>
+	<%@ include file="../includes/draganddrop.jsp" %>
+	
+	<!--Additional Script-->
+	<script>  
+		$(function() {
+			$( "#sortable" ).sortable({revert: true});    
+			$( "#draggable" ).draggable({connectToSortable: "#sortable",helper: "clone",revert: "invalid"});
+			$( "ul, li" ).disableSelection();
+		});
+	</script>
+</body>
 </html>
