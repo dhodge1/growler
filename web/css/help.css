@@ -1,12 +1,15 @@
+a
+{
+	font-size:12px;
+}
+.accordion-inner
+{
+	font-size:12px;
+}
 body
 {
 	/*background-image:url('tanweave.jpg');*/
 	background-color:#FFFFFF;
-}
-h1
-{
-	padding-top:100px;
-	padding-bottom:-10px;
 }
 .form-actions
 {
@@ -15,6 +18,11 @@ h1
 .form-group
 {
 	padding-left:0px;
+}
+h1
+{
+	padding-top:100px;
+	padding-bottom:-10px;
 }
 img
 {
@@ -28,12 +36,4 @@ label
 {
 	font-family:"Verdana", Verdana, sansserif;
 	font-size:15px;
-}
-a
-{
-	font-size:12px;
-}
-.accordion-inner
-{
-	font-size:12px;
 }
