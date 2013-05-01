@@ -45,7 +45,7 @@
 			<h1 class = "bordered" >Log-in to Project Growler</h1>
 		</div>
     </div>
-    <div class="container-fixed">
+    <div class="container-fluid">
 		<div class="content">
 		<!-- Begin Content -->
 			<div class="content" role="main"> 
@@ -70,7 +70,7 @@
 					</form>
 				</div>	
 		</div><!-- /.content -->
-	</div><!-- /.container-fixed -->
+	</div><!-- /.container-fluid -->
     <%@include file="includes/footer.jsp" %>
 	
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
