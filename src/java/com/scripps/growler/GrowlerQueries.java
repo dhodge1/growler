@@ -16,6 +16,13 @@ public class GrowlerQueries {
 	*/
 	public String selectThemeDescription() {
 		return("select name, description from theme"); }
+	/*
+	 *@return Used for admin theme selects
+	 *
+	 */
+	public String selectAdminTheme(){
+		return("select t.id, t.name, u.name as creator, sum(r.theme_rank) as rating, count(r.theme_id) as count, t.visible from theme t LEFT JOIN theme_ranking r on t.id = r.theme_id LEFT JOIN user u on u.id = t.creator group by t.id  order by rating desc, name;")
+		}
 	/**
 	* @return Used selecting speakers, user story 10344
 	*/
