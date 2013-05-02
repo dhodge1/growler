@@ -50,11 +50,6 @@
 		<div class="span6 largeBottomMargin">
 			<h1 class = "bordered">Themes</h1>
 		</div>
-		<div class="span5 offset3">
-			<h3>Drag and drop themes to rank them!</h3>
-			</br>	
-			<h5>**Only the top ten themes will be ranked</h5>
-		</div>
     </div>
 	<div class="container-fluid">
 		<div class="content">
