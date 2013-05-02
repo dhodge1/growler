@@ -54,7 +54,7 @@
 							<input name="description" class="input-xlarge" type="text" id="tip2" data-content="30 characters or less please" maxlength="30"/>
 						</div>
 						<div class="form-actions">
-							<input class="button button-primary" value="Send" id="send"/>
+							<input type="submit" class="button button-primary" value="Send"/>
 							<a class="button" id="cancel" href="../view/speaker.jsp">Cancel</a>
 						</div>
 					</fieldset>

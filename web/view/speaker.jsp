@@ -48,11 +48,7 @@
 		<div class="span6 largeBottomMargin">
 			<h1 class = "bordered">Speakers</h1>
 		</div>
-		<div class="span5 offset3">
-			<h3>Drag and drop speakers to rank them!</h3>
-			</br>	
-			<h5>**Only the top ten speakers will be ranked</h5>
-		</div>
+		
     </div>
 	<div class="container-fluid">
 		<div class="content">
@@ -90,6 +86,10 @@
 										<ul class="sortable">
 											<%
 											if (speaker != null) {
+                                                                                            out.print("<div class=\"span5 offset3\">");
+                                                                                            out.print("<h3>Drag and drop themes to rank them!</h3>");
+                                                                                            out.print("<h5>**Only the top ten themes will be ranked</h5>");
+                                                                                            out.print("</div>");
 											while (speaker.next()) {
 											%>
 											<li id="lisort"> 
