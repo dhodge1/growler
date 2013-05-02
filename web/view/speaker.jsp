@@ -63,10 +63,15 @@
 						<div class="row">
 							<div class="span1">
 								<br/>					
-								<%  Connection newConnect = dataConnection.sendConnection();
+								<% 
+                                                                String user = String.valueOf(session.getAttribute("id"));                                                                
+                                                                Connection connection = dataConnection.sendConnection();
 										 
-									Statement newStatement = newConnect.createStatement();
-									ResultSet themeResult = newStatement.executeQuery(queries.selectVisibleThemes());
+									Statement newStatement = connection.createStatement();
+									ResultSet speaker = newStatement.executeQuery(queries.selectVisibleSpeakers());
+                                                                        Statement ranked = connection.createStatement();
+                                                                        ResultSet preranked = ranked.executeQuery("select s.first_name, s.last_name from speaker s, speaker_ranking r where r.speaker_id = s.id and r.user_id = " + user);
+
 								%>
 							</div>
 							<div class="span2">
@@ -96,7 +101,7 @@
 											<% } 
 											speaker.close();
 											}
-											statement.close();
+											newStatement.close();
 											ranked.close();
 											connection.close();
 											%>
