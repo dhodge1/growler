@@ -47,8 +47,8 @@
 		<div class="span3">
 			<img class="logo" src="../images/Techtoberfest2013small.png" alt="Techtoberfest 2013 small"/><!-- Techtoberfest logo-->
 		</div>
-		<div class="span6 largeBottomMargin">
-			<h1 class = "bordered">Themes</h1>
+		<div class="span7 largeBottomMargin">
+			<h1 class = "bordered">Themes - Drag & Drop Themes To Rank Them</h1>
 		</div>
     </div>
 	<div class="container-fluid">
@@ -81,8 +81,6 @@
 									   }
 									preranked.close();
                                                                         if (themeResult != null) {
-																		out.print("<h3>Drag and drop themes to rank them!</h3>");
-																		out.print("<h5>**Only the top ten themes will be ranked</h5>");
                                                                         }
                                                                                         
 								%>
