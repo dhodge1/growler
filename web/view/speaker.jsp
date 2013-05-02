@@ -109,7 +109,7 @@
 											connection.close();
 											%>
 										</ul>
-									 </form>
+									 
 								</section>
 							</div>
 							</br>
@@ -122,6 +122,7 @@
                         out.print("<input type=\"submit\" value=\"Submit Ratings\" class=\"button button-primary\"/>");
 				   }
 				%>
+                        </form>
                         
 			</div>
 		</div><!-- End Content -->

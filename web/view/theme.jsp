@@ -120,7 +120,11 @@
 				</div><!--end span-->
 			</div><!--end row-->
 			<div class="span2 offset3"><!--button div-->
-				
+			<% if (counter == 1) {
+                        out.print("<input type=\"submit\" value=\"Submit Ratings\" class=\"button button-primary\"/>");
+				   }
+				%>
+                        </form>	
 			</div>
 		</div><!-- End Content -->	
 	</div><!--/.container-fluid-->
