@@ -64,21 +64,11 @@
 								<% 
 								Connection newConnect = dataConnection.sendConnection();
                                 Statement newStatement = newConnect.createStatement();
-                                ResultSet themeResult = newStatement.executeQuery(queries.returnThemeRanking());
+                                ResultSet themeResult = newStatement.executeQuery("select t.id, t.name, sum(r.theme_rank) as rating, count(theme_id) as count, t.visible from theme t, theme_ranking r where t.id = r.theme_id group by theme_id order by rating desc, name");
                                 %>
 							</div>
 							<div class="span2">
 								 <section>
-									 <%
-										int counter = 1;
-										   while(preranked.next()) {
-											   out.println("Rank " + counter + ":" + preranked.getString("name") + "<br/><br/>");
-											   counter++;
-											   themeResult = null;
-											   
-										   }
-										preranked.close();
-									%>
 									<form action="../model/admintheme.jsp" >
 										<table>
 											<tr>
@@ -94,7 +84,7 @@
 											<tr>
 											<td><% out.print(themeResult.getString("name")); %>
 											<input type="hidden" name="list" value="<% out.print(themeResult.getInt("id")); %>" /></td>
-											<td><% out.print(themeResult.getInt("ranking")); %></td>
+											<td><% out.print(themeResult.getInt("rating")); %></td>
 											<td><% out.print(themeResult.getInt("count")); %></td>
 											<td><input type="checkbox" name="visible" value="<% out.print(themeResult.getInt("id")); %>"
 													   <% if (themeResult.getInt("visible") == 0) {
