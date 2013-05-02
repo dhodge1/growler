@@ -59,7 +59,7 @@
 						</div>
 						<div class="form-group">
 							<label>Why should we implement this theme?</label>
-							<input name="reason" class="input-xlarge" type="text" id="tip3" data-content="Help us understand what this theme suggestion means to you" maxlength="30"/>
+							<input name="reason" class="input-xlarge" type="text" id="tip3" data-content="Help us understand what this theme suggestion means to you" maxlength="250"/>
 						</div>
 						<div class="form-actions">
 							<a class="button button-primary" id="send">Send</a>
