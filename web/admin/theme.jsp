@@ -1,7 +1,7 @@
 <%-- 
     Document   : theme
     Created on : Feb 28, 2013, 7:15:03 PM
-    Author     : Justin Bauguess
+    Author     : Justin Bauguess & Jonathan C. McCowan
     Purpose    : The theme (admin) page is for admins to edit theme information. 
                 The editable fields are simply if the theme is visible to a user 
                 or not.  It will display the theme name, how many rating points 
@@ -22,102 +22,123 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
   <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <title>Growler Project</title><!-- Title -->
-  <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>  ul { list-style-type: decimal-leading-zero; margin: 0; padding: 0; margin-bottom: 10px; }  #lisort { margin: 5px; padding: 5px; list-style-type: decimal-leading-zero; style: none; width: 600px; }  </style>
-  <link rel="stylesheet" href="../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
-  <link rel="stylesheet" href="../css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+	<title>Admin Themes</title><!-- Title -->
+  
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> 
+	<link rel="stylesheet" href="../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
+	<link rel="stylesheet" href="../css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
+	<link rel="stylesheet" href="../css/demo.css" />  
 	<link rel="stylesheet" href="../css/draganddrop.css" /><!--Drag and drop style-->
-  <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
-  <script src="../js/grabRanks.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/general.css" /><!--General CSS-->
+	<link rel="stylesheet" type="text/css" href="../css/theme.css" /><!--Theme CSS-->
+	<link rel="stylesheet" href="/resources/demos/style.css" />
+	
+	<script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
 </head>
 <body id="growler1">    
     <%@include file="../includes/isadmin.jsp" %>
-  <%@ include file="../includes/header.jsp" %> 
-  <%@ include file="../includes/adminnav.jsp" %>
-  <div class="container-fixed">
+	<%@ include file="../includes/header.jsp" %> 
+	<%@ include file="../includes/adminnav.jsp" %>
+	
+	<div class="row">
+		<div class="span3">
+			<img class="logo" src="../images/Techtoberfest2013admin.png" alt="Techtoberfest 2013 admin"/><!-- Techtoberfest logo-->
+		</div>
+		<div class="span6 largeBottomMargin">
+			<h1 class = "bordered">Default Themes - Admin View</h1>
+		</div>
+    </div>
+	<div class="container-fluid">
 		<div class="content">
 			<!-- Begin Content -->
-			<div class="row">
-				<div class="span12">
-					<img class="logo" src="../images/Techtoberfest2013.png" alt="Techtoberfest 2013"/>  <!-- Techtoberfest logo-->
-					<h1 class = "bordered">Default Themes</h1>
-					</br>
-					</br>
-                                            <h3>Default Themes</h3>
-                                            <h4>This is the Admin View </h4>
-					</br>
-                                        <div id="tabs-1">
-					<div class="row">
-						<div class="span3">
-						<p></p>
+			<div class="row"><!--row-->
+				<div class="span6 offset3"><!--span-->
+                    <div id="tabs-1">
+						<div class="row">
+							<div class="span1">
+							<br/>                   
+								<% 
+								Connection newConnect = dataConnection.sendConnection();
+                                Statement newStatement = newConnect.createStatement();
+                                ResultSet themeResult = newStatement.executeQuery(queries.returnThemeRanking());
+                                %>
+							</div>
+							<div class="span2">
+								 <section>
+									 <%
+										int counter = 1;
+										   while(preranked.next()) {
+											   out.println("Rank " + counter + ":" + preranked.getString("name") + "<br/><br/>");
+											   counter++;
+											   themeResult = null;
+											   
+										   }
+										preranked.close();
+									%>
+									<form action="../model/admintheme.jsp" >
+										<table>
+											<tr>
+												<td>Name</td>
+												<td>Rating</td>
+												<td>Times Rated</td>
+												<td>Visible?</td>
+												<td>Created By</td>
+											</tr>
+												<% 
+												while (themeResult.next()) {
+												%>
+											<tr>
+											<td><% out.print(themeResult.getString("name")); %>
+											<input type="hidden" name="list" value="<% out.print(themeResult.getInt("id")); %>" /></td>
+											<td><% out.print(themeResult.getInt("ranking")); %></td>
+											<td><% out.print(themeResult.getInt("count")); %></td>
+											<td><input type="checkbox" name="visible" value="<% out.print(themeResult.getInt("id")); %>"
+													   <% if (themeResult.getInt("visible") == 0) {
+															  out.print(" checked");} %>/>
+											<td><% out.print(themeResult.getString("creator")); %>
+											</tr>
+											<% } 
+											newConnect.close();
+											themeResult.close();
+											newStatement.close(); %>
+										</table>
+									</form>
+								</section>
+							</div>
+							<div class="span7">
+							<p></p>
+							</div>
 						</div>
-						<div class="span1">
-							<br/>
-                                             <% Connection newConnect = dataConnection.sendConnection();
-                                                
-                                                Statement newStatement = newConnect.createStatement();
-                                                ResultSet themeResult = newStatement.executeQuery(queries.returnThemeRanking());
-                                             %>
-						</div>
-					<div class="span2">
-					<section>
-                                            <form method="post" action="../model/admintheme.jsp">
-                                                <table>
-                                                    <tr>
-                                                        <td>Name</td>
-                                                        <td>Rating</td>
-                                                        <td>Times Rated</td>
-                                                        <td>Visible?</td>
-                                                        <td>Created By</td>
-                                                    </tr>
-						<% 
-                                                while (themeResult.next()) {
-                                                %>
-                                                <tr>
-                                                <td><% out.print(themeResult.getString("name")); %>
-                                                <input type="hidden" name="list" value="<% out.print(themeResult.getInt("id")); %>" /></td>
-                                                <td><% out.print(themeResult.getInt("ranking")); %></td>
-                                                <td><% out.print(themeResult.getInt("count")); %></td>
-                                                <td><input type="checkbox" name="visible" value="<% out.print(themeResult.getInt("id")); %>"
-                                                           <% if (themeResult.getInt("visible") == 0) {
-                                                                  out.print(" checked");} %>/>
-                                                <td><% out.print(themeResult.getString("creator")); %>
-                                                </tr>
-                                                <% } 
-                                                newConnect.close();
-                                                themeResult.close();
-                                                newStatement.close(); %>
-                                                </table>
-                                                <input type="submit" value="Submit" class="button-primary" />
-                                            </form>
-                                        </section>
 					</div>
-					<div class="span7">
-					<p></p>
-					</div>
-					</div>
-					</div>
-				</div>
+				</div><!--end span-->
+			</div><!--end row-->
+			<div class="span2 offset3"><!--button div-->
+				<input type="submit" value="Submit" class="button-primary" />
 			</div>
-			<!-- End Content -->
-		</div>	
-  </div>
-	<div class="row">
-		<div class="span8">
-			<p></p>
-		</div>
-		<div class="span2">
-		</div>
-	</div>	
+		</div><!-- End Content -->	
+	</div><!--/.container-fluid-->
 
 
 	<%@ include file="../includes/footer.jsp" %>
 	<%@ include file="../includes/scriptlist.jsp" %>
-	<!--drag and drop extra script-->
 	<%@ include file="../includes/draganddrop.jsp" %>
+	
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
+	<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+	<script src="../js/grabRanks.js"></script>
+	
+	<!--Additional Script-->
+	<script>  
+	$(function() {    
+		$( "#sortable" ).sortable({revert: true});    
+		$( "#draggable" ).draggable({connectToSortable: "#sortable",helper: "clone",revert: "invalid"});    
+		$( "ul, li" ).disableSelection();  
+	});  
+	</script>
 </body>
 </html>
 
