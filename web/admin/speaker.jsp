@@ -45,7 +45,7 @@
 	<%@ include file="../includes/adminnav.jsp" %>
 	<div class="row">
 		<div class="span3">
-			<img class="logo" src="../images/Techtoberfest2013small.png" alt="Techtoberfest 2013 small"/><!-- Techtoberfest logo-->
+			<img class="logo" src="../images/Techtoberfest2013admin.png" alt="Techtoberfest 2013 admin"/><!-- Techtoberfest logo-->
 		</div>
 		<div class="span6 largeBottomMargin">
 			<h1 class = "bordered">Speakers - Admin View</h1>
