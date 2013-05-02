@@ -14,7 +14,7 @@
             <li><a href="../view/speakerentry.jsp">Suggest a Speaker</a></li>
             <li><a href="../view/attendance.jsp">Attendance</a></li>
             <li><a href="../view/survey.jsp">Surveys</a></li>
-            <li><a href="../view/help.jsp">Help</a></li>
+            <li><a href="../help/help.jsp">Help</a></li>
 			<li><a href="../model/logout.jsp">Logout</a></li>
         </ul>
 		<%
