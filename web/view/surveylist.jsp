@@ -106,5 +106,13 @@
 	<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script> 
 	<script src="../js/grabRanks.js"></script>
 	
+	<!--Additional Script-->
+	<script>  
+	$(function() {    
+		$( "#sortable" ).sortable({      revert: true    });    
+		$( "#draggable" ).draggable({      connectToSortable: "#sortable",helper: "clone",revert: "invalid"});
+		$( "ul, li" ).disableSelection();
+	});  
+	</script>
 </body>
 </html>
