@@ -1,7 +1,7 @@
 <%-- 
-    Document   : theme
+    Document   : usertheme
     Created on : Feb 28, 2013, 7:15:03 PM
-    Author     : Robert Brown
+    Author     : Justin Bauguess & Jonathan C. McCowan
 --%>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
@@ -20,93 +20,94 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
   <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <title>Growler Project</title><!-- Title -->
-  <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>  ul { list-style-type: decimal-leading-zero; margin: 0; padding: 0; margin-bottom: 10px; }  #lisort { margin: 5px; padding: 5px; list-style-type: decimal-leading-zero; style: none; width: 600px; }  </style>
-  <link rel="stylesheet" href="../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
-  <link rel="stylesheet" href="../css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="description" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+	<title>Admin User Theme</title><!-- Title -->
+  
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> 
+	<link rel="stylesheet" href="../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
+	<link rel="stylesheet" href="../css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
+	<link rel="stylesheet" href="../css/demo.css" />  
 	<link rel="stylesheet" href="../css/draganddrop.css" /><!--Drag and drop style-->
-  <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
-  <script src="../js/grabRanks.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/general.css" /><!--General CSS-->
+	<link rel="stylesheet" type="text/css" href="../css/theme.css" /><!--Theme CSS-->
+	<link rel="stylesheet" href="/resources/demos/style.css" />
+	
+	<script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
 
 </head>
 <body id="growler1"> 
-    <%@include file="../includes/isadmin.jsp" %>
-  <%@ include file="../includes/header.jsp" %> 
-  <nav class="globalNavigation">
-        <ul>
-            <li><a href="../admin/theme.jsp">Default Themes</a></li>
-            <li class="selected"><a href="../admin/usertheme.jsp">Suggested Themes</a></li>
-            <li><a href="../admin/themeentry.jsp">Add a Theme</a></li>
-            <li><a href="../admin/speaker.jsp">Default Speakers</a></li>
-            <li><a href="../admin/userspeaker.jsp">Suggested Speakers</a></li>
-            <li><a href="../admin/speakerentry.jsp">Add a Speaker</a></li>
-            <li><a href="">Help</a></li>
-        </ul>
-  </nav><!-- /.globalNavigation -->
-  <div class="container-fixed">
+	<%@include file="../includes/isadmin.jsp" %>
+	<%@ include file="../includes/header.jsp" %> 
+	<%@ include file="../includes/adminnav.jsp" %>
+	<div class="row">
+		<div class="span3">
+			<img class="logo" src="../images/Techtoberfest2013admin.png" alt="Techtoberfest 2013 admin"/><!-- Techtoberfest logo-->
+		</div>
+		<div class="span6 largeBottomMargin">
+			<h1 class = "bordered">Suggested Themes - Admin View</h1>
+		</div>
+    </div>
+	<div class="container-fluid">
 		<div class="content">
 			<!-- Begin Content -->
-			<div class="row">
-				<div class="span12">
-					<img class="logo" src="../images/Techtoberfest2013.png" alt="Techtoberfest 2013"/>  <!-- Techtoberfest logo-->
-					<h1 class = "bordered">Suggested Themes</h1>
-					</br>
-					</br>
-                                            <h3>User Suggested Themes</h3>
-                                            <h4>This is the Admin View </h4>
-					</br>
-                                        <div id="tabs-1">
-					<div class="row">
-						<div class="span3">
-						<p></p>
-						</div>
-						<div class="span1">
+			<div class="row"><!--row-->
+				<div class="span6 offset3"><!--span-->
+                    <div id="tabs-1">
+						<div class="row">
+							<div class="span1">
 							<br/>
-                                             <% Connection newConnect = dataConnection.sendConnection();
-                                                Statement newStatement = newConnect.createStatement();
-                                                ResultSet themeResult = newStatement.executeQuery("select name, id, description from theme where creator is not null");
-                                             %>
-						</div>
-					<div class="span2">
-					<section>
-                                            <ul>
-						<% 
-                                                while (themeResult.next()) {
-                                                %>
-                                                <li id="lisort"><% out.print(themeResult.getString("name")); %>
-                                                    <% out.print(" : " + giveStars.themePoints(themeResult.getInt("id")) + " points"); %>
-                                                </li>
-                                                <% } 
-                                                newConnect.close();
-                                                themeResult.close();
-                                                newStatement.close();%>
-                                                </ul>
-					</section>
-					</div>
-					<div class="span7">
-					<p></p>
-					</div>
-					</div>
+								<% 
+								Connection newConnect = dataConnection.sendConnection();
+								Statement newStatement = newConnect.createStatement();
+								ResultSet themeResult = newStatement.executeQuery("select name, id, description from theme where creator is not null");
+								%>
+							</div>
+							<div class="span2">
+								<section>
+									<ul>
+										<% 
+										while (themeResult.next()) {
+										%>
+										<li id="lisort">
+											<% out.print(themeResult.getString("name")); %>
+											<% out.print(" : " + giveStars.themePoints(themeResult.getInt("id")) + " points"); %>
+										</li>
+										<% } 
+										newConnect.close();
+										themeResult.close();
+										newStatement.close();
+										%>
+									</ul>
+								</section>
+							</div>
+							<div class="span7">
+							<p></p>
+							</div>
+						</div><!--end row-->
 					</div>
 				</div>
-			</div>
-			<!-- End Content -->
-		</div>	
-  </div>
-	<div class="row">
-		<div class="span8">
-			<p></p>
-		</div>
-		<div class="span2">
-		</div>
-	</div>
+			</div><!--end row-->
+		</div><!-- End Content -->	
+	</div><!--/.container-fluid-->
 	<%@ include file="../includes/footer.jsp" %>
 	<%@ include file="../includes/scriptlist.jsp" %>
-	<!--drag and drop extra script-->
 	<%@ include file="../includes/draganddrop.jsp" %>
+	
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
+	<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+	<script src="../js/grabRanks.js"></script>
+	
+	<!--Additional Script-->
+	<script>  
+	$(function() {    
+		$( "#sortable" ).sortable({revert: true});    
+		$( "#draggable" ).draggable({connectToSortable: "#sortable",helper: "clone",revert: "invalid"});    
+		$( "ul, li" ).disableSelection();  
+	});  
+	</script>
 </body>
 </html>
 
