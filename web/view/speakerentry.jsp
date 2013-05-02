@@ -47,11 +47,11 @@
 					<fieldset>
 						<div class="form-group">
 							<label class="required">Speaker First Name</label>
-							<input name="name" class="input-xlarge" type="text" id="tip" data-content="30 characters or less please" maxlength="30"/>
+							<input name="first_name" class="input-xlarge" type="text" id="tip" data-content="30 characters or less please" maxlength="30"/>
 						</div>
 						<div class="form-group">
 							<label class="required">Speaker Last Name</label>
-							<input name="description" class="input-xlarge" type="text" id="tip2" data-content="30 characters or less please" maxlength="30"/>
+							<input name="last_name" class="input-xlarge" type="text" id="tip2" data-content="30 characters or less please" maxlength="30"/>
 						</div>
 						<div class="form-actions">
 							<input type="submit" class="button button-primary" value="Send"/>

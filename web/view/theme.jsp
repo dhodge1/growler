@@ -80,15 +80,18 @@
 										   
 									   }
 									preranked.close();
+                                                                        if (themeResult != null) {
+                                                                        out.print("<h3>Drag and drop themes to rank them!</h3>");
+									out.print("<h5>**Only the top ten themes will be ranked</h5>");
+                                                                        }
+                                                                                        
 								%>
 								<form action="../model/processThemeRanking.jsp" >
 									<ul id="sortable">
 										<%            
 										if (themeResult != null) {
                                                                                         
-											out.print("<h3>Drag and drop themes to rank them!</h3>");
-											out.print("<h5>**Only the top ten themes will be ranked</h5>");
-                                                                                        
+											
 											while (themeResult.next()) {
 										%>
 										<li class="ui-state-default" id="lisort">
@@ -117,10 +120,11 @@
 				</div><!--end span-->
 			</div><!--end row-->
 			<div class="span2 offset3"><!--button div-->
-				<% if (counter == 1) {
+			<% if (counter == 1) {
                         out.print("<input type=\"submit\" value=\"Submit Ratings\" class=\"button button-primary\"/>");
 				   }
 				%>
+                        </form>	
 			</div>
 		</div><!-- End Content -->	
 	</div><!--/.container-fluid-->
