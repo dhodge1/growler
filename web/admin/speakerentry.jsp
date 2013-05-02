@@ -31,7 +31,6 @@
 </head>
 <body id="growler1">
     <%@ include file="../includes/header.jsp" %> 
-    <%@ include file="../includes/usernav.jsp" %>
 	<%@ include file="../includes/adminnav.jsp" %>
    <div class="row">
 		<div class="span3">
@@ -49,15 +48,15 @@
 					<fieldset>
 						<div class="form-group">
 							<label class="required">Speaker First Name</label>
-							<input name="name" class="input-xlarge" type="text" id="tip" data-content="30 characters or less please" maxlength="30"/>
+							<input name="first_name" class="input-xlarge" type="text" id="tip" data-content="30 characters or less please" maxlength="30"/>
 						</div>
 						<div class="form-group">
 							<label class="required">Speaker Last Name</label>
-							<input name="description" class="input-xlarge" type="text" id="tip2" data-content="30 characters or less please" maxlength="30"/>
+							<input name="last_name" class="input-xlarge" type="text" id="tip2" data-content="30 characters or less please" maxlength="30"/>
 						</div>
 						<div class="form-actions">
-							<a class="button button-primary" id="send" type="submit" name="submit">Send</a>
-							<a class="button" id="cancel" href="index.jsp">Cancel</a>
+							<input class="button button-primary" type="submit" name="submit"/>
+							<a class="button" id="cancel" href="../admin/speaker.jsp">Cancel</a>
 						</div>
 					</fieldset>
 				</div>   

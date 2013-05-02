@@ -64,7 +64,7 @@
 								<% 
 								Connection newConnect = dataConnection.sendConnection();
                                 Statement newStatement = newConnect.createStatement();
-                                ResultSet themeResult = newStatement.executeQuery("select t.id, t.name, sum(r.theme_rank) as rating, count(theme_id) as count, t.visible from theme t, theme_ranking r where t.id = r.theme_id group by theme_id order by rating desc, name");
+                                ResultSet themeResult = newStatement.executeQuery("select t.id, t.name, u.name as creator, sum(r.theme_rank) as rating, count(theme_id) as count, t.visible from theme t, theme_ranking r, user u where t.id = r.theme_id and u.id = t.creator  group by theme_id order by rating desc, name");
                                 %>
 							</div>
 							<div class="span2">

@@ -32,7 +32,6 @@
 </head>
 <body id="growler1">
     <%@ include file="../includes/header.jsp" %> 
-    <%@ include file="../includes/usernav.jsp" %>
 	<%@ include file="../includes/adminnav.jsp" %>  
 	<div class="row">
 		<div class="span3">
@@ -57,8 +56,8 @@
 							<input name="description" class="input-xlarge" type="text" id="tip2" data-content="250 characters or less please" maxlength="250"/>
 						</div>
 						<div class="form-actions">
-							<a class="button button-primary" id="send" type="submit" name="Submit" >Send</a>
-							<a class="button" id="cancel" href="index.jsp">Cancel</a>
+							<input class="button button-primary" id="send" type="submit" name="Submit" />
+							<a class="button" id="cancel" href="../admin/theme.jsp">Cancel</a>
 						</div>
 					</fieldset>
 				</div>   
