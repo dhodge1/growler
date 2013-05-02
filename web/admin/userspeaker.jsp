@@ -32,7 +32,7 @@
 	<link rel="stylesheet" href="../css/demo.css" />  
 	<link rel="stylesheet" href="../css/draganddrop.css" /><!--Drag and drop style-->
 	<link rel="stylesheet" type="text/css" href="../css/general.css" /><!--General CSS-->
-	<link rel="stylesheet" type="text/css" href="../css/speaker.css" /><!--Survey CSS-->
+	<link rel="stylesheet" type="text/css" href="../css/speaker.css" /><!--Speaker CSS-->
 	<link rel="stylesheet" href="/resources/demos/style.css" />
 	
 	<script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
