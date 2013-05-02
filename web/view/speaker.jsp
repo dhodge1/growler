@@ -48,11 +48,7 @@
 		<div class="span6 largeBottomMargin">
 			<h1 class = "bordered">Speakers</h1>
 		</div>
-		<div class="span5 offset3">
-			<h3>Drag and drop speakers to rank them!</h3>
-			</br>	
-			<h5>**Only the top ten speakers will be ranked</h5>
-		</div>
+		
     </div>
 	<div class="container-fluid">
 		<div class="content">
@@ -63,10 +59,15 @@
 						<div class="row">
 							<div class="span1">
 								<br/>					
-								<%  Connection newConnect = dataConnection.sendConnection();
+								<% 
+                                                                String user = String.valueOf(session.getAttribute("id"));                                                                
+                                                                Connection connection = dataConnection.sendConnection();
 										 
-									Statement newStatement = newConnect.createStatement();
-									ResultSet themeResult = newStatement.executeQuery(queries.selectVisibleThemes());
+									Statement newStatement = connection.createStatement();
+									ResultSet speaker = newStatement.executeQuery(queries.selectVisibleSpeakers());
+                                                                        Statement ranked = connection.createStatement();
+                                                                        ResultSet preranked = ranked.executeQuery("select s.first_name, s.last_name from speaker s, speaker_ranking r where r.speaker_id = s.id and r.user_id = " + user);
+
 								%>
 							</div>
 							<div class="span2">
@@ -85,6 +86,10 @@
 										<ul class="sortable">
 											<%
 											if (speaker != null) {
+                                                                                            
+                                                                                            out.print("<h3>Drag and drop themes to rank them!</h3>");
+                                                                                            out.print("<h5>**Only the top ten themes will be ranked</h5>");
+                                                                                            
 											while (speaker.next()) {
 											%>
 											<li id="lisort"> 
@@ -96,7 +101,7 @@
 											<% } 
 											speaker.close();
 											}
-											statement.close();
+											newStatement.close();
 											ranked.close();
 											connection.close();
 											%>

@@ -62,8 +62,8 @@
 							<input name="reason" class="input-xlarge" type="text" id="tip3" data-content="Help us understand what this theme suggestion means to you" maxlength="250"/>
 						</div>
 						<div class="form-actions">
-							<a class="button button-primary" id="send">Send</a>
-							<a class="button" id="cancel" href="http://ps11.pstcc.edu:8584/ProjectGrowler/web/view/themes.jsp">Cancel</a>
+							<input type="submit" class="button button-primary" value="Send" />
+							<a class="button" id="cancel" href="../view/theme.jsp">Cancel</a>
 						</div>
 					</fieldset>
 				</div>   

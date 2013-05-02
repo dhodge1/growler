@@ -63,8 +63,8 @@
 							<input name="corporate" class="input-xlarge" type="text" id="tip4" data-content="6 characters or less please" maxlength="6"/>
 						</div>
 						<div class="form-actions">
-							<a class="button button-primary" id="send" type="submit">Send</a>
-							<a class="button" id="cancel" href="http://ps11.pstcc.edu:8584/ProjectGrowler/index.jsp">Cancel</a>
+							<input class="button button-primary" value="Submit" type="submit">
+							<a class="button" id="cancel" href="../index.jsp">Cancel</a>
 						</div>
 					</fieldset>
 				</div>   

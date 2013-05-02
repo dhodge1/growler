@@ -85,8 +85,10 @@
 									<ul id="sortable">
 										<%            
 										if (themeResult != null) {
+                                                                                        
 											out.print("<h3>Drag and drop themes to rank them!</h3>");
 											out.print("<h5>**Only the top ten themes will be ranked</h5>");
+                                                                                        
 											while (themeResult.next()) {
 										%>
 										<li class="ui-state-default" id="lisort">
