@@ -81,8 +81,11 @@
 									   }
 									preranked.close();
                                                                         if (themeResult != null) {
-                                                                        out.print("<h3>Drag and drop themes to rank them!</h3>");
-									out.print("<h5>**Only the top ten themes will be ranked</h5>");
+                                                                        out.print("<div class='span5 offset3'>");
+																		out.print("<h3>Drag and drop themes to rank them!</h3>");
+																		out.print("</br>");
+																		out.print("<h5>**Only the top ten themes will be ranked</h5>");
+																		out.print("</div>");
                                                                         }
                                                                                         
 								%>

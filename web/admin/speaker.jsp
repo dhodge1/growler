@@ -109,7 +109,7 @@
 											connection.close();
 											%>
 										 </table>
-									</form>
+									
 								</section>
 							</div>
 							<div class="span7">
@@ -122,6 +122,7 @@
 			<div class="span2 offset3"><!--button div-->
 				<input type="submit" value="Submit" class="button button-primary" />
 			</div>
+                                                                                        </form>
 		</div><!-- End Content -->	
 	</div><!--/.container-fluid-->
   
