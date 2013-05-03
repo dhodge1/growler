@@ -204,7 +204,9 @@ CREATE TABLE speaker_team (
 /*
  * Inserts the default user.  This user is typically associated with last year's data.
  */
-insert into user values (2023, "DEFAULT", NULL, NULL);
+insert into user values (2023, "DEFAULT", sha1('password'), NULL, NULL);
+insert into user values (8083, "ADMIN", sha1('password'), NULL, NULL);
+
 
 /*Theme inserts*/
 INSERT INTO theme VALUES (1, "Cloud Computing", "All things Cloud, from IaaS, PaaS, DaaS, SaaS, to hosting providers, brokers, and cloud-enabling appliances", 2023, "2013", true, NULL);
