@@ -11,7 +11,11 @@
 --%>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
+<%@page import="com.scripps.growler.Theme" %>
+<%@page import="com.scripps.growler.ThemePersistence" %>
 <%@page import="com.scripps.growler.DataConnection" %>
+<jsp:useBean id="theme" class="com.scripps.growler.Theme" scope="page" />
+<jsp:useBean id="persist" class="com.scripps.growler.ThemePersistence" scope="page" />
 <jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="page" />
 <jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page" />
 <jsp:useBean id="giveStars" class="com.scripps.growler.GiveStars" scope="page" />
@@ -89,24 +93,17 @@
 										<%            
 										if (themeResult != null) {
                                                                                         
-											
-											while (themeResult.next()) {
-										%>
-										<li class="ui-state-default" id="lisort">
-											<strong><% out.print(themeResult.getString("name") + " : "); %></strong>
-													<% out.print(themeResult.getString("description")); %>
-											
-										</li>
-										<% out.print("<input type=\"hidden\" name=\"list\" value=\"" + themeResult.getInt("id") + "\" >");%>
-										
-										<% }
-												themeResult.close();
-										   }
-										
-										newStatement.close();
-										themeStatement.close();
-										newConnect.close(); 
-										%>
+                                                                                    ArrayList<Theme> themes = persist.getAllThemes();
+                                                                                    for (int i = 0; i < themes.size(); i ++) {
+                                                                                        %>
+                                                                                        <li class="ui-state-default" id="lisort">
+                                                                                        <%
+                                                                                        out.print(themes.get(i).getName() + " : ");
+                                                                                        out.print(themes.get(i).getDescription());
+                                                                                        out.print("<input type=\"hidden\" name=\"list\" value=\"" + themes.get(i).getId() + "\" >");
+                                                                                        %></li><%
+                                                                                        }
+											%>
 									</ul>	
 								</section>
 							</div>

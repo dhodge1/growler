@@ -21,7 +21,7 @@ public class GrowlerQueries {
 	 *
 	 */
 	public String selectAdminTheme(){
-		return("select t.id, t.name, u.name as creator, sum(r.theme_rank) as rating, count(r.theme_id) as count, t.visible from theme t LEFT JOIN theme_ranking r on t.id = r.theme_id LEFT JOIN user u on u.id = t.creator group by t.id  order by rating desc, name;")
+		return("select t.id, t.name, u.name as creator, sum(r.theme_rank) as rating, count(r.theme_id) as count, t.visible from theme t LEFT JOIN theme_ranking r on t.id = r.theme_id LEFT JOIN user u on u.id = t.creator group by t.id  order by rating desc, name");
 		}
 	/**
 	* @return Used selecting speakers, user story 10344
@@ -109,7 +109,7 @@ public class GrowlerQueries {
 	* @return insert statement into speaker_ranking, user story 10335
 	*/
 	public String insertSpeakerRanking() {
-		return("insert into speaker_ranking (speaker_id, ranking) values (?, ?)"); }
+		return("insert into speaker_ranking (speaker_id, ranking, user_id) values (?, ?, ?)"); }
 	/**
 	* @return insert statement into isolated_theme_ranking table, user story 10332 & 10359
 	*/
