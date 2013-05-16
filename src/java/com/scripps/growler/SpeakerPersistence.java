@@ -1,0 +1,305 @@
+package com.scripps.growler;
+import java.sql.*;
+import java.util.*;
+
+/**
+ * Handles the database entries for Speakers
+ * 
+ * @see com.scripps.growler.Speaker
+ * @author "Justin Bauguess"
+ */
+public class SpeakerPersistence {
+
+    /**
+     * Reference to the DataConnection Class
+     */
+    DataConnection data;
+    /**
+     * A connection object to perform operations with
+     */
+    Connection connection;
+    /**
+     * A prepared statement object to store queries within
+     */
+    PreparedStatement statement;
+    /**
+     * A result set to get data from
+     */
+    ResultSet result;
+    /**
+     * A boolean to determine if an update was successful or not
+     */
+    boolean success;
+    /**
+     * Sorts queries by last name in ascending order
+     */
+    String SORT_BY_LAST_NAME_ASC = " order by speaker.last_name asc";
+    /**
+     * Sorts queries by first name in ascending order
+     */
+    String SORT_BY_FIRST_NAME_ASC = " order by speaker.first_name asc";
+    /**
+     * Sorts queries by id in ascending order
+     */
+    String SORT_BY_ID_ASC = " order by speaker.id asc";
+    /**
+     * Sorts queries by suggested by in ascending order
+     */
+    String SORT_BY_CREATOR_ASC = " order by speaker.suggested_by asc";
+    /**
+     * Sorts queries by visibility in ascending order
+     */
+    String SORT_BY_VISIBILITY_ASC = " order by speaker.visible asc";
+    /**
+     * Sorts queries by the 2012 rank in ascending order
+     */
+    String SORT_BY_2012_RANK_ASC = " order by ranks2012.rating asc";
+    /**
+     * Sorts queries by the 2012 count in ascending order
+     */
+    String SORT_BY_2012_COUNT_ASC = " order by ranks2012.count asc";
+    /**
+     * Sorts queries by last name in descending order
+     */
+    String SORT_BY_LAST_NAME_DESC = " order by speaker.last_name desc";
+    /**
+     * Sorts queries by first name in descending order
+     */
+    String SORT_BY_FIRST_NAME_DESC = " order by speaker.first_name desc";
+    /**
+     * Sorts queries by id in descending order
+     */
+    String SORT_BY_ID_DESC = " order by speaker.id desc";
+    /**
+     * Sorts queries by suggested by in descending order
+     */
+    String SORT_BY_CREATOR_DESC = " order by speaker.suggested_by desc";
+    /**
+     * Sorts queries by visibility in descending order
+     */
+    String SORT_BY_VISIBILITY_DESC = " order by speaker.visible desc";
+    /**
+     * Sorts queries by the 2012 rank in descending order
+     */
+    String SORT_BY_2012_RANK_DESC = " order by ranks2012.rating desc";
+    /**
+     * Sorts queries by the 2012 rank in ascending order
+     */
+    String SORT_BY_2012_COUNT_DESC = " order by ranks2012.count desc";
+    /**
+     * Default constructor
+     */
+    public SpeakerPersistence() {
+        
+    }
+    /**
+     * Initializes a database connection based on the DataConnection class
+     */
+    public void initializeJDBC() {
+        try {
+            DataConnection data = new DataConnection();
+            connection = data.sendConnection();
+        }
+        catch(Exception e) {
+            
+        }
+    }
+    /**
+     * Closes all database resources: connection, statement, and result
+     */
+    public void closeJDBC() {
+        try {
+            connection.close();
+            statement.close();
+            result.close();
+        }
+        catch(Exception e) {
+            
+        }
+    }
+    /**
+     * Adds a speaker to the database
+     * @param s The speaker to add
+     */
+    public void addSpeaker(Speaker s) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("insert into speaker " +
+                    "(first_name, last_name, suggested_by, visible) values " +
+                    "(?, ?, ?, false)");
+            statement.setString(1, s.getFirstName());
+            statement.setString(2, s.getLastName());
+            statement.setInt(3, s.getSuggestedBy());
+            success = statement.execute();
+            closeJDBC();
+        }
+        catch(Exception e) {
+            
+        }
+    }
+    /**
+     * Returns an individual speaker based on an id
+     * @param id the id to search for
+     * @return A speaker that matches the id given
+     */
+    public Speaker getSpeakerByID(int id) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select id, first_name," +
+                    "last_name, suggested_by, visible from speaker "+
+                    "where id = ?");
+            statement.setInt(1, id);
+            result = statement.executeQuery();
+            Speaker s = new Speaker();
+            if (result.next()) {
+                s.setId(result.getInt("id"));
+                s.setFirstName(result.getString("first_name"));
+                s.setLastName(result.getString("last_name"));
+                s.setSuggestedBy(result.getInt("suggested_by"));
+                s.setVisible(result.getBoolean("visible"));
+            }
+            closeJDBC();
+            return(s);
+        }
+        catch(Exception e) {
+            
+        }
+        return null;
+    }
+    /**
+     * Gets every speaker in the database along with their rank - used for admin
+     * @param A criteria to sort the query
+     * @return A list of all speakers in the database
+     */
+    public ArrayList<Speaker> getAllSpeakers(String sort) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select s.id, s.first_name," +
+                    "s.last_name, s.suggested_by, s.visible, r.rating, r.count "+
+                    "count(k.speaker_id) as newcount, sum(k.ranking) as ranking" +
+                    "from speaker s left join ranks2012 r on r.speaker_id = s.id " +
+                    "left join speaker_ranking k on k.speaker_id = s.id group by (s.id)" +
+                    " ?");
+            statement.setString(1, sort);
+            result = statement.executeQuery();
+            ArrayList<Speaker> speakers = new ArrayList<Speaker>();
+            while (result.next()){
+                Speaker s = new Speaker();
+                s.setId(result.getInt("id"));
+                s.setFirstName(result.getString("first_name"));
+                s.setLastName(result.getString("last_name"));
+                s.setSuggestedBy(result.getInt("suggested_by"));
+                s.setVisible(result.getBoolean("visible"));
+                s.setRank2012(result.getDouble("rating"));
+                s.setCount2012(result.getInt("count"));
+                s.setRank(result.getInt("ranking"));
+                s.setCount(result.getInt("newcount"));
+                speakers.add(s);
+            }
+            closeJDBC();
+            return (speakers);
+        }
+        catch(Exception e) {
+            
+        }
+        return null;
+    }
+    /**
+     * Gets a list of speaker objects based on who suggested them
+     * @param id the user who suggested the speakers
+     * @param sort the criteria with which to sort the results
+     * @return A list of speakers that have been suggested by a user
+     */
+    public ArrayList<Speaker> getSpeakersByCreator(int id, String sort) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select id, first_name, last_name, " +
+                    "suggested_by, visible from speaker where suggested_by = ?" +
+                    " ?");
+            statement.setInt(1, id);
+            statement.setString(2, sort);
+            statement.execute();
+            ArrayList<Speaker> speakers = new ArrayList<Speaker>();
+            while(result.next()){
+                Speaker s = new Speaker();
+                s.setId(result.getInt("id"));
+                s.setFirstName(result.getString("first_name"));
+                s.setLastName(result.getString("last_name"));
+                s.setSuggestedBy(result.getInt("suggested_by"));
+                s.setVisible(result.getBoolean("visible"));
+                speakers.add(s);
+            }
+            closeJDBC();
+            return speakers;
+        }
+        catch(Exception e) {
+            
+        }
+        return null;
+    }
+    /**
+     * Takes a group of speakers and ranks them in order 1-10
+     * @param speakers a list of speaker objects
+     * @param user the user who is rating the speakers
+     */
+    public void setUserRanks(ArrayList<Speaker> speakers, int user) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("insert into speaker_ranking " +
+                    "(speaker_id, ranking, user_id) values " +
+                    "(?, ?, ?)");
+            statement.setInt(3, user);
+            for (int i = 0; i < speakers.size(); i++){
+                statement.setInt(1,speakers.get(i).getId());
+                statement.setInt(2, 10-i);
+                statement.execute();
+            }
+            closeJDBC();
+        }
+        catch(Exception e) {
+            
+        }
+    }
+    /**
+     * Updates a speaker in the database
+     * @param s The speaker to be updated 
+     */
+    public void updateSpeaker(Speaker s) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("update speaker " +
+                    "set first_name = ?," +
+                    "set last_name = ?," +
+                    "set suggested_by = ?," +
+                    "set visible = ?," +
+                    "where id = ?");
+            statement.setString(1, s.getFirstName());
+            statement.setString(2, s.getLastName());
+            statement.setInt(3, s.getSuggestedBy());
+            statement.setBoolean(4, s.getVisible());
+            statement.setInt(5, s.getId());
+            success = statement.execute();
+            closeJDBC();
+        }
+        catch(Exception e) {
+            
+        }
+    }
+    /**
+     * Removes a speaker from the database
+     * @param s The speaker to remove - although just the ID is needed
+     */
+    public void deleteSpeaker(Speaker s) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("delete from speaker " +
+                    "where id = ?");
+            statement.setInt(1,s.getId());
+            statement.execute();
+            closeJDBC();
+        }
+        catch (Exception e) {
+            
+        }
+    }
+}
