@@ -1,149 +1,158 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.scripps.growler;
-
-import java.io.Serializable;
-import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
+import java.util.*;
 /**
+ * Handles the sessions or "events" of Techtoberfest
  *
+ * @see com.scripps.growler.SessionPersistence
  * @author "Justin Bauguess"
  */
-@Entity
-@Table(name = "session", catalog = "growler_db", schema = "")
-@NamedQueries({
-    @NamedQuery(name = "Session.findAll", query = "SELECT s FROM Session s")})
-public class Session implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @Column(name = "id")
+public class Session {
+    /**
+     * The identifier for the session
+     */
     private Integer id;
-    @Column(name = "name")
+    /**
+     * The name of the session
+     */
     private String name;
-    @Lob
-    @Column(name = "description")
+    /**
+     * A description of the session
+     */
     private String description;
-    @Column(name = "session_date")
-    @Temporal(TemporalType.DATE)
+    /**
+     * The date of the session
+     */
     private Date sessionDate;
-    @Column(name = "start_time")
-    @Temporal(TemporalType.TIME)
+    /**
+     * The time the session begins
+     */
     private Date startTime;
-    @Column(name = "duration")
+    /**
+     * How long the session lasts in minutes
+     */
     private Integer duration;
-    @Column(name = "location")
+    /**
+     * The location of the session
+     */
     private Integer location;
-    @Column(name = "track")
+    /**
+     * The track of the session - What information will be covered
+     */
     private String track;
 
     public Session() {
     }
 
-    public Session(Integer id) {
-        this.id = id;
-    }
-
+    /**
+     * Gets the id of a session
+     * @return The session id
+     */
     public Integer getId() {
         return id;
     }
-
+    /**
+     * Sets the id of a session
+     * @param id The session id
+     */
     public void setId(Integer id) {
         this.id = id;
     }
-
+    /**
+     * Gets the name of a session
+     * @return The session name
+     */
     public String getName() {
         return name;
     }
-
+    /**
+     * Sets the name of a session
+     * @param name The session name
+     */
     public void setName(String name) {
         this.name = name;
     }
-
+    /**
+     * Gets the description of a session
+     * @return The session description
+     */
     public String getDescription() {
         return description;
     }
-
+    /**
+     * Sets the description of a session
+     * @param description The session description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
-
+    /**
+     * Gets the date of the session
+     * @return The session date
+     */
     public Date getSessionDate() {
         return sessionDate;
     }
-
+    /**
+     * Sets the date of the session
+     * @param sessionDate The session date
+     */
     public void setSessionDate(Date sessionDate) {
         this.sessionDate = sessionDate;
     }
-
+    /**
+     * Gets the start time of the session
+     * @return The session start time
+     */
     public Date getStartTime() {
         return startTime;
     }
-
+    /**
+     * Sets the start time of the session
+     * @param startTime The session start time
+     */
     public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
-
+    /**
+     * Gets the duration of the session
+     * @return The minutes a session will last
+     */
     public Integer getDuration() {
         return duration;
     }
-
+    /**
+     * Sets the duration of the session
+     * @param duration The minutes a session will last
+     */
     public void setDuration(Integer duration) {
         this.duration = duration;
     }
-
+    /**
+     * Gets the location of the session
+     * @return A reference to the location of a session
+     */
     public Integer getLocation() {
         return location;
     }
-
+    /**
+     * Sets the location of a session
+     * @param location The session location
+     */
     public void setLocation(Integer location) {
         this.location = location;
     }
-
+    /**
+     * Gets the track of a session
+     * @return What kind of session
+     */
     public String getTrack() {
         return track;
     }
-
+    /**
+     * Sets the track of a session
+     * @param track What kind of session
+     */
     public void setTrack(String track) {
         this.track = track;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Session)) {
-            return false;
-        }
-        Session other = (Session) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.scripps.growler.Session[ id=" + id + " ]";
-    }
-
 }

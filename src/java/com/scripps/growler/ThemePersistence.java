@@ -9,28 +9,8 @@ import java.util.*;
  * @see com.scripps.growler.Theme
  * @author "Justin Bauguess"
  */
-public class ThemePersistence {
+public class ThemePersistence extends GrowlerPersistence {
 
-    /**
-     * Reference to the DataConnection Class
-     */
-    DataConnection data;
-    /**
-     * A connection object to perform operations with
-     */
-    Connection connection;
-    /**
-     * A prepared statement object to store queries within
-     */
-    PreparedStatement statement;
-    /**
-     * A result set to get data from
-     */
-    ResultSet result;
-    /**
-     * A boolean to determine if an update was successful or not
-     */
-    boolean success;
     /**
      * Sorts queries by id in ascending order
      */
@@ -67,16 +47,6 @@ public class ThemePersistence {
      * A default constructor
      */
     public ThemePersistence() {
-    }
-    /**
-     * Establishes a Connection to the database, using the DataConnection class
-     */
-    public void initializeJDBC() {
-        try {
-            data = new DataConnection();
-            connection = data.sendConnection();
-        } catch (Exception e) {
-        }
     }
     /**
      * addTheme
@@ -328,17 +298,6 @@ public class ThemePersistence {
         }
         catch (Exception e) {
             
-        }
-    }
-    /**
-     * closes the connection, statement and result set
-     */
-    public void closeJDBC() {
-        try {
-            statement.close();
-            result.close();
-            connection.close();
-        } catch (Exception e) {
         }
     }
 }

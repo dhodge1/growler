@@ -1,17 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.scripps.growler;
-
-import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
 
 /**
  * Represents the Attendance table in the database
@@ -21,16 +8,9 @@ import javax.persistence.Table;
  * @see com.scripps.growler.Session
  * @author "Justin Bauguess"
  */
-@Entity
-@Table(name = "attendance", catalog = "growler_db", schema = "")
-@NamedQueries({
-    @NamedQuery(name = "Attendance.findAll", query = "SELECT a FROM Attendance a")})
-public class Attendance implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @EmbeddedId
+public class Attendance{
     protected int userId;
     protected int sessionId;
-    @Column(name = "isRegistered")
     private Boolean isRegistered;
 
     /**

@@ -1,35 +1,13 @@
 package com.scripps.growler;
 import java.sql.*;
 import java.util.*;
-
 /**
  * Handles the database entries for Speakers
  * 
  * @see com.scripps.growler.Speaker
  * @author "Justin Bauguess"
  */
-public class SpeakerPersistence {
-
-    /**
-     * Reference to the DataConnection Class
-     */
-    DataConnection data;
-    /**
-     * A connection object to perform operations with
-     */
-    Connection connection;
-    /**
-     * A prepared statement object to store queries within
-     */
-    PreparedStatement statement;
-    /**
-     * A result set to get data from
-     */
-    ResultSet result;
-    /**
-     * A boolean to determine if an update was successful or not
-     */
-    boolean success;
+public class SpeakerPersistence extends GrowlerPersistence {
     /**
      * Sorts queries by last name in ascending order
      */
@@ -93,31 +71,6 @@ public class SpeakerPersistence {
         
     }
     /**
-     * Initializes a database connection based on the DataConnection class
-     */
-    public void initializeJDBC() {
-        try {
-            DataConnection data = new DataConnection();
-            connection = data.sendConnection();
-        }
-        catch(Exception e) {
-            
-        }
-    }
-    /**
-     * Closes all database resources: connection, statement, and result
-     */
-    public void closeJDBC() {
-        try {
-            connection.close();
-            statement.close();
-            result.close();
-        }
-        catch(Exception e) {
-            
-        }
-    }
-    /**
      * Adds a speaker to the database
      * @param s The speaker to add
      */
@@ -134,6 +87,23 @@ public class SpeakerPersistence {
             closeJDBC();
         }
         catch(Exception e) {
+            
+        }
+    }
+     /**
+     * Removes a speaker from the database
+     * @param s The speaker to remove - although just the ID is needed
+     */
+    public void deleteSpeaker(Speaker s) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("delete from speaker " +
+                    "where id = ?");
+            statement.setInt(1,s.getId());
+            statement.execute();
+            closeJDBC();
+        }
+        catch (Exception e) {
             
         }
     }
@@ -285,21 +255,5 @@ public class SpeakerPersistence {
             
         }
     }
-    /**
-     * Removes a speaker from the database
-     * @param s The speaker to remove - although just the ID is needed
-     */
-    public void deleteSpeaker(Speaker s) {
-        try {
-            initializeJDBC();
-            statement = connection.prepareStatement("delete from speaker " +
-                    "where id = ?");
-            statement.setInt(1,s.getId());
-            statement.execute();
-            closeJDBC();
-        }
-        catch (Exception e) {
-            
-        }
-    }
+
 }
