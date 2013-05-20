@@ -10,10 +10,11 @@
 <%@page import="sun.java2d.pipe.SpanClipRenderer"%>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
-<%@page import="com.scripps.growler.DataConnection" %>
+<%@page import="com.scripps.growler.*" %>
 <jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="page" />
 <jsp:useBean id="giveStars" class="com.scripps.growler.GiveStars" scope="page" />
 <jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page" />
+<jsp:useBean id="persist" class="com.scripps.growler.SpeakerPersistence" scope="page" />
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
@@ -61,14 +62,12 @@
 							<div class="span1">
 							</br>
 								<%
-								Connection connection = dataConnection.sendConnection();
-								Statement statement = connection.createStatement();
-								ResultSet speaker = statement.executeQuery("select s.id, r.rating, r.count, s.first_name, s.last_name, s.visible, s.suggested_by, u.name from speaker s, ranks_2012 r, user u where s.id = r.speaker_id and u.id = s.suggested_by order by r.rating desc, s.last_name");
+								ArrayList<Speaker> speakers = persist.getAllSpeakers(persist.SORT_BY_2012_RANK_DESC);
 								%>
 							</div>
 							<div class="span2">
 								<section>
-									<form id="entry" name="entry" action="../model/adminspeaker.jsp" method="post">
+									<form id="entry" name="entry" action="../model/adminspeaker.jsp" method="post" onSubmit="return checkRange(this)">
 										<table>
 											<tr>
 												<td>Speaker Name</td>
@@ -80,33 +79,30 @@
 												<td>Suggested By</td>
 											</tr>
 											<% 
-											while (speaker.next()) {
+											for (int i = 0; i < speakers.size(); i++) {
 											%>
 											<tr>
-												 <td><% out.print(speaker.getString("last_name") + ", " + speaker.getString("first_name")); %>
-												 <input name="list" type="hidden" value="<% out.print(speaker.getInt("id")); %>" />
-												 <td><% out.print(speaker.getDouble("rating")); %></td>
-												 <td><% out.print(speaker.getInt("count")); %></td>
+												 <td><% out.print(speakers.get(i).getLastName() + ", " + speakers.get(i).getFirstName()); %>
+												 <input name="list" type="hidden" value="<% out.print(speakers.get(i).getId()); %>" />
+												 <td><% out.print(speakers.get(i).getRank2012()); %></td>
+												 <td><% out.print(speakers.get(i).getCount2012()); %></td>
 												 <% 
-												 double d = speaker.getDouble("rating");
-												 out.print("<td><input id=\"" + speaker.getInt("id") +"\" type=\"number\" min=\"0\" max=\"5\" name=\"newrank\" value=" + d + " /></td>");
+												 double d = speakers.get(i).getRank2012();
+												 out.print("<td><input id=\"" + speakers.get(i).getId() +"\" type=\"number\" min=\"0\" max=\"5\" name=\"newrank\" value=" + d + " /></td>");
 												 %>
 												 <% 
-												 int i = speaker.getInt("count");
-												 out.print("<td><input id=\"" + speaker.getInt("id") +"\" type=\"number\" min=\"0\" max=\"100\" name=\"newcount\" value=" + i + " /></td>");
+												 int c = speakers.get(i).getCount2012();
+												 out.print("<td><input id=\"" + speakers.get(i).getId() +"\" type=\"number\" min=\"0\" max=\"100\" name=\"newcount\" value=" + c + " /></td>");
 												 %>
-												 <td><input name="visible" type="checkbox" value="<% out.print(speaker.getInt("id")); %>"
+												 <td><input name="visible" type="checkbox" value="<% out.print(speakers.get(i).getId()); %>"
 												 <% 
-												 if (speaker.getInt("visible") == 0) {
+												 if (speakers.get(i).getVisible() == true) {
 												 out.print("checked"); }
 												 %> />
 												 </td>
-												 <td><% out.print(speaker.getString("name")); %></td>
+												 <td><% out.print(speakers.get(i).getSuggestedBy()); %></td>
 											</tr>
-											<% } 
-											speaker.close();
-											statement.close();
-											connection.close();
+											<% } //close the for loop
 											%>
 										 </table>
 									
