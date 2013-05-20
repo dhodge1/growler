@@ -2,14 +2,16 @@
     Document   : surveylist
     Created on : Apr 25, 2013, 7:15:03 PM
     Author     : Justin Bauguess
-    Purpose    : 
+    Purpose    : List the surveys for sessions a user has attended
 --%>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
-<%@page import="com.scripps.growler.DataConnection" %>
+<%@page import="com.scripps.growler.*" %>
 <jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="page" />
 <jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page" />
 <jsp:useBean id="giveStars" class="com.scripps.growler.GiveStars" scope="page" />
+<jsp:useBean id="persist" class="com.scripps.growler.AttendancePersistence" scope="page" />
+<jsp:useBean id="spersist" class="com.scripps.growler.SessionPersistence" scope="page" />
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
@@ -44,7 +46,16 @@
 			<img class="logo" src="../images/Techtoberfest2013small.png" alt="Techtoberfest 2013 small"/><!-- Techtoberfest logo-->
 		</div>
 		<div class="span6 largeBottomMargin">
-			<h1 class = "bordered">Survey</h1>
+								<% 
+								String user = String.valueOf(request.getAttribute("id"));
+								ArrayList<Attendance> attendances = persist.getAttendancesByUser(Integer.parseInt(user)));
+								if (attendances == null) {
+									out.print("<h1 class=bordered>You have not attended any sessions</h1>");
+								}
+								else{
+									out.print("<h1 class=bordered>Surveys</h1>
+								}
+								%>
 		</div>
     </div>
 	<div class="container-fluid">
@@ -56,12 +67,7 @@
 						<div class="row">
 							<div class="span1">
 							<br/>
-								<% 
-								String user = String.valueOf(request.getAttribute("id"));
-								Connection newConnect = dataConnection.sendConnection();
-								Statement newStatement = newConnect.createStatement();
-								ResultSet qResult = newStatement.executeQuery("select s.name, s.id from session s, attendance a where s.id = a.session_id and a.isRegistered = 1 and a.user_id = " + user);
-								%>
+								
 							</div>
 							<div class="span2">
 								<section>
@@ -72,16 +78,15 @@
 												<td>Take Survey</td>
 											</tr>
 											<%
-											while (qResult.next()) {
+											for (int i = 0; i < attendances.size(); i++) {
+												if (attendances.get(i).getIsRegistered() == false) {
 											%>
 											<tr>
-												<td><% out.print(qResult.getString("name")); %></td>
-												<td><% out.print("<a href=\"../view/survey.jsp?session=" + qResult.getInt("id") +"\">Survey</a>");%></td>
+												<td><% out.print(spersist.getSessionById(attendances.get(i).getSessionId()).getName()); %></td>
+												<td><% out.print("<a href=\"../view/survey.jsp?session=" + attendances.get(i).getSessionId() +"\">Survey</a>");%></td>
 											</tr>
-											<% }
-											qResult.close();
-											newStatement.close();
-											newConnect.close(); 
+											<% } //close if statement
+											} //close for loop
 											%>
 										</table>
 									</form>

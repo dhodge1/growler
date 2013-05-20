@@ -1,5 +1,4 @@
 // JavaScript Document
-<script language="JavaScript" type="text/javascript">
 function checkRange(form) {
 
 	if (form.newrank.value < 0.00 || form.newrank.value > 5.00) {
@@ -18,4 +17,3 @@ function checkRange(form) {
 
 
 }
-</script>
