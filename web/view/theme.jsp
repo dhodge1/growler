@@ -52,7 +52,16 @@
 			<img class="logo" src="../images/Techtoberfest2013small.png" alt="Techtoberfest 2013 small"/><!-- Techtoberfest logo-->
 		</div>
 		<div class="span7 largeBottomMargin">
-			<h1 class = "bordered">Themes - Drag & Drop Themes To Rank Them</h1>
+								<% 
+								String user = String.valueOf(session.getAttribute("id"));
+								ArrayList<Theme> themes = persist.getUserRanks(Integer.parseInt(user));
+								if (themes == null) {
+									out.print("<h1 class=bordered>Themes - Drag & Drop Themes to Rank Them</h1>");
+								}
+								else {
+									out.print("<h1 class=bordered>Your Theme Ranks</h1>");
+								}
+								%>
 		</div>
     </div>
 	<div class="container-fluid">
@@ -64,43 +73,32 @@
 						<div class="row">
 							<div class="span1">
 							<br/>                   
-								<% 
-								String user = String.valueOf(session.getAttribute("id"));
-								Connection newConnect = dataConnection.sendConnection();
-								Statement newStatement = newConnect.createStatement();
-								Statement themeStatement = newConnect.createStatement();
-								ResultSet preranked = newStatement.executeQuery("select r.theme_id, t.name from theme_ranking r, theme t where t.id = r.theme_id and r.user_id = " + user);
-								ResultSet themeResult = themeStatement.executeQuery(queries.selectVisibleThemes());
-								%>
+								
 							</div>
 							<div class="span2">
 								<section>
 								 <%
-									int counter = 1;
-									   while(preranked.next()) {
-										   out.println("Rank " + counter + ":" + preranked.getString("name") + "<br/><br/>");
-										   counter++;
-										   themeResult = null;
-										   
-									   }
-									preranked.close();
-                                                                        if (themeResult != null) {
-                                                                        }
+									if (themes != null) {
+										for (int i = 0; i < themes.size(); i++) {
+											out.print("<h3>Rank " + (i + 1) + ": " + themes.getName() + "</h3>");
+										}
+									}
+
                                                                                         
 								%>
 								<form action="../model/processThemeRanking.jsp" >
 									<ul id="sortable">
 										<%            
-										if (themeResult != null) {
+										if (themes == null) {
                                                                                         
-                                                                                    ArrayList<Theme> themes = persist.getAllThemes();
+                                                                                    ArrayList<Theme> vthemes = persist.getThemesByVisibility(true);
                                                                                     for (int i = 0; i < themes.size(); i ++) {
                                                                                         %>
                                                                                         <li class="ui-state-default" id="lisort">
                                                                                         <%
-                                                                                        out.print(themes.get(i).getName() + " : ");
-                                                                                        out.print(themes.get(i).getDescription());
-                                                                                        out.print("<input type=\"hidden\" name=\"list\" value=\"" + themes.get(i).getId() + "\" >");
+                                                                                        out.print(vthemes.get(i).getName() + " : ");
+                                                                                        out.print(vthemes.get(i).getDescription());
+                                                                                        out.print("<input type=\"hidden\" name=\"list\" value=\"" + vthemes.get(i).getId() + "\" >");
                                                                                         %></li><%
                                                                                         }
 											%>

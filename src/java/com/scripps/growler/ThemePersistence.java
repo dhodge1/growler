@@ -14,43 +14,41 @@ public class ThemePersistence extends GrowlerPersistence {
     /**
      * Sorts queries by id in ascending order
      */
-    String SORT_BY_ID_ASC = " order by id asc";
+    final public String SORT_BY_ID_ASC = " order by id asc";
     /**
      * Sorts queries by id in descending order
      */
-    String SORT_BY_ID_DESC = " order by id desc";
+    final public String SORT_BY_ID_DESC = " order by id desc";
     /**
      * Sorts queries by name in ascending order
      */
-    String SORT_BY_NAME_ASC = " order by name asc";
+    final public String SORT_BY_NAME_ASC = " order by name asc";
     /**
      * Sorts queries by name in descending order
      */
-    String SORT_BY_NAME_DESC = " order by name desc";
+    final public String SORT_BY_NAME_DESC = " order by name desc";
     /**
      * Sorts queries by creator in ascending order
      */
-    String SORT_BY_CREATOR_ASC = " order by creator asc";
+    final public String SORT_BY_CREATOR_ASC = " order by creator asc";
     /**
      * Sorts queries by creator in descending order
      */
-    String SORT_BY_CREATOR_DESC = " order by creator desc";
+    final public String SORT_BY_CREATOR_DESC = " order by creator desc";
     /**
      * Sorts queries by visibility in ascending order
      */
-    String SORT_BY_VISIBLE_ASC = " order by visible asc";
+    final public String SORT_BY_VISIBLE_ASC = " order by visible asc";
     /**
      * Sorts queries by visibility in descending order
      */
-    String SORT_BY_VISIBLE_DESC = "order by visible desc";
+    final public String SORT_BY_VISIBLE_DESC = "order by visible desc";
     /**
      * A default constructor
      */
     public ThemePersistence() {
     }
     /**
-     * addTheme
-     *
      * Adds a theme to the database.
      *
      * @param t - a theme object
@@ -67,9 +65,6 @@ public class ThemePersistence extends GrowlerPersistence {
             statement.setBoolean(4, false);
             statement.setInt(5, t.getCreatorId());
             success = statement.execute();
-            if (success) {
-                System.out.print("Success!");
-            }
             closeJDBC();
         } catch (Exception e) {
         }
@@ -104,8 +99,6 @@ public class ThemePersistence extends GrowlerPersistence {
         return null;
     }
     /**
-     * getThemeByID
-     *
      * Returns a theme object corresponding to a given id
      *
      * @param id - The ID of the Theme, primary key of the Theme Table
@@ -125,6 +118,7 @@ public class ThemePersistence extends GrowlerPersistence {
                 t.setDescription(result.getString("description"));
                 t.setCreatorId(result.getInt("creator"));
                 t.setVisible(result.getBoolean("visible"));
+		closeJDBC();
                 return (t);
             }
             closeJDBC();
@@ -154,9 +148,38 @@ public class ThemePersistence extends GrowlerPersistence {
                 t.setCreatorId(result.getInt("creator"));
                 t.setVisible(result.getBoolean("visible"));
                 themes.add(t);
-                return (themes);
             }
             closeJDBC();
+            return (themes);
+        } catch (Exception e) {
+        }
+        return (null);
+    }
+    /**
+     * returns a list of Theme objects by visibility
+     *
+     * @param v - a given visibility value
+     * @return an array list of theme objects that are visible (or not)
+     */
+    public ArrayList<Theme> getThemeByVisibility(boolean v) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select id, name, description, "
+                    + "creator, visible from theme where visible = ?");
+            statement.setBoolean(1, v);
+            result = statement.executeQuery();
+            ArrayList<Theme> themes = new ArrayList<Theme>();
+            while (result.next()) {
+                Theme t = new Theme();
+                t.setId(result.getInt("id"));
+                t.setName(result.getString("name"));
+                t.setDescription(result.getString("description"));
+                t.setCreatorId(result.getInt("creator"));
+                t.setVisible(result.getBoolean("visible"));
+                themes.add(t);
+            }
+            closeJDBC();
+            return (themes);
         } catch (Exception e) {
         }
         return (null);
@@ -205,8 +228,10 @@ public class ThemePersistence extends GrowlerPersistence {
                 t.setRank(result.getInt("rating"));
                 t.setCount(result.getInt("count"));
                 t.setVisible(result.getBoolean("visible"));
+		themes.add(t);
             }
             closeJDBC();
+	    return (themes);
         } catch (Exception e) {
         }
         return (null);
@@ -252,9 +277,9 @@ public class ThemePersistence extends GrowlerPersistence {
                 t.setCreatorId(result.getInt("creator"));
                 t.setVisible(result.getBoolean("visible"));
                 themes.add(t);
-                return (themes);
             }
             closeJDBC();
+            return (themes);
         } catch (Exception e) {
         }
         return (null);
