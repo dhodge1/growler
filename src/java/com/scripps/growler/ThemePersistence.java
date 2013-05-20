@@ -161,7 +161,7 @@ public class ThemePersistence extends GrowlerPersistence {
      * @param v - a given visibility value
      * @return an array list of theme objects that are visible (or not)
      */
-    public ArrayList<Theme> getThemeByVisibility(boolean v) {
+    public ArrayList<Theme> getThemesByVisibility(boolean v) {
         try {
             initializeJDBC();
             statement = connection.prepareStatement("select id, name, description, "

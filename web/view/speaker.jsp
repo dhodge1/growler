@@ -11,11 +11,12 @@
 --%>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
-<%@page import="com.scripps.growler.DataConnection" %>
+<%@page import="com.scripps.growler.*" %>
 <jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="page">
 </jsp:useBean>
 <jsp:useBean id="giveStars" class="com.scripps.growler.GiveStars" scope="page"></jsp:useBean>
 <jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page"></jsp:useBean>
+<jsp:useBean id="persist" class="com.scripps.growler.SpeakerPersistence" scope="page"></jsp:useBean>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
@@ -46,7 +47,22 @@
 			<img class="logo" src="../images/Techtoberfest2013small.png" alt="Techtoberfest 2013 small"/><!-- Techtoberfest logo-->
 		</div>
 		<div class="span6 largeBottomMargin">
-			<h1 class = "bordered">Speakers - Drag & Drop Speakers To Rank Them</h1>
+								<% 
+                                                                String user = String.valueOf(session.getAttribute("id"));
+								ArrayList<Speaker> speakers = persist.getUserRanks(Integer.parseInt(user));                                                                
+                                                                if (speakers != null) {
+									out.print("<h1>Your Speaker Rankings</h1>");
+									for(int i = 0; i < speakers.size(); i++) {
+										out.print("<h3>Rank " + (i + 1) + ": " + speakers.get(i).getLastName(); +
+											", " + speakers.get(i).getFirstName() + " </h3>");
+									}
+								}
+								else {
+									out.print("<h1 class=bordered>Speakers - Drag & Drop Speakers to Rank Them</h1>");
+								}
+					
+
+								%>
 		</div>
 		
     </div>
@@ -59,52 +75,28 @@
 						<div class="row">
 							<div class="span1">
 								<br/>					
-								<% 
-                                                                String user = String.valueOf(session.getAttribute("id"));                                                                
-                                                                Connection connection = dataConnection.sendConnection();
-										 
-									Statement newStatement = connection.createStatement();
-									ResultSet speaker = newStatement.executeQuery(queries.selectVisibleSpeakers());
-                                                                        Statement ranked = connection.createStatement();
-                                                                        ResultSet preranked = ranked.executeQuery("select s.first_name, s.last_name from speaker s, speaker_ranking r where r.speaker_id = s.id and r.user_id = " + user);
-
-								%>
+								
 							</div>
 							<div class="span2">
 								<section>
 									<%
-									int counter = 1;
-									   while(preranked.next()) {
-										   out.println("Rank " + counter + ":" + preranked.getString("last_name") + ", " + preranked.getString("first_name") + "<br/><br/>");
-										   counter++;
-										   speaker = null;
-										   
-									   }
-									preranked.close();
-                                                                        if (speaker !=null) {
-                                                                                            
-                                                                        }
+									if (speakers == null) {
+										ArrayList<Speaker> vspeakers = persist.getSpeakersByVisibility(true);
+									
 									%>
 									 <form action="../model/processSpeakerRanking.jsp">
 										<ul class="sortable">
 											<%
-											if (speaker != null) {
-                                                                                            
-                                                                                            
-											while (speaker.next()) {
+											for(int j = 0; j < vspeakers.size(); j++) {
 											%>
 											<li id="lisort"> 
-											<% out.print(speaker.getString("last_name") + ", " + speaker.getString("first_name")); %>
-											<% out.print(giveStars.return2012Rank(speaker.getInt("id"))); %>
-											<% out.print(giveStars.returnCount(speaker.getInt("id"))); %>
-											<% out.print("<input type=\"hidden\" name=\"list\" value=\"" + speaker.getInt("id") + "\" />"); %>
+											<% out.print(vspeakers.get(j).getLastName() + ", " + vspeakers.get(j).getFirstName()); %>
+											<% out.print(giveStars.return2012Rank(vspeakers.get(j).getId())); %>
+											<% out.print(giveStars.returnCount(vspeakers.get(j).getId())); %>
+											<% out.print("<input type=\"hidden\" name=\"list\" value=\"" + vspeakers.get(j).getId() + "\" />"); %>
 											</li>
 											<% } 
-											speaker.close();
 											}
-											newStatement.close();
-											ranked.close();
-											connection.close();
 											%>
 										</ul>
 									 
