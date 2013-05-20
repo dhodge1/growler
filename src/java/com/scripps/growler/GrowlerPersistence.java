@@ -27,6 +27,9 @@ public abstract class GrowlerPersistence {
      * Used for determining the success of certain queries
      */
     protected boolean success;
+    /**
+     * Establishes connection for the database using the DataConnection class
+     */
     public void initializeJDBC() {
         try {
             data = new DataConnection();
@@ -36,6 +39,9 @@ public abstract class GrowlerPersistence {
             
         }
     }
+    /**
+     * Closes all database resources: connection, statement, result set
+     */
     public void closeJDBC() {
         try {
             connection.close();

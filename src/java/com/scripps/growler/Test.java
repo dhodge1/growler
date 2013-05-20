@@ -35,6 +35,22 @@ public class Test {
         catch (Exception e) {
             
         }
+        try {
+            MessageDigest sha = MessageDigest.getInstance("sha-1");
+            String password = "thisword";
+            sha.update(password.getBytes());
+            byte pwd2[] = sha.digest();
+            String p1 = bytesToHex(pwd2);
+            System.out.println(p1);
+            String password2 = "Thisword";
+            sha.update(password2.getBytes());
+            byte pwd3[] = sha.digest();
+            String p2 = bytesToHex(pwd3);
+            System.out.println(p2);
+        }
+        catch (Exception e) {
+            
+        }
         }
     }
 }

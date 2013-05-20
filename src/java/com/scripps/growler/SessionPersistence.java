@@ -75,6 +75,9 @@ public class SessionPersistence extends GrowlerPersistence {
      * Sorts queries by date then time descending
      */
     final String SORT_BY_DATE_TIME_DESC = " order by session.session_date, session.start_time desc";
+    /**
+     * An array list object for each method to use
+     */
     ArrayList<Session> sessions = new ArrayList<Session>();
     /**
      * Default Constructor

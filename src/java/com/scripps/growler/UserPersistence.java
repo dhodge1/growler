@@ -9,7 +9,15 @@ import java.util.*;
  * @author "Justin Bauguess"
  */
 public class UserPersistence extends GrowlerPersistence {
+    /**
+     * An array list for each method to use
+     */
+    ArrayList<User> users = new ArrayList<User>();
+    
 
+    /**
+     * Default constructor
+     */
     public UserPersistence() {
         
     }

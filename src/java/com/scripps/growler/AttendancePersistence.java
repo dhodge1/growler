@@ -2,6 +2,7 @@ package com.scripps.growler;
 import java.sql.*;
 import java.util.*;
 /**
+ * Handles database communication for Attendance objects
  *
  * @see com.scripps.growler.Attendance
  * @author "Justin Bauguess"
@@ -31,6 +32,10 @@ public class AttendancePersistence extends GrowlerPersistence {
      * Sorts queries by registration status descending
      */
     final String SORT_BY_REGISTERED_DESC = " order by attendance.is_registered desc";
+    /**
+     * An array list for each method to use
+     */
+    ArrayList<Attendance> attendances = new ArrayList<Attendance>();
     /**
      * Default constructor
      */
