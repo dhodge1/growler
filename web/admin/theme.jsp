@@ -10,10 +10,12 @@
 --%>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
-<%@page import="com.scripps.growler.DataConnection" %>
+<%@page import="com.scripps.growler.*" %>
 <jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="page" />
 <jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page" />
 <jsp:useBean id="giveStars" class="com.scripps.growler.GiveStars" scope="page" />
+<jsp:useBean id="persist" class="com.scripps.growler.ThemePersistence" scope="page" />
+<jsp:useBean id="upersist" class="com.scripps.growler.UserPersistence" scope="page" />
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
@@ -62,9 +64,7 @@
 							<div class="span1">
 							<br/>                   
 								<% 
-								Connection newConnect = dataConnection.sendConnection();
-                                Statement newStatement = newConnect.createStatement();
-                                ResultSet themeResult = newStatement.executeQuery(queries.selectAdminTheme());
+								ArrayList<Theme> themes = persist.getAllThemes(persist.SORT_BY_RATING_NAME_ASC);
                                 %>
 							</div>
 							<div class="span2">
@@ -79,22 +79,19 @@
 												<td>Created By</td>
 											</tr>
 												<% 
-												while (themeResult.next()) {
+												for(int i = 0; i < themes.size(); i++) {
 												%>
 											<tr>
-											<td><% out.print(themeResult.getString("name")); %>
-											<input type="hidden" name="list" value="<% out.print(themeResult.getInt("id")); %>" /></td>
-											<td><% out.print(themeResult.getInt("rating")); %></td>
-											<td><% out.print(themeResult.getInt("count")); %></td>
-											<td><input type="checkbox" name="visible" value="<% out.print(themeResult.getInt("id")); %>"
-													   <% if (themeResult.getInt("visible") == 0) {
+											<td><% out.print(themes.get(i).getName()); %>
+											<input type="hidden" name="list" value="<% out.print(themes.get(i).getId()); %>" /></td>
+											<td><% out.print(themes.get(i).getRank()); %></td>
+											<td><% out.print(themes.get(i).getCount()); %></td>
+											<td><input type="checkbox" name="visible" value="<% out.print(themes.get(i).getId()); %>"
+													   <% if (themes.get(i).getVisible() == true) {
 															  out.print(" checked");} %>/>
-											<td><% out.print(themeResult.getString("creator")); %>
+											<td><% out.print(upersist.getUserById(themes.get(i).getCreator()).getName(); %>
 											</tr>
-											<% } 
-											newConnect.close();
-											themeResult.close();
-											newStatement.close(); %>
+											<% } //close the for loop %>
 										</table>
 									
 								</section>

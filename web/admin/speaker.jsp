@@ -5,9 +5,9 @@
     Purpose    : The purpose of speaker(admin) is the page where administrators 
                 can edit speaker information.  It uses the rank_2012 table and 
                 the speaker table.  The editable data includes: rating, count of 
-                ratings, and visibility to users.
+                ratings, and visibility to users.  It uses the validation.js file
+		to ensure data entered is within a certain range of values.
 --%>
-<%@page import="sun.java2d.pipe.SpanClipRenderer"%>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
 <%@page import="com.scripps.growler.*" %>
@@ -15,6 +15,7 @@
 <jsp:useBean id="giveStars" class="com.scripps.growler.GiveStars" scope="page" />
 <jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page" />
 <jsp:useBean id="persist" class="com.scripps.growler.SpeakerPersistence" scope="page" />
+<jsp:useBean id="upersist" class="com.scripps.growler.UserPersistence" scope="page" />
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
@@ -37,7 +38,6 @@
 	<link rel="stylesheet" type="text/css" href="../css/general.css" /><!--General CSS-->
 	<link rel="stylesheet" type="text/css" href="../css/speaker.css" /><!--Survey CSS-->
 	<link rel="stylesheet" href="/resources/demos/style.css" />
-	
 	<script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
 </head>
 <body id="growler1">
@@ -100,7 +100,7 @@
 												 out.print("checked"); }
 												 %> />
 												 </td>
-												 <td><% out.print(speakers.get(i).getSuggestedBy()); %></td>
+												 <td><% out.print(upersist.getUserById(speakers.get(i).getSuggestedBy()).getName()); %></td>
 											</tr>
 											<% } //close the for loop
 											%>

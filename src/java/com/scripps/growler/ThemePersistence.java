@@ -42,7 +42,23 @@ public class ThemePersistence extends GrowlerPersistence {
     /**
      * Sorts queries by visibility in descending order
      */
-    final public String SORT_BY_VISIBLE_DESC = "order by visible desc";
+    final public String SORT_BY_VISIBLE_DESC = " order by visible desc";
+    /**
+     * Sorts queries by rating in ascending order
+     */
+    final public String SORT_BY_RATING_ASC = " order by rating asc";
+    /**
+     * Sorts queries by rating in descending order
+     */
+    final public String SORT_BY_RATING_DESC = " order by rating desc";
+    /**
+     * Sorts queries by rating, then name in ascending order
+     */
+    final public String SORT_BY_RATING_NAME_ASC = " order by rating, name asc";
+    /**
+     * Sorts queries by rating, then name in descending order
+     */
+    final public String SORT_BY_RATING_NAME_DESC = " order by rating, name desc";
     /**
      * A default constructor
      */
@@ -265,8 +281,8 @@ public class ThemePersistence extends GrowlerPersistence {
     public ArrayList<Theme> getAllThemes(String sort) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select id, name, description, "
-                    + "creator, visible from theme " + sort);
+            statement = connection.prepareStatement("select t.id, t.name, u.name as creator, sum(r.theme_rank) as rating, count(r.theme_id) as count, t.visible from theme t LEFT JOIN theme_ranking r on t.id = r.theme_id LEFT JOIN user u on u.id = t.creator group by t.id  ?");
+	    statement.setString(1, sort);
             result = statement.executeQuery();
             ArrayList<Theme> themes = new ArrayList<Theme>();
             while (result.next()) {
@@ -276,6 +292,8 @@ public class ThemePersistence extends GrowlerPersistence {
                 t.setDescription(result.getString("description"));
                 t.setCreatorId(result.getInt("creator"));
                 t.setVisible(result.getBoolean("visible"));
+		t.setRank(result.getInt("rating"));
+		t.setCount(result.getInt("count"));
                 themes.add(t);
             }
             closeJDBC();
