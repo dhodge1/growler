@@ -85,6 +85,25 @@ public class SessionPersistence extends GrowlerPersistence {
     public SessionPersistence() {
     }
     /**
+     * Generates the keys for all sessions
+     * @param list A list of sessions
+     */
+    public void generateKeys(ArrayList<Session> list) {
+        try{
+            statement = connection.prepareStatement("update session " +
+                    "set session_key = sha1((select id from session where id = ?)) where id = ?");
+            for (int i = 0; i < list.size(); i++){
+                statement.setInt(1, list.get(i).getId());
+                statement.setInt(2, list.get(i).getId());
+                statement.execute();
+            }
+        }
+        catch(Exception e){
+            
+        }
+    }
+    
+    /**
      * Gets a list of all sessions in the database
      * @param sort the criteria to sort the sessions
      * @return A list of sessions in the database, sorted
@@ -93,8 +112,7 @@ public class SessionPersistence extends GrowlerPersistence {
         try {
             initializeJDBC();
             statement = connection.prepareStatement("select id, name, description, session_date, start_time, " +
-                    " location, track, duration from session ?");
-            statement.setString(1, sort);
+                    " location, track, duration from session " + sort);
             result = statement.executeQuery();
             while (result.next()) {
                 //Create a new Session and add all data about the session to it

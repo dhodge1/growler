@@ -53,7 +53,7 @@ for (int i = 0; i < visibles.length; i++){
  for (int i = 0; i < ranks.length; i++) {
      ranks[i] = Double.parseDouble(rank[i]);
      if (ranks[i] < 0 || ranks[i] > 5) {
-         ranks[i] = 0;
+         ranks[i] = 1;
      }
  }
  //Convert the list of Counts into integers
@@ -61,7 +61,7 @@ for (int i = 0; i < visibles.length; i++){
  for (int i = 0; i < counts.length; i++) {
      counts[i] = Integer.parseInt(count[i]);
      if (counts[i] < 0 || counts[i] > 100) {
-         counts[i] = 0;
+         counts[i] = 1;
      }
  }
  
@@ -81,10 +81,10 @@ for (int i = 0; i < visibles.length; i++){
  //If the key is in the visibles array, we know the admin wants it visible
  for (int k = 0; k < ids.length; k++) {
      if (Arrays.binarySearch(visibles, ids[k]) >= 0 ) {
-         visibility.setInt(1, 0);
+         visibility.setInt(1, 1);
      }
      else {
-         visibility.setInt(1, 1);
+         visibility.setInt(1, 0);
      }
      visibility.setInt(2, ids[k]);
      visibility.execute();

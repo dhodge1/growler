@@ -18,6 +18,7 @@
         if(username!=null)        {           
         session.removeAttribute("user");
         session.removeAttribute("id");
+        session.removeAttribute("message");
         }
         response.sendRedirect("../index.jsp");
                     

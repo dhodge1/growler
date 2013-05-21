@@ -58,7 +58,7 @@ public class ThemePersistence extends GrowlerPersistence {
     /**
      * Sorts queries by rating, then name in descending order
      */
-    final public String SORT_BY_RATING_NAME_DESC = " order by rating, name desc";
+    final public String SORT_BY_RATING_NAME_DESC = " order by rating desc, t.name asc";
     /**
      * A default constructor
      */
@@ -280,15 +280,13 @@ public class ThemePersistence extends GrowlerPersistence {
     public ArrayList<Theme> getAllThemes(String sort) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select t.id, t.name, u.name as creator, sum(r.theme_rank) as rating, count(r.theme_id) as count, t.visible from theme t LEFT JOIN theme_ranking r on t.id = r.theme_id LEFT JOIN user u on u.id = t.creator group by t.id  ?");
-	    statement.setString(1, sort);
+            statement = connection.prepareStatement("select t.id as id, t.name as name, u.id as creator, sum(r.theme_rank) as rating, count(r.theme_id) as count, t.visible as visible from theme t LEFT JOIN theme_ranking r on t.id = r.theme_id LEFT JOIN user u on u.id = t.creator group by t.id " + sort);
             result = statement.executeQuery();
             ArrayList<Theme> themes = new ArrayList<Theme>();
             while (result.next()) {
                 Theme t = new Theme();
                 t.setId(result.getInt("id"));
                 t.setName(result.getString("name"));
-                t.setDescription(result.getString("description"));
                 t.setCreatorId(result.getInt("creator"));
                 t.setVisible(result.getBoolean("visible"));
 		t.setRank(result.getInt("rating"));

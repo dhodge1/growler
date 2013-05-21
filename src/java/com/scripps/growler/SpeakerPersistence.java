@@ -144,13 +144,7 @@ public class SpeakerPersistence extends GrowlerPersistence {
     public ArrayList<Speaker> getAllSpeakers(String sort) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select s.id, s.first_name," +
-                    "s.last_name, s.suggested_by, s.visible, r.rating, r.count "+
-                    "count(k.speaker_id) as newcount, sum(k.ranking) as ranking" +
-                    "from speaker s left join ranks2012 r on r.speaker_id = s.id " +
-                    "left join speaker_ranking k on k.speaker_id = s.id group by (s.id)" +
-                    " ?");
-            statement.setString(1, sort);
+            statement = connection.prepareStatement("select s.id as id, s.first_name as first_name, s.last_name as last_name, s.suggested_by as suggested_by, s.visible as visible, r.rating as rating, r.count as count from speaker s left join ranks_2012 r on r.speaker_id = s.id  group by (s.id)" + sort);
             result = statement.executeQuery();
             ArrayList<Speaker> speakers = new ArrayList<Speaker>();
             while (result.next()){
@@ -160,11 +154,16 @@ public class SpeakerPersistence extends GrowlerPersistence {
                 s.setLastName(result.getString("last_name"));
                 s.setSuggestedBy(result.getInt("suggested_by"));
                 s.setVisible(result.getBoolean("visible"));
+                try {
                 s.setRank2012(result.getDouble("rating"));
                 s.setCount2012(result.getInt("count"));
-                s.setRank(result.getInt("ranking"));
-                s.setCount(result.getInt("newcount"));
+                }
+                catch (Exception e) {
+                }
+                int count = s.getCount2012();
+                if (count != 0) {
                 speakers.add(s);
+                }
             }
             closeJDBC();
             return (speakers);
@@ -294,9 +293,8 @@ public class SpeakerPersistence extends GrowlerPersistence {
         try {
             initializeJDBC();
             statement = connection.prepareStatement("select s.id, s.first_name, s.last_name, " +
-                    "s.suggested_by, s.visible, sum(r.rating) as rating, count(r.id) as count from speaker s, speaker_ranking r where s.id = r.speaker_id and r.user_id = ?" +
+                    "s.suggested_by, s.visible, sum(r.rating) as rating, count(r.id) as count from speaker s, speaker_ranking r where s.id = r.speaker_id and r.user_id = " + id +
                     " group by r.speaker_id");
-            statement.setInt(1, id);
             result = statement.executeQuery();
             ArrayList<Speaker> speakers = new ArrayList<Speaker>();
             while(result.next()){

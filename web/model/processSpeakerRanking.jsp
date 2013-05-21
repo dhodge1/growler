@@ -56,6 +56,7 @@
      insert.setInt(3, user);
      insert.execute();
  }
+ session.setAttribute("message", "Ranks successful!");
  response.sendRedirect("../view/speaker.jsp");
  %>
  

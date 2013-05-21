@@ -60,7 +60,7 @@
                 //if there aren't any sessions there, add attendance record to DB
                 boolean success = statement.execute("insert into attendance (user_id, session_id) values (" +
                user + ", " + sessionId + ")" );
-                session.setAttribute("message","Sucessfully registered!");
+                session.setAttribute("message","Sucessfully registered!  Now you're eligible for a fantastic prize!");
             }
                        else {
                 

@@ -10,7 +10,8 @@
 
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
-<%@page import="com.scripps.growler.DataConnection" %>
+<%@page import="com.scripps.growler.*" %>
+<jsp:useBean id="persist" class="com.scripps.growler.SpeakerPersistence" scope="page" />
 <jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="page" />
 <jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page" />
 <!doctype html>
@@ -36,22 +37,18 @@
      String last_name = request.getParameter("last_name");
      String admin = request.getParameter("admin");
      int id = Integer.parseInt(String.valueOf(session.getAttribute("id")));
-     
-     
-  Connection connect = dataConnection.sendConnection();
-  PreparedStatement insert = connect.prepareStatement(queries.insertSpeaker());
-  insert.setString(1, first_name);
-  insert.setString(2, last_name);
-  insert.setInt(3, id);
-  insert.setInt(4, 1);
-
-  insert.execute();
-  connect.close();
-  insert.close();
+     Speaker s = new Speaker();
+     s.setFirstName(first_name);
+     s.setLastName(last_name);
+     s.setSuggestedBy(id);
+     s.setVisible(false);
+     persist.addSpeaker(s);
+  
   if (id == 8083) {
       response.sendRedirect("../admin/speaker.jsp");
   }
    else {
+      session.setAttribute("message", "Speaker " + s.getLastName() + ", " + s.getFirstName() + " successfully added!");
       response.sendRedirect("../view/speaker.jsp");
    }
   %>

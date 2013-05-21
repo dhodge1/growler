@@ -62,12 +62,12 @@
 							<div class="span1">
 							</br>
 								<%
-								ArrayList<Speaker> speakers = persist.getAllSpeakers(persist.SORT_BY_2012_RANK_DESC);
+								ArrayList<Speaker> speakers = persist.getAllSpeakers(" ");
 								%>
 							</div>
 							<div class="span2">
 								<section>
-									<form id="entry" name="entry" action="../model/adminspeaker.jsp" method="post" onSubmit="return checkRange(this)">
+									<form id="entry" name="entry" action="../model/adminspeaker.jsp" method="post" onSubmit="return checkRange();">
 										<table>
 											<tr>
 												<td>Speaker Name</td>
@@ -100,7 +100,7 @@
 												 out.print("checked"); }
 												 %> />
 												 </td>
-												 <td><% out.print(upersist.getUserById(speakers.get(i).getSuggestedBy()).getName()); %></td>
+                                                                                                 <td><% out.print(upersist.getUserByID(speakers.get(i).getSuggestedBy()).getUserName()); %></td>
 											</tr>
 											<% } //close the for loop
 											%>
@@ -125,7 +125,28 @@
 <%@ include file="../includes/footer.jsp" %> 
 <%@ include file="../includes/scriptlist.jsp" %>
 <%@ include file="../includes/draganddrop.jsp" %>
-<script src="../js/validation.js"></script><!--Validation-->
+<script>
+    function checkRange() {
+    var newranks = document.getElementsByName("newrank");
+    for (var i = 0; i < newranks.length; i++) {
+        if (newranks[i].value > 5.0 || newranks[i].value < 0) {
+            alert('Ranks must be between 0 and 5');
+            newranks[i].focus();
+            return false;
+        }
+    }
+    var newcounts = document.getElementsByName("newcount");
+    for (var j = 0; j < newcounts.length; j++){
+        newcounts[j] = Math.floor(newcounts[j]);
+        if (newcounts[j].value > 100 || newcounts[j].value < 0) {
+            alert('Counts must be between 0 and 100');
+            newcounts[j].focus();
+            return false;
+        }
+    }
+    return true;
+}
+</script><!--Validation-->
 
     </body>
 </html>

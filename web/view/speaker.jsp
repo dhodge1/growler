@@ -62,6 +62,10 @@
 								else {
 									out.print("<h1 class=bordered>Speakers - Drag & Drop Speakers to Rank Them</h1>");
 								}
+                                                                String message = (String)session.getAttribute("message");
+                                                                if (message != null){
+                                                                    out.print("<p>" + message + "</p>");
+                                                                }
 					
 
 								%>

@@ -71,7 +71,7 @@ CREATE TABLE isolated_theme_ranking (
  */
 DROP TABLE IF EXISTS speaker; 
 CREATE TABLE speaker (
-	 id			int			PRIMARY KEY
+	 id			int			PRIMARY KEY auto_increment
 	,first_name		varchar(30)
 	,last_name		varchar(30)
 	,suggested_by		int			REFERENCES user(id)
@@ -87,7 +87,7 @@ CREATE TABLE speaker (
  */
 DROP TABLE IF EXISTS speaker_ranking;
 CREATE TABLE speaker_ranking (
-	ranking_id		int			PRIMARY KEY auto_increment
+	user_id		int			REFERENCES user(id)
 	,speaker_id		int			REFERENCES speaker(id)
 	,ranking		int
 	);
@@ -107,7 +107,7 @@ CREATE TABLE speaker_ranking (
 
 DROP TABLE IF EXISTS session;
 CREATE TABLE session (
-	id			int		PRIMARY KEY
+	id			int		PRIMARY KEY auto_increment
 	,name			varchar(70)
 	,description		text
 	,track			varchar(20)
@@ -219,7 +219,7 @@ INSERT INTO theme VALUES (6, "Show and Tell", "Show and Tell (Description)", 202
 /*
  * Inserts the speakers from 2012
 */
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (0, "Ian", "Ratner", 2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (49, "Ian", "Ratner", 2023, TRUE);
 insert into speaker (id, first_name, last_name, suggested_by, visible) values (1, "Ram", "Karra", 2023, TRUE);
 insert into speaker (id, first_name, last_name, suggested_by, visible) values (2,"Deborah","Cliburn",2023, TRUE);
 insert into speaker (id, first_name, last_name, suggested_by, visible) values (3,"Prashanth","Chakrapani",2023, TRUE);
@@ -296,7 +296,7 @@ insert into question values (4, "The facility was appropriate for the presentati
  * Now each record in that table has a record for each survey submitted last year.
  * Next we need to link the speakers from last year to their presentations.
 */
-insert into speaker_team values (5 , 0);
+insert into speaker_team values (5 , 49);
 insert into speaker_team values (9 , 16);
 insert into speaker_team values (9 , 17);
 insert into speaker_team values (4 , 1);
@@ -372,3 +372,9 @@ rating	DECIMAL(3, 2)
 load data LOCAL infile 'C:/Users/162107/Documents/GitHub/growler/db/raw_data/ranks_2012_out.csv'
 into table ranks_2012
 fields terminated by ',';
+
+alter table session 
+add column session_key varchar(4) UNIQUE;
+
+update session
+set session_key = sha1((select id from session = 1)) where session = 1;

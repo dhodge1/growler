@@ -54,14 +54,17 @@
 		<div class="span7 largeBottomMargin">
 								<% 
 								String user = String.valueOf(session.getAttribute("id"));
-                                                                
 								ArrayList<Theme> themes = persist.getUserRanks(Integer.parseInt(user));
-								if (themes == null) {
+								if (themes == null || themes.size() == 0) {
 									out.print("<h1 class=bordered>Themes - Drag & Drop Themes to Rank Them</h1>");
 								}
 								else {
 									out.print("<h1 class=bordered>Your Theme Ranks</h1>");
 								}
+                                                                String message = (String)session.getAttribute("message");
+                                                                if (message != null){
+                                                                    out.print("<p>" + message + "</p>");
+                                                                }
 								%>
 		</div>
     </div>
@@ -90,7 +93,7 @@
 								<form action="../model/processThemeRanking.jsp" >
 									<ul id="sortable">
 										<%            
-										if (themes == null) {
+										if (themes == null || themes.size() == 0) {
                                                                                         
                                                                                     ArrayList<Theme> vthemes = persist.getThemesByVisibility(true);
                                                                                     for (int i = 0; i < vthemes.size(); i ++) {
@@ -115,7 +118,7 @@
 				</div><!--end span-->
 			</div><!--end row-->
 			<div class="span2 offset3"><!--button div-->
-			<% if (themes == null) {
+			<% if (themes == null || themes.size() == 0) {
                         out.print("<input type=\"submit\" value=\"Submit Ratings\" class=\"button button-primary\"/>");
 				   }
 				%>

@@ -48,7 +48,7 @@
                 "(" + 2 + ", " + sessionId + ", " + question2 + ")," +
                 "(" + 3 + ", " + sessionId + ", " + question3 + ")," +
                 "(" + 4 + ", " + sessionId + ", " + question4 + ")");
-        statement.execute("update attendance set isRegistered = 0 where user_id = " + user + " and session_id = " + sessionId);
+        statement.execute("update attendance set isRegistered = 1 where user_id = " + user + " and session_id = " + sessionId);
         connection.close();
         statement.close();
         

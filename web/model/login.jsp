@@ -32,10 +32,7 @@
         <%            
         String username = request.getParameter("username");            
         String password = request.getParameter("password");           
-        out.println("Checking login<br>");            
-        if (username == null || password == null) {                
-            out.print("Invalid paramters ");            
-        }            
+        out.println("Checking login<br>");                   
         // Here you put the check on the username and password            
         username = username.toLowerCase();
         password = password.toLowerCase();

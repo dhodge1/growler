@@ -10,7 +10,8 @@
 
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
-<%@page import="com.scripps.growler.DataConnection" %>
+<%@page import="com.scripps.growler.*" %>
+<jsp:useBean id="persist" class="com.scripps.growler.ThemePersistence" scope="page" />
 <jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="page" />
 <jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page" />
 <!doctype html>
@@ -35,19 +36,25 @@
   <% String name = request.getParameter("name");
      String description = request.getParameter("description");
      String reason = "";
+     try {
+        reason = request.getParameter("reason");
+     }
+     catch (Exception e){
+         reason = "";
+     }
      int user =  Integer.parseInt(String.valueOf(session.getAttribute("id")));
-  Connection connect = dataConnection.sendConnection();
-  PreparedStatement insert = connect.prepareStatement(queries.insertUserTheme());
-  insert.setString(1, name);
-  insert.setString(2, description);
-  insert.setString(3, reason);
-  insert.setInt(4, user);
-  insert.setInt(5, 1);
-  insert.execute();
+     Theme t = new Theme();
+     t.setName(name);
+     t.setDescription(description);
+     t.setCreatorId(user);
+     t.setReason(reason);
+     t.setVisible(false);
+     persist.addTheme(t);
   if (user == 8083) {
       response.sendRedirect("../admin/theme.jsp");
   }
    else {
+      session.setAttribute("message", "Theme Successfully added!");
       response.sendRedirect("../view/theme.jsp");
    }
   %>

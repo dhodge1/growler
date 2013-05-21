@@ -171,6 +171,6 @@ public class Speaker {
      * @param count A count value
      */
     public void setCount2012(int count) {
-        this.count = count;
+        this.count2012 = count;
     }
 }

@@ -39,6 +39,10 @@ public class Session {
      * The track of the session - What information will be covered
      */
     private String track;
+    /**
+     * The unique key that allows users to attend a session
+     */
+    private String key;
 
     public Session() {
     }
@@ -154,5 +158,11 @@ public class Session {
      */
     public void setTrack(String track) {
         this.track = track;
+    }
+    public String getKey() {
+        return key;
+    }
+    public void setKey(String k){
+        this.key = k;
     }
 }

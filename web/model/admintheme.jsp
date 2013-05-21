@@ -52,10 +52,10 @@
  //If the visible value is in the visibles array, set it to 1.  Otherwise, 0.
  for (int j = 0; j < ids.length; j++) {
     if (Arrays.binarySearch(visibles, ids[j]) >= 0){
-        insert.setInt(1, 0);
+        insert.setInt(1, 1);
        }
        else {
-        insert.setInt(1, 1);
+        insert.setInt(1, 0);
        }
     insert.setInt(2, ids[j]);
     insert.execute();

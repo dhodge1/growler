@@ -2,15 +2,13 @@
     Document   : speaker
     Created on : Feb 27, 2013, 11:23:26 PM
     Author     : Justin Bauguess
-    Purpose    : The purpose of speaker(admin) is the page where administrators 
-                can edit speaker information.  It uses the rank_2012 table and 
-                the speaker table.  The editable data includes: rating, count of 
-                ratings, and visibility to users.
+    Purpose    : The purpose of session(admin) is to show a list of session keys.
+                The session keys are derived from using the sha1 hash algorithm
+                on the session id and taking the first 4 letters.
 --%>
-<%@page import="sun.java2d.pipe.SpanClipRenderer"%>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
-<%@page import="com.scripps.growler.DataConnection" %>
+<%@page import="com.scripps.growler.*" %>
 <jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="page" />
 <jsp:useBean id="giveStars" class="com.scripps.growler.GiveStars" scope="page" />
 <jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page" />
@@ -42,7 +40,7 @@
 			<div class="row">
 				<div class="span12">
 					<img class="logo" src="../images/Techtoberfest2013.png" alt="Techtoberfest 2013"/>  <!-- Techtoberfest logo-->
-					<h1 class = "bordered">Speakers</h1>
+					<h1 class = "bordered">Sessions</h1>
                                         </br>
 					</br>
                                             <h3>Admin View</h3>
@@ -55,59 +53,39 @@
 						<div class="span1">
 							</br>
                                                         <%
-                                                        
-                                                        Connection connection = dataConnection.sendConnection();
-                                                        Statement statement = connection.createStatement();
-                                                       ResultSet speaker = statement.executeQuery("select s.id, r.rating, r.count, s.first_name, s.last_name, s.visible, s.suggested_by, u.name from speaker s, ranks_2012 r, user u where s.id = r.speaker_id and u.id = s.suggested_by order by r.rating desc, s.last_name");
+                                                            SessionPersistence sp = new SessionPersistence();
+                                                        ArrayList<Session> sessions = sp.getAllSessions(" ");
+                                                        sp.generateKeys(sessions);
+                                                        sessions = sp.getAllSessions(" ");
  %>
  </div>
 					<div class="span2">
 					<section>
-                                            <form id="entry" name="entry" action="../model/adminspeaker.jsp" method="post">
                                             <table>
                                                 <tr>
-                                                    <td>Speaker Name</td>
-                                                    <td>2012 Rating</td>
-                                                    <td>Times Ranked</td>
-                                                    <td>New Rating</td>
-                                                    <td>New Times Ranked</td>
-                                                    <td>Visible?</td>
-                                                    <td>Suggested By</td>
+                                                    <td>Session Name</td>
+                                                    <td>Date</td>
+                                                    <td>Time</td>
+                                                    <td>Location</td>
+                                                    <td>Key</td>
                                                 </tr>
                                                 
 <% 
- while (speaker.next()) {
+ for (int i = 0; i < sessions.size(); i++) {
      %>
      <tr>
-         <td><% out.print(speaker.getString("last_name") + ", " + speaker.getString("first_name")); %>
-         <input name="list" type="hidden" value="<% out.print(speaker.getInt("id")); %>" />
-         <td><% out.print(speaker.getDouble("rating")); %></td>
-         <td><% out.print(speaker.getInt("count")); %></td>
-         <% double d = speaker.getDouble("rating");
-         
-             out.print("<td><input id=\"" + speaker.getInt("id") +"\" type=\"number\" min=\"0\" max=\"5\" name=\"newrank\" value=" + d + " /></td>");
-         %>
-         <% int i = speaker.getInt("count");
-         
-             out.print("<td><input id=\"" + speaker.getInt("id") +"\" type=\"number\" min=\"0\" max=\"100\" name=\"newcount\" value=" + i + " /></td>");
-         
-         %>
-        
-         <td><input name="visible" type="checkbox" value="<% out.print(speaker.getInt("id")); %>"
-                    <% if (speaker.getInt("visible") == 0) {
-                        out.print("checked"); }%> />
-         </td>
-         <td><% out.print(speaker.getString("name")); %></td>
+         <td><% out.print(sessions.get(i).getName()); %>
+         <input name="list" type="hidden" value="<% out.print(sessions.get(i).getId()); %>" />
+         <td><% out.print(sessions.get(i).getSessionDate()); %></td>
+         <td><% out.print(sessions.get(i).getStartTime()); %></td>
+         <td><% out.print(sessions.get(i).getLocation()); %></td>
+         <td><% out.print(sessions.get(i).getKey()); %></td>
      </tr>
            
     
-  <% } 
- speaker.close();
- statement.close();
- connection.close();%>
+  <% } //close for loop
+ %>
  </table>
- <input type="submit" value="Submit" class="button button-primary" />
-  </form>
  </section>
 					</div>
 					<div class="span7">

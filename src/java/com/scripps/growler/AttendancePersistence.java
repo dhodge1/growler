@@ -54,7 +54,7 @@ public class AttendancePersistence extends GrowlerPersistence {
 			Attendance a = new Attendance();
 			a.setUserId(result.getInt("user_id"));
 			a.setSessionId(result.getInt("session_id"));
-			a.setIsRegistered(result.getBoolean("is_Registered"));
+			a.setIsRegistered(result.getBoolean("isRegistered"));
 			attendances.add(a);
 		}
             closeJDBC();
@@ -79,7 +79,7 @@ public class AttendancePersistence extends GrowlerPersistence {
 			Attendance a = new Attendance();
 			a.setUserId(result.getInt("user_id"));
 			a.setSessionId(result.getInt("session_id"));
-			a.setIsRegistered(result.getBoolean("is_Registered"));
+			a.setIsRegistered(result.getBoolean("isRegistered"));
 			attendances.add(a);
 		}
             closeJDBC();
@@ -98,8 +98,18 @@ public class AttendancePersistence extends GrowlerPersistence {
     public ArrayList<Attendance> getAttendanceBySession(int session) {
         try {
             initializeJDBC();
+            initializeJDBC();statement = connection.prepareStatement("select user_id, session_id, isRegistered from attendance where session_id = ?");
+		statement.setInt(1,session);
+		result = statement.executeQuery();
+		while (result.next()){
+			Attendance a = new Attendance();
+			a.setUserId(result.getInt("user_id"));
+			a.setSessionId(result.getInt("session_id"));
+			a.setIsRegistered(result.getBoolean("isRegistered"));
+			attendances.add(a);
+		}
             closeJDBC();
-            
+		return(attendances);          
         }
         catch (Exception e) {
             
@@ -114,8 +124,18 @@ public class AttendancePersistence extends GrowlerPersistence {
     public ArrayList<Attendance> getAttendanceByRegistered(boolean registered) {
         try {
             initializeJDBC();
+            initializeJDBC();statement = connection.prepareStatement("select user_id, session_id, isRegistered from attendance where isRegistered = ?");
+		statement.setBoolean(1, registered);
+		result = statement.executeQuery();
+		while (result.next()){
+			Attendance a = new Attendance();
+			a.setUserId(result.getInt("user_id"));
+			a.setSessionId(result.getInt("session_id"));
+			a.setIsRegistered(result.getBoolean("isRegistered"));
+			attendances.add(a);
+		}
             closeJDBC();
-            
+		return(attendances);          
         }
         catch (Exception e) {
             

@@ -64,7 +64,7 @@
 							<div class="span1">
 							<br/>                   
 								<% 
-								ArrayList<Theme> themes = persist.getAllThemes(persist.SORT_BY_RATING_NAME_ASC);
+								ArrayList<Theme> themes = persist.getAllThemes(" order by rating desc, name asc ");
                                 %>
 							</div>
 							<div class="span2">
@@ -89,7 +89,7 @@
 											<td><input type="checkbox" name="visible" value="<% out.print(themes.get(i).getId()); %>"
 													   <% if (themes.get(i).getVisible() == true) {
 															  out.print(" checked");} %>/>
-											<td><% out.print(upersist.getUserById(themes.get(i).getCreator()).getName(); %>
+                                                                                        <td><% out.print(upersist.getUserByID(themes.get(i).getCreatorId()).getUserName()); %>
 											</tr>
 											<% } //close the for loop %>
 										</table>

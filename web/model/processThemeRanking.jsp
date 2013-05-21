@@ -35,6 +35,7 @@
  <%@ include file="../includes/header.jsp" %> 
  <%@ include file="../includes/usernav.jsp" %>
  <% String list[] = request.getParameterValues("list");
+ //Get a list of theme ids
  int ids[] = new int[list.length];
  for (int i = 0; i < list.length; i++) {
      ids[i] = Integer.parseInt(list[i]);
@@ -43,7 +44,7 @@
  int id = Integer.parseInt(idString);
  ArrayList<Theme> themes = persist.getUserRanks(id);
  //Check to see if the user already has voted.  If so, redirect to the theme page
-  if (themes != null) {
+  if (themes != null || themes.size() == 0) {
      out.print("You have already voted!");
      
  }
@@ -52,7 +53,6 @@
  for (int i = 0; i < ids.length; i++) {
      themes.add(new Theme(ids[i]));
  }
- //three fields to put: theme_ID (int), user_id (int), theme_rank (int)
  for (int j = 0; j < list.length && j < 10; j++) {
      persist.setUserRanks(themes, id);
  }

@@ -9,7 +9,7 @@
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
 <%@page import="java.security.*"%>
-<%@page import="com.scripps.growler.DataConnection" %>
+<%@page import="com.scripps.growler.*" %>
 <jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="page" />
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
@@ -20,7 +20,7 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <title>Growler Project</title><!-- Title -->
+  <title>Session Attendance</title><!-- Title -->
   <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
@@ -31,6 +31,10 @@
 <body id="growler1">
  <%@ include file="../includes/header.jsp" %>
  <%@ include file="../includes/usernav.jsp" %>
+ <h1 class="bordered">Attend a Session</h1>
+ <p>Enter a key, provided by the speaker, and click on the "Attend" link to register your attendance.</p>
+ <p>If you do this, you will be registered to win a fantastic prize.</p>
+ <p>You will also receive a notification to complete a survey rating the session.</p>
  <form method="get" action="../model/processattendance.jsp">
  <table>
      <tr>
