@@ -6,6 +6,7 @@
                  the navigation for users.
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 	<nav class="globalNavigation">
         <ul>
             <li><a href="../view/theme.jsp">Themes</a></li>

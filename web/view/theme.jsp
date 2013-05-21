@@ -54,6 +54,7 @@
 		<div class="span7 largeBottomMargin">
 								<% 
 								String user = String.valueOf(session.getAttribute("id"));
+                                                                
 								ArrayList<Theme> themes = persist.getUserRanks(Integer.parseInt(user));
 								if (themes == null) {
 									out.print("<h1 class=bordered>Themes - Drag & Drop Themes to Rank Them</h1>");
@@ -80,7 +81,7 @@
 								 <%
 									if (themes != null) {
 										for (int i = 0; i < themes.size(); i++) {
-											out.print("<h3>Rank " + (i + 1) + ": " + themes.getName() + "</h3>");
+											out.print("<h3>Rank " + (i + 1) + ": " + themes.get(i).getName() + "</h3>");
 										}
 									}
 
@@ -92,7 +93,7 @@
 										if (themes == null) {
                                                                                         
                                                                                     ArrayList<Theme> vthemes = persist.getThemesByVisibility(true);
-                                                                                    for (int i = 0; i < themes.size(); i ++) {
+                                                                                    for (int i = 0; i < vthemes.size(); i ++) {
                                                                                         %>
                                                                                         <li class="ui-state-default" id="lisort">
                                                                                         <%
@@ -101,6 +102,7 @@
                                                                                         out.print("<input type=\"hidden\" name=\"list\" value=\"" + vthemes.get(i).getId() + "\" >");
                                                                                         %></li><%
                                                                                         }
+                                                                                }
 											%>
 									</ul>	
 								</section>
@@ -113,7 +115,7 @@
 				</div><!--end span-->
 			</div><!--end row-->
 			<div class="span2 offset3"><!--button div-->
-			<% if (counter == 1) {
+			<% if (themes == null) {
                         out.print("<input type=\"submit\" value=\"Submit Ratings\" class=\"button button-primary\"/>");
 				   }
 				%>

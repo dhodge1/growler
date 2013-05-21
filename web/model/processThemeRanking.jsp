@@ -11,8 +11,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
-<%@page import="com.scripps.growler.DataConnection" %>
+<%@page import="com.scripps.growler.*" %>
 <jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="page" />
+<jsp:useBean id="persist" class="com.scripps.growler.ThemePersistence" scope="page" />
 <jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page" />
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
@@ -40,34 +41,25 @@
  }
  String idString = String.valueOf(session.getAttribute("id"));
  int id = Integer.parseInt(idString);
- Connection connection = dataConnection.sendConnection();
- Statement statement = connection.createStatement();
- ResultSet result = statement.executeQuery("select user_id from theme_ranking where user_id = " + id);
+ ArrayList<Theme> themes = persist.getUserRanks(id);
  //Check to see if the user already has voted.  If so, redirect to the theme page
- boolean a = false;
- while(result.next()){
-    a = true;
- }
- if (a) {
+  if (themes != null) {
      out.print("You have already voted!");
+     
  }
  else {
  //If they haven't voted, take their votes and put them in the database
- PreparedStatement insert = connection.prepareStatement(queries.insertThemeRanks());
+ for (int i = 0; i < ids.length; i++) {
+     themes.add(new Theme(ids[i]));
+ }
  //three fields to put: theme_ID (int), user_id (int), theme_rank (int)
  for (int j = 0; j < list.length && j < 10; j++) {
-     insert.setInt(1, ids[j]);
-     insert.setInt(2, id);
-     insert.setInt(3, 10-j);
-     insert.execute();
+     persist.setUserRanks(themes, id);
  }
- insert.close();
+ 
  out.print("Your votes have been recorded!");
  }
  response.sendRedirect("../view/theme.jsp");
- connection.close();
- statement.close();
- result.close();
  %>
  
 <%@ include file="../includes/footer.jsp" %> 

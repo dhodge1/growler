@@ -188,7 +188,7 @@ public class SpeakerPersistence extends GrowlerPersistence {
                     " ?");
             statement.setInt(1, id);
             statement.setString(2, sort);
-            statement.execute();
+            result = statement.executeQuery();
             ArrayList<Speaker> speakers = new ArrayList<Speaker>();
             while(result.next()){
                 Speaker s = new Speaker();
@@ -216,12 +216,9 @@ public class SpeakerPersistence extends GrowlerPersistence {
     public ArrayList<Speaker> getSpeakersByVisibility(boolean v, String sort) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select id, first_name, last_name, " +
-                    "suggested_by, visible from speaker where suggested_by = ?" +
-                    " ?");
+            statement = connection.prepareStatement("select id, first_name, last_name, suggested_by, visible from speaker where visible = ? " + sort);
             statement.setBoolean(1, v);
-            statement.setString(2, sort);
-            statement.execute();
+            result = statement.executeQuery();
             ArrayList<Speaker> speakers = new ArrayList<Speaker>();
             while(result.next()){
                 Speaker s = new Speaker();
@@ -300,7 +297,7 @@ public class SpeakerPersistence extends GrowlerPersistence {
                     "s.suggested_by, s.visible, sum(r.rating) as rating, count(r.id) as count from speaker s, speaker_ranking r where s.id = r.speaker_id and r.user_id = ?" +
                     " group by r.speaker_id");
             statement.setInt(1, id);
-            statement.execute();
+            result = statement.executeQuery();
             ArrayList<Speaker> speakers = new ArrayList<Speaker>();
             while(result.next()){
                 Speaker s = new Speaker();

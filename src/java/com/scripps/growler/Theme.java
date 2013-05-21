@@ -47,6 +47,9 @@ public class Theme {
      */
     public Theme(){
     }
+    public Theme(int id){
+        this.id = id;
+    }
     /**
      * Constructs a theme object with all parameters
      * @param i ID

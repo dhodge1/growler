@@ -10,7 +10,9 @@
  *	
  *	
  */
-
+drop database if exists growler_db;
+create database growler_db;
+use growler_db;
 /*
  * Creates the table for storing theme information
  */
@@ -69,7 +71,7 @@ CREATE TABLE isolated_theme_ranking (
  */
 DROP TABLE IF EXISTS speaker; 
 CREATE TABLE speaker (
-	 id			int			PRIMARY KEY auto_increment
+	 id			int			PRIMARY KEY
 	,first_name		varchar(30)
 	,last_name		varchar(30)
 	,suggested_by		int			REFERENCES user(id)
@@ -105,7 +107,7 @@ CREATE TABLE speaker_ranking (
 
 DROP TABLE IF EXISTS session;
 CREATE TABLE session (
-	id			int		PRIMARY KEY auto_increment
+	id			int		PRIMARY KEY
 	,name			varchar(70)
 	,description		text
 	,track			varchar(20)
@@ -216,56 +218,55 @@ INSERT INTO theme VALUES (6, "Show and Tell", "Show and Tell (Description)", 202
 
 /*
  * Inserts the speakers from 2012
- * Notice that the first attirbute, id, is NULL. This is because it is an auto-increment.
 */
-insert into speaker values (0, "Ian", "Ratner", 2023, TRUE);
-insert into speaker values (NULL, "Ram", "Karra", 2023, TRUE);
-insert into speaker values (NULL,"Deborah","Cliburn",2023, TRUE);
-insert into speaker values (NULL,"Prashanth","Chakrapani",2023, TRUE);
-insert into speaker values (NULL,"Scott","Cruze",2023, TRUE);
-insert into speaker values (NULL,"Mark","Kelly",2023, TRUE);
-insert into speaker values (NULL,"Jim","Senter",2023, TRUE);
-insert into speaker values (NULL,"Phil","Spann",2023, TRUE);
-insert into speaker values (NULL,"Jeffrey","Allen",2023, TRUE);
-insert into speaker values (NULL,"Bhaumik","Shah",2023, TRUE);
-insert into speaker values (NULL,"Panagiotis","Tzerefos",2023, TRUE);
-insert into speaker values (NULL,"Ben","Pack",2023, TRUE);
-insert into speaker values (NULL,"David","Tucker",2023, TRUE);
-insert into speaker values (NULL,"Matt","Peter",2023, TRUE);
-insert into speaker values (NULL,"Pedro","Lopez",2023, TRUE);
-insert into speaker values (NULL,"John","Hills",2023, TRUE);
-insert into speaker values (NULL,"Bryan","Fails",2023, TRUE);
-insert into speaker values (NULL,"Glen","Wright",2023, TRUE);
-insert into speaker values (NULL,"Kevin","Barry",2023, TRUE);
-insert into speaker values (NULL,"Jeffery","Kissinger",2023, TRUE);
-insert into speaker values (NULL,"Beth","Jackson",2023, TRUE);
-insert into speaker values (NULL,"Brian","Hinsley",2023, TRUE);
-insert into speaker values (NULL,"Drew","Fredrick",2023, TRUE);
-insert into speaker values (NULL,"Glen","Ireland",2023, TRUE);
-insert into speaker values (NULL,"Robert","Clarence",2023, TRUE);
-insert into speaker values (NULL,"Sarah","Cottay",2023, TRUE);
-insert into speaker values (NULL,"Channing","Dawson",2023, TRUE);
-insert into speaker values (NULL,"Mike","Campbell",2023, TRUE);
-insert into speaker values (NULL,"Joshua","Eldridge",2023, TRUE);
-insert into speaker values (NULL,"Bruce","Parker",2023, TRUE);
-insert into speaker values (NULL,"Robin","Wilde",2023, TRUE);
-insert into speaker values (NULL,"Lydia","Cordell",2023, TRUE);
-insert into speaker values (NULL,"Team","Nirvana",2023, TRUE);
-insert into speaker values (NULL,"Amy","Thomason",2023, TRUE);
-insert into speaker values (NULL,"Charles","Lewis",2023, TRUE);
-insert into speaker values (NULL,"Jonathan","Williams",2023, TRUE);
-insert into speaker values (NULL,"Scott","Gentry",2023, TRUE);
-insert into speaker values (NULL,"Jason","Norton",2023, TRUE);
-insert into speaker values (NULL,"Michael","Wehrle",2023, TRUE);
-insert into speaker values (NULL,"Shane","Closser",2023, TRUE);
-insert into speaker values (NULL,"Selene","Tolbert",2023, TRUE);
-insert into speaker values (NULL,"Michael","Berger",2023, TRUE);
-insert into speaker values (NULL,"Kamlesh","Sharma",2023, TRUE);
-insert into speaker values (NULL,"Kabita","Nayak",2023, TRUE);
-insert into speaker values (NULL,"Herb","Himes",2023, TRUE);
-insert into speaker values (NULL,"Stefanie","Edinger",2023, TRUE);
-insert into speaker values (NULL, "Phil", "Cornell", 2023, TRUE);
-insert into speaker values (NULL,"Allen", "Shacklock", 2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (0, "Ian", "Ratner", 2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (1, "Ram", "Karra", 2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (2,"Deborah","Cliburn",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (3,"Prashanth","Chakrapani",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (4,"Scott","Cruze",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (5,"Mark","Kelly",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (6,"Jim","Senter",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (7,"Phil","Spann",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (8,"Jeffrey","Allen",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (9,"Bhaumik","Shah",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (10,"Panagiotis","Tzerefos",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (11,"Ben","Pack",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (12,"David","Tucker",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (13,"Matt","Peter",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (14,"Pedro","Lopez",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (15,"John","Hills",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (16,"Bryan","Fails",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (17,"Glen","Wright",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (18,"Kevin","Barry",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (19,"Jeffery","Kissinger",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (20,"Beth","Jackson",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (21,"Brian","Hinsley",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (22,"Drew","Fredrick",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (23,"Glen","Ireland",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (24,"Robert","Clarence",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (25,"Sarah","Cottay",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (26,"Channing","Dawson",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (27,"Mike","Campbell",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (28,"Joshua","Eldridge",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (29,"Bruce","Parker",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (30,"Robin","Wilde",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (31,"Lydia","Cordell",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (32,"Team","Nirvana",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (33,"Amy","Thomason",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (34,"Charles","Lewis",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (35,"Jonathan","Williams",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (36,"Scott","Gentry",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (37,"Jason","Norton",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (38,"Michael","Wehrle",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (39,"Shane","Closser",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (40,"Selene","Tolbert",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (41,"Michael","Berger",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (42,"Kamlesh","Sharma",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (43,"Kabita","Nayak",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (44,"Herb","Himes",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (45,"Stefanie","Edinger",2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (46, "Phil", "Cornell", 2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (47,"Allen", "Shacklock", 2023, TRUE);
 
 /*
  * Loads a raw data file of session data from last year

@@ -210,13 +210,12 @@ public class ThemePersistence extends GrowlerPersistence {
     public ArrayList<Theme> getUserRanks(int id) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select r.theme_id, t.name from theme_ranking r, theme t where t.id = r.theme_id and r.user_id = ?");
-            statement.setInt(1, id);
+            statement = connection.prepareStatement("select r.theme_id, t.name from theme_ranking r, theme t where t.id = r.theme_id and r.user_id = " + id);
             result = statement.executeQuery();
             ArrayList<Theme> themes = new ArrayList<Theme>();
             while (result.next()) {
                 Theme t = new Theme();
-                t.setId(result.getInt("id"));
+                t.setId(result.getInt("theme_id"));
                 t.setName(result.getString("name"));
                 themes.add(t);
             }

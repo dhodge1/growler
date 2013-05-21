@@ -12,9 +12,9 @@ import java.sql.*;
  * @author "Justin Bauguess"
  */
 public class DataConnection {
-    private final String DBNAME = "c2850a01test";
-    private final String DBUSER = "c2850a01";
-    private final String DBPASS = "c2850a01";
+    private final String DBNAME = "growler_db";
+    private final String DBUSER = "root";
+    private final String DBPASS = "password";
     public Connection connection;
     
     public DataConnection() throws SQLException, ClassNotFoundException {
@@ -30,7 +30,7 @@ public class DataConnection {
      */
     public Connection sendConnection() throws SQLException, ClassNotFoundException {
         Class.forName("com.mysql.jdbc.Driver");
-        return (connection = DriverManager.getConnection("jdbc:mysql://ps11.pstcc.edu:3306/" + DBNAME, DBUSER, DBPASS));
+        return (connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + DBNAME, DBUSER, DBPASS));
     } 
     public String bytesToHex(byte[] b) {
       char hexDigit[] = {'0', '1', '2', '3', '4', '5', '6', '7',
