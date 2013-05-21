@@ -2,7 +2,7 @@ package com.scripps.growler;
 
 /**
  * Keeps data for the users of project growler
- * 
+ *
  * @see com.scripps.growler.Attendance
  * @see com.scripps.growler.Session
  * @see com.scripps.growler.Theme
@@ -11,6 +11,7 @@ package com.scripps.growler;
  * @author "Justin Bauguess"
  */
 public class User {
+
     /**
      * Contains the integer that represents the user in the database
      */
@@ -22,14 +23,17 @@ public class User {
     /**
      * The string that contains a user's password - encrypted
      */
-    private String password;    
+    private String password;
+
     /**
      * Default constructor
      */
     public User() {
     }
+
     /**
      * Constructs a user object with id, password, and name
+     *
      * @param id User's ID
      * @param pwd User's Password
      * @param name User's Name
@@ -39,43 +43,55 @@ public class User {
         this.password = pwd;
         this.userName = name;
     }
+
     /**
      * Gets the user's id
+     *
      * @return the User's id
      */
     public Integer getId() {
         return id;
     }
+
     /**
      * Sets the user's id
+     *
      * @param id an integer for the user's id
      */
     public void setId(Integer id) {
         this.id = id;
     }
+
     /**
      * Gets the user's display name
+     *
      * @return A string with a displayable name
      */
     public String getUserName() {
         return userName;
     }
+
     /**
      * Sets the user's display name
+     *
      * @param userName A string with a name
      */
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
     /**
      * Gets the user's password
+     *
      * @return The user's password
      */
     public String getPassword() {
         return password;
     }
+
     /**
-     * Sets the user's password.  It will be encrypted first.
+     * Sets the user's password. It will be encrypted first.
+     *
      * @param password A string
      */
     public void setPassword(String password) {

@@ -1,13 +1,16 @@
 package com.scripps.growler;
+
 import java.sql.*;
 import java.util.*;
+
 /**
  * Handles the database entries for Speakers
- * 
+ *
  * @see com.scripps.growler.Speaker
  * @author "Justin Bauguess"
  */
 public class SpeakerPersistence extends GrowlerPersistence {
+
     /**
      * Sorts queries by last name in ascending order
      */
@@ -64,60 +67,62 @@ public class SpeakerPersistence extends GrowlerPersistence {
      * Sorts queries by the 2012 rank in ascending order
      */
     final public String SORT_BY_2012_COUNT_DESC = " order by ranks2012.count desc";
+
     /**
      * Default constructor
      */
     public SpeakerPersistence() {
-        
     }
+
     /**
      * Adds a speaker to the database
+     *
      * @param s The speaker to add
      */
     public void addSpeaker(Speaker s) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("insert into speaker " +
-                    "(first_name, last_name, suggested_by, visible) values " +
-                    "(?, ?, ?, false)");
+            statement = connection.prepareStatement("insert into speaker "
+                    + "(first_name, last_name, suggested_by, visible) values "
+                    + "(?, ?, ?, false)");
             statement.setString(1, s.getFirstName());
             statement.setString(2, s.getLastName());
             statement.setInt(3, s.getSuggestedBy());
             success = statement.execute();
             closeJDBC();
-        }
-        catch(Exception e) {
-            
+        } catch (Exception e) {
         }
     }
-     /**
+
+    /**
      * Removes a speaker from the database
+     *
      * @param s The speaker to remove - although just the ID is needed
      */
     public void deleteSpeaker(Speaker s) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("delete from speaker " +
-                    "where id = ?");
-            statement.setInt(1,s.getId());
+            statement = connection.prepareStatement("delete from speaker "
+                    + "where id = ?");
+            statement.setInt(1, s.getId());
             statement.execute();
             closeJDBC();
-        }
-        catch (Exception e) {
-            
+        } catch (Exception e) {
         }
     }
+
     /**
      * Returns an individual speaker based on an id
+     *
      * @param id the id to search for
      * @return A speaker that matches the id given
      */
     public Speaker getSpeakerByID(int id) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select id, first_name," +
-                    "last_name, suggested_by, visible from speaker "+
-                    "where id = ?");
+            statement = connection.prepareStatement("select id, first_name,"
+                    + "last_name, suggested_by, visible from speaker "
+                    + "where id = ?");
             statement.setInt(1, id);
             result = statement.executeQuery();
             Speaker s = new Speaker();
@@ -129,15 +134,15 @@ public class SpeakerPersistence extends GrowlerPersistence {
                 s.setVisible(result.getBoolean("visible"));
             }
             closeJDBC();
-            return(s);
-        }
-        catch(Exception e) {
-            
+            return (s);
+        } catch (Exception e) {
         }
         return null;
     }
+
     /**
      * Gets every speaker in the database along with their rank - used for admin
+     *
      * @param A criteria to sort the query
      * @return A list of all speakers in the database
      */
@@ -147,7 +152,7 @@ public class SpeakerPersistence extends GrowlerPersistence {
             statement = connection.prepareStatement("select s.id as id, s.first_name as first_name, s.last_name as last_name, s.suggested_by as suggested_by, s.visible as visible, r.rating as rating, r.count as count from speaker s left join ranks_2012 r on r.speaker_id = s.id  group by (s.id)" + sort);
             result = statement.executeQuery();
             ArrayList<Speaker> speakers = new ArrayList<Speaker>();
-            while (result.next()){
+            while (result.next()) {
                 Speaker s = new Speaker();
                 s.setId(result.getInt("id"));
                 s.setFirstName(result.getString("first_name"));
@@ -155,26 +160,25 @@ public class SpeakerPersistence extends GrowlerPersistence {
                 s.setSuggestedBy(result.getInt("suggested_by"));
                 s.setVisible(result.getBoolean("visible"));
                 try {
-                s.setRank2012(result.getDouble("rating"));
-                s.setCount2012(result.getInt("count"));
-                }
-                catch (Exception e) {
+                    s.setRank2012(result.getDouble("rating"));
+                    s.setCount2012(result.getInt("count"));
+                } catch (Exception e) {
                 }
                 int count = s.getCount2012();
                 if (count != 0) {
-                speakers.add(s);
+                    speakers.add(s);
                 }
             }
             closeJDBC();
             return (speakers);
-        }
-        catch(Exception e) {
-            
+        } catch (Exception e) {
         }
         return null;
     }
+
     /**
      * Gets a list of speaker objects based on who suggested them
+     *
      * @param id the user who suggested the speakers
      * @param sort the criteria with which to sort the results
      * @return A list of speakers that have been suggested by a user
@@ -182,14 +186,14 @@ public class SpeakerPersistence extends GrowlerPersistence {
     public ArrayList<Speaker> getSpeakersByCreator(int id, String sort) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select id, first_name, last_name, " +
-                    "suggested_by, visible from speaker where suggested_by = ?" +
-                    " ?");
+            statement = connection.prepareStatement("select id, first_name, last_name, "
+                    + "suggested_by, visible from speaker where suggested_by = ?"
+                    + " ?");
             statement.setInt(1, id);
             statement.setString(2, sort);
             result = statement.executeQuery();
             ArrayList<Speaker> speakers = new ArrayList<Speaker>();
-            while(result.next()){
+            while (result.next()) {
                 Speaker s = new Speaker();
                 s.setId(result.getInt("id"));
                 s.setFirstName(result.getString("first_name"));
@@ -200,14 +204,14 @@ public class SpeakerPersistence extends GrowlerPersistence {
             }
             closeJDBC();
             return speakers;
-        }
-        catch(Exception e) {
-            
+        } catch (Exception e) {
         }
         return null;
     }
-   /**
+
+    /**
      * Gets a list of speaker objects based on visibility
+     *
      * @param v the visibility to search for
      * @param sort the criteria with which to sort the results
      * @return A list of speakers that have been suggested by a user
@@ -219,7 +223,7 @@ public class SpeakerPersistence extends GrowlerPersistence {
             statement.setBoolean(1, v);
             result = statement.executeQuery();
             ArrayList<Speaker> speakers = new ArrayList<Speaker>();
-            while(result.next()){
+            while (result.next()) {
                 Speaker s = new Speaker();
                 s.setId(result.getInt("id"));
                 s.setFirstName(result.getString("first_name"));
@@ -230,48 +234,48 @@ public class SpeakerPersistence extends GrowlerPersistence {
             }
             closeJDBC();
             return speakers;
-        }
-        catch(Exception e) {
-            
+        } catch (Exception e) {
         }
         return null;
     }
+
     /**
      * Takes a group of speakers and ranks them in order 1-10
+     *
      * @param speakers a list of speaker objects
      * @param user the user who is rating the speakers
      */
     public void setUserRanks(ArrayList<Speaker> speakers, int user) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("insert into speaker_ranking " +
-                    "(speaker_id, ranking, user_id) values " +
-                    "(?, ?, ?)");
+            statement = connection.prepareStatement("insert into speaker_ranking "
+                    + "(speaker_id, ranking, user_id) values "
+                    + "(?, ?, ?)");
             statement.setInt(3, user);
-            for (int i = 0; i < speakers.size(); i++){
-                statement.setInt(1,speakers.get(i).getId());
-                statement.setInt(2, 10-i);
+            for (int i = 0; i < speakers.size(); i++) {
+                statement.setInt(1, speakers.get(i).getId());
+                statement.setInt(2, 10 - i);
                 statement.execute();
             }
             closeJDBC();
-        }
-        catch(Exception e) {
-            
+        } catch (Exception e) {
         }
     }
+
     /**
      * Updates a speaker in the database
-     * @param s The speaker to be updated 
+     *
+     * @param s The speaker to be updated
      */
     public void updateSpeaker(Speaker s) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("update speaker " +
-                    "set first_name = ?," +
-                    "set last_name = ?," +
-                    "set suggested_by = ?," +
-                    "set visible = ?," +
-                    "where id = ?");
+            statement = connection.prepareStatement("update speaker "
+                    + "set first_name = ?,"
+                    + "set last_name = ?,"
+                    + "set suggested_by = ?,"
+                    + "set visible = ?,"
+                    + "where id = ?");
             statement.setString(1, s.getFirstName());
             statement.setString(2, s.getLastName());
             statement.setInt(3, s.getSuggestedBy());
@@ -279,42 +283,39 @@ public class SpeakerPersistence extends GrowlerPersistence {
             statement.setInt(5, s.getId());
             success = statement.execute();
             closeJDBC();
-        }
-        catch(Exception e) {
-            
+        } catch (Exception e) {
         }
     }
-   /**
+
+    /**
      * Gets a list of speaker objects based on a user's previous rankings
+     *
      * @param id the user who ranked the speakers
      * @return A list of speakers that have been ranked by a user
      */
     public ArrayList<Speaker> getUserRanks(int id) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select s.id, s.first_name, s.last_name, " +
-                    "s.suggested_by, s.visible, sum(r.rating) as rating, count(r.id) as count from speaker s, speaker_ranking r where s.id = r.speaker_id and r.user_id = " + id +
-                    " group by r.speaker_id");
+            statement = connection.prepareStatement("select s.id, s.first_name, s.last_name, "
+                    + "s.suggested_by, s.visible, sum(r.rating) as rating, count(r.id) as count from speaker s, speaker_ranking r where s.id = r.speaker_id and r.user_id = " + id
+                    + " group by r.speaker_id");
             result = statement.executeQuery();
             ArrayList<Speaker> speakers = new ArrayList<Speaker>();
-            while(result.next()){
+            while (result.next()) {
                 Speaker s = new Speaker();
                 s.setId(result.getInt("id"));
                 s.setFirstName(result.getString("first_name"));
                 s.setLastName(result.getString("last_name"));
                 s.setSuggestedBy(result.getInt("suggested_by"));
                 s.setVisible(result.getBoolean("visible"));
-		s.setRank(result.getInt("rating"));
-		s.setCount(result.getInt("count"));
+                s.setRank(result.getInt("rating"));
+                s.setCount(result.getInt("count"));
                 speakers.add(s);
             }
             closeJDBC();
             return speakers;
-        }
-        catch(Exception e) {
-            
+        } catch (Exception e) {
         }
         return null;
     }
-
 }

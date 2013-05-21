@@ -8,7 +8,8 @@ package com.scripps.growler;
  * @see com.scripps.growler.Session
  * @author "Justin Bauguess"
  */
-public class Attendance{
+public class Attendance {
+
     protected int userId;
     protected int sessionId;
     private Boolean isRegistered;
@@ -18,8 +19,10 @@ public class Attendance{
      */
     public Attendance() {
     }
+
     /**
      * Creates an unregistered Attendance object
+     *
      * @param user The user ID
      * @param session The session ID
      */
@@ -28,8 +31,10 @@ public class Attendance{
         sessionId = session;
         isRegistered = false;
     }
+
     /**
      * Creates an attendance object
+     *
      * @param user The user ID
      * @param session The session ID
      * @param register Whether or not the survey is registered
@@ -42,6 +47,7 @@ public class Attendance{
 
     /**
      * Gives the user id for the attendance
+     *
      * @return A user id
      */
     public int getUserId() {
@@ -50,6 +56,7 @@ public class Attendance{
 
     /**
      * Sets the user id for an attendance
+     *
      * @param user The user attending the event
      */
     public void setUserId(int user) {
@@ -58,20 +65,25 @@ public class Attendance{
 
     /**
      * Gets the session ID
+     *
      * @return A session ID
      */
     public int getSessionId() {
         return sessionId;
     }
+
     /**
      * Sets the session ID for an attendance
+     *
      * @param session The session attended
      */
-    public void setSessionId(int session){
+    public void setSessionId(int session) {
         this.sessionId = session;
     }
+
     /**
      * Gets whether an attendance has a survey taken
+     *
      * @return If the survey has been taken
      */
     public Boolean getIsRegistered() {
@@ -80,6 +92,7 @@ public class Attendance{
 
     /**
      * Sets the survey status for an attendance
+     *
      * @param isRegistered True: survey taken, False: survey not taken
      */
     public void setIsRegistered(Boolean isRegistered) {

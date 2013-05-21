@@ -1,11 +1,13 @@
 package com.scripps.growler;
+
 /**
  * Represents Themes from the database
- * 
+ *
  * @see com.scripps.growler.ThemePersistence
  * @author "Justin Bauguess"
  */
 public class Theme {
+
     /**
      * The ID of the theme
      */
@@ -42,16 +44,20 @@ public class Theme {
      * How many times a theme has been ranked
      */
     private int count;
+
     /**
      * Default constructor
      */
-    public Theme(){
+    public Theme() {
     }
-    public Theme(int id){
+
+    public Theme(int id) {
         this.id = id;
     }
+
     /**
      * Constructs a theme object with all parameters
+     *
      * @param i ID
      * @param n Name
      * @param d Description
@@ -73,130 +79,166 @@ public class Theme {
         rank = rk;
         count = ct;
     }
+
     /**
      * Gets the rank of a theme
+     *
      * @return The score a theme has received
      */
-    public int getRank(){
-        return(this.rank);
+    public int getRank() {
+        return (this.rank);
     }
+
     /**
      * Sets the rank of a theme
+     *
      * @param r The rank value
      */
-    public void setRank(int r){
+    public void setRank(int r) {
         this.rank = r;
     }
+
     /**
      * Gets the count of theme ranks
+     *
      * @return The count value
      */
     public int getCount() {
-        return(this.count);
+        return (this.count);
     }
+
     /**
      * Sets the count of a theme
+     *
      * @param c The count value
      */
-    public void setCount(int c){
+    public void setCount(int c) {
         this.count = c;
     }
+
     /**
      * Gets the name of a theme
+     *
      * @return The name of a theme
      */
     public String getName() {
-        return(name);
+        return (name);
     }
+
     /**
      * Sets the name of a theme
+     *
      * @param s The name of the theme
      */
-    public void setName(String s){
+    public void setName(String s) {
         this.name = s;
     }
+
     /**
      * Gets the id of a theme
+     *
      * @return The theme id
      */
-    public int getId(){
-        return(id);
+    public int getId() {
+        return (id);
     }
+
     /**
      * Sets the id of a theme
+     *
      * @param i the id to set
      */
-    public void setId(int i){
+    public void setId(int i) {
         this.id = i;
     }
+
     /**
      * Gets the description of a theme
+     *
      * @return The description
      */
-    public String getDescription(){
-        return(description);
+    public String getDescription() {
+        return (description);
     }
+
     /**
      * Sets the description of a theme
+     *
      * @param s The description
      */
-    public void setDescription(String s){
+    public void setDescription(String s) {
         this.description = s;
     }
+
     /**
      * Gets the reason of a theme
+     *
      * @return The reason
      */
     public String getReason() {
-        return(reason);
+        return (reason);
     }
+
     /**
      * Sets the reason of a theme
+     *
      * @param s The reason
      */
-    public void setReason(String s){
+    public void setReason(String s) {
         this.reason = s;
     }
+
     /**
      * Gets the user who suggested a theme
+     *
      * @return the creator id
      */
-    public int getCreatorId(){
-        return(creatorId);
+    public int getCreatorId() {
+        return (creatorId);
     }
+
     /**
      * Sets the user who suggested a theme
+     *
      * @param i the user id
      */
     public void setCreatorId(int i) {
         this.creatorId = i;
     }
+
     /**
      * Gets whether a theme is visible or not
+     *
      * @return The visibility
      */
-    public boolean getVisible(){
-        return(visible);
+    public boolean getVisible() {
+        return (visible);
     }
+
     /**
      * Sets the visibility of a theme
+     *
      * @param b The visibility
      */
-    public void setVisible(boolean b){
+    public void setVisible(boolean b) {
         this.visible = b;
     }
+
     /**
      * Gets the year of the theme
+     *
      * @return The year
      */
-    public int getYear(){
-        return(year);
+    public int getYear() {
+        return (year);
     }
+
     /**
      * Sets the year for a theme
+     *
      * @param i A year
      */
-    public void setYear(int i){
+    public void setYear(int i) {
         this.year = i;
     }
 }

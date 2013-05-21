@@ -59,11 +59,13 @@ public class ThemePersistence extends GrowlerPersistence {
      * Sorts queries by rating, then name in descending order
      */
     final public String SORT_BY_RATING_NAME_DESC = " order by rating desc, t.name asc";
+
     /**
      * A default constructor
      */
     public ThemePersistence() {
     }
+
     /**
      * Adds a theme to the database.
      *
@@ -85,6 +87,7 @@ public class ThemePersistence extends GrowlerPersistence {
         } catch (Exception e) {
         }
     }
+
     /**
      * Searches for a string within the descriptions
      *
@@ -114,6 +117,7 @@ public class ThemePersistence extends GrowlerPersistence {
         }
         return null;
     }
+
     /**
      * Returns a theme object corresponding to a given id
      *
@@ -134,7 +138,7 @@ public class ThemePersistence extends GrowlerPersistence {
                 t.setDescription(result.getString("description"));
                 t.setCreatorId(result.getInt("creator"));
                 t.setVisible(result.getBoolean("visible"));
-		closeJDBC();
+                closeJDBC();
                 return (t);
             }
             closeJDBC();
@@ -142,6 +146,7 @@ public class ThemePersistence extends GrowlerPersistence {
         }
         return (null);
     }
+
     /**
      * returns a list of Theme objects by a creator id
      *
@@ -171,6 +176,7 @@ public class ThemePersistence extends GrowlerPersistence {
         }
         return (null);
     }
+
     /**
      * returns a list of Theme objects by visibility
      *
@@ -200,6 +206,7 @@ public class ThemePersistence extends GrowlerPersistence {
         }
         return (null);
     }
+
     /**
      *
      * Returns a list of Themes ranked by a certain user
@@ -225,6 +232,7 @@ public class ThemePersistence extends GrowlerPersistence {
         }
         return (null);
     }
+
     /**
      * Returns a list of themes and their ranks/counts - used for admin page
      *
@@ -243,14 +251,15 @@ public class ThemePersistence extends GrowlerPersistence {
                 t.setRank(result.getInt("rating"));
                 t.setCount(result.getInt("count"));
                 t.setVisible(result.getBoolean("visible"));
-		themes.add(t);
+                themes.add(t);
             }
             closeJDBC();
-	    return (themes);
+            return (themes);
         } catch (Exception e) {
         }
         return (null);
     }
+
     /**
      * Saves a user's ranks to the database
      *
@@ -270,6 +279,7 @@ public class ThemePersistence extends GrowlerPersistence {
         } catch (Exception e) {
         }
     }
+
     /**
      *
      * Searches the database for all the themes and the information about them
@@ -289,8 +299,8 @@ public class ThemePersistence extends GrowlerPersistence {
                 t.setName(result.getString("name"));
                 t.setCreatorId(result.getInt("creator"));
                 t.setVisible(result.getBoolean("visible"));
-		t.setRank(result.getInt("rating"));
-		t.setCount(result.getInt("count"));
+                t.setRank(result.getInt("rating"));
+                t.setCount(result.getInt("count"));
                 themes.add(t);
             }
             closeJDBC();
@@ -299,6 +309,7 @@ public class ThemePersistence extends GrowlerPersistence {
         }
         return (null);
     }
+
     /**
      * updates the information for a theme - used by admins
      *
@@ -323,21 +334,21 @@ public class ThemePersistence extends GrowlerPersistence {
         } catch (Exception e) {
         }
     }
+
     /**
      * Removes a theme from the database
+     *
      * @param t The theme to remove - all we really need is the ID
      */
     public void deleteTheme(Theme t) {
         try {
-        initializeJDBC();
-        statement = connection.prepareStatement("delete from theme where " +
-                "id = ?");
-        statement.setInt(1, t.getId());
-        statement.execute();
-        closeJDBC();
-        }
-        catch (Exception e) {
-            
+            initializeJDBC();
+            statement = connection.prepareStatement("delete from theme where "
+                    + "id = ?");
+            statement.setInt(1, t.getId());
+            statement.execute();
+            closeJDBC();
+        } catch (Exception e) {
         }
     }
 }

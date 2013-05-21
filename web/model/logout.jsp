@@ -13,15 +13,15 @@
         <title>Logging out...</title>
     </head>
     <body>
-        <%     
-        String username=(String)session.getAttribute("user");    
-        if(username!=null)        {           
-        session.removeAttribute("user");
-        session.removeAttribute("id");
-        session.removeAttribute("message");
-        }
-        response.sendRedirect("../index.jsp");
-                    
+        <%
+            String username = (String) session.getAttribute("user");
+            if (username != null) {
+                session.removeAttribute("user");
+                session.removeAttribute("id");
+                session.removeAttribute("message");
+            }
+            response.sendRedirect("../index.jsp");
+
         %>  
     </body>
 </html>

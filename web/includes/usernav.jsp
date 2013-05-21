@@ -7,18 +7,20 @@
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-	<nav class="globalNavigation">
-        <ul>
-            <li><a href="../view/theme.jsp">Themes</a></li>
-            <li><a href="../view/themeentry.jsp">Suggest a Theme</a></li>
-            <li><a href="../view/speaker.jsp">Speakers</a></li>
-            <li><a href="../view/speakerentry.jsp">Suggest a Speaker</a></li>
-            <li><a href="../view/help.jsp">Help</a></li>
-			<li><a href="../model/logout.jsp">Logout</a></li>
-        </ul>
-		<%
-			if (String.valueOf(session.getAttribute("user")).isEmpty() || String.valueOf(session.getAttribute("user")).equals("null")){
-				response.sendRedirect("../index.jsp");
-			}
-		%>
-	</nav><!-- /.globalNavigation -->
+<nav class="globalNavigation">
+    <ul>
+        <li><a href="../view/theme.jsp">Themes</a></li>
+        <li><a href="../view/themeentry.jsp">Suggest a Theme</a></li>
+        <li><a href="../view/speaker.jsp">Speakers</a></li>
+        <li><a href="../view/speakerentry.jsp">Suggest a Speaker</a></li>
+        <li><a href="../view/attendance.jsp">Attend a Session</a></li>
+        <li><a href="../view/surveylist.jsp">Rate a Session</a></li>
+        <li><a href="../view/help.jsp">Help</a></li>
+        <li><a href="../model/logout.jsp">Logout</a></li>
+    </ul>
+    <%
+        if (String.valueOf(session.getAttribute("user")).isEmpty() || String.valueOf(session.getAttribute("user")).equals("null")) {
+            response.sendRedirect("../index.jsp");
+        }
+    %>
+</nav><!-- /.globalNavigation -->

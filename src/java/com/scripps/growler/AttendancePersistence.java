@@ -1,6 +1,8 @@
 package com.scripps.growler;
+
 import java.sql.*;
 import java.util.*;
+
 /**
  * Handles database communication for Attendance objects
  *
@@ -8,6 +10,7 @@ import java.util.*;
  * @author "Justin Bauguess"
  */
 public class AttendancePersistence extends GrowlerPersistence {
+
     /**
      * Sorts queries by user ascending
      */
@@ -36,109 +39,113 @@ public class AttendancePersistence extends GrowlerPersistence {
      * An array list for each method to use
      */
     ArrayList<Attendance> attendances = new ArrayList<Attendance>();
+
     /**
      * Default constructor
      */
     public AttendancePersistence() {
     }
+
     /**
      * Gets a list of all attendances in the database
+     *
      * @return The list of all attendances
      */
     public ArrayList<Attendance> getAllAttendance() {
         try {
             initializeJDBC();
-		statement = connection.prepareStatement("select user_id, session_id, isRegistered from attendance");
-		result = statement.executeQuery();
-		while (result.next()){
-			Attendance a = new Attendance();
-			a.setUserId(result.getInt("user_id"));
-			a.setSessionId(result.getInt("session_id"));
-			a.setIsRegistered(result.getBoolean("isRegistered"));
-			attendances.add(a);
-		}
+            statement = connection.prepareStatement("select user_id, session_id, isRegistered from attendance");
+            result = statement.executeQuery();
+            while (result.next()) {
+                Attendance a = new Attendance();
+                a.setUserId(result.getInt("user_id"));
+                a.setSessionId(result.getInt("session_id"));
+                a.setIsRegistered(result.getBoolean("isRegistered"));
+                attendances.add(a);
+            }
             closeJDBC();
-		return(attendances);
-        }
-        catch (Exception e) {
-            
+            return (attendances);
+        } catch (Exception e) {
         }
         return null;
     }
+
     /**
      * Gets a list of session attendance for a specific user
+     *
      * @param user The user ID to look for
      * @return The list of attendances that match the criteria
      */
     public ArrayList<Attendance> getAttendanceByUser(int user) {
         try {
-            initializeJDBC();statement = connection.prepareStatement("select user_id, session_id, isRegistered from attendance where user_id = ?");
-		statement.setInt(1,user);
-		result = statement.executeQuery();
-		while (result.next()){
-			Attendance a = new Attendance();
-			a.setUserId(result.getInt("user_id"));
-			a.setSessionId(result.getInt("session_id"));
-			a.setIsRegistered(result.getBoolean("isRegistered"));
-			attendances.add(a);
-		}
+            initializeJDBC();
+            statement = connection.prepareStatement("select user_id, session_id, isRegistered from attendance where user_id = ?");
+            statement.setInt(1, user);
+            result = statement.executeQuery();
+            while (result.next()) {
+                Attendance a = new Attendance();
+                a.setUserId(result.getInt("user_id"));
+                a.setSessionId(result.getInt("session_id"));
+                a.setIsRegistered(result.getBoolean("isRegistered"));
+                attendances.add(a);
+            }
             closeJDBC();
-		return(attendances);          
-        }
-        catch (Exception e) {
-            
+            return (attendances);
+        } catch (Exception e) {
         }
         return null;
     }
+
     /**
      * Gets a list of session attendance for a specific session
+     *
      * @param session The session ID to look for
      * @return The list of attendances that match the criteria
      */
     public ArrayList<Attendance> getAttendanceBySession(int session) {
         try {
             initializeJDBC();
-            initializeJDBC();statement = connection.prepareStatement("select user_id, session_id, isRegistered from attendance where session_id = ?");
-		statement.setInt(1,session);
-		result = statement.executeQuery();
-		while (result.next()){
-			Attendance a = new Attendance();
-			a.setUserId(result.getInt("user_id"));
-			a.setSessionId(result.getInt("session_id"));
-			a.setIsRegistered(result.getBoolean("isRegistered"));
-			attendances.add(a);
-		}
+            initializeJDBC();
+            statement = connection.prepareStatement("select user_id, session_id, isRegistered from attendance where session_id = ?");
+            statement.setInt(1, session);
+            result = statement.executeQuery();
+            while (result.next()) {
+                Attendance a = new Attendance();
+                a.setUserId(result.getInt("user_id"));
+                a.setSessionId(result.getInt("session_id"));
+                a.setIsRegistered(result.getBoolean("isRegistered"));
+                attendances.add(a);
+            }
             closeJDBC();
-		return(attendances);          
-        }
-        catch (Exception e) {
-            
+            return (attendances);
+        } catch (Exception e) {
         }
         return null;
     }
+
     /**
      * Gets a list of session attended by whether or not they've been attended
+     *
      * @param registered The condition to look for in the query
      * @return The list of attendances that match the criteria
      */
     public ArrayList<Attendance> getAttendanceByRegistered(boolean registered) {
         try {
             initializeJDBC();
-            initializeJDBC();statement = connection.prepareStatement("select user_id, session_id, isRegistered from attendance where isRegistered = ?");
-		statement.setBoolean(1, registered);
-		result = statement.executeQuery();
-		while (result.next()){
-			Attendance a = new Attendance();
-			a.setUserId(result.getInt("user_id"));
-			a.setSessionId(result.getInt("session_id"));
-			a.setIsRegistered(result.getBoolean("isRegistered"));
-			attendances.add(a);
-		}
+            initializeJDBC();
+            statement = connection.prepareStatement("select user_id, session_id, isRegistered from attendance where isRegistered = ?");
+            statement.setBoolean(1, registered);
+            result = statement.executeQuery();
+            while (result.next()) {
+                Attendance a = new Attendance();
+                a.setUserId(result.getInt("user_id"));
+                a.setSessionId(result.getInt("session_id"));
+                a.setIsRegistered(result.getBoolean("isRegistered"));
+                attendances.add(a);
+            }
             closeJDBC();
-		return(attendances);          
-        }
-        catch (Exception e) {
-            
+            return (attendances);
+        } catch (Exception e) {
         }
         return null;
     }

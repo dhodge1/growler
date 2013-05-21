@@ -17,64 +17,62 @@
 <!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!--> 
 <html class="no-js" lang="en"> <!--<![endif]-->
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <title>Growler Project</title><!-- Title -->
-  <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
-  <link rel="stylesheet" href="css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-	<link rel="stylesheet" href="css/draganddrop.css" /><!--Drag and drop style-->
-  <script src="js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
-</head>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>Growler Project</title><!-- Title -->
+        <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
+        <link rel="stylesheet" href="css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
+        <link rel="stylesheet" href="css/draganddrop.css" /><!--Drag and drop style-->
+        <script src="js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
+    </head>
     <body>
-        <%            
-        String username = request.getParameter("username");            
-        String password = request.getParameter("password");           
-        out.println("Checking login<br>");                   
-        // Here you put the check on the username and password            
-        username = username.toLowerCase();
-        password = password.toLowerCase();
-        MessageDigest sha = MessageDigest.getInstance("sha-1");
-        sha.update(password.getBytes());
-        byte pwd[] = sha.digest();
-        String pw = dataConnection.bytesToHex(pwd);
-        Connection connection = dataConnection.sendConnection();
-        Statement statement = connection.createStatement();
-        ResultSet result = statement.executeQuery("select id, lower(name), password from user where name = '" + username +
-                "' and password = '" + pw + "'");
-        //Redirect, and set the user's identity in the header
-        if (result.next()) {
-            //If it's an admin, go to the admin side
-            if (result.getInt(1) == 8083) {
-                session.setAttribute("user", "admin");
-                session.setAttribute("id", new Integer(result.getInt("id")));
+        <%
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            out.println("Checking login<br>");
+            // Here you put the check on the username and password            
+            username = username.toLowerCase();
+            password = password.toLowerCase();
+            MessageDigest sha = MessageDigest.getInstance("sha-1");
+            sha.update(password.getBytes());
+            byte pwd[] = sha.digest();
+            String pw = dataConnection.bytesToHex(pwd);
+            Connection connection = dataConnection.sendConnection();
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery("select id, lower(name), password from user where name = '" + username
+                    + "' and password = '" + pw + "'");
+            //Redirect, and set the user's identity in the header
+            if (result.next()) {
+                //If it's an admin, go to the admin side
+                if (result.getInt(1) == 8083) {
+                    session.setAttribute("user", "admin");
+                    session.setAttribute("id", new Integer(result.getInt("id")));
+                    connection.close();
+                    statement.close();
+                    result.close();
+                    response.sendRedirect("../admin/theme.jsp");
+                } //Otherwise, go to the user side
+                else {
+
+                    session.setAttribute("user", result.getString(2));
+                    session.setAttribute("id", new Integer(result.getInt("id")));
+                    connection.close();
+                    statement.close();
+                    result.close();
+                    response.sendRedirect("../view/theme.jsp");
+                }
+            } else {
                 connection.close();
                 statement.close();
                 result.close();
-                response.sendRedirect("../admin/theme.jsp");
+                session.setAttribute("message", "Invalid Login");
+                response.sendRedirect("../index.jsp");
+
             }
-            //Otherwise, go to the user side
-            else {
-                
-                session.setAttribute("user", result.getString(2));
-                session.setAttribute("id", new Integer(result.getInt("id")));
-                connection.close();
-                statement.close();
-                result.close();
-                response.sendRedirect("../view/theme.jsp");
-            }
-        }
-               else {
-            connection.close();
-                statement.close();
-                result.close();
-            response.addHeader("error", "Invalid Log-In");
-            response.sendRedirect("../index.jsp");
-            
-               }
         %>
-	<%@ include file="../includes/scriptlist.jsp" %>
+        <%@ include file="../includes/scriptlist.jsp" %>
     </body>
 </html>

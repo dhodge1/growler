@@ -20,51 +20,50 @@
 <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <title>Growler Project</title><!-- Title -->
-  <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
-  <link rel="stylesheet" href="../css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-	<link rel="stylesheet" href="../js/draganddrop.css" /><!--Drag and drop style-->
-  <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
-</head>
-<body id="growler1">
- <%@ include file="../includes/header.jsp" %> 
- <%@ include file="../includes/usernav.jsp" %>
- <% String list[] = request.getParameterValues("list");
- //Get a list of theme ids
- int ids[] = new int[list.length];
- for (int i = 0; i < list.length; i++) {
-     ids[i] = Integer.parseInt(list[i]);
- }
- String idString = String.valueOf(session.getAttribute("id"));
- int id = Integer.parseInt(idString);
- ArrayList<Theme> themes = persist.getUserRanks(id);
- //Check to see if the user already has voted.  If so, redirect to the theme page
-  if (themes != null || themes.size() == 0) {
-     out.print("You have already voted!");
-     
- }
- else {
- //If they haven't voted, take their votes and put them in the database
- for (int i = 0; i < ids.length; i++) {
-     themes.add(new Theme(ids[i]));
- }
- for (int j = 0; j < list.length && j < 10; j++) {
-     persist.setUserRanks(themes, id);
- }
- 
- out.print("Your votes have been recorded!");
- }
- response.sendRedirect("../view/theme.jsp");
- %>
- 
-<%@ include file="../includes/footer.jsp" %> 
-<%@ include file="../includes/scriptlist.jsp" %>
-<%@ include file="../includes/draganddrop.jsp" %>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>Growler Project</title><!-- Title -->
+        <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
+        <link rel="stylesheet" href="../css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
+        <link rel="stylesheet" href="../js/draganddrop.css" /><!--Drag and drop style-->
+        <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
+    </head>
+    <body id="growler1">
+        <%@ include file="../includes/header.jsp" %> 
+        <%@ include file="../includes/usernav.jsp" %>
+        <% String list[] = request.getParameterValues("list");
+            //Get a list of theme ids
+            int ids[] = new int[list.length];
+            for (int i = 0; i < list.length; i++) {
+                ids[i] = Integer.parseInt(list[i]);
+            }
+            String idString = String.valueOf(session.getAttribute("id"));
+            int id = Integer.parseInt(idString);
+            ArrayList<Theme> themes = persist.getUserRanks(id);
+            //Check to see if the user already has voted.  If so, redirect to the theme page
+            if (themes != null || themes.size() == 0) {
+                out.print("You have already voted!");
+
+            } else {
+                //If they haven't voted, take their votes and put them in the database
+                for (int i = 0; i < ids.length; i++) {
+                    themes.add(new Theme(ids[i]));
+                }
+                for (int j = 0; j < list.length && j < 10; j++) {
+                    persist.setUserRanks(themes, id);
+                }
+
+                out.print("Your votes have been recorded!");
+            }
+            response.sendRedirect("../view/theme.jsp");
+        %>
+
+        <%@ include file="../includes/footer.jsp" %> 
+        <%@ include file="../includes/scriptlist.jsp" %>
+        <%@ include file="../includes/draganddrop.jsp" %>
     </body>
 </html>
 

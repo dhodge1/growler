@@ -1,12 +1,15 @@
 package com.scripps.growler;
+
 import java.sql.*;
+
 /**
  * Abstract class for all Persistence objects in the Growler project
- * 
+ *
  * @since May 15, 2013
  * @author "Justin Bauguess"
  */
 public abstract class GrowlerPersistence {
+
     /**
      * Reference to the DataConnection class
      */
@@ -27,6 +30,7 @@ public abstract class GrowlerPersistence {
      * Used for determining the success of certain queries
      */
     protected boolean success;
+
     /**
      * Establishes connection for the database using the DataConnection class
      */
@@ -34,11 +38,10 @@ public abstract class GrowlerPersistence {
         try {
             data = new DataConnection();
             connection = data.sendConnection();
-        }
-        catch (Exception e) {
-            
+        } catch (Exception e) {
         }
     }
+
     /**
      * Closes all database resources: connection, statement, result set
      */
@@ -47,9 +50,7 @@ public abstract class GrowlerPersistence {
             connection.close();
             statement.close();
             result.close();
-        }
-        catch (Exception e) {
-            
+        } catch (Exception e) {
         }
     }
 }

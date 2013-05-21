@@ -8,23 +8,24 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
- <nav class="globalNavigation">
-        <ul>
-            <li><a href="../admin/theme.jsp">Themes</a></li>
-            <li><a href="../admin/themeentry.jsp">Add a Theme</a></li>
-            <li><a href="../admin/speaker.jsp">Speakers</a></li>
-            <li><a href="../admin/userspeaker.jsp">Suggested Speakers</a></li>
-            <li><a href="../admin/speakerentry.jsp">Add a Speaker</a></li>
-            <li><a href="../model/logout.jsp">Logout</a></li>
-        </ul>
-          <%
-     //Get the user's info, and post a welcome!
-     if (!String.valueOf(session.getAttribute("user")).isEmpty()) {
+<nav class="globalNavigation">
+    <ul>
+        <li><a href="../admin/theme.jsp">Themes</a></li>
+        <li><a href="../admin/themeentry.jsp">Add a Theme</a></li>
+        <li><a href="../admin/speaker.jsp">Speakers</a></li>
+        <li><a href="../admin/userspeaker.jsp">Suggested Speakers</a></li>
+        <li><a href="../admin/speakerentry.jsp">Add a Speaker</a></li>
+        <li><a href="../admin/session.jsp">View Session Keys</a></li>
+        <li><a href="../model/logout.jsp">Logout</a></li>
+    </ul>
+    <%
+//Get the user's info, and post a welcome!
+if (!String.valueOf(session.getAttribute("user")).isEmpty()) {
                  
-     }
-     //If they aren't logged in, we want them to go back and log in.
-     else {
-        response.sendRedirect("../index.jsp");
-     }
-     %>
-  </nav><!-- /.globalNavigation -->
+}
+//If they aren't logged in, we want them to go back and log in.
+else {
+  response.sendRedirect("../index.jsp");
+}
+    %>
+</nav><!-- /.globalNavigation -->
