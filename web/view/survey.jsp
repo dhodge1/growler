@@ -79,11 +79,11 @@
 											<td><% out.print(qResult.getString("text")); %></td>
 											<td>
 												<select <% out.print("name = " + qResult.getInt("id")); %>>
-													<option value="1">1</option>
-													<option value="2">2</option>
-													<option value="3">3</option>
-													<option value="4">4</option>
-													<option value="5">5</option>
+													<option value="1">1 - Strongly Disagree</option>
+													<option value="2">2 - Disagree</option>
+													<option value="3">3 - Neutral</option>
+													<option value="4">4 - Agree</option>
+													<option value="5">5 - Strongly Agree</option>
 												</select>
 											</td>
 										</tr>

@@ -48,12 +48,13 @@
 		<div class="span6 largeBottomMargin">
 								<% 
 								String user = String.valueOf(request.getAttribute("id"));
-								ArrayList<Attendance> attendances = persist.getAttendancesByUser(Integer.parseInt(user)));
+                                                                int userId = Integer.parseInt(user);
+								ArrayList<Attendance> attendances = persist.getAttendanceByUser(userId);
 								if (attendances == null) {
 									out.print("<h1 class=bordered>You have not attended any sessions</h1>");
 								}
 								else{
-									out.print("<h1 class=bordered>Surveys</h1>
+									out.print("<h1 class=bordered>Surveys</h1>");
 								}
 								%>
 		</div>
@@ -82,7 +83,7 @@
 												if (attendances.get(i).getIsRegistered() == false) {
 											%>
 											<tr>
-												<td><% out.print(spersist.getSessionById(attendances.get(i).getSessionId()).getName()); %></td>
+												<td><% out.print(spersist.getSessionByID(attendances.get(i).getSessionId()).getName()); %></td>
 												<td><% out.print("<a href=\"../view/survey.jsp?session=" + attendances.get(i).getSessionId() +"\">Survey</a>");%></td>
 											</tr>
 											<% } //close if statement

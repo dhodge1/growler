@@ -125,7 +125,7 @@ CREATE TABLE session (
  * 	but we have to enforce them taking just one survey.
  * Hence, when a person submits a survey, there is a condition 
  * 	where, if isRegistered is false for that given user_id and session_id,
- *	the attribute is made true and records are sumbitted to session_ranking
+ *	the attribute is made true and records are submitted to session_ranking
  *	if isRegistered is true, however, there page redirects to explain
  *	that they've already submitted a survey for that session, and no	 
  *	records are inserted into session_ranking.
