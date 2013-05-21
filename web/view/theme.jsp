@@ -82,8 +82,9 @@
                                     <section>
                                         <%
                                             if (themes != null) {
+                                                out.print("<table class=\"propertyGrid\">");
                                                 for (int i = 0; i < themes.size(); i++) {
-                                                    out.print("<h3>Rank " + (i + 1) + ": " + themes.get(i).getName() + "</h3>");
+                                                    out.print("<tr><th>Rank " + (i + 1) + "</th><td>" + themes.get(i).getName() + "</td></tr>");
                                                 }
                                             }
 

@@ -56,7 +56,7 @@
                     <div id="tabs-1">
                         <div class="row">
                             <div class="span1">
-                                </br>
+                                <br/>
                                 <%
                                     Connection connection = dataConnection.sendConnection();
                                     Statement statement = connection.createStatement();

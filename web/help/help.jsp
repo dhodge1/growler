@@ -41,7 +41,7 @@
 			<h1 class = "bordered" >Help Topics</h1>
 		</div>
     </div>
-	</br>
+	<br/>
     <div class="row"><!--row-->
 	  <div class="span7 offset3">
 		<div class="accordion" id="accordion-parent">
@@ -68,7 +68,7 @@
 			  <div class="accordion-inner">To Suggest a Theme, click on the Themes tab.  Type in the name of 
 				the theme (30 character max),the description (250 character max),
 				and a reason (optional, 250 character max).  Click "Submit."  
-				The theme will be saved.</br></br>Suggested themes will not be visible until they are made so by 
+				The theme will be saved.<br/><br/>Suggested themes will not be visible until they are made so by 
 				the administrator.
 			  </div>
 			</div><!--/#collapseTwo-->
@@ -96,7 +96,7 @@
 			  <div class="accordion-inner">To Suggest a Speaker, click on Suggest a Speaker tab.  Type in the 
 				first name of the speaker (30 character max) and the last name
 				of the speaker (30 character max).  Click "Submit".  The theme 
-				will be saved.</br></br>Suggested speakers will not be visible until they are made so by 
+				will be saved.<br/><br/>Suggested speakers will not be visible until they are made so by 
 				the administrator.
 			  </div>
 			</div><!--/#collapseFour-->
@@ -154,8 +154,8 @@
 		</div><!--/.accordion-->
 	  </div><!-- /.span4 -->
 	</div><!--end row-->	
-	</br>
-	</br>		  
+	<br/>
+	<br/>		  
 	<%@ include file="../includes/footer.jsp" %> 
 	<%@ include file="../includes/scriptlist.jsp" %>
     </body>

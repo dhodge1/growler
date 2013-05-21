@@ -11,9 +11,6 @@
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
 <%@page import="com.scripps.growler.*" %>
-<jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="page" />
-<jsp:useBean id="giveStars" class="com.scripps.growler.GiveStars" scope="page" />
-<jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page" />
 <jsp:useBean id="persist" class="com.scripps.growler.SpeakerPersistence" scope="page" />
 <jsp:useBean id="upersist" class="com.scripps.growler.UserPersistence" scope="page" />
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -34,7 +31,6 @@
         <link rel="stylesheet" href="../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="../css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
         <link rel="stylesheet" href="../css/demo.css" />  
-        <link rel="stylesheet" href="../css/draganddrop.css" /><!--Drag and drop style-->
         <link rel="stylesheet" type="text/css" href="../css/general.css" /><!--General CSS-->
         <link rel="stylesheet" type="text/css" href="../css/speaker.css" /><!--Survey CSS-->
         <link rel="stylesheet" href="/resources/demos/style.css" />
@@ -60,7 +56,7 @@
                         <div id="tabs-1">
                             <div class="row">
                                 <div class="span1">
-                                    </br>
+                                    <br/>
                                     <%
                                         ArrayList<Speaker> speakers = persist.getAllSpeakers(" ");
                                     %>
@@ -125,7 +121,6 @@
 
         <%@ include file="../includes/footer.jsp" %> 
         <%@ include file="../includes/scriptlist.jsp" %>
-        <%@ include file="../includes/draganddrop.jsp" %>
         <script>
                                                                                     function checkRange() {
                                                                                         var newranks = document.getElementsByName("newrank");

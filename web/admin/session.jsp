@@ -9,9 +9,6 @@
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
 <%@page import="com.scripps.growler.*" %>
-<jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="page" />
-<jsp:useBean id="giveStars" class="com.scripps.growler.GiveStars" scope="page" />
-<jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page" />
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
@@ -22,11 +19,6 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <title>Growler Project</title><!-- Title -->
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>  <link rel="stylesheet" href="/resources/demos/style.css" />  <style>  ul { list-style-type: decimal-leading-zero; margin: 0; padding: 0; margin-bottom: 10px; }  #lisort { margin: 5px; padding: 5px; list-style-type: decimal-leading-zero; style: none; width: 600px; }  </style>  <script>  $(function() {
-          $("#sortable").sortable({revert: true});
-          $("#draggable").draggable({connectToSortable: "#sortable", helper: "clone", revert: "invalid"});
-          $("ul, li").disableSelection();
-      });</script>
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
@@ -45,17 +37,17 @@
                     <div class="span12">
                         <img class="logo" src="../images/Techtoberfest2013.png" alt="Techtoberfest 2013"/>  <!-- Techtoberfest logo-->
                         <h1 class = "bordered">Sessions</h1>
-                        </br>
-                        </br>
+                        <br/>
+                        <br/>
                         <h3>Admin View</h3>
-                        </br>
+                        <br/>
                         <div id="tabs-1">
                             <div class="row">
                                 <div class="span3">
                                     <p></p>
                                 </div>
                                 <div class="span1">
-                                    </br>
+                                    <br/>
                                     <%
                                         SessionPersistence sp = new SessionPersistence();
                                     ArrayList<Session> sessions = sp.getAllSessions(" ");
@@ -112,7 +104,5 @@
 
         <%@ include file="../includes/footer.jsp" %> 
         <%@ include file="../includes/scriptlist.jsp" %>
-        <%@ include file="../includes/draganddrop.jsp" %>
-        <script src="../js/validation.js"></script>
     </body>
 </html>
