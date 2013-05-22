@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author 162107
+ * @author 162107 - Justin Bauguess
  */
 public class PersistenceTest {
 
