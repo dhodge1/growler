@@ -208,6 +208,36 @@ public class SpeakerPersistence extends GrowlerPersistence {
         }
         return null;
     }
+    
+    /**
+     * Gets a list of speaker objects based on who suggested them
+     *
+     * @param id the user who suggested the speakers
+     * @param sort the criteria with which to sort the results
+     * @return A list of speakers that have been suggested by a user
+     */
+    public ArrayList<Speaker> getNonDefaultSpeakers() {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select id, first_name, last_name, "
+                    + "suggested_by, visible from speaker where suggested_by <> 2023");
+            result = statement.executeQuery();
+            ArrayList<Speaker> speakers = new ArrayList<Speaker>();
+            while (result.next()) {
+                Speaker s = new Speaker();
+                s.setId(result.getInt("id"));
+                s.setFirstName(result.getString("first_name"));
+                s.setLastName(result.getString("last_name"));
+                s.setSuggestedBy(result.getInt("suggested_by"));
+                s.setVisible(result.getBoolean("visible"));
+                speakers.add(s);
+            }
+            closeJDBC();
+            return speakers;
+        } catch (Exception e) {
+        }
+        return null;
+    }
 
     /**
      * Gets a list of speaker objects based on visibility
@@ -252,7 +282,7 @@ public class SpeakerPersistence extends GrowlerPersistence {
                     + "(speaker_id, ranking, user_id) values "
                     + "(?, ?, ?)");
             statement.setInt(3, user);
-            for (int i = 0; i < speakers.size(); i++) {
+            for (int i = 0; i < speakers.size() && i < 10; i++) {
                 statement.setInt(1, speakers.get(i).getId());
                 statement.setInt(2, 10 - i);
                 statement.execute();
@@ -296,18 +326,16 @@ public class SpeakerPersistence extends GrowlerPersistence {
     public ArrayList<Speaker> getUserRanks(int id) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select s.id, s.first_name, s.last_name, "
-                    + "s.suggested_by, s.visible, sum(r.rating) as rating, count(r.id) as count from speaker s, speaker_ranking r where s.id = r.speaker_id and r.user_id = " + id
-                    + " group by r.speaker_id");
+            statement = connection.prepareStatement("select s.id, s.first_name, s.last_name, s.suggested_by, s.visible, sum(r.ranking) as rating, count(r.speaker_id) as count from speaker s, speaker_ranking r where s.id = r.speaker_id and r.user_id = " + id + " group by (s.id) order by rating desc");
             result = statement.executeQuery();
             ArrayList<Speaker> speakers = new ArrayList<Speaker>();
             while (result.next()) {
                 Speaker s = new Speaker();
-                s.setId(result.getInt("id"));
-                s.setFirstName(result.getString("first_name"));
-                s.setLastName(result.getString("last_name"));
-                s.setSuggestedBy(result.getInt("suggested_by"));
-                s.setVisible(result.getBoolean("visible"));
+                s.setId(result.getInt("s.id"));
+                s.setFirstName(result.getString("s.first_name"));
+                s.setLastName(result.getString("s.last_name"));
+                s.setSuggestedBy(result.getInt("s.suggested_by"));
+                s.setVisible(result.getBoolean("s.visible"));
                 s.setRank(result.getInt("rating"));
                 s.setCount(result.getInt("count"));
                 speakers.add(s);

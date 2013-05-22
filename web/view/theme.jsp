@@ -47,22 +47,26 @@
     <body id="growler1">    
         <%@ include file="../includes/header.jsp" %> 
         <%@ include file="../includes/usernav.jsp" %>
-        <div class="row">
+        <div class="row"><!-- The Logo Row -->
             <div class="span3">
                 <img class="logo" src="../images/Techtoberfest2013small.png" alt="Techtoberfest 2013 small"/><!-- Techtoberfest logo-->
             </div>
             <div class="span7 largeBottomMargin">
                 <%
                     String user = String.valueOf(session.getAttribute("id"));
+                    //Get a list of Themes by calling getUserRanks
                     ArrayList<Theme> themes = persist.getUserRanks(Integer.parseInt(user));
+                    //If we didn't get any ranks, we tell the user to rank the themes
                     if (themes == null || themes.size() == 0) {
                         out.print("<h1 class=bordered>Themes - Drag & Drop Themes to Rank Them</h1>");
-                    } else {
+                    } else { //If we got themes, we let the user see them
                         out.print("<h1 class=bordered>Your Theme Ranks</h1>");
                     }
+                    //Displaying error or success messages -- clear it out when done
                     String message = (String) session.getAttribute("message");
                     if (message != null) {
                         out.print("<p>" + message + "</p>");
+                        session.removeAttribute("message");
                     }
                 %>
             </div>
@@ -74,18 +78,16 @@
                     <div class="span6 offset3"><!--span-->
                         <div id="tabs-1">
                             <div class="row">
-                                <div class="span1">
-                                    <br/>                   
-
-                                </div>
-                                <div class="span2">
+                                <div class="span6 offset1">
                                     <section>
                                         <%
+                                            //If There are Ranked Themes already, here is where they will be displayed
                                             if (themes != null) {
                                                 out.print("<table class=\"propertyGrid\">");
                                                 for (int i = 0; i < themes.size(); i++) {
                                                     out.print("<tr><th>Rank " + (i + 1) + "</th><td>" + themes.get(i).getName() + "</td></tr>");
                                                 }
+                                                out.print("</table>");
                                             }
 
 
@@ -110,7 +112,7 @@
                                             </ul>	
                                     </section>
                                 </div>
-                                <div class="span7">
+                                <div class="span3">
                                     <p></p>
                                 </div>
                             </div>
@@ -126,6 +128,13 @@
                 </div>
             </div><!-- End Content -->	
         </div><!--/.container-fluid-->
+                <div class="row">
+            <div class="span8">
+                <p></p>
+            </div>
+            <div class="span2">
+            </div>
+        </div>
 
         <%@ include file="../includes/footer.jsp" %>
         <%@ include file="../includes/scriptlist.jsp" %>

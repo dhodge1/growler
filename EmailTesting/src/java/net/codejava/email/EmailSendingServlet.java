@@ -39,7 +39,7 @@ public class EmailSendingServlet extends HttpServlet {
         String subject = request.getParameter("subject");
         String content = request.getParameter("content");
  
-        String resultMessage = "";
+        String resultsession.removeAttribute("message");
  
         try {
             EmailUtility.sendEmail(host, port, user, pass, recipient, subject,

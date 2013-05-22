@@ -31,52 +31,81 @@
     <body id="growler1">
         <%@ include file="../includes/header.jsp" %>
         <%@ include file="../includes/usernav.jsp" %>
-        <h1 class="bordered">Attend a Session</h1>
-        <p>Enter a key, provided by the speaker, and click on the "Attend" link to register your attendance.</p>
-        <p>If you do this, you will be registered to win a fantastic prize.</p>
-        <p>You will also receive a notification to complete a survey rating the session.</p>
-        <form method="get" action="../model/processattendance.jsp">
-            <table>
-                <tr>
-                    <td>Name</td>
-                    <td>Date</td>
-                    <td>Time</td>
-                    <td>Key</td>
-                    <td>Register</td>
-                </tr>
+        <div class="row">
+            <div class="span3">
+                <img class="logo" src="../images/Techtoberfest2013small.png" alt="Techtoberfest 2013 small"/><!-- Techtoberfest logo-->
+            </div>
+        </div>
+        <div class="row">
+            <div class="span7 offset3 largeBottomMargin">
+                <h1 class="bordered">Attend a Session</h1>
                 <%
                     String message = String.valueOf(session.getAttribute("message"));
                     if (!message.equals("null")) {
                         out.print("<p>" + message + "</p>");
+                        session.removeAttribute("message");
                     }
                 %>
-                <%
-                    Calendar today = Calendar.getInstance();
-                    String date = today.get(Calendar.YEAR) + "-" + (today.get(Calendar.MONTH) + 1) + "-" + today.get(Calendar.DATE);
-                    String time = today.get(Calendar.HOUR) + ":" + today.get(Calendar.MINUTE) + ":" + today.get(Calendar.SECOND);
-                    Connection connection = dataConnection.sendConnection();
-                    Statement statement = connection.createStatement();
-                    //Select sessions that are today, before the current time
-                    ResultSet result = statement.executeQuery("select id, name, session_date, start_time from session where session_date = '"
-                            + date + "' and start_time > '" + time + "'");
-                    while (result.next()) {
-                %>
-                <tr>
-                    <td><% out.print(result.getString("name"));%>
-                        <input type="hidden" name="session" value="<% out.print(result.getInt("id"));%>"/></td>
-                    <td><% out.print(result.getDate("session_date"));%></td>
-                    <td><% out.print(result.getTime("start_time"));%></td>
-                    <td><input type="text" name="key"/></td>
-                    <td><% out.print("<a href=\"../model/processattendance.jsp?session=" + result.getInt("id") + "\">" + "Attend</a>");%></td>
-                </tr>
-                <%
-                    }
-                    result.close();
-                    statement.close();
-                    connection.close();
-                %>
-            </table>
-        </form>
+                <p>Enter a key, provided by the speaker, and click on the "Attend" link to register your attendance.</p>
+                <p>If you do this, you will be registered to win a fantastic prize.</p>
+                <p>You will also receive a notification to complete a survey rating the session.</p>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="content">
+                <!-- Begin Content -->
+                <div class="row"><!--row-->
+                    <div class="span6 offset3"><!--span-->
+                        <div id="tabs-1">
+                            <div class="row">
+                                <div class="span1">
+                                    <br/>					
+
+                                </div>
+                                <div class="span6 offset1">
+                                    <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Date</th>
+                                            <th>Time</th>
+                                            <th>Key</th>
+                                            <th>Register</th>
+                                        </tr>
+                                        <%
+                                            Calendar today = Calendar.getInstance();
+                                            String date = today.get(Calendar.YEAR) + "-" + (today.get(Calendar.MONTH) + 1) + "-" + today.get(Calendar.DATE);
+                                            String time = today.get(Calendar.HOUR) + ":" + today.get(Calendar.MINUTE) + ":" + today.get(Calendar.SECOND);
+                                            Connection connection = dataConnection.sendConnection();
+                                            Statement statement = connection.createStatement();
+                                            //Select sessions that are today, before the current time
+                                            ResultSet result = statement.executeQuery("select id, name, session_date, start_time from session where session_date = '"
+                                                    + date + "' and start_time > '" + time + "'");
+                                            while (result.next()) {
+                                        %>
+                                        <tr>
+                                            <td><% out.print(result.getString("name"));%>
+                                                <input type="hidden" name="session" value="<% out.print(result.getInt("id"));%>"/></td>
+                                            <td><% out.print(result.getDate("session_date"));%></td>
+                                            <td><% out.print(result.getTime("start_time"));%></td>
+                                            <td><input type="text" name="key"/></td>
+                                            <td><% out.print("<a href=\"../model/processattendance.jsp?session=" + result.getInt("id") + "\">" + "Attend</a>");%></td>
+                                        </tr>
+                                        <%
+                                            }
+                                            result.close();
+                                            statement.close();
+                                            connection.close();
+                                        %>
+                                    </table>
+                                    </form>
+                                </div>
+                                <br/>
+                            </div>
+                        </div>
+                    </div><!--end span-->
+                </div><!--end row-->
+            </div><!-- End Content -->
+        </div><!--/.container-fluid-->
         <%@ include file="../includes/footer.jsp" %> 
         <%@ include file="../includes/scriptlist.jsp" %>
         <%@ include file="../includes/draganddrop.jsp" %>

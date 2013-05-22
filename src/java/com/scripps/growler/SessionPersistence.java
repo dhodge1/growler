@@ -91,17 +91,56 @@ public class SessionPersistence extends GrowlerPersistence {
      *
      * @param list A list of sessions
      */
-    public void generateKeys(ArrayList<Session> list) {
+    public void generateKeys() {
         try {
-            statement = connection.prepareStatement("update session "
-                    + "set session_key = sha1((select id from session where id = ?)) where id = ?");
-            for (int i = 0; i < list.size(); i++) {
-                statement.setInt(1, list.get(i).getId());
-                statement.setInt(2, list.get(i).getId());
-                statement.execute();
+            statement = connection.prepareStatement("select id from session");
+            result = statement.executeQuery();
+            ArrayList<Session> session = new ArrayList<Session>();
+            while(result.next()){
+                Session s = new Session();
+                s.setId(result.getInt("id"));
+                session.add(s);
             }
+            for (int i = 1; i < session.size(); i++) {
+             statement = connection.prepareStatement("update session set session_key = substring(sha1(+ '" + i + "'),1,4) where id = " + i);
+             statement.execute();
+            }
+            
         } catch (Exception e) {
         }
+    }
+    /**
+     * Gets a list of all sessions in the database
+     *
+     * @param sort the criteria to sort the sessions
+     * @return A list of sessions in the database, sorted
+     */
+    public ArrayList<Session> getAllSessionsWithKeys(String sort) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select id, name, description, session_date, start_time, "
+                    + " location, track, duration, session_key from session " + sort);
+            result = statement.executeQuery();
+            while (result.next()) {
+                //Create a new Session and add all data about the session to it
+                Session s = new Session();
+                s.setId(result.getInt("id"));
+                s.setName(result.getString("name"));
+                s.setDescription(result.getString("description"));
+                s.setSessionDate(result.getDate("session_date"));
+                s.setStartTime(result.getTime("start_time"));
+                s.setLocation(result.getInt("location"));
+                s.setTrack(result.getString("track"));
+                s.setDuration(result.getInt("duration"));
+                s.setKey(result.getString(("session_key")));
+                //Add the session to the list
+                sessions.add(s);
+            }
+            closeJDBC();
+            return sessions;
+        } catch (Exception e) {
+        }
+        return null;
     }
 
     /**
@@ -260,7 +299,7 @@ public class SessionPersistence extends GrowlerPersistence {
             initializeJDBC();
             statement = connection.prepareStatement("select id, name, description, "
                     + "session_date, start_time, duration, location, track from session "
-                    + "where id = ? ?");
+                    + "where id = ?");
             statement.setInt(1, id);
             result = statement.executeQuery();
             Session s = new Session();

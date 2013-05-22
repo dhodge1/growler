@@ -10,7 +10,7 @@
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
 <%@page import="java.security.*"%>
-<%@page import="com.scripps.growler.DataConnection" %>
+<%@page import="com.scripps.growler.*" %>
 <jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="page" />
 <jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page" />
 <!DOCTYPE html>
@@ -32,7 +32,7 @@
     </head>
     <body>
         <%
-            String sessionId = request.getParameter("session");
+            String sessionId = (String)session.getAttribute("sessionId");
 
             String user = String.valueOf(session.getAttribute("id"));
             String question1 = String.valueOf(request.getParameter("1"));
@@ -42,15 +42,21 @@
 
             Connection connection = dataConnection.sendConnection();
             Statement statement = connection.createStatement();
+            
+            
 
             statement.execute("insert into session_ranking (question_id, session_id, ranking) values "
                     + "(" + 1 + ", " + sessionId + ", " + question1 + "),"
                     + "(" + 2 + ", " + sessionId + ", " + question2 + "),"
                     + "(" + 3 + ", " + sessionId + ", " + question3 + "),"
                     + "(" + 4 + ", " + sessionId + ", " + question4 + ")");
-            statement.execute("update attendance set isRegistered = 1 where user_id = " + user + " and session_id = " + sessionId);
+            Statement statement2 = connection.createStatement();
+            statement2.execute("update attendance set isRegistered = true where user_id = " + user + " and session_id = " + sessionId);
             connection.close();
             statement.close();
+            session.removeAttribute("session");
+            SessionPersistence sp = new SessionPersistence();
+            session.setAttribute("message", "Survey for " + sp.getSessionByID(Integer.parseInt(sessionId)).getName() + " complete!");
 
             response.sendRedirect("../view/surveylist.jsp");
         %>

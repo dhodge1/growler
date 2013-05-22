@@ -186,8 +186,7 @@ public class ThemePersistence extends GrowlerPersistence {
     public ArrayList<Theme> getThemesByVisibility(boolean v) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select id, name, description, "
-                    + "creator, visible from theme where visible = ?");
+            statement = connection.prepareStatement("select id, name, description, creator, visible from theme where visible = ?");
             statement.setBoolean(1, v);
             result = statement.executeQuery();
             ArrayList<Theme> themes = new ArrayList<Theme>();
@@ -222,8 +221,8 @@ public class ThemePersistence extends GrowlerPersistence {
             ArrayList<Theme> themes = new ArrayList<Theme>();
             while (result.next()) {
                 Theme t = new Theme();
-                t.setId(result.getInt("theme_id"));
-                t.setName(result.getString("name"));
+                t.setId(result.getInt(1));
+                t.setName(result.getString(2));
                 themes.add(t);
             }
             closeJDBC();
@@ -268,9 +267,10 @@ public class ThemePersistence extends GrowlerPersistence {
      */
     public void setUserRanks(ArrayList<Theme> themes, int user) {
         try {
+            initializeJDBC();
             statement = connection.prepareStatement("insert into theme_ranking ("
                     + "user_id, theme_id, theme_rank) values (" + user + ",?,?)");
-            for (int i = 0; i > themes.size(); i++) {
+            for (int i = 0; i < themes.size(); i++) {
                 statement.setInt(1, themes.get(i).getId());
                 statement.setInt(2, 10 - i);
                 statement.execute();

@@ -35,7 +35,6 @@
             out.println("Checking login<br>");
             // Here you put the check on the username and password            
             username = username.toLowerCase();
-            password = password.toLowerCase();
             MessageDigest sha = MessageDigest.getInstance("sha-1");
             sha.update(password.getBytes());
             byte pwd[] = sha.digest();

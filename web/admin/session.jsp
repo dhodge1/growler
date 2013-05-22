@@ -49,10 +49,8 @@
                                 <div class="span1">
                                     <br/>
                                     <%
-                                        SessionPersistence sp = new SessionPersistence();
-                                    ArrayList<Session> sessions = sp.getAllSessions(" ");
-                                    sp.generateKeys(sessions);
-                                    sessions = sp.getAllSessions(" ");
+                                    SessionPersistence sp = new SessionPersistence();
+                                    ArrayList<Session> sessions = sp.getAllSessionsWithKeys(" ");
                                     %>
                                 </div>
                                 <div class="span2">

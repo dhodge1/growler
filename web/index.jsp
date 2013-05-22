@@ -43,9 +43,13 @@
             <div class="span5">
                 <h1 class = "bordered" >Log-in to Project Growler</h1>
                 <%
-                    String message = (String) session.getAttribute("message");
-                    if (!message.equals(null)) {
-                        out.print("<p>" + message + "</p>");
+                    try {
+                        String message = (String) session.getAttribute("message");
+                        if (!message.equals(null)) {
+                            out.print("<p>" + message + "</p>");
+                        }
+                        session.removeAttribute("message");
+                    } catch (Exception e) {
                     }
                 %>
             </div>

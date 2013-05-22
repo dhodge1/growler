@@ -47,13 +47,20 @@
             </div>
             <div class="span6 largeBottomMargin">
                 <%
-                    String user = String.valueOf(request.getAttribute("id"));
+                    String user = String.valueOf(session.getAttribute("id"));
                     int userId = Integer.parseInt(user);
                     ArrayList<Attendance> attendances = persist.getAttendanceByUser(userId);
-                    if (attendances == null) {
+                    if (attendances.size() < 0) {
                         out.print("<h1 class=bordered>You have not attended any sessions</h1>");
                     } else {
                         out.print("<h1 class=bordered>Surveys</h1>");
+                    }
+                %>
+                <%
+                    String message = String.valueOf(session.getAttribute("message"));
+                    if (!message.equals("null")) {
+                        out.print("<p>" + message + "</p>");
+                        session.removeAttribute("message");
                     }
                 %>
             </div>
@@ -69,25 +76,25 @@
                                     <br/>
 
                                 </div>
-                                <div class="span2">
+                                <div class="span6 offset1">
                                     <section>
                                         <form action="../model/processsurveyrequest.jsp" method="get" >
                                             <table>
                                                 <tr>
-                                                    <td>Session Name</td>
-                                                    <td>Take Survey</td>
+                                                    <th>Session Name</th>
+                                                    <th>Take Survey</th>
                                                 </tr>
                                                 <%
                                                     for (int i = 0; i < attendances.size(); i++) {
                                                         if (attendances.get(i).getIsRegistered() == false) {
+
+                                                            out.print("<tr>");
+                                                            out.print("<td>" + spersist.getSessionByID(attendances.get(i).getSessionId()).getName() + "</td>");
+                                                            out.print("<td><a href=\"../view/survey.jsp?sessionId=" + attendances.get(i).getSessionId() + "\">Survey</a></td>");
+                                                            out.print("</tr>");
+                                                        } //close if statement
+                                                    } //close for loop
                                                 %>
-                                                <tr>
-                                                    <td><% out.print(spersist.getSessionByID(attendances.get(i).getSessionId()).getName());%></td>
-                                                    <td><% out.print("<a href=\"../view/survey.jsp?session=" + attendances.get(i).getSessionId() + "\">Survey</a>");%></td>
-                                                </tr>
-                                                <% } //close if statement
-                                                                                            } //close for loop
-%>
                                             </table>
                                         </form>
                                     </section>

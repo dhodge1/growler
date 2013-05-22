@@ -70,9 +70,9 @@
             //If the key is in the visibles array, we know the admin wants it visible
             for (int k = 0; k < ids.length; k++) {
                 if (Arrays.binarySearch(visibles, ids[k]) >= 0) {
-                    visibility.setInt(1, 0);
-                } else {
                     visibility.setInt(1, 1);
+                } else {
+                    visibility.setInt(1, 0);
                 }
                 visibility.setInt(2, ids[k]);
                 visibility.execute();

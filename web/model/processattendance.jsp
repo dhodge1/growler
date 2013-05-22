@@ -45,7 +45,7 @@
             //Ensure time is still current, so user didn't just leave page up to enter erroneous data
             ResultSet result = statement.executeQuery("select id, name from session where (select addtime(start_time, '00;15:00') from "
                     + "session where id = '" + sessionId + "') < '" + time + "' and "
-                    + " session_date = '" + date + "' and survey_key = '" + key + "'");
+                    + " session_date = '" + date + "' and session_key = '" + key + "'");
 
             if (result.first()) {
                 session.setAttribute("message", "Invalid Session Key for session " + sessionId);

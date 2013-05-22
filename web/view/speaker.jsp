@@ -12,7 +12,6 @@
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
 <%@page import="com.scripps.growler.*" %>
-<jsp:useBean id="persist" class="com.scripps.growler.SpeakerPersistence" scope="page" />
 <jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="page" />
 <jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page" />
 <jsp:useBean id="giveStars" class="com.scripps.growler.GiveStars" scope="page" />
@@ -50,20 +49,29 @@
             </div>
             <div class="span6 largeBottomMargin">
                 <%
+                    SpeakerPersistence persist = new SpeakerPersistence();
                     String user = String.valueOf(session.getAttribute("id"));
                     ArrayList<Speaker> speakers = persist.getUserRanks(Integer.parseInt(user));
-                    if (speakers != null) {
-                        out.print("<h1>Your Speaker Rankings</h1>");
-                        for (int i = 0; i < speakers.size(); i++) {
-                            out.print("<h3>Rank " + (i + 1) + ": " + speakers.get(i).getLastName()
-                                    + ", " + speakers.get(i).getFirstName() + " </h3>");
-                        }
-                    } else {
+                    if (speakers == null || speakers.size() == 0) {
                         out.print("<h1 class=bordered>Speakers - Drag & Drop Speakers to Rank Them</h1>");
+                        
+                    } else {
+                        out.print("<h1 class=bordered>Your Speaker Rankings</h1>");
                     }
                     String message = (String) session.getAttribute("message");
                     if (message != null) {
                         out.print("<p>" + message + "</p>");
+                    }
+                    session.removeAttribute("message");
+                    if (speakers != null) {
+                        out.print("<table class=\"propertyGrid\">");
+                                
+                        
+                        for (int i = 0; i < speakers.size(); i++) {
+                            out.print("<tr><th>Rank " + (i + 1) + "</th><td>" + speakers.get(i).getLastName()
+                                    + ", " + speakers.get(i).getFirstName() + "</td></tr>");
+                        }
+                        out.print("</table>");
                     }
 
 
@@ -85,7 +93,7 @@
                                 <div class="span2">
                                     <section>
                                         <%
-                                            if (speakers == null) {
+                                            if (speakers == null || speakers.size() == 0) {
                                                 ArrayList<Speaker> vspeakers = persist.getSpeakersByVisibility(true, persist.SORT_BY_LAST_NAME_ASC);
                                         %>
                                         <form action="../model/processSpeakerRanking.jsp">
@@ -112,7 +120,7 @@
                     </div><!--end span-->
                 </div><!--end row-->
                 <div class="span2 offset3"><!--button div-->
-                    <% if (speakers == null) {
+                    <% if (speakers == null || speakers.size() == 0) {
                             out.print("<input type=\"submit\" value=\"Submit Ratings\" class=\"button button-primary\"/>");
                         }
                     %>

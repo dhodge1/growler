@@ -13,7 +13,6 @@
 <%@page import="java.sql.*"%>
 <%@page import="com.scripps.growler.*" %>
 <jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="page" />
-<jsp:useBean id="persist" class="com.scripps.growler.ThemePersistence" scope="page" />
 <jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page" />
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
@@ -35,6 +34,7 @@
         <%@ include file="../includes/header.jsp" %> 
         <%@ include file="../includes/usernav.jsp" %>
         <% String list[] = request.getParameterValues("list");
+            ThemePersistence persist = new ThemePersistence();
             //Get a list of theme ids
             int ids[] = new int[list.length];
             for (int i = 0; i < list.length; i++) {
@@ -43,20 +43,23 @@
             String idString = String.valueOf(session.getAttribute("id"));
             int id = Integer.parseInt(idString);
             ArrayList<Theme> themes = persist.getUserRanks(id);
+            Theme t = new Theme();
             //Check to see if the user already has voted.  If so, redirect to the theme page
-            if (themes != null || themes.size() == 0) {
-                out.print("You have already voted!");
-
-            } else {
+            if (themes.size() > 0) {
+                session.setAttribute("message", "You have already voted! User id:" + id);
+            } 
+            else {
                 //If they haven't voted, take their votes and put them in the database
+                
+                ArrayList<Theme> newThemes  = new ArrayList<Theme>();
                 for (int i = 0; i < ids.length; i++) {
-                    themes.add(new Theme(ids[i]));
+                    t = persist.getThemeByID(ids[i]);
+                    newThemes.add(t);
                 }
-                for (int j = 0; j < list.length && j < 10; j++) {
-                    persist.setUserRanks(themes, id);
-                }
+                persist.setUserRanks(newThemes, id);
+                
 
-                out.print("Your votes have been recorded!");
+                session.setAttribute("message", "Your votes have been recorded");
             }
             response.sendRedirect("../view/theme.jsp");
         %>

@@ -15,6 +15,7 @@
         <li><a href="../admin/speaker.jsp">Speakers</a></li>
         <li><a href="../admin/userspeaker.jsp">Suggested Speakers</a></li>
         <li><a href="../admin/speakerentry.jsp">Add a Speaker</a></li>
+        <li><a href="../admin/addsession.jsp">Add a Session</a></li>
         <li><a href="../admin/session.jsp">View Session Keys</a></li>
         <li><a href="../model/logout.jsp">Logout</a></li>
     </ul>

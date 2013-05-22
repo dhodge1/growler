@@ -45,7 +45,7 @@
             persist.addSpeaker(s);
 
             if (id == 8083) {
-                response.sendRedirect("../admin/speaker.jsp");
+                response.sendRedirect("../admin/userspeaker.jsp");
             } else {
                 session.setAttribute("message", "Speaker " + s.getLastName() + ", " + s.getFirstName() + " successfully added!");
                 response.sendRedirect("../view/speaker.jsp");

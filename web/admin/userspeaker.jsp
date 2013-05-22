@@ -5,7 +5,7 @@
 --%>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
-<%@page import="com.scripps.growler.DataConnection" %>
+<%@page import="com.scripps.growler.*" %>
 <jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="application" />
 <jsp:setProperty name="dataConnection" property = "*" />
 <jsp:useBean id="giveStars" class="com.scripps.growler.GiveStars" scope="application" />
@@ -37,6 +37,7 @@
 
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
     </head>
+    <body id="growler1">
     <%@include file="../includes/isadmin.jsp" %>
     <%@ include file="../includes/header.jsp" %> 
     <%@ include file="../includes/adminnav.jsp" %>
@@ -45,7 +46,7 @@
             <img class="logo" src="../images/Techtoberfest2013admin.png" alt="Techtoberfest 2013 admin"/><!-- Techtoberfest logo-->
         </div>
         <div class="span6 largeBottomMargin">
-            <h1 class = "bordered">Speakers - Admin View</h1>
+            <h1 class = "bordered">Speakers - User Suggested</h1>
         </div>
     </div>
     <div class="container-fluid">
@@ -58,9 +59,7 @@
                             <div class="span1">
                                 <br/>
                                 <%
-                                    Connection connection = dataConnection.sendConnection();
-                                    Statement statement = connection.createStatement();
-                                    ResultSet speaker = statement.executeQuery(queries.selectUserSuggestedSpeakers());
+                                    
                                 %>
                             </div>
                             <div class="span2">
@@ -73,27 +72,28 @@
                                                 <td>Suggested By</td>
                                             </tr>
                                             <%
-                                                while (speaker.next()) {
+                                                SpeakerPersistence sp = new SpeakerPersistence();
+                                                ArrayList<Speaker> speakers = sp.getNonDefaultSpeakers();
+                                                for (int i = 0; i < speakers.size(); i++) {
                                             %>
                                             <tr>
                                                 <td>
-                                                    <% out.print(speaker.getString("last_name") + ", " + speaker.getString("first_name"));%>
-                                                    <input type="hidden" name="list" value="<% out.print(speaker.getInt("id"));%>"/>
+                                                    <% out.print(speakers.get(i).getLastName() + ", " + speakers.get(i).getFirstName());%>
+                                                    <input type="hidden" name="list" value="<% out.print(speakers.get(i).getId());%>"/>
                                                 </td>
                                                 <td>
-                                                    <input name="visible" type="checkbox" value="<% out.print(speaker.getInt("id"));%>"
-                                                           <% if (speaker.getInt("visible") == 0) {
+                                                    <input name="visible" type="checkbox" value="<% out.print(speakers.get(i).getVisible());%>"
+                                                           <% if (speakers.get(i).getVisible() == true) {
                                                                                                                 out.print("checked");
                                                                                                             }%> />
                                                 </td>
                                                 <td>
-                                                    <% out.print(speaker.getString("name"));%>
+                                                    <% UserPersistence up = new UserPersistence();
+                                                        User u = up.getUserByID(speakers.get(i).getSuggestedBy());
+                                                           out.print(u.getUserName());%>
                                                 </td>
                                             </tr>
-                                            <% }
-                                                speaker.close();
-                                                statement.close();
-                                                                                                    connection.close();%>
+                                            <% } //close for loop%>
                                         </table>
 
                                 </section>

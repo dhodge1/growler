@@ -9,7 +9,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
-<%@page import="com.scripps.growler.DataConnection" %>
+<%@page import="com.scripps.growler.*" %>
 <jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="page" />
 <jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page" />
 <!doctype html>
@@ -46,17 +46,23 @@
             for (int i = 0; i < list.length; i++) {
                 ids[i] = Integer.parseInt(list[i]);
             }
-            Connection connection = dataConnection.sendConnection();
-            Statement statement = connection.createStatement();
-            PreparedStatement insert = connection.prepareStatement(queries.insertSpeakerRanking());
-            //two fields to put: ID (int), ranking (int)
-            for (int j = 0; j < list.length && j < 10; j++) {
-                insert.setInt(1, ids[j]);
-                insert.setInt(2, 10 - j);
-                insert.setInt(3, user);
-                insert.execute();
+            SpeakerPersistence sp = new SpeakerPersistence();
+            ArrayList<Speaker> speakers = sp.getUserRanks(user);
+            if (speakers.size() > 0) {
+                session.setAttribute("message", "You have already voted!");
             }
-            session.setAttribute("message", "Ranks successful!");
+            else {
+                //If they haven't voted, take their votes and put them in the database
+                ArrayList<Speaker> newSpeakers = new ArrayList<Speaker>();
+                for (int i = 0; i < ids.length; i++) {
+                    Speaker s = sp.getSpeakerByID(ids[i]);
+                    newSpeakers.add(s);
+                }
+                sp.setUserRanks(newSpeakers, user);
+                
+
+                session.setAttribute("message", "Your votes have been recorded");
+            }
             response.sendRedirect("../view/speaker.jsp");
         %>
 

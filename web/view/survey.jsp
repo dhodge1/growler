@@ -6,7 +6,7 @@
 --%>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
-<%@page import="com.scripps.growler.DataConnection" %>
+<%@page import="com.scripps.growler.*" %>
 <jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="page" />
 <jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page" />
 <jsp:useBean id="giveStars" class="com.scripps.growler.GiveStars" scope="page" />
@@ -44,27 +44,31 @@
                 <img class="logo" src="../images/Techtoberfest2013small.png" alt="Techtoberfest 2013 small"/><!-- Techtoberfest logo-->
             </div>
             <div class="span6 largeBottomMargin">
-                <h1 class = "bordered">Survey</h1>
+                <%
+                    String user = String.valueOf(request.getAttribute("id"));
+                    String sessionId = request.getParameter("sessionId");
+                    SessionPersistence sp = new SessionPersistence();
+                    
+                    %>
+                    <h1 class = "bordered">Survey - <% out.print(sp.getSessionByID((Integer.parseInt(sessionId))).getName());%></h1>
             </div>
         </div>
         <div class="container-fluid">
             <div class="content">
                 <!-- Begin Content -->
                 <div class="row"><!--row-->
-                    <div class="span6 offset3"><!--span-->
-                        <div id="tabs-1">
                             <div class="row">
                                 <div class="span1">
                                     <br/>                         
                                     <%
-                                        String user = String.valueOf(request.getAttribute("id"));
-                                        String sessionId = String.valueOf(request.getAttribute("session"));
+                                        
+                                        session.setAttribute("sessionId", sessionId);
                                         Connection newConnect = dataConnection.sendConnection();
                                         Statement newStatement = newConnect.createStatement();
                                         ResultSet qResult = newStatement.executeQuery("select id, text from question");
                                     %>
                                 </div>
-                                <div class="span2">
+                                <div class="span6 offset2">
                                     <section>
                                         <form action="../model/processsurvey.jsp" method="post" >
                                             <table>
@@ -92,6 +96,7 @@
                                                     newStatement.close();
                                                     newConnect.close();
                                                 %>
+                                                
                                             </table>
                                             <input type="submit" value="Submit" />
                                         </form>
@@ -105,10 +110,7 @@
                     </div>
                 </div><!--end row-->
                 <div class="span2 offset3"><!--button div-->
-                    <% if (counter == 1) {
-                            out.print("<input type=\"submit\" value=\"Submit Ratings\" class=\"button button-primary\"/>");
-                        }
-                    %>
+                    
                 </div>
             </div><!-- End Content -->	
         </div><!--/.container-fluid-->	
