@@ -49,6 +49,7 @@
                 if (result.getInt(1) == 8083) {
                     session.setAttribute("user", "admin");
                     session.setAttribute("id", new Integer(result.getInt("id")));
+                    session.setMaxInactiveInterval(1800); //30 minutes before it kicks you off
                     connection.close();
                     statement.close();
                     result.close();
@@ -58,6 +59,7 @@
 
                     session.setAttribute("user", result.getString(2));
                     session.setAttribute("id", new Integer(result.getInt("id")));
+                    session.setMaxInactiveInterval(600); //10 minutes before it kicks you off
                     connection.close();
                     statement.close();
                     result.close();
