@@ -37,7 +37,8 @@ public class PersistenceTest {
         t.setName("Testing Cases");
         org.junit.Assert.assertEquals("These are not equal", 999, t.getId());
         
-        
+        org.junit.Assert.assertNotNull("The object is null", t);
+        org.junit.Assert.assertNotNull("The object themes is null", themes);
         
     }
     

@@ -1,5 +1,5 @@
 <%-- 
-    Document   : speaker
+    Document   : session
     Created on : Feb 27, 2013, 11:23:26 PM
     Author     : Justin Bauguess
     Purpose    : The purpose of session(admin) is to show a list of session keys.

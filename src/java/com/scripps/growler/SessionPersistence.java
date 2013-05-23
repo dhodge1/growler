@@ -85,25 +85,41 @@ public class SessionPersistence extends GrowlerPersistence {
      */
     public SessionPersistence() {
     }
+    public void addSession(Session s){
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("insert into session " +
+                    " (name, session_date, start_time, location, duration) " +
+                    " values (?, ?, ?, ?, ?)");
+            statement.setString(1, s.getName());
+            statement.setDate(2, s.getSessionDate());
+            statement.setTime(3, s.getStartTime());
+            statement.setInt(4, s.getLocation());
+            statement.setInt(5, s.getDuration());
+            statement.execute();
+            closeJDBC();
+        }
+        catch(Exception e){
+            
+        }
+    }
 
     /**
      * Generates the keys for all sessions
      *
      * @param list A list of sessions
      */
-    public void generateKeys() {
+    public void generateKey(int id) {
         try {
-            statement = connection.prepareStatement("select id from session");
+            statement = connection.prepareStatement("select id from session where id = ?");
+            statement.setInt(1, id);
             result = statement.executeQuery();
-            ArrayList<Session> session = new ArrayList<Session>();
-            while(result.next()){
+            if(result.next()){
                 Session s = new Session();
                 s.setId(result.getInt("id"));
-                session.add(s);
-            }
-            for (int i = 1; i < session.size(); i++) {
-             statement = connection.prepareStatement("update session set session_key = substring(sha1(+ '" + i + "'),1,4) where id = " + i);
-             statement.execute();
+                statement = connection.prepareStatement("update session set session_key = " +
+                        "substring(sha1(" + id + "),1,4) where id = " + id);
+                statement.execute();
             }
             
         } catch (Exception e) {

@@ -375,6 +375,3 @@ fields terminated by ',';
 
 alter table session 
 add column session_key varchar(4) UNIQUE;
-
-update session
-set session_key = sha1((select id from session = 1)) where session = 1;

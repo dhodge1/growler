@@ -25,11 +25,11 @@ public class Session {
     /**
      * The date of the session
      */
-    private Date sessionDate;
+    private java.sql.Date sessionDate;
     /**
      * The time the session begins
      */
-    private Date startTime;
+    private java.sql.Time startTime;
     /**
      * How long the session lasts in minutes
      */
@@ -109,7 +109,7 @@ public class Session {
      *
      * @return The session date
      */
-    public Date getSessionDate() {
+    public java.sql.Date getSessionDate() {
         return sessionDate;
     }
 
@@ -118,7 +118,7 @@ public class Session {
      *
      * @param sessionDate The session date
      */
-    public void setSessionDate(Date sessionDate) {
+    public void setSessionDate(java.sql.Date sessionDate) {
         this.sessionDate = sessionDate;
     }
 
@@ -127,7 +127,7 @@ public class Session {
      *
      * @return The session start time
      */
-    public Date getStartTime() {
+    public java.sql.Time getStartTime() {
         return startTime;
     }
 
@@ -136,7 +136,7 @@ public class Session {
      *
      * @param startTime The session start time
      */
-    public void setStartTime(Date startTime) {
+    public void setStartTime(java.sql.Time startTime) {
         this.startTime = startTime;
     }
 
