@@ -58,11 +58,11 @@
                     } else {
                         out.print("<h1 class=bordered>Your Speaker Rankings</h1>");
                     }
-                    String message = (String) session.getAttribute("message");
-                    if (message != null) {
-                        out.print("<p>" + message + "</p>");
+                    String message = String.valueOf(session.getAttribute("message"));
+                    if (!message.equals("null")) {
+                        out.print("<p class=feedbackMessage-info>" + message + "</p>");
+                        session.removeAttribute("message");
                     }
-                    session.removeAttribute("message");
                     if (speakers != null) {
                         out.print("<table class=\"propertyGrid\">");
                                 

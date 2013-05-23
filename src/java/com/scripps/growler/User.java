@@ -24,6 +24,10 @@ public class User {
      * The string that contains a user's password - encrypted
      */
     private String password;
+    /**
+     * The SNI ID that is 6 digits - It's a string because we aren't doing math with it
+     */
+    private String corporateId;
 
     /**
      * Default constructor
@@ -96,5 +100,11 @@ public class User {
      */
     public void setPassword(String password) {
         this.password = password;
+    }
+    public String getCorporateId() {
+        return corporateId;
+    }
+    public void setCorporateId(String id){
+        this.corporateId = id;
     }
 }

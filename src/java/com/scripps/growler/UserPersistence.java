@@ -40,6 +40,25 @@ public class UserPersistence extends GrowlerPersistence {
         }
         return null;
     }
+    public User getUserByEmail(String email) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select id, name, corporate_id, email from user where email = ?");
+            statement.setString(1, email);
+            result = statement.executeQuery();
+            if (result.next()) {
+                User u = new User();
+                u.setId(result.getInt("id"));
+                u.setUserName(result.getString("name"));
+                u.setCorporateId(result.getString("corporate_id"));
+                closeJDBC();
+                return u;
+            }
+            closeJDBC();
+        } catch (Exception e) {
+        }
+        return null;
+    }
 
     /**
      * Gets a list of all users in the database

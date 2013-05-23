@@ -35,7 +35,6 @@
         <%@ include file="../includes/adminnav.jsp" %>
         <% String list[] = request.getParameterValues("list");
             String visible[];
-            boolean blank = false;
             visible = request.getParameterValues("visible");
 
 
@@ -44,23 +43,19 @@
             for (int i = 0; i < ids.length; i++) {
                 ids[i] = Integer.parseInt(list[i]);
             }
+            int visibles[] = new int[1];
+            visibles[0] = -1;
             //Get the list of visibles from the check boxes
-            int visibles[];
             try {
                 visibles = new int[visible.length];
-            } catch (NullPointerException e) {
-                visibles = new int[list.length];
-                blank = true;
-            }
-            if (!blank) {
                 for (int i = 0; i < visibles.length; i++) {
                     visibles[i] = Integer.parseInt(visible[i]);
                 }
-            } else {
-                for (int i = 0; i < visibles.length; i++) {
-                    visibles[i] = 1;
-                }
+            } catch (Exception e) {
+                visibles = new int[1];
+                visibles[0] = -1;
             }
+
 
             Connection connection = dataConnection.sendConnection();
             Statement statement = connection.createStatement();
@@ -80,7 +75,7 @@
             connection.close();
             statement.close();
             visibility.close();
-            response.sendRedirect("../admin/speaker.jsp");
+            response.sendRedirect("../admin/userspeaker.jsp");
         %>
         <%@ include file="../includes/footer.jsp" %> 
         <%@ include file="../includes/scriptlist.jsp" %>

@@ -24,6 +24,8 @@
         <link rel="stylesheet" href="../css/draganddrop.css" /><!--Drag and drop style-->
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
           <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+        <link rel="stylesheet" type="text/css" href="css/general.css" /><!--General CSS-->
+        <link rel="stylesheet" type="text/css" href="css/help.css" /><!--Help CSS-->
     </head>
     <body id="growler1">
         <%@include file="../includes/isadmin.jsp" %>
@@ -38,13 +40,8 @@
                         <h1 class = "bordered">Add a Session</h1>
                         <br/>
                         <br/>
-                        <h3>Admin View</h3>
-                        <br/>
                         <div id="tabs-1">
                             <div class="row">
-                                <div class="span2">
-                                    <p></p>
-                                </div>
                                 <div class="span1">
                                     <br/>
                                     <%
@@ -54,20 +51,18 @@
                                 </div>
                                 <div class="span6 offset1">
                                     <section>
-                                        <form method="post" action="../model/processSession.jsp">
-                                            <table>
-                                                <tr>
-                                                    <td>Session Name</td>
-                                                    <td>Date</td>
-                                                    <td>Time</td>
-                                                    <td>Duration</td>
-                                                    <td>Location</td>
-
-                                                </tr>
-                                                <tr>
-                                                    <td><input name="name" type="text"/></td>
-                                                    <td><input name="date" id="datepicker" type="text"/></td>
-                                                    <td><select name="time">
+                                        <form method="post" action="../model/processSession.jsp" onSubmit="return validateValues();">
+                                            <div class="form-group">
+                                                <label class="required">Session Name: </label>
+                                                <input id="name" name="name" type="text" data-content="Enter the name of the Session"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="required">Date: </label>
+                                                <input name="date" id="datepicker" type="text" data-content="Enter a date for the Session"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="required">Time: </label>
+                                                <select name="time">
                                                             <option value="09:00:00">9:00 AM</option>
                                                             <option value="09:00:00">9:30 AM</option>
                                                             <option value="10:00:00">10:00 AM</option>
@@ -85,11 +80,15 @@
                                                             <option value="16:00:00">4:00 PM</option>
                                                             <option value="16:30:00">4:30 PM</option>
                                                         </select>
-                                                    </td>
-                                                    <td><input name="duration" type="number"/></td>
-                                                    <td><input name="location" type="number"/></td>
-                                                </tr>
-                                            </table>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="required">Duration: </label>
+                                                <input id="duration" name="duration" type="number" data-content="Enter duration in minutes (Between 15 and 120)"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="required">Location: </label>
+                                                <input id="location" name="location" type="number" data-content="Enter a location"/>
+                                            </div>
                                             <input type="submit" value="Submit"/>
                                         </form>
                                     </section>
@@ -122,6 +121,35 @@
                 ;
             });
             
+        </script>
+        <script>
+            function validateValues() {
+                var myval = document.getElementById("duration");
+                if (myval.value < 15 || myval.value > 120 || !myval.value) {
+                    alert('Must be between 15 and 120');
+                    myval.focus();
+                    return false;
+                }
+                var myname = document.getElementById("name");
+                if (!myname.value) {
+                    alert('Please enter a Session Name');
+                    myname.focus();
+                    return false;
+                }
+                var mydate = document.getElementById("datepicker");
+                if (!mydate.value) {
+                    alert('Please enter a date');
+                    mydate.focus();
+                    return false;
+                }
+                var mylocation = document.getElementById("location");
+                if (!mylocation.value) {
+                    alert('Please enter a location');
+                    mylocation.focus();
+                    return false;
+                }
+                return true;
+            }
         </script>
     </body>
 </html>

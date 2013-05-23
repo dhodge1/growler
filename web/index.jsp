@@ -46,7 +46,7 @@
                     try {
                         String message = (String) session.getAttribute("message");
                         if (!message.equals(null)) {
-                            out.print("<p>" + message + "</p>");
+                            out.print("<p class=feedbackMessage-error>" + message + "</p>");
                         }
                         session.removeAttribute("message");
                     } catch (Exception e) {

@@ -31,14 +31,14 @@ public class PersistenceTest {
     @Test
     public void testTheme(){
         
-        ArrayList<Theme> themes = themePersist.getUserRanks(2023);
+        ArrayList<Theme> themes = themePersist.getRankedThemes();
         Theme t = new Theme();
         t.setId(999);
         t.setName("Testing Cases");
         org.junit.Assert.assertEquals("These are not equal", 999, t.getId());
         
         org.junit.Assert.assertNotNull("The object is null", t);
-        org.junit.Assert.assertNotNull("The object themes is null", themes);
+        org.junit.Assert.assertNotNull("The object ranked themes is null", themes);
         
     }
     

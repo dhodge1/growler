@@ -82,7 +82,7 @@
                                                     <input type="hidden" name="list" value="<% out.print(speakers.get(i).getId());%>"/>
                                                 </td>
                                                 <td>
-                                                    <input name="visible" type="checkbox" value="<% out.print(speakers.get(i).getVisible());%>"
+                                                    <input name="visible" type="checkbox" value="<% out.print(speakers.get(i).getId());%>"
                                                            <% if (speakers.get(i).getVisible() == true) {
                                                                                                                 out.print("checked");
                                                                                                             }%> />

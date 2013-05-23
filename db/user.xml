@@ -1,0 +1,34 @@
+<DATA>
+
+	<ROW>
+		<id>2023</id>
+		<name>DEFAULT</name>
+		<password>5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8</password>
+		<corporate_id>NULL</corporate_id>
+		<email>NULL</email>
+	</ROW>
+
+	<ROW>
+		<id>8083</id>
+		<name>ADMIN</name>
+		<password>5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8</password>
+		<corporate_id>NULL</corporate_id>
+		<email>NULL</email>
+	</ROW>
+
+	<ROW>
+		<id>8084</id>
+		<name>justin</name>
+		<password>5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8</password>
+		<corporate_id></corporate_id>
+		<email></email>
+	</ROW>
+
+	<ROW>
+		<id>8085</id>
+		<name>tester</name>
+		<password>8be3c943b1609fffbfc51aad666d0a04adf83c9d</password>
+		<corporate_id></corporate_id>
+		<email></email>
+	</ROW>
+</DATA>

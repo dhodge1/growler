@@ -50,16 +50,16 @@
                     String user = String.valueOf(session.getAttribute("id"));
                     int userId = Integer.parseInt(user);
                     ArrayList<Attendance> attendances = persist.getAttendanceByUser(userId);
-                    if (attendances.size() < 0) {
-                        out.print("<h1 class=bordered>You have not attended any sessions</h1>");
-                    } else {
+                    if (attendances.size() > 0) {
                         out.print("<h1 class=bordered>Surveys</h1>");
+                    } else {
+                        out.print("<h1 class=bordered>You have not attended any sessions</h1>");
                     }
                 %>
                 <%
                     String message = String.valueOf(session.getAttribute("message"));
                     if (!message.equals("null")) {
-                        out.print("<p>" + message + "</p>");
+                        out.print("<p class=feedbackMessage-info>" + message + "</p>");
                         session.removeAttribute("message");
                     }
                 %>
@@ -81,8 +81,12 @@
                                         <form action="../model/processsurveyrequest.jsp" method="get" >
                                             <table>
                                                 <tr>
-                                                    <th>Session Name</th>
-                                                    <th>Take Survey</th>
+                                                    <%
+                                                        if (attendances.size() > 0) {
+                                                        out.print("<th>Session Name</th>");
+                                                         out.print("<th>Take Survey</th>");
+                                                                }
+                                                    %>
                                                 </tr>
                                                 <%
                                                     for (int i = 0; i < attendances.size(); i++) {
@@ -94,7 +98,7 @@
                                                             out.print("</tr>");
                                                         } //close if statement
                                                     } //close for loop
-                                                %>
+%>
                                             </table>
                                         </form>
                                     </section>

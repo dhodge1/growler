@@ -46,7 +46,7 @@
             Theme t = new Theme();
             //Check to see if the user already has voted.  If so, redirect to the theme page
             if (themes.size() > 0) {
-                session.setAttribute("message", "You have already voted! User id:" + id);
+                session.setAttribute("message", "You have already voted!");
             } 
             else {
                 //If they haven't voted, take their votes and put them in the database

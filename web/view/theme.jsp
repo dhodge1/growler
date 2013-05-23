@@ -63,9 +63,13 @@
                         out.print("<h1 class=bordered>Your Theme Ranks</h1>");
                     }
                     //Displaying error or success messages -- clear it out when done
-                    String message = (String) session.getAttribute("message");
-                    if (message != null) {
-                        out.print("<p>" + message + "</p>");
+                    String message = String.valueOf(session.getAttribute("message"));
+                    if (!message.equals("null") && !message.startsWith("You have")) {
+                        out.print("<p class=feedbackMessage-success>" + message + "</p>");
+                        session.removeAttribute("message");
+                    }
+                    else if (!message.equals("null")) {
+                        out.print("<p class=feedbackMessage-error>" + message + "</p>");
                         session.removeAttribute("message");
                     }
                 %>

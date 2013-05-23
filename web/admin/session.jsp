@@ -39,7 +39,7 @@
                         <h1 class = "bordered">Sessions</h1>
                         <br/>
                         <br/>
-                        <h3>Admin View</h3>
+                        <h3>Sessions</h3>
                         <%
                             //Displaying error or success messages -- clear it out when done
                             String message = (String) session.getAttribute("message");
@@ -51,9 +51,6 @@
                         <br/>
                         <div id="tabs-1">
                             <div class="row">
-                                <div class="span3">
-                                    <p></p>
-                                </div>
                                 <div class="span1">
                                     <br/>
                                     <%
@@ -61,15 +58,15 @@
                                         ArrayList<Session> sessions = sp.getAllSessionsWithKeys(" ");
                                     %>
                                 </div>
-                                <div class="span2">
+                                <div class="span6 offset1">
                                     <section>
                                         <table>
                                             <tr>
-                                                <td>Session Name</td>
-                                                <td>Date</td>
-                                                <td>Time</td>
-                                                <td>Location</td>
-                                                <td>Key</td>
+                                                <th>Session Name</th>
+                                                <th>Date</th>
+                                                <th>Time</th>
+                                                <th>Location</th>
+                                                <th>Key</th>
                                             </tr>
 
                                             <%
