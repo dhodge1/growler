@@ -40,6 +40,14 @@
                         <br/>
                         <br/>
                         <h3>Admin View</h3>
+                        <%
+                            //Displaying error or success messages -- clear it out when done
+                            String message = (String) session.getAttribute("message");
+                            if (message != null) {
+                                out.print("<p>" + message + "</p>");
+                                session.removeAttribute("message");
+                            }
+                        %>
                         <br/>
                         <div id="tabs-1">
                             <div class="row">
@@ -49,8 +57,8 @@
                                 <div class="span1">
                                     <br/>
                                     <%
-                                    SessionPersistence sp = new SessionPersistence();
-                                    ArrayList<Session> sessions = sp.getAllSessionsWithKeys(" ");
+                                        SessionPersistence sp = new SessionPersistence();
+                                        ArrayList<Session> sessions = sp.getAllSessionsWithKeys(" ");
                                     %>
                                 </div>
                                 <div class="span2">
@@ -64,21 +72,21 @@
                                                 <td>Key</td>
                                             </tr>
 
-                                            <% 
-                                             for (int i = 0; i < sessions.size(); i++) {
+                                            <%
+                                                for (int i = 0; i < sessions.size(); i++) {
                                             %>
                                             <tr>
-                                                <td><% out.print(sessions.get(i).getName()); %>
-                                                    <input name="list" type="hidden" value="<% out.print(sessions.get(i).getId()); %>" />
-                                                <td><% out.print(sessions.get(i).getSessionDate()); %></td>
-                                                <td><% out.print(sessions.get(i).getStartTime()); %></td>
-                                                <td><% out.print(sessions.get(i).getLocation()); %></td>
-                                                <td><% out.print(sessions.get(i).getKey()); %></td>
+                                                <td><% out.print(sessions.get(i).getName());%>
+                                                    <input name="list" type="hidden" value="<% out.print(sessions.get(i).getId());%>" />
+                                                <td><% out.print(sessions.get(i).getSessionDate());%></td>
+                                                <td><% out.print(sessions.get(i).getStartTime());%></td>
+                                                <td><% out.print(sessions.get(i).getLocation());%></td>
+                                                <td><% out.print(sessions.get(i).getKey());%></td>
                                             </tr>
 
 
                                             <% } //close for loop
-                                            %>
+%>
                                         </table>
                                     </section>
                                 </div>

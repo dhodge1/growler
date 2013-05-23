@@ -97,6 +97,7 @@ public class SessionPersistence extends GrowlerPersistence {
             statement.setInt(4, s.getLocation());
             statement.setInt(5, s.getDuration());
             statement.execute();
+            generateKey(s.getName());
             closeJDBC();
         }
         catch(Exception e){
@@ -109,16 +110,16 @@ public class SessionPersistence extends GrowlerPersistence {
      *
      * @param list A list of sessions
      */
-    public void generateKey(int id) {
+    public void generateKey(String name) {
         try {
-            statement = connection.prepareStatement("select id from session where id = ?");
-            statement.setInt(1, id);
+            statement = connection.prepareStatement("select id from session where name = ?");
+            statement.setString(1, name);
             result = statement.executeQuery();
             if(result.next()){
                 Session s = new Session();
                 s.setId(result.getInt("id"));
                 statement = connection.prepareStatement("update session set session_key = " +
-                        "substring(sha1(" + id + "),1,4) where id = " + id);
+                        "substring(sha1(" + result.getInt("id") + "),1,4) where id = " + result.getInt("id"));
                 statement.execute();
             }
             

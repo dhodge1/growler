@@ -29,7 +29,7 @@
             s.setLocation(Integer.parseInt(location));
             SessionPersistence sp = new SessionPersistence();
             sp.addSession(s);
-            session.setAttribute("message", "Session " + s.getName() + " added successfully!");
+            session.setAttribute("message", "Session " + s.getName() + " for " + s.getSessionDate() + " added successfully!");
             response.sendRedirect("../admin/session.jsp");
         %>
 </html>
