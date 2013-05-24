@@ -1,0 +1,487 @@
+<?xml version="1.0"?>
+
+<resultset statement="select * from session
+LIMIT 0, 1000
+"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<row>
+		<field name="id">1</field>
+		<field name="name">Leveraging Technology for Better Deployment Collaboration</field>
+		<field name="description">The ServiceNow team is planning to implement new features that provide improvements in communication,collaboration and knowledge retention around and during deployments.</field>
+		<field name="track">Business Friendly</field>
+		<field name="session_date">2012-10-17</field>
+		<field name="start_time">13:00:00</field>
+		<field name="duration">25</field>
+		<field name="location">1</field>
+		<field name="session_key">356a</field>
+	</row>
+
+	<row>
+		<field name="id">2</field>
+		<field name="name">Cheap and Free Test Tools</field>
+		<field name="description">This presentation will provide an overview and demonstration of open source or inexpensive tools for test design,test management,defect tracking,test data creation,test automation,test evaluation and web-based load testing.</field>
+		<field name="track">Technical</field>
+		<field name="session_date">2012-10-17</field>
+		<field name="start_time">13:30:00</field>
+		<field name="duration">25</field>
+		<field name="location">1</field>
+		<field name="session_key">5a3b</field>
+	</row>
+
+	<row>
+		<field name="id">3</field>
+		<field name="name">Cloudy with a Chance of Continuous Delivery</field>
+		<field name="description">Discussion of advantages,disadvantages,and adoption of continuous deployment and delivery as well as business benefits and pain points as they are in the current (in-house) environment and as we move portions into Amazon AWS (specifically the VPC,Virtual Private Cloud),which involves multiple technologies and services with the goal to save time and money maintaining the CD/CI environment.</field>
+		<field name="track">Technical</field>
+		<field name="session_date">2012-10-17</field>
+		<field name="start_time">14:00:00</field>
+		<field name="duration">55</field>
+		<field name="location">1</field>
+		<field name="session_key">77de</field>
+	</row>
+
+	<row>
+		<field name="id">4</field>
+		<field name="name">Data Visualization</field>
+		<field name="description">An overview of data visualization tools with a demo of two and a discussion of how they can be used with MAM data.</field>
+		<field name="track">Technical</field>
+		<field name="session_date">2012-10-17</field>
+		<field name="start_time">09:30:00</field>
+		<field name="duration">25</field>
+		<field name="location">1</field>
+		<field name="session_key">1b64</field>
+	</row>
+
+	<row>
+		<field name="id">5</field>
+		<field name="name">Kickoff Meeting</field>
+		<field name="description">A kickoff meeting</field>
+		<field name="track">Business Friendly</field>
+		<field name="session_date">2012-10-18</field>
+		<field name="start_time">16:00:00</field>
+		<field name="duration">99</field>
+		<field name="location">1</field>
+		<field name="session_key">ac34</field>
+	</row>
+
+	<row>
+		<field name="id">6</field>
+		<field name="name">Project OZ - The File-Based Workflow Initiative</field>
+		<field name="description">An overview of how the file-based workflow initiative is impacting SNI,and why it is important to the core businesses. The presentation will help explain SNI&#39;s evolution from a videotape to a file-based media infrastructure. A snapshot of the current project status,and a view into the future objectives of the project will be described.</field>
+		<field name="track">Business Friendly</field>
+		<field name="session_date">2012-10-17</field>
+		<field name="start_time">10:00:00</field>
+		<field name="duration">25</field>
+		<field name="location">2</field>
+		<field name="session_key">c1df</field>
+	</row>
+
+	<row>
+		<field name="id">7</field>
+		<field name="name">Cloud Transcoding Pilot</field>
+		<field name="description">The Solutions Engineering team working with NLV Operations has successfully piloted a cloud transcoding workflow using Zencoder,S3 storage,and Aspera.</field>
+		<field name="track">Technical</field>
+		<field name="session_date">2012-10-17</field>
+		<field name="start_time">10:30:00</field>
+		<field name="duration">25</field>
+		<field name="location">1</field>
+		<field name="session_key">902b</field>
+	</row>
+
+	<row>
+		<field name="id">8</field>
+		<field name="name">SQL Tips and Tricks</field>
+		<field name="description">This presentation will show how to enhanced performance and solve some common problems in Oracle using SQL.</field>
+		<field name="track">Technical</field>
+		<field name="session_date">2012-10-17</field>
+		<field name="start_time">11:00:00</field>
+		<field name="duration">55</field>
+		<field name="location">1</field>
+		<field name="session_key">fe5d</field>
+	</row>
+
+	<row>
+		<field name="id">9</field>
+		<field name="name">Standarizing Frame Rate</field>
+		<field name="description">A discussion of standardizing frame rates</field>
+		<field name="track">Technical</field>
+		<field name="session_date">2012-10-18</field>
+		<field name="start_time">16:00:00</field>
+		<field name="duration">99</field>
+		<field name="location">1</field>
+		<field name="session_key">0ade</field>
+	</row>
+
+	<row>
+		<field name="id">10</field>
+		<field name="name">Activating SNI&#39;s Customer Data Portfolio</field>
+		<field name="description">What is SNI&#39;s customer data footprint? 35MM+ customer records across 15+ databases. Over 26MM unique visitors to our websites. Over 10MM social connections. SNI has a lot of customer data. Find out how we are activating and protecting that data to drive our business.</field>
+		<field name="track">Business Friendly</field>
+		<field name="session_date">2012-10-17</field>
+		<field name="start_time">11:00:00</field>
+		<field name="duration">55</field>
+		<field name="location">2</field>
+		<field name="session_key">b1d5</field>
+	</row>
+
+	<row>
+		<field name="id">11</field>
+		<field name="name">TV Everywhere Overview</field>
+		<field name="description">TV-Everywhere (TV-E),also known as Subscriber Authentication is a significant trend in the pay television business. The concept was launched by Time Warner Cable and Comcast in 2009 and is intended to allow all pay TV subscribers to view content on many platforms. Scripps will be creating TV-E website and mobile apps to allow viewers to watch full episodes online or via mobile devices.</field>
+		<field name="track">Business Friendly</field>
+		<field name="session_date">2012-10-17</field>
+		<field name="start_time">10:30:00</field>
+		<field name="duration">25</field>
+		<field name="location">2</field>
+		<field name="session_key">17ba</field>
+	</row>
+
+	<row>
+		<field name="id">12</field>
+		<field name="name">Using Social Media for Team Collaboration</field>
+		<field name="description">In this presentation Lydia will talk about the pros and cons of using social media tools such as Google+,Sococo,Lync and others to improve communication and collaboration among virtual teams.</field>
+		<field name="track">Business Friendly</field>
+		<field name="session_date">2012-10-18</field>
+		<field name="start_time">13:00:00</field>
+		<field name="duration">25</field>
+		<field name="location">2</field>
+		<field name="session_key">7b52</field>
+	</row>
+
+	<row>
+		<field name="id">13</field>
+		<field name="name">Homegrown Guerrilla Usability Testing</field>
+		<field name="description">An inside look into the rapid fire low and mid-fidelity usability testing efforts currently being developed and deployed by the SNI IxD department. Questions to be addressed will include: What&#39;s the aim of the testing? How is it different from our standard usability testing efforts? What are we hoping to accomplish? Are there drawbacks to this kind of testing? What have we learned so far?</field>
+		<field name="track">Business Friendly</field>
+		<field name="session_date">2012-10-18</field>
+		<field name="start_time">13:30:00</field>
+		<field name="duration">25</field>
+		<field name="location">2</field>
+		<field name="session_key">bd30</field>
+	</row>
+
+	<row>
+		<field name="id">14</field>
+		<field name="name">What&#39;s New with the Digital Software Architecture Committee</field>
+		<field name="description">Come hear what the DSAC has been up to since last year&#39;s Techtoberfest. The DSAC has been working on recommendations and best practices for timely subject areas including REST services,Object Caching and Spring. Or maybe you didn&#39;t know that Digital has a Software Architecture Committee? Then stop by to learn about the DSAC and how they can help your development team leverage tribal knowledge around best practices,proven frameworks and technologies.</field>
+		<field name="track">Business Friendly</field>
+		<field name="session_date">2012-10-18</field>
+		<field name="start_time">14:00:00</field>
+		<field name="duration">55</field>
+		<field name="location">2</field>
+		<field name="session_key">fa35</field>
+	</row>
+
+	<row>
+		<field name="id">15</field>
+		<field name="name">Virtual Desktops in the Cloud</field>
+		<field name="description">This presentation will talk to how the IT is utilizing VDI (Virtual Desktop Infrastructure) technology as well as lessons learned. Topics will include: What is Virtual Desktop Infrastructure? What are the benefits of this technology? What are the new areas for discovery/growth? What are the costs?</field>
+		<field name="track">Business Friendly</field>
+		<field name="session_date">2012-10-18</field>
+		<field name="start_time">15:30:00</field>
+		<field name="duration">25</field>
+		<field name="location">1</field>
+		<field name="session_key">f1ab</field>
+	</row>
+
+	<row>
+		<field name="id">16</field>
+		<field name="name">Using SNidbit to Pull Show Images</field>
+		<field name="description">Have you ever needed a show image or logo for a presentation that does not exist? Did you know that you could pull images by watching shows in Snidbit and frame grab the images you need? This presentation will show a technique to do just that. </field>
+		<field name="track">Business Friendly</field>
+		<field name="session_date">2012-10-17</field>
+		<field name="start_time">09:30:00</field>
+		<field name="duration">25</field>
+		<field name="location">2</field>
+		<field name="session_key">1574</field>
+	</row>
+
+	<row>
+		<field name="id">17</field>
+		<field name="name">Business Process Management in Digital</field>
+		<field name="description">This presentation will discuss Digital&#39;s efforts to introduce BPM and related technology into Digital. We will cover the social aspect and its overall importance to the success of the organization.</field>
+		<field name="track">Business Friendly</field>
+		<field name="session_date">2012-10-18</field>
+		<field name="start_time">09:00:00</field>
+		<field name="duration">25</field>
+		<field name="location">2</field>
+		<field name="session_key">0716</field>
+	</row>
+
+	<row>
+		<field name="id">18</field>
+		<field name="name">Digital&#39;s BI Current State and Vision</field>
+		<field name="description">This presentation will provide a definition of Business Intelligence and an assessment of the current and future state of BI in Digital.</field>
+		<field name="track">Business Friendly</field>
+		<field name="session_date">2012-10-17</field>
+		<field name="start_time">09:30:00</field>
+		<field name="duration">25</field>
+		<field name="location">2</field>
+		<field name="session_key">9e6a</field>
+	</row>
+
+	<row>
+		<field name="id">19</field>
+		<field name="name">Living in the Microsoft Cloud</field>
+		<field name="description">Come and see how the SharePoint team is looking at using Microsoft&#39;s cloud infrastructure and tools to develop and host applications and services in the cloud. Microsoft now has in place a host of various cloud-based offerings that allows a company to quite literally virtually replace in-house Information Technology infrastructure. This presentation will cover the major components of Microsoft&#39;s cloud offerings with real world demonstrations.</field>
+		<field name="track">Technical</field>
+		<field name="session_date">2012-10-18</field>
+		<field name="start_time">10:00:00</field>
+		<field name="duration">55</field>
+		<field name="location">2</field>
+		<field name="session_key">b3f0</field>
+	</row>
+
+	<row>
+		<field name="id">20</field>
+		<field name="name">Agile Estimation Planning Poker Workshop</field>
+		<field name="description">Ever wish you had an estimation technique that could be leveraged both with onsite and remote participants while providing a great framework for collaboration as well? Why not try Estimation Planning Poker with your agile team? Join us for a fun hands on demonstration on how to do planning poker with your team to achieve better estimation results. Want to know more on the Planning Poker technique prior to session,go here: http://planningpoker.com/ </field>
+		<field name="track">Business Friendly</field>
+		<field name="session_date">2012-10-18</field>
+		<field name="start_time">11:00:00</field>
+		<field name="duration">55</field>
+		<field name="location">2</field>
+		<field name="session_key">9103</field>
+	</row>
+
+	<row>
+		<field name="id">21</field>
+		<field name="name">JBoss Operations Network (JON)</field>
+		<field name="description">The presentation will demonstrate exposing Spring entities and some monitoring features.</field>
+		<field name="track">Technical</field>
+		<field name="session_date">2012-10-17</field>
+		<field name="start_time">09:30:00</field>
+		<field name="duration">25</field>
+		<field name="location">1</field>
+		<field name="session_key">472b</field>
+	</row>
+
+	<row>
+		<field name="id">22</field>
+		<field name="name">JBoss 6 and Arquillan</field>
+		<field name="description">This presentation will show the benefits of the new lightweight container JBoss container in EAP 6. In addition,we will discuss how Arquillian,an open-source project for testing enterprise Java applications,can help speed up development and testing on EAP 6. </field>
+		<field name="track">Technical</field>
+		<field name="session_date">2012-10-18</field>
+		<field name="start_time">09:00:00</field>
+		<field name="duration">25</field>
+		<field name="location">1</field>
+		<field name="session_key">12c6</field>
+	</row>
+
+	<row>
+		<field name="id">23</field>
+		<field name="name">Using the ICE Framework to Create a Recipe Editor</field>
+		<field name="description">This presentation will cover the feature set used to create the Recipe Editor for the Culinary Staff in NYC. We will include a introduction to the ICE framework and the enhancements made by SNI to meet user&#39;s requirements. </field>
+		<field name="track">Technical</field>
+		<field name="session_date">2012-10-18</field>
+		<field name="start_time">10:00:00</field>
+		<field name="duration">55</field>
+		<field name="location">1</field>
+		<field name="session_key">d435</field>
+	</row>
+
+	<row>
+		<field name="id">24</field>
+		<field name="name">Rapid UI Development using Bootstrap</field>
+		<field name="description">This presentation will cover the Scripps Bootstrap UI development framework including the motivation for developing a common UI framework,the capabilities included in Bootstrap and a demo of building a page with Bootstrap.</field>
+		<field name="track">Technical</field>
+		<field name="session_date">2012-10-18</field>
+		<field name="start_time">11:00:00</field>
+		<field name="duration">55</field>
+		<field name="location">1</field>
+		<field name="session_key">4d13</field>
+	</row>
+
+	<row>
+		<field name="id">25</field>
+		<field name="name">Attribute-Based Access Control with Axiomatics</field>
+		<field name="description">This presentation will discuss an authorization model that provides dynamic,context-aware access control.</field>
+		<field name="track">Technical</field>
+		<field name="session_date">2012-10-18</field>
+		<field name="start_time">13:00:00</field>
+		<field name="duration">25</field>
+		<field name="location">1</field>
+		<field name="session_key">f6e1</field>
+	</row>
+
+	<row>
+		<field name="id">26</field>
+		<field name="name">MySQL for the Oracle Professional</field>
+		<field name="description">MySQL is becoming more prevalent in IT lately,with an ever-increasing feature set,high availability options,and cost effective deployments. Prepare yourself to be an effective DBA or developer in the MySQL world. This presentation will show you how to translate your Oracle skills to MySQL with live demos of common tools and methods that you will use on a daily basis. Both DBA and developer skills will be covered.</field>
+		<field name="track">Technical</field>
+		<field name="session_date">2012-10-18</field>
+		<field name="start_time">13:30:00</field>
+		<field name="duration">25</field>
+		<field name="location">1</field>
+		<field name="session_key">8873</field>
+	</row>
+
+	<row>
+		<field name="id">27</field>
+		<field name="name">Designing Applications for Multi-Platform Delivery</field>
+		<field name="description">This presentation will discuss a framework to manage content across platforms. Topics will include HTML 5,touch interfaces,rich media,behavioral targeting and presentation across web,mobile and email. </field>
+		<field name="track">Business Friendly</field>
+		<field name="session_date">2012-10-18</field>
+		<field name="start_time">14:00:00</field>
+		<field name="duration">55</field>
+		<field name="location">1</field>
+		<field name="session_key">bc33</field>
+	</row>
+
+	<row>
+		<field name="id">28</field>
+		<field name="name">AIM Social Login and Registration</field>
+		<field name="description">Sit in to get an architectural and functional overview of the new AIM social login and user registration system. AIM is set to be launched on the new cookingchanneltv.com and is slated to eventually replace the current UR3 system. AIM will enhance the social login and registration by supporting more social providers and reducing the barrier to registration. We will discuss functional advantages of AIM and go through the challenges of keeping users synchronized between UR3 and AIM while sites transition from one system to the other.</field>
+		<field name="track">Technical</field>
+		<field name="session_date">2012-10-17</field>
+		<field name="start_time">14:00:00</field>
+		<field name="duration">25</field>
+		<field name="location">2</field>
+		<field name="session_key">0a57</field>
+	</row>
+
+	<row>
+		<field name="id">29</field>
+		<field name="name">Enterprise Mobile Apps Strategy</field>
+		<field name="description">With the proliferation of personal devices in the workplace,one may wonder what we as a company are doing about Mobile Applications in the Enterprise. This talk with share the IT Strategy for Enterprise Mobile Apps in the workplace,and what to expect in the future.</field>
+		<field name="track">Business Friendly</field>
+		<field name="session_date">2012-10-17</field>
+		<field name="start_time">13:30:00</field>
+		<field name="duration">25</field>
+		<field name="location">2</field>
+		<field name="session_key">7719</field>
+	</row>
+
+	<row>
+		<field name="id">30</field>
+		<field name="name">Media Asset Management Target State</field>
+		<field name="description">The existing Media Asset Management (MAM) infrastructure was put into service over the past seven years and has become foundational for internal processes and mission critical for linear scheduling and digital publishing of content to consumers and partners. In addition to an aging infrastructure upon which we continue to build,the business demands have grown and changed in nature,requiring a new vision for the direction of MAM. This presentation will provide an overview of the business and technical drivers for the next generation of MAM.</field>
+		<field name="track">Business Friendly</field>
+		<field name="session_date">2012-10-17</field>
+		<field name="start_time">13:00:00</field>
+		<field name="duration">25</field>
+		<field name="location">2</field>
+		<field name="session_key">22d2</field>
+	</row>
+
+	<row>
+		<field name="id">31</field>
+		<field name="name">Technology Panel</field>
+		<field name="description">A panel to discuss technology</field>
+		<field name="track">Technical</field>
+		<field name="session_date">2012-10-18</field>
+		<field name="start_time">16:00:00</field>
+		<field name="duration">99</field>
+		<field name="location">1</field>
+		<field name="session_key">6326</field>
+	</row>
+
+	<row>
+		<field name="id">32</field>
+		<field name="name">Network Current and Future State</field>
+		<field name="description">This session will provide an overview of the company&#39;s network infrastructure,current and future state. Jason Norton,Director of Telecommunications,will discuss the LAN,WAN,data center and wireless infrastructure that supports our users and applications. Jason will also discuss future trends in networking and take questions from the audience.</field>
+		<field name="track">Business Friendly</field>
+		<field name="session_date">2012-10-18</field>
+		<field name="start_time">16:00:00</field>
+		<field name="duration">55</field>
+		<field name="location">2</field>
+		<field name="session_key">cb4e</field>
+	</row>
+
+	<row>
+		<field name="id">33</field>
+		<field name="name">Integration Frameworks - Apache Camel and Spring Integration</field>
+		<field name="description">Apache Camel and Spring Integration are integration frameworks based on Enterprise Integration Patterns. Both provide a simple model to develop integration solutions.</field>
+		<field name="track">Technical</field>
+		<field name="session_date">2012-10-18</field>
+		<field name="start_time">16:00:00</field>
+		<field name="duration">55</field>
+		<field name="location">1</field>
+		<field name="session_key">b669</field>
+	</row>
+
+	<row>
+		<field name="id">34</field>
+		<field name="name">Agile Data Modeling</field>
+		<field name="description">Traditionally,data modeling has been a very time intensive exercise that involves significant effort from the data modeler and the members of the application development team. To make the process a lot more interesting the views expressed by certain sections of the data modeling community have not always been in alignment with those expressed by the agile community. However,over the past few years quite a few data practitioners have been experimenting with the concept of agile data modeling and have been sharing their lessons from the trenches. A more recent development in the concept of agile data modeling has been the use of universal patterns in data modeling.</field>
+		<field name="track">Technical</field>
+		<field name="session_date">2012-10-17</field>
+		<field name="start_time">10:00:00</field>
+		<field name="duration">25</field>
+		<field name="location">1</field>
+		<field name="session_key">f1f8</field>
+	</row>
+
+	<row>
+		<field name="id">35</field>
+		<field name="name">Cooking Channel TV Monitoring Strategy</field>
+		<field name="description">This presentation will talk about the monitoring strategy that was developed for the CCTV Relaunch Project. Topics will include architectural design,approach and buildout. </field>
+		<field name="track">Technical</field>
+		<field name="session_date">2012-10-18</field>
+		<field name="start_time">15:30:00</field>
+		<field name="duration">25</field>
+		<field name="location">2</field>
+		<field name="session_key">972a</field>
+	</row>
+
+	<row>
+		<field name="id">90</field>
+		<field name="name">Test 1</field>
+		<field name="description" xsi:nil="true" />
+		<field name="track" xsi:nil="true" />
+		<field name="session_date">2013-05-23</field>
+		<field name="start_time">09:00:00</field>
+		<field name="duration">25</field>
+		<field name="location" xsi:nil="true" />
+		<field name="session_key">2d0c</field>
+	</row>
+
+	<row>
+		<field name="id">91</field>
+		<field name="name">Test 2</field>
+		<field name="description" xsi:nil="true" />
+		<field name="track" xsi:nil="true" />
+		<field name="session_date">2013-05-22</field>
+		<field name="start_time">16:55:00</field>
+		<field name="duration">25</field>
+		<field name="location" xsi:nil="true" />
+		<field name="session_key">4cd6</field>
+	</row>
+
+	<row>
+		<field name="id">92</field>
+		<field name="name">Justin&#39;s</field>
+		<field name="description" xsi:nil="true" />
+		<field name="track" xsi:nil="true" />
+		<field name="session_date">2013-10-01</field>
+		<field name="start_time">09:00:00</field>
+		<field name="duration">15</field>
+		<field name="location">1</field>
+		<field name="session_key" xsi:nil="true" />
+	</row>
+
+	<row>
+		<field name="id">93</field>
+		<field name="name">Mine</field>
+		<field name="description" xsi:nil="true" />
+		<field name="track" xsi:nil="true" />
+		<field name="session_date">2013-10-01</field>
+		<field name="start_time">09:00:00</field>
+		<field name="duration">15</field>
+		<field name="location">1</field>
+		<field name="session_key">08a3</field>
+	</row>
+
+	<row>
+		<field name="id">94</field>
+		<field name="name">SuperSession</field>
+		<field name="description" xsi:nil="true" />
+		<field name="track" xsi:nil="true" />
+		<field name="session_date">2013-10-17</field>
+		<field name="start_time">09:00:00</field>
+		<field name="duration">15</field>
+		<field name="location">2</field>
+		<field name="session_key">215b</field>
+	</row>
+</resultset>
