@@ -39,14 +39,7 @@
                         <h1 class = "bordered">Sessions</h1>
                         <br/>
                         <br/>
-                        <%
-                            //Displaying error or success messages -- clear it out when done
-                            String message = (String) session.getAttribute("message");
-                            if (message != null) {
-                                out.print("<p>" + message + "</p>");
-                                session.removeAttribute("message");
-                            }
-                        %>
+                        
                         <br/>
                         <div id="tabs-1">
                             <div class="row">
@@ -58,6 +51,14 @@
                                     %>
                                 </div>
                                 <div class="span6 offset1">
+                                    <%
+                            //Displaying error or success messages -- clear it out when done
+                            String message = (String) session.getAttribute("message");
+                            if (message != null) {
+                                out.print("<p class=feedbackMessage-success>" + message + "</p>");
+                                session.removeAttribute("message");
+                            }
+                        %>
                                     <section>
                                         <table>
                                             <tr>

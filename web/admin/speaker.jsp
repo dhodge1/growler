@@ -47,12 +47,22 @@
             <div class="span6 largeBottomMargin">
                 <h1 class = "bordered">Speakers - Admin View</h1>
             </div>
+            
         </div>
         <div class="container-fluid">
             <div class="content">
                 <!-- Begin Content -->
                 <div class="row"><!--row-->
+                    
                     <div class="span6 offset3"><!--span-->
+                        <%
+                            //Displaying error or success messages -- clear it out when done
+                            String message = (String) session.getAttribute("message");
+                            if (message != null) {
+                                out.print("<p class=feedbackMessage-success>" + message + "</p>");
+                                session.removeAttribute("message");
+                            }
+                        %>
                         <div id="tabs-1">
                             <div class="row">
                                 <div class="span1">

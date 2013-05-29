@@ -56,7 +56,7 @@
                                 <input name="description" class="input-xlarge" type="text" id="tip2" data-content="250 characters or less please" maxlength="250"/>
                             </div>
                             <div class="form-actions">
-                                <input class="button button-primary" id="send" type="submit" name="Submit" />
+                                <input class="button button-primary" id="send" type="submit" value="Send" name="Submit" />
                                 <a class="button" id="cancel" href="../admin/theme.jsp">Cancel</a>
                             </div>
                         </fieldset>

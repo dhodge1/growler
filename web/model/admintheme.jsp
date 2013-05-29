@@ -62,6 +62,7 @@
             connection.close();
             statement.close();
             insert.close();
+            session.setAttribute("message", "Updates Successful");
             response.sendRedirect("../admin/theme.jsp");
         %>
         <%@ include file="../includes/footer.jsp" %> 
