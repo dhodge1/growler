@@ -55,7 +55,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="required">Theme Description</label>
-                                <input name="description" class="input-xlarge" type="text" id="tip2" data-content="30 characters or less please" maxlength="30"/>
+                                <input name="description" class="input-xlarge" type="text" id="tip2" data-content="250 characters or less please" maxlength="250"/>
                             </div>
                             <div class="form-group">
                                 <label>Why should we implement this theme?</label>
