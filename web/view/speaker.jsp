@@ -121,7 +121,7 @@
                 </div><!--end row-->
                 <div class="span2 offset3"><!--button div-->
                     <% if (speakers == null || speakers.size() == 0) {
-                            out.print("<input type=\"submit\" value=\"Submit Ratings\" class=\"button button-primary\"/>");
+                            out.print("<input type=\"submit\" value=\"Submit Rankings\" class=\"button button-primary\"/>");
                         }
                     %>
                     </form>

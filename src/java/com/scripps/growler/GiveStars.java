@@ -15,32 +15,9 @@ public class GiveStars {
     private final String GOLD_STAR = "../images/icon16-goldstar.png";
     private final String GREY_STAR = "../images/icon16-greystar.png";
     private final String HALF_STAR = "../images/icon16-halfstar.png";
+    private final String NOT_RATED = "../images/notratedin2012.png";
 
     public GiveStars() {
-    }
-
-    /**
-     * Gives a string that has the points a theme has earned so far in voting
-     *
-     * @param id the theme id to analyze
-     * @return The numerical id of the points a theme has earned, in string form
-     * @throws ClassNotFoundException
-     * @throws SQLException
-     */
-    public String themePoints(int id) throws ClassNotFoundException, SQLException {
-        DataConnection data = new DataConnection();
-        Connection connection = data.sendConnection();
-        Statement statement = connection.createStatement();
-        ResultSet result = statement.executeQuery("select sum(ranking) from isolated_theme_ranking where theme_id = " + id);
-        int c = 0;
-        while (result.next()) {
-            c = result.getInt(1);
-        }
-        String count = String.valueOf(c);
-        connection.close();
-        statement.close();
-        result.close();
-        return (count);
     }
 
     /**
@@ -88,7 +65,7 @@ public class GiveStars {
         //ResultSet result = statement.executeQuery("select avg(ranking) from session_ranking where session_ranking.session_id in (select id from session where id in (select session_id from speaker_team where speaker_id = " + id + "))");
         result = statement.executeQuery("select r.rating, s.id, s.first_name, s.last_name from ranks_2012 r, speaker s where s.id = r.speaker_id and s.id = " + id);
         if (!result.next()) {
-            imgTag = "Not Rated in 2012";
+            imgTag = IMAGE_START + NOT_RATED + IMAGE_END;
         } else {
             imgTag = returnIMGTag(result.getDouble(1));
         }
@@ -114,7 +91,7 @@ public class GiveStars {
         Statement statement = connection.createStatement();
         ResultSet results = statement.executeQuery("select r.rating, s.id from speaker s left join ranks_2012 r on s.id = " + id);
         if (!results.next()) {
-            imgTag = "Not Rated in 2012";
+            imgTag = IMAGE_START + NOT_RATED + IMAGE_END;
         } else {
             imgTag = returnIMGTag(results.getDouble(1));
         }
@@ -207,7 +184,7 @@ public class GiveStars {
                 img = img + (IMAGE_START + GREY_STAR + IMAGE_END);
             }
         } else {
-            img = "(No Rating in 2012)";
+            img = IMAGE_START + NOT_RATED + IMAGE_END;
         }
         return (img);
     }

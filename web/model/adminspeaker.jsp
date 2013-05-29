@@ -22,7 +22,7 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <title>Growler Project</title><!-- Title -->
+        <title>Techtoberfest</title><!-- Title -->
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
@@ -37,6 +37,7 @@
             String rank[] = request.getParameterValues("newrank");
             String count[] = request.getParameterValues("newcount");
             String visible[] = request.getParameterValues("visible");
+            String lastyear[] = request.getParameterValues("lastyear");
 
             //Convert the List of IDs into integers   
             int ids[] = new int[list.length];
@@ -52,28 +53,52 @@
             double ranks[] = new double[rank.length];
             for (int i = 0; i < ranks.length; i++) {
                 ranks[i] = Double.parseDouble(rank[i]);
-                if (ranks[i] < 0 || ranks[i] > 5) {
-                    ranks[i] = 1;
-                }
             }
             //Convert the list of Counts into integers
             int counts[] = new int[count.length];
             for (int i = 0; i < counts.length; i++) {
                 counts[i] = Integer.parseInt(count[i]);
-                if (counts[i] < 0 || counts[i] > 100) {
-                    counts[i] = 1;
-                }
+            }
+
+            //Get if the speaker spoke last year
+            int last[] = new int[lastyear.length];
+            for (int i = 0; i < last.length; i++) {
+                last[i] = Integer.parseInt(lastyear[i]);
             }
 
             Connection connection = dataConnection.sendConnection();
             Statement statement = connection.createStatement();
             PreparedStatement insert = connection.prepareStatement(queries.updateSpeakerRankings());
+
+            Arrays.sort(last);
+            //delete any entries that are flagged as not speaking last year
+            PreparedStatement delete = connection.prepareStatement("delete from ranks_2012 where speaker_id = ?");
+            for (int k = 0; k < ranks.length; k++) {
+                if (Arrays.binarySearch(last, ids[k]) < 0) {
+                    delete.setInt(1, ids[k]);
+                    delete.execute();
+                }
+            }
+
+            //look for and add any new entries
+            PreparedStatement add = connection.prepareStatement("insert into ranks_2012 (speaker_id, rating, count) values (?, ?, ?)");
+            for (int k = 0; k < ranks.length; k++) {
+                if ((Arrays.binarySearch(last, ids[k]) >= 0) && ranks[k] > 0 && counts[k] > 0) {
+                    add.setInt(1, ids[k]);
+                    add.setDouble(2, ranks[k]);
+                    add.setInt(3, counts[k]);
+                    add.execute();
+                }
+            }
+
             //update all the speaker rankings and counts
             for (int j = 0; j < ranks.length; j++) {
-                insert.setDouble(1, ranks[j]);
-                insert.setInt(2, counts[j]);
-                insert.setInt(3, ids[j]);
-                insert.execute();
+                if ((Arrays.binarySearch(last, ids[j]) >= 0)) { //if they are listed as yes for last year
+                    insert.setDouble(1, ranks[j]);
+                    insert.setInt(2, counts[j]);
+                    insert.setInt(3, ids[j]);
+                    insert.execute();
+                }
             }
             PreparedStatement visibility = connection.prepareStatement(queries.promoteSpeaker());
             //Sort the array before using binary search

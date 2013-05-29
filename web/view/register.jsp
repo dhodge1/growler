@@ -43,7 +43,7 @@
         <div class="container-fluid">
             <div class="content" role="main">
                 <!-- Begin Content -->
-                <form method="POST" id="action" action="../model/adduser.jsp">
+                <form method="POST" id="action" action="../model/adduser.jsp" onSubmit="return validateFields();">
                     <div class="span5 offset3">
                         <fieldset>
                             <div class="form-group">
@@ -52,18 +52,18 @@
                             </div>
                             <div class="form-group">
                                 <label class="required">Desired Password</label>
-                                <input name="password" class="input-xlarge" type="text" id="tip2" data-content="20 characters or less please" maxlength="20"/>
+                                <input name="password" class="input-xlarge" type="password" id="tip2" data-content="20 characters or less please" maxlength="20"/>
                             </div>
                             <div class="form-group">
                                 <label class="required">Email Address</label>
-                                <input name="email" class="input-xlarge" type="text" id="tip3" data-content="26 characters or less please" maxlength="26"/>
+                                <input name="email" class="input-xlarge" type="text" id="tip3" data-content="50 characters or less please" maxlength="50"/>
                             </div>
                             <div class="form-group">
                                 <label class="required">Corporate ID</label>
                                 <input name="corporate" class="input-xlarge" type="text" id="tip4" data-content="6 characters or less please" maxlength="6"/>
                             </div>
                             <div class="form-actions">
-                                <input class="button button-primary" value="Submit" type="submit">
+                                <input id="send" class="button button-primary" value="Submit" type="submit">
                                 <a class="button" id="cancel" href="../index.jsp">Cancel</a>
                             </div>
                         </fieldset>
@@ -83,19 +83,26 @@
 
         <!--Additional Script-->
         <script>
-            $(function() {
-                $("input").autoinline();
-            });
-            $("#send").click(function() {
-                var emptyString = "";
-                if ($("#tip").val() === emptyString || $("#tip2").val() === emptyString || $("#tip3").val() === emptyString || $("#tip4").val() === emptyString) {
-                    $("#action").attr("action", "");
-                    alert("Please enter all information before submitting.");
-                }
-                else {
-                    $("#action").attr("action", "../model/adduser.jsp");
-                }
-            });
+
+
+                    $(function() {
+                        $("input").autoinline();
+                    });
+
+                    function validateFields() {
+                        var name = $("#tip1").val();
+                        var password = $("#tip2").val();
+                        var email = $("#tip3").val();
+                        var corporate = $("tip4").val();
+                        var emptyString = "";
+                        if (name === emptyString || password === emptyString || email === emptyString || corporate === emptyString) {
+                            alert("Please fill in all information");
+                            return false;
+                        }
+                        else {
+                            return true;
+                        }
+                    }
         </script>
     </body>
 </html>

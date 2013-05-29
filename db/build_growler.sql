@@ -39,7 +39,7 @@ CREATE TABLE user (
 	,name			varchar(26)	UNIQUE	
 	,password		varchar(60)
 	,corporate_id		varchar(6)
-	,email			varchar(26)
+	,email			varchar(50)
 	);
 
 /*

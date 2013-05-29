@@ -164,10 +164,8 @@ public class SpeakerPersistence extends GrowlerPersistence {
                     s.setCount2012(result.getInt("count"));
                 } catch (Exception e) {
                 }
-                int count = s.getCount2012();
-                if (count != 0) {
                     speakers.add(s);
-                }
+                
             }
             closeJDBC();
             return (speakers);

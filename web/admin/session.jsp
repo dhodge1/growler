@@ -18,7 +18,7 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <title>Growler Project</title><!-- Title -->
+        <title>Techtoberfest Sessions</title><!-- Title -->
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
@@ -39,7 +39,6 @@
                         <h1 class = "bordered">Sessions</h1>
                         <br/>
                         <br/>
-                        <h3>Sessions</h3>
                         <%
                             //Displaying error or success messages -- clear it out when done
                             String message = (String) session.getAttribute("message");

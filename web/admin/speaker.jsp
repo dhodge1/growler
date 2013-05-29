@@ -66,13 +66,14 @@
                                         <form id="entry" name="entry" action="../model/adminspeaker.jsp" method="post" onSubmit="return checkRange();">
                                             <table>
                                                 <tr>
-                                                    <td>Speaker Name</td>
-                                                    <td>2012 Rating</td>
-                                                    <td>Times Ranked</td>
-                                                    <td>New Rating</td>
-                                                    <td>New Times Ranked</td>
-                                                    <td>Visible?</td>
-                                                    <td>Suggested By</td>
+                                                    <th>Speaker Name</th>
+                                                    <th>2012 Rating</th>
+                                                    <th>Times Ranked</th>
+                                                    <th>New Rating</th>
+                                                    <th>New Times Ranked</th>
+                                                    <th>Visible?</th>
+                                                    <th>Ranked in 2012?</th>
+                                                    <th>Suggested By</th>
                                                 </tr>
                                                 <%
                                                     for (int i = 0; i < speakers.size(); i++) {
@@ -80,11 +81,16 @@
                                                 <tr>
                                                     <td><% out.print(speakers.get(i).getLastName() + ", " + speakers.get(i).getFirstName());%>
                                                         <input name="list" type="hidden" value="<% out.print(speakers.get(i).getId());%>" />
-                                                    <td><% out.print(speakers.get(i).getRank2012());%></td>
+                                                        <%
+                                                        double d = speakers.get(i).getRank2012();
+                                                        java.text.DecimalFormat df = new java.text.DecimalFormat("0.00");
+                                                        String decimal = df.format(d);
+                                                        %>
+                                                    <td><% out.print(decimal);%></td>
                                                     <td><% out.print(speakers.get(i).getCount2012());%></td>
                                                     <%
-                                                        double d = speakers.get(i).getRank2012();
-                                                        out.print("<td><input id=\"" + speakers.get(i).getId() + "\" type=\"number\" min=\"0\" max=\"5\" name=\"newrank\" value=" + d + " /></td>");
+                                                        
+                                                        out.print("<td><input id=\"" + speakers.get(i).getId() + "\" type=\"number\" min=\"0\" max=\"5\" name=\"newrank\" value=" + decimal + " /></td>");
                                                     %>
                                                     <%
                                                         int c = speakers.get(i).getCount2012();
@@ -97,6 +103,12 @@
                                                                    }
                                                                %> />
                                                     </td>
+                                                    <td><input name="lastyear" type="checkbox" value="<% out.print(speakers.get(i).getId());%>"
+                                                               <%
+                                                                   if (speakers.get(i).getRank2012() > 0) {
+                                                                       out.print("checked");
+                                                                   }
+                                                               %>/></td>
                                                     <td><% out.print(upersist.getUserByID(speakers.get(i).getSuggestedBy()).getUserName());%></td>
                                                 </tr>
                                                 <% } //close the for loop
@@ -133,12 +145,14 @@
                                                                                         }
                                                                                         var newcounts = document.getElementsByName("newcount");
                                                                                         for (var j = 0; j < newcounts.length; j++) {
-                                                                                            newcounts[j] = Math.floor(newcounts[j]);
+                                                                                            newcounts[j].value = Math.floor(newcounts[j].value);
+                                                                                            //newcounts[j] = Math.floor(newcounts[j]);
                                                                                             if (newcounts[j].value > 100 || newcounts[j].value < 0) {
                                                                                                 alert('Counts must be between 0 and 100');
                                                                                                 newcounts[j].focus();
                                                                                                 return false;
                                                                                             }
+                                                                                            
                                                                                         }
                                                                                         return true;
                                                                                     }

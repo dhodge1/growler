@@ -20,7 +20,7 @@
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <title>Log-In to Project Growler</title><!-- Title -->
+        <title>Log-In to Techtoberfest</title><!-- Title -->
 
         <link rel="stylesheet" href="css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
         <link rel="stylesheet" href="css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
@@ -35,13 +35,13 @@
         <script src="js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
     </head>
     <body id="growler1">
-        <%@include file="includes/header.jsp" %>
+        <%@include file="includes/header.jsp" %>        
         <div class="row">
             <div class="span3">
                 <img class="logo" src="images/Techtoberfest2013small.png" alt="Techtoberfest 2013 small"/>
             </div>
             <div class="span5">
-                <h1 class = "bordered" >Log-in to Project Growler</h1>
+                <h1 class = "bordered" >Log-in to Techtoberfest</h1>
                 <%
                     try {
                         String message = (String) session.getAttribute("message");
@@ -71,8 +71,7 @@
                                 </div>
                                 <div class="form-actions">
                                     <input class ="button button-primary" type="submit" value="Submit" id="send" /><br/><br/>
-                                    <a href="view/resetpassword.jsp">Forgot Password?</a><br/><br/>
-                                    <a href="view/register.jsp">Sign Up - New User</a>
+                                    <a href="view/register.jsp">Register SNI Credentials</a>
                                 </div>
                             </fieldset>
                         </div>                   

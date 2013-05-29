@@ -46,7 +46,9 @@
     </head>
     <body id="growler1">    
         <%@ include file="../includes/header.jsp" %> 
+        <div class="row">
         <%@ include file="../includes/usernav.jsp" %>
+        </div>
         <div class="row"><!-- The Logo Row -->
             <div class="span3">
                 <img class="logo" src="../images/Techtoberfest2013small.png" alt="Techtoberfest 2013 small"/><!-- Techtoberfest logo-->
@@ -125,7 +127,7 @@
                 </div><!--end row-->
                 <div class="span2 offset3"><!--button div-->
                     <% if (themes == null || themes.size() == 0) {
-                            out.print("<input type=\"submit\" value=\"Submit Ratings\" class=\"button button-primary\"/>");
+                            out.print("<input type=\"submit\" value=\"Submit Rankings\" class=\"button button-primary\"/>");
                         }
                     %>
                     </form>	
