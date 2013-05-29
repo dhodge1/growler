@@ -37,7 +37,7 @@
                 <img class="logo" src="../images/Techtoberfest2013small.png" alt="Techtoberfest 2013 small"/>
             </div>
             <div class="span5">
-                <h1 class = "bordered largeBottomMargin">Register For An Account</h1>
+                <h1 class = "bordered largeBottomMargin">Register Your Scripps ID for Techtoberfest</h1>
             </div>
         </div>
         <div class="container-fluid">
@@ -46,21 +46,14 @@
                 <form method="POST" id="action" action="../model/adduser.jsp" onSubmit="return validateFields();">
                     <div class="span5 offset3">
                         <fieldset>
-                            <div class="form-group">
-                                <label class="required">Desired User Name</label>
-                                <input name="username" class="input-xlarge" type="text" id="tip" data-content="20 characters or less please" maxlength="20"/>
-                            </div>
-                            <div class="form-group">
-                                <label class="required">Desired Password</label>
-                                <input name="password" class="input-xlarge" type="password" id="tip2" data-content="20 characters or less please" maxlength="20"/>
-                            </div>
-                            <div class="form-group">
-                                <label class="required">Email Address</label>
-                                <input name="email" class="input-xlarge" type="text" id="tip3" data-content="50 characters or less please" maxlength="50"/>
-                            </div>
+                            
                             <div class="form-group">
                                 <label class="required">Corporate ID</label>
-                                <input name="corporate" class="input-xlarge" type="text" id="tip4" data-content="6 characters or less please" maxlength="6"/>
+                                <input name="corporate" class="input-xlarge" type="text" id="tip1" data-content="Your 6 digit SNI Id" maxlength="6"/>
+                            </div>
+                            <div class="form-group">
+                                <label class="required">Password</label>
+                                <input name="password" class="input-xlarge" type="password" id="tip2" data-content="Your password" maxlength="20"/>
                             </div>
                             <div class="form-actions">
                                 <input id="send" class="button button-primary" value="Submit" type="submit">
@@ -90,12 +83,10 @@
                     });
 
                     function validateFields() {
-                        var name = $("#tip1").val();
+                        var corporate = $("#tip1").val();
                         var password = $("#tip2").val();
-                        var email = $("#tip3").val();
-                        var corporate = $("tip4").val();
                         var emptyString = "";
-                        if (name === emptyString || password === emptyString || email === emptyString || corporate === emptyString) {
+                        if (password === emptyString || corporate === emptyString) {
                             alert("Please fill in all information");
                             return false;
                         }

@@ -31,25 +31,25 @@
         <%@ include file="../includes/header.jsp" %> 
         <%
             //Find if the user already exists
-            String user = request.getParameter("username");
+            String user = request.getParameter("corporate");
             Connection connection = dataConnection.sendConnection();
             Statement statement = connection.createStatement();
-            ResultSet result = statement.executeQuery("select name from user where name = '" + user + "'");
+            ResultSet result = statement.executeQuery("select corporate_id from user where corporate_id = '" + user + "'");
             //If there's a result, we send back to the index...don't want the same user name twice
             while (result.next()) {
+                session.setAttribute("meesage", "That ID is already registered!");
                 response.sendRedirect("../index.jsp");
             }
             //Add the user if they aren't already there
+            //In the future, we will validate the password against SiteMinder, then proceed to
+            //getting the information from SiteMinder and adding into the database.
             String password = request.getParameter("password");
-            String email = request.getParameter("email");
-            String corporate = "";
-            try {
-                corporate = request.getParameter("corporate");
-            } catch (Exception e) {
-                corporate = "null";
-            }
-            boolean success = statement.execute("insert into user (name, password, email, corporate_id) values ('"
-                    + user + "',sha1('" + password + "'),'" + email + "', '" + corporate + "')");
+            //Removed the following because it's changing while waiting for the SiteMinder information
+            //String email = request.getParameter("email");
+            //boolean success = statement.execute("insert into user (name, password, email, corporate_id) values ('"
+            //        + user + "',sha1('" + password + "'),'" + email + "', '" + corporate + "')");
+            //For now we'll make the User's name the same as their corporate Id
+            boolean success = statement.execute("insert into use(name, password, corporate_id) values ('" + user + "', sha1('" + password + "'), " + user + ")");
             if (success) {
                 result.close();
                 statement.close();
