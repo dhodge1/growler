@@ -49,7 +49,7 @@
             //boolean success = statement.execute("insert into user (name, password, email, corporate_id) values ('"
             //        + user + "',sha1('" + password + "'),'" + email + "', '" + corporate + "')");
             //For now we'll make the User's name the same as their corporate Id
-            boolean success = statement.execute("insert into use(name, password, corporate_id) values ('" + user + "', sha1('" + password + "'), " + user + ")");
+            boolean success = statement.execute("insert into user(name, password, corporate_id) values ('" + user + "', sha1('" + password + "'), " + user + ")");
             if (success) {
                 result.close();
                 statement.close();
