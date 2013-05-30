@@ -147,7 +147,7 @@
                                                                                     function checkRange() {
                                                                                         var newranks = document.getElementsByName("newrank");
                                                                                         for (var i = 0; i < newranks.length; i++) {
-                                                                                            if (newranks[i].value > 5.0 || newranks[i].value < 0) {
+                                                                                            if (newranks[i].value > 5.0 || newranks[i].value < 0 || isNaN(newranks[i].value)) {
                                                                                                 alert('Ranks must be between 0 and 5');
                                                                                                 newranks[i].focus();
                                                                                                 return false;
@@ -157,7 +157,7 @@
                                                                                         for (var j = 0; j < newcounts.length; j++) {
                                                                                             newcounts[j].value = Math.floor(newcounts[j].value);
                                                                                             //newcounts[j] = Math.floor(newcounts[j]);
-                                                                                            if (newcounts[j].value > 100 || newcounts[j].value < 0) {
+                                                                                            if (newcounts[j].value > 100 || newcounts[j].value < 0 || isNaN(newcounts[j].value)) {
                                                                                                 alert('Counts must be between 0 and 100');
                                                                                                 newcounts[j].focus();
                                                                                                 return false;

@@ -5,7 +5,7 @@
     Purpose    : Adds the record of attendance
                  into the database.
 --%>
-<%@page import="com.sun.org.apache.regexp.internal.REUtil"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
@@ -35,39 +35,59 @@
             Calendar today = Calendar.getInstance();
             String date = today.get(Calendar.YEAR) + "-" + (today.get(Calendar.MONTH) + 1) + "-" + today.get(Calendar.DATE);
             String time = today.get(Calendar.HOUR) + ":" + today.get(Calendar.MINUTE) + ":" + today.get(Calendar.SECOND);
-            String sessionId = request.getParameter("session");
-            String key = request.getParameter("key");
+            int sessionId = Integer.parseInt(request.getParameter("session"));
+            String key = request.getParameter("skey");
             String user = String.valueOf(session.getAttribute("id"));
 
 
             Connection connection = dataConnection.sendConnection();
             Statement statement = connection.createStatement();
             //Ensure time is still current, so user didn't just leave page up to enter erroneous data
-            ResultSet result = statement.executeQuery("select id, name from session where (select addtime(start_time, '00;15:00') from "
-                    + "session where id = '" + sessionId + "') < '" + time + "' and "
-                    + " session_date = '" + date + "' and session_key = '" + key + "'");
-
-            if (result.first()) {
-                session.setAttribute("message", "Invalid Session Key for session " + sessionId);
-            } else {
-
-                //Prevent the same time slot registration
-                ResultSet duplicate = statement.executeQuery("select a.session_id from attendance a, session s where "
-                        + "a.user_id = " + user + " and s.start_time = (select start_time from session where id = " + sessionId
-                        + " ) and s.session_date = '" + date + "'");
-                if (!duplicate.first()) {
-                    //if there aren't any sessions there, add attendance record to DB
-                    boolean success = statement.execute("insert into attendance (user_id, session_id) values ("
-                            + user + ", " + sessionId + ")");
-                    session.setAttribute("message", "Sucessfully registered!  Now you're eligible for a fantastic prize!");
-                } else {
-
-                    session.setAttribute("message", "Already registered in that time slot!");
-                }
-                duplicate.close();
+            int duration = 0;
+            ResultSet durRes = statement.executeQuery("select duration from session where id = " + sessionId);
+            while (durRes.next()) {
+                duration = durRes.getInt("duration");
             }
+            //Convert the duration into a usable format
+            int hours = duration / 60;
+            int minutes = duration % 60;
+            String durString = hours + ":" + minutes + ":" + "00";
+            Calendar cal = Calendar.getInstance();
+            SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
+            java.util.Date d = df.parse(durString);
+            cal.setTime(d);
+            //Add 15 minutes to the end of the session
+            cal.add(Calendar.MINUTE, 15);
+            durString = cal.get(Calendar.HOUR) + ":" + cal.get(Calendar.MINUTE) + ":" + cal.get(Calendar.SECOND);;
+            //Query against the end of a session + the 15 minutes
+            ResultSet result = statement.executeQuery("select id, name, start_time from session where addtime(start_time,'" + durString + "') < '" + time + "' and session_date = '" + date + "' and id = " + sessionId);
+            if (!result.first()) {
+                session.setAttribute("message", "Too late to register for this session");
+            } else {
+                //Ensure the key matches
+                Statement newStatement = connection.createStatement();
+                ResultSet keycheck = newStatement.executeQuery("select count(id) from session where session_key = '" + key +"'");
+                keycheck.next();
+                if (keycheck.getInt(1) == 0) {
+                    session.setAttribute("message", "Invalid Session Key");
+                } else {
+                    //Prevent the same time slot registration
+                    ResultSet duplicate = statement.executeQuery("select a.session_id from attendance a, session s where "
+                            + "a.user_id = " + user + " and s.start_time = (select start_time from session s where id = " + sessionId
+                            + " ) and s.session_date = '" + date + "' and a.session_id = s.id");
+                    if (!duplicate.next()) {
+                        //if there aren't any sessions there, add attendance record to DB
+                        boolean success = statement.execute("insert into attendance (user_id, session_id) values ("
+                                + user + ", " + sessionId + ")");
+                        session.setAttribute("message", "Sucessfully registered!");
+                    } else {
+                        session.setAttribute("message", "Already registered in that time slot!");
 
 
+                    }
+                    duplicate.close();
+                }
+            }
 
             connection.close();
             statement.close();

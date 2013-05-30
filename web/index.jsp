@@ -71,7 +71,8 @@
                                 </div>
                                 <div class="form-actions">
                                     <input class ="button button-primary" type="submit" value="Submit" id="send" /><br/><br/>
-                                    <a href="view/register.jsp">Register SNI Credentials</a>
+                                    <a href="view/register.jsp">Register SNI Credentials</a><br/>
+                                    <a href="model/emailer.jsp">Test the Email</a>
                                 </div>
                             </fieldset>
                         </div>                   
