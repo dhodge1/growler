@@ -51,7 +51,7 @@
                 <img class="logo" src="../images/Techtoberfest2013admin.png" alt="Techtoberfest 2013 admin"/><!-- Techtoberfest logo-->
             </div>
             <div class="span6 largeBottomMargin">
-                <h1 class = "bordered">Default Themes - Admin View</h1>
+                <h1 class = "bordered">Themes</h1>
             </div>
             
         </div>
@@ -60,7 +60,7 @@
                 <!-- Begin Content -->
                 <div class="row"><!--row-->
                     
-                    <div class="span6 offset3"><!--span-->
+                    <div class="span9 offset2"><!--span-->
                         <%
                             //Displaying error or success messages -- clear it out when done
                             String message = (String) session.getAttribute("message");
@@ -69,24 +69,23 @@
                                 session.removeAttribute("message");
                             }
                         %>
-                        <div id="tabs-1">
-                            <div class="row">
-                                <div class="span1">
-                                    <br/>                   
+                        
                                     <%
                                         ArrayList<Theme> themes = persist.getAllThemes(" order by rating desc, name asc ");
                                     %>
-                                </div>
-                                <div class="span2">
+                        
                                     <section>
                                         <form action="../model/admintheme.jsp" >
-                                            <table>
+                                            <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
                                                 <tr>
-                                                    <td>Name</td>
-                                                    <td>Rating</td>
-                                                    <td>Times Rated</td>
-                                                    <td>Visible?</td>
-                                                    <td>Created By</td>
+                                                    <th>Name</th>
+                                                    <th>Description</th>
+                                                    <th>Reason</th>
+                                                    <th>Rating</th>
+                                                    <th>Times Rated</th>
+                                                    <th>Visible?</th>
+                                                    <th>Created By</th>
+                                                    <th>Remove Theme</th>
                                                 </tr>
                                                 <%
                                                     for (int i = 0; i < themes.size(); i++) {
@@ -94,6 +93,8 @@
                                                 <tr>
                                                     <td><% out.print(themes.get(i).getName());%>
                                                         <input type="hidden" name="list" value="<% out.print(themes.get(i).getId());%>" /></td>
+                                                    <td><% out.print(themes.get(i).getDescription());%></td>
+                                                    <td><% if (themes.get(i).getReason() != null) {out.print(themes.get(i).getReason());}%></td>
                                                     <td><% out.print(themes.get(i).getRank());%></td>
                                                     <td><% out.print(themes.get(i).getCount());%></td>
                                                     <td><input type="checkbox" name="visible" value="<% out.print(themes.get(i).getId());%>"
@@ -101,6 +102,7 @@
                                                                                                                    out.print(" checked");
                                                                                                                }%>/>
                                                     <td><% out.print(upersist.getUserByID(themes.get(i).getCreatorId()).getUserName());%>
+                                                    <td><a href="../model/removeTheme.jsp?id=<%out.print(themes.get(i).getId());%>">Remove</a></td>
                                                 </tr>
                                                 <% } //close the for loop %>
                                             </table>
@@ -109,13 +111,11 @@
                                 </div>
                                 <div class="span7">
                                     <p></p>
-                                </div>
-                            </div>
-                        </div>
+                                
                     </div><!--end span-->
                 </div><!--end row-->
                 <div class="span2 offset3"><!--button div-->
-                    <input type="submit" value="Submit" class="button-primary" />
+                    <input type="submit" value="Submit" class="button button-primary" />
                 </div>
                 </form>
             </div><!-- End Content -->	

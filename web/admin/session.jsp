@@ -35,22 +35,16 @@
                 <!-- Begin Content -->
                 <div class="row">
                     <div class="span12">
-                        <img class="logo" src="../images/Techtoberfest2013.png" alt="Techtoberfest 2013"/>  <!-- Techtoberfest logo-->
+                        <img class="logo" src="../images/Techtoberfest2013admin.png" alt="Techtoberfest 2013 admin"/>  <!-- Techtoberfest logo-->
                         <h1 class = "bordered">Sessions</h1>
                         <br/>
                         <br/>
-                        
-                        <br/>
-                        <div id="tabs-1">
-                            <div class="row">
-                                <div class="span1">
-                                    <br/>
-                                    <%
+                                   <%
                                         SessionPersistence sp = new SessionPersistence();
                                         ArrayList<Session> sessions = sp.getAllSessionsWithKeys(" ");
                                     %>
                                 </div>
-                                <div class="span6 offset1">
+                                <div class="span9 offset2">
                                     <%
                             //Displaying error or success messages -- clear it out when done
                             String message = (String) session.getAttribute("message");
@@ -60,7 +54,7 @@
                             }
                         %>
                                     <section>
-                                        <table>
+                                        <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
                                             <tr>
                                                 <th>Session Name</th>
                                                 <th>Date</th>
@@ -70,6 +64,7 @@
                                             </tr>
 
                                             <%
+                                                LocationPersistence lp = new LocationPersistence();
                                                 for (int i = 0; i < sessions.size(); i++) {
                                             %>
                                             <tr>
@@ -77,7 +72,8 @@
                                                     <input name="list" type="hidden" value="<% out.print(sessions.get(i).getId());%>" />
                                                 <td><% out.print(sessions.get(i).getSessionDate());%></td>
                                                 <td><% out.print(sessions.get(i).getStartTime());%></td>
-                                                <td><% out.print(sessions.get(i).getLocation());%></td>
+                                                <td><% Location l = lp.getLocationById(sessions.get(i).getLocation());
+                                                out.print(l.getDescription());%></td>
                                                 <td><% out.print(sessions.get(i).getKey());%></td>
                                             </tr>
 
@@ -93,10 +89,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
                 <!-- End Content -->
-            </div>	
-        </div>
+            
         <div class="row">
             <div class="span8">
                 <p></p>

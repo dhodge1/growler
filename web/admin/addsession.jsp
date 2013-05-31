@@ -16,7 +16,7 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <title>Growler Project</title><!-- Title -->
+        <title>Add a Session</title><!-- Title -->
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
@@ -95,9 +95,17 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="required">Location: </label>
-                                                <input id="location" name="location" type="number" data-content="Enter a location"/>
+                                                <select name="location">
+                                                    <%
+                                                       LocationPersistence lp = new LocationPersistence();
+                                                       ArrayList<Location> locations = lp.getAllLocations();
+                                                       for (int i = 0; i < locations.size(); i++) {
+                                                           out.print("<option value=" + locations.get(i).getId() +">" + locations.get(i).getDescription() + "</option>");
+                                                       }
+                                                    %>
+                                                </select>
                                             </div>
-                                            <input type="submit" value="Submit"/>
+                                            <input class="button button-primary" type="submit" value="Submit"/>
                                         </form>
                                     </section>
                                 </div>

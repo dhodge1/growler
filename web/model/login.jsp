@@ -63,7 +63,7 @@
                     connection.close();
                     statement.close();
                     result.close();
-                    response.sendRedirect("../view/theme.jsp");
+                    response.sendRedirect("../view/home.jsp");
                 }
             } else {
                 connection.close();

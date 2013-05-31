@@ -54,7 +54,7 @@
                 <!-- Begin Content -->
                 <div class="row"><!--row-->
                     
-                    <div class="span6 offset3"><!--span-->
+                    <div class="span9 offset2"><!--span-->
                         <%
                             //Displaying error or success messages -- clear it out when done
                             String message = (String) session.getAttribute("message");
@@ -68,14 +68,14 @@
                                 <div class="span1">
                                     <br/>
                                     <%
-                                        ArrayList<Speaker> speakers = persist.getAllSpeakers(" ");
+                                        ArrayList<Speaker> speakers = persist.getAllSpeakers(" order by rating desc, last_name");
                                         
                                     %>
                                 </div>
                                 <div class="span2">
                                     <section>
                                         <form id="entry" name="entry" action="../model/adminspeaker.jsp" method="post" onSubmit="return checkRange();">
-                                            <table>
+                                            <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
                                                 <tr>
                                                     <th>Speaker Name</th>
                                                     <th>Current Votes</th>
@@ -87,6 +87,7 @@
                                                     <th>Visible?</th>
                                                     <th>Ranked in 2012?</th>
                                                     <th>Suggested By</th>
+                                                    <th>Remove Speaker</th>
                                                 </tr>
                                                 <%
                                                     for (int i = 0; i < speakers.size(); i++) {
@@ -125,6 +126,7 @@
                                                                    }
                                                                %>/></td>
                                                     <td><% out.print(upersist.getUserByID(speakers.get(i).getSuggestedBy()).getUserName());%></td>
+                                                    <td><a href="../model/removeSpeaker.jsp?id=<%out.print(speakers.get(i).getId());%>">Remove</a></td>
                                                 </tr>
                                                 <% } //close the for loop
 %>

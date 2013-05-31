@@ -63,7 +63,7 @@
                         out.print("<p class=feedbackMessage-info>" + message + "</p>");
                         session.removeAttribute("message");
                     }
-                    if (speakers != null) {
+                    if (speakers.size() > 0) {
                         out.print("<table class=\"propertyGrid\">");
                                 
                         
@@ -72,6 +72,7 @@
                                     + ", " + speakers.get(i).getFirstName() + "</td></tr>");
                         }
                         out.print("</table>");
+                        out.print("<a href=\"../model/removeSpeakerRanks.jsp?id=" + user + "\">Reset Ranks</a>");
                     }
 
 
