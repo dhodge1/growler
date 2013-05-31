@@ -69,6 +69,7 @@
                                     <br/>
                                     <%
                                         ArrayList<Speaker> speakers = persist.getAllSpeakers(" ");
+                                        
                                     %>
                                 </div>
                                 <div class="span2">
@@ -77,6 +78,8 @@
                                             <table>
                                                 <tr>
                                                     <th>Speaker Name</th>
+                                                    <th>Current Votes</th>
+                                                    <th>Current Points</th>
                                                     <th>2012 Rating</th>
                                                     <th>Times Ranked</th>
                                                     <th>New Rating</th>
@@ -96,6 +99,8 @@
                                                         java.text.DecimalFormat df = new java.text.DecimalFormat("0.00");
                                                         String decimal = df.format(d);
                                                         %>
+                                                    <td><% out.print(speakers.get(i).getCount()); %></td>
+                                                    <td><% out.print(speakers.get(i).getRank()); %></td>
                                                     <td><% out.print(decimal);%></td>
                                                     <td><% out.print(speakers.get(i).getCount2012());%></td>
                                                     <%

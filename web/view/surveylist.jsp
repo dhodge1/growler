@@ -59,7 +59,7 @@
                 <%
                     String message = String.valueOf(session.getAttribute("message"));
                     if (!message.equals("null")) {
-                        out.print("<p class=feedbackMessage-info>" + message + "</p>");
+                        out.print("<p class=feedbackMessage-success>" + message + "</p>");
                         session.removeAttribute("message");
                     }
                 %>

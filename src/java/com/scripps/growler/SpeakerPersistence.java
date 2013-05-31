@@ -149,10 +149,12 @@ public class SpeakerPersistence extends GrowlerPersistence {
     public ArrayList<Speaker> getAllSpeakers(String sort) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select s.id as id, s.first_name as first_name, s.last_name as last_name, s.suggested_by as suggested_by, s.visible as visible, r.rating as rating, r.count as count from speaker s left join ranks_2012 r on r.speaker_id = s.id  group by (s.id)" + sort);
+            statement = connection.prepareStatement("select s.id as id, s.first_name as first_name, s.last_name as last_name, s.suggested_by as suggested_by, s.visible as visible, sum(sr.ranking) as points, count(sr.speaker_id) as votes, r.rating as rating, r.count as count from speaker s left join ranks_2012 r on r.speaker_id = s.id left join speaker_ranking sr on sr.speaker_id = s.id  group by (s.id) " + sort);
+            Statement s2 = connection.createStatement();
             result = statement.executeQuery();
+            ResultSet result2 = s2.executeQuery("select s.id, sum(sr.ranking) as points, count(sr.speaker_id) as votes from speaker s left join speaker_ranking sr on s.id = sr.speaker_id group by s.id");
             ArrayList<Speaker> speakers = new ArrayList<Speaker>();
-            while (result.next()) {
+            while (result.next() && result2.next()) {
                 Speaker s = new Speaker();
                 s.setId(result.getInt("id"));
                 s.setFirstName(result.getString("first_name"));
@@ -162,6 +164,9 @@ public class SpeakerPersistence extends GrowlerPersistence {
                 try {
                     s.setRank2012(result.getDouble("rating"));
                     s.setCount2012(result.getInt("count"));
+                    s.setRank(result2.getInt("points"));
+                    s.setCount(result2.getInt("votes"));
+                    
                 } catch (Exception e) {
                 }
                     speakers.add(s);

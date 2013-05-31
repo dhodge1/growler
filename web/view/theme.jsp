@@ -88,12 +88,15 @@
                                     <section>
                                         <%
                                             //If There are Ranked Themes already, here is where they will be displayed
-                                            if (themes != null) {
+                                            if (themes.size() > 0) {
                                                 out.print("<table class=\"propertyGrid\">");
                                                 for (int i = 0; i < themes.size(); i++) {
                                                     out.print("<tr><th>Rank " + (i + 1) + "</th><td>" + themes.get(i).getName() + "</td></tr>");
                                                 }
-                                                out.print("</table>");
+                                                
+                                                out.print("</table><br/>");
+                                                out.print("<a href=\"../model/removeThemeRanks.jsp?id=" + user + "\">Reset Ranks</a>");
+                                                
                                             }
 
 

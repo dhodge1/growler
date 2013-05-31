@@ -58,10 +58,12 @@
             cal.setTime(d);
             //Add 15 minutes to the end of the session
             cal.add(Calendar.MINUTE, 15);
-            durString = cal.get(Calendar.HOUR) + ":" + cal.get(Calendar.MINUTE) + ":" + cal.get(Calendar.SECOND);;
+            durString = cal.get(Calendar.HOUR) + "0:" + cal.get(Calendar.MINUTE) + ":0" + cal.get(Calendar.SECOND);;
             //Query against the end of a session + the 15 minutes
-            ResultSet result = statement.executeQuery("select id, name, start_time from session where addtime(start_time,'" + durString + "') < '" + time + "' and session_date = '" + date + "' and id = " + sessionId);
-            if (!result.first()) {
+            ResultSet result = statement.executeQuery("select count(id), start_time from session where addtime(start_time,'" + durString + "') > (select curtime()) and session_date = '" + date + "' and id = " + sessionId);
+            result.next();
+            int check = result.getInt(1);
+            if (result.getTime("start_time") == null) {
                 session.setAttribute("message", "Too late to register for this session");
             } else {
                 //Ensure the key matches
