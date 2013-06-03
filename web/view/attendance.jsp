@@ -27,7 +27,27 @@
         <link rel="stylesheet" href="../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="../css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
         <link rel="stylesheet" href="draganddrop.css" /><!--Drag and drop style-->
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
+        <%@ include file="../includes/scriptlist.jsp" %>
+        <script>
+            $(function() {    $( "#modalDialog" ).dialog({
+                    resizable: false,
+                    height:140,
+                    modal: true,
+                    buttons: {
+                        "Take a Survey": function() {
+                            $( this ).dialog( "close" );
+                            window.location = '../view/surveylist.jsp'
+                        },        
+                                "Don't take Survey": function() {          
+                            $( this ).dialog( "close" );
+                            alert('Thanks anyway.  You can always take a survey later!');
+                        }      
+                    }    
+                    });  
+                    });
+        </script>
     </head>
     <body id="growler1">
         <%@ include file="../includes/header.jsp" %>
@@ -43,8 +63,12 @@
                 <%
                     String message = String.valueOf(session.getAttribute("message"));
                     if (!message.equals("null")) {
-                        if (message.equals("Sucessfully registered!") || message.equals("You were successfully removed from the session!")){
-                            out.print("<p class=feedbackMessage-success>" + message + "</p>");
+                        if (message.equals("You were successfully removed from the session!")){
+                            out.print("<p id=\"topMessage\" class=feedbackMessage-success>" + message + "</p>");
+                        }
+                        else if (message.startsWith("Sucessfully registered!")){
+                            out.print("<p id=\"topMessage\" class=feedbackMessage-success>" + message + "</p>");
+                            out.print("<div id=\"modalDialog\" title=\"Survey Message\"><p>Please take a survey</p></div>");
                         }
                         else {
                             out.print("<p class=feedbackMessage-error>" + message + "</p>");
@@ -129,7 +153,8 @@
             </div><!-- End Content -->
         </div><!--/.container-fluid-->
         <%@ include file="../includes/footer.jsp" %> 
-        <%@ include file="../includes/scriptlist.jsp" %>
+        
         <%@ include file="../includes/draganddrop.jsp" %>
+        
     </body>
 </html>

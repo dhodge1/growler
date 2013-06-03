@@ -39,6 +39,7 @@
             String key = request.getParameter("skey");
             String user = String.valueOf(session.getAttribute("id"));
 
+            boolean success = false;
 
             Connection connection = dataConnection.sendConnection();
             Statement statement = connection.createStatement();
@@ -68,7 +69,7 @@
             } else {
                 //Ensure the key matches
                 Statement newStatement = connection.createStatement();
-                ResultSet keycheck = newStatement.executeQuery("select count(id) from session where session_key = '" + key +"'");
+                ResultSet keycheck = newStatement.executeQuery("select count(id) from session where session_key = '" + key + "'");
                 keycheck.next();
                 if (keycheck.getInt(1) == 0) {
                     session.setAttribute("message", "Invalid Session Key");
@@ -79,9 +80,13 @@
                             + " ) and s.session_date = '" + date + "' and a.session_id = s.id");
                     if (!duplicate.next()) {
                         //if there aren't any sessions there, add attendance record to DB
-                        boolean success = statement.execute("insert into attendance (user_id, session_id) values ("
+                        statement.execute("insert into attendance (user_id, session_id) values ("
                                 + user + ", " + sessionId + ")");
                         session.setAttribute("message", "Sucessfully registered!");
+                        session.setAttribute("page", "../view/attendance.jsp");
+                        success = true;
+
+
                     } else {
                         session.setAttribute("message", "Already registered in that time slot!");
 
@@ -94,8 +99,13 @@
             connection.close();
             statement.close();
             result.close();
-            response.sendRedirect("../view/attendance.jsp");
+            if (success) {
+                response.sendRedirect("../model/emailer.jsp?session=" + sessionId);
+            } else {
+                response.sendRedirect("../view/attendance.jsp");
+            }
         %>
         <%@ include file="../includes/scriptlist.jsp" %>
+
     </body>
 </html>
