@@ -104,6 +104,54 @@ public class SessionPersistence extends GrowlerPersistence {
             
         }
     }
+    
+    /**
+     * Deletes a session
+     * @param s The session to delete
+     */
+    public void deleteSession(Session s){
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("delete from session where id = ?");
+            statement.setInt(1, s.getId());
+            statement.execute();
+            closeJDBC();
+        }
+        catch(Exception e){
+            
+        }
+    }
+    
+    /**
+     * Updates a session
+     * @param s The values to update
+     */
+    public void updateSession(Session s){
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("update session set " +
+                    "name = ?," +
+                    "description = ?, " +
+                    "session_date = ?, " +
+                    "start_time = ?," +
+                    "location = ?," +
+                    "duration = ? " +
+                    "where id = ?");
+            statement.setString(1, s.getName());
+            statement.setString(2, s.getDescription());
+            statement.setDate(3, s.getSessionDate());
+            statement.setTime(4, s.getStartTime());
+            statement.setInt(5, s.getLocation());
+            statement.setInt(6, s.getDuration());
+            statement.setInt(7, s.getId());
+            statement.execute();
+            generateKey(s.getName());
+            closeJDBC();
+        }
+        catch(Exception e){
+            
+        }
+    }
 
     /**
      * Generates the keys for all sessions

@@ -53,7 +53,7 @@
                     connection.close();
                     statement.close();
                     result.close();
-                    response.sendRedirect("../admin/theme.jsp");
+                    response.sendRedirect("../admin/home.jsp");
                 } //Otherwise, go to the user side
                 else {
 

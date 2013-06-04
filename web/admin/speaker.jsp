@@ -62,6 +62,24 @@
                                 out.print("<p class=feedbackMessage-success>" + message + "</p>");
                                 session.removeAttribute("message");
                             }
+                            
+                            String sortcrit = " ";
+                            try {
+                                sortcrit = request.getParameter("sort");
+                                if (sortcrit.equals("votes")) {
+                                    sortcrit = " order by votes desc";
+                                }
+                                else if (sortcrit.equals("points")){
+                                    sortcrit = " order by points desc";
+                                }
+                                else {
+                                    sortcrit = " order by rating desc, last_name";
+                                }
+                            }
+                            catch (Exception e) {
+                                sortcrit = " order by rating desc, last_name";
+                            }
+                            
                         %>
                         <div id="tabs-1">
                             <div class="row">
@@ -78,7 +96,7 @@
                                             <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
                                                 <tr>
                                                     <th>Speaker Name</th>
-                                                    <th>Current Votes</th>
+                                                    <th><a href="../admin/speaker.jsp?sort=votes">Current Votes</a></th>
                                                     <th>Current Points</th>
                                                     <th>2012 Rating</th>
                                                     <th>Times Ranked</th>
@@ -99,7 +117,10 @@
                                                         double d = speakers.get(i).getRank2012();
                                                         java.text.DecimalFormat df = new java.text.DecimalFormat("0.00");
                                                         String decimal = df.format(d);
-                                                        %>
+                                                        %><br/>
+                                                        Last Name:<input name="last" value="<% out.print(speakers.get(i).getLastName()); %>"><br/>
+                                                        First Name:<input name="first" value="<% out.print(speakers.get(i).getFirstName()); %>">
+                                                    </td>
                                                     <td><% out.print(speakers.get(i).getCount()); %></td>
                                                     <td><% out.print(speakers.get(i).getRank()); %></td>
                                                     <td><% out.print(decimal);%></td>

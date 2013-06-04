@@ -3,6 +3,7 @@ package com.scripps.growler;
 import java.sql.*;
 import java.util.*;
 
+import org.apache.log4j.*;
 /**
  * Handles database operations for the User class
  *
@@ -11,6 +12,7 @@ import java.util.*;
  */
 public class UserPersistence extends GrowlerPersistence {
 
+    static Logger logger = Logger.getLogger(UserPersistence.class);
     /**
      * An array list for each method to use
      */
@@ -24,10 +26,13 @@ public class UserPersistence extends GrowlerPersistence {
 
     public User getUserByID(int id) {
         try {
+            logger.info("Connecting to Database");
             initializeJDBC();
+            logger.info("Preparing Statement and loading Parameter");
             statement = connection.prepareStatement("select name, corporate_id, email from user where id = ?");
             statement.setInt(1, id);
             result = statement.executeQuery();
+            logger.info("Processing ResultSet");
             if (result.next()) {
                 User u = new User();
                 u.setId(id);
@@ -35,8 +40,11 @@ public class UserPersistence extends GrowlerPersistence {
                 closeJDBC();
                 return u;
             }
-            closeJDBC();
+            
         } catch (Exception e) {
+        }
+        finally {
+            closeJDBC();
         }
         return null;
     }
@@ -54,8 +62,11 @@ public class UserPersistence extends GrowlerPersistence {
                 closeJDBC();
                 return u;
             }
-            closeJDBC();
+            
         } catch (Exception e) {
+        }
+        finally {
+            closeJDBC();
         }
         return null;
     }
@@ -72,6 +83,9 @@ public class UserPersistence extends GrowlerPersistence {
 
         } catch (Exception e) {
         }
+        finally {
+            closeJDBC();
+        }
         return null;
     }
 
@@ -87,6 +101,9 @@ public class UserPersistence extends GrowlerPersistence {
 
         } catch (Exception e) {
         }
+        finally {
+            closeJDBC();
+        }
     }
 
     /**
@@ -100,6 +117,9 @@ public class UserPersistence extends GrowlerPersistence {
             closeJDBC();
 
         } catch (Exception e) {
+        }
+        finally {
+            closeJDBC();
         }
     }
 }

@@ -304,10 +304,10 @@ public class SpeakerPersistence extends GrowlerPersistence {
         try {
             initializeJDBC();
             statement = connection.prepareStatement("update speaker "
-                    + "set first_name = ?,"
-                    + "set last_name = ?,"
-                    + "set suggested_by = ?,"
-                    + "set visible = ?,"
+                    + "set first_name = ?, "
+                    + "last_name = ?, "
+                    + "suggested_by = ?, "
+                    + "visible = ? "
                     + "where id = ?");
             statement.setString(1, s.getFirstName());
             statement.setString(2, s.getLastName());

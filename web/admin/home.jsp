@@ -38,13 +38,14 @@
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
     </head>
     <body id="growler1">    
+        <%@ include file="../includes/isadmin.jsp" %> 
         <%@ include file="../includes/header.jsp" %> 
         <div class="row">
-            <%@ include file="../includes/usernav.jsp" %>
+            <%@ include file="../includes/adminnav.jsp" %>
         </div>
         <div class="row"><!-- The Logo Row -->
             <div class="span3">
-                <img class="logo" src="../images/Techtoberfest2013small.png" alt="Techtoberfest 2013 small"/><!-- Techtoberfest logo-->
+                <img class="logo" src="../images/Techtoberfest2013admin.png" alt="Techtoberfest 2013 admin"/><!-- Techtoberfest logo-->
             </div>
             <div class="span7 largeBottomMargin">
                 <%
@@ -71,11 +72,11 @@
                                     <section>
 
                                         <h3>Themes</h3>
-                                        <p>A place to view, rank, and suggest Themes for this year's Techtoberfest</p>
+                                        <p>A place to edit and add Themes for this year's Techtoberfest</p>
                                         <h3>Speakers</h3>
-                                        <p>A place to view, rank, and suggest Speakers for this year's Techtoberfest</p>
+                                        <p>A place to edit and add Speakers for this year's Techtoberfest</p>
                                         <h3>Sessions</h3>
-                                        <p>A place to register for and complete surveys for sessions in this year's Techtoberfest</p>
+                                        <p>A place to add and view sessions in this year's Techtoberfest</p>
 
                                     </section>
                                 </div>

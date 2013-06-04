@@ -5,13 +5,14 @@
 package com.scripps.growler;
 
 import java.sql.*;
-
+import org.apache.log4j.*;
 /**
  *
  * @author "Justin Bauguess"
  */
 public class DataConnection {
 
+    static Logger logger = Logger.getLogger(DataConnection.class);
     private final String DBNAME = "growler_db";
     private final String DBUSER = "root";
     private final String DBPASS = "password";
@@ -30,6 +31,7 @@ public class DataConnection {
      * @throws ClassNotFoundException
      */
     public Connection sendConnection() throws SQLException, ClassNotFoundException {
+        logger.info("Getting the Driver, then Returning a connection using the class constants of DBNAME, DBUSER, DBPASSWORD");
         Class.forName("com.mysql.jdbc.Driver");
         return (connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + DBNAME, DBUSER, DBPASS));
     }
@@ -81,3 +83,5 @@ public class DataConnection {
         connection.close();
     }
 }
+
+

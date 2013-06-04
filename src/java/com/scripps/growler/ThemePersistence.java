@@ -322,15 +322,17 @@ public class ThemePersistence extends GrowlerPersistence {
             initializeJDBC();
             statement = connection.prepareStatement("update theme "
                     + "set name = ?, "
-                    + "set description = ?, "
-                    + "set creator = ?, "
-                    + "set visibility = ?, "
+                    + "description = ?, "
+                    + "reason = ?, "
+                    + "creator = ?, "
+                    + "visible = ? "
                     + "where id = ?");
             statement.setString(1, t.getName());
             statement.setString(2, t.getDescription());
-            statement.setInt(3, t.getCreatorId());
-            statement.setBoolean(4, t.getVisible());
-            statement.setInt(5, t.getId());
+            statement.setString(3, t.getReason());
+            statement.setInt(4, t.getCreatorId());
+            statement.setBoolean(5, t.getVisible());
+            statement.setInt(6, t.getId());
             success = statement.execute();
             closeJDBC();
         } catch (Exception e) {

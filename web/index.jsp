@@ -72,7 +72,7 @@
                                 <div class="form-actions">
                                     <input class ="button button-primary" type="submit" value="Submit" id="send" /><br/><br/>
                                     <a href="view/register.jsp">Register SNI Credentials</a><br/>
-                                    <a href="model/emailer.jsp?session=1">Test the Email</a>
+                                    <a href="https://sniforms-dev.scrippsnetworks.com/siteminderagent/sniforms-dev/login.html?METHOD=GET&SMAGENTNAME=-SM-R41dvpvAi4oVmmKksD%2b0z5uwwZoX6QiQd3sRW7JpbVA%2ffCLeU5r0g63GQwYTUgJY&TARGET=-SM-http://127.0.0.1:8080/ProjectGrowler/test.jsp">SNI Login</a>
                                 </div>
                             </fieldset>
                         </div>                   

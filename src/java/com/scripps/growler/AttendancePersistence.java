@@ -45,6 +45,45 @@ public class AttendancePersistence extends GrowlerPersistence {
      */
     public AttendancePersistence() {
     }
+    
+    /**
+     * Adds an attendance record to the database
+     * @param a The attendance record to add
+     */
+    public void addAttendance(Attendance a) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("insert into attendance " +
+                    " (user_id, session_id, isRegistered) " +
+                    " values (?, ?, ?)");
+            statement.setInt(1, a.getUserId());
+            statement.setInt(2, a.getSessionId());
+            statement.setBoolean(3, a.getIsRegistered());
+            statement.execute();
+            closeJDBC();
+        }
+        catch(Exception e){
+            
+        }
+    }
+    
+    /**
+     * Deletes an attendance record from the database: Only if the user hasn't taken a survey
+     * @param a 
+     */
+    public void deleteAttendance(Attendance a) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("delete from attendance where user_id = ? and session_id = ? and isRegistered = 0");
+            statement.setInt(1, a.getUserId());
+            statement.setInt(2, a.getSessionId());
+            statement.execute();
+            closeJDBC();
+        }
+        catch(Exception e){
+            
+        }
+    }
 
     /**
      * Gets a list of all attendances in the database

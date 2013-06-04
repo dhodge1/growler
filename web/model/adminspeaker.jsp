@@ -34,16 +34,25 @@
         <%@ include file="../includes/header.jsp" %> 
         <%@ include file="../includes/adminnav.jsp" %>
         <% String list[] = request.getParameterValues("list");
+            String first[] = request.getParameterValues("first");
+            String last[] = request.getParameterValues("last");
             String rank[] = request.getParameterValues("newrank");
             String count[] = request.getParameterValues("newcount");
             String visible[] = request.getParameterValues("visible");
             String lastyear[] = request.getParameterValues("lastyear");
 
+            
+            Connection connection = dataConnection.sendConnection();
+            Statement statement = connection.createStatement();
+            PreparedStatement insert = connection.prepareStatement(queries.updateSpeakerRankings());
+            
             //Convert the List of IDs into integers   
             int ids[] = new int[list.length];
             for (int i = 0; i < ids.length; i++) {
                 ids[i] = Integer.parseInt(list[i]);
             }
+            
+            
             //Get the list of visibles from the check boxes
             int visibles[] = new int[visible.length];
             for (int i = 0; i < visibles.length; i++) {
@@ -61,20 +70,17 @@
             }
 
             //Get if the speaker spoke last year
-            int last[] = new int[lastyear.length];
-            for (int i = 0; i < last.length; i++) {
-                last[i] = Integer.parseInt(lastyear[i]);
+            int lasts[] = new int[lastyear.length];
+            for (int i = 0; i < lasts.length; i++) {
+                lasts[i] = Integer.parseInt(lastyear[i]);
             }
 
-            Connection connection = dataConnection.sendConnection();
-            Statement statement = connection.createStatement();
-            PreparedStatement insert = connection.prepareStatement(queries.updateSpeakerRankings());
 
-            Arrays.sort(last);
+            Arrays.sort(lasts);
             //delete any entries that are flagged as not speaking last year
             PreparedStatement delete = connection.prepareStatement("delete from ranks_2012 where speaker_id = ?");
             for (int k = 0; k < ranks.length; k++) {
-                if (Arrays.binarySearch(last, ids[k]) < 0) {
+                if (Arrays.binarySearch(lasts, ids[k]) < 0) {
                     delete.setInt(1, ids[k]);
                     delete.execute();
                 }
@@ -83,7 +89,7 @@
             //look for and add any new entries
             PreparedStatement add = connection.prepareStatement("insert into ranks_2012 (speaker_id, rating, count) values (?, ?, ?)");
             for (int k = 0; k < ranks.length; k++) {
-                if ((Arrays.binarySearch(last, ids[k]) >= 0) && ranks[k] > 0 && counts[k] > 0) {
+                if ((Arrays.binarySearch(lasts, ids[k]) >= 0) && ranks[k] > 0 && counts[k] > 0) {
                     add.setInt(1, ids[k]);
                     add.setDouble(2, ranks[k]);
                     add.setInt(3, counts[k]);
@@ -93,7 +99,7 @@
 
             //update all the speaker rankings and counts
             for (int j = 0; j < ranks.length; j++) {
-                if ((Arrays.binarySearch(last, ids[j]) >= 0)) { //if they are listed as yes for last year
+                if ((Arrays.binarySearch(lasts, ids[j]) >= 0)) { //if they are listed as yes for last year
                     insert.setDouble(1, ranks[j]);
                     insert.setInt(2, counts[j]);
                     insert.setInt(3, ids[j]);
@@ -113,6 +119,15 @@
                 visibility.setInt(2, ids[k]);
                 visibility.execute();
             }
+            PreparedStatement nameUpdate = connection.prepareStatement("update speaker " +
+                    "set first_name = ?, last_name = ? where id = ?");
+            for (int l = 0; l < ids.length; l++) {
+                nameUpdate.setString(1, first[l]);
+                nameUpdate.setString(2, last[l]);
+                nameUpdate.setInt(3,ids[l]);
+                nameUpdate.execute();
+            }
+            
             connection.close();
             statement.close();
             insert.close();

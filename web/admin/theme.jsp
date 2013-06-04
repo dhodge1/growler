@@ -85,6 +85,7 @@
                                                     <th>Times Rated</th>
                                                     <th>Visible?</th>
                                                     <th>Created By</th>
+                                                    <th>Edit Theme</th>
                                                     <th>Remove Theme</th>
                                                 </tr>
                                                 <%
@@ -100,13 +101,14 @@
                                                     <td><input type="checkbox" name="visible" value="<% out.print(themes.get(i).getId());%>"
                                                                <% if (themes.get(i).getVisible() == true) {
                                                                                                                    out.print(" checked");
-                                                                                                               }%>/>
-                                                    <td><% out.print(upersist.getUserByID(themes.get(i).getCreatorId()).getUserName());%>
+                                                                                                               }%>/></td>
+                                                    <td><% out.print(upersist.getUserByID(themes.get(i).getCreatorId()).getUserName());%></td>
+                                                    <td><a href="../admin/edittheme.jsp?id=<%out.print(themes.get(i).getId());%>">Edit</a></td>
                                                     <td><a href="../model/removeTheme.jsp?id=<%out.print(themes.get(i).getId());%>">Remove</a></td>
                                                 </tr>
                                                 <% } //close the for loop %>
                                             </table>
-
+<input type="submit" value="Submit" class="button button-primary" />
                                     </section>
                                 </div>
                                 <div class="span7">
@@ -115,7 +117,7 @@
                     </div><!--end span-->
                 </div><!--end row-->
                 <div class="span2 offset3"><!--button div-->
-                    <input type="submit" value="Submit" class="button button-primary" />
+                    
                 </div>
                 </form>
             </div><!-- End Content -->	

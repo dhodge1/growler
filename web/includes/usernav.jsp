@@ -35,6 +35,7 @@
 		 }
 		%>
             <ul>
+                <li><a href="../view/home.jsp">Home</a></li>
                 <li><a href="../view/help.jsp">Help</a></li>
                 <li><a href="../model/logout.jsp">Logout</a></li>
             </ul>
