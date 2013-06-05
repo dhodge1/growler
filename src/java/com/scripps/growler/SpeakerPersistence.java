@@ -146,13 +146,13 @@ public class SpeakerPersistence extends GrowlerPersistence {
      * @param A criteria to sort the query
      * @return A list of all speakers in the database
      */
-    public ArrayList<Speaker> getAllSpeakers(String sort) {
+    public ArrayList<Speaker> getAllSpeakers(String sort, String sort2) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select s.id as id, s.first_name as first_name, s.last_name as last_name, s.suggested_by as suggested_by, s.visible as visible, sum(sr.ranking) as points, count(sr.speaker_id) as votes, r.rating as rating, r.count as count from speaker s left join ranks_2012 r on r.speaker_id = s.id left join speaker_ranking sr on sr.speaker_id = s.id  group by (s.id) " + sort);
+            statement = connection.prepareStatement("select s.id as id, s.first_name as first_name, s.last_name as last_name, s.suggested_by as suggested_by, s.visible as visible, r.rating as rating, r.count as count from speaker s left join ranks_2012 r on r.speaker_id = s.id  group by (s.id) " + sort);
             Statement s2 = connection.createStatement();
             result = statement.executeQuery();
-            ResultSet result2 = s2.executeQuery("select s.id, sum(sr.ranking) as points, count(sr.speaker_id) as votes from speaker s left join speaker_ranking sr on s.id = sr.speaker_id group by s.id");
+            ResultSet result2 = s2.executeQuery("select s.id, sum(sr.ranking) as points, count(sr.speaker_id) as votes from speaker s left join speaker_ranking sr on s.id = sr.speaker_id group by s.id ");
             ArrayList<Speaker> speakers = new ArrayList<Speaker>();
             while (result.next() && result2.next()) {
                 Speaker s = new Speaker();
@@ -170,9 +170,27 @@ public class SpeakerPersistence extends GrowlerPersistence {
                 } catch (Exception e) {
                 }
                     speakers.add(s);
-                
+                    
             }
             closeJDBC();
+//            if (sort2.equals("points_desc")) {
+//                        Collections.sort(speakers, new CompareSpeakerRankDesc());
+//                    }
+//                    else if (sort2.equals("points_asc")){
+//                        Collections.sort(speakers, new CompareSpeakerRankAsc());
+//                    }
+//                    else if (sort2.equals("votes_desc")){
+//                        Collections.sort(speakers, new CompareSpeakerCountDesc());
+//                    }
+//                    else if (sort2.equals("votes_asc")){
+//                        Collections.sort(speakers, new CompareSpeakerCountAsc());
+//                    }
+//                    else if (sort2.equals(" ")) {
+//                        
+//                    }
+//                    else {
+//                        //do nothing
+//                    }
             return (speakers);
         } catch (Exception e) {
         }
@@ -348,5 +366,38 @@ public class SpeakerPersistence extends GrowlerPersistence {
         } catch (Exception e) {
         }
         return null;
+    }
+    
+    public class CompareSpeakerCountDesc implements Comparator<Speaker> {
+
+        @Override
+        public int compare(Speaker o1, Speaker o2) {
+            return o2.getCount() - o1.getCount();
+        }
+        
+    }
+    public class CompareSpeakerRankDesc implements Comparator<Speaker> {
+
+        @Override
+        public int compare(Speaker o1, Speaker o2) {
+            return o2.getRank() - o1.getRank();
+        }
+        
+    }
+    public class CompareSpeakerCountAsc implements Comparator<Speaker> {
+
+        @Override
+        public int compare(Speaker o1, Speaker o2) {
+            return o1.getCount() - o2.getCount();
+        }
+        
+    }
+    public class CompareSpeakerRankAsc implements Comparator<Speaker> {
+
+        @Override
+        public int compare(Speaker o1, Speaker o2) {
+            return o1.getRank() - o2.getRank();
+        }
+        
     }
 }

@@ -16,6 +16,8 @@ public class DataConnection {
     private final String DBNAME = "growler_db";
     private final String DBUSER = "root";
     private final String DBPASS = "password";
+    private final String LOCAL = "localhost";
+    private final String AMAZON = "aa14v3gprpnox6g.cqbta787z8et.us-east-1.rds.amazonaws.com";
     public Connection connection;
 
     public DataConnection() throws SQLException, ClassNotFoundException {
@@ -33,7 +35,7 @@ public class DataConnection {
     public Connection sendConnection() throws SQLException, ClassNotFoundException {
         logger.info("Getting the Driver, then Returning a connection using the class constants of DBNAME, DBUSER, DBPASSWORD");
         Class.forName("com.mysql.jdbc.Driver");
-        return (connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + DBNAME, DBUSER, DBPASS));
+        return (connection = DriverManager.getConnection("jdbc:mysql://" + AMAZON + ":3306/" + DBNAME, DBUSER, DBPASS));
     }
 
     public String bytesToHex(byte[] b) {

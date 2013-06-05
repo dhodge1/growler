@@ -5,13 +5,9 @@
 
 package com.scripps.growler;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.ie.InternetExplorerDriver;
+import java.util.Calendar;
+
+
 
 /**
  *
@@ -20,13 +16,18 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 public class Test {
 
     public static void main (String args[]) {
-        WebDriver driver = new InternetExplorerDriver();
-        driver.get("http://www.google.com");
-        WebElement element = driver.findElement(By.name("q"));
-        element.sendKeys("Cheese!");
-        element.submit();
-        System.out.println("Page title is: " + driver.getTitle());
+        Calendar today = Calendar.getInstance();
+        String date = today.get(Calendar.YEAR) + "-" + (today.get(Calendar.MONTH) + 1) + "-" + today.get(Calendar.DATE);
+        String time = today.get(Calendar.HOUR_OF_DAY) + ":" + today.get(Calendar.MINUTE) + ":" + today.get(Calendar.SECOND);
+        System.out.println(date);
+        System.out.println(time);
+        Calendar other = Calendar.getInstance();
+        String date2 = other.get(Calendar.YEAR) + "-" + (other.get(Calendar.MONTH) + 1) + "-" + other.get(Calendar.DATE);
+        System.out.println(date2);
+        other.set(2013, 06, 05, 12, 30, 00);
+        System.out.println(today.compareTo(other));
+        System.out.println(other.compareTo(today));
         
-        driver.close();
+        
     }
 }

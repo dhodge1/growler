@@ -82,7 +82,7 @@
  
 		} catch (MessagingException e) {
                     results = "Failed " + e.getLocalizedMessage();
-			throw new RuntimeException(e);
+			
 		}
                 response.sendRedirect(pageReturn);
 %>

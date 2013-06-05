@@ -63,21 +63,12 @@
                                 session.removeAttribute("message");
                             }
                             
-                            String sortcrit = " ";
+                            String sortcrit = "";
                             try {
                                 sortcrit = request.getParameter("sort");
-                                if (sortcrit.equals("votes")) {
-                                    sortcrit = " order by votes desc";
-                                }
-                                else if (sortcrit.equals("points")){
-                                    sortcrit = " order by points desc";
-                                }
-                                else {
-                                    sortcrit = " order by rating desc, last_name";
-                                }
                             }
                             catch (Exception e) {
-                                sortcrit = " order by rating desc, last_name";
+                                sortcrit = " ";
                             }
                             
                         %>
@@ -86,7 +77,7 @@
                                 <div class="span1">
                                     <br/>
                                     <%
-                                        ArrayList<Speaker> speakers = persist.getAllSpeakers(" order by rating desc, last_name");
+                                        ArrayList<Speaker> speakers = persist.getAllSpeakers(" order by rating desc", sortcrit);
                                         
                                     %>
                                 </div>
@@ -96,7 +87,7 @@
                                             <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
                                                 <tr>
                                                     <th>Speaker Name</th>
-                                                    <th><a href="../admin/speaker.jsp?sort=votes">Current Votes</a></th>
+                                                    <th>Current Votes</th>
                                                     <th>Current Points</th>
                                                     <th>2012 Rating</th>
                                                     <th>Times Ranked</th>
@@ -127,7 +118,7 @@
                                                     <td><% out.print(speakers.get(i).getCount2012());%></td>
                                                     <%
                                                         
-                                                        out.print("<td><input id=\"" + speakers.get(i).getId() + "\" type=\"number\" min=\"0\" max=\"5\" name=\"newrank\" value=" + decimal + " /></td>");
+                                                        out.print("<td><input id=\"" + speakers.get(i).getId() + "\" min=\"0\" max=\"5\" name=\"newrank\" value=" + decimal + " /></td>");
                                                     %>
                                                     <%
                                                         int c = speakers.get(i).getCount2012();

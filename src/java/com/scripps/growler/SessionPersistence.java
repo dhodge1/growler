@@ -183,8 +183,7 @@ public class SessionPersistence extends GrowlerPersistence {
     public ArrayList<Session> getAllSessionsWithKeys(String sort) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select id, name, description, session_date, start_time, "
-                    + " location, track, duration, session_key from session " + sort);
+            statement = connection.prepareStatement("select id, name, description, session_date, start_time, location, track, duration, session_key from session " + sort);
             result = statement.executeQuery();
             while (result.next()) {
                 //Create a new Session and add all data about the session to it

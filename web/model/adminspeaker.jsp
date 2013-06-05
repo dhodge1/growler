@@ -93,7 +93,12 @@
                     add.setInt(1, ids[k]);
                     add.setDouble(2, ranks[k]);
                     add.setInt(3, counts[k]);
+                    try {
                     add.execute();
+                    }
+                    catch (Exception e) {
+                        
+                    }
                 }
             }
 
