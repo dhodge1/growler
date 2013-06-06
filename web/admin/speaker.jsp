@@ -167,7 +167,7 @@
                                                                                         var lastyear = document.getElementsByName("lastyear");
                                                                                         var newranks = document.getElementsByName("newrank");
                                                                                         for (var i = 0; i < newranks.length; i++) {
-                                                                                            if (newranks[i].value > 5.0 || newranks[i].value < 0.01 || isNaN(newranks[i].value)) {
+                                                                                            if ((newranks[i].value > 5.0 || newranks[i].value < 0.01 || isNaN(newranks[i].value)) && lastyear[i].checked == true) {
                                                                                                 alert('Ranks must be between 0 and 5');
                                                                                                 newranks[i].focus();
                                                                                                 return false;

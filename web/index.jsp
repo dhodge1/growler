@@ -62,17 +62,17 @@
                         <div class="span5 offset3">
                             <fieldset>
                                 <div class="form-group">
-                                    <label class="required">User Name:</label>
-                                    <input type="text" name="username" id="tip" data-content="Enter your username" size="15"/>
+                                    <label class="required">User ID:</label>
+                                    <input type="text" name="username" id="tip" data-content="Enter your 6 digit ID" size="6"/>
                                 </div>
                                 <div class="form-group">
                                     <label class="required">Password:</label>
-                                    <input type="password" name="password" id="tip2" data-content="Enter your password" size="15"/>
+                                    <input type="password" name="password" id="tip2" data-content="Enter your password" size="20"/>
                                 </div>
                                 <div class="form-actions">
                                     <input class ="button button-primary" type="submit" value="Submit" id="send" /><br/><br/>
-                                    <a href="view/register.jsp">Register SNI Credentials</a><br/>
-                                    <a href="https://sniforms-dev.scrippsnetworks.com/siteminderagent/sniforms-dev/login.html?METHOD=GET&SMAGENTNAME=-SM-R41dvpvAi4oVmmKksD%2b0z5uwwZoX6QiQd3sRW7JpbVA%2ffCLeU5r0g63GQwYTUgJY&TARGET=-SM-http://127.0.0.1:8080/ProjectGrowler/test.jsp">SNI Login</a>
+                                    <a href="view/register.jsp">Sign Up</a><br/>                                    
+                                    <a href="view/requestreset.jsp">Forgot Password</a><br/>
                                 </div>
                             </fieldset>
                         </div>                   

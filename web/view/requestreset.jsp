@@ -1,5 +1,5 @@
 <%-- 
-    Document   : resetpassword
+    Document   : requestreset
     Created on : Modified on 5/1/2013 by JCM
     Author     : Christopher Tupps & Jonathan C. McCowan
     Purpose    : This page allows users to change their password
@@ -50,26 +50,19 @@
         <div class="container-fluid">
             <div class="content" role="main">
                 <!-- Begin Content -->
-                <form method="POST" id="action" action="../model/reset.jsp">
+                <form method="POST" id="action" action="../model/sendreset.jsp">
                     <div class="span5 offset3">
                         <fieldset>
                             <div class="form-group">
-                                <label class="required">Verification</label>
-                                <input name="verify" class="input-xlarge" type="text" id="tip" data-content="Enter the code you received from your password reset email." maxlength="60"/>
+                                <label class="required">User ID</label>
+                                <input name="id" class="input-xlarge" type="text" id="tip" data-content="Enter your User ID" maxlength="6"/>
                             </div>
                             <div class="form-group">
-                                <label class="required">New Password</label>
-                                <input name="password" class="input-xlarge" type="password" id="tip2" data-content="Enter the new password." maxlength="60"/>
+                                <label class="required">Email Address</label>
+                                <input name="email" class="input-xlarge" type="text" id="tip2" data-content="Enter your Email Address" maxlength="50"/>
                             </div>
-                            <div class="form-group">
-                                <label class="required">Confirm</label>
-                                <input name="password2" class="input-xlarge" type="password" id="tip3" data-content="Re-enter the new password." maxlength="60"/>
-                            </div>
-                            <input type="hidden" name="user" value="<% out.print(request.getParameter("id")); %>"/>
-                            <input type="hidden" name="email" value="<% out.print(request.getParameter("email")); %>"/>
                             <div class="form-actions">
-                                <input class="button button-primary" id="send" value="Submit" type="submit">
-                                <a class="button" id="cancel" href="http://ps11.pstcc.edu:8584/ProjectGrowler/index.jsp">Cancel</a>
+                                <input class="button button-primary" id="send" value="Submit" type="submit"/>
                             </div>
                         </fieldset>
                     </div>   
@@ -89,16 +82,16 @@
     <!--Additional Script-->
     <script>
         $(function() {
-            $("#tip, #tip2, #tip3").autoinline();
+            $("#tip, #tip2").autoinline();
         });
         $("#send").click(function() {
             var emptyString = "";
-            if ($("#tip,#tip2,#tip3").val() === emptyString) {
+            if ($("#tip,#tip2").val() === emptyString) {
                 $("#action").attr("action", "");
                 alert("Please enter information into all fields before submitting.");
             }
             else {
-                $("#action").attr("action", "../model/reset.jsp");
+                $("#action").attr("action", "../model/sendreset.jsp");
             }
         });
     </script>

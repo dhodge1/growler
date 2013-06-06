@@ -28,6 +28,16 @@ public class User {
      * The SNI ID that is 6 digits - It's a string because we aren't doing math with it
      */
     private String corporateId;
+    
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     /**
      * Default constructor

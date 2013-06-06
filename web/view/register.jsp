@@ -52,8 +52,20 @@
                                 <input name="corporate" class="input-xlarge" type="text" id="tip1" data-content="Your 6 digit SNI Id" maxlength="6"/>
                             </div>
                             <div class="form-group">
+                                <label class="required">First Name</label>
+                                <input name="firstname" class="input-xlarge" type="text" id="tip2" data-content="Your First name, 20 characters or less please" maxlength="20"/>
+                            </div>
+                            <div class="form-group">
+                                <label class="required">Last name</label>
+                                <input name="lastname" class="input-xlarge" type="text" id="tip3" data-content="Your Last name, 20 characters or less please" maxlength="20"/>
+                            </div>
+                            <div class="form-group">
                                 <label class="required">Password</label>
-                                <input name="password" class="input-xlarge" type="password" id="tip2" data-content="Your password" maxlength="20"/>
+                                <input name="password" class="input-xlarge" type="password" id="tip4" data-content="Your password, 20 characters or less" maxlength="20"/>
+                            </div>
+                            <div class="form-group">
+                                <label class="required">Email</label>
+                                <input name="password" class="input-xlarge" type="text" id="tip5" data-content="Your email" maxlength="50"/>
                             </div>
                             <div class="form-actions">
                                 <input id="send" class="button button-primary" value="Submit" type="submit">
@@ -83,10 +95,15 @@
                     });
 
                     function validateFields() {
+                        //Starts with alphanumeric characters, can have a dot and more characters, must have an @, followed by "domain.00x"
                         var corporate = $("#tip1").val();
-                        var password = $("#tip2").val();
+                        var first = $("#tip2").val();
+                        var last = $("#tip3").val();
+                        var password = $("#tip4").val();
+                        var email = $("#tip5").val();
                         var emptyString = "";
-                        if (password === emptyString || corporate === emptyString) {
+                        
+                        if (password === emptyString || corporate === emptyString || first === emptyString || last === emptyString || email === emptyString) {
                             alert("Please fill in all information");
                             return false;
                         }

@@ -32,16 +32,14 @@
         <%
             String username = request.getParameter("username");
             String password = request.getParameter("password");
-            out.println("Checking login<br>");
             // Here you put the check on the username and password            
-            username = username.toLowerCase();
             MessageDigest sha = MessageDigest.getInstance("sha-1");
             sha.update(password.getBytes());
             byte pwd[] = sha.digest();
             String pw = dataConnection.bytesToHex(pwd);
             Connection connection = dataConnection.sendConnection();
             Statement statement = connection.createStatement();
-            ResultSet result = statement.executeQuery("select id, lower(name), password from user where name = '" + username
+            ResultSet result = statement.executeQuery("select id, name, password from user where id = '" + username
                     + "' and password = '" + pw + "'");
             //Redirect, and set the user's identity in the header
             if (result.next()) {
@@ -57,7 +55,7 @@
                 } //Otherwise, go to the user side
                 else {
 
-                    session.setAttribute("user", result.getString(2));
+                    session.setAttribute("user", result.getString("name"));
                     session.setAttribute("id", new Integer(result.getInt("id")));
                     session.setMaxInactiveInterval(600); //10 minutes before it kicks you off
                     connection.close();

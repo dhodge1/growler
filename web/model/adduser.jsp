@@ -32,6 +32,8 @@
         <%
             //Find if the user already exists
             String user = request.getParameter("corporate");
+            String firstname = request.getParameter("firstname");
+            String lastname = request.getParameter("lastname");
             Connection connection = dataConnection.sendConnection();
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery("select corporate_id from user where corporate_id = '" + user + "'");
@@ -49,12 +51,13 @@
             //boolean success = statement.execute("insert into user (name, password, email, corporate_id) values ('"
             //        + user + "',sha1('" + password + "'),'" + email + "', '" + corporate + "')");
             //For now we'll make the User's name the same as their corporate Id
-            boolean success = statement.execute("insert into user(name, password, corporate_id) values ('" + user + "', sha1('" + password + "'), " + user + ")");
+            boolean success = statement.execute("insert into user(name, password, corporate_id, id) values ('" + firstname + " " + lastname + "', sha1('" + password + "'), " + user + ", " + user + ")");
             if (success) {
                 result.close();
                 statement.close();
                 connection.close();
-                session.setAttribute("user", user);
+                session.setAttribute("user", firstname + " " + lastname);
+                session.setAttribute("id", user);
                 response.sendRedirect("../view/theme.jsp");
             } else {
                 result.close();

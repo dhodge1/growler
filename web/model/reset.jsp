@@ -34,6 +34,7 @@
         <%@ include file="../includes/header.jsp" %> 
         <%
             String user = request.getParameter("user");
+            String email = request.getParameter("email");
             String verify = request.getParameter("verify");
             String p1 = request.getParameter("password");
             String p2 = request.getParameter("password2");
@@ -42,22 +43,30 @@
             }
             Connection connection = dataConnection.sendConnection();
             Statement statement = connection.createStatement();
-            ResultSet result = statement.executeQuery("select name from user, password where name = '" + user
-                    + "' and password = '" + verify + "'");
+            //Query for the result
+            ResultSet result = statement.executeQuery("select count(id), name, password, email from user where id = " + user
+                    + " and password = '" + verify + "' and email = '" + email + "'");
             boolean success = false;
+            String name = " ";
             while (result.next()) {
-                success = statement.execute("update user set password = '" + p1 + "' where name = '" + user + "'");
+                if (result.getInt(1) != 0) {
+                    success = true;
+                    name = result.getString("name");
+                }
             }
             if (success) {
+                statement.execute("update user set password = sha1('" + p1 + "') where id = " + user);
                 result.close();
                 statement.close();
                 connection.close();
-                session.setAttribute("user", user);
-                response.sendRedirect("../view/theme.jsp");
+                session.setAttribute("user", name);
+                session.setAttribute("id", user);
+                response.sendRedirect("../view/home.jsp");
             } else {
                 result.close();
                 statement.close();
                 connection.close();
+                session.setAttribute("message", "Invalid credentials");
                 response.sendRedirect("../index.jsp");
             }
 

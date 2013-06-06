@@ -37,7 +37,7 @@
         sess_name = eresult.getString("name");
     }
     // Sender's email ID needs to be mentioned
-    String from = "jmbauguess@gmail.com";
+    String from = "techtoberfesthelp@gmail.com";
 
     // Assuming you are sending email from localhost
     String host = "smtp.gmail.com";
