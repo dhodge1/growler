@@ -77,7 +77,7 @@
                                 <div class="span1">
                                     <br/>
                                     <%
-                                        ArrayList<Speaker> speakers = persist.getAllSpeakers(" order by rating desc", sortcrit);
+                                        ArrayList<Speaker> speakers = persist.getAllSpeakers(" order by rating desc");
                                         
                                     %>
                                 </div>
@@ -118,7 +118,7 @@
                                                     <td><% out.print(speakers.get(i).getCount2012());%></td>
                                                     <%
                                                         
-                                                        out.print("<td><input id=\"" + speakers.get(i).getId() + "\" min=\"0\" max=\"5\" name=\"newrank\" value=" + decimal + " /></td>");
+                                                        out.print("<td><input id=\"" + speakers.get(i).getId() + "\" type=\"number\" min=\"0\" max=\"5\" step=\".01\" name=\"newrank\" value=" + decimal + " /></td>");
                                                     %>
                                                     <%
                                                         int c = speakers.get(i).getCount2012();
@@ -164,10 +164,16 @@
         <%@ include file="../includes/scriptlist.jsp" %>
         <script>
                                                                                     function checkRange() {
+                                                                                        var lastyear = document.getElementsByName("lastyear");
                                                                                         var newranks = document.getElementsByName("newrank");
                                                                                         for (var i = 0; i < newranks.length; i++) {
-                                                                                            if (newranks[i].value > 5.0 || newranks[i].value < 0 || isNaN(newranks[i].value)) {
+                                                                                            if (newranks[i].value > 5.0 || newranks[i].value < 0.01 || isNaN(newranks[i].value)) {
                                                                                                 alert('Ranks must be between 0 and 5');
+                                                                                                newranks[i].focus();
+                                                                                                return false;
+                                                                                            }
+                                                                                            if (lastyear[i].checked == true && newranks[i].value == 0) {
+                                                                                                alert('Speakers who spoke last year must have a Rank value.')
                                                                                                 newranks[i].focus();
                                                                                                 return false;
                                                                                             }
@@ -181,10 +187,15 @@
                                                                                                 newcounts[j].focus();
                                                                                                 return false;
                                                                                             }
-                                                                                            
+                                                                                            if (lastyear[j].checked == true && newcounts[j].value == 0) {
+                                                                                                alert('Speakers who spoke last year must have a Count value.')
+                                                                                                newcounts[j].focus();
+                                                                                                return false;
+                                                                                            }
                                                                                         }
                                                                                         return true;
                                                                                     }
+
         </script><!--Validation-->
 
     </body>

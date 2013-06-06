@@ -17,7 +17,8 @@ public class DataConnection {
     private final String DBUSER = "root";
     private final String DBPASS = "password";
     private final String LOCAL = "localhost";
-    private final String AMAZON = "aa14v3gprpnox6g.cqbta787z8et.us-east-1.rds.amazonaws.com";
+    private final String AMAZON = "growler.cqbta787z8et.us-east-1.rds.amazonaws.com";
+    private final String AMAZON2 = "aa3vjo54kpdhxg.cqbta787z8et.us-east-1.rds.amazonaws.com";
     public Connection connection;
 
     public DataConnection() throws SQLException, ClassNotFoundException {
