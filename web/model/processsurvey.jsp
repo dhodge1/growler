@@ -46,11 +46,19 @@
                 }
 
             }
-            
+
             String question1 = String.valueOf(request.getParameter("1"));
             String question2 = String.valueOf(request.getParameter("2"));
             String question3 = String.valueOf(request.getParameter("3"));
             String question4 = String.valueOf(request.getParameter("4"));
+            try {
+                String comment = String.valueOf(request.getParameter("comment"));
+                CommentPersistence cp = new CommentPersistence();
+                Comment c = new Comment(Integer.parseInt(sessionId), comment);
+                cp.addComment(c);
+            } catch (Exception e) {
+                //No comment found
+            }
 
             Connection connection = dataConnection.sendConnection();
             Statement statement = connection.createStatement();

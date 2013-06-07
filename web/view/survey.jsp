@@ -119,6 +119,7 @@
                                                 %>
                                                 
                                             </table>
+                                                <label>Comments:</label><input type="text" maxlength="250" name="comment"/>
                                             <input id="send" class="button button-primary" type="submit" value="Submit Survey" />
                                         </form>
                                     </section>

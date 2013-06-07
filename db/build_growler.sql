@@ -36,7 +36,7 @@ CREATE TABLE theme (
 DROP TABLE IF EXISTS user; 
 CREATE TABLE user (
 	id			int		primary key auto_increment
-	,name			varchar(26)	UNIQUE	
+	,name			varchar(41)	UNIQUE	
 	,password		varchar(60)
 	,corporate_id		varchar(6)
 	,email			varchar(50)
@@ -113,7 +113,7 @@ CREATE TABLE session (
 	,track			varchar(20)
 	,session_date		date
 	,start_time		time
-	,duration		int
+	,duration		time
 	,location		int		REFERENCES location(id)
 	);
 	
@@ -204,69 +204,69 @@ CREATE TABLE speaker_team (
 /*
  * Inserts the default user.  This user is typically associated with last year's data.
  */
-insert into user values (2023, "DEFAULT", sha1('password'), NULL, NULL);
-insert into user values (8083, "ADMIN", sha1('password'), NULL, NULL);
+insert into user values (202300, "Default User", sha1('password'), NULL, NULL);
+insert into user values (808300, "Administrator", sha1('password'), NULL, NULL);
 
 
 /*Theme inserts*/
-INSERT INTO theme VALUES (1, "Cloud Computing", "All things Cloud, from IaaS, PaaS, DaaS, SaaS, to hosting providers, brokers, and cloud-enabling appliances", 2023, "2013", true, NULL);
-INSERT INTO theme VALUES (2, "Development Frameworks", "Any type of development framework, regardless of language", 2023, "2013", true, NULL);
-INSERT INTO theme VALUES (3, "Software Process/Lifecycle", "Waterfall, Agile, Scrum, Kanban, process improvements, new techniques", 2023, "2013", true, NULL);
-INSERT INTO theme VALUES (4, "Mobility", "Topics related to mobile computing in the enterprise, including mobile apps, phones, tablets, and other devices", 2023, "2013", true, NULL);
-INSERT INTO theme VALUES (5, "Social and Collaboration", "Tools and Techniques that make the enterprise more social and allow people to better communicate and collaborate when they are not in the same room, floor, building, city, state, or country", 2023, "2013", true, NULL);
-INSERT INTO theme VALUES (6, "Show and Tell", "Show and Tell (Description)", 2023, "2013", true, NULL);
+INSERT INTO theme VALUES (1, "Cloud Computing", "All things Cloud, from IaaS, PaaS, DaaS, SaaS, to hosting providers, brokers, and cloud-enabling appliances", 202300, "2013", true, NULL);
+INSERT INTO theme VALUES (2, "Development Frameworks", "Any type of development framework, regardless of language", 202300, "2013", true, NULL);
+INSERT INTO theme VALUES (3, "Software Process/Lifecycle", "Waterfall, Agile, Scrum, Kanban, process improvements, new techniques", 202300, "2013", true, NULL);
+INSERT INTO theme VALUES (4, "Mobility", "Topics related to mobile computing in the enterprise, including mobile apps, phones, tablets, and other devices", 202300, "2013", true, NULL);
+INSERT INTO theme VALUES (5, "Social and Collaboration", "Tools and Techniques that make the enterprise more social and allow people to better communicate and collaborate when they are not in the same room, floor, building, city, state, or country", 202300, "2013", true, NULL);
+INSERT INTO theme VALUES (6, "Show and Tell", "Show and Tell (Description)", 202300, "2013", true, NULL);
 
 /*
  * Inserts the speakers from 2012
 */
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (49, "Ian", "Ratner", 2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (1, "Ram", "Karra", 2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (2,"Deborah","Cliburn",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (3,"Prashanth","Chakrapani",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (4,"Scott","Cruze",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (5,"Mark","Kelly",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (6,"Jim","Senter",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (7,"Phil","Spann",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (8,"Jeffrey","Allen",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (9,"Bhaumik","Shah",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (10,"Panagiotis","Tzerefos",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (11,"Ben","Pack",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (12,"David","Tucker",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (13,"Matt","Peter",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (14,"Pedro","Lopez",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (15,"John","Hills",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (16,"Bryan","Fails",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (17,"Glen","Wright",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (18,"Kevin","Barry",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (19,"Jeffery","Kissinger",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (20,"Beth","Jackson",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (21,"Brian","Hinsley",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (22,"Drew","Fredrick",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (23,"Glen","Ireland",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (24,"Robert","Clarence",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (25,"Sarah","Cottay",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (26,"Channing","Dawson",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (27,"Mike","Campbell",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (28,"Joshua","Eldridge",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (29,"Bruce","Parker",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (30,"Robin","Wilde",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (31,"Lydia","Cordell",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (32,"Team","Nirvana",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (33,"Amy","Thomason",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (34,"Charles","Lewis",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (35,"Jonathan","Williams",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (36,"Scott","Gentry",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (37,"Jason","Norton",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (38,"Michael","Wehrle",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (39,"Shane","Closser",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (40,"Selene","Tolbert",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (41,"Michael","Berger",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (42,"Kamlesh","Sharma",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (43,"Kabita","Nayak",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (44,"Herb","Himes",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (45,"Stefanie","Edinger",2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (46, "Phil", "Cornell", 2023, TRUE);
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (47,"Allen", "Shacklock", 2023, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (49, "Ian", "Ratner", 202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (1, "Ram", "Karra", 202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (2,"Deborah","Cliburn",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (3,"Prashanth","Chakrapani",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (4,"Scott","Cruze",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (5,"Mark","Kelly",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (6,"Jim","Senter",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (7,"Phil","Spann",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (8,"Jeffrey","Allen",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (9,"Bhaumik","Shah",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (10,"Panagiotis","Tzerefos",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (11,"Ben","Pack",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (12,"David","Tucker",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (13,"Matt","Peter",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (14,"Pedro","Lopez",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (15,"John","Hills",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (16,"Bryan","Fails",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (17,"Glen","Wright",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (18,"Kevin","Barry",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (19,"Jeffery","Kissinger",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (20,"Beth","Jackson",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (21,"Brian","Hinsley",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (22,"Drew","Fredrick",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (23,"Glen","Ireland",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (24,"Robert","Clarence",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (25,"Sarah","Cottay",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (26,"Channing","Dawson",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (27,"Mike","Campbell",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (28,"Joshua","Eldridge",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (29,"Bruce","Parker",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (30,"Robin","Wilde",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (31,"Lydia","Cordell",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (32,"Team","Nirvana",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (33,"Amy","Thomason",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (34,"Charles","Lewis",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (35,"Jonathan","Williams",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (36,"Scott","Gentry",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (37,"Jason","Norton",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (38,"Michael","Wehrle",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (39,"Shane","Closser",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (40,"Selene","Tolbert",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (41,"Michael","Berger",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (42,"Kamlesh","Sharma",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (43,"Kabita","Nayak",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (44,"Herb","Himes",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (45,"Stefanie","Edinger",202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (46, "Phil", "Cornell", 202300, TRUE);
+insert into speaker (id, first_name, last_name, suggested_by, visible) values (47,"Allen", "Shacklock", 202300, TRUE);
 
 /*
  * Loads a raw data file of session data from last year
@@ -274,10 +274,41 @@ insert into speaker (id, first_name, last_name, suggested_by, visible) values (4
  * Session has the following fields: ID,Topic,Summary,Track,Date,Time,Duration,Location
  * Without the LOCAL, access may be denied to your statement.
  */
-load data LOCAL infile 'C:/Users/162107/Documents/GitHub/growler/db/raw_data/sessions_2012.csv'
-into table session
-fields terminated by ','
-ignore 1 lines;
+INSERT INTO `growler_db`.`session` (`id`, `name`, `description`, `track`, `session_date`, `start_time`, `duration`, `location`, `session_key`) VALUES ('1', 'Leveraging Technology for Better Deployment Collaboration', 'The ServiceNow team is planning to implement new features that provide improvements in communication,collaboration and knowledge retention around and during deployments.', 'Business Friendly', '10/17/2012', '13:00:00', '0:25:00', '1', '356a');
+INSERT INTO `growler_db`.`session` (`id`, `name`, `description`, `track`, `session_date`, `start_time`, `duration`, `location`, `session_key`) VALUES ('2', 'Cheap and Free Test Tools', 'This presentation will provide an overview and demonstration of open source or inexpensive tools for test design,test management,defect tracking,test data creation,test automation,test evaluation and web-based load testing.', 'Technical', '10/17/2012', '13:30:00', '0:25:00', '1', '5a3b');
+INSERT INTO `growler_db`.`session` (`id`, `name`, `description`, `track`, `session_date`, `start_time`, `duration`, `location`, `session_key`) VALUES ('3', 'Cloudy with a Chance of Continuous Delivery', 'Discussion of advantages,disadvantages,and adoption of continuous deployment and delivery as well as business benefits and pain points as they are in the current (in-house) environment and as we move portions into Amazon AWS (specifically the VPC,Virtual Private Cloud),which involves multiple technologies and services with the goal to save time and money maintaining the CD/CI environment.', 'Technical', '10/17/2012', '14:00:00', '0:55:00', '1', '77de');
+INSERT INTO `growler_db`.`session` (`id`, `name`, `description`, `track`, `session_date`, `start_time`, `duration`, `location`, `session_key`) VALUES ('4', 'Data Visualization', 'An overview of data visualization tools with a demo of two and a discussion of how they can be used with MAM data.', 'Technical', '10/17/2012', '9:30:00', '0:25:00', '1', '1b64');
+INSERT INTO `growler_db`.`session` (`id`, `name`, `description`, `track`, `session_date`, `start_time`, `duration`, `location`, `session_key`) VALUES ('5', 'Kickoff Meeting', 'A kickoff meeting', 'Business Friendly', '10/18/2012', '16:00:00', '0:10:00', '1', 'ac34');
+INSERT INTO `growler_db`.`session` (`id`, `name`, `description`, `track`, `session_date`, `start_time`, `duration`, `location`, `session_key`) VALUES ('6', 'Project OZ - The File-Based Workflow Initiative', 'An overview of how the file-based workflow initiative is impacting SNI,and why it is important to the core businesses. The presentation will help explain SNI\'s evolution from a videotape to a file-based media infrastructure. A snapshot of the current project status,and a view into the future objectives of the project will be described.', 'Business Friendly', '10/17/2012', '10:00:00', '0:25:00', '2', 'c1df');
+INSERT INTO `growler_db`.`session` (`id`, `name`, `description`, `track`, `session_date`, `start_time`, `duration`, `location`, `session_key`) VALUES ('7', 'Cloud Transcoding Pilot', 'The Solutions Engineering team working with NLV Operations has successfully piloted a cloud transcoding workflow using Zencoder,S3 storage,and Aspera.', 'Technical', '10/17/2012', '10:30:00', '0:25:00', '1', '902b');
+INSERT INTO `growler_db`.`session` (`id`, `name`, `description`, `track`, `session_date`, `start_time`, `duration`, `location`, `session_key`) VALUES ('8', 'SQL Tips and Tricks', 'This presentation will show how to enhanced performance and solve some common problems in Oracle using SQL.', 'Technical', '10/17/2012', '11:00:00', '0:55:00', '1', 'fe5d');
+INSERT INTO `growler_db`.`session` (`id`, `name`, `description`, `track`, `session_date`, `start_time`, `duration`, `location`, `session_key`) VALUES ('9', 'Standarizing Frame Rate', 'A discussion of standardizing frame rates', 'Technical', '10/18/2012', '16:00:00', '0:10:00', '1', '0ade');
+INSERT INTO `growler_db`.`session` (`id`, `name`, `description`, `track`, `session_date`, `start_time`, `duration`, `location`, `session_key`) VALUES ('10', 'Activating SNI\'s Customer Data Portfolio', 'What is SNI\'s customer data footprint? 35MM+ customer records across 15+ databases. Over 26MM unique visitors to our websites. Over 10MM social connections. SNI has a lot of customer data. Find out how we are activating and protecting that data to drive our business.', 'Business Friendly', '10/17/2012', '11:00:00', '0:55:00', '2', 'b1d5');
+INSERT INTO `growler_db`.`session` (`id`, `name`, `description`, `track`, `session_date`, `start_time`, `duration`, `location`, `session_key`) VALUES ('11', 'TV Everywhere Overview', 'TV-Everywhere (TV-E),also known as Subscriber Authentication is a significant trend in the pay television business. The concept was launched by Time Warner Cable and Comcast in 2009 and is intended to allow all pay TV subscribers to view content on many platforms. Scripps will be creating TV-E website and mobile apps to allow viewers to watch full episodes online or via mobile devices.', 'Business Friendly', '10/17/2012', '10:30:00', '0:25:00', '2', '17ba');
+INSERT INTO `growler_db`.`session` (`id`, `name`, `description`, `track`, `session_date`, `start_time`, `duration`, `location`, `session_key`) VALUES ('12', 'Using Social Media for Team Collaboration', 'In this presentation Lydia will talk about the pros and cons of using social media tools such as Google+,Sococo,Lync and others to improve communication and collaboration among virtual teams.', 'Business Friendly', '10/18/2012', '13:00:00', '0:25:00', '2', '7b52');
+INSERT INTO `growler_db`.`session` (`id`, `name`, `description`, `track`, `session_date`, `start_time`, `duration`, `location`, `session_key`) VALUES ('13', 'Homegrown Guerrilla Usability Testing', 'An inside look into the rapid fire low and mid-fidelity usability testing efforts currently being developed and deployed by the SNI IxD department. Questions to be addressed will include: What\'s the aim of the testing? How is it different from our standard usability testing efforts? What are we hoping to accomplish? Are there drawbacks to this kind of testing? What have we learned so far?', 'Business Friendly', '10/18/2012', '13:30:00', '0:25:00', '2', 'bd30');
+INSERT INTO `growler_db`.`session` (`id`, `name`, `description`, `track`, `session_date`, `start_time`, `duration`, `location`, `session_key`) VALUES ('14', 'What\'s New with the Digital Software Architecture Committee', 'Come hear what the DSAC has been up to since last year\'s Techtoberfest. The DSAC has been working on recommendations and best practices for timely subject areas including REST services,Object Caching and Spring. Or maybe you didn\'t know that Digital has a Software Architecture Committee? Then stop by to learn about the DSAC and how they can help your development team leverage tribal knowledge around best practices,proven frameworks and technologies.', 'Business Friendly', '10/18/2012', '14:00:00', '0:55:00', '2', 'fa35');
+INSERT INTO `growler_db`.`session` (`id`, `name`, `description`, `track`, `session_date`, `start_time`, `duration`, `location`, `session_key`) VALUES ('15', 'Virtual Desktops in the Cloud', 'This presentation will talk to how the IT is utilizing VDI (Virtual Desktop Infrastructure) technology as well as lessons learned. Topics will include: What is Virtual Desktop Infrastructure? What are the benefits of this technology? What are the new areas for discovery/growth? What are the costs?', 'Business Friendly', '10/18/2012', '15:30:00', '0:25:00', '1', 'f1ab');
+INSERT INTO `growler_db`.`session` (`id`, `name`, `description`, `track`, `session_date`, `start_time`, `duration`, `location`, `session_key`) VALUES ('16', 'Using SNidbit to Pull Show Images', 'Have you ever needed a show image or logo for a presentation that does not exist? Did you know that you could pull images by watching shows in Snidbit and frame grab the images you need? This presentation will show a technique to do just that. ', 'Business Friendly', '10/17/2012', '9:30:00', '0:25:00', '2', '1574');
+INSERT INTO `growler_db`.`session` (`id`, `name`, `description`, `track`, `session_date`, `start_time`, `duration`, `location`, `session_key`) VALUES ('17', 'Business Process Management in Digital', 'This presentation will discuss Digital\'s efforts to introduce BPM and related technology into Digital. We will cover the social aspect and its overall importance to the success of the organization.', 'Business Friendly', '10/18/2012', '9:00:00', '0:25:00', '2', '716');
+INSERT INTO `growler_db`.`session` (`id`, `name`, `description`, `track`, `session_date`, `start_time`, `duration`, `location`, `session_key`) VALUES ('18', 'Digital\'s BI Current State and Vision', 'This presentation will provide a definition of Business Intelligence and an assessment of the current and future state of BI in Digital.', 'Business Friendly', '10/17/2012', '9:30:00', '0:25:00', '2', '9e6a');
+INSERT INTO `growler_db`.`session` (`id`, `name`, `description`, `track`, `session_date`, `start_time`, `duration`, `location`, `session_key`) VALUES ('19', 'Living in the Microsoft Cloud', 'Come and see how the SharePoint team is looking at using Microsoft\'s cloud infrastructure and tools to develop and host applications and services in the cloud. Microsoft now has in place a host of various cloud-based offerings that allows a company to quite literally virtually replace in-house Information Technology infrastructure. This presentation will cover the major components of Microsoft\'s cloud offerings with real world demonstrations.', 'Technical', '10/18/2012', '10:00:00', '0:55:00', '2', 'b3f0');
+INSERT INTO `growler_db`.`session` (`id`, `name`, `description`, `track`, `session_date`, `start_time`, `duration`, `location`, `session_key`) VALUES ('20', 'Agile Estimation Planning Poker Workshop', 'Ever wish you had an estimation technique that could be leveraged both with onsite and remote participants while providing a great framework for collaboration as well? Why not try Estimation Planning Poker with your agile team? Join us for a fun hands on demonstration on how to do planning poker with your team to achieve better estimation results. Want to know more on the Planning Poker technique prior to session,go here: http://planningpoker.com/ ', 'Business Friendly', '10/18/2012', '11:00:00', '0:55:00', '2', '9103');
+INSERT INTO `growler_db`.`session` (`id`, `name`, `description`, `track`, `session_date`, `start_time`, `duration`, `location`, `session_key`) VALUES ('21', 'JBoss Operations Network (JON)', 'The presentation will demonstrate exposing Spring entities and some monitoring features.', 'Technical', '10/17/2012', '9:30:00', '0:25:00', '1', '472b');
+INSERT INTO `growler_db`.`session` (`id`, `name`, `description`, `track`, `session_date`, `start_time`, `duration`, `location`, `session_key`) VALUES ('22', 'JBoss 6 and Arquillan', 'This presentation will show the benefits of the new lightweight container JBoss container in EAP 6. In addition,we will discuss how Arquillian,an open-source project for testing enterprise Java applications,can help speed up development and testing on EAP 6. ', 'Technical', '10/18/2012', '9:00:00', '0:25:00', '1', '12c6');
+INSERT INTO `growler_db`.`session` (`id`, `name`, `description`, `track`, `session_date`, `start_time`, `duration`, `location`, `session_key`) VALUES ('23', 'Using the ICE Framework to Create a Recipe Editor', 'This presentation will cover the feature set used to create the Recipe Editor for the Culinary Staff in NYC. We will include a introduction to the ICE framework and the enhancements made by SNI to meet user\'s requirements. ', 'Technical', '10/18/2012', '10:00:00', '0:55:00', '1', 'd435');
+INSERT INTO `growler_db`.`session` (`id`, `name`, `description`, `track`, `session_date`, `start_time`, `duration`, `location`, `session_key`) VALUES ('24', 'Rapid UI Development using Bootstrap', 'This presentation will cover the Scripps Bootstrap UI development framework including the motivation for developing a common UI framework,the capabilities included in Bootstrap and a demo of building a page with Bootstrap.', 'Technical', '10/18/2012', '11:00:00', '0:55:00', '1', '4d13');
+INSERT INTO `growler_db`.`session` (`id`, `name`, `description`, `track`, `session_date`, `start_time`, `duration`, `location`, `session_key`) VALUES ('25', 'Attribute-Based Access Control with Axiomatics', 'This presentation will discuss an authorization model that provides dynamic,context-aware access control.', 'Technical', '10/18/2012', '13:00:00', '0:25:00', '1', 'f6e1');
+INSERT INTO `growler_db`.`session` (`id`, `name`, `description`, `track`, `session_date`, `start_time`, `duration`, `location`, `session_key`) VALUES ('26', 'MySQL for the Oracle Professional', 'MySQL is becoming more prevalent in IT lately,with an ever-increasing feature set,high availability options,and cost effective deployments. Prepare yourself to be an effective DBA or developer in the MySQL world. This presentation will show you how to translate your Oracle skills to MySQL with live demos of common tools and methods that you will use on a daily basis. Both DBA and developer skills will be covered.', 'Technical', '10/18/2012', '13:30:00', '0:25:00', '1', '8873');
+INSERT INTO `growler_db`.`session` (`id`, `name`, `description`, `track`, `session_date`, `start_time`, `duration`, `location`, `session_key`) VALUES ('27', 'Designing Applications for Multi-Platform Delivery', 'This presentation will discuss a framework to manage content across platforms. Topics will include HTML 5,touch interfaces,rich media,behavioral targeting and presentation across web,mobile and email. ', 'Business Friendly', '10/18/2012', '14:00:00', '0:55:00', '1', 'bc33');
+INSERT INTO `growler_db`.`session` (`id`, `name`, `description`, `track`, `session_date`, `start_time`, `duration`, `location`, `session_key`) VALUES ('28', 'AIM Social Login and Registration', 'Sit in to get an architectural and functional overview of the new AIM social login and user registration system. AIM is set to be launched on the new cookingchanneltv.com and is slated to eventually replace the current UR3 system. AIM will enhance the social login and registration by supporting more social providers and reducing the barrier to registration. We will discuss functional advantages of AIM and go through the challenges of keeping users synchronized between UR3 and AIM while sites transition from one system to the other.', 'Technical', '10/17/2012', '14:00:00', '0:25:00', '2', '0a57');
+INSERT INTO `growler_db`.`session` (`id`, `name`, `description`, `track`, `session_date`, `start_time`, `duration`, `location`, `session_key`) VALUES ('29', 'Enterprise Mobile Apps Strategy', 'With the proliferation of personal devices in the workplace,one may wonder what we as a company are doing about Mobile Applications in the Enterprise. This talk with share the IT Strategy for Enterprise Mobile Apps in the workplace,and what to expect in the future.', 'Business Friendly', '10/17/2012', '13:30:00', '0:25:00', '2', '7719');
+INSERT INTO `growler_db`.`session` (`id`, `name`, `description`, `track`, `session_date`, `start_time`, `duration`, `location`, `session_key`) VALUES ('30', 'Media Asset Management Target State', 'The existing Media Asset Management (MAM) infrastructure was put into service over the past seven years and has become foundational for internal processes and mission critical for linear scheduling and digital publishing of content to consumers and partners. In addition to an aging infrastructure upon which we continue to build,the business demands have grown and changed in nature,requiring a new vision for the direction of MAM. This presentation will provide an overview of the business and technical drivers for the next generation of MAM.', 'Business Friendly', '10/17/2012', '13:00:00', '0:25:00', '2', '22d2');
+INSERT INTO `growler_db`.`session` (`id`, `name`, `description`, `track`, `session_date`, `start_time`, `duration`, `location`, `session_key`) VALUES ('31', 'Technology Panel', 'A panel to discuss technology', 'Technical', '10/18/2012', '16:00:00', '0:10:00', '1', '6326');
+INSERT INTO `growler_db`.`session` (`id`, `name`, `description`, `track`, `session_date`, `start_time`, `duration`, `location`, `session_key`) VALUES ('32', 'Network Current and Future State', 'This session will provide an overview of the company\'s network infrastructure,current and future state. Jason Norton,Director of Telecommunications,will discuss the LAN,WAN,data center and wireless infrastructure that supports our users and applications. Jason will also discuss future trends in networking and take questions from the audience.', 'Business Friendly', '10/18/2012', '16:00:00', '0:55:00', '2', 'cb4e');
+INSERT INTO `growler_db`.`session` (`id`, `name`, `description`, `track`, `session_date`, `start_time`, `duration`, `location`, `session_key`) VALUES ('33', 'Integration Frameworks - Apache Camel and Spring Integration', 'Apache Camel and Spring Integration are integration frameworks based on Enterprise Integration Patterns. Both provide a simple model to develop integration solutions.', 'Technical', '10/18/2012', '16:00:00', '0:55:00', '1', 'b669');
+INSERT INTO `growler_db`.`session` (`id`, `name`, `description`, `track`, `session_date`, `start_time`, `duration`, `location`, `session_key`) VALUES ('34', 'Agile Data Modeling', 'Traditionally,data modeling has been a very time intensive exercise that involves significant effort from the data modeler and the members of the application development team. To make the process a lot more interesting the views expressed by certain sections of the data modeling community have not always been in alignment with those expressed by the agile community. However,over the past few years quite a few data practitioners have been experimenting with the concept of agile data modeling and have been sharing their lessons from the trenches. A more recent development in the concept of agile data modeling has been the use of universal patterns in data modeling.', 'Technical', '10/17/2012', '10:00:00', '0:25:00', '1', 'f1f8');
+INSERT INTO `growler_db`.`session` (`id`, `name`, `description`, `track`, `session_date`, `start_time`, `duration`, `location`, `session_key`) VALUES ('35', 'Cooking Channel TV Monitoring Strategy', 'This presentation will talk about the monitoring strategy that was developed for the CCTV Relaunch Project. Topics will include architectural design,approach and buildout. ', 'Technical', '10/18/2012', '15:30:00', '0:25:00', '2', '972a');
 
 /* Inserts the questions */
 insert into question values (1, "This session met my expectations:", '2012');
@@ -375,3 +406,23 @@ fields terminated by ',';
 
 alter table session 
 add column session_key varchar(4) UNIQUE;
+
+/*
+ * The Comments table is to store comments made after a survey.
+ * We don't want to know who made the comment so it's anonymous, we just want the text and the session.
+ */
+create table comments(
+	session_id	int		references session(id)
+	,comment	varchar(250)
+);
+/*
+ * The registration table is there to allow users to pick what sessions they are interested in attending.
+ */
+create table registration (
+	user_id				int		references user(id)
+	,session_id			int		references session(id)
+	,date_registered	date
+	,time_registered	time
+	,reason				varchar(250)
+	,constraint pk_registration primary key (user_id, session_id)
+);

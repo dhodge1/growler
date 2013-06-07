@@ -31,45 +31,45 @@
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <%@ include file="../includes/scriptlist.jsp" %>
         <script>
-            $(function() {    
-                $( "#modalDialog" ).dialog({
+            $(function() {
+                $("#modalDialog").dialog({
                     resizable: false,
-                    height:240,
+                    height: 240,
+                    width: 500,
                     modal: true,
                     buttons: {
                         "Take a Survey": function() {
-                            $( this ).dialog( "close" );
+                            $(this).dialog("close");
                             window.location = '../view/surveylist.jsp';
-                        },        
-                        "Don't take Survey": function() {          
-                        $("#thanksDialog").dialog({
-                                height:140,
+                        },
+                        "Don't take Survey": function() {
+                            $("#thanksDialog").dialog({
+                                height: 140,
+                                width: 500,
                                 buttons: {
-                                    "Ok" : function () {
+                                    "Ok": function() {
                                         $(this).dialog("close");
                                     }
                                 }
-                            });    
-                        $( this ).dialog( "close" );
-                            
-                        }      
-                    }    
-                    });  
-                    });
+                            });
+                            $(this).dialog("close");
+
+                        }
+                    }
+                });
+            });
         </script>
     </head>
     <body id="growler1">
         <% String user = "";
-                    try {
-                        user = String.valueOf(session.getAttribute("id"));
-                        String name = String.valueOf(session.getAttribute("user"));                  
-                    }
-                    catch (Exception e) {
-                        
-                    }
-                    if (user == null) {
-                        response.sendRedirect("../index.jsp");
-                    } 
+            try {
+                user = String.valueOf(session.getAttribute("id"));
+                String name = String.valueOf(session.getAttribute("user"));
+            } catch (Exception e) {
+            }
+            if (user == null) {
+                response.sendRedirect("../index.jsp");
+            }
         %>
         <%@ include file="../includes/header.jsp" %>
         <%@ include file="../includes/usernav.jsp" %>
@@ -84,16 +84,14 @@
                 <%
                     String message = String.valueOf(session.getAttribute("message"));
                     if (!message.equals("null")) {
-                        if (message.equals("You were successfully removed from the session!")){
+                        if (message.equals("You were successfully removed from the session!")) {
                             out.print("<p id=\"topMessage\" class=feedbackMessage-success>" + message + "</p>");
-                        }
-                        else if (message.startsWith("Sucessfully registered!")){
+                        } else if (message.startsWith("Sucessfully registered!")) {
                             out.print("<p id=\"topMessage\" class=feedbackMessage-success>" + message + "</p>");
-                            String sessionName = (String)session.getAttribute("sessionName");
-                            out.print("<div id=\"modalDialog\" title=\"Survey Message - Successfully Acknowledged Attendance for " + sessionName + "\"><p>Please take a survey.</p><p>This will enter you in a drawing for a fantastic prize.</p></div>");
+                            String sessionName = (String) session.getAttribute("sessionName");
+                            out.print("<div id=\"modalDialog\" title=\"Successfully Acknowledged Attendance for " + sessionName + "\"><p>Please take a survey.</p><p>This will enter you in a drawing for a fantastic prize.</p></div>");
                             out.print("<div id=\"thanksDialog\" title=\"Thanks Anyway\"><p>Thanks anyway. You can always take a survey later.</p></div>");
-                        }
-                        else {
+                        } else {
                             out.print("<p class=feedbackMessage-error>" + message + "</p>");
                         }
                         session.removeAttribute("message");
@@ -101,7 +99,7 @@
                 %>
                 <p>Enter a key, provided by the speaker, and click on the "Acknowledge" link to acknowledge your attendance.  If you changed your mind and switched sessions, click "UnRegister" to delete your attendance so you can attend another session.</p>
                 <p>You will also receive a notification to complete a survey rating the session, or you can go to "Rate a Session" 
-                link in the menu.</p>
+                    link in the menu.</p>
                 <p>Upon completing the survey, you will be registered to win a fantastic prize.</p>
             </div>
         </div>
@@ -110,54 +108,31 @@
                 <!-- Begin Content -->
                 <div class="row"><!--row-->
                     <div class="span6 offset3"><!--span-->
-
-                                    <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Date</th>
-                                            <th>Time</th>
-                                            <th>Key</th>
-                                            <th>Acknowledge</th>
-                                            <th>UnRegister</th>
-                                        </tr>
-                                        <%
-                                            Calendar today = Calendar.getInstance();
-                                            String date = today.get(Calendar.YEAR) + "-" + (today.get(Calendar.MONTH) + 1) + "-" + today.get(Calendar.DATE);
-                                            String time = today.get(Calendar.HOUR_OF_DAY) + ":" + today.get(Calendar.MINUTE) + ":" + today.get(Calendar.SECOND);
-                                            
-                                            Connection connection = dataConnection.sendConnection();
-                                            Statement statement = connection.createStatement();
-                                            //Select sessions that are today, before the current time
-                                            ResultSet result = statement.executeQuery("select id, name, session_date, start_time, duration from session where session_date = curdate() and start_time > addtime(curtime(), '-04:00:00')");
-                                            
-                                            while (result.next()) {
-                                               
-                                                   out.print("<form action=\"../model/processattendance.jsp\" method=post>");
-                                                   out.print("<tr>");
-                                                   out.print("<td>" + result.getString("name") + "</td>" +
-                                                           "<input type=hidden name=session value=\"" + result.getInt("id") + "\"/>");
-                                                   out.print("<td>" + result.getDate("session_date") + "</td>");
-                                                   out.print("<td>" + result.getTime("start_time") +  "</td>");
-                                                   out.print("<td><input type=text name=\"skey\"/></td>");
-                                                   out.print("<td><input type=submit name=submit value=Acknowledge></td>");
-                                                   out.print("<td><a href=\"../model/leaveattendance.jsp?session=" + result.getInt("id") + "\"><i class=icon16-userRemove></i></a></td>");
-                                                   out.print("</tr>");
-                                                   out.print("</form>");
-                                            }
-                                            result.close();
-                                            statement.close();
-                                            connection.close();
-                                        %>
-                                    </table>
-                                    
-                                </div>
-                                <br/>
-                    </div><!--end span-->
+                        <%
+                            SessionPersistence sp = new SessionPersistence();
+                            ArrayList<Session> sessions = sp.getSessionsToAcknowledge();
+                        %>
+                        <form action="../model/processattendance.jsp" method="post">
+                            <label class="required">Session: </label>
+                            <select name="session">
+                                <%
+                                    for (int i = 0; i < sessions.size(); i++) {
+                                        out.print("<option value=\"" + sessions.get(i).getId() + "\">");
+                                        out.print(sessions.get(i).getName());
+                                        out.print("</option>");
+                                    }
+                                %>
+                            </select>
+                            <br/>
+                            <label class="required">Session Key:</label>
+                            <input type="text" maxlength="4" name="skey"/>
+                            <input type="submit" value="Submit" />
+                        </form>
+                    </div>
+                    <br/>
+                </div><!--end span-->
             </div><!-- End Content -->
         </div><!--/.container-fluid-->
         <%@ include file="../includes/footer.jsp" %> 
-        
-        <%@ include file="../includes/draganddrop.jsp" %>
-        
     </body>
 </html>
