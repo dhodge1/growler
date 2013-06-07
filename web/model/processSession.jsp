@@ -19,13 +19,17 @@
             String date = request.getParameter("date");
             String time = request.getParameter("time");
             String duration = request.getParameter("duration");
+            int dur = Integer.parseInt(duration);
+            int hours = dur / 60;
+            int minutes = dur % 60;
+            String durString = hours + ":" + minutes + ":00";
             String name = request.getParameter("name");
             String location = request.getParameter("location");
             Session s = new Session();
             s.setName(name);
             s.setSessionDate(java.sql.Date.valueOf(date));
             s.setStartTime(java.sql.Time.valueOf(time));
-            s.setDuration(Integer.parseInt(duration));
+            s.setDuration(java.sql.Time.valueOf(durString));
             s.setLocation(Integer.parseInt(location));
             SessionPersistence sp = new SessionPersistence();
             sp.addSession(s);
