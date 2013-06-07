@@ -36,7 +36,19 @@
 
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
     </head>
-    <body id="growler1">    
+    <body id="growler1">
+        <% String user = "";
+                    try {
+                        user = String.valueOf(session.getAttribute("id"));
+                        String name = String.valueOf(session.getAttribute("user"));                  
+                    }
+                    catch (Exception e) {
+                        
+                    }
+                    if (user == null) {
+                        response.sendRedirect("../index.jsp");
+                    } 
+        %>
         <%@ include file="../includes/header.jsp" %> 
         <%@ include file="../includes/usernav.jsp" %>
         <div class="row">
@@ -45,10 +57,18 @@
             </div>
             <div class="span6 largeBottomMargin">
                 <%
-                    String user = String.valueOf(request.getAttribute("id"));
                     String sessionId = request.getParameter("sessionId");
                     SessionPersistence sp = new SessionPersistence();
-                    
+                    AttendancePersistence ap = new AttendancePersistence();
+                    ArrayList<Attendance> attendances = ap.getAttendanceBySession(Integer.parseInt(sessionId));
+                    int uId = (Integer.parseInt(user));
+                    for (int a = 0; a < attendances.size(); a++) {
+                        if (uId == attendances.get(a).getUserId() && attendances.get(a).getIsRegistered() == true) {
+                            session.setAttribute("message", "You have already taken this survey");
+                            response.sendRedirect("../view/surveylist.jsp");
+                        }
+                        
+                    }
                     %>
                     <h1 class = "bordered">Survey - <% out.print(sp.getSessionByID((Integer.parseInt(sessionId))).getName());%></h1>
             </div>
@@ -70,7 +90,7 @@
                                 </div>
                                 <div class="span6 offset2">
                                     <section>
-                                        <form action="../model/processsurvey.jsp" method="post" >
+                                        <form id="action" action="../model/processsurvey.jsp" method="post">
                                             <table>
                                                 <tr>
                                                     <td>Question</td>
@@ -82,7 +102,8 @@
                                                 <tr>
                                                     <td><% out.print(qResult.getString("text"));%></td>
                                                     <td>
-                                                        <select <% out.print("name = " + qResult.getInt("id"));%>>
+                                                        <select class="survey" <% out.print("name =" + qResult.getInt("id"));%>>
+                                                            <option value="0"> - Enter a Selection - </option>
                                                             <option value="1">1 - Strongly Disagree</option>
                                                             <option value="2">2 - Disagree</option>
                                                             <option value="3">3 - Neutral</option>
@@ -98,7 +119,7 @@
                                                 %>
                                                 
                                             </table>
-                                            <input type="submit" value="Submit" />
+                                            <input id="send" class="button button-primary" type="submit" value="Submit Survey" />
                                         </form>
                                     </section>
                                 </div>
@@ -107,11 +128,10 @@
                                 </div>
                             </div><!--end row-->
                         </div>
-                    </div>
                 </div><!--end row-->
                 <div class="span2 offset3"><!--button div-->
                     
-                </div>
+                
             </div><!-- End Content -->	
         </div><!--/.container-fluid-->	
 
@@ -125,10 +145,16 @@
 
         <!--Additional Script-->
         <script>
-            $(function() {
-                $("#sortable").sortable({revert: true});
-                $("#draggable").draggable({connectToSortable: "#sortable", helper: "clone", revert: "invalid"});
-                $("ul, li").disableSelection();
+            $(document).ready(function(){
+                $("#send").click(function(){
+                     if ($(".survey").val() == 0) {
+                        alert("Please fill out all questions");
+                        $("#action").attr("action", "");
+                    }
+                    else {
+                        $("#action").attr("action", "../model/processsurvey.jsp");
+                    }
+                });
             });
         </script>
     </body>

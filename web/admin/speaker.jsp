@@ -37,6 +37,18 @@
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
     </head>
     <body id="growler1">
+        <% String user = "";
+                    try {
+                        user = String.valueOf(session.getAttribute("id"));
+                        String name = String.valueOf(session.getAttribute("user"));                  
+                    }
+                    catch (Exception e) {
+                        
+                    }
+                    if (user == null) {
+                        response.sendRedirect("../index.jsp");
+                    } 
+        %>
         <%@include file="../includes/isadmin.jsp" %>
         <%@ include file="../includes/header.jsp" %> 
         <%@ include file="../includes/adminnav.jsp" %>
@@ -82,7 +94,7 @@
                                     %>
                                 </div>
                                 <div class="span2">
-                                    <section>
+                                    
                                         <form id="entry" name="entry" action="../model/adminspeaker.jsp" method="post" onSubmit="return checkRange();">
                                             <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
                                                 <tr>
@@ -116,14 +128,18 @@
                                                     <td><% out.print(speakers.get(i).getRank()); %></td>
                                                     <td><% out.print(decimal);%></td>
                                                     <td><% out.print(speakers.get(i).getCount2012());%></td>
+                                                    <td>
                                                     <%
                                                         
-                                                        out.print("<td><input id=\"" + speakers.get(i).getId() + "\" type=\"number\" min=\"0\" max=\"5\" step=\".01\" name=\"newrank\" value=" + decimal + " /></td>");
+                                                        out.print("<input id=\"" + speakers.get(i).getId() + "\" type=\"number\" maxlength=\"4\" min=\"0\" max=\"5\" step=\".01\" name=\"newrank\" value=" + decimal + " />");
                                                     %>
+                                                    </td>
+                                                    <td>
                                                     <%
                                                         int c = speakers.get(i).getCount2012();
-                                                        out.print("<td><input id=\"" + speakers.get(i).getId() + "\" type=\"number\" min=\"0\" max=\"100\" name=\"newcount\" value=" + c + " /></td>");
+                                                        out.print("<input id=\"" + speakers.get(i).getId() + "\" type=\"number\" min=\"0\" max=\"100\" name=\"newcount\" value=" + c + " />");
                                                     %>
+                                                    </td>
                                                     <td><input name="visible" type="checkbox" value="<% out.print(speakers.get(i).getId());%>"
                                                                <%
                                                                    if (speakers.get(i).getVisible() == true) {
@@ -138,13 +154,15 @@
                                                                    }
                                                                %>/></td>
                                                     <td><% out.print(upersist.getUserByID(speakers.get(i).getSuggestedBy()).getUserName());%></td>
-                                                    <td><a href="../model/removeSpeaker.jsp?id=<%out.print(speakers.get(i).getId());%>">Remove</a></td>
+                                                    <td><%out.print("<a href=\"../model/removeSpeaker.jsp?id=" + speakers.get(i).getId() + "\">Remove</a></td>"); %>
                                                 </tr>
                                                 <% } //close the for loop
-%>
+                                                %>
                                             </table>
-
-                                    </section>
+                                            <div class="span2 offset3"><!--button div-->
+                                            <input type="submit" value="Submit" class="button button-primary" />
+                                            </div>
+                                            </form>
                                 </div>
                                 <div class="span7">
                                     <p></p>
@@ -153,10 +171,9 @@
                         </div>
                     </div>
                 </div><!--end row-->
-                <div class="span2 offset3"><!--button div-->
-                    <input type="submit" value="Submit" class="button button-primary" />
-                </div>
-                </form>
+                
+                                                
+                                            
             </div><!-- End Content -->	
         </div><!--/.container-fluid-->
 

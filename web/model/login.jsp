@@ -44,7 +44,7 @@
             //Redirect, and set the user's identity in the header
             if (result.next()) {
                 //If it's an admin, go to the admin side
-                if (result.getInt(1) == 8083) {
+                if (result.getInt(1) == 808300) {
                     session.setAttribute("user", "admin");
                     session.setAttribute("id", new Integer(result.getInt("id")));
                     session.setMaxInactiveInterval(1800); //30 minutes before it kicks you off

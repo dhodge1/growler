@@ -25,6 +25,14 @@
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->	
     </head>
     <body id="growler1">
+        <% try {
+                    String user = String.valueOf(session.getAttribute("id"));
+                    String name = String.valueOf(session.getAttribute("user"));                  
+                    }
+                    catch (Exception e) {
+                        response.sendRedirect("../index.jsp");
+                    } 
+        %>
         <%@ include file="../includes/header.jsp" %> 
         <%@ include file="../includes/usernav.jsp" %>
 

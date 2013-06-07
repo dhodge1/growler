@@ -32,9 +32,21 @@
     </head>
     <body>
         <%
-            String sessionId = (String)session.getAttribute("sessionId");
+            String sessionId = (String) session.getAttribute("sessionId");
 
             String user = String.valueOf(session.getAttribute("id"));
+            //Make sure user didn't click back and try to take survey again
+            AttendancePersistence ap = new AttendancePersistence();
+            ArrayList<Attendance> attendances = ap.getAttendanceBySession(Integer.parseInt(sessionId));
+            int uId = (Integer.parseInt(user));
+            for (int a = 0; a < attendances.size(); a++) {
+                if (uId == attendances.get(a).getUserId() && attendances.get(a).getIsRegistered() == true) {
+                    session.setAttribute("message", "You have already taken this survey");
+                    response.sendRedirect("../view/surveylist.jsp");
+                }
+
+            }
+            
             String question1 = String.valueOf(request.getParameter("1"));
             String question2 = String.valueOf(request.getParameter("2"));
             String question3 = String.valueOf(request.getParameter("3"));
@@ -42,8 +54,8 @@
 
             Connection connection = dataConnection.sendConnection();
             Statement statement = connection.createStatement();
-            
-            
+
+
 
             statement.execute("insert into session_ranking (question_id, session_id, ranking) values "
                     + "(" + 1 + ", " + sessionId + ", " + question1 + "),"

@@ -44,7 +44,19 @@
 
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
     </head>
-    <body id="growler1">    
+    <body id="growler1">  
+        <% String user = "";
+                    try {
+                        user = String.valueOf(session.getAttribute("id"));
+                        String name = String.valueOf(session.getAttribute("user"));                  
+                    }
+                    catch (Exception e) {
+                        
+                    }
+                    if (user == null) {
+                        response.sendRedirect("../index.jsp");
+                    }
+        %>
         <%@ include file="../includes/header.jsp" %> 
         <div class="row">
         <%@ include file="../includes/usernav.jsp" %>
@@ -55,7 +67,6 @@
             </div>
             <div class="span7 largeBottomMargin">
                 <%
-                    String user = String.valueOf(session.getAttribute("id"));
                     //Get a list of Themes by calling getUserRanks
                     ArrayList<Theme> themes = persist.getUserRanks(Integer.parseInt(user));
                     //If we didn't get any ranks, we tell the user to rank the themes

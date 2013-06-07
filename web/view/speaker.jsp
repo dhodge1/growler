@@ -41,6 +41,19 @@
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
     </head>
     <body id="growler1">
+        <%          
+                    String user = "";
+                    try {
+                        user = String.valueOf(session.getAttribute("id"));
+                        String name = String.valueOf(session.getAttribute("user"));                  
+                    }
+                    catch (Exception e) {
+                        
+                    }
+                    if (user == null) {
+                        response.sendRedirect("../index.jsp");
+                    }
+        %>
         <%@ include file="../includes/header.jsp" %> 
         <%@ include file="../includes/usernav.jsp" %>
         <div class="row">
@@ -50,7 +63,6 @@
             <div class="span6 largeBottomMargin">
                 <%
                     SpeakerPersistence persist = new SpeakerPersistence();
-                    String user = String.valueOf(session.getAttribute("id"));
                     ArrayList<Speaker> speakers = persist.getUserRanks(Integer.parseInt(user));
                     if (speakers == null || speakers.size() == 0) {
                         out.print("<h1 class=bordered>Speakers - Drag & Drop Speakers to Rank Them</h1>");

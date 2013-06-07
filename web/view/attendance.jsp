@@ -31,18 +31,27 @@
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <%@ include file="../includes/scriptlist.jsp" %>
         <script>
-            $(function() {    $( "#modalDialog" ).dialog({
+            $(function() {    
+                $( "#modalDialog" ).dialog({
                     resizable: false,
-                    height:140,
+                    height:240,
                     modal: true,
                     buttons: {
                         "Take a Survey": function() {
                             $( this ).dialog( "close" );
-                            window.location = '../view/surveylist.jsp'
+                            window.location = '../view/surveylist.jsp';
                         },        
-                                "Don't take Survey": function() {          
-                            $( this ).dialog( "close" );
-                            alert('Thanks anyway.  You can always take a survey later!');
+                        "Don't take Survey": function() {          
+                        $("#thanksDialog").dialog({
+                                height:140,
+                                buttons: {
+                                    "Ok" : function () {
+                                        $(this).dialog("close");
+                                    }
+                                }
+                            });    
+                        $( this ).dialog( "close" );
+                            
                         }      
                     }    
                     });  
@@ -50,6 +59,18 @@
         </script>
     </head>
     <body id="growler1">
+        <% String user = "";
+                    try {
+                        user = String.valueOf(session.getAttribute("id"));
+                        String name = String.valueOf(session.getAttribute("user"));                  
+                    }
+                    catch (Exception e) {
+                        
+                    }
+                    if (user == null) {
+                        response.sendRedirect("../index.jsp");
+                    } 
+        %>
         <%@ include file="../includes/header.jsp" %>
         <%@ include file="../includes/usernav.jsp" %>
         <div class="row">
@@ -68,7 +89,9 @@
                         }
                         else if (message.startsWith("Sucessfully registered!")){
                             out.print("<p id=\"topMessage\" class=feedbackMessage-success>" + message + "</p>");
-                            out.print("<div id=\"modalDialog\" title=\"Survey Message\"><p>Please take a survey</p></div>");
+                            String sessionName = (String)session.getAttribute("sessionName");
+                            out.print("<div id=\"modalDialog\" title=\"Survey Message - Successfully Acknowledged Attendance for " + sessionName + "\"><p>Please take a survey.</p><p>This will enter you in a drawing for a fantastic prize.</p></div>");
+                            out.print("<div id=\"thanksDialog\" title=\"Thanks Anyway\"><p>Thanks anyway. You can always take a survey later.</p></div>");
                         }
                         else {
                             out.print("<p class=feedbackMessage-error>" + message + "</p>");
@@ -126,7 +149,7 @@
                                             connection.close();
                                         %>
                                     </table>
-                                    </form>
+                                    
                                 </div>
                                 <br/>
                     </div><!--end span-->

@@ -38,6 +38,18 @@
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
     </head>
     <body id="growler1">
+        <% String user = "";
+                    try {
+                        user = String.valueOf(session.getAttribute("id"));
+                        String name = String.valueOf(session.getAttribute("user"));                  
+                    }
+                    catch (Exception e) {
+                        
+                    }
+                    if (user == null) {
+                        response.sendRedirect("../index.jsp");
+                    } 
+        %>
     <%@include file="../includes/isadmin.jsp" %>
     <%@ include file="../includes/header.jsp" %> 
     <%@ include file="../includes/adminnav.jsp" %>
@@ -65,11 +77,11 @@
                             <div class="span2">
                                 <section>
                                     <form action="../model/adminuserspeaker.jsp" method="post">
-                                        <table>
+                                        <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
                                             <tr>
-                                                <td>Speaker Name</td>
-                                                <td>Visible?</td>
-                                                <td>Suggested By</td>
+                                                <th>Speaker Name</th>
+                                                <th>Visible?</th>
+                                                <th>Suggested By</th>
                                             </tr>
                                             <%
                                                 SpeakerPersistence sp = new SpeakerPersistence();

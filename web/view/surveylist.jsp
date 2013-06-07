@@ -38,7 +38,19 @@
 
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
     </head>
-    <body id="growler1">    
+    <body id="growler1">
+        <% String user = "";
+                    try {
+                        user = String.valueOf(session.getAttribute("id"));
+                        String name = String.valueOf(session.getAttribute("user"));                  
+                    }
+                    catch (Exception e) {
+                        
+                    }
+                    if (user == null) {
+                        response.sendRedirect("../index.jsp");
+                    } 
+        %>
         <%@ include file="../includes/header.jsp" %> 
         <%@ include file="../includes/usernav.jsp" %>
         <div class="row">
@@ -47,11 +59,26 @@
             </div>
             <div class="span6 largeBottomMargin">
                 <%
-                    String user = String.valueOf(session.getAttribute("id"));
                     int userId = Integer.parseInt(user);
+                    int surveystaken = 0;
+                    int surveysleft = 0;
                     ArrayList<Attendance> attendances = persist.getAttendanceByUser(userId);
                     if (attendances.size() > 0) {
-                        out.print("<h1 class=bordered>Surveys</h1>");
+                        
+                        for (int i = 0; i < attendances.size(); i++) {
+                            if (attendances.get(i).getIsRegistered() == true) {
+                                surveystaken++;
+                            }
+                            else {
+                                surveysleft++;
+                            }
+                        }
+                        if (surveysleft == 0) {
+                            out.print("<h1 class=bordered>You have no Surveys</h1>");
+                        }
+                        else {
+                            out.print("<h1 class=bordered>You have taken " + surveystaken + " surveys and have " + surveysleft + " left to take.</h1>");
+                        }
                     } else {
                         out.print("<h1 class=bordered>You have not attended any sessions</h1>");
                     }
@@ -82,7 +109,7 @@
                                             <table>
                                                 <tr>
                                                     <%
-                                                        if (attendances.size() > 0) {
+                                                        if (surveysleft > 0) {
                                                         out.print("<th>Session Name</th>");
                                                          out.print("<th>Take Survey</th>");
                                                                 }

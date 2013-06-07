@@ -48,13 +48,15 @@
             </div>
             <div class="span7 largeBottomMargin">
                 <%
+                    String user = "";
                     try {
-                    String user = String.valueOf(session.getAttribute("id"));
-                    String name = String.valueOf(session.getAttribute("user"));
-                    //Get a list of Themes by calling getUserRanks
-                    out.print("<h1 class=bordered>Welcome, " + name + "</h1>");
+                        user = String.valueOf(session.getAttribute("id"));
+                        String name = String.valueOf(session.getAttribute("user"));                  
                     }
                     catch (Exception e) {
+                        
+                    }
+                    if (user == null) {
                         response.sendRedirect("../index.jsp");
                     }
                 %>

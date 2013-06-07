@@ -24,38 +24,44 @@
         <div class="menu">
         
     <ul>
-        <li><%//Get the user's info, and post a welcome!
+        <li>
+                <%//Get the user's info, and post a welcome!
 		 if (!String.valueOf(session.getAttribute("user")).isEmpty()) {
-			String user = String.valueOf(session.getAttribute("user"));
-			out.print("    Welcome, " + user + "!");
+			String navuser = String.valueOf(session.getAttribute("user"));
+			out.print("    Welcome, " + navuser + "!");
 			}
 		 //If they aren't logged in, we want them to go back and log in.
 		 else {
 			response.sendRedirect("../index.jsp");
 		 }
 		%>
-            <ul>
-                <li><a href="../view/home.jsp">Home</a></li>
-                <li><a href="../view/help.jsp">Help</a></li>
-                <li><a href="../model/logout.jsp">Logout</a></li>
-            </ul>
         </li>
         <li>Themes
             <ul>
-                <li><a href="../view/themeentry.jsp">Suggest a Theme</a></li>
-                <li><a href="../view/theme.jsp">Rank Themes</a></li>
+                <li><a href="../view/theme.jsp">Rank Preferred Themes</a></li>
+                <li><a href="../view/themeentry.jsp">Suggest New Themes</a></li>
             </ul>
         </li>
         <li>Speakers
             <ul>
-                <li><a href="../view/speakerentry.jsp">Suggest a Speaker</a></li>
-                <li><a href="../view/speaker.jsp">Rank Speakers</a></li>
+                <li><a href="../view/speaker.jsp">Rank Preferred Speakers</a></li>
+                <li><a href="../view/speakerentry.jsp">Suggest new Speaker</a></li>
             </ul>
         </li>
         <li>Sessions
             <ul>
-                <li><a href="../view/attendance.jsp">Attend a Session</a></li>
+                <li><a href="../view/attendance.jsp">Acknowledge Attendance</a></li>
                 <li><a href="../view/surveylist.jsp">Rate a Session</a></li>
+            </ul>
+        </li>
+        <li>Help
+            <ul>
+                <li><a href="../view/help.jsp">Help</a></li>
+            </ul>
+        </li>
+        <li>Logout
+            <ul>
+                <li><a href="../model/logout.jsp">Logout</a></li>
             </ul>
         </li>
     </ul>
@@ -67,4 +73,4 @@
         if (String.valueOf(session.getAttribute("user")).isEmpty() || String.valueOf(session.getAttribute("user")).equals("null")) {
           response.sendRedirect("../index.jsp");
          }
-%>
+    %>

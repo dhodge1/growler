@@ -11,6 +11,8 @@
 <%@page import="java.sql.*"%>
 <%@page import="java.security.*"%>
 <%@page import="com.scripps.growler.DataConnection" %>
+<%@page import="com.scripps.growler.SessionPersistence" %>
+<%@page import="com.scripps.growler.Session" %>
 <jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="page" />
 <jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page" />
 <!DOCTYPE html>
@@ -65,7 +67,7 @@
             result.next();
             int check = result.getInt(1);
             if (check == 0) {
-                session.setAttribute("message", "Too late to register for this session");
+                session.setAttribute("message", "Too late to acknowledge for this session");
             } else {
                 //Ensure the key matches
                 Statement newStatement = connection.createStatement();
@@ -83,6 +85,9 @@
                         statement.execute("insert into attendance (user_id, session_id) values ("
                                 + user + ", " + sessionId + ")");
                         session.setAttribute("message", "Sucessfully registered!");
+                        SessionPersistence sp = new SessionPersistence();
+                        Session s = sp.getSessionByID(sessionId);
+                        session.setAttribute("sessionName", s.getName());
                         session.setAttribute("page", "../view/attendance.jsp");
                         success = true;
 
