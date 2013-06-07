@@ -33,7 +33,7 @@ public class Session {
     /**
      * How long the session lasts in minutes
      */
-    private Integer duration;
+    private java.sql.Time duration;
     /**
      * The location of the session
      */
@@ -145,7 +145,7 @@ public class Session {
      *
      * @return The minutes a session will last
      */
-    public Integer getDuration() {
+    public java.sql.Time getDuration() {
         return duration;
     }
 
@@ -154,7 +154,7 @@ public class Session {
      *
      * @param duration The minutes a session will last
      */
-    public void setDuration(Integer duration) {
+    public void setDuration(java.sql.Time duration) {
         this.duration = duration;
     }
 
