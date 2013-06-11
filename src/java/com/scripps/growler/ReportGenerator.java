@@ -10,19 +10,20 @@ import java.util.ListIterator;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 import java.io.*;
+import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 
 /**
  *
  * @author 162107
  */
 public class ReportGenerator extends GrowlerPersistence {
+
     static File file = new File("report.pdf");
     static Font tableHeader = new Font(Font.FontFamily.HELVETICA, 16, Font.BOLD);
     static Font tableData = new Font(Font.FontFamily.COURIER, 12);
-    
+
     public void createReport() {
         try {
             Document document = new Document();
@@ -30,12 +31,10 @@ public class ReportGenerator extends GrowlerPersistence {
             document.open();
             addContent(document);
             document.close();
-        }
-        catch (Exception e) {
-            
+        } catch (Exception e) {
         }
     }
-    
+
     public void addContent(Document document) throws DocumentException {
         ArrayList<SurveyReport> report = generateSurveyReport();
         PdfPTable table = new PdfPTable(3);
@@ -46,21 +45,21 @@ public class ReportGenerator extends GrowlerPersistence {
         PdfPCell c1 = new PdfPCell(new Phrase("Entry Number"));
         c1.setHorizontalAlignment(Element.ALIGN_CENTER);
         c1.setFixedHeight(cellHeight);
-        
-        
+
+
         table.addCell(c1);
-        
+
         PdfPCell c2 = new PdfPCell(new Phrase("User Name"));
         c2.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(c2);
-        
+
         PdfPCell c3 = new PdfPCell(new Phrase("Session Name"));
         c3.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(c3);
-        
+
         table.setHeaderRows(1);
-        
-        for (int i = 0; i < report.size(); i ++){
+
+        for (int i = 0; i < report.size(); i++) {
             table.addCell(String.valueOf(i + 1));
             table.addCell(report.get(i).getUser().getUserName());
             table.addCell(report.get(i).getSession().getName());
@@ -70,9 +69,36 @@ public class ReportGenerator extends GrowlerPersistence {
         } catch (DocumentException ex) {
             Logger.getLogger(ReportGenerator.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
-    
+
+    public ArrayList<InterestReport> generateInterestReport() {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select count(r.session_id), s.id, s.name, s.description from registration r, session s where s.id = r.session_id group by (r.session_id) order by s.name");
+            result = statement.executeQuery();
+            SpeakerPersistence sp = new SpeakerPersistence();
+            ArrayList<InterestReport> interest = new ArrayList<InterestReport>();
+            while (result.next()) {
+                InterestReport i = new InterestReport();
+                i.setSessionName(result.getString(3));
+                i.setSessionDescription(result.getString(4));
+                
+                ArrayList<Speaker> speakers = sp.getSpeakersBySession(result.getInt(2));
+                i.setSpeakers(speakers);
+                i.setInterested(result.getInt(1));
+                interest.add(i);
+            }
+            return interest;
+
+
+        } catch (Exception e) {
+        } finally {
+            closeJDBC();
+        }
+        return null;
+    }
+
     public ArrayList<SurveyReport> generateSurveyReport() {
         AttendancePersistence ap = new AttendancePersistence();
         UserPersistence up = new UserPersistence();
@@ -92,9 +118,4 @@ public class ReportGenerator extends GrowlerPersistence {
         }
         return report;
     }
-    
-    
-    
 }
-    
-    

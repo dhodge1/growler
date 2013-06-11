@@ -33,20 +33,18 @@
     </head>
     <body id="growler1">  
         <% String user = "";
-                    try {
-                        user = String.valueOf(session.getAttribute("id"));
-                        String name = String.valueOf(session.getAttribute("user"));                  
-                    }
-                    catch (Exception e) {
-                        
-                    }
-                    if (user == null) {
-                        response.sendRedirect("../index.jsp");
-                    }
+            try {
+                user = String.valueOf(session.getAttribute("id"));
+                String name = String.valueOf(session.getAttribute("user"));
+            } catch (Exception e) {
+            }
+            if (user == null) {
+                response.sendRedirect("../index.jsp");
+            }
         %>
         <%@ include file="../includes/header.jsp" %> 
         <div class="row">
-        <%@ include file="../includes/usernav.jsp" %>
+            <%@ include file="../includes/usernav.jsp" %>
         </div>
         <div class="row"><!-- The Logo Row -->
             <div class="span3">
@@ -57,76 +55,89 @@
                 <%
                     //Displaying error or success messages -- clear it out when done
                     String message = String.valueOf(session.getAttribute("message"));
-                    if (!message.equals("null") && !message.startsWith("You have")) {
+                    if (!message.equals("null") && message.startsWith("Successfully registered!")) {
                         out.print("<p class=feedbackMessage-success>" + message + "</p>");
                         session.removeAttribute("message");
-                    }
-                    else if (!message.equals("null")) {
+                    } else if (!message.equals("null")) {
                         out.print("<p class=feedbackMessage-error>" + message + "</p>");
                         session.removeAttribute("message");
                     }
+                    //Get the year
                     int year = 2013;
                     try {
                         year = Integer.parseInt(request.getParameter("year"));
-                    }
-                    catch (Exception e) {
-                        
+                    } catch (Exception e) {
                     }
                     SessionPersistence sp = new SessionPersistence();
                     LocationPersistence lp = new LocationPersistence();
+                    RegistrationPersistence rp = new RegistrationPersistence();
                     ArrayList<Session> sessions = sp.getThisYearSessions(year);
                 %>
             </div>
         </div>
         <div class="container-fluid">
             <div class="content"><!-- Begin Content -->
+                <div class="span6 offset3">
+                    <form action="sessionschedule.jsp" method="post">
+                        <select name="year">
+                            <option value="2013">2013</option>
+                            <option value="2012">2012</option>
+                            <!--Provisioned for future years! -->
+                        </select>
+                        <input value="Change Year" type="submit" class="button button-primary"/>
+                    </form>
+                </div>
                 <div class="span9 offset2">
-                <form method="post" action="../model/registerinterest.jsp">
-                <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
-                    <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Duration</th>
-                        <th>Location</th>
-                        <th>Select Interest</th>
-                    </tr>
-                    <% 
-                    for (int i = 0; i < sessions.size(); i++) {
-                        out.print("<tr>");
-                        out.print("<td>");
-                        out.print(sessions.get(i).getName());
-                        out.print("<input type=\"hidden\" value=\"" + sessions.get(i).getId() + "\" name=\"name\">");
-                        out.print("</td>");
-                        out.print("<td>");
-                        out.print(sessions.get(i).getDescription());
-                        out.print("</td>");
-                        out.print("<td>");
-                        out.print(sessions.get(i).getSessionDate());
-                        out.print("</td>");
-                        out.print("<td>");
-                        out.print(sessions.get(i).getStartTime());
-                        out.print("</td>");
-                        out.print("<td>");
-                        out.print(sessions.get(i).getDuration());
-                        out.print("</td>");
-                        out.print("<td>");
-                        out.print(lp.getLocationById(sessions.get(i).getLocation()).getDescription());
-                        out.print("</td>");
-                        out.print("<td>");
-                        out.print("<input type=\"checkbox\" value=\"" + sessions.get(i).getId() + "\" name=\"interest\">");
-                        out.print("</td>");
-                        out.print("</tr>");
-                    }
-                    %>
-                </table>
-                    <input value="Register" type="submit" class="button button-primary"/>
-                </form>
+                    <form method="post" action="../model/registerinterest.jsp">
+                        <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Duration</th>
+                                <th>Location</th>
+                                <th>Register Interest</th>
+                            </tr>
+                            <%
+                                for (int i = 0; i < sessions.size(); i++) {
+                                    out.print("<tr>");
+                                    out.print("<td>");
+                                    out.print(sessions.get(i).getName());
+                                    out.print("<input type=\"hidden\" value=\"" + sessions.get(i).getId() + "\" name=\"name\">");
+                                    out.print("</td>");
+                                    out.print("<td>");
+                                    out.print(sessions.get(i).getDescription());
+                                    out.print("</td>");
+                                    out.print("<td>");
+                                    out.print(sessions.get(i).getSessionDate());
+                                    out.print("</td>");
+                                    out.print("<td>");
+                                    out.print(sessions.get(i).getStartTime());
+                                    out.print("</td>");
+                                    out.print("<td>");
+                                    out.print(sessions.get(i).getDuration());
+                                    out.print("</td>");
+                                    out.print("<td>");
+                                    out.print(lp.getLocationById(sessions.get(i).getLocation()).getDescription());
+                                    out.print("</td>");
+                                    out.print("<td>");
+                                    out.print("<input type=\"checkbox\" value=\"" + sessions.get(i).getId() + "\" name=\"interest\"");
+                                    if (rp.isUserRegistered(Integer.parseInt(user), sessions.get(i).getId())) {
+                                        out.print(" checked ");
+                                    }
+                                    out.print(">");
+                                    out.print("</td>");
+                                    out.print("</tr>");
+                                }
+                            %>
+                        </table>
+                        <input value="Register" type="submit" class="button button-primary"/>
+                    </form>
                 </div>
             </div><!-- End Content -->	
         </div><!--/.container-fluid-->
-                <div class="row">
+        <div class="row">
             <div class="span8">
                 <p></p>
             </div>

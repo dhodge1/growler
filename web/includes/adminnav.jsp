@@ -58,6 +58,7 @@ else {
         <li>Reports
             <ul>
                 <li><a href="../admin/surveyReport.jsp">Surveys By Submission Time</a></li>
+                <li><a href="../admin/interestReport.jsp">Interest in a Session</a></li>
             </ul>
         </li>
         <li>Log Out

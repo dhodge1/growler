@@ -353,15 +353,15 @@ public class SpeakerPersistence extends GrowlerPersistence {
     public ArrayList<Speaker> getSpeakersBySession(int session) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select s.id, s.first_name, s.last_name, ses.id, ses.name from session ses, speaker s, speaker_team t where t.session_id = ses.id and t.speaker_id = s.id and ses.id = ?");
+            statement = connection.prepareStatement("select s.id, s.name, k.first_name, k.last_name from speaker k, session s, speaker_team t where t.speaker_id = k.id and t.session_id = s.id and s.id = ?");
             statement.setInt(1, session);
             result = statement.executeQuery();
             ArrayList<Speaker> speakers = new ArrayList<Speaker>();
             while (result.next()){
                 Speaker s = new Speaker();
                 s.setId(result.getInt(1));
-                s.setFirstName(result.getString(2));
-                s.setLastName(result.getString(3));
+                s.setFirstName(result.getString(3));
+                s.setLastName(result.getString(4));
                 speakers.add(s);
             }
             return speakers;
