@@ -162,8 +162,10 @@ CREATE TABLE question (
 
 DROP TABLE IF EXISTS location;
 CREATE TABLE location (
-	id				int			PRIMARY KEY
-	,description	varchar(50)
+	id				varchar(10)			PRIMARY KEY
+	,description	varchar(30)
+	,capacity		int
+	,building		varchar(20)
 	);
 	
 
@@ -323,8 +325,8 @@ insert into question values (4, "The facility was appropriate for the presentati
 /* 
  * inserts locations
  */
- insert into location values (1, "KXTC Training Room");
- insert into location values (2, "KXOFFICE Training Room");
+ insert into location( id, description, capacity, building) values (1, "KXTC Training Room", 20, 'Knoxville Office');
+ insert into location (id, description, capacity, building) values (2, "KXOFFICE Training Room", 20, 'Knoxville Office');
 
 
 /*

@@ -95,7 +95,7 @@ public class SessionPersistence extends GrowlerPersistence {
             statement.setString(1, s.getName());
             statement.setDate(2, s.getSessionDate());
             statement.setTime(3, s.getStartTime());
-            statement.setInt(4, s.getLocation());
+            statement.setString(4, s.getLocation());
             statement.setTime(5, s.getDuration());
             statement.execute();
             generateKey(s.getName());
@@ -140,7 +140,7 @@ public class SessionPersistence extends GrowlerPersistence {
             statement.setString(2, s.getDescription());
             statement.setDate(3, s.getSessionDate());
             statement.setTime(4, s.getStartTime());
-            statement.setInt(5, s.getLocation());
+            statement.setString(5, s.getLocation());
             statement.setTime(6, s.getDuration());
             statement.setInt(7, s.getId());
             statement.execute();
@@ -192,7 +192,7 @@ public class SessionPersistence extends GrowlerPersistence {
                 s.setDescription(result.getString("description"));
                 s.setSessionDate(result.getDate(4));
                 s.setStartTime(result.getTime("start_time"));
-                s.setLocation(result.getInt("location"));
+                s.setLocation(result.getString("location"));
                 s.setTrack(result.getString("track"));
                 s.setDuration(result.getTime("duration"));
                 s.setKey(result.getString("session_key"));
@@ -226,7 +226,7 @@ public class SessionPersistence extends GrowlerPersistence {
                 s.setDescription(result.getString("description"));
                 s.setSessionDate(result.getDate("session_date"));
                 s.setStartTime(result.getTime("start_time"));
-                s.setLocation(result.getInt("location"));
+                s.setLocation(result.getString("location"));
                 s.setTrack(result.getString("track"));
                 s.setDuration(result.getTime("duration"));
                 //Add the session to the list
@@ -263,7 +263,7 @@ public class SessionPersistence extends GrowlerPersistence {
                 s.setDescription(result.getString("description"));
                 s.setSessionDate(result.getDate("session_date"));
                 s.setStartTime(result.getTime("start_time"));
-                s.setLocation(result.getInt("location"));
+                s.setLocation(result.getString("location"));
                 s.setTrack(result.getString("track"));
                 s.setDuration(result.getTime("duration"));
                 //Add the session to the list
@@ -300,7 +300,7 @@ public class SessionPersistence extends GrowlerPersistence {
                 s.setDescription(result.getString("description"));
                 s.setSessionDate(result.getDate("session_date"));
                 s.setStartTime(result.getTime("start_time"));
-                s.setLocation(result.getInt("location"));
+                s.setLocation(result.getString("location"));
                 s.setTrack(result.getString("track"));
                 s.setDuration(result.getTime("duration"));
                 //Add the session to the list
@@ -338,7 +338,7 @@ public class SessionPersistence extends GrowlerPersistence {
                 s.setDescription(result.getString("description"));
                 s.setSessionDate(result.getDate("session_date"));
                 s.setStartTime(result.getTime("start_time"));
-                s.setLocation(result.getInt("location"));
+                s.setLocation(result.getString("location"));
                 s.setTrack(result.getString("track"));
                 s.setDuration(result.getTime("duration"));
                 //Add the session to the list
@@ -399,7 +399,7 @@ public class SessionPersistence extends GrowlerPersistence {
                 s.setDescription(result.getString("description"));
                 s.setSessionDate(result.getDate("session_date"));
                 s.setStartTime(result.getTime("start_time"));
-                s.setLocation(result.getInt("location"));
+                s.setLocation(result.getString("location"));
                 s.setTrack(result.getString("track"));
                 s.setDuration(result.getTime("duration"));
             }
@@ -423,7 +423,7 @@ public class SessionPersistence extends GrowlerPersistence {
                 s.setDescription(result.getString("description"));
                 s.setSessionDate(result.getDate("session_date"));
                 s.setStartTime(result.getTime("start_time"));
-                s.setLocation(result.getInt("location"));
+                s.setLocation(result.getString("location"));
                 s.setTrack(result.getString("track"));
                 s.setDuration(result.getTime("duration"));
                 sessions.add(s);

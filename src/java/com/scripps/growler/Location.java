@@ -10,27 +10,16 @@ package com.scripps.growler;
  */
 public class Location {
     
-    private int id;
+    private String id;
     private String description;
+    private int capacity;
+    private String building;
 
-    public Location(int id, String description) {
-        this.id = id;
-        this.description = description;
-    }
-
-    public Location() {
-    }
-
-    public Location(int id) {
-        this.id = id;
-    }
-
-    
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -41,5 +30,22 @@ public class Location {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public String getBuilding() {
+        return building;
+    }
+
+    public void setBuilding(String building) {
+        this.building = building;
+    }
+
     
 }

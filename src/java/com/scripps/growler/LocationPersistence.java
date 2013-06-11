@@ -19,9 +19,11 @@ public class LocationPersistence extends GrowlerPersistence {
     public void addLocation(Location l) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("insert into location (id, description) values (?, ?)");
-            statement.setInt(1, l.getId());
+            statement = connection.prepareStatement("insert into location (id, description, building, capacity) values (?, ?, ?, ?)");
+            statement.setString(1, l.getId());
             statement.setString(2, l.getDescription());
+            statement.setString(3, l.getBuilding());
+            statement.setInt(4, l.getCapacity());
             statement.execute();
         } catch (Exception e) {
             
@@ -38,7 +40,7 @@ public class LocationPersistence extends GrowlerPersistence {
         try {
             initializeJDBC();
             statement = connection.prepareStatement("delete from location where id = ?");
-            statement.setInt(1, l.getId());
+            statement.setString(1, l.getId());
             statement.execute();
         } catch (Exception e) {
             
@@ -48,15 +50,17 @@ public class LocationPersistence extends GrowlerPersistence {
     }
 
     /**
-     * Updates a location's info
+     * Updates location info
      * @param l The location to update
      */
     public void updateLocation(Location l) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("update location set description = ? where id = ?");
-            statement.setInt(2, l.getId());
+            statement = connection.prepareStatement("update location set description = ?, capacity = ?, building = ? where id = ?");
+            statement.setString(4, l.getId());
             statement.setString(1, l.getDescription());
+            statement.setInt(2, l.getCapacity());
+            statement.setString(3, l.getBuilding());
             statement.execute();
         } catch (Exception e) {
             
@@ -73,12 +77,15 @@ public class LocationPersistence extends GrowlerPersistence {
     public Location getLocationById(int id) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select id, description from location where id = ?");
+            statement = connection.prepareStatement("select id, description, capacity, building from location where id = ?");
             statement.setInt(1, id);
             result = statement.executeQuery();
             Location location = new Location();
             while (result.next()){
-                location = new Location(result.getInt("id"), result.getString("description"));
+                location.setId(result.getString("id"));
+                location.setBuilding(result.getString("building"));
+                location.setDescription(result.getString("description"));
+                location.setCapacity(result.getInt("capacity"));
             }
             return location;
         } catch (Exception e) {
@@ -96,11 +103,15 @@ public class LocationPersistence extends GrowlerPersistence {
     public ArrayList<Location> getAllLocations() {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select id, description from location");
+            statement = connection.prepareStatement("select id, description, capacity, building from location");
             result = statement.executeQuery();
             ArrayList<Location> list = new ArrayList<Location>();
             while (result.next()) {
-                Location location = new Location(result.getInt("id"), result.getString("description"));
+                Location location = new Location();
+                location.setId(result.getString("id"));
+                location.setBuilding(result.getString("building"));
+                location.setDescription(result.getString("description"));
+                location.setCapacity(result.getInt("capacity"));
                 list.add(location);
             }
             return list;

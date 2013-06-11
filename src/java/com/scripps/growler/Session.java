@@ -37,7 +37,7 @@ public class Session {
     /**
      * The location of the session
      */
-    private Integer location;
+    private String location;
     /**
      * The track of the session - What information will be covered
      */
@@ -163,7 +163,7 @@ public class Session {
      *
      * @return A reference to the location of a session
      */
-    public Integer getLocation() {
+    public String getLocation() {
         return location;
     }
 
@@ -172,7 +172,7 @@ public class Session {
      *
      * @param location The session location
      */
-    public void setLocation(Integer location) {
+    public void setLocation(String location) {
         this.location = location;
     }
 
