@@ -54,7 +54,7 @@ else {
                 <li><a href="../admin/session.jsp">View Sessions</a></li>
                 <li><a href="../admin/assignspeaker.jsp">Assign Speaker to Session</a></li>
                 <li><a href="../admin/room.jsp">Rooms</a></li>
-                <li><a href="../admin/assignrooms.jsp">Assign Room to a Session</a></li>
+                <li><a href="../admin/assignroom.jsp">Assign Room to a Session</a></li>
             </ul>
         </li>
         <li>Reports

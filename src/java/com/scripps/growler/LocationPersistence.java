@@ -74,11 +74,11 @@ public class LocationPersistence extends GrowlerPersistence {
      * @param id The ID to search for
      * @return The location that matches the ID
      */
-    public Location getLocationById(int id) {
+    public Location getLocationById(String id) {
         try {
             initializeJDBC();
             statement = connection.prepareStatement("select id, description, capacity, building from location where id = ?");
-            statement.setInt(1, id);
+            statement.setString(1, id);
             result = statement.executeQuery();
             Location location = new Location();
             while (result.next()){

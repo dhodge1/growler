@@ -18,42 +18,51 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <title>Techtoberfest Sessions</title><!-- Title -->
-        <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
+        <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <title>Admin Session</title><!-- Title -->
+
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> 
         <link rel="stylesheet" href="../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="../css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-        <link rel="stylesheet" href="../css/draganddrop.css" /><!--Drag and drop style-->
+        <link rel="stylesheet" href="../css/demo.css" />  
+        <link rel="stylesheet" type="text/css" href="../css/general.css" /><!--General CSS-->
+        <link rel="stylesheet" type="text/css" href="../css/speaker.css" /><!--Survey CSS-->
+        <link rel="stylesheet" href="/resources/demos/style.css" />
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
     </head>
     <body id="growler1">
         <% String user = "";
-            try {
-                user = String.valueOf(session.getAttribute("id"));
-                String name = String.valueOf(session.getAttribute("user"));
-            } catch (Exception e) {
-            }
-            if (user == null) {
-                response.sendRedirect("../index.jsp");
-            }
+                    try {
+                        user = String.valueOf(session.getAttribute("id"));
+                        String name = String.valueOf(session.getAttribute("user"));                  
+                    }
+                    catch (Exception e) {
+                        
+                    }
+                    if (user == null) {
+                        response.sendRedirect("../index.jsp");
+                    } 
         %>
         <%@include file="../includes/isadmin.jsp" %>
         <%@ include file="../includes/header.jsp" %> 
         <%@ include file="../includes/adminnav.jsp" %>
         <div class="row">
             <div class="span3">
-                <img class="logo" src="../images/Techtoberfest2013admin.png" alt="Techtoberfest 2013 admin"/>
+                <img class="logo" src="../images/Techtoberfest2013admin.png" alt="Techtoberfest 2013 admin"/><!-- Techtoberfest logo-->
             </div>
-            <div class="span5">
-                <h1 class = "bordered largeBottomMargin">Add a Speaker</h1>
+            <div class="span6 largeBottomMargin">
+                <h1 class = "bordered">Sessions</h1>
             </div>
+            
         </div>
-        <div class="container-fixed">
+        <div class="container-fluid">
             <div class="content">
                 <!-- Begin Content -->
-                <div class="row">
+                <div class="row"><!--row-->
                     
-                    <div class="span10 offset1">
+                    <div class="span9 offset2"><!--span-->
                         <%
                             //Displaying error or success messages -- clear it out when done
                             String message = (String) session.getAttribute("message");
@@ -62,6 +71,26 @@
                                 session.removeAttribute("message");
                             }
                         %>
+                        <%
+                    //Get the year
+                    int year = 2013;
+                    try {
+                        year = Integer.parseInt(request.getParameter("year"));
+                    } catch (Exception e) {
+                    }
+                    SessionPersistence sp = new SessionPersistence();
+                    LocationPersistence lp = new LocationPersistence();
+                    RegistrationPersistence rp = new RegistrationPersistence();
+                    ArrayList<Session> sessions = sp.getThisYearSessions(year);
+                %>
+                        <form action="session.jsp" method="post">
+                        <select name="year">
+                            <option value="2013">2013</option>
+                            <option value="2012">2012</option>
+                            <!--Provisioned for future years! -->
+                        </select>
+                        <input value="Change Year" type="submit" class="button button-primary"/>
+                    </form>
                         <section>
 
                             <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
@@ -71,16 +100,16 @@
                                     <th>Date</th>
                                     <th>Time</th>
                                     <th>Duration</th>
-                                    <th>Location</th>
+                                    <th>Room #</th>
+                                    <th>Room Name</th>
+                                    <th>Building</th>
+                                    <th>Capacity</th>
                                     <th>Key</th>
                                     <th>Speaker(s)</th>
                                     <th>Edit</th>
                                 </tr>
 
                                 <%
-                                    SessionPersistence sp = new SessionPersistence();
-                                    ArrayList<Session> sessions = sp.getAllSessionsWithKeys(" ");
-                                    LocationPersistence lp = new LocationPersistence();
                                     SpeakerPersistence spkr = new SpeakerPersistence();
                                     for (int i = 0; i < sessions.size(); i++) {
                                 %>
@@ -92,7 +121,10 @@
                                     <td><% out.print(sessions.get(i).getStartTime());%></td>
                                     <td><% out.print(sessions.get(i).getDuration());%></td>
                                     <td><% Location l = lp.getLocationById(sessions.get(i).getLocation());
-                                           out.print(l.getDescription());%></td>
+                                           out.print(l.getId()); %> </td>
+                                    <td><% out.print(l.getDescription()); %></td>
+                                    <td><% out.print(l.getBuilding()); %></td>
+                                    <td><% out.print(l.getCapacity()); %></td>
                                     <td><% out.print(sessions.get(i).getKey());%></td>
                                     <td>
                                         <% ArrayList<Speaker> speakers = spkr.getSpeakersBySession(sessions.get(i).getId());
@@ -115,24 +147,16 @@
 
                         </section>
                     </div>
-                    <div class="span7">
-                        <p></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Content -->
-
-        <div class="row">
-            <div class="span8">
-                <p></p>
-            </div>
-            <div class="span2">
-            </div>
-        </div>
+                </div><!--end row-->
+                
+                                                
+                                            
+            </div><!-- End Content -->	
+        </div><!--/.container-fluid-->
 
         <%@ include file="../includes/footer.jsp" %> 
         <%@ include file="../includes/scriptlist.jsp" %>
-    </body>
+        
 
+    </body>
 </html>

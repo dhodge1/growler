@@ -39,18 +39,19 @@
         <%@ include file="../includes/adminnav.jsp" %>
         <div class="row">
             <div class="span3">
-                <img class="logo" src="../images/Techtoberfest2013admin.png" alt="Techtoberfest 2013 admin"/>
+                <img class="logo" src="../images/Techtoberfest2013admin.png" alt="Techtoberfest 2013 admin"/><!-- Techtoberfest logo-->
             </div>
-            <div class="span5">
-                <h1 class = "bordered largeBottomMargin">Edit a Session</h1>
+            <div class="span6 largeBottomMargin">
+                <h1 class = "bordered">Edit a Session</h1>
             </div>
+            
         </div>
-        <div class="container-fixed">
+        <div class="container-fluid">
             <div class="content">
                 <!-- Begin Content -->
-                <div class="row">
-
-                    <div class="span10 offset1">
+                <div class="row"><!--row-->
+                    
+                    <div class="span9 offset2"><!--span-->
                         <%
                             //Displaying error or success messages -- clear it out when done
                             String message = (String) session.getAttribute("message");

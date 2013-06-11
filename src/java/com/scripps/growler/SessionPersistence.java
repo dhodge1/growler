@@ -360,11 +360,11 @@ public class SessionPersistence extends GrowlerPersistence {
         try {
             initializeJDBC();
             statement = connection.prepareStatement("select id, name from session where session_date = ? and addtime(start_time, duration) <= ? and addtime(addtime(start_time,duration), '00:15:00') >= ?");
-            statement.setDate(1,date);
-            statement.setTime(2,time);
-            statement.setTime(3,time);
+            statement.setDate(1, date);
+            statement.setTime(2, time);
+            statement.setTime(3, time);
             result = statement.executeQuery();
-            while(result.next()) {
+            while (result.next()) {
                 Session s = new Session();
                 s.setId(result.getInt("id"));
                 s.setName(result.getString("name"));
@@ -409,7 +409,7 @@ public class SessionPersistence extends GrowlerPersistence {
         }
         return null;
     }
-    
+
     public ArrayList<Session> getThisYearSessions(int year) {
         try {
             initializeJDBC();
@@ -429,18 +429,40 @@ public class SessionPersistence extends GrowlerPersistence {
                 sessions.add(s);
             }
             return sessions;
-        }
-        catch (Exception e) {
-            
-        }
-        finally {
+        } catch (Exception e) {
+        } finally {
             closeJDBC();
         }
         return null;
     }
-    
-    public void assignSpeakerTeam(){
-        
+
+    /**
+     * Checks to see if there is a session already scheduled in a room at a certain time. Multiple locations can have "TBD" as the value.
+     * 
+     * @param id
+     * @param location
+     * @return False if there is a session already scheduled in that room for that time \n True if there is no session in that room at that time
+     */
+    public boolean validateSessionSlot(int id, String location) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select id, name, start_time, session_date, location from session where start_time >= (select start_time from session where id = ?) and addtime(start_time, duration) <= (select addtime(start_time,duration) from session where id = ?) and session_date = (select session_date from session where id = ?)");
+            statement.setInt(1, id);
+            statement.setInt(2, id);
+            statement.setInt(3, id);
+            result = statement.executeQuery();
+            while (result.next()) {
+                if (result.getString("location").equals(location) && !location.equals("TBD")) {
+                    return false;
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            closeJDBC();
+        }
+        return true;
     }
-    
+
+    public void assignSpeakerTeam() {
+    }
 }

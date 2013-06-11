@@ -34,16 +34,14 @@
     </head>
     <body id="growler1">
         <% String user = "";
-                    try {
-                        user = String.valueOf(session.getAttribute("id"));
-                        String name = String.valueOf(session.getAttribute("user"));                  
-                    }
-                    catch (Exception e) {
-                        
-                    }
-                    if (user == null) {
-                        response.sendRedirect("../index.jsp");
-                    } 
+            try {
+                user = String.valueOf(session.getAttribute("id"));
+                String name = String.valueOf(session.getAttribute("user"));
+            } catch (Exception e) {
+            }
+            if (user == null) {
+                response.sendRedirect("../index.jsp");
+            }
         %>
         <%@include file="../includes/isadmin.jsp" %>
         <%@ include file="../includes/header.jsp" %> 
@@ -64,46 +62,57 @@
                     ArrayList<Location> locations = lp.getAllLocations();
                 %>
                 <div class="span9 offset2">
+                    <% 
+                            //Displaying error or success messages -- clear it out when done
+                            String message = (String) session.getAttribute("message");
+                            if (message != null && message.startsWith("Room")) {
+                                out.print("<p class=feedbackMessage-success>" + message + "</p>");
+                                session.removeAttribute("message");
+                            }
+                            else if (message != null) {
+                                out.print("<p class=feedbackMessage-error>" + message + "</p>");
+                                session.removeAttribute("message");
+                            }
+                    %>
                     <form method="post" action="../model/addroom.jsp">
-                    <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
-                        <tr>
-                            <th>Room Id</th>
-                            <th>Name</th>
-                            <th>Capacity</th>
-                            <th>Building</th>
-                            <th>Edit</th>
-                            <th>Remove</th>
-                        </tr>
-                        <% 
-                    for (int i = 0; i < locations.size(); i++) {
-                        out.print("<tr>");
-                        out.print("<td>");
-                        out.print(locations.get(i).getId());
-                        out.print("</td>");
-                        out.print("<td>");
-                        out.print(locations.get(i).getDescription());
-                        out.print("</td>");
-                        out.print("<td>");
-                        out.print(locations.get(i).getCapacity());
-                        out.print("</td>");
-                        out.print("<td>");
-                        out.print(locations.get(i).getBuilding());
-                        out.print("</td>");
-                        out.print("<td><a href=\"../admin/editroom.jsp?id=" + locations.get(i).getId() + "\">Edit</td>");
-                        out.print("<td><a href=\"../model/deleteroom.jsp?id=" + locations.get(i).getId() + "\">Delete</td>");
-                        out.print("</tr>");
-                    }
-                        %>
-                        <tr>
-                            <td><input type="text" maxlength="10" name="id"/></td>
-                            <td><input type="text" maxlength="30" name="name"/></td>
-                            <td><input type="number" min="0" step="1" max="999" name="capacity"/></td>
-                            <td><input type="text" maxlength="10" name="building"/></td>
-                            <td><input type="submit" value="Add New Room"/></td>
-                            
-                        </tr>
-                    </table>
-                </form>
+                        <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
+                            <tr>
+                                <th>Room Number</th>
+                                <th>Name</th>
+                                <th>Capacity</th>
+                                <th>Building</th>
+                                <th>Edit</th>
+                                <th>Remove</th>
+                            </tr>
+                            <%
+                                for (int i = 0; i < locations.size(); i++) {
+                                    out.print("<tr>");
+                                    out.print("<td>");
+                                    out.print(locations.get(i).getId());
+                                    out.print("</td>");
+                                    out.print("<td>");
+                                    out.print(locations.get(i).getDescription());
+                                    out.print("</td>");
+                                    out.print("<td>");
+                                    out.print(locations.get(i).getCapacity());
+                                    out.print("</td>");
+                                    out.print("<td>");
+                                    out.print(locations.get(i).getBuilding());
+                                    out.print("</td>");
+                                    out.print("<td><a href=\"../admin/editroom.jsp?id=" + locations.get(i).getId() + "\">Edit</td>");
+                                    out.print("<td><a href=\"../model/deleteroom.jsp?id=" + locations.get(i).getId() + "\">Delete</td>");
+                                    out.print("</tr>");
+                                }
+                            %>
+                            <tr>
+                                <td><input required="required" type="text" maxlength="10" name="id" id="tip" data-content="Room Number, 10 Characters or Less"/></td>
+                                <td><input required="required" type="text" maxlength="30" name="name" id="tip1" data-content="Room Name, 20 Characters or Less"/></td>
+                                <td><input required="required" type="number" min="1" step="1" max="999" name="capacity" id="tip2" data-content="Maximum Capacity, 0 to 999"/></td>
+                                <td><input required="required" type="text" maxlength="20" name="building" id="tip3" data-content="Building Name, 20 Characters or Less"/></td>
+                                <td><input id="send" type="submit" value="Add New Room"/></td>
+                            </tr>
+                        </table>
+                    </form>
                 </div>
             </div><!-- End Content -->	
         </div><!--/.container-fluid-->
@@ -113,5 +122,37 @@
         <%@ include file="../includes/scriptlist.jsp" %>
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+        <script>
+                        $(function() {
+                            $("input").autoinline();
+                        });</script>
+        <script>
+                            $(function() {
+                                    $("#send").click(function() {
+                                        if ($("#tip").val() === "") {
+                                            alert("Please enter a Room Number");
+                                            $("#action").attr("action", "");
+                                        }
+                                        else if ($("#tip1").val() === "") {
+                                            alert("Please enter a Room name");
+                                            $("#action").attr("action", "");
+                                        }
+                                        else if ($("#tip2").val() === "" || $("#tip2").val() <= 0) {
+                                            alert("Please enter a Capacity greater than 0");
+                                            $("#action").attr("action", "");
+                                        }
+                                        else if ($("#tip3").val() === "") {
+                                            alert("Please enter a Building name");
+                                            $("#action").attr("action", "");
+                                        }
+                                        else {
+                                            $("#action").attr("action", "../model/addroom.jsp");
+                                        }
+                                    });
+                                });
+
+        </script>
+
+
     </body>
 </html>

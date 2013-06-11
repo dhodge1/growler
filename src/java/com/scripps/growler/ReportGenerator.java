@@ -75,7 +75,7 @@ public class ReportGenerator extends GrowlerPersistence {
     public ArrayList<InterestReport> generateInterestReport() {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select count(r.session_id), s.id, s.name, s.description from registration r, session s where s.id = r.session_id group by (r.session_id) order by s.name");
+            statement = connection.prepareStatement("select count(r.session_id), s.id, s.name, s.description from registration r, session s where s.id = r.session_id group by (r.session_id) order by count(r.session_id) desc, s.name");
             result = statement.executeQuery();
             SpeakerPersistence sp = new SpeakerPersistence();
             ArrayList<InterestReport> interest = new ArrayList<InterestReport>();

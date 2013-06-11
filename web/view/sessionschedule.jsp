@@ -96,7 +96,10 @@
                                 <th>Date</th>
                                 <th>Time</th>
                                 <th>Duration</th>
-                                <th>Location</th>
+                                <th>Room #</th>
+                                <th>Room Name</th>
+                                <th>Building</th>
+                                <th>Capacity</th>
                                 <th>Register Interest</th>
                             </tr>
                             <%
@@ -119,7 +122,16 @@
                                     out.print(sessions.get(i).getDuration());
                                     out.print("</td>");
                                     out.print("<td>");
+                                    out.print(lp.getLocationById(sessions.get(i).getLocation()).getId());
+                                    out.print("</td>");
+                                    out.print("<td>");
                                     out.print(lp.getLocationById(sessions.get(i).getLocation()).getDescription());
+                                    out.print("</td>");
+                                    out.print("<td>");
+                                    out.print(lp.getLocationById(sessions.get(i).getLocation()).getBuilding());
+                                    out.print("</td>");
+                                    out.print("<td>");
+                                    out.print(lp.getLocationById(sessions.get(i).getLocation()).getCapacity());
                                     out.print("</td>");
                                     out.print("<td>");
                                     out.print("<input type=\"checkbox\" value=\"" + sessions.get(i).getId() + "\" name=\"interest\"");
