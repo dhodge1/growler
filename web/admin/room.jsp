@@ -74,7 +74,6 @@
                                 session.removeAttribute("message");
                             }
                     %>
-                    <form method="post" action="../model/addroom.jsp">
                         <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
                             <tr>
                                 <th>Room Number</th>
@@ -104,15 +103,7 @@
                                     out.print("</tr>");
                                 }
                             %>
-                            <tr>
-                                <td><input required="required" type="text" maxlength="10" name="id" id="tip" data-content="Room Number, 10 Characters or Less"/></td>
-                                <td><input required="required" type="text" maxlength="30" name="name" id="tip1" data-content="Room Name, 20 Characters or Less"/></td>
-                                <td><input required="required" type="number" min="1" step="1" max="999" name="capacity" id="tip2" data-content="Maximum Capacity, 0 to 999"/></td>
-                                <td><input required="required" type="text" maxlength="20" name="building" id="tip3" data-content="Building Name, 20 Characters or Less"/></td>
-                                <td><input id="send" type="submit" value="Add New Room"/></td>
-                            </tr>
                         </table>
-                    </form>
                 </div>
             </div><!-- End Content -->	
         </div><!--/.container-fluid-->
@@ -126,32 +117,7 @@
                         $(function() {
                             $("input").autoinline();
                         });</script>
-        <script>
-                            $(function() {
-                                    $("#send").click(function() {
-                                        if ($("#tip").val() === "") {
-                                            alert("Please enter a Room Number");
-                                            $("#action").attr("action", "");
-                                        }
-                                        else if ($("#tip1").val() === "") {
-                                            alert("Please enter a Room name");
-                                            $("#action").attr("action", "");
-                                        }
-                                        else if ($("#tip2").val() === "" || $("#tip2").val() <= 0) {
-                                            alert("Please enter a Capacity greater than 0");
-                                            $("#action").attr("action", "");
-                                        }
-                                        else if ($("#tip3").val() === "") {
-                                            alert("Please enter a Building name");
-                                            $("#action").attr("action", "");
-                                        }
-                                        else {
-                                            $("#action").attr("action", "../model/addroom.jsp");
-                                        }
-                                    });
-                                });
-
-        </script>
+        
 
 
     </body>

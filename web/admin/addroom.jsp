@@ -1,9 +1,8 @@
 <%-- 
-    Document   : editroom
-    Created on : Jun 11, 2013, 1:28:02 PM
+    Document   : addroom
+    Created on : Jun 11, 2013, 4:25:33 PM
     Author     : 162107
 --%>
-
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
 <%@page import="com.scripps.growler.*" %>
@@ -19,7 +18,7 @@
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <title>Admin Rooms</title><!-- Title -->
+        <title>Add a Room</title><!-- Title -->
 
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> 
         <link rel="stylesheet" href="../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
@@ -52,27 +51,21 @@
                 <img class="logo" src="../images/Techtoberfest2013admin.png" alt="Techtoberfest 2013 admin"/><!-- Techtoberfest logo-->
             </div>
             <div class="span6 largeBottomMargin">
-                <h1 class = "bordered">Edit A Room</h1>
+                <h1 class = "bordered">Add A Room</h1>
             </div>
         </div>
         <div class="container-fluid">
             <div class="content"><!-- Begin Content -->
-                <%
-                    String id = request.getParameter("id");
-                    LocationPersistence lp = new LocationPersistence();
-                    Location location = lp.getLocationById(id);
-
-                %>
                 <div class="span7 offset4">
                     <form id="action" method="post" action="../model/processroom.jsp" >
                         <label class="required">Room ID:</label>
-                        <input type="text" maxlength="10" id="tip" name="id" class="input-xlarge" value="<% out.print(location.getId());%>" data-content="Room ID, 10 Characters or Less"/><br/>
+                        <input type="text" maxlength="10" id="tip" name="id" class="input-xlarge" data-content="Room ID, 10 Characters or Less"/><br/>
                         <label class="required">Room Name:</label>
-                        <input type="text" maxlength="20" id="tip1" name="name"  class="input-xlarge" value="<% out.print(location.getDescription());%>" data-content="Room Name, 20 Characters or Less"/><br/>
+                        <input type="text" maxlength="20" id="tip1" name="name"  class="input-xlarge" data-content="Room Name, 20 Characters or Less"/><br/>
                         <label class="required">Capacity:</label>
-                        <% out.print("<input value=\"" + location.getCapacity() + "\" type=\"number\" min=\"0\" max=\"999\" step=\"1\" id=\"tip2\" name=\"capacity\"  data-content=\"Maximum Capacity, 0 to 999\"/>");%><br/>
+                        <% out.print("<input type=\"number\" min=\"0\" max=\"999\" step=\"1\" id=\"tip2\" name=\"capacity\"  data-content=\"Maximum Capacity, 0 to 999\"/>");%><br/>
                         <label class="required">Building Name:</label>
-                        <input type="text" maxlength="20" id="tip3" name="building" class="input-xlarge" value="<% out.print(location.getBuilding());%>" data-content="Building Name, 20 Characters or Less"/>  
+                        <input type="text" maxlength="20" id="tip3" name="building" class="input-xlarge" data-content="Building Name, 20 Characters or Less"/>  
                         <br/>
                         <br/>
                         <input id="send" type="submit" value="Submit Changes" class="button button-primary"/>
@@ -85,9 +78,9 @@
         <%@ include file="../includes/footer.jsp" %>
         <%@ include file="../includes/scriptlist.jsp" %>
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
-        <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>           
         <script>
-                        $(document).ready(function() {
+                            $(document).ready(function() {
                                     $("#send").click(function(event) {
                                         if ($("#tip").val() == "") {
                                             alert("Please enter a Room Number");
@@ -116,7 +109,6 @@
                                 });
 
         </script>
-
-
     </body>
+    
 </html>

@@ -31,7 +31,7 @@
 
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
     </head>
-    <% 
+    <%
         String id = request.getParameter("id");
         String description = request.getParameter("name");
         int capacity = Integer.parseInt(request.getParameter("capacity"));
@@ -43,13 +43,17 @@
         l.setBuilding(building);
         LocationPersistence lp = new LocationPersistence();
         try {
-        lp.updateLocation(l);
-            session.setAttribute("message", "Room successfully updated!");
-        }
-        catch (Exception e) {
+                lp.updateLocation(l);
+                session.setAttribute("message", "Room successfully updated!");
+            } catch (Exception x) {
+                session.setAttribute("message", "Adding Room failed.");
+            }
+        try {
+            lp.addLocation(l);
+            session.setAttribute("message", "Room successfully added!");
+        } catch (Exception e) {
             session.setAttribute("message", "Updating Room failed.");
-        }
-        finally {
+        } finally {
             response.sendRedirect("../admin/room.jsp");
         }
     %>

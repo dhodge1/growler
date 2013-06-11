@@ -11,6 +11,8 @@ import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 import java.io.*;
 import java.sql.*;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -118,4 +120,29 @@ public class ReportGenerator extends GrowlerPersistence {
         }
         return report;
     }
+    
+    public ArrayList<QuestionReport> generateExpectationReport() {
+        SurveyPersistence sp = new SurveyPersistence();
+        SpeakerPersistence skp = new SpeakerPersistence();
+        SessionPersistence ssp = new SessionPersistence();
+        AttendancePersistence ap = new AttendancePersistence();
+        Map<Integer, Double> map = sp.getExpectationsByQuestion(1);
+        ArrayList<QuestionReport> report = new ArrayList<QuestionReport>();
+        Iterator iterator = map.entrySet().iterator();
+        while(iterator.hasNext()){
+            QuestionReport qr = new QuestionReport();
+            Map.Entry pairs = (Map.Entry)iterator.next();
+            Integer sessionId = (Integer)pairs.getKey();
+            Double ranking = (Double)pairs.getValue();
+            qr.setSession_name(ssp.getSessionByID(sessionId).getName());
+            qr.setSession_description(ssp.getSessionByID(sessionId).getDescription());
+            qr.setScore(ranking);
+            qr.setAttendance(ap.getCountBySession(sessionId));
+            qr.setSpeakers(skp.getSpeakersBySession(sessionId));
+            qr.setRaters(sp.getCountBySession(sessionId));
+            report.add(qr);
+        }
+        return report;
+    }
+    
 }

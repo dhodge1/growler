@@ -77,4 +77,42 @@ public class SurveyPersistence extends GrowlerPersistence {
         }
         return null;
     }
+    
+    public int getCountBySession(int session) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select count(session_id) from session_ranking where session_id = ?");
+            statement.setInt(1, session);
+            result = statement.executeQuery();
+            while (result.next()) {
+                return (result.getInt(1)/4);
+            }
+            closeJDBC();
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+    
+    public Map<Integer, Double> getExpectationsByQuestion(int question) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select r.session_id, s.name, avg(r.ranking) from session_ranking r," +
+                    " session s where s.id = r.session_id and r.question_id = ? group by r.session_id order by avg(r.ranking) desc, s.name");
+            statement.setInt(1, question);
+            result = statement.executeQuery();
+            Map<Integer, Double> sessionRanks = new HashMap<Integer, Double>();
+            while (result.next()) {
+                sessionRanks.put(result.getInt("session_id"), result.getDouble(3));
+            }
+            return sessionRanks;
+        }
+        catch (Exception e) {
+            
+        }
+        finally {
+            closeJDBC();
+        }
+        return null;
+    }
+    
 }

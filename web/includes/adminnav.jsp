@@ -53,7 +53,8 @@ else {
                 <li><a href="../admin/addsession.jsp">Add a Session</a></li>
                 <li><a href="../admin/session.jsp">View Sessions</a></li>
                 <li><a href="../admin/assignspeaker.jsp">Assign Speaker to Session</a></li>
-                <li><a href="../admin/room.jsp">Rooms</a></li>
+                <li><a href="../admin/room.jsp">View Rooms</a></li>
+                <li><a href="../admin/addroom.jsp">Add a Room</a></li>
                 <li><a href="../admin/assignroom.jsp">Assign Room to a Session</a></li>
             </ul>
         </li>
@@ -61,6 +62,7 @@ else {
             <ul>
                 <li><a href="../admin/surveyReport.jsp">Surveys By Submission Time</a></li>
                 <li><a href="../admin/interestReport.jsp">Interest in a Session</a></li>
+                <li><a href="../admin/expectationReport.jsp">Session Met Expectations</a></li>
             </ul>
         </li>
         <li>Log Out

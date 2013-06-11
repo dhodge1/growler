@@ -144,7 +144,6 @@ public class AttendancePersistence extends GrowlerPersistence {
     public ArrayList<Attendance> getAttendanceBySession(int session) {
         try {
             initializeJDBC();
-            initializeJDBC();
             statement = connection.prepareStatement("select user_id, session_id, isSurveyTaken from attendance where session_id = ?");
             statement.setInt(1, session);
             result = statement.executeQuery();
@@ -160,6 +159,21 @@ public class AttendancePersistence extends GrowlerPersistence {
         } catch (Exception e) {
         }
         return null;
+    }
+    
+    public int getCountBySession(int session) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select count(user_id) from attendance where session_id = ?");
+            statement.setInt(1, session);
+            result = statement.executeQuery();
+            while (result.next()) {
+                return (result.getInt(1));
+            }
+            closeJDBC();
+        } catch (Exception e) {
+        }
+        return 0;
     }
 
     /**
