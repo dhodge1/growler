@@ -34,12 +34,7 @@ if (!String.valueOf(session.getAttribute("user")).isEmpty()) {
 else {
   response.sendRedirect("../index.jsp");
 }
-    %>
-    <ul>
-        <li><a href="../admin/home.jsp">Home</a></li>
-        <li><a href="../model/logout.jsp">Logout</a></li>
-    </ul>
-        </li>
+    %>        
         <li>Themes
             <ul>
                 <li><a href="../admin/theme.jsp">Edit Themes</a></li>
@@ -56,7 +51,18 @@ else {
         <li>Sessions
             <ul>
                 <li><a href="../admin/addsession.jsp">Add a Session</a></li>
-                <li><a href="../admin/session.jsp">View Session Keys</a></li>
+                <li><a href="../admin/session.jsp">View Sessions</a></li>
+                <li><a href="../admin/assignspeaker.jsp">Assign Speaker to Session</a></li>
+            </ul>
+        </li>
+        <li>Reports
+            <ul>
+                <li><a href="../admin/surveyReport.jsp">Surveys By Submission Time</a></li>
+            </ul>
+        </li>
+        <li>Log Out
+            <ul>
+                <li><a href="../model/logout.jsp">Logout</a></li>
             </ul>
         </li>
     </ul>

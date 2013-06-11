@@ -31,15 +31,20 @@
         <%@include file="../includes/isadmin.jsp" %>
         <%@ include file="../includes/header.jsp" %> 
         <%@ include file="../includes/adminnav.jsp" %>
+        <div class="row">
+            <div class="span3">
+                <img class="logo" src="../images/Techtoberfest2013admin.png" alt="Techtoberfest 2013 admin"/>
+            </div>
+            <div class="span5">
+                <h1 class = "bordered largeBottomMargin">Add a Speaker</h1>
+            </div>
+        </div>
         <div class="container-fixed">
             <div class="content">
                 <!-- Begin Content -->
                 <div class="row">
                     <div class="span12">
-                        <img class="logo" src="../images/Techtoberfest2013.png" alt="Techtoberfest 2013"/>  <!-- Techtoberfest logo-->
-                        <h1 class = "bordered">Add a Session</h1>
-                        <br/>
-                        <br/>
+                        
                         <div id="tabs-1">
                             <div class="row">
                                 <div class="span1">
@@ -62,7 +67,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="required">Time: </label>
-                                                <select name="time">
+                                                <select id="time" name="time">
                                                             <option value="08:00:00">8:00 AM</option>
                                                             <option value="08:30:00">8:30 AM</option>
                                                             <option value="09:00:00">9:00 AM</option>
@@ -91,7 +96,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="required">Duration: </label>
-                                                <input id="duration" name="duration" type="number" data-content="Enter duration in minutes (Between 15 and 120)"/>
+                                                <input id="duration" name="duration" type="number" step="1" max="120" min="15" data-content="Enter duration in minutes (Between 15 and 120)" />
                                             </div>
                                             <div class="form-group">
                                                 <label class="required">Location: </label>
@@ -143,8 +148,9 @@
                         $("input").autoinline();
                     });
             function validateValues() {
+                //Get the Duration value, make sure it's within the threshold, isn't blank, and is a number
                 var myval = document.getElementById("duration");
-                if (myval.value < 15 || myval.value > 120 || !myval.value) {
+                if (myval.value < 15 || myval.value > 120 || !myval.value || isNaN(myval.value)) {
                     alert('Must be between 15 and 120');
                     myval.focus();
                     return false;

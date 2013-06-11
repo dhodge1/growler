@@ -14,8 +14,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <%
-            String user = (String)session.getAttribute("user");
-            //String id = (String)session.getAttribute("id");
             String date = request.getParameter("date");
             String time = request.getParameter("time");
             String duration = request.getParameter("duration");

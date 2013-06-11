@@ -223,7 +223,7 @@ public class SpeakerPersistence extends GrowlerPersistence {
         try {
             initializeJDBC();
             statement = connection.prepareStatement("select id, first_name, last_name, "
-                    + "suggested_by, visible from speaker where suggested_by <> 2023");
+                    + "suggested_by, visible from speaker where suggested_by <> 202300");
             result = statement.executeQuery();
             ArrayList<Speaker> speakers = new ArrayList<Speaker>();
             while (result.next()) {
@@ -349,4 +349,30 @@ public class SpeakerPersistence extends GrowlerPersistence {
         }
         return null;
     }
+    
+    public ArrayList<Speaker> getSpeakersBySession(int session) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select s.id, s.first_name, s.last_name, ses.id, ses.name from session ses, speaker s, speaker_team t where t.session_id = ses.id and t.speaker_id = s.id and ses.id = ?");
+            statement.setInt(1, session);
+            result = statement.executeQuery();
+            ArrayList<Speaker> speakers = new ArrayList<Speaker>();
+            while (result.next()){
+                Speaker s = new Speaker();
+                s.setId(result.getInt(1));
+                s.setFirstName(result.getString(2));
+                s.setLastName(result.getString(3));
+                speakers.add(s);
+            }
+            return speakers;
+        }
+        catch (Exception e) {
+            
+        }
+        finally {
+            closeJDBC();
+        }
+        return null;
+    }
+    
 }

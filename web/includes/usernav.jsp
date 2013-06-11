@@ -50,6 +50,7 @@
         </li>
         <li>Sessions
             <ul>
+                <li><a href="../view/sessionschedule.jsp">View Session Schedule</a></li>
                 <li><a href="../view/attendance.jsp">Acknowledge Attendance</a></li>
                 <li><a href="../view/surveylist.jsp">Rate a Session</a></li>
             </ul>

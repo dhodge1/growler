@@ -77,7 +77,7 @@
                                         <h3>Speakers</h3>
                                         <p>A place to view, rank, and suggest Speakers for this year's Techtoberfest</p>
                                         <h3>Sessions</h3>
-                                        <p>A place to register for and complete surveys for sessions in this year's Techtoberfest</p>
+                                        <p>A place to register interest in a session, acknowledge attendance to a session, and complete surveys for sessions in this year's Techtoberfest</p>
 
                                     </section>
                                 </div>

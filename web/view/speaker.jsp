@@ -1,5 +1,5 @@
 <%-- 
-    Document   : theme
+    Document   : speaker
     Created on : Feb 28, 2013, 7:15:03 PM
     Author     : Justin Bauguess & Jonathan C. McCowan
     Purpose    : The theme (user) page is for users to rank themes according to 

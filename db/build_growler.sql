@@ -102,7 +102,6 @@ CREATE TABLE speaker_ranking (
  * own table as we did with location. If there are only ever two tracks, 
  * and admin never need to add others, we will keep it as an attribute.
  * Survey key is a short, unique number allowing survey-takers to register their session
- * isAttendable is a boolean that is true only from start time to fifteen minutes past the session
  */
 
 DROP TABLE IF EXISTS session;
@@ -124,9 +123,9 @@ CREATE TABLE session (
  * We don't want to know which users filled out which surveys,
  * 	but we have to enforce them taking just one survey.
  * Hence, when a person submits a survey, there is a condition 
- * 	where, if isRegistered is false for that given user_id and session_id,
+ * 	where, if isSurveyTaken is false for that given user_id and session_id,
  *	the attribute is made true and records are submitted to session_ranking
- *	if isRegistered is true, however, there page redirects to explain
+ *	if isSurveyTaken is true, however, there page redirects to explain
  *	that they've already submitted a survey for that session, and no	 
  *	records are inserted into session_ranking.
  */	
@@ -134,7 +133,8 @@ DROP TABLE IF EXISTS attendance;
 CREATE TABLE attendance (
 	user_id		int	REFERENCES user(id)
 	,session_id	int	REFERENCES session(id)
-	,isRegistered	boolean	DEFAULT '0'
+	,isSurveyTaken	boolean	DEFAULT '0'
+	,surveySubmitTime datetime
 	,CONSTRAINT pk_attendance PRIMARY KEY(user_id, session_id)
 	);
 	
@@ -192,12 +192,16 @@ CREATE TABLE session_ranking (
  * Speaker teams are a way of allowing multiple speakers for a given session,
  * where a many to many relationship would exist, this bridge table associates
  * sessions and speakers.
+ * Also represents an assignment for a single speaker.  Each record must be unique,
+ * otherwise there would be the chance of having the same speaker assigned to the same 
+ * session multiple times.
  */
 
 DROP TABLE IF EXISTS speaker_team;
 CREATE TABLE speaker_team (
 	session_id		int			REFERENCES session(id)
 	,speaker_id		int			REFERENCES speaker(id)
+	,constraint pk_speaker_team primary key (session_id, speaker_id)
 	);
 
 

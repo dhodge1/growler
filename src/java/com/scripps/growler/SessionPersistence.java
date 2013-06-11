@@ -190,12 +190,12 @@ public class SessionPersistence extends GrowlerPersistence {
                 s.setId(result.getInt("id"));
                 s.setName(result.getString("name"));
                 s.setDescription(result.getString("description"));
-                s.setSessionDate(result.getDate("session_date"));
+                s.setSessionDate(result.getDate(4));
                 s.setStartTime(result.getTime("start_time"));
                 s.setLocation(result.getInt("location"));
                 s.setTrack(result.getString("track"));
                 s.setDuration(result.getTime("duration"));
-                s.setKey(result.getString(("session_key")));
+                s.setKey(result.getString("session_key"));
                 //Add the session to the list
                 sessions.add(s);
             }
@@ -409,4 +409,38 @@ public class SessionPersistence extends GrowlerPersistence {
         }
         return null;
     }
+    
+    public ArrayList<Session> getThisYearSessions(int year) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select * from session where extract(YEAR FROM session_date) = ? and extract(MONTH FROM session_date) = '10'");
+            statement.setInt(1, year);
+            result = statement.executeQuery();
+            while (result.next()) {
+                Session s = new Session();
+                s.setId(result.getInt("id"));
+                s.setName(result.getString("name"));
+                s.setDescription(result.getString("description"));
+                s.setSessionDate(result.getDate("session_date"));
+                s.setStartTime(result.getTime("start_time"));
+                s.setLocation(result.getInt("location"));
+                s.setTrack(result.getString("track"));
+                s.setDuration(result.getTime("duration"));
+                sessions.add(s);
+            }
+            return sessions;
+        }
+        catch (Exception e) {
+            
+        }
+        finally {
+            closeJDBC();
+        }
+        return null;
+    }
+    
+    public void assignSpeakerTeam(){
+        
+    }
+    
 }

@@ -81,5 +81,14 @@ scrippsHeaders[3] = "SN-AD-EMAIL";
         } catch (Exception e) {
         }
             %>
+            
+            <%
+        
+        FirstPdf pdfer = new FirstPdf();
+        
+        
+            ReportGenerator rg = new ReportGenerator();
+            rg.createReport();
+            %>
     </body>
 </html>

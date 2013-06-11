@@ -35,8 +35,8 @@
             String sessionId = request.getParameter("session");
             String user = String.valueOf(session.getAttribute("id"));
             Connection connection = dataConnection.sendConnection();
-            //Check against isRegistered value, or a user can delete a session they've taken a survey for, then take it again!
-            PreparedStatement statement = connection.prepareStatement("delete from attendance where session_id = ? and user_id = ? and isRegistered = false");
+            //Check against isSurveyTaken value, or a user can delete a session they've taken a survey for, then take it again!
+            PreparedStatement statement = connection.prepareStatement("delete from attendance where session_id = ? and user_id = ? and isSurveyTaken = false");
             statement.setInt(1, Integer.parseInt(sessionId));
             statement.setInt(2, Integer.parseInt(user));
             int success = statement.executeUpdate();

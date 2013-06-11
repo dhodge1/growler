@@ -28,36 +28,33 @@
     </head>
     <body id="growler1">
         <% String user = "";
-                    try {
-                        user = String.valueOf(session.getAttribute("id"));
-                        String name = String.valueOf(session.getAttribute("user"));                  
-                    }
-                    catch (Exception e) {
-                        
-                    }
-                    if (user == null) {
-                        response.sendRedirect("../index.jsp");
-                    } 
+            try {
+                user = String.valueOf(session.getAttribute("id"));
+                String name = String.valueOf(session.getAttribute("user"));
+            } catch (Exception e) {
+            }
+            if (user == null) {
+                response.sendRedirect("../index.jsp");
+            }
         %>
         <%@include file="../includes/isadmin.jsp" %>
         <%@ include file="../includes/header.jsp" %> 
         <%@ include file="../includes/adminnav.jsp" %>
+        <div class="row">
+            <div class="span3">
+                <img class="logo" src="../images/Techtoberfest2013admin.png" alt="Techtoberfest 2013 admin"/>
+            </div>
+            <div class="span5">
+                <h1 class = "bordered largeBottomMargin">Add a Speaker</h1>
+            </div>
+        </div>
         <div class="container-fixed">
             <div class="content">
                 <!-- Begin Content -->
                 <div class="row">
-                    <div class="span12">
-                        <img class="logo" src="../images/Techtoberfest2013admin.png" alt="Techtoberfest 2013 admin"/>  <!-- Techtoberfest logo-->
-                        <h1 class = "bordered">Sessions</h1>
-                        <br/>
-                        <br/>
-                                   <%
-                                        SessionPersistence sp = new SessionPersistence();
-                                        ArrayList<Session> sessions = sp.getAllSessionsWithKeys(" ");
-                                    %>
-                                </div>
-                                <div class="span9 offset2">
-                                    <%
+                    
+                    <div class="span10 offset1">
+                        <%
                             //Displaying error or success messages -- clear it out when done
                             String message = (String) session.getAttribute("message");
                             if (message != null) {
@@ -65,44 +62,67 @@
                                 session.removeAttribute("message");
                             }
                         %>
-                                    <section>
-                                        <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
-                                            <tr>
-                                                <th>Session Name</th>
-                                                <th>Date</th>
-                                                <th>Time</th>
-                                                <th>Location</th>
-                                                <th>Key</th>
-                                            </tr>
+                        <section>
 
-                                            <%
-                                                LocationPersistence lp = new LocationPersistence();
-                                                for (int i = 0; i < sessions.size(); i++) {
-                                            %>
-                                            <tr>
-                                                <td><% out.print(sessions.get(i).getName());%>
-                                                    <input name="list" type="hidden" value="<% out.print(sessions.get(i).getId());%>" />
-                                                <td><% out.print(sessions.get(i).getSessionDate());%></td>
-                                                <td><% out.print(sessions.get(i).getStartTime());%></td>
-                                                <td><% Location l = lp.getLocationById(sessions.get(i).getLocation());
-                                                out.print(l.getDescription());%></td>
-                                                <td><% out.print(sessions.get(i).getKey());%></td>
-                                            </tr>
+                            <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
+                                <tr>
+                                    <th>Session Name</th>
+                                    <th>Description</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Duration</th>
+                                    <th>Location</th>
+                                    <th>Key</th>
+                                    <th>Speaker(s)</th>
+                                    <th>Edit</th>
+                                </tr>
+
+                                <%
+                                    SessionPersistence sp = new SessionPersistence();
+                                    ArrayList<Session> sessions = sp.getAllSessionsWithKeys(" ");
+                                    LocationPersistence lp = new LocationPersistence();
+                                    SpeakerPersistence spkr = new SpeakerPersistence();
+                                    for (int i = 0; i < sessions.size(); i++) {
+                                %>
+                                <tr>
+
+                                    <td><% out.print(sessions.get(i).getName());%></td>
+                                    <td><% out.print(sessions.get(i).getDescription());%></td>
+                                    <td><% out.print(sessions.get(i).getSessionDate());%></td>
+                                    <td><% out.print(sessions.get(i).getStartTime());%></td>
+                                    <td><% out.print(sessions.get(i).getDuration());%></td>
+                                    <td><% Location l = lp.getLocationById(sessions.get(i).getLocation());
+                                           out.print(l.getDescription());%></td>
+                                    <td><% out.print(sessions.get(i).getKey());%></td>
+                                    <td>
+                                        <% ArrayList<Speaker> speakers = spkr.getSpeakersBySession(sessions.get(i).getId());
+                                        ListIterator<Speaker> iterator = speakers.listIterator();
+                                            while (iterator.hasNext()){
+                                                Speaker s = iterator.next();
+                                                out.print("<strong>" + s.getLastName() + ", " + s.getFirstName() + "</strong>");
+                                                if (iterator.hasNext()) {
+                                                    out.print(" and <br/>");
+                                                }
+                                            }
+                                        %>
+                                    </td>
+                                    <td><% out.print("<a href=\"../admin/sessionEdit.jsp?id=" + sessions.get(i).getId() + "\">Edit</a>"); %></td>
+                                </tr>
+                                <% } //close for loop
+                                %>
+                            </table>
 
 
-                                            <% } //close for loop
-%>
-                                        </table>
-                                    </section>
-                                </div>
-                                <div class="span7">
-                                    <p></p>
-                                </div>
-                            </div>
-                        </div>
+                        </section>
                     </div>
-                <!-- End Content -->
-            
+                    <div class="span7">
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Content -->
+
         <div class="row">
             <div class="span8">
                 <p></p>
@@ -114,4 +134,5 @@
         <%@ include file="../includes/footer.jsp" %> 
         <%@ include file="../includes/scriptlist.jsp" %>
     </body>
+
 </html>

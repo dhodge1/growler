@@ -33,15 +33,11 @@
             //Find if the user already exists
             String user = request.getParameter("corporate");
             String firstname = request.getParameter("firstname");
+            firstname = firstname.trim();
             String lastname = request.getParameter("lastname");
+            lastname = lastname.trim();
             Connection connection = dataConnection.sendConnection();
             Statement statement = connection.createStatement();
-            ResultSet result = statement.executeQuery("select corporate_id from user where corporate_id = '" + user + "'");
-            //If there's a result, we send back to the index...don't want the same user name twice
-            while (result.next()) {
-                session.setAttribute("meesage", "That ID is already registered!");
-                response.sendRedirect("../index.jsp");
-            }
             //Add the user if they aren't already there
             //In the future, we will validate the password against SiteMinder, then proceed to
             //getting the information from SiteMinder and adding into the database.
@@ -51,23 +47,21 @@
             //boolean success = statement.execute("insert into user (name, password, email, corporate_id) values ('"
             //        + user + "',sha1('" + password + "'),'" + email + "', '" + corporate + "')");
             //For now we'll make the User's name the same as their corporate Id
-            boolean success = statement.execute("insert into user(name, password, corporate_id, id) values ('" + firstname + " " + lastname + "', sha1('" + password + "'), " + user + ", " + user + ")");
-            if (success) {
-                result.close();
-                statement.close();
-                connection.close();
+            try {
+                statement.execute("insert into user(name, password, corporate_id, id) values ('" + firstname + " " + lastname + "', sha1('" + password + "'), " + user + ", " + user + ")");
+
                 session.setAttribute("user", firstname + " " + lastname);
                 session.setAttribute("id", user);
                 response.sendRedirect("../view/theme.jsp");
-            } else {
-                result.close();
+            } catch (Exception e) {
+                session.setAttribute("message", "That corporate id is already registered!");
+            } finally {
                 statement.close();
                 connection.close();
-                response.sendRedirect("../index.jsp");
             }
+            response.sendRedirect("../index.jsp");
         %>
         <%@ include file="../includes/footer.jsp" %> 
         <%@ include file="../includes/scriptlist.jsp" %>
-        <%@ include file="../includes/draganddrop.jsp" %>
     </body>
 </html>

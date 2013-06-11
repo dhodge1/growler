@@ -66,7 +66,7 @@
                     if (attendances.size() > 0) {
                         
                         for (int i = 0; i < attendances.size(); i++) {
-                            if (attendances.get(i).getIsRegistered() == true) {
+                            if (attendances.get(i).getisSurveyTaken() == true) {
                                 surveystaken++;
                             }
                             else {
@@ -117,7 +117,7 @@
                                                 </tr>
                                                 <%
                                                     for (int i = 0; i < attendances.size(); i++) {
-                                                        if (attendances.get(i).getIsRegistered() == false) {
+                                                        if (attendances.get(i).getisSurveyTaken() == false) {
 
                                                             out.print("<tr>");
                                                             out.print("<td>" + spersist.getSessionByID(attendances.get(i).getSessionId()).getName() + "</td>");

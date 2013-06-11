@@ -1,5 +1,7 @@
 package com.scripps.growler;
 
+import java.sql.Timestamp;
+
 /**
  * Represents the Attendance table in the database
  *
@@ -12,7 +14,8 @@ public class Attendance {
 
     protected int userId;
     protected int sessionId;
-    private Boolean isRegistered;
+    private Boolean isSurveyTaken;
+    private java.sql.Timestamp surveySubmitTime;
 
     /**
      * Default constructor
@@ -29,7 +32,7 @@ public class Attendance {
     public Attendance(int user, int session) {
         userId = user;
         sessionId = session;
-        isRegistered = false;
+        isSurveyTaken = false;
     }
 
     /**
@@ -42,7 +45,7 @@ public class Attendance {
     public Attendance(int user, int session, boolean register) {
         userId = user;
         sessionId = session;
-        isRegistered = register;
+        isSurveyTaken = register;
     }
 
     /**
@@ -86,16 +89,25 @@ public class Attendance {
      *
      * @return If the survey has been taken
      */
-    public Boolean getIsRegistered() {
-        return isRegistered;
+    public Boolean getIsSurveyTaken() {
+        return isSurveyTaken;
     }
 
     /**
      * Sets the survey status for an attendance
      *
-     * @param isRegistered True: survey taken, False: survey not taken
+     * @param isSurveyTaken True: survey taken, False: survey not taken
      */
-    public void setIsRegistered(Boolean isRegistered) {
-        this.isRegistered = isRegistered;
+    public void setIsSurveyTaken(Boolean isSurveyTaken) {
+        this.isSurveyTaken = isSurveyTaken;
     }
+    
+    public Timestamp getSurveySubmitTime() {
+        return surveySubmitTime;
+    }
+
+    public void setSurveySubmitTime(Timestamp surveySubmitTime) {
+        this.surveySubmitTime = surveySubmitTime;
+    }
+
 }
