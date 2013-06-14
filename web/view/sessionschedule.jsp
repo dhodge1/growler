@@ -102,7 +102,7 @@
                                     out.print("<tr>");
                                     out.print("<td>");
                                     out.print(sessions.get(i).getName());
-                                    out.print("<input type=\"hidden\" value=\"" + sessions.get(i).getId() + "\" name=\"name\">");
+                                    out.print("<input id=\"" + sessions.get(i).getId() + "\" type=\"hidden\" value=\"" + sessions.get(i).getId() + "\" name=\"name\">");
                                     out.print("</td>");
                                     out.print("<td>");
                                     out.print(sessions.get(i).getDescription());
@@ -139,7 +139,7 @@
                                 }
                             %>
                         </table>
-                        <input value="Register" type="submit" class="button button-primary"/>
+                        <input value="Register" id="send" type="submit" class="button button-primary"/>
                     </form>
                 </div>
             </div><!-- End Content -->	

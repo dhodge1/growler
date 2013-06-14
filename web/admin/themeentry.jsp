@@ -62,11 +62,11 @@
                         <fieldset>
                             <div class="form-group">
                                 <label class="required">Theme Name</label>
-                                <input name="name" class="input-xlarge" type="text" id="tip" data-content="30 characters or less please" maxlength="30"/>
+                                <input required="required" name="name" class="input-xlarge" type="text" id="tip" data-content="30 characters or less please" maxlength="30"/>
                             </div>
                             <div class="form-group">
                                 <label class="required">Theme Description</label>
-                                <input name="description" class="input-xlarge" type="text" id="tip2" data-content="250 characters or less please" maxlength="250"/>
+                                <input required="required" name="description" class="input-xlarge" type="text" id="tip2" data-content="250 characters or less please" maxlength="250"/>
                             </div>
                             <div class="form-actions">
                                 <input class="button button-primary" id="send" type="submit" value="Send" name="Submit" />
@@ -86,14 +86,10 @@
             $(function() {
                 $("input").autoinline();
             });
-            $("#send").click(function() {
-                var emptyString = "";
-                if ($("#tip").val() === emptyString || $("#tip2").val() === emptyString) {
-                    $("#action").attr("action", "");
-                    alert("Please enter both a theme name and theme description before submitting.");
-                }
-                else {
-                    $("#action").attr("action", "../model/processThemeSuggestion.jsp");
+            $("#send").click(function(event) {
+                if ($("input:empty")) {
+                    event.preventDefault();
+                    alert("Please fill in all Fields.");
                 }
             });
         </script>

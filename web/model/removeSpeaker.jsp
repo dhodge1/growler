@@ -14,6 +14,19 @@
 <html>
     <head>
         <%
+                    int user = 0;
+                    if (null == session.getAttribute("id")) {
+                        response.sendRedirect("../index.jsp");
+                    }
+                    try {
+                        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+                        String name = String.valueOf(session.getAttribute("user"));                  
+                    }
+                    catch (Exception e) {
+                        
+                    }
+                %>
+        <%
             String idString = request.getParameter("id");
             Connection connection = dataConnection.sendConnection();
             Statement statement = connection.createStatement();

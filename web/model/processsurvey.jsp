@@ -32,15 +32,28 @@
     </head>
     <body>
         <%
+                    int user = 0;
+                    if (null == session.getAttribute("id")) {
+                        response.sendRedirect("../index.jsp");
+                    }
+                    try {
+                        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+                        String name = String.valueOf(session.getAttribute("user"));                  
+                    }
+                    catch (Exception e) {
+                        
+                    }
+                %>
+        <%
             String sessionId = (String) session.getAttribute("sessionId");
 
-            String user = String.valueOf(session.getAttribute("id"));
+
             //Make sure user didn't click back and try to take survey again
             AttendancePersistence ap = new AttendancePersistence();
             ArrayList<Attendance> attendances = ap.getAttendanceBySession(Integer.parseInt(sessionId));
-            int uId = (Integer.parseInt(user));
+  
             for (int a = 0; a < attendances.size(); a++) {
-                if (uId == attendances.get(a).getUserId() && attendances.get(a).getIsSurveyTaken() == true) {
+                if (user == attendances.get(a).getUserId() && attendances.get(a).getIsSurveyTaken() == true) {
                     session.setAttribute("message", "You have already taken this survey");
                     response.sendRedirect("../view/surveylist.jsp");
                 }

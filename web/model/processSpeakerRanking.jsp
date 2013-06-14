@@ -29,9 +29,21 @@
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
     </head>
     <body id="growler1">
+        <%
+                    int user = 0;
+                    if (null == session.getAttribute("id")) {
+                        response.sendRedirect("../index.jsp");
+                    }
+                    try {
+                        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+                        String name = String.valueOf(session.getAttribute("user"));                  
+                    }
+                    catch (Exception e) {
+                        
+                    }
+                %>
         <%@ include file="../includes/header.jsp" %> 
         <% String list[] = request.getParameterValues("list");
-            int user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
             int ids[] = new int[list.length];
             for (int i = 0; i < list.length; i++) {
                 ids[i] = Integer.parseInt(list[i]);

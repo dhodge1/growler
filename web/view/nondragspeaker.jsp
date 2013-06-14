@@ -128,8 +128,9 @@
                                                                 out.print("<select id=\"visible\" name=\"visible\" size=\"10\" MULTIPLE>");
                                                                 ArrayList<Speaker> vspeakers = persist.getSpeakersByVisibility(true, persist.SORT_BY_LAST_NAME_ASC);
                                                                 for (int i = 0; i < vspeakers.size(); i++) {
-                                                                    out.print("<option value=\"" + vspeakers.get(i).getId() + "\">");
-                                                                    out.print(vspeakers.get(i).getLastName() + ", " + vspeakers.get(i).getFirstName());
+                                                                    int sId = vspeakers.get(i).getId();
+                                                                    out.print("<option value=\"" + sId + "\">");
+                                                                    out.print(vspeakers.get(i).getLastName() + ", " + vspeakers.get(i).getFirstName() + ": " + persist.getSpeakerByID(sId).getRank2012() + " out of " + persist.getSpeakerByID(sId).getCount2012() + " surveys");
                                                                     out.print("</option>");
                                                                 }
                                                                 out.print("</select>");

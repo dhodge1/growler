@@ -32,6 +32,19 @@
     </head>
     <body id="growler1">
         <%@ include file="../includes/header.jsp" %> 
+        <%
+                    int user = 0;
+                    if (null == session.getAttribute("id")) {
+                        response.sendRedirect("../index.jsp");
+                    }
+                    try {
+                        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+                        String name = String.valueOf(session.getAttribute("user"));                  
+                    }
+                    catch (Exception e) {
+                        
+                    }
+                %>
 
         <% String name = request.getParameter("name");
             String description = request.getParameter("description");
@@ -41,7 +54,6 @@
             } catch (Exception e) {
                 reason = "";
             }
-            int user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
             Theme t = new Theme();
             t.setName(name);
             t.setDescription(description);

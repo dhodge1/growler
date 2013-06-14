@@ -72,7 +72,7 @@
                         <input type="text" maxlength="20" id="tip3" name="building" class="input-xlarge" data-content="Building Name, 20 Characters or Less"/>  <br/>
                         <br/>
                         <br/>
-                        <input id="send" type="submit" value="Submit Changes" class="button button-primary"/>
+                        <input id="send" type="submit" value="Submit" class="button button-primary"/>
                     </form>
                 </div>
             </div><!-- End Content -->	

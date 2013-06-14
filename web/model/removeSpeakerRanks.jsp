@@ -13,10 +13,23 @@
 <html>
     <head>
         <%
-            String idString = String.valueOf(session.getAttribute("id"));
+                    int user = 0;
+                    if (null == session.getAttribute("id")) {
+                        response.sendRedirect("../index.jsp");
+                    }
+                    try {
+                        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+                        String name = String.valueOf(session.getAttribute("user"));                  
+                    }
+                    catch (Exception e) {
+                        
+                    }
+                %>
+        <%
+            
             Connection connection = dataConnection.sendConnection();
             Statement statement = connection.createStatement();
-            String sql = "delete from speaker_ranking where user_id = " + idString;
+            String sql = "delete from speaker_ranking where user_id = " + user;
             int success = statement.executeUpdate(sql);
             session.setAttribute("message", "Success: Your Rankings have been removed!");
             connection.close();

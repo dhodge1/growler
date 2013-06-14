@@ -1,5 +1,6 @@
 package com.scripps.growler;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 /**
@@ -16,6 +17,7 @@ public class Attendance {
     protected int sessionId;
     private Boolean isSurveyTaken;
     private java.sql.Timestamp surveySubmitTime;
+    private java.sql.Date dateRegistered;
 
     /**
      * Default constructor
@@ -110,4 +112,13 @@ public class Attendance {
         this.surveySubmitTime = surveySubmitTime;
     }
 
+    public Date getDateRegistered() {
+        return dateRegistered;
+    }
+
+    public void setDateRegistered(Date dateRegistered) {
+        this.dateRegistered = dateRegistered;
+    }
+
+    
 }

@@ -5,6 +5,9 @@
 package com.scripps.growler;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
 
 /**
  *
@@ -140,6 +143,79 @@ public class RegistrationPersistence extends GrowlerPersistence {
             return registrations;
         } catch (Exception e) {
         } finally {
+            closeJDBC();
+        }
+        return null;
+    }
+    
+    public ArrayList<Attendance> getRegisteredWhoAttended() {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select a.user_id, a.session_id, r.date_registered, a.surveySubmitTime from attendance a, registration r where r.session_id = a.session_id and r.user_id = a.user_id");
+            result = statement.executeQuery();
+            ArrayList<Attendance> list = new ArrayList<Attendance>();
+            while (result.next()) {
+                Attendance a = new Attendance();
+                a.setSessionId(result.getInt("session_id"));
+                a.setUserId(result.getInt("user_id"));
+                a.setSurveySubmitTime(result.getTimestamp("surveySubmitTime"));
+                a.setDateRegistered(result.getDate("date_registered"));
+                list.add(a);
+            }
+            return list;
+        }
+        catch (Exception e) {
+            
+        }
+        finally {
+            closeJDBC();
+        }
+        return null;
+    }
+    
+    public ArrayList<Attendance> getAttendedWhoDidNotRegister() {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select distinct a.user_id, a.session_id, a.surveySubmitTime from attendance a where (a.user_id, a.session_id) not in (select user_id, session_id from registration)");
+            result = statement.executeQuery();
+            ArrayList<Attendance> list = new ArrayList<Attendance>();
+            while (result.next()) {
+                Attendance a = new Attendance();
+                a.setSessionId(result.getInt("session_id"));
+                a.setUserId(result.getInt("user_id"));
+                a.setSurveySubmitTime(result.getTimestamp("surveySubmitTime"));
+                list.add(a);
+            }
+            return list;
+        }
+        catch (Exception e) {
+            
+        }
+        finally {
+            closeJDBC();
+        }
+        return null;
+    }
+    
+    public ArrayList<Attendance> getRegisteredWhoDidNotAttend() {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select distinct r.user_id, r.session_id, r.date_registered from registration r where (r.user_id, r.session_id) not in (select user_id, session_id from attendance)");
+            result = statement.executeQuery();
+            ArrayList<Attendance> list = new ArrayList<Attendance>();
+            while (result.next()) {
+                Attendance a = new Attendance();
+                a.setSessionId(result.getInt("session_id"));
+                a.setUserId(result.getInt("user_id"));
+                a.setDateRegistered(result.getDate("date_registered"));
+                list.add(a);
+            }
+            return list;
+        }
+        catch (Exception e) {
+            
+        }
+        finally {
             closeJDBC();
         }
         return null;

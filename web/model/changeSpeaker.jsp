@@ -14,6 +14,19 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <%
+                    int user = 0;
+                    if (null == session.getAttribute("id")) {
+                        response.sendRedirect("../index.jsp");
+                    }
+                    try {
+                        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+                        String name = String.valueOf(session.getAttribute("user"));                  
+                    }
+                    catch (Exception e) {
+                        
+                    }
+                %>
+    <%
         
         int speaker_id = Integer.parseInt(request.getParameter("id"));
         SpeakerPersistence sp = new SpeakerPersistence();

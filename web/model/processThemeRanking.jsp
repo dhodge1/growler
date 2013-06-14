@@ -31,6 +31,19 @@
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
     </head>
     <body id="growler1">
+        <%
+                    int user = 0;
+                    if (null == session.getAttribute("id")) {
+                        response.sendRedirect("../index.jsp");
+                    }
+                    try {
+                        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+                        String name = String.valueOf(session.getAttribute("user"));                  
+                    }
+                    catch (Exception e) {
+                        
+                    }
+                %>
         <%@ include file="../includes/header.jsp" %> 
         <%@ include file="../includes/usernav.jsp" %>
         <% String list[] = request.getParameterValues("list");
@@ -40,9 +53,8 @@
             for (int i = 0; i < list.length; i++) {
                 ids[i] = Integer.parseInt(list[i]);
             }
-            String idString = String.valueOf(session.getAttribute("id"));
-            int id = Integer.parseInt(idString);
-            ArrayList<Theme> themes = persist.getUserRanks(id);
+            
+            ArrayList<Theme> themes = persist.getUserRanks(user);
             Theme t = new Theme();
             //Check to see if the user already has voted.  If so, redirect to the theme page
             if (themes.size() > 0) {
@@ -56,7 +68,7 @@
                     t = persist.getThemeByID(ids[i]);
                     newThemes.add(t);
                 }
-                persist.setUserRanks(newThemes, id);
+                persist.setUserRanks(newThemes, user);
                 
 
                 session.setAttribute("message", "Success: Your votes have been recorded");

@@ -31,18 +31,16 @@
     </head>
     <body id="growler1">
         <%
-                    int user = 0;
-                    if (null == session.getAttribute("id")) {
-                        response.sendRedirect("../index.jsp");
-                    }
-                    try {
-                        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
-                        String name = String.valueOf(session.getAttribute("user"));                  
-                    }
-                    catch (Exception e) {
-                        
-                    }
-                %>
+            int user = 0;
+            if (null == session.getAttribute("id")) {
+                response.sendRedirect("../index.jsp");
+            }
+            try {
+                user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+                String name = String.valueOf(session.getAttribute("user"));
+            } catch (Exception e) {
+            }
+        %>
         <%@ include file="../includes/header.jsp" %> 
         <%@ include file="../includes/adminnav.jsp" %>
         <div class="row">
@@ -62,14 +60,14 @@
                         <fieldset>
                             <div class="form-group">
                                 <label class="required">Speaker First Name</label>
-                                <input name="first_name" class="input-xlarge" type="text" id="tip" data-content="30 characters or less please" maxlength="30"/>
+                                <input required="required" name="first_name" class="input-xlarge" type="text" id="tip" data-content="30 characters or less please" maxlength="30"/>
                             </div>
                             <div class="form-group">
                                 <label class="required">Speaker Last Name</label>
-                                <input name="last_name" class="input-xlarge" type="text" id="tip2" data-content="30 characters or less please" maxlength="30"/>
+                                <input required="required" name="last_name" class="input-xlarge" type="text" id="tip2" data-content="30 characters or less please" maxlength="30"/>
                             </div>
                             <div class="form-actions">
-                                <input class="button button-primary" type="submit" value="Submit" name="submit"/>
+                                <input class="button button-primary" id="send" type="submit" value="Submit" name="submit"/>
                                 <a class="button" id="cancel" href="../admin/speaker.jsp">Cancel</a>
                             </div>
                         </fieldset>
@@ -86,14 +84,10 @@
             $(function() {
                 $("input").autoinline();
             });
-            $("#send").click(function() {
-                var emptyString = "";
-                if ($("#tip").val() === emptyString || $("#tip2").val() === emptyString) {
-                    $("#action").attr("action", "");
-                    alert("Please enter both a first and last name for the speaker before submitting.");
-                }
-                else {
-                    $("#action").attr("action", "../model/processSpeakerSuggestion.jsp");
+            $("#send").click(function(event) {
+                if ($("input:empty")) {
+                    event.preventDefault();
+                    alert("Please fill in all Fields.");
                 }
             });
         </script>

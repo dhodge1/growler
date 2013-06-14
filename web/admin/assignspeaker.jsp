@@ -26,12 +26,14 @@
     <body id="growler1">
         <%
                     int user = 0;
+                    int sessionPassed = 0;
                     if (null == session.getAttribute("id")) {
                         response.sendRedirect("../index.jsp");
                     }
                     try {
                         user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
-                        String name = String.valueOf(session.getAttribute("user"));                  
+                        String name = String.valueOf(session.getAttribute("user"));    
+                        sessionPassed = Integer.parseInt(request.getParameter("sessionId"));
                     }
                     catch (Exception e) {
                         
@@ -71,7 +73,13 @@
                                         <%
                                             //Get a list of all sessions
                                             for (int i = 0; i < sessions.size(); i++) {
-                                                out.print("<option value=\"" + sessions.get(i).getId() + "\">" + sessions.get(i).getName() + "</option>");
+                                                out.print("<option value=\"" + sessions.get(i).getId() + "\"");
+                                                if (sessions.get(i).getId() == sessionPassed) {
+                                                    out.print(" selected ");
+                                                }
+                                                out.print("\">" + sessions.get(i).getName());
+                                                
+                                                        out.print("</option>");
                                             }
                                         %>
                                     </select>

@@ -78,7 +78,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="required">Session Description: </label>
-                                                <input id="description" name="name" type="text" data-content="Enter the name of the Session" maxlength="250"/>
+                                                <input id="description" name="description" type="text" data-content="Enter the name of the Session" maxlength="250"/>
                                             </div>
                                             <div class="form-group">
                                                 <label class="required">Date: </label>

@@ -14,7 +14,21 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <%
+                    int user = 0;
+                    if (null == session.getAttribute("id")) {
+                        response.sendRedirect("../index.jsp");
+                    }
+                    try {
+                        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+                        String name = String.valueOf(session.getAttribute("user"));                  
+                    }
+                    catch (Exception e) {
+                        
+                    }
+                %>
+        <%
             String date = request.getParameter("date");
+            String description = request.getParameter("description");
             String time = request.getParameter("time");
             String duration = request.getParameter("duration");
             int dur = Integer.parseInt(duration);
@@ -25,6 +39,7 @@
             String location = request.getParameter("location");
             Session s = new Session();
             s.setName(name);
+            s.setDescription(description);
             s.setSessionDate(java.sql.Date.valueOf(date));
             s.setStartTime(java.sql.Time.valueOf(time));
             s.setDuration(java.sql.Time.valueOf(durString));

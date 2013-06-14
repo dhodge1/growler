@@ -140,7 +140,7 @@
                                                     out.print("<br/><a href=\"../admin/removespeaker.jsp?sessionId=" + sessions.get(i).getId() + "\">Remove a Speaker</a>");
                                                 }
                                             }
-                                            out.print("<br/><a href=\"../admin/assignspeaker.jsp\">Assign a Speaker</a>");
+                                            out.print("<br/><a href=\"../admin/assignspeaker.jsp?sessionId=" + sessions.get(i).getId() + "\">Assign a Speaker</a>");
                                         %>
                                     </td>
                                     <td><% out.print("<a href=\"../admin/sessionEdit.jsp?id=" + sessions.get(i).getId() + "\">Edit</a>"); %></td>

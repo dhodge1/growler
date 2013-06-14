@@ -24,14 +24,15 @@ scrippsHeaders[3] = "SN-AD-EMAIL";
     <body>
             
             <%
+        RegistrationPersistence rp = new RegistrationPersistence();
+        ArrayList<Attendance> list = rp.getRegisteredWhoAttended();
         
-        
-        
-        
-            ReportGenerator rg = new ReportGenerator();
-            String result = rg.createReport();
-            
-            out.print(result);
+        for (int i = 0; i < list.size(); i++) {
+            out.print(list.get(i).getSessionId());
+            out.print(" was attended by ");
+            out.print(list.get(i).getUserId());
+            out.print(" who actually registered interest.<br/>");
+        }
             %>
     </body>
 </html>

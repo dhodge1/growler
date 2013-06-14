@@ -68,6 +68,7 @@ if (!String.valueOf(session.getAttribute("user")).isEmpty()) {
                 <li><a href="../admin/speakerReport.jsp">Speaker Knowledge</a></li>
                 <li><a href="../admin/presentationReport.jsp">Best Presentation Skills</a></li>
                 <li><a href="../admin/overallReport.jsp">Best Overall</a></li>
+                <li><a href="../admin/registrationAttendanceReport.jsp">Registration vs. Attendance</a></li>
             </ul>
         </li>
         <li>Log Out

@@ -24,48 +24,63 @@
         <link rel="stylesheet" href="../css/draganddrop.css" /><!--Drag and drop style-->
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
     </head>
-    <% 
+    <%
+                    int user = 0;
+                    if (null == session.getAttribute("id")) {
+                        response.sendRedirect("../index.jsp");
+                    }
+                    try {
+                        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+                        String name = String.valueOf(session.getAttribute("user"));                  
+                    }
+                    catch (Exception e) {
+                        
+                    }
+                %>
+    <%
         //Get the necessary values
-        String user = String.valueOf(session.getAttribute("id"));
-        int id = Integer.parseInt(user);
+        
         String[] interest = request.getParameterValues("interest");
         String[] names = request.getParameterValues("name");
         //Convert the List of sessionIDs into integers   
-            int ids[] = new int[names.length];
-            for (int i = 0; i < ids.length; i++) {
-                ids[i] = Integer.parseInt(names[i]);
-            }
+        int ids[] = new int[names.length];
+        for (int i = 0; i < ids.length; i++) {
+            ids[i] = Integer.parseInt(names[i]);
+        }
+        //Clear out the old ranks
+        DataConnection dc = new DataConnection();
+        Connection connection = dc.sendConnection();
+        Statement dstatement = connection.createStatement();
+        dstatement.execute("delete from registration where user_id = " + user);
+        try {
             //Convert the List of registered sessionIDs into integers   
             int interests[] = new int[interest.length];
             for (int i = 0; i < interest.length; i++) {
                 interests[i] = Integer.parseInt(interest[i]);
             }
-        //Prepare SQL
-        DataConnection dc = new DataConnection();
-        Connection connection = dc.sendConnection();
-        Statement dstatement = connection.createStatement();
-        dstatement.execute("delete from registration where user_id = " + id);
-        
-        PreparedStatement statement = connection.prepareStatement("insert into registration (user_id, session_id, date_registered, time_registered) " +
-                " values (?, ?, curdate(), curtime())");
-        //Search through the array for values to enter
-        Arrays.sort(interests);
-        Arrays.sort(ids);
-        for (int i = 0; i < ids.length; i++) {
-            if (Arrays.binarySearch(interests, ids[i]) >= 0) {
-                try {
-                    statement.setInt(1, id);
-                    statement.setInt(2, ids[i]);
-                    statement.execute();
-                }
-                catch (Exception e) {
-                    
+            PreparedStatement statement = connection.prepareStatement("insert into registration (user_id, session_id, date_registered, time_registered) "
+                    + " values (?, ?, curdate(), curtime())");
+            //Search through the array for values to enter
+            Arrays.sort(interests);
+            Arrays.sort(ids);
+            for (int i = 0; i < ids.length; i++) {
+                if (Arrays.binarySearch(interests, ids[i]) >= 0) {
+                    try {
+                        statement.setInt(1, user);
+                        statement.setInt(2, ids[i]);
+                        statement.execute();
+                    } catch (Exception e) {
+                    }
                 }
             }
+            session.setAttribute("message", "Success: Your interest has been registered!");
+        } catch (Exception e) {
+            session.setAttribute("message", "Success: Your interests have been removed!");
         }
-        session.setAttribute("message", "Success: Your interest has been registered!");
+        //Prepare SQL
+
         response.sendRedirect("../view/sessionschedule.jsp");
-        
+
     %>
-    
+
 </html>

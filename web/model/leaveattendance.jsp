@@ -32,13 +32,26 @@
     </head>
     <body>
         <%
+                    int user = 0;
+                    if (null == session.getAttribute("id")) {
+                        response.sendRedirect("../index.jsp");
+                    }
+                    try {
+                        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+                        String name = String.valueOf(session.getAttribute("user"));                  
+                    }
+                    catch (Exception e) {
+                        
+                    }
+                %>
+        <%
             String sessionId = request.getParameter("session");
-            String user = String.valueOf(session.getAttribute("id"));
+
             Connection connection = dataConnection.sendConnection();
             //Check against isSurveyTaken value, or a user can delete a session they've taken a survey for, then take it again!
             PreparedStatement statement = connection.prepareStatement("delete from attendance where session_id = ? and user_id = ? and isSurveyTaken = false");
             statement.setInt(1, Integer.parseInt(sessionId));
-            statement.setInt(2, Integer.parseInt(user));
+            statement.setInt(2, user);
             int success = statement.executeUpdate();
             if (success == 0) {
                 session.setAttribute("message", "Failed to remove attendance record.");

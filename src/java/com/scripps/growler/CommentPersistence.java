@@ -40,7 +40,7 @@ public class CommentPersistence extends GrowlerPersistence {
     public ArrayList<Comment> getCommentsBySession(int id){
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select session_id, comment from comments where session_id = ?");
+            statement = connection.prepareStatement("select session_id, comment from comments where session_id = ? order by comment");
             statement.setInt(1, id);
             result = statement.executeQuery();
             ArrayList<Comment> comments = new ArrayList<Comment>();
@@ -65,7 +65,7 @@ public class CommentPersistence extends GrowlerPersistence {
     public ArrayList<Comment> getAllComments(){
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select session_id, comment from comments order by session_id");
+            statement = connection.prepareStatement("select session_id, comment from comments order by session_id, comment");
             result = statement.executeQuery();
             ArrayList<Comment> comments = new ArrayList<Comment>();
             while (result.next()) {

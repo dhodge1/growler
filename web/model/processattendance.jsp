@@ -34,12 +34,24 @@
     </head>
     <body>
         <%
+                    int user = 0;
+                    if (null == session.getAttribute("id")) {
+                        response.sendRedirect("../index.jsp");
+                    }
+                    try {
+                        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+                        String name = String.valueOf(session.getAttribute("user"));                  
+                    }
+                    catch (Exception e) {
+                        
+                    }
+                %>
+        <%
             Calendar today = Calendar.getInstance();
             String date = today.get(Calendar.YEAR) + "-" + (today.get(Calendar.MONTH) + 1) + "-" + today.get(Calendar.DATE);
             String time = today.get(Calendar.HOUR) + ":" + today.get(Calendar.MINUTE) + ":" + today.get(Calendar.SECOND);
             int sessionId = Integer.parseInt(request.getParameter("session"));
             String key = request.getParameter("skey");
-            String user = String.valueOf(session.getAttribute("id"));
 
             boolean success = false;
 

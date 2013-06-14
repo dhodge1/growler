@@ -33,14 +33,27 @@
     <body id="growler1">
         <%@ include file="../includes/header.jsp" %> 
 
+        <%
+                    int user = 0;
+                    if (null == session.getAttribute("id")) {
+                        response.sendRedirect("../index.jsp");
+                    }
+                    try {
+                        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+                        String name = String.valueOf(session.getAttribute("user"));                  
+                    }
+                    catch (Exception e) {
+                        
+                    }
+                %>
         <% String first_name = request.getParameter("first_name");
             String last_name = request.getParameter("last_name");
             String admin = request.getParameter("admin");
-            int id = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+
             Speaker s = new Speaker();
             s.setFirstName(first_name);
             s.setLastName(last_name);
-            s.setSuggestedBy(id);
+            s.setSuggestedBy(user);
             s.setVisible(false);
             Speaker s2 = persist.getSpeakerByName(first_name, last_name);
             if (s.getFirstName() == s2.getFirstName() && s.getLastName() == s2.getLastName()) {
@@ -50,7 +63,7 @@
             else {
                 persist.addSpeaker(s);
             }
-            if (id == 808300) {
+            if (user == 808300) {
                 response.sendRedirect("../admin/userspeaker.jsp");
             } else {
                 session.setAttribute("message", "Success: Speaker " + s.getLastName() + ", " + s.getFirstName() + " successfully added!");

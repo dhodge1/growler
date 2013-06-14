@@ -123,7 +123,7 @@
                                                     %>
                                             </ul>	
                                             <% if (themes == null || themes.size() == 0) {
-                                                    out.print("<input type=\"submit\" value=\"Submit Rankings\" class=\"button button-primary\"/>");
+                                                    out.print("<input id=\"send\" type=\"submit\" value=\"Submit Rankings\" class=\"button button-primary\"/>");
                                                 }
                                             %>
                                         </form>

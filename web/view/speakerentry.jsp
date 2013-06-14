@@ -60,14 +60,14 @@
                         <fieldset>
                             <div class="form-group">
                                 <label class="required">Speaker First Name</label>
-                                <input name="first_name" class="input-xlarge" type="text" id="tip" data-content="30 characters or less please" maxlength="30"/>
+                                <input required="required" name="first_name" class="input-xlarge" type="text" id="tip" data-content="30 characters or less please" maxlength="30"/>
                             </div>
                             <div class="form-group">
                                 <label class="required">Speaker Last Name</label>
-                                <input name="last_name" class="input-xlarge" type="text" id="tip2" data-content="30 characters or less please" maxlength="30"/>
+                                <input required="required" name="last_name" class="input-xlarge" type="text" id="tip2" data-content="30 characters or less please" maxlength="30"/>
                             </div>
                             <div class="form-actions">
-                                <input type="submit" class="button button-primary" value="Send"/>
+                                <input type="submit" id="send" class="button button-primary" value="Send"/>
                                 <a class="button" id="cancel" href="../view/speaker.jsp">Cancel</a>
                             </div>
                         </fieldset>
@@ -84,14 +84,10 @@
             $(function() {
                 $("input").autoinline();
             });
-            $("#send").click(function() {
-                var emptyString = "";
-                if ($("#tip").val() === emptyString || $("#tip2").val() === emptyString) {
-                    $("#action").attr("action", "");
-                    alert("Please enter both a first and last name for the speaker before submitting.");
-                }
-                else {
-                    $("#action").attr("action", "../model/processSpeakerSuggestion.jsp");
+            $("#send").click(function(event) {
+                if ($("input:empty")) {
+                    event.preventDefault();
+                    alert("Please fill in all Fields.");
                 }
             });
         </script>

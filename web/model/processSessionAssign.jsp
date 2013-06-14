@@ -15,6 +15,19 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Page</title>
         <%
+                    int user = 0;
+                    if (null == session.getAttribute("id")) {
+                        response.sendRedirect("../index.jsp");
+                    }
+                    try {
+                        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+                        String name = String.valueOf(session.getAttribute("user"));                  
+                    }
+                    catch (Exception e) {
+                        
+                    }
+                %>
+        <%
 
             int speakerId = Integer.parseInt(request.getParameter("speaker"));
             int sessionId = Integer.parseInt(request.getParameter("sessionId"));

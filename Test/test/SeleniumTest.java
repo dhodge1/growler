@@ -30,21 +30,20 @@ public class SeleniumTest {
         
         driver.get("http://sni-techtoberfest.elasticbeanstalk.com");
         driver.manage().window().maximize();
-        driver.findElement(By.name("username")).sendKeys("808300");
+        driver.findElement(By.name("username")).sendKeys("202300");
         driver.findElement(By.name("password")).sendKeys("password");
         WebElement button = driver.findElement(By.id("send"));
         button.click();
         
-        driver.navigate().to("http://sni-techtoberfest.elasticbeanstalk.com/admin/speaker.jsp");
+        
         
     }
     
-    @Test 
-    public void testChangeVisibilityOnTheme() throws Exception {
-        List<WebElement> visible = driver.findElements(By.name("last"));
-            WebElement l = visible.get(3);
-            l.clear();
-            l.sendKeys("UH OH!");
+    @Test
+    public void testRegistration() {
+        driver.navigate().to("http://sni-techtoberfest.elasticbeanstalk.com/view/sessionschedule.jsp");
+        driver.findElement(By.name("interest")).click();
+        driver.findElement(By.id("send"));
     }
     
     

@@ -65,18 +65,18 @@
                         <fieldset>
                             <div class="form-group">
                                 <label class="required">Theme Name</label>
-                                <input name="name" class="input-xlarge" type="text" id="tip" data-content="30 characters or less please" maxlength="30"/>
+                                <input required="required" name="name" class="input-xlarge" type="text" id="tip" data-content="30 characters or less please" maxlength="30"/>
                             </div>
                             <div class="form-group">
                                 <label class="required">Theme Description</label>
-                                <input name="description" class="input-xlarge" type="text" id="tip2" data-content="250 characters or less please" maxlength="250"/>
+                                <input required="required" name="description" class="input-xlarge" type="text" id="tip2" data-content="250 characters or less please" maxlength="250"/>
                             </div>
                             <div class="form-group">
                                 <label>Why should we implement this theme?</label>
                                 <input name="reason" class="input-xlarge" type="text" id="tip3" data-content="Help us understand what this theme suggestion means to you" maxlength="250"/>
                             </div>
                             <div class="form-actions">
-                                <input type="submit" class="button button-primary" value="Send" />
+                                <input type="submit" id="send" class="button button-primary" value="Send" />
                                 <a class="button" id="cancel" href="../view/theme.jsp">Cancel</a>
                             </div>
                         </fieldset>
@@ -93,11 +93,11 @@
             $(function() {
                 $("input").autoinline();
             });
-            $("#send").click(function() {
+            $("#send").click(function(event) {
                 var emptyString = "";
                 if ($("#tip").val() === emptyString || $("#tip2").val() === emptyString) {
-                    $("#action").attr("action", "");
                     alert("Please enter both a theme name and theme description before submitting.");
+                    event.preventDefault();
                 }
                 else {
                     $("#action").attr("action", "../model/processThemeSuggestion.jsp");
