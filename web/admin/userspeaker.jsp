@@ -38,7 +38,11 @@
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
     </head>
     <body id="growler1">
-        <% String user = "";
+        <%
+                    String user = "";
+                    if (null == session.getAttribute("id")) {
+                        response.sendRedirect("../index.jsp");
+                    }
                     try {
                         user = String.valueOf(session.getAttribute("id"));
                         String name = String.valueOf(session.getAttribute("user"));                  
@@ -46,10 +50,7 @@
                     catch (Exception e) {
                         
                     }
-                    if (user == null) {
-                        response.sendRedirect("../index.jsp");
-                    } 
-        %>
+                %>
     <%@include file="../includes/isadmin.jsp" %>
     <%@ include file="../includes/header.jsp" %> 
     <%@ include file="../includes/adminnav.jsp" %>
@@ -64,17 +65,15 @@
     <div class="container-fluid">
         <div class="content">
             <!-- Begin Content -->
+            <%@include file="../includes/messagehandler.jsp" %>
             <div class="row"><!--row-->
                 <div class="span6 offset3"><!--span-->
                     <div id="tabs-1">
                         <div class="row">
                             <div class="span1">
                                 <br/>
-                                <%
-                                    
-                                %>
                             </div>
-                            <div class="span2">
+                            <div class="span5">
                                 <section>
                                     <form action="../model/adminuserspeaker.jsp" method="post">
                                         <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
@@ -82,6 +81,7 @@
                                                 <th>Speaker Name</th>
                                                 <th>Visible?</th>
                                                 <th>Suggested By</th>
+                                                <th>Remove</th>
                                             </tr>
                                             <%
                                                 SpeakerPersistence sp = new SpeakerPersistence();
@@ -104,6 +104,7 @@
                                                         User u = up.getUserByID(speakers.get(i).getSuggestedBy());
                                                            out.print(u.getUserName());%>
                                                 </td>
+                                                <td><%out.print("<a href=\"../model/removeSpeaker.jsp?id=" + speakers.get(i).getId() + "\">Remove</a></td>"); %></td>
                                             </tr>
                                             <% } //close for loop%>
                                         </table>

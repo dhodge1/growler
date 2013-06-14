@@ -50,6 +50,7 @@
         <div class="container-fluid">
             <div class="content" role="main">
                 <!-- Begin Content -->
+                <%@include file="../includes/messagehandler.jsp" %>
                 <form method="POST" id="action" action="../model/sendreset.jsp">
                     <div class="span5 offset3">
                         <fieldset>

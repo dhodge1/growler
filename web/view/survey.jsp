@@ -37,7 +37,11 @@
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
     </head>
     <body id="growler1">
-        <% String user = "";
+        <%
+                    String user = "";
+                    if (null == session.getAttribute("id")) {
+                        response.sendRedirect("../index.jsp");
+                    }
                     try {
                         user = String.valueOf(session.getAttribute("id"));
                         String name = String.valueOf(session.getAttribute("user"));                  
@@ -45,10 +49,7 @@
                     catch (Exception e) {
                         
                     }
-                    if (user == null) {
-                        response.sendRedirect("../index.jsp");
-                    } 
-        %>
+                %>
         <%@ include file="../includes/header.jsp" %> 
         <%@ include file="../includes/usernav.jsp" %>
         <div class="row">
@@ -63,7 +64,7 @@
                     ArrayList<Attendance> attendances = ap.getAttendanceBySession(Integer.parseInt(sessionId));
                     int uId = (Integer.parseInt(user));
                     for (int a = 0; a < attendances.size(); a++) {
-                        if (uId == attendances.get(a).getUserId() && attendances.get(a).getisSurveyTaken() == true) {
+                        if (uId == attendances.get(a).getUserId() && attendances.get(a).getIsSurveyTaken() == true) {
                             session.setAttribute("message", "You have already taken this survey");
                             response.sendRedirect("../view/surveylist.jsp");
                         }
@@ -119,7 +120,7 @@
                                                 %>
                                                 
                                             </table>
-                                                <label>Comments:</label><input type="text" maxlength="250" name="comment"/>
+                                                <label>Comments:</label><br/><br/><input type="text" maxlength="250" size="90" name="comment"/>
                                             <input id="send" class="button button-primary" type="submit" value="Submit Survey" />
                                         </form>
                                     </section>

@@ -1,6 +1,6 @@
 <%-- 
-    Document   : surveyReport
-    Created on : Jun 10, 2013, 2:18:37 PM
+    Document   : overallReport
+    Created on : Jun 12, 2013, 9:06:40 AM
     Author     : 162107
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -49,36 +49,52 @@
                 <img class="logo" src="../images/Techtoberfest2013admin.png" alt="Techtoberfest 2013 admin"/>
             </div>
             <div class="span5">
-                <h1 class = "bordered largeBottomMargin">Report: Surveys Taken By Submission Time</h1>
+                <h1 class = "bordered largeBottomMargin">Report: Overall Score</h1>
             </div>
         </div>
         <div class="container-fluid">
             <div class="content" role="main"><!-- Begin Content -->	
                 <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
-                    <tr>
-                        <th>Entry Number</th>
-                        <th>User Name</th>
+                    <tr>                    
                         <th>Session Name</th>
+                        <th>Description</th>
+                        <th>Speaker(s)</th>
+                        <th>Avg. Rating</th>
+                        <th># Attended</th>
+                        <th># Rated</th>
                     </tr>
                     <%  ReportGenerator rg = new ReportGenerator();
-                        ArrayList<SurveyReport> report = rg.generateSurveyReport();
+                        ArrayList<QuestionReport> qr = rg.generateTotalRankingsReport();
                         
-                        for(int i = 0; i < report.size(); i++) {
+                        
+                        for(int i = 0; i < qr.size(); i++) {
                             out.print("<tr>");
                             out.print("<td>");
-                            out.print(i + 1);
+                            out.print(qr.get(i).getSession_name());
                             out.print("</td>");
                             out.print("<td>");
-                            out.print(report.get(i).getUser().getUserName());
+                            out.print(qr.get(i).getSession_description());
                             out.print("</td>");
                             out.print("<td>");
-                            out.print(report.get(i).getSession().getName());
+                            ArrayList<Speaker> speakers = qr.get(i).getSpeakers();
+                            for (int x = 0; x < speakers.size(); x++) {
+                                out.print(speakers.get(x).getLastName() + ", " + speakers.get(x).getFirstName() + " <br/> ");
+                            }
+                            out.print("</td>");
+                            out.print("<td>");
+                            out.print(qr.get(i).getScore());
+                            out.print("</td>");
+                            out.print("<td>");
+                            out.print(qr.get(i).getAttendance());
+                            out.print("</td>");
+                            out.print("<td>");
+                            out.print(qr.get(i).getRaters());
                             out.print("</td>");
                             out.print("</tr>");
                         }
                     %>
                 </table>
-                <label><a href="../SurveyReportServlet">Download a PDF</a></label>
+                <label><a href="../admin/download.jsp?type=interset">Download a PDF</a></label>
             </div><!-- /.content -->
         </div><!-- /.container-fluid -->
 

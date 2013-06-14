@@ -15,7 +15,7 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <title>Assign a Speaker to a Session</title><!-- Title -->
+        <title>Assign a Room to a Session</title><!-- Title -->
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
@@ -24,26 +24,28 @@
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
     </head>
     <body id="growler1">
-        <% String user = "";
-            try {
-                user = String.valueOf(session.getAttribute("id"));
-                String name = String.valueOf(session.getAttribute("user"));
-            } catch (Exception e) {
-            }
-            if (user == null) {
-                response.sendRedirect("../index.jsp");
-            }
-        %>
+        <%
+                    String user = "";
+                    if (null == session.getAttribute("id")) {
+                        response.sendRedirect("../index.jsp");
+                    }
+                    try {
+                        user = String.valueOf(session.getAttribute("id"));
+                        String name = String.valueOf(session.getAttribute("user"));                  
+                    }
+                    catch (Exception e) {
+                        
+                    }
+                %>
         <%@include file="../includes/isadmin.jsp" %>
         <%@ include file="../includes/header.jsp" %> 
         <%@ include file="../includes/adminnav.jsp" %>
-        <div class="row">
+<div class="row">
             <div class="span3">
-                <img class="logo" src="../images/Techtoberfest2013admin.png" alt="Techtoberfest 2013 admin"/>
+                <img class="logo" src="../images/Techtoberfest2013admin.png" alt="Techtoberfest 2013 admin"/><!-- Techtoberfest logo-->
             </div>
-            <br/>
-            <div class="span5">
-                <h1 class = "bordered largeBottomMargin">Assign a Room to a Session</h1>
+            <div class="span6 largeBottomMargin">
+                <h1 class = "bordered">Assign a Room to a Session</h1>
             </div>
         </div>
         <div class="container-fixed">
@@ -52,22 +54,12 @@
                 <div class="row">
 
                     <div class="span10 offset2">
-                        <%
-                            //Displaying error or success messages -- clear it out when done
-                            String message = (String) session.getAttribute("message");
-                            if (message != null && message.startsWith("Room")) {
-                                out.print("<p class=feedbackMessage-success>" + message + "</p>");
-                                session.removeAttribute("message");
-                            } else if (message != null) {
-                                out.print("<p class=feedbackMessage-error>" + message + "</p>");
-                                session.removeAttribute("message");
-                            }
-                        %>
+                        <%@include file="../includes/messagehandler.jsp" %>
                         <section>
                             <%
                                 SessionPersistence sessionPersist = new SessionPersistence();
                                 LocationPersistence locationPersist = new LocationPersistence();
-                                ArrayList<Session> sessions = sessionPersist.getAllSessions(" ");
+                                ArrayList<Session> sessions = sessionPersist.getThisYearSessions(2013);
                                 ArrayList<Location> locations = locationPersist.getAllLocations();
                             %>
                             <form id="action" action="../model/processroomassign.jsp" method="post" onsubmit="return validateForm();">
@@ -123,14 +115,14 @@
         <%@ include file="../includes/scriptlist.jsp" %>
         <script>
                                 $(document).ready(function() {
-                                    $("#send").click(function() {
+                                    $("#send").click(function(event) {
                                         if ($(".session").val() == 0) {
                                             alert("Please enter a session!");
-                                            $("#action").attr("action", "");
+                                            event.preventDefault();
                                         }
                                         else if ($(".speaker").val() == 0) {
                                             alert("Please enter a speaker!");
-                                            $("#action").attr("action", "");
+                                            event.preventDefault();
                                         }
                                         else {
                                             $("#action").attr("action", "../model/processroomassign.jsp");

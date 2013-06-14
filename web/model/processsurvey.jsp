@@ -40,7 +40,7 @@
             ArrayList<Attendance> attendances = ap.getAttendanceBySession(Integer.parseInt(sessionId));
             int uId = (Integer.parseInt(user));
             for (int a = 0; a < attendances.size(); a++) {
-                if (uId == attendances.get(a).getUserId() && attendances.get(a).getisSurveyTaken() == true) {
+                if (uId == attendances.get(a).getUserId() && attendances.get(a).getIsSurveyTaken() == true) {
                     session.setAttribute("message", "You have already taken this survey");
                     response.sendRedirect("../view/surveylist.jsp");
                 }

@@ -90,13 +90,14 @@ public class SessionPersistence extends GrowlerPersistence {
         try {
             initializeJDBC();
             statement = connection.prepareStatement("insert into session "
-                    + " (name, session_date, start_time, location, duration) "
-                    + " values (?, ?, ?, ?, ?)");
+                    + " (name, session_date, start_time, location, duration, session_key) "
+                    + " values (?, ?, ?, ?, ?, substring(sha1(?), 1, 4))");
             statement.setString(1, s.getName());
             statement.setDate(2, s.getSessionDate());
             statement.setTime(3, s.getStartTime());
             statement.setString(4, s.getLocation());
             statement.setTime(5, s.getDuration());
+            statement.setString(6, s.getKey());
             statement.execute();
             generateKey(s.getName());
             closeJDBC();
@@ -351,6 +352,10 @@ public class SessionPersistence extends GrowlerPersistence {
         return null;
     }
 
+    /**
+     * Gets a list of sessions that are on today's date, that are over, but haven't been over longer than 15 minutes.
+     * @return Sessions a user can acknowledge
+     */
     public ArrayList<Session> getSessionsToAcknowledge() {
         Calendar today = Calendar.getInstance();
         String dateString = today.get(Calendar.YEAR) + "-" + (today.get(Calendar.MONTH) + 1) + "-" + today.get(Calendar.DATE);
@@ -359,10 +364,10 @@ public class SessionPersistence extends GrowlerPersistence {
         java.sql.Time time = java.sql.Time.valueOf(timeString);
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select id, name from session where session_date = ? and addtime(start_time, duration) <= ? and addtime(addtime(start_time,duration), '00:15:00') >= ?");
-            statement.setDate(1, date);
-            statement.setTime(2, time);
-            statement.setTime(3, time);
+            statement = connection.prepareStatement("select id, name from session where session_date = curdate() and addtime(start_time, duration) <= curtime() and addtime(addtime(start_time,duration), '00:15:00') >= curtime()");
+//            statement.setDate(1, date);
+//            statement.setTime(2, time);
+//            statement.setTime(3, time);
             result = statement.executeQuery();
             while (result.next()) {
                 Session s = new Session();
@@ -426,6 +431,7 @@ public class SessionPersistence extends GrowlerPersistence {
                 s.setLocation(result.getString("location"));
                 s.setTrack(result.getString("track"));
                 s.setDuration(result.getTime("duration"));
+                s.setKey(result.getString("session_key"));
                 sessions.add(s);
             }
             return sessions;
@@ -446,7 +452,7 @@ public class SessionPersistence extends GrowlerPersistence {
     public boolean validateSessionSlot(int id, String location) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select id, name, start_time, session_date, location from session where start_time >= (select start_time from session where id = ?) and addtime(start_time, duration) <= (select addtime(start_time,duration) from session where id = ?) and session_date = (select session_date from session where id = ?)");
+            statement = connection.prepareStatement("select id, name, start_time, addtime(start_time, duration), session_date, location from session where addtime(start_time, duration) >= (select start_time from session where id = ?) and session_date = (select session_date from session where id = ?) and start_time <= (select addtime(start_time, duration) from session where id = ?)");
             statement.setInt(1, id);
             statement.setInt(2, id);
             statement.setInt(3, id);

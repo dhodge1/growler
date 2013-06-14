@@ -1,6 +1,6 @@
 <%-- 
-    Document   : assignspeaker
-    Created on : Jun 10, 2013, 10:52:05 AM
+    Document   : removespeaker
+    Created on : Jun 13, 2013, 3:41:53 PM
     Author     : 162107
 --%>
 <%@page import="java.util.*"%>
@@ -15,7 +15,7 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <title>Assign a Speaker to a Session</title><!-- Title -->
+        <title>Remove a Speaker from a Session</title><!-- Title -->
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
@@ -24,7 +24,7 @@
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
     </head>
     <body id="growler1">
-        <%
+            <%
                     String user = "";
                     if (null == session.getAttribute("id")) {
                         response.sendRedirect("../index.jsp");
@@ -46,7 +46,7 @@
             </div>
             <br/>
             <div class="span5">
-                <h1 class = "bordered largeBottomMargin">Assign a Suggested Speaker to a Session</h1>
+                <h1 class = "bordered largeBottomMargin">Remove a Speaker from a Session</h1>
             </div>
         </div>
         <div class="container-fixed">
@@ -58,29 +58,24 @@
                         <%@include file="../includes/messagehandler.jsp" %>
                         <section>
                             <%
+                                int sessionId = Integer.parseInt(request.getParameter("sessionId"));
                                 SessionPersistence sessionPersist = new SessionPersistence();
                                 SpeakerPersistence speakerPersist = new SpeakerPersistence();
-                                ArrayList<Session> sessions = sessionPersist.getThisYearSessions(2013);
-                                ArrayList<Speaker> speakers = speakerPersist.getNonDefaultSpeakers();
+                                
+                                
                             %>
-                            <form id="action" action="../model/processSessionAssign.jsp" method="post" onsubmit="return validateForm();">
+                            <form id="action" action="../model/processSpeakerRemove.jsp" method="post" onsubmit="return validateForm();">
                                 <div class="form-group">
-                                    <label class="required">Session Name:</label>
-                                    <select class="session" name="sessionId">
-                                        <option value="0"> - Please Pick a Session - </option>
-                                        <%
-                                            //Get a list of all sessions
-                                            for (int i = 0; i < sessions.size(); i++) {
-                                                out.print("<option value=\"" + sessions.get(i).getId() + "\">" + sessions.get(i).getName() + "</option>");
-                                            }
-                                        %>
-                                    </select>
+                                    <label>Session Name:</label>
+                                    <label><% out.print(sessionPersist.getSessionByID(sessionId).getName()); %></label>
+                                    <input type="hidden" name="sessionId" value="<% out.print(sessionId); %>"/>
                                 </div>
                                 <div class="form-group">
-                                    <label>Suggested Speakers:</label>
+                                    <label>Assigned Speakers:</label>
                                     <select class="speaker" name="speaker">
                                         <option value="0"> - Please Pick a Speaker - </option>
                                         <%
+                                            ArrayList<Speaker> speakers = speakerPersist.getSpeakersBySession(sessionId);
                                             //Get a list of suggested speakers
                                             for (int i = 0; i < speakers.size(); i++) {
                                                 out.print("<option value=\"" + speakers.get(i).getId() + "\">" + speakers.get(i).getLastName() + ", " + speakers.get(i).getFirstName() + "</option>");
@@ -88,7 +83,6 @@
                                         %>
                                     </select>
                                 </div>
-                                <a href="../admin/speakerentry.jsp">Add a New Speaker</a><br/>
                                 <div class="form-actions">
                                     <input id="send" type="submit" class="button button-primary" value="Submit"/>
                                 </div>
@@ -125,7 +119,7 @@
                                             event.preventDefault();
                                         }
                                         else {
-                                            $("#action").attr("action", "../model/processSessionAssign.jsp");
+                                            $("#action").attr("action", "../model/processSpeakerRemove.jsp");
                                         }
                                     });
                                 });

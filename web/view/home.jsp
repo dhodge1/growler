@@ -49,6 +49,9 @@
             <div class="span7 largeBottomMargin">
                 <%
                     String user = "";
+                    if (null == session.getAttribute("id")) {
+                        response.sendRedirect("../index.jsp");
+                    }
                     try {
                         user = String.valueOf(session.getAttribute("id"));
                         String name = String.valueOf(session.getAttribute("user"));                  
@@ -56,15 +59,13 @@
                     catch (Exception e) {
                         
                     }
-                    if (user == null) {
-                        response.sendRedirect("../index.jsp");
-                    }
                 %>
             </div>
         </div>
         <div class="container-fluid">
             <div class="content">
                 <!-- Begin Content -->
+                <%@include file="../includes/messagehandler.jsp" %>
                 <div class="row"><!--row-->
                     <div class="span6 offset3"><!--span-->
                         <div id="tabs-1">

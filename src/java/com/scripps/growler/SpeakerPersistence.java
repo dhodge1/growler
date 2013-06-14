@@ -139,6 +139,30 @@ public class SpeakerPersistence extends GrowlerPersistence {
         }
         return null;
     }
+    
+    public Speaker getSpeakerByName(String first, String last) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select id, first_name,"
+                    + "last_name, suggested_by, visible from speaker "
+                    + "where first_name = ? and last_name = ?");
+            statement.setString(1, first);
+            statement.setString(2, last);
+            result = statement.executeQuery();
+            Speaker s = new Speaker();
+            if (result.next()) {
+                s.setId(result.getInt("id"));
+                s.setFirstName(result.getString("first_name"));
+                s.setLastName(result.getString("last_name"));
+                s.setSuggestedBy(result.getInt("suggested_by"));
+                s.setVisible(result.getBoolean("visible"));
+            }
+            closeJDBC();
+            return (s);
+        } catch (Exception e) {
+        }
+        return null;
+    }
 
     /**
      * Gets every speaker in the database along with their rank - used for admin
@@ -353,7 +377,7 @@ public class SpeakerPersistence extends GrowlerPersistence {
     public ArrayList<Speaker> getSpeakersBySession(int session) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select s.id, s.name, k.first_name, k.last_name from speaker k, session s, speaker_team t where t.speaker_id = k.id and t.session_id = s.id and s.id = ?");
+            statement = connection.prepareStatement("select k.id, s.name, k.first_name, k.last_name from speaker k, session s, speaker_team t where t.speaker_id = k.id and t.session_id = s.id and s.id = ?");
             statement.setInt(1, session);
             result = statement.executeQuery();
             ArrayList<Speaker> speakers = new ArrayList<Speaker>();

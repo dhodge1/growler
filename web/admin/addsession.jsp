@@ -28,19 +28,33 @@
         <link rel="stylesheet" type="text/css" href="css/help.css" /><!--Help CSS-->
     </head>
     <body id="growler1">
+        <%
+                    String user = "";
+                    if (null == session.getAttribute("id")) {
+                        response.sendRedirect("../index.jsp");
+                    }
+                    try {
+                        user = String.valueOf(session.getAttribute("id"));
+                        String name = String.valueOf(session.getAttribute("user"));                  
+                    }
+                    catch (Exception e) {
+                        
+                    }
+                %>
         <%@include file="../includes/isadmin.jsp" %>
         <%@ include file="../includes/header.jsp" %> 
         <%@ include file="../includes/adminnav.jsp" %>
         <div class="row">
             <div class="span3">
-                <img class="logo" src="../images/Techtoberfest2013admin.png" alt="Techtoberfest 2013 admin"/>
+                <img class="logo" src="../images/Techtoberfest2013admin.png" alt="Techtoberfest 2013 admin"/><!-- Techtoberfest logo-->
             </div>
-            <div class="span5">
-                <h1 class = "bordered largeBottomMargin">Add a Speaker</h1>
+            <div class="span6 largeBottomMargin">
+                <h1 class = "bordered">Add A Session</h1>
             </div>
         </div>
         <div class="container-fixed">
             <div class="content">
+                <%@include file="../includes/messagehandler.jsp" %>
                 <!-- Begin Content -->
                 <div class="row">
                     <div class="span12">
@@ -59,7 +73,11 @@
                                         <form method="post" action="../model/processSession.jsp" onSubmit="return validateValues();">
                                             <div class="form-group">
                                                 <label class="required">Session Name: </label>
-                                                <input id="name" name="name" type="text" data-content="Enter the name of the Session"/>
+                                                <input id="name" name="name" type="text" data-content="Enter the name of the Session" maxlength="70"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="required">Session Description: </label>
+                                                <input id="description" name="name" type="text" data-content="Enter the name of the Session" maxlength="250"/>
                                             </div>
                                             <div class="form-group">
                                                 <label class="required">Date: </label>
@@ -159,6 +177,12 @@
                 if (!myname.value) {
                     alert('Please enter a Session Name');
                     myname.focus();
+                    return false;
+                }
+                var mydesc = document.getElementById("description");
+                if (!mydesc.value) {
+                    alert('Please enter a Session Description');
+                    mydesc.focus();
                     return false;
                 }
                 var mydate = document.getElementById("datepicker");

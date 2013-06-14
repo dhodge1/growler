@@ -30,10 +30,7 @@
 if (!String.valueOf(session.getAttribute("user")).isEmpty()) {
               out.print(session.getAttribute("user"));   
 }
-//If they aren't logged in, we want them to go back and log in.
-else {
-  response.sendRedirect("../index.jsp");
-}
+
     %>        
         <li>Themes
             <ul>
@@ -46,13 +43,18 @@ else {
                 <li><a href="../admin/speaker.jsp">Edit Speakers</a></li>
                 <li><a href="../admin/userspeaker.jsp">Suggested Speakers</a></li>
                 <li><a href="../admin/speakerentry.jsp">Add a Speaker</a></li>
+                <li><a href="../admin/assignspeaker.jsp">Assign Speaker to Session</a></li>
             </ul>
         </li>
         <li>Sessions
             <ul>
                 <li><a href="../admin/addsession.jsp">Add a Session</a></li>
                 <li><a href="../admin/session.jsp">View Sessions</a></li>
-                <li><a href="../admin/assignspeaker.jsp">Assign Speaker to Session</a></li>
+                <li><a href="../admin/comments.jsp">Comments By Session</a></li>
+            </ul>
+        </li>
+        <li>Rooms
+            <ul>
                 <li><a href="../admin/room.jsp">View Rooms</a></li>
                 <li><a href="../admin/addroom.jsp">Add a Room</a></li>
                 <li><a href="../admin/assignroom.jsp">Assign Room to a Session</a></li>
@@ -63,6 +65,9 @@ else {
                 <li><a href="../admin/surveyReport.jsp">Surveys By Submission Time</a></li>
                 <li><a href="../admin/interestReport.jsp">Interest in a Session</a></li>
                 <li><a href="../admin/expectationReport.jsp">Session Met Expectations</a></li>
+                <li><a href="../admin/speakerReport.jsp">Speaker Knowledge</a></li>
+                <li><a href="../admin/presentationReport.jsp">Best Presentation Skills</a></li>
+                <li><a href="../admin/overallReport.jsp">Best Overall</a></li>
             </ul>
         </li>
         <li>Log Out

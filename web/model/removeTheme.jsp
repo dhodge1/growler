@@ -18,7 +18,7 @@
             Statement statement = connection.createStatement();
             String sql = "delete from theme where id = " + idString;
             int success = statement.executeUpdate(sql);
-            session.setAttribute("message", "The theme has been deleted!");
+            session.setAttribute("message", "Success: The theme has been deleted!");
             connection.close();
             statement.close();
             response.sendRedirect("../admin/theme.jsp");

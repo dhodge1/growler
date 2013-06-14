@@ -1,6 +1,6 @@
 <%-- 
-    Document   : surveyReport
-    Created on : Jun 10, 2013, 2:18:37 PM
+    Document   : comments
+    Created on : Jun 13, 2013, 11:32:54 AM
     Author     : 162107
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -18,7 +18,7 @@
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <title>Techtoberfest Report</title>
+        <title>Techtoberfest Comments</title>
 
         <link rel="stylesheet" href="../css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
         <link rel="stylesheet" href="../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
@@ -49,36 +49,33 @@
                 <img class="logo" src="../images/Techtoberfest2013admin.png" alt="Techtoberfest 2013 admin"/>
             </div>
             <div class="span5">
-                <h1 class = "bordered largeBottomMargin">Report: Surveys Taken By Submission Time</h1>
+                <h1 class = "bordered largeBottomMargin">Comments By Session</h1>
             </div>
         </div>
         <div class="container-fluid">
-            <div class="content" role="main"><!-- Begin Content -->	
+            <div class="content" role="main"><!-- Begin Content -->
+                <%@include file="../includes/messagehandler.jsp" %>
                 <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
                     <tr>
-                        <th>Entry Number</th>
-                        <th>User Name</th>
                         <th>Session Name</th>
+                        <th>Comment</th>
                     </tr>
-                    <%  ReportGenerator rg = new ReportGenerator();
-                        ArrayList<SurveyReport> report = rg.generateSurveyReport();
-                        
-                        for(int i = 0; i < report.size(); i++) {
+                    <%  
+                        CommentPersistence cp = new CommentPersistence();
+                        SessionPersistence sp = new SessionPersistence();
+                        ArrayList<Comment> comments = cp.getAllComments();
+                        for (int i = 0; i < comments.size(); i++) {
                             out.print("<tr>");
                             out.print("<td>");
-                            out.print(i + 1);
+                            out.print(sp.getSessionByID(comments.get(i).getSession_id()).getName());
                             out.print("</td>");
                             out.print("<td>");
-                            out.print(report.get(i).getUser().getUserName());
-                            out.print("</td>");
-                            out.print("<td>");
-                            out.print(report.get(i).getSession().getName());
+                            out.print(comments.get(i).getDescription());
                             out.print("</td>");
                             out.print("</tr>");
                         }
                     %>
                 </table>
-                <label><a href="../SurveyReportServlet">Download a PDF</a></label>
             </div><!-- /.content -->
         </div><!-- /.container-fluid -->
 

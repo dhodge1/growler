@@ -52,14 +52,17 @@
 
                 session.setAttribute("user", firstname + " " + lastname);
                 session.setAttribute("id", user);
-                response.sendRedirect("../view/theme.jsp");
+                session.setAttribute("message", "Success: You have been successfully registered!");
+                
             } catch (Exception e) {
-                session.setAttribute("message", "That corporate id is already registered!");
+                session.setAttribute("message", "Error: That corporate id is already registered!");
             } finally {
                 statement.close();
                 connection.close();
             }
-            response.sendRedirect("../index.jsp");
+            
+            
+            response.sendRedirect("../view/theme.jsp");
         %>
         <%@ include file="../includes/footer.jsp" %> 
         <%@ include file="../includes/scriptlist.jsp" %>

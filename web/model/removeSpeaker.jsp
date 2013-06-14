@@ -19,7 +19,7 @@
             Statement statement = connection.createStatement();
             String sql = "delete from speaker where id = " + idString;
             int success = statement.executeUpdate(sql);
-            session.setAttribute("message", "The Speaker has been deleted!");
+            session.setAttribute("message", "Success: The Speaker has been deleted!");
             connection.close();
             statement.close();
             response.sendRedirect("../admin/speaker.jsp");

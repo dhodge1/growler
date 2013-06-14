@@ -40,10 +40,10 @@
         LocationPersistence lp = new LocationPersistence();
         try {
         lp.deleteLocation(l);
-            session.setAttribute("message", "Room successfully deleted!");
+            session.setAttribute("message", "Success: Room successfully deleted!");
         }
         catch (Exception e) {
-            session.setAttribute("message", "Deleting Room failed.");
+            session.setAttribute("message", "Error: Deleting Room failed.");
         }
         finally {
             response.sendRedirect("../admin/room.jsp");

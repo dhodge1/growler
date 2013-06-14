@@ -10,6 +10,7 @@ import java.util.ListIterator;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 import java.io.*;
+import java.net.URI;
 import java.sql.*;
 import java.util.Iterator;
 import java.util.Map;
@@ -22,19 +23,23 @@ import java.util.logging.Logger;
  */
 public class ReportGenerator extends GrowlerPersistence {
 
-    static File file = new File("report.pdf");
     static Font tableHeader = new Font(Font.FontFamily.HELVETICA, 16, Font.BOLD);
     static Font tableData = new Font(Font.FontFamily.COURIER, 12);
-
-    public void createReport() {
+    
+    public String createReport() {
         try {
+            
+            File file = new File("report.pdf");
+    
             Document document = new Document();
             PdfWriter.getInstance(document, new FileOutputStream(file));
             document.open();
             addContent(document);
             document.close();
+            return (file.getAbsolutePath());
         } catch (Exception e) {
         }
+        return "I don't know";
     }
 
     public void addContent(Document document) throws DocumentException {
@@ -43,28 +48,45 @@ public class ReportGenerator extends GrowlerPersistence {
 //        float[] columnWidth = {10, 45, 45};
 //        Rectangle pageSize = new Rectangle((float) 8.5, 11);
 //        table.setWidthPercentage(columnWidth, pageSize);
-        float cellHeight = 5;
+        float cellHeight = 30;
         PdfPCell c1 = new PdfPCell(new Phrase("Entry Number"));
         c1.setHorizontalAlignment(Element.ALIGN_CENTER);
         c1.setFixedHeight(cellHeight);
-
-
+        c1.setBorderWidthBottom((float)1.5);
         table.addCell(c1);
 
         PdfPCell c2 = new PdfPCell(new Phrase("User Name"));
         c2.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c2.setBorderWidthBottom((float)1.5);
         table.addCell(c2);
+        
 
         PdfPCell c3 = new PdfPCell(new Phrase("Session Name"));
         c3.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c3.setBorderWidthBottom((float)1.5);
         table.addCell(c3);
 
         table.setHeaderRows(1);
 
         for (int i = 0; i < report.size(); i++) {
-            table.addCell(String.valueOf(i + 1));
-            table.addCell(report.get(i).getUser().getUserName());
-            table.addCell(report.get(i).getSession().getName());
+            PdfPCell c4 = new PdfPCell();
+            c4.setHorizontalAlignment(Element.ALIGN_LEFT);
+            c4.setFixedHeight(cellHeight);
+            c4.setPhrase(new Phrase(String.valueOf(i + 1)));
+            c4.setBorderWidthBottom((float)1.5);
+            table.addCell(c4);
+            PdfPCell c5 = new PdfPCell();
+            c5.setHorizontalAlignment(Element.ALIGN_LEFT);
+            c5.setFixedHeight(cellHeight);
+            c5.setBorderWidthBottom((float)1.5);
+            c5.setPhrase(new Phrase(report.get(i).getUser().getUserName()));
+            table.addCell(c5);
+            PdfPCell c6 = new PdfPCell();
+            c6.setHorizontalAlignment(Element.ALIGN_LEFT);
+            c6.setFixedHeight(cellHeight);
+            c6.setBorderWidthBottom((float)1.5);
+            c6.setPhrase(new Phrase(report.get(i).getSession().getName()));
+            table.addCell(c6);
         }
         try {
             document.add(table);
@@ -126,7 +148,7 @@ public class ReportGenerator extends GrowlerPersistence {
         SpeakerPersistence skp = new SpeakerPersistence();
         SessionPersistence ssp = new SessionPersistence();
         AttendancePersistence ap = new AttendancePersistence();
-        Map<Integer, Double> map = sp.getExpectationsByQuestion(1);
+        Map<Integer, Double> map = sp.getAverageRankingByQuestion(1);
         ArrayList<QuestionReport> report = new ArrayList<QuestionReport>();
         Iterator iterator = map.entrySet().iterator();
         while(iterator.hasNext()){
@@ -145,4 +167,51 @@ public class ReportGenerator extends GrowlerPersistence {
         return report;
     }
     
+    public ArrayList<QuestionReport> generateRankingsReport(int question) {
+        SurveyPersistence sp = new SurveyPersistence();
+        SpeakerPersistence skp = new SpeakerPersistence();
+        SessionPersistence ssp = new SessionPersistence();
+        AttendancePersistence ap = new AttendancePersistence();
+        Map<Integer, Double> map = sp.getAverageRankingByQuestion(question);
+        ArrayList<QuestionReport> report = new ArrayList<QuestionReport>();
+        Iterator iterator = map.entrySet().iterator();
+        while(iterator.hasNext()){
+            QuestionReport qr = new QuestionReport();
+            Map.Entry pairs = (Map.Entry)iterator.next();
+            Integer sessionId = (Integer)pairs.getKey();
+            Double ranking = (Double)pairs.getValue();
+            qr.setSession_name(ssp.getSessionByID(sessionId).getName());
+            qr.setSession_description(ssp.getSessionByID(sessionId).getDescription());
+            qr.setScore(ranking);
+            qr.setAttendance(ap.getCountBySession(sessionId));
+            qr.setSpeakers(skp.getSpeakersBySession(sessionId));
+            qr.setRaters(sp.getCountBySession(sessionId));
+            report.add(qr);
+        }
+        return report;
+    }
+    
+    public ArrayList<QuestionReport> generateTotalRankingsReport() {
+        SurveyPersistence sp = new SurveyPersistence();
+        SpeakerPersistence skp = new SpeakerPersistence();
+        SessionPersistence ssp = new SessionPersistence();
+        AttendancePersistence ap = new AttendancePersistence();
+        Map<Integer, Double> map = sp.getAverageTotalRanking();
+        ArrayList<QuestionReport> report = new ArrayList<QuestionReport>();
+        Iterator iterator = map.entrySet().iterator();
+        while(iterator.hasNext()){
+            QuestionReport qr = new QuestionReport();
+            Map.Entry pairs = (Map.Entry)iterator.next();
+            Integer sessionId = (Integer)pairs.getKey();
+            Double ranking = (Double)pairs.getValue();
+            qr.setSession_name(ssp.getSessionByID(sessionId).getName());
+            qr.setSession_description(ssp.getSessionByID(sessionId).getDescription());
+            qr.setScore(ranking);
+            qr.setAttendance(ap.getCountBySession(sessionId));
+            qr.setSpeakers(skp.getSpeakersBySession(sessionId));
+            qr.setRaters(sp.getCountBySession(sessionId));
+            report.add(qr);
+        }
+        return report;
+    }
 }

@@ -47,6 +47,7 @@
                 if (result.getInt(1) == 808300) {
                     session.setAttribute("user", "admin");
                     session.setAttribute("id", new Integer(result.getInt("id")));
+                    session.setAttribute("message", "Success: Welcome to Techtoberfest!");
                     session.setMaxInactiveInterval(1800); //30 minutes before it kicks you off
                     connection.close();
                     statement.close();
@@ -57,7 +58,8 @@
 
                     session.setAttribute("user", result.getString("name"));
                     session.setAttribute("id", new Integer(result.getInt("id")));
-                    session.setMaxInactiveInterval(600); //10 minutes before it kicks you off
+                    session.setAttribute("message", "Success: Welcome to Techtoberfest!");
+                    session.setMaxInactiveInterval(10); //10 minutes before it kicks you off
                     connection.close();
                     statement.close();
                     result.close();

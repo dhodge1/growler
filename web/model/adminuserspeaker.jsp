@@ -75,6 +75,7 @@
             connection.close();
             statement.close();
             visibility.close();
+            session.setAttribute("message", "Success: Changes were successful.");
             response.sendRedirect("../admin/userspeaker.jsp");
         %>
         <%@ include file="../includes/footer.jsp" %> 

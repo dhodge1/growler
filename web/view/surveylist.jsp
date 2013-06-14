@@ -39,7 +39,11 @@
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
     </head>
     <body id="growler1">
-        <% String user = "";
+        <%
+                    String user = "";
+                    if (null == session.getAttribute("id")) {
+                        response.sendRedirect("../index.jsp");
+                    }
                     try {
                         user = String.valueOf(session.getAttribute("id"));
                         String name = String.valueOf(session.getAttribute("user"));                  
@@ -47,10 +51,7 @@
                     catch (Exception e) {
                         
                     }
-                    if (user == null) {
-                        response.sendRedirect("../index.jsp");
-                    } 
-        %>
+                %>
         <%@ include file="../includes/header.jsp" %> 
         <%@ include file="../includes/usernav.jsp" %>
         <div class="row">
@@ -66,7 +67,7 @@
                     if (attendances.size() > 0) {
                         
                         for (int i = 0; i < attendances.size(); i++) {
-                            if (attendances.get(i).getisSurveyTaken() == true) {
+                            if (attendances.get(i).getIsSurveyTaken() == true) {
                                 surveystaken++;
                             }
                             else {
@@ -83,13 +84,7 @@
                         out.print("<h1 class=bordered>You have not attended any sessions</h1>");
                     }
                 %>
-                <%
-                    String message = String.valueOf(session.getAttribute("message"));
-                    if (!message.equals("null")) {
-                        out.print("<p class=feedbackMessage-success>" + message + "</p>");
-                        session.removeAttribute("message");
-                    }
-                %>
+                <%@include file="../includes/messagehandler.jsp" %>
             </div>
         </div>
         <div class="container-fluid">
@@ -117,7 +112,7 @@
                                                 </tr>
                                                 <%
                                                     for (int i = 0; i < attendances.size(); i++) {
-                                                        if (attendances.get(i).getisSurveyTaken() == false) {
+                                                        if (attendances.get(i).getIsSurveyTaken() == false) {
 
                                                             out.print("<tr>");
                                                             out.print("<td>" + spersist.getSessionByID(attendances.get(i).getSessionId()).getName() + "</td>");

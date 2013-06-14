@@ -63,37 +63,36 @@
             cal.add(Calendar.MINUTE, 15);
             durString = cal.get(Calendar.HOUR) + "0:" + cal.get(Calendar.MINUTE) + ":0" + cal.get(Calendar.SECOND);;
             //Query against the end of a session + the 15 minutes
-            ResultSet result = statement.executeQuery("select count(id), start_time from session where addtime(start_time,'" + durString + "') < '" + time + "' and session_date = '" + date + "' and id = " + sessionId);
+            ResultSet result = statement.executeQuery("select id, name from session where session_date = curdate() and addtime(start_time, duration) <= curtime() and addtime(addtime(start_time,duration), '00:15:00') >= curtime() and id = " + sessionId);
             result.next();
             int check = result.getInt(1);
             if (check == 0) {
-                session.setAttribute("message", "Too late to acknowledge for this session");
+                session.setAttribute("message", "Error: Too late to acknowledge for this session");
             } else {
                 //Ensure the key matches
                 Statement newStatement = connection.createStatement();
                 ResultSet keycheck = newStatement.executeQuery("select count(id) from session where session_key = '" + key + "'");
                 keycheck.next();
                 if (keycheck.getInt(1) == 0) {
-                    session.setAttribute("message", "Invalid Session Key");
+                    session.setAttribute("message", "Error: Invalid Session Key");
                 } else {
                     //Prevent the same time slot registration
-                    ResultSet duplicate = statement.executeQuery("select a.session_id from attendance a, session s where "
-                            + "a.user_id = " + user + " and s.start_time = (select start_time from session s where id = " + sessionId
-                            + " ) and s.session_date = '" + date + "' and a.session_id = s.id");
-                    if (!duplicate.next()) {
+                    ResultSet duplicate = statement.executeQuery("select count(a.session_id) from attendance a, session s where a.user_id = " + user + " and s.start_time = (select start_time from session where id = " + sessionId + ") and s.session_date = curdate() and a.session_id = s.id");
+                    duplicate.next();
+                    int check2 = duplicate.getInt(1);
+                    if (check2 == 0) {
                         //if there aren't any sessions there, add attendance record to DB
-                        statement.execute("insert into attendance (user_id, session_id) values ("
-                                + user + ", " + sessionId + ")");
-                        session.setAttribute("message", "Sucessfully registered!");
+                        statement.execute("insert into attendance (user_id, session_id, isSurveyTaken, surveySubmitTime) values ("
+                                + user + ", " + sessionId + ", false, null)");
+                        session.setAttribute("message", "Success: Sucessfully acknowledged!");
                         SessionPersistence sp = new SessionPersistence();
-                        Session s = sp.getSessionByID(sessionId);
-                        session.setAttribute("sessionName", s.getName());
+                        session.setAttribute("sessionName", sp.getSessionByID(sessionId).getName());
                         session.setAttribute("page", "../view/attendance.jsp");
                         success = true;
 
 
                     } else {
-                        session.setAttribute("message", "Already registered in that time slot!");
+                        session.setAttribute("message", "Error: Already registered in that time slot!");
 
 
                     }

@@ -110,6 +110,7 @@
                         </div><!-- /.accordion-toggle-->
                         <div id="collapseFive" class="accordion-body collapse">
                             <div class="accordion-inner">After you attend the session the speaker will provide you with a code to verify your attendance.
+                                <br/><br/>You can acknowledge your attendance from the end of the session until 15 minutes after the session ends.
                             </div>
                         </div><!--/#collapseFive-->
                     </div><!--/.accordion-group-->
@@ -119,17 +120,17 @@
                             <a>How Do I Fill Out a Survey?</a>
                         </div><!-- /.accordion-toggle-->
                         <div id="collapseSix" class="accordion-body collapse">
-                            <div class="accordion-inner">Once a session is complete, you may visit the Survey List page to view the surveys you are eligible to take.  Click on a link to take a survey.
+                            <div class="accordion-inner">Once you have acknowledged attendance, you may visit the Survey List page to view the surveys you are eligible to take.  Click on a link to take a survey.
                             </div>
                         </div><!--/#collapseSix-->
                     </div><!--/.accordion-group-->
                     <div class="accordion-group">
                         <div class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-parent" data-target="#collapseSeven">
                             <i class="icon12-previous"></i>
-                            <a>How Do I undo Attendance to a Session?</a>
+                            <a>How Do I Show Interest in a Future Session</a>
                         </div><!-- /.accordion-toggle-->
                         <div id="collapseSeven" class="accordion-body collapse">
-                            <div class="accordion-inner">Currently, there is no way to un-attend a session.  Email an administrator to take care of this issue.
+                            <div class="accordion-inner">Visit the View Session Schedule page, and click on as many sessions as you are interested in.  You may also remove interest in a session from that page.
                             </div>
                         </div><!--/#collapseSeven-->
                     </div><!--/.accordion-group-->
@@ -149,7 +150,7 @@
                             <a>How Do I Leverage my Corporate Credentials?</a>
                         </div><!-- /.accordion-toggle-->
                         <div id="collapseNine" class="accordion-body collapse">
-                            <div class="accordion-inner">You simply log in with your corporate credentials or you may decide to register as a new user to make your own separate account at the log in page.
+                            <div class="accordion-inner">Visit the link at the Log-In screen that says "Register Corporate Credentials".  Once you sign-in, you will automatically be added to the Techtoberfest Information System.
                             </div>
                         </div><!--/#collapseNine-->
                     </div><!--/.accordion-group-->                

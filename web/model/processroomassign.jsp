@@ -47,17 +47,17 @@
                 s = sp.getSessionByID(sessionId);
                 s.setLocation(roomId);
                 sp.updateSession(s);
-                session.setAttribute("message", "Room successfully updated!");
+                session.setAttribute("message", "Success: Room successfully updated!");
             }
             catch (Exception e) {
-                session.setAttribute("message", "Room already assigned to that Session.");
+                session.setAttribute("message", "Error: Room already assigned to that Session.");
             }
                 
         }
         else {
-            session.setAttribute("message", "Already a Session in that Room at that Time.");
+            session.setAttribute("message", "Error: Already a Session in that Room at that Time.");
         }
-            response.sendRedirect("../admin/assignroom.jsp");
+            response.sendRedirect("../admin/session.jsp");
         
     %>
 </html>

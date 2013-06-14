@@ -32,16 +32,19 @@
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
     </head>
     <body id="growler1">
-        <% String user = "";
-            try {
-                user = String.valueOf(session.getAttribute("id"));
-                String name = String.valueOf(session.getAttribute("user"));
-            } catch (Exception e) {
-            }
-            if (user == null) {
-                response.sendRedirect("../index.jsp");
-            }
-        %>
+        <%
+                    String user = "";
+                    if (null == session.getAttribute("id")) {
+                        response.sendRedirect("../index.jsp");
+                    }
+                    try {
+                        user = String.valueOf(session.getAttribute("id"));
+                        String name = String.valueOf(session.getAttribute("user"));                  
+                    }
+                    catch (Exception e) {
+                        
+                    }
+                %>
         <%@include file="../includes/isadmin.jsp" %>
         <%@ include file="../includes/header.jsp" %> 
         <%@ include file="../includes/adminnav.jsp" %>
@@ -57,15 +60,16 @@
         <div class="container-fluid">
             <div class="content"><!-- Begin Content -->
                 <div class="span7 offset4">
+                    <%@include file="../includes/messagehandler.jsp" %>
                     <form id="action" method="post" action="../model/processroom.jsp" >
-                        <label class="required">Room ID:</label>
-                        <input type="text" maxlength="10" id="tip" name="id" class="input-xlarge" data-content="Room ID, 10 Characters or Less"/><br/>
-                        <label class="required">Room Name:</label>
-                        <input type="text" maxlength="20" id="tip1" name="name"  class="input-xlarge" data-content="Room Name, 20 Characters or Less"/><br/>
-                        <label class="required">Capacity:</label>
-                        <% out.print("<input type=\"number\" min=\"0\" max=\"999\" step=\"1\" id=\"tip2\" name=\"capacity\"  data-content=\"Maximum Capacity, 0 to 999\"/>");%><br/>
-                        <label class="required">Building Name:</label>
-                        <input type="text" maxlength="20" id="tip3" name="building" class="input-xlarge" data-content="Building Name, 20 Characters or Less"/>  
+                        <label class="required">Room ID:</label><br/>
+                        <input type="text" maxlength="10" id="tip" name="id" class="input-xlarge" data-content="Room ID, 10 Characters or Less"/><br/><br/>
+                        <label class="required">Room Name:</label><br/>
+                        <input type="text" maxlength="20" id="tip1" name="name"  class="input-xlarge" data-content="Room Name, 20 Characters or Less"/><br/><br/>
+                        <label class="required">Capacity:</label><br/>
+                        <% out.print("<input type=\"number\" min=\"0\" max=\"999\" step=\"1\" id=\"tip2\" name=\"capacity\"  data-content=\"Maximum Capacity, 0 to 999\"/>");%><br/><br/>
+                        <label class="required">Building Name:</label><br/>
+                        <input type="text" maxlength="20" id="tip3" name="building" class="input-xlarge" data-content="Building Name, 20 Characters or Less"/>  <br/>
                         <br/>
                         <br/>
                         <input id="send" type="submit" value="Submit Changes" class="button button-primary"/>

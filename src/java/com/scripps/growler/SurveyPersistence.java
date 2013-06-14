@@ -93,14 +93,37 @@ public class SurveyPersistence extends GrowlerPersistence {
         return 0;
     }
     
-    public Map<Integer, Double> getExpectationsByQuestion(int question) {
+    
+    
+    
+    public LinkedHashMap<Integer, Double> getAverageRankingByQuestion(int question) {
         try {
             initializeJDBC();
             statement = connection.prepareStatement("select r.session_id, s.name, avg(r.ranking) from session_ranking r," +
                     " session s where s.id = r.session_id and r.question_id = ? group by r.session_id order by avg(r.ranking) desc, s.name");
             statement.setInt(1, question);
             result = statement.executeQuery();
-            Map<Integer, Double> sessionRanks = new HashMap<Integer, Double>();
+            LinkedHashMap<Integer, Double> sessionRanks = new LinkedHashMap<Integer, Double>();
+            while (result.next()) {
+                sessionRanks.put(result.getInt("session_id"), result.getDouble(3));
+            }
+            return sessionRanks;
+        }
+        catch (Exception e) {
+            
+        }
+        finally {
+            closeJDBC();
+        }
+        return null;
+    }
+    
+    public LinkedHashMap<Integer, Double> getAverageTotalRanking() {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select r.session_id, s.name, avg(r.ranking) from session_ranking r, session s where s.id = r.session_id and question_id <> 4 group by r.session_id order by avg(r.ranking) desc, s.name");
+            result = statement.executeQuery();
+            LinkedHashMap<Integer, Double> sessionRanks = new LinkedHashMap<Integer, Double>();
             while (result.next()) {
                 sessionRanks.put(result.getInt("session_id"), result.getDouble(3));
             }

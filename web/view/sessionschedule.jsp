@@ -32,16 +32,19 @@
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
     </head>
     <body id="growler1">  
-        <% String user = "";
-            try {
-                user = String.valueOf(session.getAttribute("id"));
-                String name = String.valueOf(session.getAttribute("user"));
-            } catch (Exception e) {
-            }
-            if (user == null) {
-                response.sendRedirect("../index.jsp");
-            }
-        %>
+        <%
+                    String user = "";
+                    if (null == session.getAttribute("id")) {
+                        response.sendRedirect("../index.jsp");
+                    }
+                    try {
+                        user = String.valueOf(session.getAttribute("id"));
+                        String name = String.valueOf(session.getAttribute("user"));                  
+                    }
+                    catch (Exception e) {
+                        
+                    }
+                %>
         <%@ include file="../includes/header.jsp" %> 
         <div class="row">
             <%@ include file="../includes/usernav.jsp" %>
@@ -52,16 +55,8 @@
             </div>
             <div class="span7 largeBottomMargin">
                 <h1 class="bordered">Session Registration</h1>
+                <%@include file="../includes/messagehandler.jsp" %>
                 <%
-                    //Displaying error or success messages -- clear it out when done
-                    String message = String.valueOf(session.getAttribute("message"));
-                    if (!message.equals("null") && message.startsWith("Successfully registered!")) {
-                        out.print("<p class=feedbackMessage-success>" + message + "</p>");
-                        session.removeAttribute("message");
-                    } else if (!message.equals("null")) {
-                        out.print("<p class=feedbackMessage-error>" + message + "</p>");
-                        session.removeAttribute("message");
-                    }
                     //Get the year
                     int year = 2013;
                     try {

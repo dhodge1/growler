@@ -27,6 +27,7 @@
             
             try {
                 statement.execute();
+                session.setAttribute("message", "Success: Session has been changed.");
             }
             catch (Exception e) {
                 session.setAttribute("message", "Error processing update");

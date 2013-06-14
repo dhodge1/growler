@@ -28,10 +28,20 @@
             s.setSessionDate(java.sql.Date.valueOf(date));
             s.setStartTime(java.sql.Time.valueOf(time));
             s.setDuration(java.sql.Time.valueOf(durString));
-            s.setLocation(Integer.parseInt(location));
+            s.setLocation(location);
             SessionPersistence sp = new SessionPersistence();
-            sp.addSession(s);
-            session.setAttribute("message", "Session " + s.getName() + " for " + s.getSessionDate() + " added successfully!");
+            ArrayList<Session> ses = sp.getSessionsByDateAndTime(java.sql.Date.valueOf(date), java.sql.Time.valueOf(time), " ");
+            boolean ok = true;
+            for (int i = 0; i < ses.size(); i++) {
+                if (ses.get(i).getLocation().equals(location)) {
+                    session.setAttribute("message", "Error: There is already a session scheduled for that room at that time");
+                    ok = false;
+                }
+            }
+            if (ok) {
+                sp.addSession(s);
+                session.setAttribute("message", "Success: Session " + s.getName() + " for " + s.getSessionDate() + " added successfully!");
+            }
             response.sendRedirect("../admin/session.jsp");
         %>
 </html>

@@ -5,6 +5,8 @@
 
 package com.scripps.growler;
 import java.util.regex.*;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 
 /**
  *
@@ -13,7 +15,14 @@ import java.util.regex.*;
 public class Test {
 
     public static void main (String args[]) {
-        Pattern myPattern = Pattern.compile("^[A-Za-z0-9_](\\.[A-Za-z0-9])?@[A-Za-z0-9_]\\.[com|org|net]$");
+        
+        
+        WebDriver driver = new InternetExplorerDriver();
+        driver.get("http://sni-techtoberfest.elasticbeanstalk.com/");
+        driver.manage().window().maximize();
+        System.out.println(driver.getTitle());
+        
+        //Pattern myPattern = Pattern.compile("^[A-Za-z0-9_](\\.[A-Za-z0-9])?@[A-Za-z0-9_]\\.[com|org|net]$");
         
     }
 }

@@ -30,16 +30,6 @@
     </head>
     <body id="growler1">
         <%@ include file="../includes/header.jsp" %> 
-        <nav class="globalNavigation">
-            <ul>
-                <li><a href="../view/theme.jsp">Themes</a></li>
-                <li><a href="../view/themeentry.jsp">Suggest a Theme</a></li>
-                <li><a href="../view/themedescription.jsp">Theme Descriptions</a></li>
-                <li class="selected"><a href="../view/speaker.jsp">Speakers</a></li>
-                <li><a href="../view/speakerentry.jsp">Suggest a Speaker</a></li>
-                <li><a href="">Help</a></li>
-            </ul>
-        </nav><!-- /.globalNavigation -->
         <% String list[] = request.getParameterValues("list");
             int user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
             int ids[] = new int[list.length];
@@ -49,7 +39,7 @@
             SpeakerPersistence sp = new SpeakerPersistence();
             ArrayList<Speaker> speakers = sp.getUserRanks(user);
             if (speakers.size() > 0) {
-                session.setAttribute("message", "You have already voted!");
+                session.setAttribute("message", "Error: You have already voted!");
             }
             else {
                 //If they haven't voted, take their votes and put them in the database
@@ -61,7 +51,7 @@
                 sp.setUserRanks(newSpeakers, user);
                 
 
-                session.setAttribute("message", "Your votes have been recorded");
+                session.setAttribute("message", "Success: Your votes have been recorded");
             }
             response.sendRedirect("../view/speaker.jsp");
         %>

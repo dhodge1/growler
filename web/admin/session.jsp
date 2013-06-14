@@ -33,7 +33,11 @@
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
     </head>
     <body id="growler1">
-        <% String user = "";
+        <%
+                    String user = "";
+                    if (null == session.getAttribute("id")) {
+                        response.sendRedirect("../index.jsp");
+                    }
                     try {
                         user = String.valueOf(session.getAttribute("id"));
                         String name = String.valueOf(session.getAttribute("user"));                  
@@ -41,10 +45,7 @@
                     catch (Exception e) {
                         
                     }
-                    if (user == null) {
-                        response.sendRedirect("../index.jsp");
-                    } 
-        %>
+                %>
         <%@include file="../includes/isadmin.jsp" %>
         <%@ include file="../includes/header.jsp" %> 
         <%@ include file="../includes/adminnav.jsp" %>
@@ -135,7 +136,11 @@
                                                 if (iterator.hasNext()) {
                                                     out.print(" and <br/>");
                                                 }
+                                                else {
+                                                    out.print("<br/><a href=\"../admin/removespeaker.jsp?sessionId=" + sessions.get(i).getId() + "\">Remove a Speaker</a>");
+                                                }
                                             }
+                                            out.print("<br/><a href=\"../admin/assignspeaker.jsp\">Assign a Speaker</a>");
                                         %>
                                     </td>
                                     <td><% out.print("<a href=\"../admin/sessionEdit.jsp?id=" + sessions.get(i).getId() + "\">Edit</a>"); %></td>

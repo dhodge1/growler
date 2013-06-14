@@ -35,7 +35,7 @@
                 $("#modalDialog").dialog({
                     resizable: false,
                     height: 240,
-                    width: 500,
+                    width: 700,
                     modal: true,
                     buttons: {
                         "Take a Survey": function() {
@@ -61,16 +61,19 @@
         </script>
     </head>
     <body id="growler1">
-        <% String user = "";
-            try {
-                user = String.valueOf(session.getAttribute("id"));
-                String name = String.valueOf(session.getAttribute("user"));
-            } catch (Exception e) {
-            }
-            if (user == null) {
-                response.sendRedirect("../index.jsp");
-            }
-        %>
+        <%
+                    String user = "";
+                    if (null == session.getAttribute("id")) {
+                        response.sendRedirect("../index.jsp");
+                    }
+                    try {
+                        user = String.valueOf(session.getAttribute("id"));
+                        String name = String.valueOf(session.getAttribute("user"));                  
+                    }
+                    catch (Exception e) {
+                        
+                    }
+                %>
         <%@ include file="../includes/header.jsp" %>
         <%@ include file="../includes/usernav.jsp" %>
         <div class="row">
@@ -84,9 +87,7 @@
                 <%
                     String message = String.valueOf(session.getAttribute("message"));
                     if (!message.equals("null")) {
-                        if (message.equals("You were successfully removed from the session!")) {
-                            out.print("<p id=\"topMessage\" class=feedbackMessage-success>" + message + "</p>");
-                        } else if (message.startsWith("Sucessfully registered!")) {
+                        if (message.startsWith("Sucessfully acknowledged!")) {
                             out.print("<p id=\"topMessage\" class=feedbackMessage-success>" + message + "</p>");
                             String sessionName = (String) session.getAttribute("sessionName");
                             out.print("<div id=\"modalDialog\" title=\"Successfully Acknowledged Attendance for " + sessionName + "\"><p>Please take a survey.</p><p>This will enter you in a drawing for a fantastic prize.</p></div>");
@@ -97,10 +98,7 @@
                         session.removeAttribute("message");
                     }
                 %>
-                <p>Enter a key, provided by the speaker, and click on the "Acknowledge" link to acknowledge your attendance.  If you changed your mind and switched sessions, click "UnRegister" to delete your attendance so you can attend another session.</p>
-                <p>You will also receive a notification to complete a survey rating the session, or you can go to "Rate a Session" 
-                    link in the menu.</p>
-                <p>Upon completing the survey, you will be registered to win a fantastic prize.</p>
+                
             </div>
         </div>
         <div class="container-fluid">
@@ -111,28 +109,49 @@
                         <%
                             SessionPersistence sp = new SessionPersistence();
                             ArrayList<Session> sessions = sp.getSessionsToAcknowledge();
-                        %>
-                        <form action="../model/processattendance.jsp" method="post">
-                            <label class="required">Session: </label>
-                            <select name="session">
-                                <%
-                                    for (int i = 0; i < sessions.size(); i++) {
+                            
+                            if (sessions.size() > 0) {
+                                out.print("<p>Enter a key, provided by the speaker, and click on the \"Acknowledge\" link to acknowledge your attendance.  If you changed your mind and switched sessions, click \"UnRegister\" to delete your attendance so you can attend another session.</p>");
+                                out.print("<p>You will also receive a notification to complete a survey rating the session, or you can go to \"Rate a Session\" link in the menu.</p>");
+                                out.print("<p>Upon completing the survey, you will be registered to win a fantastic prize.</p>");
+                                out.print("<form action=\"../model/processattendance.jsp\" method=\"post\">");
+                                out.print("<label class=\"required\">Session: </label>");
+                                out.print("<select name=\"session\">");
+                                for (int i = 0; i < sessions.size(); i++) {
                                         out.print("<option value=\"" + sessions.get(i).getId() + "\">");
                                         out.print(sessions.get(i).getName());
                                         out.print("</option>");
                                     }
-                                %>
-                            </select>
-                            <br/>
-                            <label class="required">Session Key:</label>
-                            <input type="text" maxlength="4" name="skey"/>
-                            <input type="submit" value="Submit" />
-                        </form>
+                                out.print("</select><br/>");
+                                out.print("<label class=\"required\">Session Key:</label>");
+                                out.print("<input class=\"input-large\" id=\"tip\" type=\"text\" maxlength=\"4\" required=\"required\" name=\"skey\" data-content=\"Please enter the 4 character session key the instructor provided\"/>");
+                                out.print("<input id=\"send\" type=\"submit\" value=\"Submit\" />");
+                                out.print("</form>");
+                            }
+                            else {
+                                out.print("<label>There are No Sessions To Acknowledge At the Moment</label>");
+                            }
+                        %>   
                     </div>
                     <br/>
                 </div><!--end span-->
             </div><!-- End Content -->
         </div><!--/.container-fluid-->
-        <%@ include file="../includes/footer.jsp" %> 
+        <%@ include file="../includes/footer.jsp" %>
+        <script>
+            $(function() {
+                $("input").autoinline();
+            });
+            $("#send").click(function(event) {
+                var emptyString = "";
+                if ($("#tip").val() === emptyString) {
+                    alert("Please enter a Session Key.");
+                    event.preventDefault();
+                }
+                else {
+                    $("#action").attr("action", "../model/processThemeSuggestion.jsp");
+                }
+            });
+        </script>
     </body>
 </html>

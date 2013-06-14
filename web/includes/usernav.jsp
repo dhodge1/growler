@@ -26,14 +26,12 @@
     <ul>
         <li>
                 <%//Get the user's info, and post a welcome!
-		 if (!String.valueOf(session.getAttribute("user")).isEmpty()) {
+		 if (!String.valueOf(session.getAttribute("user")).isEmpty() || !String.valueOf(session.getAttribute("user")).equals("null")) {
 			String navuser = String.valueOf(session.getAttribute("user"));
 			out.print("    Welcome, " + navuser + "!");
 			}
 		 //If they aren't logged in, we want them to go back and log in.
-		 else {
-			response.sendRedirect("../index.jsp");
-		 }
+		 //
 		%>
         </li>
         <li>Themes
@@ -69,9 +67,3 @@
         
     </div>
             </nav>
-    
-    <%        //This redirects a user to the login page if they aren't logged in, and prevents jumping straight into the application
-        if (String.valueOf(session.getAttribute("user")).isEmpty() || String.valueOf(session.getAttribute("user")).equals("null")) {
-          response.sendRedirect("../index.jsp");
-         }
-    %>

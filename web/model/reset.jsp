@@ -66,7 +66,7 @@
                 result.close();
                 statement.close();
                 connection.close();
-                session.setAttribute("message", "Invalid credentials");
+                session.setAttribute("message", "Error: Invalid credentials");
                 response.sendRedirect("../index.jsp");
             }
 

@@ -46,7 +46,7 @@
             Theme t = new Theme();
             //Check to see if the user already has voted.  If so, redirect to the theme page
             if (themes.size() > 0) {
-                session.setAttribute("message", "You have already voted!");
+                session.setAttribute("message", "Error: You have already voted!");
             } 
             else {
                 //If they haven't voted, take their votes and put them in the database
@@ -59,7 +59,7 @@
                 persist.setUserRanks(newThemes, id);
                 
 
-                session.setAttribute("message", "Your votes have been recorded");
+                session.setAttribute("message", "Success: Your votes have been recorded");
             }
             response.sendRedirect("../view/theme.jsp");
         %>

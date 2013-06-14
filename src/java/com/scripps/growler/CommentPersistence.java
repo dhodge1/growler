@@ -19,7 +19,7 @@ public class CommentPersistence extends GrowlerPersistence {
     public void addComment(Comment c) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("insert into comment (session_id, description) values (?, ?)");
+            statement = connection.prepareStatement("insert into comments (session_id, comment) values (?, ?)");
             statement.setInt(1, c.getSession_id());
             statement.setString(2, c.getDescription());
             statement.executeUpdate();
@@ -40,12 +40,12 @@ public class CommentPersistence extends GrowlerPersistence {
     public ArrayList<Comment> getCommentsBySession(int id){
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select session_id, description from comment where session_id = ?");
+            statement = connection.prepareStatement("select session_id, comment from comments where session_id = ?");
             statement.setInt(1, id);
             result = statement.executeQuery();
             ArrayList<Comment> comments = new ArrayList<Comment>();
             while (result.next()) {
-                Comment c = new Comment(result.getInt("session_id"), result.getString("description"));
+                Comment c = new Comment(result.getInt("session_id"), result.getString("comments"));
                 comments.add(c);
             }
             return comments;
@@ -65,11 +65,11 @@ public class CommentPersistence extends GrowlerPersistence {
     public ArrayList<Comment> getAllComments(){
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select session_id, description from comment");
+            statement = connection.prepareStatement("select session_id, comment from comments order by session_id");
             result = statement.executeQuery();
             ArrayList<Comment> comments = new ArrayList<Comment>();
             while (result.next()) {
-                Comment c = new Comment(result.getInt("session_id"), result.getString("description"));
+                Comment c = new Comment(result.getInt("session_id"), result.getString("comment"));
                 comments.add(c);
             }
             return comments;

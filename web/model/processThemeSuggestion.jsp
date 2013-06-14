@@ -50,9 +50,10 @@
             t.setVisible(false);
             persist.addTheme(t);
             if (user == 8083) {
+                session.setAttribute("message", "Success: Theme Successfully added!");
                 response.sendRedirect("../admin/theme.jsp");
             } else {
-                session.setAttribute("message", "Theme Successfully added!");
+                session.setAttribute("message", "Success: Theme Successfully added!");
                 response.sendRedirect("../view/theme.jsp");
             }
         %>

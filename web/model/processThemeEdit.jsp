@@ -33,7 +33,7 @@
         }
         tp.updateTheme(t);
         
-        session.setAttribute("message", "Theme successfully changed");
+        session.setAttribute("message", "Success: Theme successfully changed");
         response.sendRedirect("../admin/theme.jsp");
         
     %>

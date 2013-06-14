@@ -1,0 +1,9 @@
+create table historical_session (
+session_id	int references session(id)
+,year year
+,expecation_score	decimal(3,2)
+,presentation_score	decimal(3,2)
+,speaker_score	decimal(3,2)
+,overall_score	decimal(3,2)
+,constraint pk_historical_session primary key (session_id, year)
+);

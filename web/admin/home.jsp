@@ -49,14 +49,16 @@
             </div>
             <div class="span7 largeBottomMargin">
                 <%
+                    String user = "";
+                    if (null == session.getAttribute("id")) {
+                        response.sendRedirect("../index.jsp");
+                    }
                     try {
-                    String user = String.valueOf(session.getAttribute("id"));
-                    String name = String.valueOf(session.getAttribute("user"));
-                    //Get a list of Themes by calling getUserRanks
-                    out.print("<h1 class=bordered>Welcome, " + name + "</h1>");
+                        user = String.valueOf(session.getAttribute("id"));
+                        String name = String.valueOf(session.getAttribute("user"));                  
                     }
                     catch (Exception e) {
-                        response.sendRedirect("../index.jsp");
+                        
                     }
                 %>
             </div>
@@ -69,6 +71,7 @@
                         <div id="tabs-1">
                             <div class="row">
                                 <div class="span6 offset1">
+                                    <%@include file="../includes/messagehandler.jsp" %>
                                     <section>
 
                                         <h3>Themes</h3>

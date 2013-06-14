@@ -45,10 +45,10 @@
         LocationPersistence lp = new LocationPersistence();
         try {
         lp.addLocation(l);
-            session.setAttribute("message", "Room successfully added!");
+            session.setAttribute("message", "Success: Room successfully added!");
         }
         catch (Exception e) {
-            session.setAttribute("message", "Adding Room failed.");
+            session.setAttribute("message", "Error: Adding Room failed.");
         }
         finally {
             response.sendRedirect("../admin/room.jsp");

@@ -42,12 +42,18 @@
             s.setLastName(last_name);
             s.setSuggestedBy(id);
             s.setVisible(false);
-            persist.addSpeaker(s);
-
+            Speaker s2 = persist.getSpeakerByName(first_name, last_name);
+            if (s.getFirstName() == s2.getFirstName() && s.getLastName() == s2.getLastName()) {
+                s.setVisible(true);
+                persist.updateSpeaker(s);
+            }
+            else {
+                persist.addSpeaker(s);
+            }
             if (id == 808300) {
                 response.sendRedirect("../admin/userspeaker.jsp");
             } else {
-                session.setAttribute("message", "Speaker " + s.getLastName() + ", " + s.getFirstName() + " successfully added!");
+                session.setAttribute("message", "Success: Speaker " + s.getLastName() + ", " + s.getFirstName() + " successfully added!");
                 response.sendRedirect("../view/speaker.jsp");
             }
         %>

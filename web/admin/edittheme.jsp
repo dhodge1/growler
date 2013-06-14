@@ -24,7 +24,11 @@
 <title>Edit Theme</title>
 </head>
 <body id="growler1">
-    <% String user = "";
+    <%
+                    String user = "";
+                    if (null == session.getAttribute("id")) {
+                        response.sendRedirect("../index.jsp");
+                    }
                     try {
                         user = String.valueOf(session.getAttribute("id"));
                         String name = String.valueOf(session.getAttribute("user"));                  
@@ -32,10 +36,7 @@
                     catch (Exception e) {
                         
                     }
-                    if (user == null) {
-                        response.sendRedirect("../index.jsp");
-                    } 
-        %>
+                %>
         <%@include file="../includes/isadmin.jsp" %>
         <%@ include file="../includes/header.jsp" %> 
         <%@ include file="../includes/adminnav.jsp" %>
@@ -60,6 +61,7 @@
                                     
                                 </div>
                                 <div class="span6 offset1">
+                                    <%@include file="../includes/messagehandler.jsp" %>
                                     <section>
                                         <form method="post" action="../model/processThemeEdit.jsp" onSubmit="return validateValues();">
                                             <div class="form-group">

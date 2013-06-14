@@ -10,14 +10,6 @@
 <%
     //Look for the "user" info in the header
     if (!String.valueOf(session.getAttribute("user")).equals("admin")) {
-        //If there is no header data, go to login page
-        if (String.valueOf(session.getAttribute("user")).isEmpty()) {
             response.sendRedirect("../index.jsp");
         }
-        //If there is header data, then the user is trying to access
-        //Something they shouldn't.  Send them to the theme page
-        else {
-            response.sendRedirect("../index.jsp");
-        }
-    }
 %>

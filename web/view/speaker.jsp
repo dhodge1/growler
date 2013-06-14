@@ -41,7 +41,7 @@
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
     </head>
     <body id="growler1">
-        <%          
+        <%
                     String user = "";
                     try {
                         user = String.valueOf(session.getAttribute("id"));
@@ -50,10 +50,10 @@
                     catch (Exception e) {
                         
                     }
-                    if (user == null) {
+                    if (user == "null") {
                         response.sendRedirect("../index.jsp");
                     }
-        %>
+                %>
         <%@ include file="../includes/header.jsp" %> 
         <%@ include file="../includes/usernav.jsp" %>
         <div class="row">
@@ -70,13 +70,9 @@
                     } else {
                         out.print("<h1 class=bordered>Your Speaker Rankings</h1>");
                     }
-                    String message = String.valueOf(session.getAttribute("message"));
-                    if (!message.equals("null")) {
-                        out.print("<p class=feedbackMessage-info>" + message + "</p>");
-                        session.removeAttribute("message");
-                    }
-                    if (speakers.size() > 0) {
-                        out.print("<table class=\"propertyGrid\">");
+                    %>
+                    <%@include file="../includes/messagehandler.jsp" %>
+                    <%
                                 
                         
                         for (int i = 0; i < speakers.size(); i++) {

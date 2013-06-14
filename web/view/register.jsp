@@ -43,6 +43,7 @@
         <div class="container-fluid">
             <div class="content" role="main">
                 <!-- Begin Content -->
+                <%@include file="../includes/messagehandler.jsp" %>
                 <form method="POST" id="action" action="../model/adduser.jsp" onSubmit="return validateFields();">
                     <div class="span5 offset3">
                         <fieldset>

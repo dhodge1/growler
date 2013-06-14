@@ -41,7 +41,7 @@
         
         while (result.next()){
             if (result.getString("name") == null) {
-                session.setAttribute("message", "Invalid attributes");
+                session.setAttribute("message", "Error: Invalid attributes");
                 response.sendRedirect("../view/requestreset.jsp");
             }
         }
@@ -97,7 +97,7 @@
 			Transport.send(message);
  
 			results = "Done";
-                        
+                        session.setAttribute("message", "Success: Email has been sent!");
  
 		} catch (MessagingException e) {
                     results = "Failed " + e.getLocalizedMessage();

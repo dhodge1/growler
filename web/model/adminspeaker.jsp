@@ -137,7 +137,7 @@
             statement.close();
             insert.close();
             visibility.close();
-            session.setAttribute("message", "Updates Successful");
+            session.setAttribute("message", "Success: Updates Successful");
             response.sendRedirect("../admin/speaker.jsp");
         %>
         <%@ include file="../includes/footer.jsp" %> 

@@ -63,7 +63,7 @@
                 }
             }
         }
-        session.setAttribute("message", "Successfully registered!");
+        session.setAttribute("message", "Success: Your interest has been registered!");
         response.sendRedirect("../view/sessionschedule.jsp");
         
     %>
