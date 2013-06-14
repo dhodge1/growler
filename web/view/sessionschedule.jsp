@@ -33,12 +33,12 @@
     </head>
     <body id="growler1">  
         <%
-                    String user = "";
+                    int user = 0;
                     if (null == session.getAttribute("id")) {
                         response.sendRedirect("../index.jsp");
                     }
                     try {
-                        user = String.valueOf(session.getAttribute("id"));
+                        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
                         String name = String.valueOf(session.getAttribute("user"));                  
                     }
                     catch (Exception e) {
@@ -130,7 +130,7 @@
                                     out.print("</td>");
                                     out.print("<td>");
                                     out.print("<input type=\"checkbox\" value=\"" + sessions.get(i).getId() + "\" name=\"interest\"");
-                                    if (rp.isUserRegistered(Integer.parseInt(user), sessions.get(i).getId())) {
+                                    if (rp.isUserRegistered(user, sessions.get(i).getId())) {
                                         out.print(" checked ");
                                     }
                                     out.print(">");

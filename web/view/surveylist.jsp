@@ -40,12 +40,12 @@
     </head>
     <body id="growler1">
         <%
-                    String user = "";
+                    int user = 0;
                     if (null == session.getAttribute("id")) {
                         response.sendRedirect("../index.jsp");
                     }
                     try {
-                        user = String.valueOf(session.getAttribute("id"));
+                        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
                         String name = String.valueOf(session.getAttribute("user"));                  
                     }
                     catch (Exception e) {
@@ -60,10 +60,10 @@
             </div>
             <div class="span6 largeBottomMargin">
                 <%
-                    int userId = Integer.parseInt(user);
+                    
                     int surveystaken = 0;
                     int surveysleft = 0;
-                    ArrayList<Attendance> attendances = persist.getAttendanceByUser(userId);
+                    ArrayList<Attendance> attendances = persist.getAttendanceByUser(user);
                     if (attendances.size() > 0) {
                         
                         for (int i = 0; i < attendances.size(); i++) {

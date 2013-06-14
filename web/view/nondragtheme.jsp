@@ -1,24 +1,14 @@
 <%-- 
-    Document   : theme
-    Created on : Feb 28, 2013, 7:15:03 PM
-    Author     : Justin Bauguess & Jonathan C. McCowan
-    Purpose    : The theme (user) page is for users to rank themes according to 
-                their preferences.  The ranks are saved in the isolated_theme_ranking
-                table for now.  Once users are remembered, it will be saved in the 
-                theme_ranking table.  A record in that table will contain a user_id,
-                theme_id, and rank.  Ranks can only be between 1 and 10.  Once a user
-                has submitted rankings, they can change them later.
+    Document   : nondragtheme
+    Created on : Jun 14, 2013, 10:07:15 AM
+    Author     : 162107
 --%>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
 <%@page import="com.scripps.growler.Theme" %>
 <%@page import="com.scripps.growler.ThemePersistence" %>
-<%@page import="com.scripps.growler.DataConnection" %>
 <jsp:useBean id="theme" class="com.scripps.growler.Theme" scope="page" />
 <jsp:useBean id="persist" class="com.scripps.growler.ThemePersistence" scope="page" />
-<jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="page" />
-<jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page" />
-<jsp:useBean id="giveStars" class="com.scripps.growler.GiveStars" scope="page" />
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
@@ -43,6 +33,29 @@
         <link rel="stylesheet" href="/resources/demos/style.css" />
 
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
+
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
+        <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+        <!--Additional Script-->
+        <script>
+            $().ready(function() {
+                $('#add').click(function() {
+                    return !$('#visible option:selected').appendTo('#list');
+                });
+                $('#remove').click(function() {
+                    return !$('#list option:selected').appendTo('#visible');
+                });
+                $('#send').click(function(event) {
+                    if ($('#list').has('option').length == 0) {
+                        alert('Please select some themes to rank');
+                        event.preventDefault();
+                    }
+                    else {
+                        $('#action').attr("action", "../model/processThemeRanking.jsp");
+                    }
+                });
+            });
+        </script>
     </head>
     <body id="growler1">  
         <%
@@ -70,9 +83,9 @@
                     ArrayList<Theme> themes = persist.getUserRanks(user);
                     //If we didn't get any ranks, we tell the user to rank the themes
                     if (themes == null || themes.size() == 0) {
-                        out.print("<h1 class=bordered>Themes - Drag & Drop Themes to Rank Them</h1>");
-                        out.print("<a href=\"../view/nondragtheme.jsp\">Non Drag and Drop Themes</a><br/>");
+                        out.print("<h1 class=bordered>Themes - Click To Order Themes</h1>");
                     } else { //If we got themes, we let the user see them
+                        response.sendRedirect("../view/theme.jsp");
                         out.print("<h1 class=bordered>Your Theme Ranks</h1>");
                     }
                 %>
@@ -100,32 +113,53 @@
                                                 out.print("</table><br/>");
                                                 out.print("<a href=\"../model/removeThemeRanks.jsp?id=" + user + "\">Reset Ranks</a>");
 
+                                            } else {
                                             }
 
 
                                         %>
-                                        <form action="../model/processThemeRanking.jsp" >
-                                            <ul id="sortable">
-                                                <%
-                                                    if (themes == null || themes.size() == 0) {
 
-                                                        ArrayList<Theme> vthemes = persist.getThemesByVisibility(true);
-                                                        for (int i = 0; i < vthemes.size(); i++) {
-                                                %>
-                                                <li class="ui-state-default" id="lisort">
-                                                    <%
-                                                        out.print(vthemes.get(i).getName() + " : ");
-                                                        out.print(vthemes.get(i).getDescription());
-                                                        out.print("<input type=\"hidden\" name=\"list\" value=\"" + vthemes.get(i).getId() + "\" >");
-                                                    %></li><%
-                                                            }
-                                                        }
-                                                    %>
-                                            </ul>	
-                                            <% if (themes == null || themes.size() == 0) {
-                                                    out.print("<input type=\"submit\" value=\"Submit Rankings\" class=\"button button-primary\"/>");
+                                        <form id="action" name="Themes">
+                                            <table>
+                                                <tr>
+                                                    <td>
+
+                                                        <%
+                                                            if (themes == null || themes.size() == 0) {
+                                                                out.print("<select id=\"visible\" name=\"visible\" size=\"10\" MULTIPLE>");
+                                                                ArrayList<Theme> vthemes = persist.getThemesByVisibility(true);
+                                                                for (int i = 0; i < vthemes.size(); i++) {
+                                                                    out.print("<option value=\"" + vthemes.get(i).getId() + "\">");
+                                                                    out.print(vthemes.get(i).getName());
+                                                                    out.print("</option>");
+                                                                }
+                                                                out.print("</select>");
+
+
+                                                        %>
+
+                                                    </td>
+                                                    <td align="center" valign="middle">
+
+                                                        <br>
+
+                                                        <br/>
+
+                                                    </td>
+                                                    <td>
+                                                        <%
+                                                            out.print("<select id=\"list\" name=\"list\" size=\"10\" MULTIPLE>");
+                                                            out.print("</select>");%>
+                                                    </td>
+                                                </tr>
+                                            </table>    
+                                            <%
+                                                    out.print("<input id=\"add\" type=\"Button\" value=\"Add >>\" style=\"width:100px\"><br/><br/>");
+                                                    out.print("<input id=\"remove\" type=\"Button\" value=\"<< Remove\" style=\"width:100px\"><br/><br/>");
+                                                    out.print("<input type=\"Submit\" value=\"Send Ranks\" id=\"send\" class=\"button button-primary\"/>");
                                                 }
                                             %>
+
                                         </form>
                                     </section>
                                 </div>
@@ -151,20 +185,8 @@
 
         <%@ include file="../includes/footer.jsp" %>
         <%@ include file="../includes/scriptlist.jsp" %>
-        <%@ include file="../includes/draganddrop.jsp" %>
 
-        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
-        <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
-        <script src="../js/grabRanks.js"></script>
 
-        <!--Additional Script-->
-        <script>
-            $(function() {
-                $("#sortable").sortable({revert: true});
-                $("#draggable").draggable({connectToSortable: "#sortable", helper: "clone", revert: "invalid"});
-                $("ul, li").disableSelection();
-            });
-        </script>
+
     </body>
 </html>
-

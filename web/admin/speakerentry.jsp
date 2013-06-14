@@ -31,12 +31,12 @@
     </head>
     <body id="growler1">
         <%
-                    String user = "";
+                    int user = 0;
                     if (null == session.getAttribute("id")) {
                         response.sendRedirect("../index.jsp");
                     }
                     try {
-                        user = String.valueOf(session.getAttribute("id"));
+                        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
                         String name = String.valueOf(session.getAttribute("user"));                  
                     }
                     catch (Exception e) {

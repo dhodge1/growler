@@ -49,7 +49,7 @@
             t.setReason(reason);
             t.setVisible(false);
             persist.addTheme(t);
-            if (user == 8083) {
+            if (user == 808300) {
                 session.setAttribute("message", "Success: Theme Successfully added!");
                 response.sendRedirect("../admin/theme.jsp");
             } else {

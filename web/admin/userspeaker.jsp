@@ -39,12 +39,12 @@
     </head>
     <body id="growler1">
         <%
-                    String user = "";
+                    int user = 0;
                     if (null == session.getAttribute("id")) {
                         response.sendRedirect("../index.jsp");
                     }
                     try {
-                        user = String.valueOf(session.getAttribute("id"));
+                        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
                         String name = String.valueOf(session.getAttribute("user"));                  
                     }
                     catch (Exception e) {
@@ -65,7 +65,7 @@
     <div class="container-fluid">
         <div class="content">
             <!-- Begin Content -->
-            <%@include file="../includes/messagehandler.jsp" %>
+            
             <div class="row"><!--row-->
                 <div class="span6 offset3"><!--span-->
                     <div id="tabs-1">
@@ -75,6 +75,7 @@
                             </div>
                             <div class="span5">
                                 <section>
+                                    <%@include file="../includes/messagehandler.jsp" %>
                                     <form action="../model/adminuserspeaker.jsp" method="post">
                                         <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
                                             <tr>

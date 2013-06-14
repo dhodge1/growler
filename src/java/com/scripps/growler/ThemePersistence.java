@@ -270,7 +270,7 @@ public class ThemePersistence extends GrowlerPersistence {
             initializeJDBC();
             statement = connection.prepareStatement("insert into theme_ranking ("
                     + "user_id, theme_id, theme_rank) values (" + user + ",?,?)");
-            for (int i = 0; i < themes.size(); i++) {
+            for (int i = 0; i < themes.size() && i < 10; i++) {
                 statement.setInt(1, themes.get(i).getId());
                 statement.setInt(2, 10 - i);
                 statement.execute();

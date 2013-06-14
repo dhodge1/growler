@@ -42,18 +42,16 @@
     </head>
     <body id="growler1">
         <%
-                    String user = "";
-                    try {
-                        user = String.valueOf(session.getAttribute("id"));
-                        String name = String.valueOf(session.getAttribute("user"));                  
-                    }
-                    catch (Exception e) {
-                        
-                    }
-                    if (user == "null") {
-                        response.sendRedirect("../index.jsp");
-                    }
-                %>
+            int user = 0;
+            if (null == session.getAttribute("id")) {
+                response.sendRedirect("../index.jsp");
+            }
+            try {
+                user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+                String name = String.valueOf(session.getAttribute("user"));
+            } catch (Exception e) {
+            }
+        %>
         <%@ include file="../includes/header.jsp" %> 
         <%@ include file="../includes/usernav.jsp" %>
         <div class="row">
@@ -63,18 +61,20 @@
             <div class="span6 largeBottomMargin">
                 <%
                     SpeakerPersistence persist = new SpeakerPersistence();
-                    ArrayList<Speaker> speakers = persist.getUserRanks(Integer.parseInt(user));
+                    ArrayList<Speaker> speakers = persist.getUserRanks(user);
                     if (speakers == null || speakers.size() == 0) {
                         out.print("<h1 class=bordered>Speakers - Drag & Drop Speakers to Rank Them</h1>");
-                        
+                        out.print("<a href=\"../view/nondragspeaker.jsp\">Non Drag and Drop Speakers</a><br/>");
+
                     } else {
                         out.print("<h1 class=bordered>Your Speaker Rankings</h1>");
                     }
-                    %>
-                    <%@include file="../includes/messagehandler.jsp" %>
-                    <%
-                                
-                        
+                %>
+                <%@include file="../includes/messagehandler.jsp" %>
+                <%
+
+                    if (speakers.size() > 0) {
+                        out.print("<table class=\"propertyGrid\">");
                         for (int i = 0; i < speakers.size(); i++) {
                             out.print("<tr><th>Rank " + (i + 1) + "</th><td>" + speakers.get(i).getLastName()
                                     + ", " + speakers.get(i).getFirstName() + "</td></tr>");
@@ -120,6 +120,11 @@
                                                     }
                                                 %>
                                             </ul>
+                                            <% if (speakers == null || speakers.size() == 0) {
+                                                    out.print("<input type=\"submit\" value=\"Submit Rankings\" class=\"button button-primary\"/>");
+                                                }
+                                            %>
+                                        </form>
 
                                     </section>
                                 </div>
@@ -129,11 +134,7 @@
                     </div><!--end span-->
                 </div><!--end row-->
                 <div class="span2 offset3"><!--button div-->
-                    <% if (speakers == null || speakers.size() == 0) {
-                            out.print("<input type=\"submit\" value=\"Submit Rankings\" class=\"button button-primary\"/>");
-                        }
-                    %>
-                    </form>
+
 
                 </div>
             </div><!-- End Content -->

@@ -65,12 +65,12 @@
         <div class="container-fluid">
             <div class="content">
                 <!-- Begin Content -->
-                <%@include file="../includes/messagehandler.jsp" %>
                 <div class="row"><!--row-->
                     <div class="span6 offset3"><!--span-->
                         <div id="tabs-1">
                             <div class="row">
                                 <div class="span6 offset1">
+                                    <%@include file="../includes/messagehandler.jsp" %>
                                     <section>
 
                                         <h3>Themes</h3>
