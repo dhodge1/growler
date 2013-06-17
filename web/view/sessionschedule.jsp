@@ -2,6 +2,9 @@
     Document   : sessionschedule
     Created on : Jun 11, 2013, 8:40:30 AM
     Author     : 162107
+    Purpose    : Shows the user a schedule of the events taking place this year, 
+                allowing them to register interest in any number of those events.
+                Uses registerinterest.jsp to process data.
 --%>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
@@ -11,7 +14,8 @@
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> 
+<html class="no-js" lang="en"> <!--<![endif]-->
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -73,14 +77,13 @@
         <div class="container-fluid">
             <div class="content"><!-- Begin Content -->
                 <div class="span6 offset3">
-                    <form action="sessionschedule.jsp" method="post">
+                    <!--<form action="sessionschedule.jsp" method="post">
                         <select name="year">
                             <option value="2013">2013</option>
                             <option value="2012">2012</option>
-                            <!--Provisioned for future years! -->
                         </select>
-                        <input value="Change Year" type="submit" class="button button-primary"/>
-                    </form>
+                        <input value="Change Year" type="submit" class="button button-primary"/> 
+                    </form>-->
                 </div>
                 <div class="span9 offset2">
                     <form method="post" action="../model/registerinterest.jsp">
@@ -102,7 +105,7 @@
                                     out.print("<tr>");
                                     out.print("<td>");
                                     out.print(sessions.get(i).getName());
-                                    out.print("<input id=\"" + sessions.get(i).getId() + "\" type=\"hidden\" value=\"" + sessions.get(i).getId() + "\" name=\"name\">");
+                                    out.print("<input type=\"hidden\" value=\"" + sessions.get(i).getId() + "\" name=\"name\">");
                                     out.print("</td>");
                                     out.print("<td>");
                                     out.print(sessions.get(i).getDescription());
@@ -129,7 +132,7 @@
                                     out.print(lp.getLocationById(sessions.get(i).getLocation()).getCapacity());
                                     out.print("</td>");
                                     out.print("<td>");
-                                    out.print("<input type=\"checkbox\" value=\"" + sessions.get(i).getId() + "\" name=\"interest\"");
+                                    out.print("<input id=\"" + sessions.get(i).getId() + "\" type=\"checkbox\" value=\"" + sessions.get(i).getId() + "\" name=\"interest\"");
                                     if (rp.isUserRegistered(user, sessions.get(i).getId())) {
                                         out.print(" checked ");
                                     }
@@ -154,8 +157,6 @@
 
         <%@ include file="../includes/footer.jsp" %>
         <%@ include file="../includes/scriptlist.jsp" %>
-        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
-        <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
     </body>
 </html>
 

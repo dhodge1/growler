@@ -2,6 +2,11 @@
     Document   : registerinterest
     Created on : Jun 11, 2013, 9:04:19 AM
     Author     : 162107
+    Purpose    : Processes data received from sessionschedule.jsp.
+                 First, it clears the previous registrations of interest for the user.
+                 Next, it takes the interests received from the form and inserts them
+                 into the database.  Finally, it returns to the sessionschedule page
+                 with a success message.
 --%>
 
 <%@page import="java.util.*"%>
@@ -60,7 +65,7 @@
             }
             PreparedStatement statement = connection.prepareStatement("insert into registration (user_id, session_id, date_registered, time_registered) "
                     + " values (?, ?, curdate(), curtime())");
-            //Search through the array for values to enter
+            //Search through the array for values to enter, then execute the PreparedStatement
             Arrays.sort(interests);
             Arrays.sort(ids);
             for (int i = 0; i < ids.length; i++) {
@@ -75,10 +80,9 @@
             }
             session.setAttribute("message", "Success: Your interest has been registered!");
         } catch (Exception e) {
+            //It makes it here if/when it cannot process the for loop because of a null pointer - which means there are no sessions to register
             session.setAttribute("message", "Success: Your interests have been removed!");
         }
-        //Prepare SQL
-
         response.sendRedirect("../view/sessionschedule.jsp");
 
     %>

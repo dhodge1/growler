@@ -34,17 +34,13 @@ public class SeleniumTest {
         driver.findElement(By.name("password")).sendKeys("password");
         WebElement button = driver.findElement(By.id("send"));
         button.click();
+        driver.navigate().to("http://sni-techtoberfest.elasticbeanstalk.com/view/sessionschedule.jsp");
         
         
+        driver.findElement(By.id("send")).click();
         
     }
     
-    @Test
-    public void testRegistration() {
-        driver.navigate().to("http://sni-techtoberfest.elasticbeanstalk.com/view/sessionschedule.jsp");
-        driver.findElement(By.name("interest")).click();
-        driver.findElement(By.id("send"));
-    }
     
     
 }

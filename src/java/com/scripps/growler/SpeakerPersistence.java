@@ -140,6 +140,32 @@ public class SpeakerPersistence extends GrowlerPersistence {
         return null;
     }
     
+    public Speaker getRanksByID(int id) {
+        Speaker s = new Speaker();
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select rating, count from ranks_2012 where speaker_id = ?");
+            statement.setInt(1, id);
+            result = statement.executeQuery();
+            while (result.next()){
+                s.setCount2012(result.getInt("count"));
+                s.setRank2012(result.getDouble("rating"));
+                return s;
+            }
+        }
+        catch(Exception e) {
+            s.setCount2012(0);
+            s.setRank2012(0);
+            return s;
+        }
+        finally {
+            closeJDBC();
+        }
+        s.setCount2012(0);
+            s.setRank2012(0);
+            return s;
+    }
+    
     public Speaker getSpeakerByName(String first, String last) {
         try {
             initializeJDBC();

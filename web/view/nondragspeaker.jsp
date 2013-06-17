@@ -130,7 +130,7 @@
                                                                 for (int i = 0; i < vspeakers.size(); i++) {
                                                                     int sId = vspeakers.get(i).getId();
                                                                     out.print("<option value=\"" + sId + "\">");
-                                                                    out.print(vspeakers.get(i).getLastName() + ", " + vspeakers.get(i).getFirstName() + ": " + persist.getSpeakerByID(sId).getRank2012() + " out of " + persist.getSpeakerByID(sId).getCount2012() + " surveys");
+                                                                    out.print(vspeakers.get(i).getLastName() + ", " + vspeakers.get(i).getFirstName() + ": " + persist.getRanksByID(sId).getRank2012() + " out of " + persist.getRanksByID(sId).getCount2012() + " surveys");
                                                                     out.print("</option>");
                                                                 }
                                                                 out.print("</select>");
