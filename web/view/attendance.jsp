@@ -110,7 +110,6 @@
                             SessionPersistence sp = new SessionPersistence();
                             ArrayList<Session> sessions = sp.getSessionsToAcknowledge();
                             
-                            if (sessions.size() > 0) {
                                 out.print("<p>Enter a key, provided by the speaker, and click on the \"Acknowledge\" link to acknowledge your attendance.  If you changed your mind and switched sessions, click \"UnRegister\" to delete your attendance so you can attend another session.</p>");
                                 out.print("<p>You will also receive a notification to complete a survey rating the session, or you can go to \"Rate a Session\" link in the menu.</p>");
                                 out.print("<p>Upon completing the survey, you will be registered to win a fantastic prize.</p>");
@@ -127,10 +126,6 @@
                                 out.print("<input class=\"input-large\" id=\"tip\" type=\"text\" maxlength=\"4\" required=\"required\" name=\"skey\" data-content=\"Please enter the 4 character session key the instructor provided\"/>");
                                 out.print("<input id=\"send\" type=\"submit\" value=\"Submit\" />");
                                 out.print("</form>");
-                            }
-                            else {
-                                out.print("<label>There are No Sessions To Acknowledge At the Moment</label>");
-                            }
                         %>   
                     </div>
                     <br/>

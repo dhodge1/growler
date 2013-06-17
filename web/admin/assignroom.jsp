@@ -25,35 +25,33 @@
     </head>
     <body id="growler1">
         <%
-                    int user = 0;
-                    if (null == session.getAttribute("id")) {
-                        response.sendRedirect("../index.jsp");
-                    }
-                    else if (!session.getAttribute("user").equals("admin")) {
-                        response.sendRedirect("../index.jsp");
-                    }
-                    try {
-                        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
-                        String name = String.valueOf(session.getAttribute("user"));                  
-                    }
-                    catch (Exception e) {
-                        
-                    }
-                %>
+            int user = 0;
+            if (null == session.getAttribute("id")) {
+                response.sendRedirect("../index.jsp");
+            } else if (!session.getAttribute("user").equals("admin")) {
+                response.sendRedirect("../index.jsp");
+            }
+            try {
+                user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+                String name = String.valueOf(session.getAttribute("user"));
+            } catch (Exception e) {
+            }
+        %>
         <%@ include file="../includes/header.jsp" %> 
         <%@ include file="../includes/adminnav.jsp" %>
-<div class="row">
+        <div class="row">
             <div class="span3">
                 <img class="logo" src="../images/Techtoberfest2013admin.png" alt="Techtoberfest 2013 admin"/><!-- Techtoberfest logo-->
             </div>
-            <div class="span6 largeBottomMargin">
-                <h1 class = "bordered">Assign a Room to a Session</h1>
-            </div>
+
         </div>
         <div class="container-fixed">
             <div class="content">
                 <!-- Begin Content -->
                 <div class="row">
+                    <div class="span6 largeBottomMargin offset2">
+                        <h1 class = "bordered">Assign a Room to a Session</h1>
+                    </div>
 
                     <div class="span10 offset2">
                         <%@include file="../includes/messagehandler.jsp" %>
@@ -84,9 +82,9 @@
                                         <%
                                             //Get a list of suggested speakers
                                             for (int i = 0; i < locations.size(); i++) {
-                                                out.print("<option value=\"" + locations.get(i).getId() + "\">" + locations.get(i).getDescription() + ", " +
-                                                        locations.get(i).getBuilding() + " Capacity: " +
-                                                        locations.get(i).getCapacity() + "</option>");
+                                                out.print("<option value=\"" + locations.get(i).getId() + "\">" + locations.get(i).getDescription() + ", "
+                                                        + locations.get(i).getBuilding() + " Capacity: "
+                                                        + locations.get(i).getCapacity() + "</option>");
                                             }
                                         %>
                                     </select>

@@ -38,6 +38,8 @@ public abstract class GrowlerPersistence {
         try {
             data = new DataConnection();
             connection = data.sendConnection();
+            statement = connection.prepareStatement("set time_zone = 'US/Eastern'");
+            statement.execute();
         } catch (Exception e) {
         }
     }

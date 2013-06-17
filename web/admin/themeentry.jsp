@@ -91,7 +91,9 @@
             });
             $("#send").click(function(event) {
                 var emptyString = "";
-                if ($("#tip").val() === emptyString || $("#tip2").val() === emptyString) {
+                var str1 = $("#tip").val();
+                var str2 = $("#tip2").val();
+                if ($.trim(str1) === emptyString || $.trim(str2) === emptyString) {
                     alert("Please enter both a theme name and theme description before submitting.");
                     event.preventDefault();
                 }

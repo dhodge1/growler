@@ -70,6 +70,7 @@
                         <div id="tabs-1">
                             <div class="row">
                                 <div class="span6 offset1">
+                                    <h1 class='bordered'>Techtoberfest Home</h1>
                                     <%@include file="../includes/messagehandler.jsp" %>
                                     <section>
 

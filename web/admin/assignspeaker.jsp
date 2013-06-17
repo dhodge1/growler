@@ -25,23 +25,20 @@
     </head>
     <body id="growler1">
         <%
-                    int user = 0;
-                    int sessionPassed = 0;
-                    if (null == session.getAttribute("id")) {
-                        response.sendRedirect("../index.jsp");
-                    }
-                    else if (!session.getAttribute("user").equals("admin")) {
-                        response.sendRedirect("../index.jsp");
-                    }
-                    try {
-                        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
-                        String name = String.valueOf(session.getAttribute("user"));    
-                        sessionPassed = Integer.parseInt(request.getParameter("sessionId"));
-                    }
-                    catch (Exception e) {
-                        
-                    }
-                %>
+            int user = 0;
+            int sessionPassed = 0;
+            if (null == session.getAttribute("id")) {
+                response.sendRedirect("../index.jsp");
+            } else if (!session.getAttribute("user").equals("admin")) {
+                response.sendRedirect("../index.jsp");
+            }
+            try {
+                user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+                String name = String.valueOf(session.getAttribute("user"));
+                sessionPassed = Integer.parseInt(request.getParameter("sessionId"));
+            } catch (Exception e) {
+            }
+        %>
         <%@ include file="../includes/header.jsp" %> 
         <%@ include file="../includes/adminnav.jsp" %>
         <div class="row">
@@ -49,14 +46,15 @@
                 <img class="logo" src="../images/Techtoberfest2013admin.png" alt="Techtoberfest 2013 admin"/>
             </div>
             <br/>
-            <div class="span5">
-                <h1 class = "bordered largeBottomMargin">Assign a Suggested Speaker to a Session</h1>
-            </div>
+
         </div>
         <div class="container-fixed">
             <div class="content">
                 <!-- Begin Content -->
                 <div class="row">
+                    <div class="span6 offset1">
+                        <h1 class = "bordered largeBottomMargin">Assign a Suggested Speaker to a Session</h1>
+                    </div>
 
                     <div class="span10 offset1">
                         <%@include file="../includes/messagehandler.jsp" %>
@@ -80,8 +78,8 @@
                                                     out.print(" selected ");
                                                 }
                                                 out.print("\">" + sessions.get(i).getName());
-                                                
-                                                        out.print("</option>");
+
+                                                out.print("</option>");
                                             }
                                         %>
                                     </select>

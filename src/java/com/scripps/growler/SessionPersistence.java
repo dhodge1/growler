@@ -357,17 +357,9 @@ public class SessionPersistence extends GrowlerPersistence {
      * @return Sessions a user can acknowledge
      */
     public ArrayList<Session> getSessionsToAcknowledge() {
-        Calendar today = Calendar.getInstance();
-        String dateString = today.get(Calendar.YEAR) + "-" + (today.get(Calendar.MONTH) + 1) + "-" + today.get(Calendar.DATE);
-        String timeString = today.get(Calendar.HOUR_OF_DAY) + ":" + today.get(Calendar.MINUTE) + ":" + today.get(Calendar.SECOND);
-        java.sql.Date date = java.sql.Date.valueOf(dateString);
-        java.sql.Time time = java.sql.Time.valueOf(timeString);
         try {
             initializeJDBC();
             statement = connection.prepareStatement("select id, name from session where session_date = curdate() and addtime(start_time, duration) <= curtime() and addtime(addtime(start_time,duration), '00:15:00') >= curtime()");
-//            statement.setDate(1, date);
-//            statement.setTime(2, time);
-//            statement.setTime(3, time);
             result = statement.executeQuery();
             while (result.next()) {
                 Session s = new Session();

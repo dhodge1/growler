@@ -56,6 +56,8 @@
             boolean success = false;
 
             Connection connection = dataConnection.sendConnection();
+            PreparedStatement changeTime = connection.prepareStatement("set time_zone = 'US/Eastern'");
+            changeTime.execute();
             Statement statement = connection.createStatement();
             //Ensure time is still current, so user didn't just leave page up to enter erroneous data
             int duration = 0;
@@ -73,7 +75,8 @@
             cal.setTime(d);
             //Add 15 minutes to the end of the session
             cal.add(Calendar.MINUTE, 15);
-            durString = cal.get(Calendar.HOUR) + "0:" + cal.get(Calendar.MINUTE) + ":0" + cal.get(Calendar.SECOND);;
+            durString = cal.get(Calendar.HOUR) + "0:" + cal.get(Calendar.MINUTE) + ":0" + cal.get(Calendar.SECOND);
+            
             //Query against the end of a session + the 15 minutes
             ResultSet result = statement.executeQuery("select id, name from session where session_date = curdate() and addtime(start_time, duration) <= curtime() and addtime(addtime(start_time,duration), '00:15:00') >= curtime() and id = " + sessionId);
             result.next();

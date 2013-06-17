@@ -73,15 +73,20 @@
                         <div id="tabs-1">
                             <div class="row">
                                 <div class="span6 offset1">
+                                    <h1 class='bordered'>Techtoberfest Home</h1>
                                     <%@include file="../includes/messagehandler.jsp" %>
                                     <section>
 
                                         <h3>Themes</h3>
                                         <p>A place to edit and add Themes for this year's Techtoberfest</p>
                                         <h3>Speakers</h3>
-                                        <p>A place to edit and add Speakers for this year's Techtoberfest</p>
+                                        <p>A place to edit and add Speakers, and assign them to speak at sessions for this year's Techtoberfest</p>
                                         <h3>Sessions</h3>
                                         <p>A place to add and view sessions in this year's Techtoberfest</p>
+                                        <h3>Rooms</h3>
+                                        <p>A place to add, edit, and assign rooms for this year's Techtoberfest</p>
+                                        <h3>Reports</h3>
+                                        <p>A place to view real time reports based on the information gathered so far about this year's Techtoberfest</p>
 
                                     </section>
                                 </div>

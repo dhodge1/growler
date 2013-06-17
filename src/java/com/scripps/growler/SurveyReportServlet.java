@@ -57,4 +57,10 @@ public class SurveyReportServlet extends HttpServlet {
             
         }
     }
+    
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }
+    
 }

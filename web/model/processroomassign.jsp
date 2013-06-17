@@ -60,7 +60,7 @@
                 s = sp.getSessionByID(sessionId);
                 s.setLocation(roomId);
                 sp.updateSession(s);
-                session.setAttribute("message", "Success: Room successfully updated!");
+                session.setAttribute("message", "Success: Room successfully assigned to Session!");
             }
             catch (Exception e) {
                 session.setAttribute("message", "Error: Room already assigned to that Session.");

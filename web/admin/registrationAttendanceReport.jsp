@@ -44,19 +44,20 @@
                     catch (Exception e) {
                         
                     }
-                %>
+        %>
         <%@ include file="../includes/header.jsp" %> 
         <%@ include file="../includes/adminnav.jsp" %>  
         <div class="row">
             <div class="span3">
                 <img class="logo" src="../images/Techtoberfest2013admin.png" alt="Techtoberfest 2013 admin"/>
             </div>
-            <div class="span5">
-                <h1 class = "bordered largeBottomMargin">Report: Those Who Registered And Attended</h1>
-            </div>
+
         </div>
         <div class="container-fluid">
             <div class="content" role="main"><!-- Begin Content -->	
+                <div class="span5">
+                    <h1 class = "bordered largeBottomMargin">Report: Those Who Registered And Attended</h1>
+                </div>
                 <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
                     <tr>                    
                         <th>Session Name</th>
@@ -92,11 +93,11 @@
                             out.print("</td>");
                             out.print("</tr>");
                             }
-                            %>
+                    %>
                 </table>
                 <div class="span5">
-                <h1 class = "bordered largeBottomMargin">Report: Those Who Attended But Didn't Register</h1>
-            </div>
+                    <h1 class = "bordered largeBottomMargin">Report: Those Who Attended But Didn't Register</h1>
+                </div>
                 <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
                     <tr>                    
                         <th>Session Name</th>
@@ -125,11 +126,11 @@
                             out.print("</td>");
                             out.print("</tr>");
                             }
-                            %>
+                    %>
                 </table>
                 <div class="span5">
-                <h1 class = "bordered largeBottomMargin">Report: Those Who Registered But Didn't Attend</h1>
-            </div>
+                    <h1 class = "bordered largeBottomMargin">Report: Those Who Registered But Didn't Attend</h1>
+                </div>
                 <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
                     <tr>                    
                         <th>Session Name</th>
@@ -152,7 +153,7 @@
                             out.print("</td>");
                             out.print("</tr>");
                             }
-                            %>
+                    %>
                 </table>
                 <label><a href="../admin/download.jsp?type=registeredattendance">Download a PDF</a></label>
             </div><!-- /.content -->

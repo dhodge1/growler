@@ -93,13 +93,14 @@ public class AttendancePersistence extends GrowlerPersistence {
     public ArrayList<Attendance> getAllAttendance() {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select user_id, session_id, isSurveyTaken from attendance");
+            statement = connection.prepareStatement("select user_id, session_id, isSurveyTaken, surveySubmitTime from attendance ");
             result = statement.executeQuery();
             while (result.next()) {
                 Attendance a = new Attendance();
                 a.setUserId(result.getInt("user_id"));
                 a.setSessionId(result.getInt("session_id"));
                 a.setIsSurveyTaken(result.getBoolean("isSurveyTaken"));
+                a.setSurveySubmitTime(result.getTimestamp("surveySubmitTime"));
                 attendances.add(a);
             }
             closeJDBC();
@@ -144,7 +145,7 @@ public class AttendancePersistence extends GrowlerPersistence {
     public ArrayList<Attendance> getAttendanceBySession(int session) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select user_id, session_id, isSurveyTaken from attendance where session_id = ?");
+            statement = connection.prepareStatement("select user_id, session_id, isSurveyTaken, surveySubmitTime from attendance where session_id = ?");
             statement.setInt(1, session);
             result = statement.executeQuery();
             while (result.next()) {
@@ -152,6 +153,7 @@ public class AttendancePersistence extends GrowlerPersistence {
                 a.setUserId(result.getInt("user_id"));
                 a.setSessionId(result.getInt("session_id"));
                 a.setIsSurveyTaken(result.getBoolean("isSurveyTaken"));
+                a.setSurveySubmitTime(result.getTimestamp("surveySubmitTime"));
                 attendances.add(a);
             }
             closeJDBC();
@@ -186,7 +188,7 @@ public class AttendancePersistence extends GrowlerPersistence {
         try {
             initializeJDBC();
             initializeJDBC();
-            statement = connection.prepareStatement("select user_id, session_id, isSurveyTaken from attendance where isSurveyTaken = ?");
+            statement = connection.prepareStatement("select user_id, session_id, isSurveyTaken, surveySubmitTime from attendance where isSurveyTaken = ?");
             statement.setBoolean(1, registered);
             result = statement.executeQuery();
             while (result.next()) {
@@ -194,6 +196,7 @@ public class AttendancePersistence extends GrowlerPersistence {
                 a.setUserId(result.getInt("user_id"));
                 a.setSessionId(result.getInt("session_id"));
                 a.setIsSurveyTaken(result.getBoolean("isSurveyTaken"));
+                a.setSurveySubmitTime(result.getTimestamp("surveySubmitTime"));
                 attendances.add(a);
             }
             closeJDBC();
