@@ -90,14 +90,14 @@ public class SessionPersistence extends GrowlerPersistence {
         try {
             initializeJDBC();
             statement = connection.prepareStatement("insert into session "
-                    + " (name, session_date, start_time, location, duration, session_key) "
-                    + " values (?, ?, ?, ?, ?, substring(sha1(?), 1, 4))");
+                    + " (name, session_date, start_time, location, duration, description) "
+                    + " values (?, ?, ?, ?, ?, ?)");
             statement.setString(1, s.getName());
             statement.setDate(2, s.getSessionDate());
             statement.setTime(3, s.getStartTime());
             statement.setString(4, s.getLocation());
             statement.setTime(5, s.getDuration());
-            statement.setString(6, s.getKey());
+            statement.setString(6, s.getDescription());
             statement.execute();
             generateKey(s.getName());
             closeJDBC();

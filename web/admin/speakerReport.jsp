@@ -97,7 +97,7 @@
                         }
                     %>
                 </table>
-                <label><a href="../admin/download.jsp?type=interset">Download a PDF</a></label>
+                <label><a href="../SpeakerReportServlet">Download a PDF<i class="icon16-document"></i></a></label>
             </div><!-- /.content -->
         </div><!-- /.container-fluid -->
 

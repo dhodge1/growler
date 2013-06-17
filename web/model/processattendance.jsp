@@ -2,8 +2,10 @@
     Document   : processattendance
     Created on : Apr 17, 2013, 11:00:30 PM
     Author     : Justin Bauguess
-    Purpose    : Adds the record of attendance
-                 into the database.
+    Purpose    : Adds the record of attendance into the database.  
+                 Checks against current time to ensure a user
+                 didn't just leave the attendance page up, then checks against other sessions 
+                 to ensure the user isn't registering for a session in the same time slot.
 --%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -59,24 +61,6 @@
             PreparedStatement changeTime = connection.prepareStatement("set time_zone = 'US/Eastern'");
             changeTime.execute();
             Statement statement = connection.createStatement();
-            //Ensure time is still current, so user didn't just leave page up to enter erroneous data
-            int duration = 0;
-            ResultSet durRes = statement.executeQuery("select duration from session where id = " + sessionId);
-            while (durRes.next()) {
-                duration = durRes.getInt("duration");
-            }
-            //Convert the duration into a usable format
-            int hours = duration / 60;
-            int minutes = duration % 60;
-            String durString = hours + ":" + minutes + ":" + "00";
-            Calendar cal = Calendar.getInstance();
-            SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
-            java.util.Date d = df.parse(durString);
-            cal.setTime(d);
-            //Add 15 minutes to the end of the session
-            cal.add(Calendar.MINUTE, 15);
-            durString = cal.get(Calendar.HOUR) + "0:" + cal.get(Calendar.MINUTE) + ":0" + cal.get(Calendar.SECOND);
-            
             //Query against the end of a session + the 15 minutes
             ResultSet result = statement.executeQuery("select id, name from session where session_date = curdate() and addtime(start_time, duration) <= curtime() and addtime(addtime(start_time,duration), '00:15:00') >= curtime() and id = " + sessionId);
             result.next();
@@ -104,12 +88,8 @@
                         session.setAttribute("sessionName", sp.getSessionByID(sessionId).getName());
                         session.setAttribute("page", "../view/attendance.jsp");
                         success = true;
-
-
                     } else {
                         session.setAttribute("message", "Error: Already registered in that time slot!");
-
-
                     }
                     duplicate.close();
                 }
@@ -119,6 +99,7 @@
             statement.close();
             result.close();
             if (success) {
+                //Email the user a message that they should take a survey
                 response.sendRedirect("../model/emailer.jsp?session=" + sessionId);
             } else {
                 response.sendRedirect("../view/attendance.jsp");

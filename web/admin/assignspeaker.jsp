@@ -77,7 +77,7 @@
                                                 if (sessions.get(i).getId() == sessionPassed) {
                                                     out.print(" selected ");
                                                 }
-                                                out.print("\">" + sessions.get(i).getName());
+                                                out.print(">" + sessions.get(i).getName());
 
                                                 out.print("</option>");
                                             }
@@ -85,7 +85,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label>Suggested Speakers:</label>
+                                    <label class="required">Suggested Speakers:</label>
                                     <select class="speaker" name="speaker">
                                         <option value="0"> - Please Pick a Speaker - </option>
                                         <%
@@ -99,6 +99,7 @@
                                 <a href="../admin/speakerentry.jsp">Add a New Speaker</a><br/>
                                 <div class="form-actions">
                                     <input id="send" type="submit" class="button button-primary" value="Submit"/>
+                                    <a id="cancel" class="button" href="../admin/session.jsp">Cancel</a>
                                 </div>
                             </form>
                         </section>

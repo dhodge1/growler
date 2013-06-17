@@ -91,6 +91,7 @@
                                 </div>
                                 <div class="form-actions">
                                     <input id="send" type="submit" class="button button-primary" value="Submit"/>
+                                    <a id="cancel" class="button" href="../admin/session.jsp">Cancel</a>
                                 </div>
                             </form>
                         </section>

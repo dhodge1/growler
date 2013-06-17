@@ -23,44 +23,42 @@
         <link rel="stylesheet" href="../css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
         <link rel="stylesheet" href="../css/draganddrop.css" /><!--Drag and drop style-->
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
-          <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
         <link rel="stylesheet" type="text/css" href="css/general.css" /><!--General CSS-->
         <link rel="stylesheet" type="text/css" href="css/help.css" /><!--Help CSS-->
     </head>
     <body id="growler1">
         <%
-                    int user = 0;
-                    if (null == session.getAttribute("id")) {
-                        response.sendRedirect("../index.jsp");
-                    }
-                    else if (!session.getAttribute("user").equals("admin")) {
-                        response.sendRedirect("../index.jsp");
-                    }
-                    try {
-                        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
-                        String name = String.valueOf(session.getAttribute("user"));                  
-                    }
-                    catch (Exception e) {
-                        
-                    }
-                %>
+            int user = 0;
+            if (null == session.getAttribute("id")) {
+                response.sendRedirect("../index.jsp");
+            } else if (!session.getAttribute("user").equals("admin")) {
+                response.sendRedirect("../index.jsp");
+            }
+            try {
+                user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+                String name = String.valueOf(session.getAttribute("user"));
+            } catch (Exception e) {
+            }
+        %>
         <%@ include file="../includes/header.jsp" %> 
         <%@ include file="../includes/adminnav.jsp" %>
         <div class="row">
             <div class="span3">
                 <img class="logo" src="../images/Techtoberfest2013admin.png" alt="Techtoberfest 2013 admin"/><!-- Techtoberfest logo-->
             </div>
-            <div class="span6 largeBottomMargin">
-                <h1 class = "bordered">Add A Session</h1>
-            </div>
+
         </div>
         <div class="container-fixed">
             <div class="content">
-                
+
                 <!-- Begin Content -->
+                <div class="span6 largeBottomMargin offset2">
+                    <h1 class = "bordered">Add A Session</h1>
+                </div>
                 <div class="row">
                     <div class="span12">
-                        
+
                         <div id="tabs-1">
                             <div class="row">
                                 <div class="span1">
@@ -70,17 +68,17 @@
                                         ArrayList<Session> sessions = sp.getAllSessionsWithKeys(" ");
                                     %>
                                 </div>
-                                <div class="span6 offset1">
+                                <div class="span6 offset2">
                                     <%@include file="../includes/messagehandler.jsp" %>
                                     <section>
                                         <form method="post" action="../model/processSession.jsp" onSubmit="return validateValues();">
                                             <div class="form-group">
                                                 <label class="required">Session Name: </label>
-                                                <input id="name" name="name" type="text" data-content="Enter the name of the Session" maxlength="70"/>
+                                                <input id="name" size='50' name="name" type="text" data-content="Enter the name of the Session" maxlength="70"/>
                                             </div>
                                             <div class="form-group">
                                                 <label class="required">Session Description: </label>
-                                                <input id="description" name="description" type="text" data-content="Enter the name of the Session" maxlength="250"/>
+                                                <textarea id="description" name="description" maxlength="250" rows="5" cols="50" data-content="Enter the name of the Session" ></textarea>
                                             </div>
                                             <div class="form-group">
                                                 <label class="required">Date: </label>
@@ -89,31 +87,31 @@
                                             <div class="form-group">
                                                 <label class="required">Time: </label>
                                                 <select id="time" name="time">
-                                                            <option value="08:00:00">8:00 AM</option>
-                                                            <option value="08:30:00">8:30 AM</option>
-                                                            <option value="09:00:00">9:00 AM</option>
-                                                            <option value="09:30:00">9:30 AM</option>
-                                                            <option value="10:00:00">10:00 AM</option>
-                                                            <option value="10:30:00">10:30 AM</option>
-                                                            <option value="11:00:00">11:00 AM</option>
-                                                            <option value="11:30:00">11:30 AM</option>
-                                                            <option value="12:00:00">12:00 PM</option>
-                                                            <option value="12:30:00">12:30 PM</option>
-                                                            <option value="13:00:00">1:00 PM</option>
-                                                            <option value="13:30:00">1:30 PM</option>
-                                                            <option value="14:00:00">2:00 PM</option>
-                                                            <option value="14:30:00">2:30 PM</option>
-                                                            <option value="15:00:00">3:00 PM</option>
-                                                            <option value="15:30:00">3:30 PM</option>
-                                                            <option value="16:00:00">4:00 PM</option>
-                                                            <option value="16:30:00">4:30 PM</option>
-                                                            <option value="17:00:00">5:00 PM</option>
-                                                            <option value="17:30:00">5:30 PM</option>
-                                                            <option value="18:00:00">6:00 PM</option>
-                                                            <option value="18:30:00">6:30 PM</option>
-                                                            <option value="19:00:00">7:00 PM</option>
-                                                            
-                                                        </select>
+                                                    <option value="08:00:00">8:00 AM</option>
+                                                    <option value="08:30:00">8:30 AM</option>
+                                                    <option value="09:00:00">9:00 AM</option>
+                                                    <option value="09:30:00">9:30 AM</option>
+                                                    <option value="10:00:00">10:00 AM</option>
+                                                    <option value="10:30:00">10:30 AM</option>
+                                                    <option value="11:00:00">11:00 AM</option>
+                                                    <option value="11:30:00">11:30 AM</option>
+                                                    <option value="12:00:00">12:00 PM</option>
+                                                    <option value="12:30:00">12:30 PM</option>
+                                                    <option value="13:00:00">1:00 PM</option>
+                                                    <option value="13:30:00">1:30 PM</option>
+                                                    <option value="14:00:00">2:00 PM</option>
+                                                    <option value="14:30:00">2:30 PM</option>
+                                                    <option value="15:00:00">3:00 PM</option>
+                                                    <option value="15:30:00">3:30 PM</option>
+                                                    <option value="16:00:00">4:00 PM</option>
+                                                    <option value="16:30:00">4:30 PM</option>
+                                                    <option value="17:00:00">5:00 PM</option>
+                                                    <option value="17:30:00">5:30 PM</option>
+                                                    <option value="18:00:00">6:00 PM</option>
+                                                    <option value="18:30:00">6:30 PM</option>
+                                                    <option value="19:00:00">7:00 PM</option>
+
+                                                </select>
                                             </div>
                                             <div class="form-group">
                                                 <label class="required">Duration: </label>
@@ -123,11 +121,11 @@
                                                 <label class="required">Location: </label>
                                                 <select name="location">
                                                     <%
-                                                       LocationPersistence lp = new LocationPersistence();
-                                                       ArrayList<Location> locations = lp.getAllLocations();
-                                                       for (int i = 0; i < locations.size(); i++) {
-                                                           out.print("<option value=" + locations.get(i).getId() +">" + locations.get(i).getDescription() + "</option>");
-                                                       }
+                                                        LocationPersistence lp = new LocationPersistence();
+                                                        ArrayList<Location> locations = lp.getAllLocations();
+                                                        for (int i = 0; i < locations.size(); i++) {
+                                                            out.print("<option value=" + locations.get(i).getId() + ">" + locations.get(i).getDescription() + "</option>");
+                                                        }
                                                     %>
                                                 </select>
                                             </div>
@@ -156,26 +154,20 @@
         <%@ include file="../includes/footer.jsp" %> 
         <%@ include file="../includes/scriptlist.jsp" %>
         <script>
-            $(function() {
-                $("#datepicker").datepicker({minDate: new Date(2013, 10 - 1, 1), maxDate: new Date(2013, 10 - 1, 31)}).change(function() {
-                    $("#datepicker").datepicker("option", "dateFormat", "yy-mm-dd");
-                });
-                ;
-            });
-            
+                                            $(function() {
+                                                $("#datepicker").datepicker({minDate: new Date(2013, 10 - 1, 1), maxDate: new Date(2013, 10 - 1, 31)}).change(function() {
+                                                    $("#datepicker").datepicker("option", "dateFormat", "yy-mm-dd");
+                                                });
+                                                ;
+                                            });
+
         </script>
         <script>
             $(function() {
-                        $("input").autoinline();
-                    });
+                $("input").autoinline();
+            });
             function validateValues() {
                 //Get the Duration value, make sure it's within the threshold, isn't blank, and is a number
-                var myval = document.getElementById("duration");
-                if (myval.value < 15 || myval.value > 120 || !myval.value || isNaN(myval.value)) {
-                    alert('Must be between 15 and 120');
-                    myval.focus();
-                    return false;
-                }
                 var myname = document.getElementById("name");
                 if (!myname.value) {
                     alert('Please enter a Session Name');
@@ -192,6 +184,12 @@
                 if (!mydate.value) {
                     alert('Please enter a date');
                     mydate.focus();
+                    return false;
+                }
+                var myval = document.getElementById("duration");
+                if (myval.value < 15 || myval.value > 120 || !myval.value || isNaN(myval.value)) {
+                    alert('Duration must be between 15 and 120');
+                    myval.focus();
                     return false;
                 }
                 var mylocation = document.getElementById("location");

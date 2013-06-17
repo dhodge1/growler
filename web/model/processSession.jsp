@@ -38,7 +38,7 @@
             String name = request.getParameter("name");
             String location = request.getParameter("location");
             Session s = new Session();
-            s.setName(name);
+            s.setName(name);            
             s.setDescription(description);
             s.setSessionDate(java.sql.Date.valueOf(date));
             s.setStartTime(java.sql.Time.valueOf(time));
@@ -48,7 +48,9 @@
             ArrayList<Session> ses = sp.getSessionsByDateAndTime(java.sql.Date.valueOf(date), java.sql.Time.valueOf(time), " ");
             boolean ok = true;
             for (int i = 0; i < ses.size(); i++) {
-                if (ses.get(i).getLocation().equals(location)) {
+                //Gets the session scheduled for that time, then compares them to the location parameter
+                //Excuses TBD, because any number of sessions can have TBD as the location
+                if (ses.get(i).getLocation().equals(location) && !location.equals("TBD")) {
                     session.setAttribute("message", "Error: There is already a session scheduled for that room at that time");
                     ok = false;
                 }

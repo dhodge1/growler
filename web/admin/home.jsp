@@ -46,7 +46,8 @@
             <div class="span3">
                 <img class="logo" src="../images/Techtoberfest2013admin.png" alt="Techtoberfest 2013 admin"/><!-- Techtoberfest logo-->
             </div>
-            <div class="span7 largeBottomMargin">
+            <div class="span7">
+                <h1 class='bordered'>Techtoberfest Home</h1>
                 <%
                     int user = 0;
                     if (null == session.getAttribute("id")) {
@@ -73,7 +74,7 @@
                         <div id="tabs-1">
                             <div class="row">
                                 <div class="span6 offset1">
-                                    <h1 class='bordered'>Techtoberfest Home</h1>
+                                    
                                     <%@include file="../includes/messagehandler.jsp" %>
                                     <section>
 

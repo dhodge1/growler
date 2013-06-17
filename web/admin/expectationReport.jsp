@@ -97,7 +97,6 @@
                         }
                     %>
                 </table>
-                <label><a href="../admin/download.jsp?type=interset">Download a PDF</a></label>
             </div><!-- /.content -->
         </div><!-- /.container-fluid -->
 

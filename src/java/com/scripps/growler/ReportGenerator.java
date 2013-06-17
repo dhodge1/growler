@@ -95,6 +95,101 @@ public class ReportGenerator extends GrowlerPersistence {
         }
 
     }
+    
+    public void addSpeakerContent(Document document) throws DocumentException {
+        ArrayList<QuestionReport> report = generateRankingsReport(2);
+        PdfPTable table = new PdfPTable(6);
+//        float[] columnWidth = {10, 45, 45};
+//        Rectangle pageSize = new Rectangle((float) 8.5, 11);
+//        table.setWidthPercentage(columnWidth, pageSize);
+        float cellHeight = 30;
+        PdfPCell c1 = new PdfPCell(new Phrase("Session Name"));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c1.setFixedHeight(cellHeight);
+        c1.setBorderWidthBottom((float)1.5);
+        table.addCell(c1);
+
+        PdfPCell c2 = new PdfPCell(new Phrase("Session Description"));
+        c2.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c2.setBorderWidthBottom((float)1.5);
+        table.addCell(c2);
+        
+
+        PdfPCell c3 = new PdfPCell(new Phrase("Speaker(s)"));
+        c3.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c3.setBorderWidthBottom((float)1.5);
+        table.addCell(c3);
+        
+        PdfPCell c4 = new PdfPCell(new Phrase("Avg Rating"));
+        c4.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c4.setBorderWidthBottom((float)1.5);
+        table.addCell(c4);
+        
+        PdfPCell c5 = new PdfPCell(new Phrase("# Attended"));
+        c5.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c5.setBorderWidthBottom((float)1.5);
+        table.addCell(c5);
+        
+        PdfPCell c6 = new PdfPCell(new Phrase("# Surveys"));
+        c6.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c6.setBorderWidthBottom((float)1.5);
+        table.addCell(c6);
+
+        table.setHeaderRows(1);
+
+        for (int i = 0; i < report.size(); i++) {
+            PdfPCell c7 = new PdfPCell();
+            c7.setHorizontalAlignment(Element.ALIGN_LEFT);
+            c7.setFixedHeight(cellHeight);
+            c7.setPhrase(new Phrase(report.get(i).getSession_name()));
+            c7.setBorderWidthBottom((float)1.5);
+            table.addCell(c7);
+            PdfPCell c8 = new PdfPCell();
+            c8.setHorizontalAlignment(Element.ALIGN_LEFT);
+            c8.setFixedHeight(cellHeight);
+            c8.setBorderWidthBottom((float)1.5);
+            c8.setPhrase(new Phrase(report.get(i).getSession_description()));
+            table.addCell(c8);
+            PdfPCell c9 = new PdfPCell();
+            c9.setHorizontalAlignment(Element.ALIGN_LEFT);
+            c9.setFixedHeight(cellHeight);
+            c9.setBorderWidthBottom((float)1.5);
+            String[] speakers = (String[])report.get(i).getSpeakers().toArray();
+            String spkr = "";
+            for (int f = 0; f < speakers.length; f++) {
+                spkr = spkr.concat(speakers[f]);
+                if (f != speakers.length) {
+                    spkr = spkr.concat(" and ");
+                }
+            }
+            c9.setPhrase(new Phrase(spkr));
+            table.addCell(c9);
+            PdfPCell c10 = new PdfPCell();
+            c10.setHorizontalAlignment(Element.ALIGN_LEFT);
+            c10.setFixedHeight(cellHeight);
+            c10.setPhrase(new Phrase(String.valueOf(report.get(i).getScore())));
+            c10.setBorderWidthBottom((float)1.5);
+            table.addCell(c10);
+            PdfPCell c11 = new PdfPCell();
+            c11.setHorizontalAlignment(Element.ALIGN_LEFT);
+            c11.setFixedHeight(cellHeight);
+            c11.setBorderWidthBottom((float)1.5);
+            c11.setPhrase(new Phrase(report.get(i).getAttendance()));
+            table.addCell(c11);
+            PdfPCell c12 = new PdfPCell();
+            c12.setHorizontalAlignment(Element.ALIGN_LEFT);
+            c12.setFixedHeight(cellHeight);
+            c12.setBorderWidthBottom((float)1.5);
+            c12.setPhrase(new Phrase(report.get(i).getRaters()));
+            table.addCell(c12);
+        }
+        try {
+            document.add(table);
+        } catch (DocumentException ex) {
+            Logger.getLogger(ReportGenerator.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 
     public ArrayList<InterestReport> generateInterestReport() {
         try {

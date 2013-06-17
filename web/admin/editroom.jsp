@@ -82,6 +82,7 @@
                         <br/>
                         <br/>
                         <input id="send" type="submit" value="Submit Changes" class="button button-primary"/>
+                        <a id="cancel" class="button" href="../admin/room.jsp">Cancel</a>
                     </form>
                 </div>
             </div><!-- End Content -->	

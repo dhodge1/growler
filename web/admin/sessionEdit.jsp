@@ -25,37 +25,32 @@
     </head>
     <body id="growler1">
         <%
-                    int user = 0;
-                    if (null == session.getAttribute("id")) {
-                        response.sendRedirect("../index.jsp");
-                    }
-                    else if (!session.getAttribute("user").equals("admin")) {
-                        response.sendRedirect("../index.jsp");
-                    }
-                    try {
-                        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
-                        String name = String.valueOf(session.getAttribute("user"));                  
-                    }
-                    catch (Exception e) {
-                        
-                    }
-                %>
+            int user = 0;
+            if (null == session.getAttribute("id")) {
+                response.sendRedirect("../index.jsp");
+            } else if (!session.getAttribute("user").equals("admin")) {
+                response.sendRedirect("../index.jsp");
+            }
+            try {
+                user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+                String name = String.valueOf(session.getAttribute("user"));
+            } catch (Exception e) {
+            }
+        %>
         <%@ include file="../includes/header.jsp" %> 
         <%@ include file="../includes/adminnav.jsp" %>
         <div class="row">
             <div class="span3">
                 <img class="logo" src="../images/Techtoberfest2013admin.png" alt="Techtoberfest 2013 admin"/><!-- Techtoberfest logo-->
             </div>
-            <div class="span6 largeBottomMargin">
-                <h1 class = "bordered">Edit a Session</h1>
-            </div>
-            
         </div>
         <div class="container-fluid">
             <div class="content">
                 <!-- Begin Content -->
                 <div class="row"><!--row-->
-                    
+                    <div class="span6 largeBottomMargin">
+                        <h1 class="bordered">Edit a Session</h1>
+                    </div>
                     <div class="span9 offset2"><!--span-->
                         <%
                             //Displaying error or success messages -- clear it out when done
@@ -74,15 +69,16 @@
                             <form action="../model/processSessionEdit.jsp" method="post" onsubmit="return validateForm();">
                                 <div class="form-group">
                                     <label class="required">Name:</label>
-                                    <input type="text" name="name" value="<% out.print(s.getName());%>" class="input-xlarge" id="tip" data-content="70 characters or less please" maxlength="70"/>
+                                    <input type="text" name="name" value="<% out.print(s.getName());%>" class="input-xlarge" size="50" id="tip" data-content="70 characters or less please" maxlength="70"/>
                                     <input type="hidden" name="id" value="<% out.print(s.getId());%>"/>
                                 </div>
                                 <div class="form-group">
                                     <label>Description:</label>
-                                    <input type="text" name="description" value="<% out.print(s.getDescription());%>" class="input-xlarge" id="tip2" data-content="200 characters or less please" maxlength="200"/>
+                                    <textarea name="description" class="input-xlarge" cols="50" rows='5' id="tip2" data-content="250 characters or less please" maxlength="250"><% out.print(s.getDescription());%></textarea>
                                 </div>
                                 <div class="form-actions">
                                     <input type="submit" class="button button-primary" value="Submit"/>
+                                    <a id="cancel" class="button" href="../admin/session.jsp">Cancel</a>
                                 </div>
                             </form>
                         </section>

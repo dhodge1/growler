@@ -4,8 +4,16 @@
         <servlet-name>SurveyReportServlet</servlet-name>
         <servlet-class>com.scripps.growler.SurveyReportServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SpeakerReportServlet</servlet-name>
+        <servlet-class>com.scripps.growler.SpeakerReportServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SurveyReportServlet</servlet-name>
         <url-pattern>/SurveyReportServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SpeakerReportServlet</servlet-name>
+        <url-pattern>/SpeakerReportServlet</url-pattern>
     </servlet-mapping>
 </web-app>
