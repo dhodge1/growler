@@ -38,17 +38,14 @@
         
         //ensure the person requesting the reset gave us the proper data
         ResultSet result = statement.executeQuery("select id, name, email from user where id = " + Integer.parseInt(user) + " and email = '" + email + "'");
-        
         while (result.next()){
             if (result.getString("name") == null) {
                 session.setAttribute("message", "Error: Invalid attributes");
                 response.sendRedirect("../view/requestreset.jsp");
             }
         }
-
         //Make the temporary password a hash of the System Date
         statement.executeUpdate("update user set password = sha1(sysdate()) where id = " + Integer.parseInt(user));
-
         ResultSet result2 = statement.executeQuery("select id, name, password, email from user where id = " + Integer.parseInt(user));
         User u = new User();
         while (result2.next()) {

@@ -29,6 +29,9 @@
                     if (null == session.getAttribute("id")) {
                         response.sendRedirect("../index.jsp");
                     }
+                    else if (!session.getAttribute("user").equals("admin")) {
+                        response.sendRedirect("../index.jsp");
+                    }
                     try {
                         user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
                         String name = String.valueOf(session.getAttribute("user"));                  
@@ -37,7 +40,6 @@
                         
                     }
                 %>
-        <%@include file="../includes/isadmin.jsp" %>
         <%@ include file="../includes/header.jsp" %> 
         <%@ include file="../includes/adminnav.jsp" %>
         <%

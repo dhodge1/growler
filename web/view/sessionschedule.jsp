@@ -6,6 +6,7 @@
                 allowing them to register interest in any number of those events.
                 Uses registerinterest.jsp to process data.
 --%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
 <%@page import="com.scripps.growler.*" %>
@@ -22,7 +23,7 @@
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <title>Session</title><!-- Title -->
+        <title>Techtoberfest Session Schedule</title><!-- Title -->
 
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> 
         <link rel="stylesheet" href="../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
@@ -111,13 +112,16 @@
                                     out.print(sessions.get(i).getDescription());
                                     out.print("</td>");
                                     out.print("<td>");
-                                    out.print(sessions.get(i).getSessionDate());
+                                    SimpleDateFormat dates = new SimpleDateFormat("E, MM-dd-yyyy");
+                                    out.print(dates.format(sessions.get(i).getSessionDate()));
                                     out.print("</td>");
                                     out.print("<td>");
-                                    out.print(sessions.get(i).getStartTime());
+                                    SimpleDateFormat fmt = new SimpleDateFormat("h:mm a");
+                                    out.print(fmt.format(sessions.get(i).getStartTime()));
                                     out.print("</td>");
                                     out.print("<td>");
-                                    out.print(sessions.get(i).getDuration());
+                                    SimpleDateFormat fmt2 = new SimpleDateFormat("K ' hours and ' mm ' minutes'");
+                                    out.print(fmt2.format(sessions.get(i).getDuration()));
                                     out.print("</td>");
                                     out.print("<td>");
                                     out.print(lp.getLocationById(sessions.get(i).getLocation()).getId());

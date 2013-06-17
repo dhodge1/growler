@@ -76,7 +76,7 @@
                                 <input name="reason" class="input-xlarge" type="text" id="tip3" data-content="Help us understand what this theme suggestion means to you" maxlength="250"/>
                             </div>
                             <div class="form-actions">
-                                <input type="submit" id="send" class="button button-primary" value="Send" />
+                                <input type="submit" id="send" class="button button-primary" value="Submit" />
                                 <a class="button" id="cancel" href="../view/theme.jsp">Cancel</a>
                             </div>
                         </fieldset>

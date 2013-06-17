@@ -38,7 +38,6 @@
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
     </head>
     <body id="growler1">    
-        <%@ include file="../includes/isadmin.jsp" %> 
         <%@ include file="../includes/header.jsp" %> 
         <div class="row">
             <%@ include file="../includes/adminnav.jsp" %>
@@ -51,6 +50,9 @@
                 <%
                     int user = 0;
                     if (null == session.getAttribute("id")) {
+                        response.sendRedirect("../index.jsp");
+                    }
+                    else if (!session.getAttribute("user").equals("admin")) {
                         response.sendRedirect("../index.jsp");
                     }
                     try {

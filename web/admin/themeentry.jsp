@@ -36,6 +36,9 @@
                     if (null == session.getAttribute("id")) {
                         response.sendRedirect("../index.jsp");
                     }
+                    else if (!session.getAttribute("user").equals("admin")) {
+                        response.sendRedirect("../index.jsp");
+                    }
                     try {
                         user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
                         String name = String.valueOf(session.getAttribute("user"));                  
@@ -87,9 +90,13 @@
                 $("input").autoinline();
             });
             $("#send").click(function(event) {
-                if ($("input:empty")) {
+                var emptyString = "";
+                if ($("#tip").val() === emptyString || $("#tip2").val() === emptyString) {
+                    alert("Please enter both a theme name and theme description before submitting.");
                     event.preventDefault();
-                    alert("Please fill in all Fields.");
+                }
+                else {
+                    $("#action").attr("action", "../model/processThemeSuggestion.jsp");
                 }
             });
         </script>

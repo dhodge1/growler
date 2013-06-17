@@ -1,14 +1,10 @@
 <%-- 
     Document   : requestreset
-    Created on : Modified on 5/1/2013 by JCM
-    Author     : Christopher Tupps & Jonathan C. McCowan
-    Purpose    : This page allows users to change their password
-                                 by using a special code emailed to them from
-                                 EmailForm.jsp
-                                 **Thought it might be nice to start our reset password view file.
-                                It should be the place we have the new password fields and submit.
-                                It might need to be posted to with an associated ID, the post
-                                coming from the link emailed from the JSP mailer.
+    Created on : Modified on 5/1/2013 by JCM (Modifed again in June - JMB
+    Author     : Christopher Tupps & Jonathan C. McCowan & Justin Bauguess
+    Purpose    : This page allows a user to enter a ID and email to allow a password reset.
+                If the ID matches the email in the user table, they will be sent
+                an email that allows them to reset their password.
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.*"%>
@@ -64,6 +60,7 @@
                             </div>
                             <div class="form-actions">
                                 <input class="button button-primary" id="send" value="Submit" type="submit"/>
+                                <a class="button" href="../index.jsp">Cancel</a>
                             </div>
                         </fieldset>
                     </div>   
@@ -85,11 +82,11 @@
         $(function() {
             $("#tip, #tip2").autoinline();
         });
-        $("#send").click(function() {
+        $("#send").click(function(event) {
             var emptyString = "";
             if ($("#tip,#tip2").val() === emptyString) {
-                $("#action").attr("action", "");
                 alert("Please enter information into all fields before submitting.");
+                event.preventDefault();
             }
             else {
                 $("#action").attr("action", "../model/sendreset.jsp");
