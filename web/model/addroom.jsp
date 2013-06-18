@@ -58,11 +58,11 @@
         l.setBuilding(building);
         LocationPersistence lp = new LocationPersistence();
         try {
-        lp.addLocation(l);
-            session.setAttribute("message", "Success: Room successfully added!");
+            lp.addLocation(l);
+            session.setAttribute("message", "Success: Room " + l.getDescription() + " successfully added!");
         }
         catch (Exception e) {
-            session.setAttribute("message", "Error: Adding Room failed.");
+            session.setAttribute("message", "Error: Adding Room " + l.getDescription() + " failed.");
         }
         finally {
             response.sendRedirect("../admin/room.jsp");

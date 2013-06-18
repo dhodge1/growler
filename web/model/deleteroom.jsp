@@ -51,12 +51,13 @@
         Location l = new Location();
         l.setId(id);
         LocationPersistence lp = new LocationPersistence();
+        l = lp.getLocationById(id);
         try {
-        lp.deleteLocation(l);
-            session.setAttribute("message", "Success: Room successfully deleted!");
+            lp.deleteLocation(l);
+            session.setAttribute("message", "Success: Room " + l.getDescription() + " successfully deleted!");
         }
         catch (Exception e) {
-            session.setAttribute("message", "Error: Deleting Room failed.");
+            session.setAttribute("message", "Error: Deleting Room " + l.getDescription() + " failed.");
         }
         finally {
             response.sendRedirect("../admin/room.jsp");

@@ -2,6 +2,8 @@
     Document   : processSpeakerRemove
     Created on : Jun 13, 2013, 4:02:50 PM
     Author     : 162107
+    Purpose    : Removes a speaker from a speaker_team, which means they are no
+                longer assigned to speak for a session.
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.*"%>
@@ -24,18 +26,10 @@
                     catch (Exception e) {
                         
                     }
-                %>
-        <%
-
             int speakerId = Integer.parseInt(request.getParameter("speaker"));
             int sessionId = Integer.parseInt(request.getParameter("sessionId"));
-
-
             DataConnection dc = new DataConnection();
             Connection connection = dc.sendConnection();
-
-
-
             PreparedStatement statement = connection.prepareStatement("delete from speaker_team where speaker_id = ? and session_id = ?");
             statement.setInt(1, speakerId);
             statement.setInt(2, sessionId);
@@ -48,7 +42,6 @@
                 statement.close();
                 connection.close();
             }
-
             response.sendRedirect("../admin/session.jsp");
         %>
 </html>

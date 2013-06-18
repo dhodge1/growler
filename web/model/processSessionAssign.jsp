@@ -40,12 +40,16 @@
                 PreparedStatement statement = connection.prepareStatement("insert into speaker_team (speaker_id, session_id) values (?, ?)");
                 statement.setInt(1, speakerId);
                 statement.setInt(2, sessionId);
+                SpeakerPersistence sk = new SpeakerPersistence();
+                SessionPersistence sp = new SessionPersistence();
+                Speaker k = sk.getSpeakerByID(speakerId);
+                Session s= sp.getSessionByID(sessionId);
                 try {
                     statement.execute();
-                    session.setAttribute("message", "Success: Speaker successfully assigned to Session!");
+                    session.setAttribute("message", "Success: Speaker " + k.getLastName() + ", " + k.getFirstName() + " successfully assigned to Session " + s.getName() + "!");
                 } catch (Exception e) {
                     //If the insert fails, it's a primary key violation, so display that message gracefully
-                    session.setAttribute("message", "Error: Speaker has already been assigned to that Session");
+                    session.setAttribute("message", "Error: Speaker " + k.getLastName() + ", " + k.getFirstName() + " was already assigned to Session " + s.getName());
                 } finally {
                     statement.close();
                     connection.close();

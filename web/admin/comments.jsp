@@ -30,21 +30,18 @@
     </head>
     <body id="growler1">
         <%
-                    int user = 0;
-                    if (null == session.getAttribute("id")) {
-                        response.sendRedirect("../index.jsp");
-                    }
-                    else if (!session.getAttribute("user").equals("admin")) {
-                        response.sendRedirect("../index.jsp");
-                    }
-                    try {
-                        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
-                        String name = String.valueOf(session.getAttribute("user"));                  
-                    }
-                    catch (Exception e) {
-                        
-                    }
-                %>
+            int user = 0;
+            if (null == session.getAttribute("id")) {
+                response.sendRedirect("../index.jsp");
+            } else if (!session.getAttribute("user").equals("admin")) {
+                response.sendRedirect("../index.jsp");
+            }
+            try {
+                user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+                String name = String.valueOf(session.getAttribute("user"));
+            } catch (Exception e) {
+            }
+        %>
         <%@ include file="../includes/header.jsp" %> 
         <%@ include file="../includes/adminnav.jsp" %>  
         <div class="row">
@@ -57,28 +54,30 @@
         </div>
         <div class="container-fluid">
             <div class="content" role="main"><!-- Begin Content -->
-                <%@include file="../includes/messagehandler.jsp" %>
-                <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
-                    <tr>
-                        <th>Session Name</th>
-                        <th>Comment</th>
-                    </tr>
-                    <%  
-                        CommentPersistence cp = new CommentPersistence();
-                        SessionPersistence sp = new SessionPersistence();
-                        ArrayList<Comment> comments = cp.getAllComments();
-                        for (int i = 0; i < comments.size(); i++) {
-                            out.print("<tr>");
-                            out.print("<td>");
-                            out.print(sp.getSessionByID(comments.get(i).getSession_id()).getName());
-                            out.print("</td>");
-                            out.print("<td>");
-                            out.print(comments.get(i).getDescription());
-                            out.print("</td>");
-                            out.print("</tr>");
-                        }
-                    %>
-                </table>
+                <div class="span8 offset3">
+                    <%@include file="../includes/messagehandler.jsp" %>
+                    <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
+                        <tr>
+                            <th>Session Name</th>
+                            <th>Comment</th>
+                        </tr>
+                        <%
+                            CommentPersistence cp = new CommentPersistence();
+                            SessionPersistence sp = new SessionPersistence();
+                            ArrayList<Comment> comments = cp.getAllComments();
+                            for (int i = 0; i < comments.size(); i++) {
+                                out.print("<tr>");
+                                out.print("<td>");
+                                out.print(sp.getSessionByID(comments.get(i).getSession_id()).getName());
+                                out.print("</td>");
+                                out.print("<td>");
+                                out.print(comments.get(i).getDescription());
+                                out.print("</td>");
+                                out.print("</tr>");
+                            }
+                        %>
+                    </table>
+                </div>
             </div><!-- /.content -->
         </div><!-- /.container-fluid -->
 

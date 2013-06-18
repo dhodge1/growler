@@ -24,14 +24,16 @@
                     catch (Exception e) {
                         
                     }
-                %>
-        <%
+            
             String idString = request.getParameter("id");
+            ThemePersistence tp = new ThemePersistence();
+            Theme t = tp.getThemeByID(Integer.parseInt(idString));
             Connection connection = dataConnection.sendConnection();
             Statement statement = connection.createStatement();
             String sql = "delete from theme where id = " + idString;
             int success = statement.executeUpdate(sql);
-            session.setAttribute("message", "Success: The theme has been deleted!");
+            
+            session.setAttribute("message", "Success: The theme " + t.getName() +  " has been deleted!");
             connection.close();
             statement.close();
             response.sendRedirect("../admin/theme.jsp");

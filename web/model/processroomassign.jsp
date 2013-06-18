@@ -50,9 +50,9 @@
         
         SessionPersistence sp = new SessionPersistence();
         LocationPersistence lp = new LocationPersistence();
-        
+        Location l = lp.getLocationById(roomId);
         boolean success = sp.validateSessionSlot(sessionId, roomId);
-        
+        Session h = sp.getSessionByID(sessionId);
         if (success) {
             try {
                 //Get the session's current info, then update the location
@@ -60,15 +60,16 @@
                 s = sp.getSessionByID(sessionId);
                 s.setLocation(roomId);
                 sp.updateSession(s);
-                session.setAttribute("message", "Success: Room successfully assigned to Session!");
+                session.setAttribute("message", "Success: Room " + l.getDescription() + " successfully assigned to Session " + h.getName() + "!");
             }
             catch (Exception e) {
-                session.setAttribute("message", "Error: Room already assigned to that Session.");
+                
+                session.setAttribute("message", "Error: Room " + l.getDescription() + " already assigned to Session " + h.getName());
             }
                 
         }
         else {
-            session.setAttribute("message", "Error: Already a Session in that Room at that Time.");
+            session.setAttribute("message", "Error: Room " + l.getDescription() + " already assigned to Session " + h.getName() + " at that time.");
         }
             response.sendRedirect("../admin/session.jsp");
         

@@ -37,13 +37,14 @@
             statement.setString(1, name);
             statement.setString(2, description);
             statement.setInt(3, id);
-            
+            SessionPersistence sp = new SessionPersistence();
+            Session s = sp.getSessionByID(id);
             try {
                 statement.execute();
-                session.setAttribute("message", "Success: Session has been changed.");
+                session.setAttribute("message", "Success: Session " + s.getName() + " has been changed.");
             }
             catch (Exception e) {
-                session.setAttribute("message", "Error processing update");
+                session.setAttribute("message", "Error: Trouble processing update for " + s.getName());
             }
             finally {
                 statement.close();

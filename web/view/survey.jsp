@@ -70,7 +70,7 @@
                         
                     }
                     %>
-                    <h1 class = "bordered">Survey - <% out.print(sp.getSessionByID((Integer.parseInt(sessionId))).getName());%></h1>
+                    <h1 class = "bordered">Confidential Survey - <% out.print(sp.getSessionByID((Integer.parseInt(sessionId))).getName());%></h1>
             </div>
         </div>
         <div class="container-fluid">
@@ -102,7 +102,7 @@
                                                 <tr>
                                                     <td><% out.print(qResult.getString("text"));%></td>
                                                     <td>
-                                                        <select class="survey" <% out.print("name =" + qResult.getInt("id"));%>>
+                                                        <select class="survey" <% out.print("id = q" + qResult.getInt("id"));%>>
                                                             <option value="0"> - Enter a Selection - </option>
                                                             <option value="1">1 - Strongly Disagree</option>
                                                             <option value="2">2 - Disagree</option>
@@ -113,13 +113,14 @@
                                                     </td>
                                                 </tr>
                                                 <% }
+                                                    
                                                     qResult.close();
                                                     newStatement.close();
                                                     newConnect.close();
                                                 %>
                                                 
                                             </table>
-                                                <label>Comments:</label><br/><br/><input type="text" maxlength="250" size="90" name="comment"/>
+                                                <label>Comments:</label><br/><br/><textarea maxlength="250" cols="50" rows="5" name="comment"></textarea>
                                             <input id="send" class="button button-primary" type="submit" value="Submit Survey" />
                                         </form>
                                     </section>
@@ -142,19 +143,34 @@
 
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script> 
-        <script src="../js/grabRanks.js"></script>
 
         <!--Additional Script-->
         <script>
             $(document).ready(function(){
-                $("#send").click(function(){
-                     if ($(".survey").val() == 0) {
-                        alert("Please fill out all questions");
-                        $("#action").attr("action", "");
+                $("#send").click(function(event){
+                     if ($("#q1").val() == 0) {
+                       alert("Please fill out all questions");
+                       $("#q1").focus();
+                        event.preventDefault();
+                    }
+                    else if ($("#q2").val() == 0) {
+                       alert("Please fill out all questions");
+                       $("#q2").focus();
+                        event.preventDefault();
+                    }
+                    else if ($("#q3").val() == 0) {
+                       alert("Please fill out all questions");
+                       $("#q3").focus();
+                        event.preventDefault();
+                    }
+                    else if ($("#q4").val() == 0) {
+                       alert("Please fill out all questions");
+                       $("#q4").focus();
+                        event.preventDefault();
                     }
                     else {
-                        $("#action").attr("action", "../model/processsurvey.jsp");
-                    }
+                    $("#action").attr("action", "../model/processsurvey.jsp");
+                     }
                 });
             });
         </script>

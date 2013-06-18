@@ -32,18 +32,16 @@
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
     </head>
     <%
-                    int user = 0;
-                    if (null == session.getAttribute("id")) {
-                        response.sendRedirect("../index.jsp");
-                    }
-                    try {
-                        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
-                        String name = String.valueOf(session.getAttribute("user"));                  
-                    }
-                    catch (Exception e) {
-                        
-                    }
-                %>
+        int user = 0;
+        if (null == session.getAttribute("id")) {
+            response.sendRedirect("../index.jsp");
+        }
+        try {
+            user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+            String name = String.valueOf(session.getAttribute("user"));
+        } catch (Exception e) {
+        }
+    %>
     <%
         String id = request.getParameter("id");
         String description = request.getParameter("name");
@@ -56,16 +54,16 @@
         l.setBuilding(building);
         LocationPersistence lp = new LocationPersistence();
         try {
-                lp.updateLocation(l);
-                session.setAttribute("message", "Success: Room successfully updated!");
-            } catch (Exception x) {
-                session.setAttribute("message", "Error: Adding Room failed.");
+            lp.updateLocation(l);
+            session.setAttribute("message", "Success: Room " + l.getDescription() + " successfully updated!");
+        } catch (Exception x) {
+
+            try {
+                lp.addLocation(l);
+                session.setAttribute("message", "Success: Room " + l.getDescription() + " successfully added!");
+            } catch (Exception e) {
+                session.setAttribute("message", "Error: Updating Room " + l.getDescription() + " failed.");
             }
-        try {
-            lp.addLocation(l);
-            session.setAttribute("message", "Success: Room successfully added!");
-        } catch (Exception e) {
-            session.setAttribute("message", "Error: Updating Room failed.");
         } finally {
             response.sendRedirect("../admin/room.jsp");
         }
