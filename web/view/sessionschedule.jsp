@@ -38,18 +38,16 @@
     </head>
     <body id="growler1">  
         <%
-                    int user = 0;
-                    if (null == session.getAttribute("id")) {
-                        response.sendRedirect("../index.jsp");
-                    }
-                    try {
-                        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
-                        String name = String.valueOf(session.getAttribute("user"));                  
-                    }
-                    catch (Exception e) {
-                        
-                    }
-                %>
+            int user = 0;
+            if (null == session.getAttribute("id")) {
+                response.sendRedirect("../index.jsp");
+            }
+            try {
+                user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+                String name = String.valueOf(session.getAttribute("user"));
+            } catch (Exception e) {
+            }
+        %>
         <%@ include file="../includes/header.jsp" %> 
         <div class="row">
             <%@ include file="../includes/usernav.jsp" %>
@@ -109,7 +107,13 @@
                                     out.print("<input type=\"hidden\" value=\"" + sessions.get(i).getId() + "\" name=\"name\">");
                                     out.print("</td>");
                                     out.print("<td>");
-                                    out.print(sessions.get(i).getDescription());
+                                    try {
+                                        if (!sessions.get(i).getDescription().equals(null)) {
+                                            out.print(sessions.get(i).getDescription());
+                                        }
+                                    } catch (Exception e) {
+                                        out.print(" ");
+                                    }
                                     out.print("</td>");
                                     out.print("<td>");
                                     SimpleDateFormat dates = new SimpleDateFormat("E, MM-dd-yyyy");

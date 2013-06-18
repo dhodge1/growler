@@ -48,7 +48,7 @@
             <div class="content">
                 <!-- Begin Content -->
                 <div class="row"><!--row-->
-                    <div class="span6 largeBottomMargin">
+                    <div class="span6 largeBottomMargin offset2">
                         <h1 class="bordered">Edit a Session</h1>
                     </div>
                     <div class="span9 offset2"><!--span-->
