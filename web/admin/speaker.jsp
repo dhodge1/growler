@@ -69,7 +69,7 @@
                 <!-- Begin Content -->
                 <div class="row"><!--row-->
                     
-                    <div class="span9 offset2"><!--span-->
+                    <div class="span8 offset2"><!--span-->
                         <%
                             //Displaying error or success messages -- clear it out when done
                             String message = (String) session.getAttribute("message");
@@ -89,14 +89,13 @@
                         %>
                         <div id="tabs-1">
                             <div class="row">
-                                <div class="span1">
+                                
                                     <br/>
                                     <%
                                         ArrayList<Speaker> speakers = persist.getAllSpeakers(" order by rating desc, last_name");
                                         
                                     %>
-                                </div>
-                                <div class="span2">
+                                
                                     
                                         <form id="entry" name="entry" action="../model/adminspeaker.jsp" method="post" onSubmit="return checkRange();">
                                             <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
@@ -176,8 +175,6 @@
                                     <p></p>
                                 </div>
                             </div><!--end row-->
-                        </div>
-                    </div>
                 </div><!--end row-->
                 
                                                 

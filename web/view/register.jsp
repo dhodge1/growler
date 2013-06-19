@@ -57,7 +57,7 @@
                                 <input name="firstname" class="input-xlarge" type="text" id="tip2" data-content="Your First name, 20 characters or less please" maxlength="20"/>
                             </div>
                             <div class="form-group">
-                                <label class="required">Last name</label>
+                                <label class="required">Last Name</label>
                                 <input name="lastname" class="input-xlarge" type="text" id="tip3" data-content="Your Last name, 20 characters or less please" maxlength="20"/>
                             </div>
                             <div class="form-group">

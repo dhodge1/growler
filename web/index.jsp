@@ -63,11 +63,11 @@
                             <fieldset>
                                 <div class="form-group">
                                     <label class="required">User ID:</label>
-                                    <input type="text" name="username" id="tip" data-content="Enter your 6 digit ID" size="6"/>
+                                    <input type="text" name="username" id="tip" data-content="Enter your 6 digit ID" maxlength="6"/>
                                 </div>
                                 <div class="form-group">
                                     <label class="required">Password:</label>
-                                    <input type="password" name="password" id="tip2" data-content="Enter your password" size="20"/>
+                                    <input type="password" name="password" id="tip2" data-content="Enter your password" maxlength="20"/>
                                 </div>
                                 <div class="form-actions">
                                     <input class ="button button-primary" type="submit" value="Submit" id="send" /><br/><br/>
@@ -93,11 +93,11 @@
             $(function() {
                 $("input").autoinline();
             });
-            $("#send").click(function() {
+            $("#send").click(function(event) {
                 var emptyString = "";
                 if ($("#tip").val() === emptyString || $("#tip2").val() === emptyString) {
-                    $("#action").attr("action", "");
                     alert("Please enter both a username and a password for log-in.");
+                    event.preventDefault();
                 }
                 else {
                     $("#action").attr("action", "model/login.jsp");

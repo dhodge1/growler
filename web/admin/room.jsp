@@ -67,7 +67,7 @@
                     LocationPersistence lp = new LocationPersistence();
                     ArrayList<Location> locations = lp.getAllLocations();
                 %>
-                <div class="span9 offset2">
+                <div class="span8 offset2">
                     <%@include file="../includes/messagehandler.jsp" %>
                         <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
                             <tr>
