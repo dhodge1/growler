@@ -43,6 +43,7 @@
         <link rel="stylesheet" href="/resources/demos/style.css" />
 
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
+        <script src="../js/jquery.ui.touch-punch.min.js"></script>
     </head>
     <body id="growler1">  
         <%
@@ -155,8 +156,6 @@
 
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
-        <script src="../js/grabRanks.js"></script>
-
         <!--Additional Script-->
         <script>
             $(function() {

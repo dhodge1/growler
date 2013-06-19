@@ -39,6 +39,7 @@
         <link rel="stylesheet" href="/resources/demos/style.css" />
 
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
+        <script src="../js/jquery.ui.touch-punch.min.js"></script>
     </head>
     <body id="growler1">
         <%
