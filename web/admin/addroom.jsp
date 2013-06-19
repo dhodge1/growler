@@ -64,7 +64,7 @@
             <div class="content"><!-- Begin Content -->
                 <div class="span7 offset4">
                     <%@include file="../includes/messagehandler.jsp" %>
-                    <form id="action" method="post" action="../model/processroom.jsp" >
+                    <form id="action" method="post" action="../model/processaddroom.jsp" >
                         <label class="required">Room ID:</label><br/>
                         <input type="text" maxlength="10" id="tip" name="id" class="input-xlarge" data-content="Room ID, 10 Characters or Less"/><br/><br/>
                         <label class="required">Room Name:</label><br/>
@@ -72,7 +72,12 @@
                         <label class="required">Capacity:</label><br/>
                         <% out.print("<input type=\"number\" min=\"0\" max=\"999\" step=\"1\" id=\"tip2\" name=\"capacity\"  data-content=\"Maximum Capacity, 0 to 999\"/>");%><br/><br/>
                         <label class="required">Building Name:</label><br/>
-                        <input type="text" maxlength="20" id="tip3" name="building" class="input-xlarge" data-content="Building Name, 20 Characters or Less"/>  <br/>
+                        <select id="building" name="building">
+                            <option value="0"> - Please Select a Building- </option>
+                            <option value="KXTC">Knoxville Tech Center</option>
+                            <option value="KXOFFICE">Knoxville Office</option>
+                        </select>
+                        <br/>
                         <br/>
                         <br/>
                         <input id="send" type="submit" value="Submit" class="button button-primary"/>
@@ -91,26 +96,26 @@
                                     $("#send").click(function(event) {
                                         if ($("#tip").val() == "") {
                                             alert("Please enter a Room Number");
+                                            $("#tip").focus();
                                             event.preventDefault();
-                                            $("#action").attr("action", "");
                                         }
                                         else if ($("#tip1").val() == "") {
                                             alert("Please enter a Room name");
                                             event.preventDefault();
-                                            $("#action").attr("action", "");
+                                            $("#tip1").focus();
                                         }
                                         else if ($("#tip2").val() == "" || $("#tip2").val() <= 0) {
                                             alert("Please enter a Capacity greater than 0");
                                             event.preventDefault();
-                                            $("#action").attr("action", "");
+                                            $("#tip2").focus();
                                         }
-                                        else if ($("#tip3").val() == "") {
+                                        else if ($("#building").val() == 0) {
                                             alert("Please enter a Building name");
                                             event.preventDefault();
-                                            $("#action").attr("action", "");
+                                            $("#building").focus();
                                         }
                                         else {
-                                            $("#action").attr("action", "../model/processroom.jsp");
+                                            $("#action").attr("action", "../model/processaddroom.jsp");
                                         }
                                     });
                                 });

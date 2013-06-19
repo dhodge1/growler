@@ -69,7 +69,7 @@
                 
         }
         else {
-            session.setAttribute("message", "Error: Room " + l.getDescription() + " already assigned to Session " + h.getName() + " at that time.");
+            session.setAttribute("message", "Error: Room " + l.getDescription() + " already assigned to another Session at that time.");
         }
             response.sendRedirect("../admin/session.jsp");
         

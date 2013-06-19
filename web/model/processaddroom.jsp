@@ -1,5 +1,5 @@
 <%-- 
-    Document   : processroom
+    Document   : processaddroom
     Created on : Jun 11, 2013, 2:10:02 PM
     Author     : 162107
 --%>
@@ -54,11 +54,11 @@
         l.setBuilding(building);
         LocationPersistence lp = new LocationPersistence();
         try {
-            lp.updateLocation(l);
-            session.setAttribute("message", "Success: Room " + l.getDescription() + " successfully updated!");
-        } catch (Exception x) {
-            session.setAttribute("message", "Error: Room " + l.getDescription() + " did not update.");
-        } finally {
+                lp.addLocation(l);
+                session.setAttribute("message", "Success: Room " + l.getDescription() + " successfully added!");
+            } catch (Exception e) {
+                session.setAttribute("message", "Error: Adding Room " + l.getDescription() + " failed.");
+            } finally {
             response.sendRedirect("../admin/room.jsp");
         }
     %>

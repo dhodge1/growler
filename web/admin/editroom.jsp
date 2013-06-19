@@ -78,7 +78,12 @@
                         <label class="required">Capacity:</label>
                         <% out.print("<input value=\"" + location.getCapacity() + "\" type=\"number\" min=\"0\" max=\"999\" step=\"1\" id=\"tip2\" name=\"capacity\"  data-content=\"Maximum Capacity, 0 to 999\"/>");%><br/>
                         <label class="required">Building Name:</label>
-                        <input type="text" maxlength="20" id="tip3" name="building" class="input-xlarge" value="<% out.print(location.getBuilding());%>" data-content="Building Name, 20 Characters or Less"/>  
+                        <select id="building" name="building">
+                            <% String building = location.getBuilding(); %>
+                            <option value="0"> - Please Select a Building- </option>
+                            <option value="KXTC" <% if (building.equals("KXTC")) { out.print(" selected "); } %>>Knoxville Tech Center</option>
+                            <option value="KXOFFICE" <% if (building.equals("KXOFFICE")) { out.print(" selected "); } %>>Knoxville Office</option>
+                        </select>
                         <br/>
                         <br/>
                         <input id="send" type="submit" value="Submit Changes" class="button button-primary"/>
@@ -99,22 +104,22 @@
                                         if ($("#tip").val() == "") {
                                             alert("Please enter a Room Number");
                                             event.preventDefault();
-                                            $("#action").attr("action", "");
+                                            $("#tip").focus();
                                         }
                                         else if ($("#tip1").val() == "") {
                                             alert("Please enter a Room name");
                                             event.preventDefault();
-                                            $("#action").attr("action", "");
+                                            $("#tip1").focus();
                                         }
                                         else if ($("#tip2").val() == "" || $("#tip2").val() <= 0) {
                                             alert("Please enter a Capacity greater than 0");
                                             event.preventDefault();
-                                            $("#action").attr("action", "");
+                                            $("#tip2").focus();
                                         }
-                                        else if ($("#tip3").val() == "") {
+                                        else if ($("#building").val() == 0) {
                                             alert("Please enter a Building name");
                                             event.preventDefault();
-                                            $("#action").attr("action", "");
+                                            $("#building").focus();
                                         }
                                         else {
                                             $("#action").attr("action", "../model/processroom.jsp");

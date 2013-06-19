@@ -57,6 +57,7 @@
         </div>
         <div class="container-fluid">
             <div class="content" role="main"><!-- Begin Content -->	
+                <div class="span9 offset1">
                 <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
                     <tr>                    
                         <th>Session Name</th>
@@ -89,7 +90,7 @@
                         }
                     %>
                 </table>
-                <label><a href="../admin/download.jsp?type=interset">Download a PDF</a></label>
+                </div>
             </div><!-- /.content -->
         </div><!-- /.container-fluid -->
 

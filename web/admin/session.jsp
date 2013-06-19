@@ -64,14 +64,7 @@
                 <div class="row"><!--row-->
 
                     <div class="span9 offset1"><!--span-->
-                        <%
-                            //Displaying error or success messages -- clear it out when done
-                            String message = (String) session.getAttribute("message");
-                            if (message != null) {
-                                out.print("<p class=feedbackMessage-success>" + message + "</p>");
-                                session.removeAttribute("message");
-                            }
-                        %>
+                        <%@include file="../includes/messagehandler.jsp" %>
                         <%
                             //Get the year
                             int year = 2013;
