@@ -81,12 +81,13 @@
                                                 <textarea id="description" name="description" maxlength="250" rows="5" cols="50" data-content="Enter the name of the Session" ></textarea>
                                             </div>
                                             <div class="form-group">
-                                                <label class="required">Date: </label>
+                                                <label>Date: </label>
                                                 <input name="date" id="datepicker" type="text" data-content="Enter a date for the Session"/>
                                             </div>
                                             <div class="form-group">
-                                                <label class="required">Time: </label>
+                                                <label>Time: </label>
                                                 <select id="time" name="time">
+                                                    <option value="null"> - No Time - </option>
                                                     <option value="08:00:00">8:00 AM</option>
                                                     <option value="08:30:00">8:30 AM</option>
                                                     <option value="09:00:00">9:00 AM</option>
@@ -114,7 +115,7 @@
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <label class="required">Duration: </label>
+                                                <label>Duration: </label>
                                                 <input id="duration" name="duration" type="number" step="1" max="120" min="15" data-content="Enter duration in minutes (Between 15 and 120)" />
                                             </div>
                                             <div class="form-group">
@@ -180,24 +181,24 @@
                     mydesc.focus();
                     return false;
                 }
-                var mydate = document.getElementById("datepicker");
-                if (!mydate.value) {
-                    alert('Please enter a date');
-                    mydate.focus();
-                    return false;
-                }
-                var myval = document.getElementById("duration");
-                if (myval.value < 15 || myval.value > 120 || !myval.value || isNaN(myval.value)) {
-                    alert('Duration must be between 15 and 120');
-                    myval.focus();
-                    return false;
-                }
-                var mylocation = document.getElementById("location");
-                if (!mylocation.value) {
-                    alert('Please enter a location');
-                    mylocation.focus();
-                    return false;
-                }
+              //  var mydate = document.getElementById("datepicker");
+              //  if (!mydate.value) {
+              //      alert('Please enter a date');
+              //      mydate.focus();
+              //      return false;
+              //  }
+              //  var myval = document.getElementById("duration");
+              //  if (myval.value < 15 || myval.value > 120 || !myval.value || isNaN(myval.value)) {
+              //      alert('Duration must be between 15 and 120');
+              //      myval.focus();
+              //      return false;
+              //  }
+              //  var mylocation = document.getElementById("location");
+              //  if (!mylocation.value) {
+              //      alert('Please enter a location');
+              //      mylocation.focus();
+              //      return false;
+              //  }
                 return true;
             }
         </script>
