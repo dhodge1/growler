@@ -36,23 +36,40 @@
     .menu1 li ul a:hover, .menu li ul li:hover a{border:0px;color:#ffffff;text-decoration:none;background:#002D56;-webkit-box-shadow: inset 0px 0px 7px 2px rgba(0, 0, 0, .3);-moz-box-shadow: inset 0px 0px 7px 2px rgba(0, 0, 0, .3);box-shadow: inset 0px 0px 7px 2px rgba(0, 0, 0, .3); }    
 
 </style>
+<% 
+    String pageURI = request.getRequestURI();
+    String themeTab = "";
+    String speakerTab = "";
+    String sessionTab = "";
+    String roomTab = "";
+    String reportTab = "";
+    if (pageURI.contains("theme")) {
+        themeTab = " class=\"selected\" ";
+    }
+    else if (pageURI.contains("speaker")) {
+        speakerTab = " class=\"selected\" ";
+    }
+    else if (pageURI.contains("session") || pageURI.contains("comments")){
+        sessionTab = " class=\"selected\" ";
+    }
+    else if (pageURI.contains("room")){
+        sessionTab = " class=\"selected\" ";
+    }
+    else if (pageURI.contains("Report")){
+        sessionTab = " class=\"selected\" ";
+    }
+%>
 <nav class="globalNavigation hidden-tablet hidden-phone">
-        <div id="header" class="menu hidden-tablet hidden-phone">
+        <div id="header" class="menu">
     <ul>
-        <li><%
-//Get the user's info, and post a welcome!
-if (!String.valueOf(session.getAttribute("user")).isEmpty()) {
-              out.print(session.getAttribute("user"));   
-}
-
-    %>        
-        <li>Themes
+        <li><p></p></li>
+        <li<%= themeTab %>>Themes
             <ul>
                 <li><a href="../admin/theme.jsp">Edit Themes</a></li>
                 <li><a href="../admin/themeentry.jsp">Add a Theme</a></li>
             </ul>
         </li>
-        <li>Speakers
+        <li<%= speakerTab %>>Speakers
             <ul>
                 <li><a href="../admin/speaker.jsp">Edit Speakers</a></li>
                 <li><a href="../admin/userspeaker.jsp">Suggested Speakers</a></li>
@@ -60,21 +77,22 @@ if (!String.valueOf(session.getAttribute("user")).isEmpty()) {
                 <li><a href="../admin/assignspeaker.jsp">Assign Speaker to Session</a></li>
             </ul>
         </li>
-        <li>Sessions
+        <li<%= sessionTab %>>Sessions
             <ul>
                 <li><a href="../admin/addsession.jsp">Add a Session</a></li>
                 <li><a href="../admin/session.jsp">View Sessions</a></li>
+                <li><a href="../admin/sessionScheduler.jsp">Schedule Sessions</a></li>
                 <li><a href="../admin/comments.jsp">Comments By Session</a></li>
             </ul>
         </li>
-        <li>Rooms
+        <li<%= roomTab %>>Rooms
             <ul>
                 <li><a href="../admin/room.jsp">View Rooms</a></li>
                 <li><a href="../admin/addroom.jsp">Add a Room</a></li>
                 <li><a href="../admin/assignroom.jsp">Assign Room to a Session</a></li>
             </ul>
         </li>
-        <li>Reports
+        <li<%= reportTab %>>Reports
             <ul>
                 <li><a href="../admin/surveyReport.jsp">Surveys By Submission Time</a></li>
                 <li><a href="../admin/interestReport.jsp">Interest in a Session</a></li>
@@ -83,68 +101,6 @@ if (!String.valueOf(session.getAttribute("user")).isEmpty()) {
                 <li><a href="../admin/presentationReport.jsp">Best Presentation Skills</a></li>
                 <li><a href="../admin/overallReport.jsp">Best Overall</a></li>
                 <li><a href="../admin/registrationAttendanceReport.jsp">Registration vs. Attendance</a></li>
-            </ul>
-        </li>
-        <li>Log Out
-            <ul>
-                <li><a href="../model/logout.jsp">Logout</a></li>
-            </ul>
-        </li>
-    </ul>
-    </div>
-</nav><!-- /.globalNavigation -->
-<nav class="globalNavigation hidden-desktop">
-        <div id="mobile" class="menu1 hidden-desktop">
-    <ul>
-        <li><%
-//Get the user's info, and post a welcome!
-if (!String.valueOf(session.getAttribute("user")).isEmpty()) {
-              out.print(session.getAttribute("user"));   
-}
-
-    %>        
-        <li>Themes
-            <ul>
-                <li><a href="../admin/theme.jsp">Edit Themes</a></li>
-                <li><a href="../admin/themeentry.jsp">Add a Theme</a></li>
-            </ul>
-        </li>
-        <li>Speakers
-            <ul>
-                <li><a href="../admin/speaker.jsp">Edit Speakers</a></li>
-                <li><a href="../admin/userspeaker.jsp">Suggested Speakers</a></li>
-                <li><a href="../admin/speakerentry.jsp">Add a Speaker</a></li>
-                <li><a href="../admin/assignspeaker.jsp">Assign Speaker to Session</a></li>
-            </ul>
-        </li>
-        <li>Sessions
-            <ul>
-                <li><a href="../admin/addsession.jsp">Add a Session</a></li>
-                <li><a href="../admin/session.jsp">View Sessions</a></li>
-                <li><a href="../admin/comments.jsp">Comments By Session</a></li>
-            </ul>
-        </li>
-        <li>Rooms
-            <ul>
-                <li><a href="../admin/room.jsp">View Rooms</a></li>
-                <li><a href="../admin/addroom.jsp">Add a Room</a></li>
-                <li><a href="../admin/assignroom.jsp">Assign Room to a Session</a></li>
-            </ul>
-        </li>
-        <li>Reports
-            <ul>
-                <li><a href="../admin/surveyReport.jsp">Surveys By Submission Time</a></li>
-                <li><a href="../admin/interestReport.jsp">Interest in a Session</a></li>
-                <li><a href="../admin/expectationReport.jsp">Session Met Expectations</a></li>
-                <li><a href="../admin/speakerReport.jsp">Speaker Knowledge</a></li>
-                <li><a href="../admin/presentationReport.jsp">Best Presentation Skills</a></li>
-                <li><a href="../admin/overallReport.jsp">Best Overall</a></li>
-                <li><a href="../admin/registrationAttendanceReport.jsp">Registration vs. Attendance</a></li>
-            </ul>
-        </li>
-        <li>Log Out
-            <ul>
-                <li><a href="../model/logout.jsp">Logout</a></li>
             </ul>
         </li>
     </ul>

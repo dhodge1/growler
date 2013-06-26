@@ -30,14 +30,8 @@ public class User {
     private String corporateId;
     
     private String email;
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    
+    private String volunteer;
 
     /**
      * Default constructor
@@ -117,4 +111,20 @@ public class User {
     public void setCorporateId(String id){
         this.corporateId = id;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getVolunteer() {
+        return volunteer;
+    }
+
+    public void setVolunteer(String volunteer) {
+        this.volunteer = volunteer;
+    }    
 }

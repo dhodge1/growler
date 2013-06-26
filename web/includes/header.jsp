@@ -14,8 +14,24 @@
     <div class="pageHeader-portal">
       <div class="pageHeader-logo">
       </div>
+        <nav class="pageHeader-utility right">
+              <ul>
+                  <li class="first" style="color: white">
+                  <%//Get the user's info, and post a welcome!
+		 if (!String.valueOf(session.getAttribute("user")).isEmpty() || !String.valueOf(session.getAttribute("user")).equals("null")) {
+			String navuser = String.valueOf(session.getAttribute("user"));
+			out.print("    Welcome, " + navuser + "!");
+			}
+		%>
+                  </li>
+                  <li><a href="../view/help.jsp">Help</a></li>
+                  <li><a href="../model/logout.jsp">Logout</a></li>
+              </ul>
+          </nav>    
     </div>
-      <nav class="pageHeader-utility"><label class="hidden-tablet hidden-phone" style="color:white">Techtoberfest Information System</label>
-      <label class="hidden-desktop" style="color:white;font-size:6px">Techtoberfest Information System</label></nav>
+      
+          <nav class="pageHeader-utility">
+          <label class="hidden-tablet hidden-phone" style="color:white">Techtoberfest Information System</label>
+          </nav>
   </header><!-- /.pageHeader -->
 <script src="../js/respond.min.js"></script>

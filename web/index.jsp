@@ -35,7 +35,7 @@
         <script src="js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
     </head>
     <body id="growler1">
-        <%@include file="includes/header.jsp" %>        
+        <%@include file="includes/indexheader.jsp" %>        
         <div class="row">
             <div class="span3">
                 <img class="logo" src="images/Techtoberfest2013small.png" alt="Techtoberfest 2013 small"/>

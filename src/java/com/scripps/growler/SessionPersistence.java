@@ -103,6 +103,9 @@ public class SessionPersistence extends GrowlerPersistence {
             closeJDBC();
         } catch (Exception e) {
         }
+        finally {
+            closeJDBC();
+        }
     }
 
     /**
@@ -118,6 +121,9 @@ public class SessionPersistence extends GrowlerPersistence {
             statement.execute();
             closeJDBC();
         } catch (Exception e) {
+        }
+        finally {
+            closeJDBC();
         }
     }
 
@@ -149,6 +155,9 @@ public class SessionPersistence extends GrowlerPersistence {
             closeJDBC();
         } catch (Exception e) {
         }
+        finally {
+            closeJDBC();
+        }
     }
 
     /**
@@ -170,6 +179,9 @@ public class SessionPersistence extends GrowlerPersistence {
             }
 
         } catch (Exception e) {
+        }
+        finally {
+            closeJDBC();
         }
     }
 
@@ -204,7 +216,10 @@ public class SessionPersistence extends GrowlerPersistence {
             return sessions;
         } catch (Exception e) {
         }
-        return null;
+        finally {
+            closeJDBC();
+        }
+        return sessions;
     }
 
     /**
@@ -219,6 +234,7 @@ public class SessionPersistence extends GrowlerPersistence {
             statement = connection.prepareStatement("select id, name, description, session_date, start_time, "
                     + " location, track, duration from session " + sort);
             result = statement.executeQuery();
+            sessions = new ArrayList<Session>();
             while (result.next()) {
                 //Create a new Session and add all data about the session to it
                 Session s = new Session();
@@ -237,7 +253,10 @@ public class SessionPersistence extends GrowlerPersistence {
             return sessions;
         } catch (Exception e) {
         }
-        return null;
+        finally {
+            closeJDBC();
+        }
+        return sessions;
     }
 
     /**
@@ -247,15 +266,23 @@ public class SessionPersistence extends GrowlerPersistence {
      * @param sort The sort criteria
      * @return The sessions that occur on the given date
      */
-    public ArrayList<Session> getSessionsByDate(java.sql.Date date, String sort) {
+    public ArrayList<Session> getSessionsByDate(int day, String sort) {
         try {
             initializeJDBC();
             statement = connection.prepareStatement("select id, name, description, "
                     + "session_date, start_time, duration, location, track from session "
                     + "where session_date = ? ?");
-            statement.setDate(1, date);
+            String date = ("2013-10-20");
+            if (day == 1) {
+                date = ("2013-10-17");
+            }
+            else if (day == 2) {
+                date = ("2013-10-18");
+            }
+            statement.setString(1, date);
             statement.setString(2, sort);
             result = statement.executeQuery();
+            sessions = new ArrayList<Session>();
             while (result.next()) {
                 //Create a new Session and add all data about the session to it
                 Session s = new Session();
@@ -274,7 +301,42 @@ public class SessionPersistence extends GrowlerPersistence {
             return sessions;
         } catch (Exception e) {
         }
-        return null;
+        finally {
+            closeJDBC();
+        }
+        return sessions;
+    }
+    
+    public ArrayList<Session> getSessionsWithoutADate() {
+         try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select id, name, description, "
+                    + "session_date, start_time, duration, location, track from session "
+                    + "where session_date is null");
+            result = statement.executeQuery();
+            sessions = new ArrayList<Session>();
+            while (result.next()) {
+                //Create a new Session and add all data about the session to it
+                Session s = new Session();
+                s.setId(result.getInt("id"));
+                s.setName(result.getString("name"));
+                s.setDescription(result.getString("description"));
+                s.setSessionDate(result.getDate("session_date"));
+                s.setStartTime(result.getTime("start_time"));
+                s.setLocation(result.getString("location"));
+                s.setTrack(result.getString("track"));
+                s.setDuration(result.getTime("duration"));
+                //Add the session to the list
+                sessions.add(s);
+            }
+            closeJDBC();
+            return sessions;
+        } catch (Exception e) {
+        }
+        finally {
+            closeJDBC();
+        }
+        return sessions;
     }
 
     /**
@@ -293,6 +355,7 @@ public class SessionPersistence extends GrowlerPersistence {
             statement.setTime(1, time);
             statement.setString(2, sort);
             result = statement.executeQuery();
+            sessions = new ArrayList<Session>();
             while (result.next()) {
                 //Create a new Session and add all data about the session to it
                 Session s = new Session();
@@ -311,17 +374,20 @@ public class SessionPersistence extends GrowlerPersistence {
             return sessions;
         } catch (Exception e) {
         }
-        return null;
+        finally {
+            closeJDBC();
+        }
+        return sessions;
     }
 
     /**
-     * Gets a list of sessions based on a date and time
+     * Gets a session based on a date and time
      *
      * @param date The date of the session
      * @param time The time of the session
-     * @return The sessions on the given date at the given time
+     * @return The session on the given date at the given time
      */
-    public ArrayList<Session> getSessionsByDateAndTime(java.sql.Date date, java.sql.Time time, String sort) {
+    public Session getSessionByDateAndTime(java.sql.Date date, java.sql.Time time, String sort) {
         try {
             initializeJDBC();
             statement = connection.prepareStatement("select id, name, description, "
@@ -343,13 +409,15 @@ public class SessionPersistence extends GrowlerPersistence {
                 s.setTrack(result.getString("track"));
                 s.setDuration(result.getTime("duration"));
                 //Add the session to the list
-                sessions.add(s);
+                return s;
             }
             closeJDBC();
-            return sessions;
         } catch (Exception e) {
         }
-        return null;
+        finally {
+            closeJDBC();
+        }
+        return new Session();
     }
 
     /**
@@ -370,6 +438,9 @@ public class SessionPersistence extends GrowlerPersistence {
             closeJDBC();
             return sessions;
         } catch (Exception e) {
+        }
+        finally {
+            closeJDBC();
         }
         return null;
     }
@@ -400,9 +471,11 @@ public class SessionPersistence extends GrowlerPersistence {
                 s.setTrack(result.getString("track"));
                 s.setDuration(result.getTime("duration"));
             }
-            closeJDBC();
             return s;
         } catch (Exception e) {
+        }
+        finally {
+            closeJDBC();
         }
         return null;
     }
@@ -431,7 +504,7 @@ public class SessionPersistence extends GrowlerPersistence {
         } finally {
             closeJDBC();
         }
-        return null;
+        return sessions;
     }
 
     /**

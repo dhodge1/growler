@@ -58,6 +58,7 @@ public class UserPersistence extends GrowlerPersistence {
                 User u = new User();
                 u.setId(result.getInt("id"));
                 u.setUserName(result.getString("name"));
+                u.setEmail(email);
                 u.setCorporateId(result.getString("corporate_id"));
                 closeJDBC();
                 return u;
@@ -79,8 +80,17 @@ public class UserPersistence extends GrowlerPersistence {
     public ArrayList<User> getAllUsers() {
         try {
             initializeJDBC();
-            closeJDBC();
-
+            statement = connection.prepareStatement("select u.id, u.name, u.email, v.task from user u left join volunteers v on v.user_id = u.id");
+            result = statement.executeQuery();
+            while (result.next()) {
+                User u = new User();
+                u.setId(result.getInt("id"));
+                u.setUserName(result.getString("name"));
+                u.setEmail(result.getString("email"));
+                u.setVolunteer(result.getString("task"));    
+                users.add(u);
+            }
+            return users;
         } catch (Exception e) {
         }
         finally {
@@ -122,4 +132,55 @@ public class UserPersistence extends GrowlerPersistence {
             closeJDBC();
         }
     }
+    
+    public void setVolunteer(int id, String task) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("insert into volunteers (user_id, task) values (?, ?)");
+            statement.setInt(1, id);
+            statement.setString(2, task);
+            statement.execute();
+        } catch (Exception e) {
+        }
+        finally {
+            closeJDBC();
+        }
+    }
+    
+    public void removeVolunteer(int id) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("delete from volunteers where user_id = ?");
+            statement.setInt(1, id);
+            statement.execute();
+        } catch (Exception e) {
+        }
+        finally {
+            closeJDBC();
+        }
+    }
+    
+    public ArrayList<User> getVolunteers() {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select v.user_id, u.name, u.email, v.task from volunteers v, user u where u.id = v.user_id");
+            result = statement.executeQuery();
+            while (result.next()){
+                User u = new User();
+                u.setId(result.getInt("user_id"));
+                u.setUserName(result.getString("name"));
+                u.setEmail(result.getString("email"));
+                u.setVolunteer(result.getString("task"));
+                users.add(u);
+            }
+        return users;
+
+        } catch (Exception e) {
+        }
+        finally {
+            closeJDBC();
+        }
+        return users;
+    }
+    
 }

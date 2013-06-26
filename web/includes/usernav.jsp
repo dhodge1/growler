@@ -12,7 +12,7 @@
     .menu{border:none;border:0px;margin:0px;padding:0px;font: 67.5% Arial, Helvetica, sans-serif;font-size:14px;font-weight:bold;}
     .menu ul{color:#FFFFFF;height:50px;list-style:none;margin:0;padding:0;-webkit-border-radius: 15px;-moz-border-radius: 15px;border-radius: 15px;-webkit-box-shadow: inset 0px 16px 0px 0px rgba(255, 255, 255, .1);-moz-box-shadow: inset 0px 16px 0px 0px rgba(255, 255, 255, .1);box-shadow: inset 0px 16px 0px 0px rgba(255, 255, 255, .1);}
     .menu li{color:#FFFFFF;float:left;padding:0px 0px 0px 15px; }
-    .menu li a{color:#FFFFFF;display:block;font-weight:normal;line-height:50px;margin:0px;padding:0px 25px;text-align:center;text-decoration:none;}
+    .menu li a{color:#FFFF00;display:block;font-weight:normal;line-height:50px;margin:0px;padding:0px 25px;text-align:center;text-decoration:none;}
     .menu li a:hover{background:#00467C;color:#FFFFFF;text-decoration:none;-webkit-box-shadow: inset 0px 0px 7px 2px rgba(0, 0, 0, .3);-moz-box-shadow: inset 0px 0px 7px 2px rgba(0, 0, 0, .3);box-shadow: inset 0px 0px 7px 2px rgba(0, 0, 0, .3);}
     .menu ul li:hover a{background:#00467C;color:#FFFFFF;text-decoration:none;}
     .menu li ul{display:none;height:auto;padding:0px;margin:0px;border:0px;position:absolute;width:200px;z-index:200;}
@@ -36,96 +36,45 @@
     .menu1 li ul a:hover, .menu li ul li:hover a{border:0px;color:#ffffff;text-decoration:none;background:#002D56;-webkit-box-shadow: inset 0px 0px 7px 2px rgba(0, 0, 0, .3);-moz-box-shadow: inset 0px 0px 7px 2px rgba(0, 0, 0, .3);box-shadow: inset 0px 0px 7px 2px rgba(0, 0, 0, .3); }    
 
 </style>
-<nav class="globalNavigation hidden-tablet hidden-phone">
-        <div id="header" class="menu hidden-tablet hidden-phone">
-        
-    <ul>
-        <li>
-                <%//Get the user's info, and post a welcome!
-		 if (!String.valueOf(session.getAttribute("user")).isEmpty() || !String.valueOf(session.getAttribute("user")).equals("null")) {
-			String navuser = String.valueOf(session.getAttribute("user"));
-			out.print("    Welcome, " + navuser + "!");
-			}
-		%>
+<% 
+    String pageURI = request.getRequestURI();
+    String selected = "";
+    String themeTab = "";
+    String speakerTab = "";
+    String sessionTab = "";
+    if (pageURI.contains("theme")) {
+        themeTab = " class=\"selected\" ";
+    }
+    else if (pageURI.contains("speaker")) {
+        speakerTab = " class=\"selected\" ";
+    }
+    else if (pageURI.contains("session") || pageURI.contains("attendance") || pageURI.contains("survey") ){
+        sessionTab = " class=\"selected\" ";
+    }
+%>
+<nav class="globalNavigation menu">
+<ul>
+        <li><p></p>
         </li>
-        <li>Themes
+        <li <%= themeTab %>>Themes
             <ul>
                 <li><a href="../view/theme.jsp">Rank Preferred Themes</a></li>
                 <li><a href="../view/themeentry.jsp">Suggest New Themes</a></li>
             </ul>
         </li>
-        <li>Speakers
+        <li <%= speakerTab %>>Speakers
             <ul>
                 <li><a href="../view/speaker.jsp">Rank Preferred Speakers</a></li>
                 <li><a href="../view/speakerentry.jsp">Suggest new Speaker</a></li>
             </ul>
         </li>
-        <li>Sessions
+        <li <%= sessionTab %>>Sessions
             <ul>
                 <li><a href="../view/sessionschedule.jsp">View Session Schedule</a></li>
                 <li><a href="../view/attendance.jsp">Acknowledge Attendance</a></li>
                 <li><a href="../view/surveylist.jsp">Rate a Session</a></li>
             </ul>
         </li>
-        <li>Help
-            <ul>
-                <li><a href="../view/help.jsp">Help</a></li>
-            </ul>
-        </li>
-        <li>Logout
-            <ul>
-                <li><a href="../model/logout.jsp">Logout</a></li>
-            </ul>
-        </li>
     </ul>
-        
-    </div>
-            </nav>
-        <nav class="globalNavigation hidden-desktop">
-        <div id="mobile" class="menu1 hidden-desktop">
-        
-    <ul>
-        <li>
-                <%//Get the user's info, and post a welcome!
-		 if (!String.valueOf(session.getAttribute("user")).isEmpty() || !String.valueOf(session.getAttribute("user")).equals("null")) {
-			String navuser = String.valueOf(session.getAttribute("user"));
-			out.print("    Welcome, " + navuser + "!");
-			}
-		 //If they aren't logged in, we want them to go back and log in.
-		 //
-		%>
-        </li>
-        <li>Themes
-            <ul>
-                <li><a href="../view/theme.jsp">Rank Preferred Themes</a></li>
-                <li><a href="../view/themeentry.jsp">Suggest New Themes</a></li>
-            </ul>
-        </li>
-        <li>Speakers
-            <ul>
-                <li><a href="../view/speaker.jsp">Rank Preferred Speakers</a></li>
-                <li><a href="../view/speakerentry.jsp">Suggest new Speaker</a></li>
-            </ul>
-        </li>
-        <li>Sessions
-            <ul>
-                <li><a href="../view/sessionschedule.jsp">View Session Schedule</a></li>
-                <li><a href="../view/attendance.jsp">Acknowledge Attendance</a></li>
-                <li><a href="../view/surveylist.jsp">Rate a Session</a></li>
-            </ul>
-        </li>
-        <li>Help
-            <ul>
-                <li><a href="../view/help.jsp">Help</a></li>
-            </ul>
-        </li>
-        <li>Logout
-            <ul>
-                <li><a href="../model/logout.jsp">Logout</a></li>
-            </ul>
-        </li>
-    </ul>
-        
-    </div>
-            </nav>
+    </nav>
         <script src="../js/respond.min.js"></script>
