@@ -35,6 +35,7 @@
         <script src="js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
     </head>
     <body id="growler1">
+        <div class="container-fluid">
         <%@include file="includes/indexheader.jsp" %>        
         <div class="row">
             <div class="span3">
@@ -54,9 +55,6 @@
                 %>
             </div>
         </div>
-        <div class="container-fluid">
-            <div class="content">
-                <!-- Begin Content -->
                 <div class="content" role="main"> 
                     <form method="post" id="action" action="model/login.jsp">
                         <div class="span5 offset3">
@@ -77,7 +75,6 @@
                             </fieldset>
                         </div>                   
                     </form>
-                </div>	
             </div><!-- /.content -->
         </div><!-- /.container-fluid -->
         <%@include file="includes/footer.jsp" %>

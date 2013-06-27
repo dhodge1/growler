@@ -52,10 +52,10 @@
                 }
 
             }
-            String question1 = String.valueOf(request.getParameter("1"));
-            String question2 = String.valueOf(request.getParameter("2"));
-            String question3 = String.valueOf(request.getParameter("3"));
-            String question4 = String.valueOf(request.getParameter("4"));
+            String question1 = String.valueOf(request.getParameter("q1"));
+            String question2 = String.valueOf(request.getParameter("q2"));
+            String question3 = String.valueOf(request.getParameter("q3"));
+            String question4 = String.valueOf(request.getParameter("q4"));
             try {
                 String comment = String.valueOf(request.getParameter("comment"));
                 comment = comment.trim();

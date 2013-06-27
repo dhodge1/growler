@@ -102,7 +102,7 @@
                                                 <tr>
                                                     <td><% out.print(qResult.getString("text"));%></td>
                                                     <td>
-                                                        <select class="survey" <% out.print("id = q" + qResult.getInt("id"));%>>
+                                                        <select class="survey" <% out.print("id = q" + qResult.getInt("id") + " name=q" + qResult.getInt("id"));%>>
                                                             <option value="0"> - Enter a Selection - </option>
                                                             <option value="1">1 - Strongly Disagree</option>
                                                             <option value="2">2 - Disagree</option>
