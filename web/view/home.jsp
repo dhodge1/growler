@@ -39,9 +39,7 @@
     </head>
     <body id="growler1">    
         <%@ include file="../includes/header.jsp" %> 
-        <div class="row">
-            <%@ include file="../includes/usernav.jsp" %>
-        </div>
+        <%@ include file="../includes/testnav.jsp" %>
         <div class="row"><!-- The Logo Row -->
             <div class="span3">
                 <img class="logo" src="../images/Techtoberfest2013small.png" alt="Techtoberfest 2013 small"/><!-- Techtoberfest logo-->
@@ -95,22 +93,14 @@
 
                 </div>
             </div><!-- End Content -->	
+            
         </div><!--/.container-fluid-->
-        <div class="row">
-            <div class="span8">
-                <p></p>
-            </div>
-            <div class="span2">
-            </div>
-        </div>
-
         <%@ include file="../includes/footer.jsp" %>
         <%@ include file="../includes/scriptlist.jsp" %>
         <%@ include file="../includes/draganddrop.jsp" %>
 
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
-        <script src="../js/grabRanks.js"></script>
 
         <!--Additional Script-->
         <script>

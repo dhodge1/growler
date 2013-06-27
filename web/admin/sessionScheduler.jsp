@@ -36,7 +36,7 @@
                     var current = $(this);
                     $("select").each(function() {
                         if (($(this).val() === current.val()) && ($(this).val() !== "0") && !$(this).is(current)) {
-                            alert('Matches another Session');
+                            alert('That Session has already been scheduled!');
                             $(this).focus();
                             $(this).val('0');
                         }

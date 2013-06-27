@@ -46,6 +46,7 @@
         <script src="../js/jquery.ui.touch-punch.min.js"></script>
     </head>
     <body id="growler1">  
+        
         <%
             int user = 0;
             if (null == session.getAttribute("id")) {
@@ -56,19 +57,19 @@
                 String name = String.valueOf(session.getAttribute("user"));
             } catch (Exception e) {
             }
+            ArrayList<Theme> themes = persist.getUserRanks(user);
         %>
-        <%@ include file="../includes/header.jsp" %> 
-        <div class="row">
-            <%@ include file="../includes/usernav.jsp" %>
+        <div class="row"><!-- The Header and Navigation Row -->
+            <%@ include file="../includes/header.jsp" %> 
+            <%@ include file="../includes/testnav.jsp" %>
         </div>
+        <div class="container-fluid">
         <div class="row"><!-- The Logo Row -->
             <div class="span3">
                 <img class="logo" src="../images/Techtoberfest2013small.png" alt="Techtoberfest 2013 small"/><!-- Techtoberfest logo-->
             </div>
-            <div class="span7 largeBottomMargin">
+            <div class="span5">
                 <%
-                    //Get a list of Themes by calling getUserRanks
-                    ArrayList<Theme> themes = persist.getUserRanks(user);
                     //If we didn't get any ranks, we tell the user to rank the themes
                     if (themes == null || themes.size() == 0) {
                         out.print("<h1 class=bordered>Themes - Drag & Drop Themes to Rank Them</h1>");
@@ -79,15 +80,10 @@
                 %>
             </div>
         </div>
-        <div class="container-fluid">
             <div class="content">
                 <!-- Begin Content -->
-
                 <div class="row"><!--row-->
                     <div class="span6 offset3"><!--span-->
-                        <div id="tabs-1">
-                            <div class="row">
-                                <div class="span6 offset1">
                                     <%@include file="../includes/messagehandler.jsp" %>
                                     <section>
                                         <%
@@ -129,12 +125,6 @@
                                             %>
                                         </form>
                                     </section>
-                                </div>
-                                <div class="span3">
-                                    <p></p>
-                                </div>
-                            </div>
-                        </div>
                     </div><!--end span-->
                 </div><!--end row-->
                 <div class="span2 offset3"><!--button div-->

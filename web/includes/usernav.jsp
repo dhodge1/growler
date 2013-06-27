@@ -5,9 +5,23 @@
     Purpose    : The usernav file goes below the header.jsp file.  It contains 
                  the navigation for users.
 --%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<link rel="stylesheet" href="../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
-        <link rel="stylesheet" href="../css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
+<%
+    String pageURI = request.getRequestURI();
+    String home = "";
+    String themeTab = "";
+    String speakerTab = "";
+    String sessionTab = "";
+    if (pageURI.contains("theme")) {
+        themeTab = " class=\"selected\" ";
+    } else if (pageURI.contains("speaker")) {
+        speakerTab = " class=\"selected\" ";
+    } else if (pageURI.contains("session") || pageURI.contains("attendance") || pageURI.contains("survey")) {
+        sessionTab = " class=\"selected\" ";
+    } else if (pageURI.contains("home")) {
+        home = " class=\"selected\" ";
+    }
+
+%>
 <style>
     .menu{border:none;border:0px;margin:0px;padding:0px;font: 67.5% Arial, Helvetica, sans-serif;font-size:14px;font-weight:bold;}
     .menu ul{color:#FFFFFF;height:50px;list-style:none;margin:0;padding:0;-webkit-border-radius: 15px;-moz-border-radius: 15px;border-radius: 15px;-webkit-box-shadow: inset 0px 16px 0px 0px rgba(255, 255, 255, .1);-moz-box-shadow: inset 0px 16px 0px 0px rgba(255, 255, 255, .1);box-shadow: inset 0px 16px 0px 0px rgba(255, 255, 255, .1);}
@@ -21,7 +35,7 @@
     .menu li:hover li a{background:none;}
     .menu li ul a{display:block;height:50px;font-size:12px;font-style:normal;margin:0px;padding:0px 10px 0px 15px;text-align:left;}
     .menu li ul a:hover, .menu li ul li:hover a{border:0px;color:#ffffff;text-decoration:none;background:#002D56;-webkit-box-shadow: inset 0px 0px 7px 2px rgba(0, 0, 0, .3);-moz-box-shadow: inset 0px 0px 7px 2px rgba(0, 0, 0, .3);box-shadow: inset 0px 0px 7px 2px rgba(0, 0, 0, .3); }
-    
+
     .menu1{border:none;border:0px;margin:0px;padding:0px;font: 67.5% Arial, Helvetica, sans-serif;font-size:12px;font-weight:bold;}
     .menu1 ul{color:#FFFFFF;height:25px;list-style:none;margin:0;padding:0;-webkit-border-radius: 7px;-moz-border-radius: 7px;border-radius: 7px;-webkit-box-shadow: inset 0px 8px 0px 0px rgba(255, 255, 255, .1);-moz-box-shadow: inset 0px 8px 0px 0px rgba(255, 255, 255, .1);box-shadow: inset 0px 8px 0px 0px rgba(255, 255, 255, .1);}
     .menu1 li{color:#FFFFFF;float:left;padding:0px 0px 0px 8px;font-size:10px; }
@@ -36,39 +50,25 @@
     .menu1 li ul a:hover, .menu li ul li:hover a{border:0px;color:#ffffff;text-decoration:none;background:#002D56;-webkit-box-shadow: inset 0px 0px 7px 2px rgba(0, 0, 0, .3);-moz-box-shadow: inset 0px 0px 7px 2px rgba(0, 0, 0, .3);box-shadow: inset 0px 0px 7px 2px rgba(0, 0, 0, .3); }    
 
 </style>
-<% 
-    String pageURI = request.getRequestURI();
-    String selected = "";
-    String themeTab = "";
-    String speakerTab = "";
-    String sessionTab = "";
-    if (pageURI.contains("theme")) {
-        themeTab = " class=\"selected\" ";
-    }
-    else if (pageURI.contains("speaker")) {
-        speakerTab = " class=\"selected\" ";
-    }
-    else if (pageURI.contains("session") || pageURI.contains("attendance") || pageURI.contains("survey") ){
-        sessionTab = " class=\"selected\" ";
-    }
-%>
+
+
 <nav class="globalNavigation menu">
-<ul>
-        <li><p></p>
-        </li>
-        <li <%= themeTab %>>Themes
+    <ul>
+        <li <%= home%>>Home</li>
+        <li <%= themeTab%>>Themes
             <ul>
                 <li><a href="../view/theme.jsp">Rank Preferred Themes</a></li>
                 <li><a href="../view/themeentry.jsp">Suggest New Themes</a></li>
             </ul>
         </li>
-        <li <%= speakerTab %>>Speakers
+
+        <li <%= speakerTab%>>Speakers
             <ul>
                 <li><a href="../view/speaker.jsp">Rank Preferred Speakers</a></li>
                 <li><a href="../view/speakerentry.jsp">Suggest new Speaker</a></li>
             </ul>
         </li>
-        <li <%= sessionTab %>>Sessions
+        <li <%= sessionTab%>>Sessions
             <ul>
                 <li><a href="../view/sessionschedule.jsp">View Session Schedule</a></li>
                 <li><a href="../view/attendance.jsp">Acknowledge Attendance</a></li>
@@ -76,5 +76,4 @@
             </ul>
         </li>
     </ul>
-    </nav>
-        <script src="../js/respond.min.js"></script>
+</nav>
