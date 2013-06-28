@@ -34,7 +34,7 @@
                     } 
         %>
         <%@ include file="../includes/header.jsp" %> 
-        <%@ include file="../includes/usernav.jsp" %>
+        <%@ include file="../includes/testnav.jsp" %>
 
         <div class="row">
             <div class="span3">

@@ -111,7 +111,7 @@
                                             out.print(fmt.format(start));
                                             out.print("</td>");
                                             out.print("<td>");
-                                            out.print("<select name=\"list1\" class=\"verify\">");
+                                            out.print("<select name=\"list1\" title=\"" + start + "\" onChange=\"updateSessionList(this)\">");
                                             out.print("<option value=\"0\">NO SESSION</option>");
                                             Session current = sp.getSessionByDateAndTime(java.sql.Date.valueOf("2013-10-17"), start, " ");
                                             for (int j = 0; j < sessions.size(); j++) {
@@ -126,7 +126,7 @@
                                             out.print("</select>");
                                             out.print("</td>");
                                             out.print("<td>");
-                                            out.print("<select name=\"list2\">");
+                                            out.print("<select name=\"list2\" title=\"" + start + "\" onChange=\"updateSessionList(this)\">");
                                             out.print("<option value=\"0\">NO SESSION</option>");
                                             current = sp.getSessionByDateAndTime(java.sql.Date.valueOf("2013-10-17"), start, " ");
                                             for (int j = 0; j < sessions.size(); j++) {
@@ -141,7 +141,7 @@
                                             out.print("</select>");
                                             out.print("</td>");
                                             out.print("<td>");
-                                            out.print("<select name=\"list3\">");
+                                            out.print("<select name=\"list3\" title=\"" + start + "\" onChange=\"updateSessionList(this)\">");
                                             out.print("<option value=\"0\">NO SESSION</option>");
                                             current = sp.getSessionByDateAndTime(java.sql.Date.valueOf("2013-10-18"), start, " ");
                                             for (int j = 0; j < sessions.size(); j++) {
@@ -156,7 +156,7 @@
                                             out.print("</select>");
                                             out.print("</td>");
                                             out.print("<td>");
-                                            out.print("<select name=\"list4\">");
+                                            out.print("<select name=\"list4\" title=\"" + start + "\" onChange=\"updateSessionList(this)\">");
                                             out.print("<option value=\"0\">NO SESSION</option>");
                                             current = sp.getSessionByDateAndTime(java.sql.Date.valueOf("2013-10-18"), start, " ");
                                             for (int j = 0; j < sessions.size(); j++) {
@@ -175,7 +175,28 @@
                                         }
                                     %>
                                 </table>
-                                <input type="submit" id="send" value="Submit Schedule" class="button button-primary"/>
+                                <% ArrayList<Session> uns = sp.getUnscheduledSessions();%>
+                                <h2>Unscheduled Sessions</h2>
+                                <div id="unscheduled">
+                                    <table>
+                                        <tr>
+                                            <td>Name</td>
+                                            <td>Description</td>
+                                        </tr>
+                                        <% for (int j = 0; j < uns.size(); j++) {
+                                            out.print("<tr>");
+                                            out.print("<td>");
+                                            out.print(uns.get(j).getName());
+                                            out.print("</td>");
+                                            out.print("<td>");
+                                            out.print(uns.get(j).getDescription());
+                                            out.print("</td>");
+                                            out.print("</tr>");
+                                        } %>
+                                        </table>
+                                </div><br/><br/>
+                                
+                                 <!-- <input type="submit" id="send" value="Submit Schedule" class="button button-primary"/> -->
                             </form>
                         </section>
                     </div>
@@ -188,6 +209,7 @@
 
         <%@ include file="../includes/footer.jsp" %> 
         <%@ include file="../includes/scriptlist.jsp" %>
+        <script src="../js/updateSessionList.js"></script>
 
 
     </body>

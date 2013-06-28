@@ -47,7 +47,7 @@
                     }
                 %>
         <%@ include file="../includes/header.jsp" %> 
-        <%@ include file="../includes/usernav.jsp" %>
+        <%@ include file="../includes/testnav.jsp" %>
         <div class="row">
             <div class="span3">
                 <img class="logo" src="../images/Techtoberfest2013small.png" alt="Techtoberfest 2013 small"/>

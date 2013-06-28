@@ -71,7 +71,7 @@
         %>
         <%@ include file="../includes/header.jsp" %> 
         <div class="row">
-            <%@ include file="../includes/usernav.jsp" %>
+            <%@ include file="../includes/testnav.jsp" %>
         </div>
         <div class="row"><!-- The Logo Row -->
             <div class="span3">

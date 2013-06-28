@@ -25,14 +25,27 @@
     <body id="growler1">
         <div class="container-fluid">
             <%@ include file="../includes/header.jsp" %> 
-            <%@ include file="../includes/usernav.jsp" %>
-            <div class="span8 offset2">
-                <h1 class="bordered"></h1>
-
+            <%@ include file="../includes/testnav.jsp" %>
+            <div class='span3'>
+                <img src='../images/Techtoberfest2013small.png'/>
             </div>
-
-            <%@ include file="../includes/footer.jsp" %> 
+            <div class="span8 offset2">
+                <h1 class="bordered">Template File</h1>
+                <table>
+                    <tr>
+                        <td>Here's a Table</td>
+                        <td>With Stuff</td>
+                    </tr>
+                    <tr>
+                        <td>Uh Oh!</td>
+                        <td>My Goodness!</td>
+                    </tr>
+                </table>
+            </div>
+            <br/>
         </div>
+        <br/>
+        <%@ include file="../includes/footer.jsp" %> 
         <%@ include file="../includes/scriptlist.jsp" %>
     </body>
 </html>

@@ -533,6 +533,33 @@ public class SessionPersistence extends GrowlerPersistence {
         }
         return true;
     }
+    
+    public ArrayList<Session> getUnscheduledSessions() {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select * from session where extract(YEAR FROM session_date) = 2013 and extract(MONTH FROM session_date) = '10' and start_time is null order by session_date, start_time, name");
+            result = statement.executeQuery();
+            sessions.clear();
+            while (result.next()) {
+                Session s = new Session();
+                s.setId(result.getInt("id"));
+                s.setName(result.getString("name"));
+                s.setDescription(result.getString("description"));
+                s.setSessionDate(result.getDate("session_date"));
+                s.setLocation(result.getString("location"));
+                s.setTrack(result.getString("track"));
+                s.setDuration(result.getTime("duration"));
+                s.setKey(result.getString("session_key"));
+                sessions.add(s);
+            }
+            return sessions;
+        }catch (Exception e) {
+            
+        } finally {
+            closeJDBC();
+        }
+        return sessions;
+    }
 
     public void assignSpeakerTeam() {
     }
