@@ -121,7 +121,12 @@
                                     out.print("</td>");
                                     out.print("<td>");
                                     SimpleDateFormat fmt = new SimpleDateFormat("h:mm a");
+                                    try {
                                     out.print(fmt.format(sessions.get(i).getStartTime()));
+                                    }
+                                    catch (Exception e) {
+                                        out.print("No Time");
+                                    }
                                     out.print("</td>");
                                     out.print("<td>");
                                     SimpleDateFormat fmt2 = new SimpleDateFormat("K ' hours and ' mm ' minutes'");
