@@ -67,7 +67,7 @@
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", "true");
-		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.host", host);
 		props.put("mail.smtp.port", "587");
  
 		javax.mail.Session sess = javax.mail.Session.getInstance(props,
@@ -81,7 +81,7 @@
 		try {
  
 			Message message = new MimeMessage(sess);
-			message.setFrom(new InternetAddress(username));
+			message.setFrom(new InternetAddress(from));
 			message.setRecipients(Message.RecipientType.TO,
 				InternetAddress.parse(u.getEmail()));
 			message.setSubject("Your password has been reset");
@@ -98,6 +98,7 @@
  
 		} catch (MessagingException e) {
                     results = "Failed " + e.getLocalizedMessage();
+                    session.setAttribute("message", "Error: Email was not sent!");
 			
 		}
                 finally {
