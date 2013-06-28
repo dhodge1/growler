@@ -1,12 +1,11 @@
 <%-- 
     Document   : footer
     Created on : Feb 27, 2013, 9:33:24 PM
-    Author     : Robert Brown
+    Purpose    : June 28, 2013, 5:00:00 PM
+    Author     : Justin Bauguess
 --%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
   <footer class="pageFooter">
     <hr />
-    <p>Scripps Networks Interactive Bootstrap version 1.2.0.<!-- Application name --></p>
-    <p>Copyright &copy; 2013 Scripps Networks Interactive</p>
+    <p>SNI Techtoberfest.<!-- Application name --></p>
+    <p>Copyright &copy; 2013 Scripps Networks.</p>
   </footer><!-- /.pageFooter -->

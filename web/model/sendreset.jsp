@@ -85,7 +85,7 @@
 			message.setRecipients(Message.RecipientType.TO,
 				InternetAddress.parse(u.getEmail()));
 			message.setSubject("Your password has been reset");
-			message.setText("Dear " + u.getUserName() + "," +
+			message.setText("Dear " + u.getUserName() + ",\n\n" +
 				"We have received a notification for your password reset.\n" +
                                 "Please visit http://snitechtoberfest.elasticbeanstalk.com/view/resetpassword.jsp?id=" + u.getId() + "&email=" + u.getEmail() + " \n" +
                                 "Your verification code is: " + u.getPassword() + " \n" +
