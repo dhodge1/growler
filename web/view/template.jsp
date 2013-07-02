@@ -19,31 +19,48 @@
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
-        <link rel="stylesheet" href="../css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
     </head>
     <body id="growler1">
-        <div class="container-fluid">
-            <%@ include file="../includes/header.jsp" %> 
-            <%@ include file="../includes/testnav.jsp" %>
-            <div class='span3'>
-                <img src='../images/Techtoberfest2013small.png'/>
+        <%@ include file="../includes/indexheader.jsp" %> 
+        <div class="container-fixed">
+            <div class="row">
+                <br/>
+                <div class="span8">
+                    <h1>Techtoberfest Information System (TIS)</h1>
+                    <h3>TIS allows Scripps Employees the ability to not only stay abreast 
+                        of all Techtoberfest sessions, but also the opportunity to provide 
+                        valuable session feedback before, during, and after the event!</h3>
+                </div>
             </div>
-            <div class="span8 offset2">
-                <h1 class="bordered">Template File</h1>
-                <table>
-                    <tr>
-                        <td>Here's a Table</td>
-                        <td>With Stuff</td>
-                    </tr>
-                    <tr>
-                        <td>Uh Oh!</td>
-                        <td>My Goodness!</td>
-                    </tr>
-                </table>
+            <br/><br/><br/>
+            <div class="row">
+                <div class='span8'>
+                    <h2 class="bordered"><img src='../images/Techtoberfest2013small.png'/>Login to TIS</h2>
+                </div>
             </div>
             <br/>
+            <div class="row">
+                <div class="span8">
+                    <form>
+                        <div class="form-group">
+                            <label>User ID</label>
+                            <input type="text" name="username" />
+                            <label>Password</label>
+                            <input type="password" name="password"/>
+                        </div>
+                        <div class="form-actions">
+                            <button class="button button-primary" type="submit">Login</button>
+                            <a href="">Forgot Password?</a>
+                        </div>
+                        <div class="form-actions">
+                            <span>Not Registered? <a href="">Click here to register</a></span>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
+        <br/>
         <br/>
         <%@ include file="../includes/footer.jsp" %> 
         <%@ include file="../includes/scriptlist.jsp" %>

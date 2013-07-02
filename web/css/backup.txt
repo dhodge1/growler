@@ -2879,8 +2879,6 @@ table th[class*="span"],
 
 .dropdown-toggle {
   *margin-bottom: -3px;
-  padding-right: 0px;
-padding-left: 24px;
 }
 
 .dropdown-toggle:active,
@@ -4055,12 +4053,12 @@ input[type="submit"].btn.btn-mini {
 .nav-pills > li > a {
   padding-right: 12px;
   padding-left: 12px;
+  margin-right: 2px;
   line-height: 14px;
-  margin-left: 3px;
 }
 
 .nav-tabs {
-  border-bottom: 0px solid #ddd;
+  border-bottom: 1px solid #ddd;
 }
 
 .nav-tabs > li {
@@ -4071,6 +4069,7 @@ input[type="submit"].btn.btn-mini {
   padding-top: 8px;
   padding-bottom: 8px;
   line-height: 20px;
+  border: 1px solid transparent;
   -webkit-border-radius: 4px 4px 0 0;
      -moz-border-radius: 4px 4px 0 0;
           border-radius: 4px 4px 0 0;
@@ -4088,12 +4087,17 @@ input[type="submit"].btn.btn-mini {
   cursor: default;
   background-color: #ffffff;
   border: 1px solid #ddd;
-  border-bottom-color: #002d56;
+  border-bottom-color: transparent;
 }
 
 .nav-pills > li > a {
   padding-top: 8px;
-  padding-bottom: 8px;
+  padding-bottom: 4px;
+  margin-bottom: 2px;
+  margin-top: 2px;
+  -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+          border-radius: 5px;
 }
 
 .nav-pills > .active > a,
@@ -4382,7 +4386,6 @@ input[type="submit"].btn.btn-mini {
 
 .navbar .container {
   width: auto;
-  border-bottom: 3px solid #bbb;
 }
 
 .nav-collapse.collapse {
@@ -4529,7 +4532,7 @@ input[type="submit"].btn.btn-mini {
 
 .navbar-fixed-top .navbar-inner,
 .navbar-static-top .navbar-inner {
-  border-width: 0 0 0px;
+  border-width: 0 0 1px;
 }
 
 .navbar-fixed-bottom .navbar-inner {
@@ -4579,7 +4582,6 @@ input[type="submit"].btn.btn-mini {
   display: block;
   float: left;
   margin: 0 10px 0 0;
-  font: 13px / 18px Lucida Grande, Lucida Sans Unicode, Arial,sans-serif;
 }
 
 .navbar .nav.pull-right {
@@ -4592,15 +4594,11 @@ input[type="submit"].btn.btn-mini {
 }
 
 .navbar .nav > li > a {
--webkit-border-radius: 3px 3px 0 0;
--moz-border-radius: 3px 3px 0 0;
-border-radius: 3px 3px 0 0;
-float: none;
-padding-right: 12px;
-margin-right: 3px;
-padding-left: 12px;
-color: #FFF;
-text-decoration: none;
+  float: none;
+  padding-left: 10px;
+  padding-right: 24px;
+  color: #ffffff;
+  text-decoration: none;
 }
 
 .navbar .nav .dropdown-toggle .caret {
@@ -6147,17 +6145,4 @@ a.badge:focus {
 
 .affix {
   position: fixed;
-}
-
-.dottedline {
-	display: inline-block;
-  width: 14px;
-  height: 14px;
-  margin-top: 1px;
-  *margin-right: .3em;
-  line-height: 14px;
-  vertical-align: text-top;
-  background-image: url("../images/dottedline.png");
-  background-position: 14px 14px;
-  background-repeat: no-repeat;
 }
