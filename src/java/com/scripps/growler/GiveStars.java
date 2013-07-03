@@ -12,10 +12,10 @@ public class GiveStars {
     GrowlerQueries list = new GrowlerQueries();
     private final String IMAGE_START = "<img src = \"";
     private final String IMAGE_END = "\" />";
-    private final String GOLD_STAR = "../images/icon16-goldstar.png";
-    private final String GREY_STAR = "../images/icon16-greystar.png";
-    private final String HALF_STAR = "../images/icon16-halfstar.png";
-    private final String NOT_RATED = "../images/notratedin2012.png";
+    private final String GOLD_STAR = "../../images/icon16-goldstar.png";
+    private final String GREY_STAR = "../../images/icon16-greystar.png";
+    private final String HALF_STAR = "../../images/icon16-halfstar.png";
+    private final String NOT_RATED = "../../images/notratedin2012.png";
 
     public GiveStars() {
     }

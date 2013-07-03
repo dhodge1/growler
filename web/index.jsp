@@ -34,48 +34,46 @@
         <script src="js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
     </head>
     <body id="growler1">
-            <%@include file="includes/indexheader.jsp" %>        
-            <div class="container-fluid">
+            <%@ include file="includes/indexheader.jsp" %> 
+        <div class="container-fixed">
             <div class="row">
-                <div class="span3">
-                    <img class="logo" src="images/Techtoberfest2013small.png" alt="Techtoberfest 2013 small"/>
-                </div>
-                <div class="span5">
-                    <h1 class = "bordered" >Log-in to Techtoberfest</h1>
-                    <%
-                        try {
-                            String message = (String) session.getAttribute("message");
-                            if (!message.equals(null)) {
-                                out.print("<p class=feedbackMessage-error>" + message + "</p>");
-                            }
-                            session.removeAttribute("message");
-                        } catch (Exception e) {
-                        }
-                    %>
+                <br/>
+                <div class="span8">
+                    <h1>Techtoberfest Information System (TIS)</h1>
+                    <h3>TIS allows Scripps Employees the ability to not only stay abreast 
+                        of all Techtoberfest sessions, but also the opportunity to provide 
+                        valuable session feedback before, during, and after the event!</h3>
                 </div>
             </div>
-            <div class="content" role="main"> 
-                <form method="post" id="action" action="model/login.jsp">
-                    <div class="span5 offset3">
-                        <fieldset>
-                            <div class="form-group">
-                                <label class="required">User ID:</label>
-                                <input type="text" name="username" id="tip" data-content="Enter your 6 digit ID" maxlength="6"/>
-                            </div>
-                            <div class="form-group">
-                                <label class="required">Password:</label>
-                                <input type="password" name="password" id="tip2" data-content="Enter your password" maxlength="20"/>
-                            </div>
-                            <div class="form-actions">
-                                <input class ="button button-primary" type="submit" value="Log In" id="send" /><br/><br/>
-                                <a href="view/register.jsp">Sign Up</a><br/>                                    
-                                <a href="view/requestreset.jsp">Forgot Password</a><br/>
-                            </div>
-                        </fieldset>
-                    </div>                   
-                </form>
-            </div><!-- /.content -->
-        </div><!-- /.container-fluid -->
+            <br/><br/><br/>
+            <div class="row">
+                <div class='span8'>
+                    <h2 class="bordered"><img src='images/Techtoberfest2013small.png'/>Login to TIS</h2>
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="span8">
+                    <form action="action/login.jsp" method="post" id="form">
+                        <div class="form-group">
+                            <label>User ID</label>
+                            <input type="text" name="username" />
+                            <label>Password</label>
+                            <input type="password" name="password"/>
+                        </div>
+                        <div class="form-actions">
+                            <button class="button button-primary" type="submit">Login</button>
+                            <a href="">Forgot Password?</a>
+                        </div>
+                        <div class="form-actions">
+                            <span>Not Registered? <a href="">Click here to register</a></span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <br/>
         <%@include file="includes/footer.jsp" %>
         <div id="modalDialog" title="Error logging in">
             <p>Please Enter A Username and Password.</p>

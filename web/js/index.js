@@ -23,6 +23,6 @@ $("#send").click(function(event) {
         $("#modalDialog").dialog("open");
     }
     else {
-        $("#action").attr("action", "model/login.jsp");
+        //$("#action").attr("action", "action/login.jsp");
     }
 });
