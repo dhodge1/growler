@@ -30,75 +30,72 @@
     </head>
     <body id="growler1">
         <%
-                    int user = 0;
-                    if (null == session.getAttribute("id")) {
-                        response.sendRedirect("../../../index.jsp");
-                    }
-                    else if (!session.getAttribute("user").equals("admin")) {
-                        response.sendRedirect("../../../index.jsp");
-                    }
-                    try {
-                        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
-                        String name = String.valueOf(session.getAttribute("user"));                  
-                    }
-                    catch (Exception e) {
-                        
-                    }
-                %>
-				<div class="container-fixed">
+            int user = 0;
+            if (null == session.getAttribute("id")) {
+                response.sendRedirect("../../../index.jsp");
+            } else if (!session.getAttribute("user").equals("admin")) {
+                response.sendRedirect("../../../index.jsp");
+            }
+            try {
+                user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+                String name = String.valueOf(session.getAttribute("user"));
+            } catch (Exception e) {
+            }
+        %>
         <%@ include file="../../../includes/header.jsp" %> 
         <%@ include file="../../../includes/adminnav.jsp" %>  
-        <br/><br/><br/>
-			<div class="row">
-            <div class="span8">
-                <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Best Presentation Skills</h2>
+        <div class="container-fixed">
+            <br/><br/><br/>
+            <div class="row">
+                <div class="span8">
+                    <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Best Presentation Skills</h2>
+                </div>
             </div>
-			</div>
-			<br/>
-			<div class="row">
-			<div class="span8">
-			<table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
-                    <tr>                    
-                        <th>Session Name</th>
-                        <th>Description</th>
-                        <th>Speaker(s)</th>
-                        <th>Avg. Rating</th>
-                        <th># Attended</th>
-                        <th># Rated</th>
-                    </tr>
-                    <%  ReportGenerator rg = new ReportGenerator();
-                        ArrayList<QuestionReport> qr = rg.generateRankingsReport(3);
-                        
-                        
-                        for(int i = 0; i < qr.size(); i++) {
-                            out.print("<tr>");
-                            out.print("<td>");
-                            out.print(qr.get(i).getSession_name());
-                            out.print("</td>");
-                            out.print("<td>");
-                            out.print(qr.get(i).getSession_description());
-                            out.print("</td>");
-                            out.print("<td>");
-                            ArrayList<Speaker> speakers = qr.get(i).getSpeakers();
-                            for (int x = 0; x < speakers.size(); x++) {
-                                out.print(speakers.get(x).getLastName() + ", " + speakers.get(x).getFirstName() + " <br/> ");
+            <br/>
+            <div class="row">
+                <div class="span8">
+                    <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
+                        <tr>                    
+                            <th>Session Name</th>
+                            <th>Description</th>
+                            <th>Speaker(s)</th>
+                            <th>Avg. Rating</th>
+                            <th># Attended</th>
+                            <th># Rated</th>
+                        </tr>
+                        <%  ReportGenerator rg = new ReportGenerator();
+                            ArrayList<QuestionReport> qr = rg.generateRankingsReport(3);
+
+
+                            for (int i = 0; i < qr.size(); i++) {
+                                out.print("<tr>");
+                                out.print("<td>");
+                                out.print(qr.get(i).getSession_name());
+                                out.print("</td>");
+                                out.print("<td>");
+                                out.print(qr.get(i).getSession_description());
+                                out.print("</td>");
+                                out.print("<td>");
+                                ArrayList<Speaker> speakers = qr.get(i).getSpeakers();
+                                for (int x = 0; x < speakers.size(); x++) {
+                                    out.print(speakers.get(x).getLastName() + ", " + speakers.get(x).getFirstName() + " <br/> ");
+                                }
+                                out.print("</td>");
+                                out.print("<td>");
+                                out.print(qr.get(i).getScore());
+                                out.print("</td>");
+                                out.print("<td>");
+                                out.print(qr.get(i).getAttendance());
+                                out.print("</td>");
+                                out.print("<td>");
+                                out.print(qr.get(i).getRaters());
+                                out.print("</td>");
+                                out.print("</tr>");
                             }
-                            out.print("</td>");
-                            out.print("<td>");
-                            out.print(qr.get(i).getScore());
-                            out.print("</td>");
-                            out.print("<td>");
-                            out.print(qr.get(i).getAttendance());
-                            out.print("</td>");
-                            out.print("<td>");
-                            out.print(qr.get(i).getRaters());
-                            out.print("</td>");
-                            out.print("</tr>");
-                        }
-                    %>
-                </table>
-			</div>
-			</div>
+                        %>
+                    </table>
+                </div>
+            </div>
         </div>
 
         <%@ include file="../../../includes/footer.jsp" %> 

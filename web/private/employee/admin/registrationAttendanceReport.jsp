@@ -30,139 +30,134 @@
     </head>
     <body id="growler1">
         <%
-                    int user = 0;
-                    if (null == session.getAttribute("id")) {
-                        response.sendRedirect("../../../index.jsp");
-                    }
-                    else if (!session.getAttribute("user").equals("admin")) {
-                        response.sendRedirect("../../../index.jsp");
-                    }
-                    try {
-                        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
-                        String name = String.valueOf(session.getAttribute("user"));                  
-                    }
-                    catch (Exception e) {
-                        
-                    }
+            int user = 0;
+            if (null == session.getAttribute("id")) {
+                response.sendRedirect("../../../index.jsp");
+            } else if (!session.getAttribute("user").equals("admin")) {
+                response.sendRedirect("../../../index.jsp");
+            }
+            try {
+                user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+                String name = String.valueOf(session.getAttribute("user"));
+            } catch (Exception e) {
+            }
         %>
-		<div class="container-fixed">
         <%@ include file="../../../includes/header.jsp" %> 
         <%@ include file="../../../includes/adminnav.jsp" %>  
-        <br/><br/><br/>
-			<div class="row">
-            <div class="span8">
-                <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Registration vs. Attendance</h2>
-            </div>
-			</div>
-			<br/>
-			<div class="row">
-			<div class="span8">
-			<div class="row">
-                    <h2 class = "bordered largeBottomMargin">Report: Those Who Attended And Registered</h2>
+        <div class="container-fixed">
+            <br/><br/><br/>
+            <div class="row">
+                <div class="span8">
+                    <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Registration vs. Attendance</h2>
                 </div>
-<table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
-                    <tr>                    
-                        <th>Session Name</th>
-                        <th>User Name</th>
-                        <th>Date Registered</th>
-                        <th>Survey Submitted Time</th>
-                    </tr>
-                    <%  
+            </div>
+            <br/>
+            <div class="row">
+                <div class="span8">
+                    <div class="row">
+                        <h2 class = "bordered largeBottomMargin">Report: Those Who Attended And Registered</h2>
+                    </div>
+                    <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
+                        <tr>                    
+                            <th>Session Name</th>
+                            <th>User Name</th>
+                            <th>Date Registered</th>
+                            <th>Survey Submitted Time</th>
+                        </tr>
+                        <%
                             RegistrationPersistence rp = new RegistrationPersistence();
                             ArrayList<Attendance> list = rp.getRegisteredWhoAttended();
                             UserPersistence up = new UserPersistence();
                             SessionPersistence sp = new SessionPersistence();
-                    
-                            for (int i = 0; i < list.size(); i++){
-                            out.print("<tr>");
-                            out.print("<td>");
-                            out.print(sp.getSessionByID(list.get(i).getSessionId()).getName());
-                            out.print("</td>");
-                            out.print("<td>");
-                            out.print(up.getUserByID(list.get(i).getUserId()).getUserName());
-                            out.print("</td>");
-                            out.print("<td>");
-                            out.print(list.get(i).getDateRegistered());
-                            out.print("</td>");
-                            out.print("<td>");
-                            java.sql.Timestamp surveyTime = list.get(i).getSurveySubmitTime();
-                            if (surveyTime == null) {
-                                out.print("No Survey Taken");
+
+                            for (int i = 0; i < list.size(); i++) {
+                                out.print("<tr>");
+                                out.print("<td>");
+                                out.print(sp.getSessionByID(list.get(i).getSessionId()).getName());
+                                out.print("</td>");
+                                out.print("<td>");
+                                out.print(up.getUserByID(list.get(i).getUserId()).getUserName());
+                                out.print("</td>");
+                                out.print("<td>");
+                                out.print(list.get(i).getDateRegistered());
+                                out.print("</td>");
+                                out.print("<td>");
+                                java.sql.Timestamp surveyTime = list.get(i).getSurveySubmitTime();
+                                if (surveyTime == null) {
+                                    out.print("No Survey Taken");
+                                } else {
+                                    out.print(surveyTime);
+                                }
+                                out.print("</td>");
+                                out.print("</tr>");
                             }
-                            else {
-                                out.print(surveyTime);
-                            }
-                            out.print("</td>");
-                            out.print("</tr>");
-                            }
-                    %>
-                </table>
-                <div class="row">
-                    <h2 class = "bordered largeBottomMargin">Report: Those Who Attended But Didn't Register</h2>
+                        %>
+                    </table>
+                    <div class="row">
+                        <h2 class = "bordered largeBottomMargin">Report: Those Who Attended But Didn't Register</h2>
+                    </div>
+                    <div class="row">
+                        <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
+                            <tr>                    
+                                <th>Session Name</th>
+                                <th>User Name</th>
+                                <th>Survey Submitted Time</th>
+                            </tr>
+                            <%
+                                list = rp.getAttendedWhoDidNotRegister();
+
+                                for (int i = 0; i < list.size(); i++) {
+                                    out.print("<tr>");
+                                    out.print("<td>");
+                                    out.print(sp.getSessionByID(list.get(i).getSessionId()).getName());
+                                    out.print("</td>");
+                                    out.print("<td>");
+                                    out.print(up.getUserByID(list.get(i).getUserId()).getUserName());
+                                    out.print("</td>");
+                                    out.print("<td>");
+                                    java.sql.Timestamp surveyTime = list.get(i).getSurveySubmitTime();
+                                    if (surveyTime == null) {
+                                        out.print("No Survey Taken");
+                                    } else {
+                                        out.print(surveyTime);
+                                    }
+                                    out.print("</td>");
+                                    out.print("</tr>");
+                                }
+                            %>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <h2 class = "bordered largeBottomMargin">Report: Those Who Registered But Didn't Attend</h2>
+                    </div>
+                    <div class="row">
+                        <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
+                            <tr>                    
+                                <th>Session Name</th>
+                                <th>User Name</th>
+                                <th>Date Registered</th>
+                            </tr>
+                            <%
+                                list = rp.getRegisteredWhoDidNotAttend();
+
+                                for (int i = 0; i < list.size(); i++) {
+                                    out.print("<tr>");
+                                    out.print("<td>");
+                                    out.print(sp.getSessionByID(list.get(i).getSessionId()).getName());
+                                    out.print("</td>");
+                                    out.print("<td>");
+                                    out.print(up.getUserByID(list.get(i).getUserId()).getUserName());
+                                    out.print("</td>");
+                                    out.print("<td>");
+                                    out.print(list.get(i).getDateRegistered());
+                                    out.print("</td>");
+                                    out.print("</tr>");
+                                }
+                            %>
+                        </table>
+                    </div>
                 </div>
-				<div class="row">
-                <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
-                    <tr>                    
-                        <th>Session Name</th>
-                        <th>User Name</th>
-                        <th>Survey Submitted Time</th>
-                    </tr>
-                    <%  
-                            list = rp.getAttendedWhoDidNotRegister();
-                            
-                            for (int i = 0; i < list.size(); i++){
-                            out.print("<tr>");
-                            out.print("<td>");
-                            out.print(sp.getSessionByID(list.get(i).getSessionId()).getName());
-                            out.print("</td>");
-                            out.print("<td>");
-                            out.print(up.getUserByID(list.get(i).getUserId()).getUserName());
-                            out.print("</td>");
-                            out.print("<td>");
-                            java.sql.Timestamp surveyTime = list.get(i).getSurveySubmitTime();
-                            if (surveyTime == null) {
-                                out.print("No Survey Taken");
-                            }
-                            else {
-                                out.print(surveyTime);
-                            }
-                            out.print("</td>");
-                            out.print("</tr>");
-                            }
-                    %>
-                </table>
-				</div>
-                <div class="row">
-                    <h2 class = "bordered largeBottomMargin">Report: Those Who Registered But Didn't Attend</h2>
-                </div>
-				<div class="row">
-                <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
-                    <tr>                    
-                        <th>Session Name</th>
-                        <th>User Name</th>
-                        <th>Date Registered</th>
-                    </tr>
-                    <%  
-                            list = rp.getRegisteredWhoDidNotAttend();
-                            
-                            for (int i = 0; i < list.size(); i++){
-                            out.print("<tr>");
-                            out.print("<td>");
-                            out.print(sp.getSessionByID(list.get(i).getSessionId()).getName());
-                            out.print("</td>");
-                            out.print("<td>");
-                            out.print(up.getUserByID(list.get(i).getUserId()).getUserName());
-                            out.print("</td>");
-                            out.print("<td>");
-                            out.print(list.get(i).getDateRegistered());
-                            out.print("</td>");
-                            out.print("</tr>");
-                            }
-                    %>
-                </table>
-				</div>
-			</div>
-			</div>
+            </div>
         </div>
 
         <%@ include file="../../../includes/footer.jsp" %> 

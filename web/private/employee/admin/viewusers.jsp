@@ -45,52 +45,51 @@
             } catch (Exception e) {
             }
         %>
-		<div class="container-fixed">
         <%@ include file="../../../includes/header.jsp" %> 
         <%@ include file="../../../includes/adminnav.jsp" %>
-        <br/><br/><br/>
-			<div class="row">
-            <div class="span8">
-                <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Users</h2>
+        <div class="container-fixed">
+            <br/><br/><br/>
+            <div class="row">
+                <div class="span8">
+                    <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Users</h2>
+                </div>
             </div>
-			</div>
-			<br/>
-			<div class="row">
-			<div class="span8">
-			<table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
-                                <tr>
-                                    <th>ID#</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Volunteer Interest</th>
-                                </tr>
+            <br/>
+            <div class="row">
+                <div class="span8">
+                    <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
+                        <tr>
+                            <th>ID#</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Volunteer Interest</th>
+                        </tr>
 
-                                <%
-                                    UserPersistence usrs = new UserPersistence();
-                                    ArrayList<User> users = usrs.getAllUsers();
-                                    for (int i = 0; i < users.size(); i++) {
-                                %>
-                                <tr>
-                                    <td><% out.print(users.get(i).getId()); %></td>
-                                    <td><% out.print(users.get(i).getUserName()); %></td>
-                                    <td><% String email = users.get(i).getEmail();%>
-                                        <a href=mailto:<%= email %> ><%= email %></a>
-                                    </td>
-                                    <td><% String task = users.get(i).getVolunteer(); 
-                                        if (task == null) {
-                                            out.print("Not a Volunteer");
-                                        }
-                                        else {
-                                            out.print(task);
-                                        }
-                                    %></td>
-                                    
-                                </tr>
-                                <% } //close for loop
-                                %>
-                            </table>
-			</div>
-			</div>
+                        <%
+                            UserPersistence usrs = new UserPersistence();
+                            ArrayList<User> users = usrs.getAllUsers();
+                            for (int i = 0; i < users.size(); i++) {
+                        %>
+                        <tr>
+                            <td><% out.print(users.get(i).getId());%></td>
+                            <td><% out.print(users.get(i).getUserName());%></td>
+                            <td><% String email = users.get(i).getEmail();%>
+                                <a href=mailto:<%= email%> ><%= email%></a>
+                            </td>
+                            <td><% String task = users.get(i).getVolunteer();
+                                if (task == null) {
+                                    out.print("Not a Volunteer");
+                                } else {
+                                    out.print(task);
+                                }
+                                %></td>
+
+                        </tr>
+                        <% } //close for loop
+%>
+                    </table>
+                </div>
+            </div>
         </div>
 
         <%@ include file="../../../includes/footer.jsp" %> 

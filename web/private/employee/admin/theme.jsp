@@ -43,73 +43,73 @@
     </head>
     <body id="growler1">
         <%
-                    int user = 0;
-                    if (null == session.getAttribute("id")) {
-                        response.sendRedirect("../../../index.jsp");
-                    }
-                    else if (!session.getAttribute("user").equals("admin")) {
-                        response.sendRedirect("../../../index.jsp");
-                    }
-                    try {
-                        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
-                        String name = String.valueOf(session.getAttribute("user"));                  
-                    }
-                    catch (Exception e) {
-                        
-                    }
-                %>
-				<div class="container-fixed">
+            int user = 0;
+            if (null == session.getAttribute("id")) {
+                response.sendRedirect("../../../index.jsp");
+            } else if (!session.getAttribute("user").equals("admin")) {
+                response.sendRedirect("../../../index.jsp");
+            }
+            try {
+                user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+                String name = String.valueOf(session.getAttribute("user"));
+            } catch (Exception e) {
+            }
+        %>
+
         <%@ include file="../../../includes/header.jsp" %> 
         <%@ include file="../../../includes/adminnav.jsp" %>
-        <br/><br/><br/>
-			<div class="row">
-            <div class="span8">
-                <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Themes</h2>
+        <div class="container-fixed">
+            <br/><br/><br/>
+            <div class="row">
+                <div class="span8">
+                    <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Themes</h2>
+                </div>
             </div>
-			</div>
-			<br/>
-			<div class="row">
-			<div class="span8">
-			<%
-                                        ArrayList<Theme> themes = persist.getAllThemes(" order by rating desc, name asc ");
-                                    %>
-                                        <form action="../../../action/admintheme.jsp" >
-                                            <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
-                                                <tr>
-                                                    <th>Name</th>
-                                                    <th>Description</th>
-                                                    <th>Reason</th>
-                                                    <th>Rating</th>
-                                                    <th>Times Rated</th>
-                                                    <th>Visible?</th>
-                                                    <th>Created By</th>
-                                                    <th>Edit Theme</th>
-                                                    <th>Remove Theme</th>
-                                                </tr>
-                                                <%
-                                                    for (int i = 0; i < themes.size(); i++) {
-                                                %>
-                                                <tr>
-                                                    <td><% out.print(themes.get(i).getName());%>
-                                                        <input type="hidden" name="list" value="<% out.print(themes.get(i).getId());%>" /></td>
-                                                    <td><% out.print(themes.get(i).getDescription());%></td>
-                                                    <td><% if (themes.get(i).getReason() != null) {out.print(themes.get(i).getReason());}%></td>
-                                                    <td><% out.print(themes.get(i).getRank());%></td>
-                                                    <td><% out.print(themes.get(i).getCount());%></td>
-                                                    <td><input type="checkbox" name="visible" value="<% out.print(themes.get(i).getId());%>"
-                                                               <% if (themes.get(i).getVisible() == true) {
-                                                                                                                   out.print(" checked");
-                                                                                                               }%>/></td>
-                                                    <td><% out.print(upersist.getUserByID(themes.get(i).getCreatorId()).getUserName());%></td>
-                                                    <td><a href="edittheme.jsp?id=<%out.print(themes.get(i).getId());%>">Edit</a></td>
-                                                    <td><a href="../../../action/removeTheme.jsp?id=<%out.print(themes.get(i).getId());%>">Remove</a></td>
-                                                </tr>
-                                                <% } //close the for loop %>
-                                            </table>
-<input type="submit" value="Submit" class="button button-primary" />
-</form>
-			</div>
-			</div>
+            <br/>
+            <div class="row">
+                <div class="span8">
+                    <%
+                        ArrayList<Theme> themes = persist.getAllThemes(" order by rating desc, name asc ");
+                    %>
+                    <form action="../../../action/admintheme.jsp" >
+                        <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Reason</th>
+                                <th>Rating</th>
+                                <th>Times Rated</th>
+                                <th>Visible?</th>
+                                <th>Created By</th>
+                                <th>Edit Theme</th>
+                                <th>Remove Theme</th>
+                            </tr>
+                            <%
+                                for (int i = 0; i < themes.size(); i++) {
+                            %>
+                            <tr>
+                                <td><% out.print(themes.get(i).getName());%>
+                                    <input type="hidden" name="list" value="<% out.print(themes.get(i).getId());%>" /></td>
+                                <td><% out.print(themes.get(i).getDescription());%></td>
+                                <td><% if (themes.get(i).getReason() != null) {
+                                                            out.print(themes.get(i).getReason());
+                                                        }%></td>
+                                <td><% out.print(themes.get(i).getRank());%></td>
+                                <td><% out.print(themes.get(i).getCount());%></td>
+                                <td><input type="checkbox" name="visible" value="<% out.print(themes.get(i).getId());%>"
+                                           <% if (themes.get(i).getVisible() == true) {
+                                                                       out.print(" checked");
+                                                                   }%>/></td>
+                                <td><% out.print(upersist.getUserByID(themes.get(i).getCreatorId()).getUserName());%></td>
+                                <td><a href="edittheme.jsp?id=<%out.print(themes.get(i).getId());%>">Edit</a></td>
+                                <td><a href="../../../action/removeTheme.jsp?id=<%out.print(themes.get(i).getId());%>">Remove</a></td>
+                            </tr>
+                            <% } //close the for loop %>
+                        </table>
+                        <input type="submit" value="Submit" class="button button-primary" />
+                    </form>
+                </div>
+            </div>
         </div>
         <%@ include file="../../../includes/footer.jsp" %>
         <%@ include file="../../../includes/scriptlist.jsp" %>

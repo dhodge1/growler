@@ -39,63 +39,64 @@
             } catch (Exception e) {
             }
         %>
-		<div class="container-fixed">
+
         <%@ include file="../../../includes/header.jsp" %> 
         <%@ include file="../../../includes/adminnav.jsp" %>
-        <br/><br/><br/>
-			<div class="row">
-            <div class="span8">
-                <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Assign Speaker to Session</h2>
+        <div class="container-fixed">
+            <br/><br/><br/>
+            <div class="row">
+                <div class="span8">
+                    <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Assign Speaker to Session</h2>
+                </div>
             </div>
-			</div>
-			<br/>
-			<div class="row">
-			<div class="span8">
-				<%
-                                SessionPersistence sessionPersist = new SessionPersistence();
-                                SpeakerPersistence speakerPersist = new SpeakerPersistence();
-                                ArrayList<Session> sessions = sessionPersist.getThisYearSessions(2013);
-                                ArrayList<Speaker> speakers = speakerPersist.getNonDefaultSpeakers();
-                            %>
-                            <form id="action" action="../../../action/processSessionAssign.jsp" method="post" onsubmit="return validateForm();">
-                                <div class="form-group">
-                                    <label class="required">Session Name:</label>
-                                    <select class="session" name="sessionId">
-                                        <option value="0"> - Please Pick a Session - </option>
-                                        <%
-                                            //Get a list of all sessions
-                                            for (int i = 0; i < sessions.size(); i++) {
-                                                out.print("<option value=\"" + sessions.get(i).getId() + "\"");
-                                                if (sessions.get(i).getId() == sessionPassed) {
-                                                    out.print(" selected ");
-                                                }
-                                                out.print(">" + sessions.get(i).getName());
+            <br/>
+            <div class="row">
+                <div class="span8">
+                    <%
+                        SessionPersistence sessionPersist = new SessionPersistence();
+                        SpeakerPersistence speakerPersist = new SpeakerPersistence();
+                        ArrayList<Session> sessions = sessionPersist.getThisYearSessions(2013);
+                        ArrayList<Speaker> speakers = speakerPersist.getNonDefaultSpeakers();
+                    %>
+                    <form id="action" action="../../../action/processSessionAssign.jsp" method="post" onsubmit="return validateForm();">
+                        <div class="form-group">
+                            <label class="required">Session Name:</label>
+                            <select class="session" name="sessionId">
+                                <option value="0"> - Please Pick a Session - </option>
+                                <%
+                                    //Get a list of all sessions
+                                    for (int i = 0; i < sessions.size(); i++) {
+                                        out.print("<option value=\"" + sessions.get(i).getId() + "\"");
+                                        if (sessions.get(i).getId() == sessionPassed) {
+                                            out.print(" selected ");
+                                        }
+                                        out.print(">" + sessions.get(i).getName());
 
-                                                out.print("</option>");
-                                            }
-                                        %>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label class="required">Suggested Speakers:</label>
-                                    <select class="speaker" name="speaker">
-                                        <option value="0"> - Please Pick a Speaker - </option>
-                                        <%
-                                            //Get a list of suggested speakers
-                                            for (int i = 0; i < speakers.size(); i++) {
-                                                out.print("<option value=\"" + speakers.get(i).getId() + "\">" + speakers.get(i).getLastName() + ", " + speakers.get(i).getFirstName() + "</option>");
-                                            }
-                                        %>
-                                    </select>
-                                </div>
-                                <a href="speakerentry.jsp">Add a New Speaker</a><br/>
-                                <div class="form-actions">
-                                    <input id="send" type="submit" class="button button-primary" value="Submit"/>
-                                    <a id="cancel" class="button" href="session.jsp">Cancel</a>
-                                </div>
-                            </form>
-			</div>
-			</div>
+                                        out.print("</option>");
+                                    }
+                                %>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="required">Suggested Speakers:</label>
+                            <select class="speaker" name="speaker">
+                                <option value="0"> - Please Pick a Speaker - </option>
+                                <%
+                                    //Get a list of suggested speakers
+                                    for (int i = 0; i < speakers.size(); i++) {
+                                        out.print("<option value=\"" + speakers.get(i).getId() + "\">" + speakers.get(i).getLastName() + ", " + speakers.get(i).getFirstName() + "</option>");
+                                    }
+                                %>
+                            </select>
+                        </div>
+                        <a href="speakerentry.jsp">Add a New Speaker</a><br/>
+                        <div class="form-actions">
+                            <input id="send" type="submit" class="button button-primary" value="Submit"/>
+                            <a id="cancel" class="button" href="session.jsp">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
 
         <%@ include file="../../../includes/footer.jsp" %> 

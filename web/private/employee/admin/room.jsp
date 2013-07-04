@@ -35,66 +35,63 @@
     </head>
     <body id="growler1">
         <%
-                    int user = 0;
-                    if (null == session.getAttribute("id")) {
-                        response.sendRedirect("../../../index.jsp");
-                    }
-                    else if (!session.getAttribute("user").equals("admin")) {
-                        response.sendRedirect("../../../index.jsp");
-                    }
-                    try {
-                        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
-                        String name = String.valueOf(session.getAttribute("user"));                  
-                    }
-                    catch (Exception e) {
-                        
-                    }
-                %>
-				<div class="container-fixed">
+            int user = 0;
+            if (null == session.getAttribute("id")) {
+                response.sendRedirect("../../../index.jsp");
+            } else if (!session.getAttribute("user").equals("admin")) {
+                response.sendRedirect("../../../index.jsp");
+            }
+            try {
+                user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+                String name = String.valueOf(session.getAttribute("user"));
+            } catch (Exception e) {
+            }
+        %>
         <%@ include file="../../../includes/header.jsp" %> 
         <%@ include file="../../../includes/adminnav.jsp" %>
-        <br/><br/><br/>
-			<div class="row">
-            <div class="span8">
-                <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Rooms</h2>
+        <div class="container-fixed">
+            <br/><br/><br/>
+            <div class="row">
+                <div class="span8">
+                    <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Rooms</h2>
+                </div>
             </div>
-			</div>
-			<br/>
-			<div class="row">
-			<div class="span8">
-			<table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
-                            <tr>
-                                <th>Room Number</th>
-                                <th>Name</th>
-                                <th>Capacity</th>
-                                <th>Building</th>
-                                <th>Edit</th>
-                                <th>Remove</th>
-                            </tr>
-                            <%
-                                for (int i = 0; i < locations.size(); i++) {
-                                    out.print("<tr>");
-                                    out.print("<td>");
-                                    out.print(locations.get(i).getId());
-                                    out.print("</td>");
-                                    out.print("<td>");
-                                    out.print(locations.get(i).getDescription());
-                                    out.print("</td>");
-                                    out.print("<td>");
-                                    out.print(locations.get(i).getCapacity());
-                                    out.print("</td>");
-                                    out.print("<td>");
-                                    out.print(locations.get(i).getBuilding());
-                                    out.print("</td>");
-                                    out.print("<td><a href=\"editroom.jsp?id=" + locations.get(i).getId() + "\">Edit</td>");
-                                    out.print("<td><a href=\"../../../action/deleteroom.jsp?id=" + locations.get(i).getId() + "\">Delete</td>");
-                                    out.print("</tr>");
-                                }
-                            %>
-                        </table>
-                        <a href="addroom.jsp" class="button button-primary" id="add">Add a New Room</a>
-			</div>
-			</div>
+            <br/>
+            <div class="row">
+                <div class="span8">
+                    <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
+                        <tr>
+                            <th>Room Number</th>
+                            <th>Name</th>
+                            <th>Capacity</th>
+                            <th>Building</th>
+                            <th>Edit</th>
+                            <th>Remove</th>
+                        </tr>
+                        <%
+                            for (int i = 0; i < locations.size(); i++) {
+                                out.print("<tr>");
+                                out.print("<td>");
+                                out.print(locations.get(i).getId());
+                                out.print("</td>");
+                                out.print("<td>");
+                                out.print(locations.get(i).getDescription());
+                                out.print("</td>");
+                                out.print("<td>");
+                                out.print(locations.get(i).getCapacity());
+                                out.print("</td>");
+                                out.print("<td>");
+                                out.print(locations.get(i).getBuilding());
+                                out.print("</td>");
+                                out.print("<td><a href=\"editroom.jsp?id=" + locations.get(i).getId() + "\">Edit</td>");
+                                out.print("<td><a href=\"../../../action/deleteroom.jsp?id=" + locations.get(i).getId() + "\">Delete</td>");
+                                out.print("</tr>");
+                            }
+                        %>
+                    </table>
+                    <a href="addroom.jsp" class="button button-primary" id="add">Add a New Room</a>
+                </div>
+            </div>
         </div>
 
 

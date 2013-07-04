@@ -37,30 +37,31 @@
         <script src="../../../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
     </head>
     <body id="growler1">    
-	<div class="container-fixed">
+
         <%@ include file="../../../includes/header.jsp" %> 
-            <%@ include file="../../../includes/adminnav.jsp" %>
-        <br/><br/><br/>
-			<div class="row">
-            <div class="span8">
-                <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Welcome to Techtoberfest!</h2>
+        <%@ include file="../../../includes/adminnav.jsp" %>
+        <div class="container-fixed">
+            <br/><br/><br/>
+            <div class="row">
+                <div class="span8">
+                    <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Welcome to Techtoberfest!</h2>
+                </div>
             </div>
-			</div>
-			<br/>
-			<div class="row">
-			<div class="span8">
-			<h3>Themes</h3>
-                                        <p>A place to edit and add Themes for this year's Techtoberfest</p>
-                                        <h3>Speakers</h3>
-                                        <p>A place to edit and add Speakers, and assign them to speak at sessions for this year's Techtoberfest</p>
-                                        <h3>Sessions</h3>
-                                        <p>A place to add and view sessions in this year's Techtoberfest</p>
-                                        <h3>Rooms</h3>
-                                        <p>A place to add, edit, and assign rooms for this year's Techtoberfest</p>
-                                        <h3>Reports</h3>
-                                        <p>A place to view real time reports based on the information gathered so far about this year's Techtoberfest</p>
-			</div>
-			</div>
+            <br/>
+            <div class="row">
+                <div class="span8">
+                    <h3>Themes</h3>
+                    <p>A place to edit and add Themes for this year's Techtoberfest</p>
+                    <h3>Speakers</h3>
+                    <p>A place to edit and add Speakers, and assign them to speak at sessions for this year's Techtoberfest</p>
+                    <h3>Sessions</h3>
+                    <p>A place to add and view sessions in this year's Techtoberfest</p>
+                    <h3>Rooms</h3>
+                    <p>A place to add, edit, and assign rooms for this year's Techtoberfest</p>
+                    <h3>Reports</h3>
+                    <p>A place to view real time reports based on the information gathered so far about this year's Techtoberfest</p>
+                </div>
+            </div>
         </div>
 
         <%@ include file="../../../includes/footer.jsp" %>

@@ -24,67 +24,64 @@
         <script src="../../../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
     </head>
     <body id="growler1">
-            <%
-                    int user = 0;
-                    if (null == session.getAttribute("id")) {
-                        response.sendRedirect("../../../index.jsp");
-                    }
-                    else if (!session.getAttribute("user").equals("admin")) {
-                        response.sendRedirect("../../../index.jsp");
-                    }
-                    try {
-                        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
-                        String name = String.valueOf(session.getAttribute("user"));                  
-                    }
-                    catch (Exception e) {
-                        
-                    }
-                %>
-				<div class="container-fixed">
+        <%
+            int user = 0;
+            if (null == session.getAttribute("id")) {
+                response.sendRedirect("../../../index.jsp");
+            } else if (!session.getAttribute("user").equals("admin")) {
+                response.sendRedirect("../../../index.jsp");
+            }
+            try {
+                user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+                String name = String.valueOf(session.getAttribute("user"));
+            } catch (Exception e) {
+            }
+        %>
         <%@ include file="../../../includes/header.jsp" %> 
         <%@ include file="../../../includes/adminnav.jsp" %>
-        <br/><br/><br/>
-			<div class="row">
-            <div class="span8">
-                <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Remove a Speaker from a Session</h2>
+        <div class="container-fixed">
+            <br/><br/><br/>
+            <div class="row">
+                <div class="span8">
+                    <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Remove a Speaker from a Session</h2>
+                </div>
             </div>
-			</div>
-			<br/>
-			<div class="row">
-			<div class="span8">
-			<%
-                                int sessionId = Integer.parseInt(request.getParameter("sessionId"));
-                                SessionPersistence sessionPersist = new SessionPersistence();
-                                SpeakerPersistence speakerPersist = new SpeakerPersistence();
-                                
-                                
-                            %>
-                            <form id="action" action="../../../action/processSpeakerRemove.jsp" method="post" onsubmit="return validateForm();">
-                                <div class="form-group">
-                                    <label>Session Name:</label>
-                                    <label><% out.print(sessionPersist.getSessionByID(sessionId).getName()); %></label>
-                                    <input type="hidden" name="sessionId" value="<% out.print(sessionId); %>"/>
-                                </div>
-                                <div class="form-group">
-                                    <label>Assigned Speakers:</label>
-                                    <select class="speaker" name="speaker">
-                                        <option value="0"> - Please Pick a Speaker - </option>
-                                        <%
-                                            ArrayList<Speaker> speakers = speakerPersist.getSpeakersBySession(sessionId);
-                                            //Get a list of suggested speakers
-                                            for (int i = 0; i < speakers.size(); i++) {
-                                                out.print("<option value=\"" + speakers.get(i).getId() + "\">" + speakers.get(i).getLastName() + ", " + speakers.get(i).getFirstName() + "</option>");
-                                            }
-                                        %>
-                                    </select>
-                                </div>
-                                <div class="form-actions">
-                                    <input id="send" type="submit" class="button button-primary" value="Submit"/>
-                                    <a id="cancel" class="button" href="session.jsp">Cancel</a>
-                                </div>
-                            </form>
-			</div>
-			</div>
+            <br/>
+            <div class="row">
+                <div class="span8">
+                    <%
+                        int sessionId = Integer.parseInt(request.getParameter("sessionId"));
+                        SessionPersistence sessionPersist = new SessionPersistence();
+                        SpeakerPersistence speakerPersist = new SpeakerPersistence();
+
+
+                    %>
+                    <form id="action" action="../../../action/processSpeakerRemove.jsp" method="post" onsubmit="return validateForm();">
+                        <div class="form-group">
+                            <label>Session Name:</label>
+                            <label><% out.print(sessionPersist.getSessionByID(sessionId).getName());%></label>
+                            <input type="hidden" name="sessionId" value="<% out.print(sessionId);%>"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Assigned Speakers:</label>
+                            <select class="speaker" name="speaker">
+                                <option value="0"> - Please Pick a Speaker - </option>
+                                <%
+                                    ArrayList<Speaker> speakers = speakerPersist.getSpeakersBySession(sessionId);
+                                    //Get a list of suggested speakers
+                                    for (int i = 0; i < speakers.size(); i++) {
+                                        out.print("<option value=\"" + speakers.get(i).getId() + "\">" + speakers.get(i).getLastName() + ", " + speakers.get(i).getFirstName() + "</option>");
+                                    }
+                                %>
+                            </select>
+                        </div>
+                        <div class="form-actions">
+                            <input id="send" type="submit" class="button button-primary" value="Submit"/>
+                            <a id="cancel" class="button" href="session.jsp">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
 
         <%@ include file="../../../includes/footer.jsp" %> 

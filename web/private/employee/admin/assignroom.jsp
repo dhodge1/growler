@@ -37,58 +37,59 @@
             } catch (Exception e) {
             }
         %>
-		<div class="container-fixed">
+
         <%@ include file="../../../includes/header.jsp" %> 
         <%@ include file="../../../includes/adminnav.jsp" %>
-        <br/><br/><br/>
-			<div class="row">
-            <div class="span8">
-                <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Assign Room To Session</h2>
+        <div class="container-fixed">
+            <br/><br/><br/>
+            <div class="row">
+                <div class="span8">
+                    <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Assign Room To Session</h2>
+                </div>
             </div>
-			</div>
-			<br/>
-			<div class="row">
-			<div class="span8">
-			<%
-                                SessionPersistence sessionPersist = new SessionPersistence();
-                                LocationPersistence locationPersist = new LocationPersistence();
-                                ArrayList<Session> sessions = sessionPersist.getThisYearSessions(2013);
-                                ArrayList<Location> locations = locationPersist.getAllLocations();
-                            %>
-                            <form id="action" action="../../../action/processroomassign.jsp" method="post" onsubmit="return validateForm();">
-                                <div class="form-group">
-                                    <label class="required">Session Name:</label>
-                                    <select class="session" name="sessionId">
-                                        <option value="0"> - Please Pick a Session - </option>
-                                        <%
-                                            //Get a list of all sessions
-                                            for (int i = 0; i < sessions.size(); i++) {
-                                                out.print("<option value=\"" + sessions.get(i).getId() + "\">" + sessions.get(i).getName() + "</option>");
-                                            }
-                                        %>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Available Rooms:</label>
-                                    <select class="rooms" name="roomId">
-                                        <option value="0"> - Please Pick a Room - </option>
-                                        <%
-                                            //Get a list of suggested speakers
-                                            for (int i = 0; i < locations.size(); i++) {
-                                                out.print("<option value=\"" + locations.get(i).getId() + "\">" + locations.get(i).getDescription() + ", "
-                                                        + locations.get(i).getBuilding() + " Capacity: "
-                                                        + locations.get(i).getCapacity() + "</option>");
-                                            }
-                                        %>
-                                    </select>
-                                </div>
-                                <div class="form-actions">
-                                    <input id="send" type="submit" class="button button-primary" value="Submit"/>
-                                    <a id="cancel" class="button" href="session.jsp">Cancel</a>
-                                </div>
-                            </form>
-			</div>
-			</div>
+            <br/>
+            <div class="row">
+                <div class="span8">
+                    <%
+                        SessionPersistence sessionPersist = new SessionPersistence();
+                        LocationPersistence locationPersist = new LocationPersistence();
+                        ArrayList<Session> sessions = sessionPersist.getThisYearSessions(2013);
+                        ArrayList<Location> locations = locationPersist.getAllLocations();
+                    %>
+                    <form id="action" action="../../../action/processroomassign.jsp" method="post" onsubmit="return validateForm();">
+                        <div class="form-group">
+                            <label class="required">Session Name:</label>
+                            <select class="session" name="sessionId">
+                                <option value="0"> - Please Pick a Session - </option>
+                                <%
+                                    //Get a list of all sessions
+                                    for (int i = 0; i < sessions.size(); i++) {
+                                        out.print("<option value=\"" + sessions.get(i).getId() + "\">" + sessions.get(i).getName() + "</option>");
+                                    }
+                                %>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Available Rooms:</label>
+                            <select class="rooms" name="roomId">
+                                <option value="0"> - Please Pick a Room - </option>
+                                <%
+                                    //Get a list of suggested speakers
+                                    for (int i = 0; i < locations.size(); i++) {
+                                        out.print("<option value=\"" + locations.get(i).getId() + "\">" + locations.get(i).getDescription() + ", "
+                                                + locations.get(i).getBuilding() + " Capacity: "
+                                                + locations.get(i).getCapacity() + "</option>");
+                                    }
+                                %>
+                            </select>
+                        </div>
+                        <div class="form-actions">
+                            <input id="send" type="submit" class="button button-primary" value="Submit"/>
+                            <a id="cancel" class="button" href="session.jsp">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
 
         <%@ include file="../../../includes/footer.jsp" %> 

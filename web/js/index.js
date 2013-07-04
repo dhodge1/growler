@@ -1,26 +1,18 @@
-$(function() {
-    $("input").autoinline();
-});
- $('#modalDialog').dialog({
-        autoOpen: false,
-        buttons: {
-            'ok': {
-                'class': 'button button-primary',
-                click: function() {
-                    $(this).dialog('close');
-                },
-                text: 'Ok'
-            }
-        },
-        height: 200,
-        modal: true,
-        resizable: false
-    });
 $("#send").click(function(event) {
     var emptyString = "";
-    if ($("#tip").val() === emptyString || $("#tip2").val() === emptyString) {
+    $("#error_userid").hide();
+    $("#error_password").hide();
+    $("#tip").css("border", "1px solid black");
+    if ($("#tip").val() === emptyString)
+     {
         event.preventDefault();
-        $("#modalDialog").dialog("open");
+        $("#error_userid").show();
+        $("#tip").css("border", "1px solid red");
+    }
+    else if ($("#tip2").val() === emptyString) {
+        event.preventDefault();
+        $("#error_password").show();
+        $("#tip2").css("border", "1px solid red");
     }
     else {
         //$("#action").attr("action", "action/login.jsp");

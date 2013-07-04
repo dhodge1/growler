@@ -34,29 +34,29 @@
             int user = 0;
             if (null == session.getAttribute("id")) {
                 response.sendRedirect("../../../index.jsp");
+            } else if (!session.getAttribute("user").equals("admin")) {
+                response.sendRedirect("../../../index.jsp");
             }
-            else if (!session.getAttribute("user").equals("admin")) {
-                        response.sendRedirect("../../../index.jsp");
-                    }
             try {
                 user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
                 String name = String.valueOf(session.getAttribute("user"));
             } catch (Exception e) {
             }
         %>
-		<div class="container-fixed">
+
         <%@ include file="../../../includes/header.jsp" %> 
         <%@ include file="../../../includes/adminnav.jsp" %>
-        <br/><br/><br/>
-			<div class="row">
-            <div class="span8">
-                <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Add a Speaker</h2>
+        <div class="container-fixed">
+            <br/><br/><br/>
+            <div class="row">
+                <div class="span8">
+                    <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Add a Speaker</h2>
+                </div>
             </div>
-			</div>
-			<br/>
-			<div class="row">
-			<div class="span8">
-			<form method="POST" id="action" action="../../../action/processSpeakerSuggestion.jsp">
+            <br/>
+            <div class="row">
+                <div class="span8">
+                    <form method="POST" id="action" action="../../../action/processSpeakerSuggestion.jsp">
                         <fieldset>
                             <div class="form-group">
                                 <label class="required">Speaker First Name</label>
@@ -71,9 +71,9 @@
                                 <a class="button" id="cancel" href="speaker.jsp">Cancel</a>
                             </div>
                         </fieldset>
-                </form>	
-			</div>
-			</div>
+                    </form>	
+                </div>
+            </div>
         </div>
 
         <%@ include file="../../../includes/footer.jsp" %> 

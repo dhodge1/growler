@@ -52,7 +52,7 @@
                 connection.close();
                 statement.close();
                 result.close();
-                session.setAttribute("message", "Invalid Login");
+                session.setAttribute("message", "Error: The User ID or Password you entered is incorrect.");
                 response.sendRedirect("../index.jsp");
 
             }

@@ -42,19 +42,20 @@
             } catch (Exception e) {
             }
         %>
-		<div class="container-fixed">
+
         <%@ include file="../../../includes/header.jsp" %> 
         <%@ include file="../../../includes/adminnav.jsp" %>  
-        <br/><br/><br/>
-			<div class="row">
-            <div class="span8">
-                <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Comments By Session</h2>
+        <div class="container-fixed">
+            <br/><br/><br/>
+            <div class="row">
+                <div class="span8">
+                    <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Comments By Session</h2>
+                </div>
             </div>
-			</div>
-			<br/>
-			<div class="row">
-			<div class="span8">
-				<table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
+            <br/>
+            <div class="row">
+                <div class="span8">
+                    <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
                         <tr>
                             <th>Session Name</th>
                             <th>Comment</th>
@@ -75,8 +76,8 @@
                             }
                         %>
                     </table>
-			</div>
-			</div>
+                </div>
+            </div>
         </div>
 
         <%@ include file="../../../includes/footer.jsp" %> 

@@ -60,138 +60,138 @@
             } catch (Exception e) {
             }
         %>
-		<div class="container-fixed">
         <%@ include file="../../../includes/header.jsp" %> 
         <%@ include file="../../../includes/adminnav.jsp" %>
-        <br/><br/><br/>
-			<div class="row">
-            <div class="span8">
-                <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Session Scheduler Tool</h2>
+        <div class="container-fixed">
+            <br/><br/><br/>
+            <div class="row">
+                <div class="span8">
+                    <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Session Scheduler Tool</h2>
+                </div>
             </div>
-			</div>
-			<br/>
-			<div class="row">
-			<div class="span8">
-			<%
-                            SimpleDateFormat dates = new SimpleDateFormat("E, MM-dd-yyyy");
-                            SimpleDateFormat fmt = new SimpleDateFormat("h:mm a");
-                            SimpleDateFormat fmt2 = new SimpleDateFormat("K ' hours and ' mm ' minutes'");
+            <br/>
+            <div class="row">
+                <div class="span8">
+                    <%
+                        SimpleDateFormat dates = new SimpleDateFormat("E, MM-dd-yyyy");
+                        SimpleDateFormat fmt = new SimpleDateFormat("h:mm a");
+                        SimpleDateFormat fmt2 = new SimpleDateFormat("K ' hours and ' mm ' minutes'");
 
-                            SessionPersistence sp = new SessionPersistence();
-                            LocationPersistence lp = new LocationPersistence();
-                            ArrayList<Session> day1 = sp.getSessionsByDate(1, "");
-                            ArrayList<Session> day2 = sp.getSessionsByDate(2, "");
-                            ArrayList<Session> noDay = sp.getSessionsWithoutADate();
-                        %>
-                            <form id="myform" action="../../../action/processScheduler.jsp" method="post">
-                                <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
-                                    <tr>
-                                        <th>Time</th>
-                                        <th>10/17/2013: E130</th>
-                                        <th>10/17/2013: D304</th>
-                                        <th>10/18/2013: E130</th>
-                                        <th>10/18/2013: D304</th>
-                                    </tr>
-                                    <%
-                                        java.sql.Time start = java.sql.Time.valueOf("07:00:00");
-                                        ArrayList<Session> sessions = sp.getThisYearSessions(2013);
+                        SessionPersistence sp = new SessionPersistence();
+                        LocationPersistence lp = new LocationPersistence();
+                        ArrayList<Session> day1 = sp.getSessionsByDate(1, "");
+                        ArrayList<Session> day2 = sp.getSessionsByDate(2, "");
+                        ArrayList<Session> noDay = sp.getSessionsWithoutADate();
+                    %>
+                    <form id="myform" action="../../../action/processScheduler.jsp" method="post">
+                        <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
+                            <tr>
+                                <th>Time</th>
+                                <th>10/17/2013: E130</th>
+                                <th>10/17/2013: D304</th>
+                                <th>10/18/2013: E130</th>
+                                <th>10/18/2013: D304</th>
+                            </tr>
+                            <%
+                                java.sql.Time start = java.sql.Time.valueOf("07:00:00");
+                                ArrayList<Session> sessions = sp.getThisYearSessions(2013);
 
-                                        for (int i = 0; i < 11; i++) {
-                                            out.print("<tr>");
-                                            out.print("<td>");
-                                            start.setHours(start.getHours() + 1);
-                                            out.print(fmt.format(start));
-                                            out.print("</td>");
-                                            out.print("<td>");
-                                            out.print("<select name=\"list1\" title=\"" + start + "\" onChange=\"updateSessionList(this)\">");
-                                            out.print("<option value=\"0\">NO SESSION</option>");
-                                            Session current = sp.getSessionByDateAndTime(java.sql.Date.valueOf("2013-10-17"), start, " ");
-                                            for (int j = 0; j < sessions.size(); j++) {
-                                                out.print("<option  value=\"" + sessions.get(j).getId() + "\"");
-                                                if ((sessions.get(j).getId() == current.getId()) && (sessions.get(j).getLocation().equals("E130"))) {
-                                                    out.print(" selected >");
-                                                } else {
-                                                    out.print(">");
-                                                }
-                                                out.print(sessions.get(j).getName() + "</option>");
-                                            }
-                                            out.print("</select>");
-                                            out.print("</td>");
-                                            out.print("<td>");
-                                            out.print("<select name=\"list2\" title=\"" + start + "\" onChange=\"updateSessionList(this)\">");
-                                            out.print("<option value=\"0\">NO SESSION</option>");
-                                            current = sp.getSessionByDateAndTime(java.sql.Date.valueOf("2013-10-17"), start, " ");
-                                            for (int j = 0; j < sessions.size(); j++) {
-                                                out.print("<option value=\"" + sessions.get(j).getId() + "\"");
-                                                if ((sessions.get(j).getId() == current.getId()) && (sessions.get(j).getLocation().equals("D304"))) {
-                                                    out.print(" selected >");
-                                                } else {
-                                                    out.print(">");
-                                                }
-                                                out.print(sessions.get(j).getName() + "</option>");
-                                            }
-                                            out.print("</select>");
-                                            out.print("</td>");
-                                            out.print("<td>");
-                                            out.print("<select name=\"list3\" title=\"" + start + "\" onChange=\"updateSessionList(this)\">");
-                                            out.print("<option value=\"0\">NO SESSION</option>");
-                                            current = sp.getSessionByDateAndTime(java.sql.Date.valueOf("2013-10-18"), start, " ");
-                                            for (int j = 0; j < sessions.size(); j++) {
-                                                out.print("<option value=\"" + sessions.get(j).getId() + "\"");
-                                                if ((sessions.get(j).getId() == current.getId()) && (sessions.get(j).getLocation().equals("E130"))) {
-                                                    out.print(" selected >");
-                                                } else {
-                                                    out.print(">");
-                                                }
-                                                out.print(sessions.get(j).getName() + "</option>");
-                                            }
-                                            out.print("</select>");
-                                            out.print("</td>");
-                                            out.print("<td>");
-                                            out.print("<select name=\"list4\" title=\"" + start + "\" onChange=\"updateSessionList(this)\">");
-                                            out.print("<option value=\"0\">NO SESSION</option>");
-                                            current = sp.getSessionByDateAndTime(java.sql.Date.valueOf("2013-10-18"), start, " ");
-                                            for (int j = 0; j < sessions.size(); j++) {
-                                                out.print("<option value=\"" + sessions.get(j).getId() + "\"");
-                                                if ((sessions.get(j).getId() == current.getId()) && (sessions.get(j).getLocation().equals("D304"))) {
-                                                    out.print(" selected >");
-                                                } else {
-                                                    out.print(">");
-                                                }
-                                                out.print(sessions.get(j).getName() + "</option>");
-                                            }
-                                            out.print("</select>");
-
-                                            out.print("</td>");
-                                            out.print("</tr>");
+                                for (int i = 0; i < 11; i++) {
+                                    out.print("<tr>");
+                                    out.print("<td>");
+                                    start.setHours(start.getHours() + 1);
+                                    out.print(fmt.format(start));
+                                    out.print("</td>");
+                                    out.print("<td>");
+                                    out.print("<select name=\"list1\" title=\"" + start + "\" onChange=\"updateSessionList(this)\">");
+                                    out.print("<option value=\"0\">NO SESSION</option>");
+                                    Session current = sp.getSessionByDateAndTime(java.sql.Date.valueOf("2013-10-17"), start, " ");
+                                    for (int j = 0; j < sessions.size(); j++) {
+                                        out.print("<option  value=\"" + sessions.get(j).getId() + "\"");
+                                        if ((sessions.get(j).getId() == current.getId()) && (sessions.get(j).getLocation().equals("E130"))) {
+                                            out.print(" selected >");
+                                        } else {
+                                            out.print(">");
                                         }
-                                    %>
-                                </table>
-                                <% ArrayList<Session> uns = sp.getUnscheduledSessions();%>
-                                <h2>Unscheduled Sessions</h2>
-                                <div id="unscheduled">
-                                    <table>
-                                        <tr>
-                                            <td>Name</td>
-                                            <td>Description</td>
-                                        </tr>
-                                        <% for (int j = 0; j < uns.size(); j++) {
-                                            out.print("<tr>");
-                                            out.print("<td>");
-                                            out.print(uns.get(j).getName());
-                                            out.print("</td>");
-                                            out.print("<td>");
-                                            out.print(uns.get(j).getDescription());
-                                            out.print("</td>");
-                                            out.print("</tr>");
-                                        } %>
-                                        </table>
-                                </div><br/><br/>
-                                
-                                 <!-- <input type="submit" id="send" value="Submit Schedule" class="button button-primary"/> -->
-                            </form>
-			</div>
-			</div>
+                                        out.print(sessions.get(j).getName() + "</option>");
+                                    }
+                                    out.print("</select>");
+                                    out.print("</td>");
+                                    out.print("<td>");
+                                    out.print("<select name=\"list2\" title=\"" + start + "\" onChange=\"updateSessionList(this)\">");
+                                    out.print("<option value=\"0\">NO SESSION</option>");
+                                    current = sp.getSessionByDateAndTime(java.sql.Date.valueOf("2013-10-17"), start, " ");
+                                    for (int j = 0; j < sessions.size(); j++) {
+                                        out.print("<option value=\"" + sessions.get(j).getId() + "\"");
+                                        if ((sessions.get(j).getId() == current.getId()) && (sessions.get(j).getLocation().equals("D304"))) {
+                                            out.print(" selected >");
+                                        } else {
+                                            out.print(">");
+                                        }
+                                        out.print(sessions.get(j).getName() + "</option>");
+                                    }
+                                    out.print("</select>");
+                                    out.print("</td>");
+                                    out.print("<td>");
+                                    out.print("<select name=\"list3\" title=\"" + start + "\" onChange=\"updateSessionList(this)\">");
+                                    out.print("<option value=\"0\">NO SESSION</option>");
+                                    current = sp.getSessionByDateAndTime(java.sql.Date.valueOf("2013-10-18"), start, " ");
+                                    for (int j = 0; j < sessions.size(); j++) {
+                                        out.print("<option value=\"" + sessions.get(j).getId() + "\"");
+                                        if ((sessions.get(j).getId() == current.getId()) && (sessions.get(j).getLocation().equals("E130"))) {
+                                            out.print(" selected >");
+                                        } else {
+                                            out.print(">");
+                                        }
+                                        out.print(sessions.get(j).getName() + "</option>");
+                                    }
+                                    out.print("</select>");
+                                    out.print("</td>");
+                                    out.print("<td>");
+                                    out.print("<select name=\"list4\" title=\"" + start + "\" onChange=\"updateSessionList(this)\">");
+                                    out.print("<option value=\"0\">NO SESSION</option>");
+                                    current = sp.getSessionByDateAndTime(java.sql.Date.valueOf("2013-10-18"), start, " ");
+                                    for (int j = 0; j < sessions.size(); j++) {
+                                        out.print("<option value=\"" + sessions.get(j).getId() + "\"");
+                                        if ((sessions.get(j).getId() == current.getId()) && (sessions.get(j).getLocation().equals("D304"))) {
+                                            out.print(" selected >");
+                                        } else {
+                                            out.print(">");
+                                        }
+                                        out.print(sessions.get(j).getName() + "</option>");
+                                    }
+                                    out.print("</select>");
+
+                                    out.print("</td>");
+                                    out.print("</tr>");
+                                }
+                            %>
+                        </table>
+                        <% ArrayList<Session> uns = sp.getUnscheduledSessions();%>
+                        <h2>Unscheduled Sessions</h2>
+                        <div id="unscheduled">
+                            <table>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Description</td>
+                                </tr>
+                                <% for (int j = 0; j < uns.size(); j++) {
+                                        out.print("<tr>");
+                                        out.print("<td>");
+                                        out.print(uns.get(j).getName());
+                                        out.print("</td>");
+                                        out.print("<td>");
+                                        out.print(uns.get(j).getDescription());
+                                        out.print("</td>");
+                                                out.print("</tr>");
+                                            }%>
+                            </table>
+                        </div><br/><br/>
+
+                        <!-- <input type="submit" id="send" value="Submit Schedule" class="button button-primary"/> -->
+                    </form>
+                </div>
+            </div>
         </div>
 
         <%@ include file="../../../includes/footer.jsp" %> 

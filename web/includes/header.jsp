@@ -19,8 +19,8 @@
                         }
                     %>
                 </li>
-                <li><a href="../view/help.jsp">Help</a></li>
-                <li><a href="../model/logout.jsp">Logout</a></li>
+                <li><a href="../../help.jsp">Help</a></li>
+                <li><a href="../../action/logout.jsp">Logout</a></li>
             </ul>
         </nav> 
     </div>

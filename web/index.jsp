@@ -32,9 +32,16 @@
         <link rel="stylesheet" href="css/wijmo/jquery.wijmo-complete.all.2.3.2.min.css"/>
         <link rel="stylesheet" type="text/css" href="css/general.css" /><!--General CSS-->
         <script src="js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
+        <style>
+            .message_container {
+                display: none;
+                color: red;
+                font-weight: bold;
+            }
+        </style>
     </head>
     <body id="growler1">
-            <%@ include file="includes/indexheader.jsp" %> 
+        <%@ include file="includes/indexheader.jsp" %> 
         <div class="container-fixed">
             <div class="row">
                 <br/>
@@ -54,15 +61,23 @@
             <br/>
             <div class="row">
                 <div class="span8">
+                    <%@include file="includes/messagehandler.jsp" %>
                     <form action="action/login.jsp" method="post" id="form">
                         <div class="form-group">
                             <label>User ID</label>
-                            <input type="text" name="username" />
+                            <input type="text" name="username" id="tip" data-content="Enter your User ID"/><br/>
+                            <span id="error_userid" class="message_container">
+                                <span>Please Enter a User ID</span>
+                            </span>
+                            <br/>
                             <label>Password</label>
-                            <input type="password" name="password"/>
+                            <input type="password" name="password" id="tip2" data-content="Enter your Password"/><br/>
+                            <span id="error_password" class="message_container">
+                                <span>Please Enter a Password</span>
+                            </span>
                         </div>
                         <div class="form-actions">
-                            <button class="button button-primary" type="submit">Login</button>
+                            <button class="button button-primary" id="send" type="submit">Login</button>
                             <a href="">Forgot Password?</a>
                         </div>
                         <div class="form-actions">
@@ -87,5 +102,8 @@
 
         <!--Additional script-->
         <script src="js/index.js"></script>
+        <script>$(function() {
+                $("input").autoinline();
+            });</script>
     </body>
 </html>

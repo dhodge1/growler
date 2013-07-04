@@ -11,6 +11,7 @@
         out.print("<p class=feedbackMessage-success>" + message + "</p>");
         session.removeAttribute("message");
     } else if (message != null && message.startsWith("Error:")) {
+        message = message.substring(6, message.length()-1);
         out.print("<p class=feedbackMessage-error>" + message + "</p>");
         session.removeAttribute("message");
     }

@@ -39,88 +39,89 @@
             } catch (Exception e) {
             }
         %>
-		<div class="container-fixed">
+
         <%@ include file="../../../includes/header.jsp" %> 
         <%@ include file="../../../includes/adminnav.jsp" %>
-        <br/><br/><br/>
-			<div class="row">
-            <div class="span8">
-                <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Add a Session</h2>
+        <div class="container-fixed">
+            <br/><br/><br/>
+            <div class="row">
+                <div class="span8">
+                    <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Add a Session</h2>
+                </div>
             </div>
-			</div>
-			<br/>
-			<div class="row">
-			<div class="span8">
-				<%
-                                        SessionPersistence sp = new SessionPersistence();
-                                        ArrayList<Session> sessions = sp.getAllSessionsWithKeys(" ");
-                                    %>
-                                        <form method="post" action="../../../action/processSession.jsp" onSubmit="return validateValues();">
-                                            <div class="form-group">
-                                                <label class="required">Session Name: </label>
-                                                <input id="name" size='50' name="name" type="text" data-content="Enter the name of the Session" maxlength="70"/>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="required">Session Description: </label>
-                                                <textarea id="description" name="description" maxlength="250" rows="5" cols="50" data-content="Enter the name of the Session" ></textarea>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Date: </label>
-                                                <input name="date" id="datepicker" type="text" data-content="Enter a date for the Session"/>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Time: </label>
-                                                <select id="time" name="time">
-                                                    <option value="null"> - No Time - </option>
-                                                    <option value="08:00:00">8:00 AM</option>
-                                                    <option value="08:30:00">8:30 AM</option>
-                                                    <option value="09:00:00">9:00 AM</option>
-                                                    <option value="09:30:00">9:30 AM</option>
-                                                    <option value="10:00:00">10:00 AM</option>
-                                                    <option value="10:30:00">10:30 AM</option>
-                                                    <option value="11:00:00">11:00 AM</option>
-                                                    <option value="11:30:00">11:30 AM</option>
-                                                    <option value="12:00:00">12:00 PM</option>
-                                                    <option value="12:30:00">12:30 PM</option>
-                                                    <option value="13:00:00">1:00 PM</option>
-                                                    <option value="13:30:00">1:30 PM</option>
-                                                    <option value="14:00:00">2:00 PM</option>
-                                                    <option value="14:30:00">2:30 PM</option>
-                                                    <option value="15:00:00">3:00 PM</option>
-                                                    <option value="15:30:00">3:30 PM</option>
-                                                    <option value="16:00:00">4:00 PM</option>
-                                                    <option value="16:30:00">4:30 PM</option>
-                                                    <option value="17:00:00">5:00 PM</option>
-                                                    <option value="17:30:00">5:30 PM</option>
-                                                    <option value="18:00:00">6:00 PM</option>
-                                                    <option value="18:30:00">6:30 PM</option>
-                                                    <option value="19:00:00">7:00 PM</option>
+            <br/>
+            <div class="row">
+                <div class="span8">
+                    <%
+                        SessionPersistence sp = new SessionPersistence();
+                        ArrayList<Session> sessions = sp.getAllSessionsWithKeys(" ");
+                    %>
+                    <form method="post" action="../../../action/processSession.jsp" onSubmit="return validateValues();">
+                        <div class="form-group">
+                            <label class="required">Session Name: </label>
+                            <input id="name" size='50' name="name" type="text" data-content="Enter the name of the Session" maxlength="70"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="required">Session Description: </label>
+                            <textarea id="description" name="description" maxlength="250" rows="5" cols="50" data-content="Enter the name of the Session" ></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Date: </label>
+                            <input name="date" id="datepicker" type="text" data-content="Enter a date for the Session"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Time: </label>
+                            <select id="time" name="time">
+                                <option value="null"> - No Time - </option>
+                                <option value="08:00:00">8:00 AM</option>
+                                <option value="08:30:00">8:30 AM</option>
+                                <option value="09:00:00">9:00 AM</option>
+                                <option value="09:30:00">9:30 AM</option>
+                                <option value="10:00:00">10:00 AM</option>
+                                <option value="10:30:00">10:30 AM</option>
+                                <option value="11:00:00">11:00 AM</option>
+                                <option value="11:30:00">11:30 AM</option>
+                                <option value="12:00:00">12:00 PM</option>
+                                <option value="12:30:00">12:30 PM</option>
+                                <option value="13:00:00">1:00 PM</option>
+                                <option value="13:30:00">1:30 PM</option>
+                                <option value="14:00:00">2:00 PM</option>
+                                <option value="14:30:00">2:30 PM</option>
+                                <option value="15:00:00">3:00 PM</option>
+                                <option value="15:30:00">3:30 PM</option>
+                                <option value="16:00:00">4:00 PM</option>
+                                <option value="16:30:00">4:30 PM</option>
+                                <option value="17:00:00">5:00 PM</option>
+                                <option value="17:30:00">5:30 PM</option>
+                                <option value="18:00:00">6:00 PM</option>
+                                <option value="18:30:00">6:30 PM</option>
+                                <option value="19:00:00">7:00 PM</option>
 
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Duration: </label>
-                                                <input id="duration" name="duration" type="number" step="1" max="120" min="15" data-content="Enter duration in minutes (Between 15 and 120)" />
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="required">Location: </label>
-                                                <select name="location">
-                                                    <%
-                                                        LocationPersistence lp = new LocationPersistence();
-                                                        ArrayList<Location> locations = lp.getAllLocations();
-                                                        for (int i = 0; i < locations.size(); i++) {
-                                                            out.print("<option value=" + locations.get(i).getId() + ">" + locations.get(i).getDescription() + "</option>");
-                                                        }
-                                                    %>
-                                                </select>
-                                            </div>
-											<div class="form-actions">
-                                            <input class="button button-primary" type="submit" value="Submit"/>
-											</div>
-                                        </form>
-			</div>
-			</div>
-		</div>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Duration: </label>
+                            <input id="duration" name="duration" type="number" step="1" max="120" min="15" data-content="Enter duration in minutes (Between 15 and 120)" />
+                        </div>
+                        <div class="form-group">
+                            <label class="required">Location: </label>
+                            <select name="location">
+                                <%
+                                    LocationPersistence lp = new LocationPersistence();
+                                    ArrayList<Location> locations = lp.getAllLocations();
+                                    for (int i = 0; i < locations.size(); i++) {
+                                        out.print("<option value=" + locations.get(i).getId() + ">" + locations.get(i).getDescription() + "</option>");
+                                    }
+                                %>
+                            </select>
+                        </div>
+                        <div class="form-actions">
+                            <input class="button button-primary" type="submit" value="Submit"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         <%@ include file="../../../includes/footer.jsp" %> 
         <%@ include file="../../../includes/scriptlist.jsp" %>
         <script>
@@ -150,24 +151,24 @@
                     mydesc.focus();
                     return false;
                 }
-              //  var mydate = document.getElementById("datepicker");
-              //  if (!mydate.value) {
-              //      alert('Please enter a date');
-              //      mydate.focus();
-              //      return false;
-              //  }
-              //  var myval = document.getElementById("duration");
-              //  if (myval.value < 15 || myval.value > 120 || !myval.value || isNaN(myval.value)) {
-              //      alert('Duration must be between 15 and 120');
-              //      myval.focus();
-              //      return false;
-              //  }
-              //  var mylocation = document.getElementById("location");
-              //  if (!mylocation.value) {
-              //      alert('Please enter a location');
-              //      mylocation.focus();
-              //      return false;
-              //  }
+                //  var mydate = document.getElementById("datepicker");
+                //  if (!mydate.value) {
+                //      alert('Please enter a date');
+                //      mydate.focus();
+                //      return false;
+                //  }
+                //  var myval = document.getElementById("duration");
+                //  if (myval.value < 15 || myval.value > 120 || !myval.value || isNaN(myval.value)) {
+                //      alert('Duration must be between 15 and 120');
+                //      myval.focus();
+                //      return false;
+                //  }
+                //  var mylocation = document.getElementById("location");
+                //  if (!mylocation.value) {
+                //      alert('Please enter a location');
+                //      mylocation.focus();
+                //      return false;
+                //  }
                 return true;
             }
         </script>

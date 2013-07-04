@@ -47,105 +47,105 @@
             } catch (Exception e) {
             }
         %>
-		<div class="container-fixed">
         <%@ include file="../../../includes/header.jsp" %> 
         <%@ include file="../../../includes/adminnav.jsp" %>
-        <br/><br/><br/>
-			<div class="row">
-            <div class="span8">
-                <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Sessions</h2>
+        <div class="container-fixed">
+            <br/><br/><br/>
+            <div class="row">
+                <div class="span8">
+                    <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Sessions</h2>
+                </div>
             </div>
-			</div>
-			<br/>
-			<div class="row">
-			<div class="span8">
-			<%
-                            //Get the year
-                            int year = 2013;
-                            try {
-                                year = Integer.parseInt(request.getParameter("year"));
-                            } catch (Exception e) {
-                            }
-                            SessionPersistence sp = new SessionPersistence();
-                            LocationPersistence lp = new LocationPersistence();
-                            RegistrationPersistence rp = new RegistrationPersistence();
-                            ArrayList<Session> sessions = sp.getThisYearSessions(year);
-                        %>
-                        <form action="session.jsp" method="post">
-                            <select name="year">
-                                <option value="2013">2013</option>
-                                <option value="2012">2012</option>
-                                <!--Provisioned for future years! -->
-                            </select>
-                            <input value="Change Year" type="submit" class="button button-primary"/>
-                        </form>
-                        <section>
+            <br/>
+            <div class="row">
+                <div class="span8">
+                    <%
+                        //Get the year
+                        int year = 2013;
+                        try {
+                            year = Integer.parseInt(request.getParameter("year"));
+                        } catch (Exception e) {
+                        }
+                        SessionPersistence sp = new SessionPersistence();
+                        LocationPersistence lp = new LocationPersistence();
+                        RegistrationPersistence rp = new RegistrationPersistence();
+                        ArrayList<Session> sessions = sp.getThisYearSessions(year);
+                    %>
+                    <form action="session.jsp" method="post">
+                        <select name="year">
+                            <option value="2013">2013</option>
+                            <option value="2012">2012</option>
+                            <!--Provisioned for future years! -->
+                        </select>
+                        <input value="Change Year" type="submit" class="button button-primary"/>
+                    </form>
+                    <section>
 
-                            <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
-                                <tr>
-                                    <th>Session Name</th>
-                                    <th>Description</th>
-                                    <th>Date</th>
-                                    <th>Time</th>
-                                    <th>Duration</th>
-                                    <th>Room #</th>
-                                    <th>Room Name</th>
-                                    <th>Building</th>
-                                    <th>Capacity</th>
-                                    <th>Key</th>
-                                    <th>Speaker(s)</th>
-                                    <th>Edit</th>
-                                </tr>
+                        <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
+                            <tr>
+                                <th>Session Name</th>
+                                <th>Description</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Duration</th>
+                                <th>Room #</th>
+                                <th>Room Name</th>
+                                <th>Building</th>
+                                <th>Capacity</th>
+                                <th>Key</th>
+                                <th>Speaker(s)</th>
+                                <th>Edit</th>
+                            </tr>
 
-                                <%
-                                    SpeakerPersistence spkr = new SpeakerPersistence();
-                                    for (int i = 0; i < sessions.size(); i++) {
-                                %>
-                                <tr>
+                            <%
+                                SpeakerPersistence spkr = new SpeakerPersistence();
+                                for (int i = 0; i < sessions.size(); i++) {
+                            %>
+                            <tr>
 
-                                    <td><% out.print(sessions.get(i).getName());%></td>
-                                    <td><% try {
-                                            if (!sessions.get(i).getDescription().equals(null)) {
-                                                out.print(sessions.get(i).getDescription());
-                                            }
-                                        } catch (Exception e) {
-                                            out.print("");
+                                <td><% out.print(sessions.get(i).getName());%></td>
+                                <td><% try {
+                                        if (!sessions.get(i).getDescription().equals(null)) {
+                                            out.print(sessions.get(i).getDescription());
                                         }
-                                        %></td>
-                                        <td><% SimpleDateFormat dates = new SimpleDateFormat("E, MM-dd-yyyy");
-                                        out.print(dates.format(sessions.get(i).getSessionDate()));%></td>
-                                        <td><% SimpleDateFormat fmt = new SimpleDateFormat("h:mm a");
-                                        out.print(fmt.format(sessions.get(i).getStartTime()));%></td>
-                                        <td><% SimpleDateFormat fmt2 = new SimpleDateFormat("K ' hours and ' mm ' minutes'");
-                                        out.print(fmt2.format(sessions.get(i).getDuration()));%></td>
+                                    } catch (Exception e) {
+                                        out.print("");
+                                    }
+                                    %></td>
+                                    <td><% SimpleDateFormat dates = new SimpleDateFormat("E, MM-dd-yyyy");
+                                            out.print(dates.format(sessions.get(i).getSessionDate()));%></td>
+                                    <td><% SimpleDateFormat fmt = new SimpleDateFormat("h:mm a");
+                                            out.print(fmt.format(sessions.get(i).getStartTime()));%></td>
+                                    <td><% SimpleDateFormat fmt2 = new SimpleDateFormat("K ' hours and ' mm ' minutes'");
+                                            out.print(fmt2.format(sessions.get(i).getDuration()));%></td>
                                     <td><% Location l = lp.getLocationById(sessions.get(i).getLocation());
-                                            out.print(l.getId());%> </td>
-                                    <td><% out.print(l.getDescription());%></td>
-                                    <td><% out.print(l.getBuilding());%></td>
-                                    <td><% out.print(l.getCapacity());%></td>
-                                    <td><% out.print(sessions.get(i).getKey());%></td>
-                                    <td>
-                                        <% ArrayList<Speaker> speakers = spkr.getSpeakersBySession(sessions.get(i).getId());
-                                            ListIterator<Speaker> iterator = speakers.listIterator();
-                                            while (iterator.hasNext()) {
-                                                Speaker s = iterator.next();
-                                                out.print("<strong>" + s.getLastName() + ", " + s.getFirstName() + "</strong>");
-                                                if (iterator.hasNext()) {
-                                                    out.print(" and <br/>");
-                                                } else {
-                                                    out.print("<br/><a href=\"removespeaker.jsp?sessionId=" + sessions.get(i).getId() + "\">Remove a Speaker</a>");
-                                                }
+                                        out.print(l.getId());%> </td>
+                                <td><% out.print(l.getDescription());%></td>
+                                <td><% out.print(l.getBuilding());%></td>
+                                <td><% out.print(l.getCapacity());%></td>
+                                <td><% out.print(sessions.get(i).getKey());%></td>
+                                <td>
+                                    <% ArrayList<Speaker> speakers = spkr.getSpeakersBySession(sessions.get(i).getId());
+                                        ListIterator<Speaker> iterator = speakers.listIterator();
+                                        while (iterator.hasNext()) {
+                                            Speaker s = iterator.next();
+                                            out.print("<strong>" + s.getLastName() + ", " + s.getFirstName() + "</strong>");
+                                            if (iterator.hasNext()) {
+                                                out.print(" and <br/>");
+                                            } else {
+                                                out.print("<br/><a href=\"removespeaker.jsp?sessionId=" + sessions.get(i).getId() + "\">Remove a Speaker</a>");
                                             }
-                                            out.print("<br/><a href=\"assignspeaker.jsp?sessionId=" + sessions.get(i).getId() + "\">Assign a Speaker</a>");
-                                        %>
-                                    </td>
-                                    <td><% out.print("<a href=\"sessionEdit.jsp?id=" + sessions.get(i).getId() + "\">Edit</a>");%></td>
-                                </tr>
-                                <% } //close for loop
-                                %>
-                            </table>
-			</div>
-			</div>
+                                        }
+                                        out.print("<br/><a href=\"assignspeaker.jsp?sessionId=" + sessions.get(i).getId() + "\">Assign a Speaker</a>");
+                                    %>
+                                </td>
+                                <td><% out.print("<a href=\"sessionEdit.jsp?id=" + sessions.get(i).getId() + "\">Edit</a>");%></td>
+                            </tr>
+                            <% } //close for loop
+%>
+                        </table>
+                </div>
+            </div>
         </div>
 
         <%@ include file="../../../includes/footer.jsp" %> 

@@ -37,40 +37,40 @@
             } catch (Exception e) {
             }
         %>
-		<div class="container-fixed">
         <%@ include file="../../../includes/header.jsp" %> 
         <%@ include file="../../../includes/adminnav.jsp" %>
-        <br/><br/><br/>
-			<div class="row">
-            <div class="span8">
-                <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Edit a Session</h2>
+        <div class="container-fixed">
+            <br/><br/><br/>
+            <div class="row">
+                <div class="span8">
+                    <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Edit a Session</h2>
+                </div>
             </div>
-			</div>
-			<br/>
-			<div class="row">
-			<div class="span8">
-			<%
-                                int id = Integer.parseInt(request.getParameter("id"));
-                                SessionPersistence sp = new SessionPersistence();
-                                Session s = sp.getSessionByID(id);
-                            %>
-                            <form action="../../../action/processSessionEdit.jsp" method="post" onsubmit="return validateForm();">
-                                <div class="form-group">
-                                    <label class="required">Name:</label>
-                                    <input type="text" name="name" value="<% out.print(s.getName());%>" class="input-xlarge" size="50" id="tip" data-content="70 characters or less please" maxlength="70"/>
-                                    <input type="hidden" name="id" value="<% out.print(s.getId());%>"/>
-                                </div>
-                                <div class="form-group">
-                                    <label>Description:</label>
-                                    <textarea name="description" class="input-xlarge" cols="50" rows='5' id="tip2" data-content="250 characters or less please" maxlength="250"><% out.print(s.getDescription());%></textarea>
-                                </div>
-                                <div class="form-actions">
-                                    <input type="submit" class="button button-primary" value="Submit"/>
-                                    <a id="cancel" class="button" href="session.jsp">Cancel</a>
-                                </div>
-                            </form>
-			</div>
-			</div>
+            <br/>
+            <div class="row">
+                <div class="span8">
+                    <%
+                        int id = Integer.parseInt(request.getParameter("id"));
+                        SessionPersistence sp = new SessionPersistence();
+                        Session s = sp.getSessionByID(id);
+                    %>
+                    <form action="../../../action/processSessionEdit.jsp" method="post" onsubmit="return validateForm();">
+                        <div class="form-group">
+                            <label class="required">Name:</label>
+                            <input type="text" name="name" value="<% out.print(s.getName());%>" class="input-xlarge" size="50" id="tip" data-content="70 characters or less please" maxlength="70"/>
+                            <input type="hidden" name="id" value="<% out.print(s.getId());%>"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Description:</label>
+                            <textarea name="description" class="input-xlarge" cols="50" rows='5' id="tip2" data-content="250 characters or less please" maxlength="250"><% out.print(s.getDescription());%></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <input type="submit" class="button button-primary" value="Submit"/>
+                            <a id="cancel" class="button" href="session.jsp">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
 
         <%@ include file="../../../includes/footer.jsp" %> 

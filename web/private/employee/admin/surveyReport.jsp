@@ -30,60 +30,58 @@
     </head>
     <body id="growler1">
         <%
-                    int user = 0;
-                    if (null == session.getAttribute("id")) {
-                        response.sendRedirect("../../../index.jsp");
-                    }
-                    else if (!session.getAttribute("user").equals("admin")) {
-                        response.sendRedirect("../../../index.jsp");
-                    }
-                    try {
-                        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
-                        String name = String.valueOf(session.getAttribute("user"));                  
-                    }
-                    catch (Exception e) {
-                        
-                    }
-                %>
-				<div class="container-fixed">
+            int user = 0;
+            if (null == session.getAttribute("id")) {
+                response.sendRedirect("../../../index.jsp");
+            } else if (!session.getAttribute("user").equals("admin")) {
+                response.sendRedirect("../../../index.jsp");
+            }
+            try {
+                user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+                String name = String.valueOf(session.getAttribute("user"));
+            } catch (Exception e) {
+            }
+        %>
+
         <%@ include file="../../../includes/header.jsp" %> 
         <%@ include file="../../../includes/adminnav.jsp" %>  
-        <br/><br/><br/>
-			<div class="row">
-            <div class="span8">
-                <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Surveys By Submission Time</h2>
+        <div class="container-fixed">
+            <br/><br/><br/>
+            <div class="row">
+                <div class="span8">
+                    <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Surveys By Submission Time</h2>
+                </div>
             </div>
-			</div>
-			<br/>
-			<div class="row">
-			<div class="span8">
-			<table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
-                    <tr>
-                        <th>Entry Number</th>
-                        <th>User Name</th>
-                        <th>Session Name</th>
-                    </tr>
-                    <%  ReportGenerator rg = new ReportGenerator();
-                        ArrayList<SurveyReport> report = rg.generateSurveyReport();
-                        
-                        for(int i = 0; i < report.size(); i++) {
-                            out.print("<tr>");
-                            out.print("<td>");
-                            out.print(i + 1);
-                            out.print("</td>");
-                            out.print("<td>");
-                            out.print(report.get(i).getUser().getUserName());
-                            out.print("</td>");
-                            out.print("<td>");
-                            out.print(report.get(i).getSession().getName());
-                            out.print("</td>");
-                            out.print("</tr>");
-                        }
-                    %>
-                </table>
-                <label><a href="../../../SurveyReportServlet">Download a PDF<i class="icon16-document"></i></a></label>
-			</div>
-			</div>
+            <br/>
+            <div class="row">
+                <div class="span8">
+                    <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
+                        <tr>
+                            <th>Entry Number</th>
+                            <th>User Name</th>
+                            <th>Session Name</th>
+                        </tr>
+                        <%  ReportGenerator rg = new ReportGenerator();
+                            ArrayList<SurveyReport> report = rg.generateSurveyReport();
+
+                            for (int i = 0; i < report.size(); i++) {
+                                out.print("<tr>");
+                                out.print("<td>");
+                                out.print(i + 1);
+                                out.print("</td>");
+                                out.print("<td>");
+                                out.print(report.get(i).getUser().getUserName());
+                                out.print("</td>");
+                                out.print("<td>");
+                                out.print(report.get(i).getSession().getName());
+                                out.print("</td>");
+                                out.print("</tr>");
+                            }
+                        %>
+                    </table>
+                    <label><a href="../../../SurveyReportServlet">Download a PDF<i class="icon16-document"></i></a></label>
+                </div>
+            </div>
         </div>
 
         <%@ include file="../../../includes/footer.jsp" %> 

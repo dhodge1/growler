@@ -33,101 +33,99 @@
     </head>
     <body id="growler1">
         <%
-                    int user = 0;
-                    if (null == session.getAttribute("id")) {
-                        response.sendRedirect("../../../index.jsp");
-                    }
-                    else if (!session.getAttribute("user").equals("admin")) {
-                        response.sendRedirect("../../../index.jsp");
-                    }
-                    try {
-                        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
-                        String name = String.valueOf(session.getAttribute("user"));                  
-                    }
-                    catch (Exception e) {
-                        
-                    }
-                %>
-        <div class="container-fluid">
+            int user = 0;
+            if (null == session.getAttribute("id")) {
+                response.sendRedirect("../../../index.jsp");
+            } else if (!session.getAttribute("user").equals("admin")) {
+                response.sendRedirect("../../../index.jsp");
+            }
+            try {
+                user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+                String name = String.valueOf(session.getAttribute("user"));
+            } catch (Exception e) {
+            }
+        %>
+
         <%@ include file="../../../includes/header.jsp" %> 
         <%@ include file="../../../includes/adminnav.jsp" %>
-        <br/><br/><br/>
-			<div class="row">
-            <div class="span8">
-                <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Add a Room</h2>
+        <div class="container-fluid">
+            <br/><br/><br/>
+            <div class="row">
+                <div class="span8">
+                    <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Add a Room</h2>
+                </div>
             </div>
-			</div>
-			<br/>
-			<div class="row">
-			<div class="span8">
-			<form id="action" method="post" action="../../../action/processaddroom.jsp" >
-			<fieldset>
-						<div class="form-group">
-                        <label class="required">Room ID:</label><br/>
-                        <input type="text" maxlength="10" id="tip" name="id" class="input-xlarge" data-content="Room ID, 10 Characters or Less"/><br/><br/>
-                        </div>
-						<div class="form-group">
-						<label class="required">Room Name:</label><br/>
-                        <input type="text" maxlength="20" id="tip1" name="name"  class="input-xlarge" data-content="Room Name, 20 Characters or Less"/><br/><br/>
-                        </div>
-						<div class="form-group">
-						<label class="required">Capacity:</label><br/>
-                        <input type="number" min="0" max="999" step="1" id="tip2" name="capacity"  data-content="Maximum Capacity, 0 to 999"/><br/><br/>
-                        </div>
-						<div class="form-group">
-						<label class="required">Building Name:</label><br/>
-                        <select id="building" name="building">
-                            <option value="0"> - Please Select a Building- </option>
-                            <option value="KXTC">Knoxville Tech Center</option>
-                            <option value="KXOFFICE">Knoxville Office</option>
-                        </select>
-						</div>
-                        <br/>
-                        <br/>
-                        <br/>
-						<div class="form-actions">
-                        <input id="send" type="submit" value="Submit" class="button button-primary"/>
-						</div>
-						</fieldset>
+            <br/>
+            <div class="row">
+                <div class="span8">
+                    <form id="action" method="post" action="../../../action/processaddroom.jsp" >
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="required">Room ID:</label><br/>
+                                <input type="text" maxlength="10" id="tip" name="id" class="input-xlarge" data-content="Room ID, 10 Characters or Less"/><br/><br/>
+                            </div>
+                            <div class="form-group">
+                                <label class="required">Room Name:</label><br/>
+                                <input type="text" maxlength="20" id="tip1" name="name"  class="input-xlarge" data-content="Room Name, 20 Characters or Less"/><br/><br/>
+                            </div>
+                            <div class="form-group">
+                                <label class="required">Capacity:</label><br/>
+                                <input type="number" min="0" max="999" step="1" id="tip2" name="capacity"  data-content="Maximum Capacity, 0 to 999"/><br/><br/>
+                            </div>
+                            <div class="form-group">
+                                <label class="required">Building Name:</label><br/>
+                                <select id="building" name="building">
+                                    <option value="0"> - Please Select a Building- </option>
+                                    <option value="KXTC">Knoxville Tech Center</option>
+                                    <option value="KXOFFICE">Knoxville Office</option>
+                                </select>
+                            </div>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <div class="form-actions">
+                                <input id="send" type="submit" value="Submit" class="button button-primary"/>
+                            </div>
+                        </fieldset>
                     </form>
-			</div>
-			</div>
+                </div>
+            </div>
         </div>
-		</div>
-        <%@ include file="../../../includes/footer.jsp" %>
-        <%@ include file="../../../includes/scriptlist.jsp" %>
-        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
-        <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>           
-        <script>
-                            $(document).ready(function() {
-                                    $("#send").click(function(event) {
-                                        if ($("#tip").val() == "") {
-                                            alert("Please enter a Room Number");
-                                            $("#tip").focus();
-                                            event.preventDefault();
-                                        }
-                                        else if ($("#tip1").val() == "") {
-                                            alert("Please enter a Room name");
-                                            event.preventDefault();
-                                            $("#tip1").focus();
-                                        }
-                                        else if ($("#tip2").val() == "" || $("#tip2").val() <= 0) {
-                                            alert("Please enter a Capacity greater than 0");
-                                            event.preventDefault();
-                                            $("#tip2").focus();
-                                        }
-                                        else if ($("#building").val() == 0) {
-                                            alert("Please enter a Building name");
-                                            event.preventDefault();
-                                            $("#building").focus();
-                                        }
-                                        else {
-                                            $("#action").attr("action", "../../../action/processaddroom.jsp");
-                                        }
-                                    });
-                                });
+    </div>
+    <%@ include file="../../../includes/footer.jsp" %>
+    <%@ include file="../../../includes/scriptlist.jsp" %>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
+    <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>           
+    <script>
+        $(document).ready(function() {
+            $("#send").click(function(event) {
+                if ($("#tip").val() == "") {
+                    alert("Please enter a Room Number");
+                    $("#tip").focus();
+                    event.preventDefault();
+                }
+                else if ($("#tip1").val() == "") {
+                    alert("Please enter a Room name");
+                    event.preventDefault();
+                    $("#tip1").focus();
+                }
+                else if ($("#tip2").val() == "" || $("#tip2").val() <= 0) {
+                    alert("Please enter a Capacity greater than 0");
+                    event.preventDefault();
+                    $("#tip2").focus();
+                }
+                else if ($("#building").val() == 0) {
+                    alert("Please enter a Building name");
+                    event.preventDefault();
+                    $("#building").focus();
+                }
+                else {
+                    $("#action").attr("action", "../../../action/processaddroom.jsp");
+                }
+            });
+        });
 
-        </script>
-    </body>
-    
+    </script>
+</body>
+
 </html>

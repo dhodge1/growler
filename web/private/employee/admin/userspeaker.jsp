@@ -38,72 +38,70 @@
     </head>
     <body id="growler1">
         <%
-                    int user = 0;
-                    if (null == session.getAttribute("id")) {
-                        response.sendRedirect("../../../index.jsp");
-                    }
-                    else if (!session.getAttribute("user").equals("admin")) {
-                        response.sendRedirect("../../../index.jsp");
-                    }
-                    try {
-                        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
-                        String name = String.valueOf(session.getAttribute("user"));                  
-                    }
-                    catch (Exception e) {
-                        
-                    }
-                %>
-    <%@ include file="../../../includes/header.jsp" %> 
-    <%@ include file="../../../includes/adminnav.jsp" %>
-    <br/><br/><br/>
-			<div class="row">
-            <div class="span8">
-                <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>User Suggested Speakers</h2>
+            int user = 0;
+            if (null == session.getAttribute("id")) {
+                response.sendRedirect("../../../index.jsp");
+            } else if (!session.getAttribute("user").equals("admin")) {
+                response.sendRedirect("../../../index.jsp");
+            }
+            try {
+                user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+                String name = String.valueOf(session.getAttribute("user"));
+            } catch (Exception e) {
+            }
+        %>
+        <%@ include file="../../../includes/header.jsp" %> 
+        <%@ include file="../../../includes/adminnav.jsp" %>
+        <div class="container-fixed">
+            <br/><br/><br/>
+            <div class="row">
+                <div class="span8">
+                    <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>User Suggested Speakers</h2>
+                </div>
             </div>
-			</div>
-			<br/>
-			<div class="row">
-			<div class="span8">
-			<form action="../../../action/adminuserspeaker.jsp" method="post">
-                                        <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
-                                            <tr>
-                                                <th>Speaker Name</th>
-                                                <th>Visible?</th>
-                                                <th>Suggested By</th>
-                                                <th>Remove</th>
-                                            </tr>
-                                            <%
-                                                SpeakerPersistence sp = new SpeakerPersistence();
-                                                ArrayList<Speaker> speakers = sp.getNonDefaultSpeakers();
-                                                for (int i = 0; i < speakers.size(); i++) {
-                                            %>
-                                            <tr>
-                                                <td>
-                                                    <% out.print(speakers.get(i).getLastName() + ", " + speakers.get(i).getFirstName());%>
-                                                    <input type="hidden" name="list" value="<% out.print(speakers.get(i).getId());%>"/>
-                                                </td>
-                                                <td>
-                                                    <input name="visible" type="checkbox" value="<% out.print(speakers.get(i).getId());%>"
-                                                           <% if (speakers.get(i).getVisible() == true) {
-                                                                                                                out.print("checked");
-                                                                                                            }%> />
-                                                </td>
-                                                <td>
-                                                    <% UserPersistence up = new UserPersistence();
+            <br/>
+            <div class="row">
+                <div class="span8">
+                    <form action="../../../action/adminuserspeaker.jsp" method="post">
+                        <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
+                            <tr>
+                                <th>Speaker Name</th>
+                                <th>Visible?</th>
+                                <th>Suggested By</th>
+                                <th>Remove</th>
+                            </tr>
+                            <%
+                                SpeakerPersistence sp = new SpeakerPersistence();
+                                ArrayList<Speaker> speakers = sp.getNonDefaultSpeakers();
+                                for (int i = 0; i < speakers.size(); i++) {
+                            %>
+                            <tr>
+                                <td>
+                                    <% out.print(speakers.get(i).getLastName() + ", " + speakers.get(i).getFirstName());%>
+                                    <input type="hidden" name="list" value="<% out.print(speakers.get(i).getId());%>"/>
+                                </td>
+                                <td>
+                                    <input name="visible" type="checkbox" value="<% out.print(speakers.get(i).getId());%>"
+                                           <% if (speakers.get(i).getVisible() == true) {
+                                                                   out.print("checked");
+                                                               }%> />
+                                </td>
+                                <td>
+                                    <% UserPersistence up = new UserPersistence();
                                                         User u = up.getUserByID(speakers.get(i).getSuggestedBy());
-                                                           out.print(u.getUserName());%>
-                                                </td>
-                                                <td><%out.print("<a href=\"../../../action/removeSpeaker.jsp?id=" + speakers.get(i).getId() + "\">Remove</a></td>"); %></td>
-                                            </tr>
-                                            <% } //close for loop%>
-                                        </table>
-										<input type="submit" value="submit" class="button button-primary" />
-										</form>
-			</div>
-			</div>
+                                                        out.print(u.getUserName());%>
+                                </td>
+                                <td><%out.print("<a href=\"../../../action/removeSpeaker.jsp?id=" + speakers.get(i).getId() + "\">Remove</a></td>");%></td>
+                            </tr>
+                            <% } //close for loop%>
+                        </table>
+                        <input type="submit" value="submit" class="button button-primary" />
+                    </form>
+                </div>
+            </div>
         </div>
 
-    <%@ include file="../../../includes/footer.jsp" %>
-    <%@ include file="../../../includes/scriptlist.jsp" %>
-</body>
+        <%@ include file="../../../includes/footer.jsp" %>
+        <%@ include file="../../../includes/scriptlist.jsp" %>
+    </body>
 </html>
