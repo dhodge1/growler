@@ -37,7 +37,7 @@ function updateSessionList(selectBox) {
     {
         if (xmlhttp.readyState === 4)
         {
-            xmlhttp2.open("GET", "../model/updateUnscheduled.jsp", true);
+            xmlhttp2.open("GET", "../../../action/updateUnscheduled.jsp", true);
             xmlhttp2.send();
             document.getElementById("unscheduled").innerHTML = "";
         }
@@ -47,7 +47,7 @@ function updateSessionList(selectBox) {
                 document.getElementById("unscheduled").innerHTML = xmlhttp2.responseText;
             }  
     };
-    xmlhttp.open("POST", "../model/updateSessionLive.jsp?id=" + id + "&date=" + date + "&time=" + time, true);
+    xmlhttp.open("POST", "../../../action/updateSessionLive.jsp?id=" + id + "&date=" + date + "&time=" + time, true);
     xmlhttp.send();
 
 

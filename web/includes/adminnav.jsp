@@ -8,6 +8,7 @@
 --%>
 
 <link href="../../../css/bootstrap.css" rel="stylesheet">
+<link href="../../../css/navbar.css" rel="stylesheet">
 <style>
     body {
         padding-bottom: 30px;
@@ -15,7 +16,7 @@
 </style>
 <%
     String pageURI = request.getRequestURI();
-    String active = "active";
+    String active = " selected ";
     String themeTab = "";
     String speakerTab = "";
     String sessionTab = "";
@@ -33,82 +34,52 @@
     } else if (pageURI.contains("Report")) {
         sessionTab = active;
     } else if (pageURI.contains("home")) {
-        home = "class=\"active\"";
+        home = active;
     }
 %>
-<link href="../../../css/bootstrap-responsive.css" rel="stylesheet">
-<div class="navbar">
-    <div class="navbar-inner">
-        <div class="container">
-            <a class="btn btn-navbar pull-right" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </a>
-            <a class="brand" href="../admin/home.jsp">Techtoberfest Information System</a>
-            <div class="nav-collapse collapse">
-                <ul class="nav">
-                    <li <%= home%>><a href="../admin/home.jsp">Home</a></li>
-                    <li class="dropdown <%= themeTab%>">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Themes <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="../admin/theme.jsp">Edit Themes</a></li>
-                            <li><a href="../admin/themeentry.jsp">Add New Themes</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown <%= speakerTab%>">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Speakers <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="../admin/speaker.jsp">Edit Speakers</a></li>
-                            <li><a href="../admin/speakerentry.jsp">Add New Speakers</a></li>
-                            <li><a href="../admin/userspeaker.jsp">Suggested Speakers</a></li>
-                            <li><a href="../admin/assignspeaker.jsp">Assign Speaker to a Session</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown <%= sessionTab%>">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sessions <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="../admin/addsession.jsp">Add a Session</a></li>
-                            <li><a href="../admin/session.jsp">View Sessions</a></li>
-                            <li><a href="../admin/sessionScheduler.jsp">Schedule Sessions</a></li>
-                            <li><a href="../admin/comments.jsp">Comments By Session</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown <%= roomTab%>">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Rooms <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="../admin/room.jsp">View Rooms</a></li>
-                            <li><a href="../admin/addroom.jsp">Add a Room</a></li>
-                            <li><a href="../admin/assignroom.jsp">Assign Room to a Session</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown <%= reportTab%>">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reports <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="../admin/surveyReport.jsp">Surveys By Submission Time</a></li>
-                            <li><a href="../admin/interestReport.jsp">Interest in a Session</a></li>
-                            <li><a href="../admin/expectationReport.jsp">Session Met Expectations</a></li>
-                            <li><a href="../admin/speakerReport.jsp">Speaker Knowledge</a></li>
-                            <li><a href="../admin/presentationReport.jsp">Best Presentation Skills</a></li>
-                            <li><a href="../admin/overallReport.jsp">Best Overall</a></li>
-                            <li><a href="../admin/registrationAttendanceReport.jsp">Registration vs. Attendance</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div><!--/.nav-collapse -->
-        </div>
-    </div>
-</div>
-<script src="../../../js/jquery.js"></script>
-<script src="../../../js/bootstrap-transition.js"></script>
-<script src="../../../js/bootstrap-alert.js"></script>
-<script src="../../../js/bootstrap-modal.js"></script>
-<script src="../../../js/bootstrap-dropdown.js"></script>
-<script src="../../../js/bootstrap-scrollspy.js"></script>
-<script src="../../../js/bootstrap-tab.js"></script>
-<script src="../../../js/bootstrap-tooltip.js"></script>
-<script src="../../../js/bootstrap-popover.js"></script>
-<script src="../../../js/bootstrap-button.js"></script>
-<script src="../../../js/bootstrap-collapse.js"></script>
-<script src="../../../js/bootstrap-carousel.js"></script>
-<script src="../../../js/bootstrap-typeahead.js"></script>
+<link href="../../css/responsive.1.2.0.css" rel="stylesheet">
+<nav class="topnav">
+<nav class="globalNavigation modify-pages" id="navigation">
+  <ul>
+	<li class="non_drop <%= home %>" style="padding-right:12px" ><a href="home.jsp"><span>Home</span></a></li>
+	<li class="brand_nav <%= themeTab %>" style="padding-left:12px"><a href="#"><span>Themes</span><em></em></a>
+		<ul class="child-menu child-menu-ul">
+			<li><a href="theme.jsp">Edit Themes</a></li>
+			<li><a href="themeentry.jsp">Suggest a New Theme</a></li>
+		</ul>
+	</li>
+	<li class="brand_nav <%= speakerTab %>"><a href="#"><span>Speakers</span><em></em></a>
+		<ul class="child-menu child-menu-ul">
+			<li><a href="speaker.jsp">Edit Speakers</a></li>
+			<li><a href="speakerentry.jsp">Suggest a New Speaker</a></li>
+                        <li><a href="assignspeaker.jsp">Assign Speaker to a Session</a></li>
+		</ul>
+	</li>
+	<li class="brand_nav <%= roomTab %>"><a href="#"><span>Rooms</span><em></em></a>
+		<ul class="child-menu child-menu-ul">
+			<li><a href="editroom.jsp">Edit Rooms</a></li>
+			<li><a href="addroom.jsp">Add a Room</a></li>
+                        <li><a href="assignroom.jsp">Assign Room to a Session</a></li>
+		</ul>
+	</li>
+	<li class="brand_nav <%= sessionTab %>"><a href="#"><span>Sessions</span><em></em></a>
+		<ul class="child-menu child-menu-ul">
+			<li><a href="sessionScheduler.jsp">Schedule Sessions</a></li>
+			<li><a href="session.jsp">View Sessions</a></li>
+                        <li><a href="comments.jsp">Session Comments</a></li>
+		</ul>
+	</li>
+	<li class="brand_nav <%= reportTab %>"><a href="#"><span>Reports</span><em></em></a>
+		<ul class="child-menu child-menu-ul">
+			<li><a href="surveyReport.jsp">Users Who Completed Surveys</a></li>
+                        <li><a href="interestReport.jsp">Interest in Sessions</a></li>
+			<li><a href="registrationAttendanceReport.jsp">Registration vs. Attendance</a></li>
+                        <li><a href="expectationReport.jsp">Session Met Expectations</a></li>
+			<li><a href="speakerReport.jsp">Speaker Was Knowledgeable</a></li>
+                        <li><a href="presentationReport.jsp">Best Presentation Skills</a></li>
+                        <li><a href="overallReport.jsp">Best Overall Session</a></li>
+		</ul>
+	</li>
+  </ul>
+</nav>
+</nav>

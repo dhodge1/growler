@@ -47,7 +47,7 @@
             } catch (Exception e) {
             }
         %>
-        <%@ include file="../../../includes/header.jsp" %> 
+        <%@ include file="../../../includes/adminheader.jsp" %> 
         <%@ include file="../../../includes/adminnav.jsp" %>
         <div class="container-fixed">
             <br/><br/><br/>
@@ -113,11 +113,25 @@
                                     }
                                     %></td>
                                     <td><% SimpleDateFormat dates = new SimpleDateFormat("E, MM-dd-yyyy");
-                                            out.print(dates.format(sessions.get(i).getSessionDate()));%></td>
+                                    try {        
+                                    out.print(dates.format(sessions.get(i).getSessionDate()));
+                                    } catch(Exception e){
+                                    out.print("No Date");
+                                    }%></td>
                                     <td><% SimpleDateFormat fmt = new SimpleDateFormat("h:mm a");
-                                            out.print(fmt.format(sessions.get(i).getStartTime()));%></td>
+                                    try {        
+                                    out.print(fmt.format(sessions.get(i).getStartTime()));
+                                    } catch(Exception e){
+                                        out.print("No Time");
+                                    }
+                                    %></td>
                                     <td><% SimpleDateFormat fmt2 = new SimpleDateFormat("K ' hours and ' mm ' minutes'");
-                                            out.print(fmt2.format(sessions.get(i).getDuration()));%></td>
+                                    try {        
+                                    out.print(fmt2.format(sessions.get(i).getDuration()));
+                                    } catch (Exception e){
+                                        out.print("No Duration");
+                                    }
+                                    %></td>
                                     <td><% Location l = lp.getLocationById(sessions.get(i).getLocation());
                                         out.print(l.getId());%> </td>
                                 <td><% out.print(l.getDescription());%></td>

@@ -2,7 +2,8 @@ $("#send").click(function(event) {
     var emptyString = "";
     $("#error_userid").hide();
     $("#error_password").hide();
-    $("#tip").css("border", "1px solid black");
+    $("#tip").css("border", "1px solid #CCC");
+    $("#tip2").css("border", "1px solid #CCC");
     if ($("#tip").val() === emptyString)
      {
         event.preventDefault();
