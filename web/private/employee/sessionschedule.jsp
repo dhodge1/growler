@@ -55,7 +55,7 @@
             SessionPersistence sp = new SessionPersistence();
             LocationPersistence lp = new LocationPersistence();
             RegistrationPersistence rp = new RegistrationPersistence();
-            ArrayList<Session> sessions = sp.getThisYearSessions(year);
+            ArrayList<Session> sessions = sp.getThisYearSessions(year, " ");
         %>
         <%@ include file="../../includes/header.jsp" %> 
         <%@ include file="../../includes/testnav.jsp" %>
