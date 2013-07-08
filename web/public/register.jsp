@@ -49,7 +49,7 @@
             <br/><br/><br/>
             <div class="row">
 
-                <h2 class="bordered"><img src='../images/Techtoberfest2013small.png'/><span>Create An Account</span></h2>
+                <h2 class="bordered"><img src='../images/Techtoberfest2013small.png'/><span class="titlespan">Create An Account</span></h2>
 
             </div>
             <br/>

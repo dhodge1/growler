@@ -27,7 +27,7 @@
             <%@ include file="includes/header.jsp" %> 
             <%@ include file="includes/testnav.jsp" %>
             <div class='span3'>
-                <img src='images/Techtoberfest2013small.png'/><span>
+                <img src='images/Techtoberfest2013small.png'/><span class="titlespan">
             </div>
             <div class="span8 offset2">
                 <h1 class="bordered">Template File</h1>

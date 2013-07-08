@@ -52,7 +52,7 @@
             <br/><br/><br/>
             <div class="row">
                 <div class='span8'>
-                    <h2 class="bordered"><img src='../images/Techtoberfest2013small.png'/><span>Reset Your Password</span></h2>
+                    <h2 class="bordered"><img src='../images/Techtoberfest2013small.png'/><span class="titlespan">Reset Your Password</span></h2>
                 </div>
             </div>
             <br/>

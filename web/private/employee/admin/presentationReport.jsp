@@ -48,7 +48,7 @@
             <br/><br/><br/>
             <div class="row">
                 
-                    <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/><span>Best Presentation Skills</span></h2>
+                    <h2 class="bordered"><img style="padding-bottom:0" src='../../../images/Techtoberfest2013small.png'/><span class="titlespan">Best Presentation Skills</span></h2>
                 
             </div>
             <br/>
