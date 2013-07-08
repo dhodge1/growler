@@ -42,13 +42,13 @@
         <div class="container-fixed">
             <br/><br/><br/>
             <div class="row">
-                <div class="span8">
+                
                     <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Remove a Speaker from a Session</h2>
-                </div>
+                
             </div>
             <br/>
             <div class="row">
-                <div class="span8">
+                
                     <%
                         int sessionId = Integer.parseInt(request.getParameter("sessionId"));
                         SessionPersistence sessionPersist = new SessionPersistence();
@@ -80,7 +80,7 @@
                             <a id="cancel" class="button" href="session.jsp">Cancel</a>
                         </div>
                     </form>
-                </div>
+                
             </div>
         </div>
 

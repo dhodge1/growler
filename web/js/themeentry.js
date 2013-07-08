@@ -19,7 +19,4 @@ $("#send").click(function(event) {
         $("#error_theme_description").show();
         event.preventDefault();
     }
-    else {
-        $("#action").attr("action", "../../action/processThemeSuggestion.jsp");
-    }
 });

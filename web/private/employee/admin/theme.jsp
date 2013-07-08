@@ -61,13 +61,13 @@
         <div class="container-fixed">
             <br/><br/><br/>
             <div class="row">
-                <div class="span8">
+                
                     <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Themes</h2>
-                </div>
+                
             </div>
             <br/>
             <div class="row">
-                <div class="span8">
+                
                     <%
                         ArrayList<Theme> themes = persist.getAllThemes(" order by rating desc, name asc ");
                     %>
@@ -108,7 +108,7 @@
                         </table>
                         <input type="submit" value="Submit" class="button button-primary" />
                     </form>
-                </div>
+                
             </div>
         </div>
         <%@ include file="../../../includes/footer.jsp" %>

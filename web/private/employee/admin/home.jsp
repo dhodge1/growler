@@ -43,13 +43,13 @@
         <div class="container-fixed">
             <br/><br/><br/>
             <div class="row">
-                <div class="span8">
+                
                     <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Welcome to Techtoberfest!</h2>
-                </div>
+                
             </div>
             <br/>
             <div class="row">
-                <div class="span8">
+
                     <h3>Themes</h3>
                     <p>A place to edit and add Themes for this year's Techtoberfest</p>
                     <h3>Speakers</h3>
@@ -60,7 +60,7 @@
                     <p>A place to add, edit, and assign rooms for this year's Techtoberfest</p>
                     <h3>Reports</h3>
                     <p>A place to view real time reports based on the information gathered so far about this year's Techtoberfest</p>
-                </div>
+
             </div>
         </div>
 

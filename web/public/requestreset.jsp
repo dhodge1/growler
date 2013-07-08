@@ -30,7 +30,13 @@
         <link rel="stylesheet" href="../css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
         <link rel="stylesheet" href="../css/prettify/prettify.css" /> 
         <link rel="stylesheet" type="text/css" href="../css/general.css" /><!--General CSS-->
-
+        <style>
+            .message_container {
+                display: none;
+                color: red;
+                font-weight: bold;
+            }
+        </style>
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->	
     </head>
     <body id="growler1">
@@ -59,10 +65,16 @@
                             <div class="form-group">
                                 <label class="required">User ID</label>
                                 <input name="id" class="input-xlarge" type="text" id="tip" data-content="Enter your User ID" maxlength="6"/>
+                                <span id="error_id" class="message_container">
+                                    <span>Please Enter Your User ID</span>
+                                </span>
                             </div>
                             <div class="form-group">
                                 <label class="required">Email Address</label>
                                 <input name="email" class="input-xlarge" type="text" id="tip2" data-content="Enter your Email Address" maxlength="50"/>
+                                <span id="error_email" class="message_container">
+                                    <span>Please Enter Your Email Address</span>
+                                </span>
                             </div>
                             <div class="form-actions">
                                 <input class="button button-primary" id="send" value="Submit" type="submit"/>
@@ -86,20 +98,6 @@
     <script src="../js/libs/sniui.auto-inline-help.1.0.0.min.js" type="text/javascript"></script>
 
     <!--Additional Script-->
-    <script>
-        $(function() {
-            $("#tip, #tip2").autoinline();
-        });
-        $("#send").click(function(event) {
-            var emptyString = "";
-            if ($("#tip,#tip2").val() === emptyString) {
-                alert("Please enter information into all fields before submitting.");
-                event.preventDefault();
-            }
-            else {
-                $("#action").attr("action", "../action/sendreset.jsp");
-            }
-        });
-    </script>
+    <script src="../js/requestreset.js"></script>
 </body>
 </html>

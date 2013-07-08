@@ -45,13 +45,13 @@
         <div class="container-fixed">
             <br/><br/><br/>
             <div class="row">
-                <div class="span8">
+                
                     <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Add a Session</h2>
-                </div>
+                
             </div>
             <br/>
             <div class="row">
-                <div class="span8">
+                
                     <%
                         SessionPersistence sp = new SessionPersistence();
                         ArrayList<Session> sessions = sp.getAllSessionsWithKeys(" ");
@@ -119,7 +119,7 @@
                             <input class="button button-primary" type="submit" value="Submit"/>
                         </div>
                     </form>
-                </div>
+                
             </div>
         </div>
         <%@ include file="../../../includes/footer.jsp" %> 

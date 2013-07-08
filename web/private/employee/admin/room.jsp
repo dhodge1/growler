@@ -69,6 +69,8 @@
                             <th>Remove</th>
                         </tr>
                         <%
+                            LocationPersistence lp = new LocationPersistence();
+                            ArrayList<Location> locations = lp.getAllLocations();
                             for (int i = 0; i < locations.size(); i++) {
                                 out.print("<tr>");
                                 out.print("<td>");

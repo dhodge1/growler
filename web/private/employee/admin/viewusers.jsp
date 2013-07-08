@@ -50,13 +50,13 @@
         <div class="container-fixed">
             <br/><br/><br/>
             <div class="row">
-                <div class="span8">
+                
                     <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Users</h2>
-                </div>
+                
             </div>
             <br/>
             <div class="row">
-                <div class="span8">
+                
                     <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
                         <tr>
                             <th>ID#</th>
@@ -88,7 +88,7 @@
                         <% } //close for loop
 %>
                     </table>
-                </div>
+                
             </div>
         </div>
 

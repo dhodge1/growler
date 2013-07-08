@@ -12,7 +12,7 @@
       </div>
         <nav class="pageHeader-utility right">
             <ul>
-                <li class="first" style="color: white"><a href="../view/help.jsp">Help</a></li>
+                <li class="first" style="color: white"><a href="public/help.jsp">Help</a></li>
             </ul>
         </nav>
     </div>

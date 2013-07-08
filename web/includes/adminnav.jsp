@@ -7,7 +7,7 @@
                 be able to look at.
 --%>
 
-<link href="../../../css/bootstrap.css" rel="stylesheet">
+<link rel="stylesheet" href="../../../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
 <link href="../../../css/navbar.css" rel="stylesheet">
 <style>
     body {
@@ -30,14 +30,14 @@
     } else if (pageURI.contains("session") || pageURI.contains("comments")) {
         sessionTab = active;
     } else if (pageURI.contains("room")) {
-        sessionTab = active;
+        roomTab = active;
     } else if (pageURI.contains("Report")) {
         sessionTab = active;
     } else if (pageURI.contains("home")) {
         home = active;
     }
 %>
-<link href="../../css/responsive.1.2.0.css" rel="stylesheet">
+<link href="../../../css/responsive.1.2.0.css" rel="stylesheet">
 <nav class="topnav">
 <nav class="globalNavigation modify-pages" id="navigation">
   <ul>
@@ -57,8 +57,8 @@
 	</li>
 	<li class="brand_nav <%= roomTab %>"><a href="#"><span>Rooms</span><em></em></a>
 		<ul class="child-menu child-menu-ul">
-			<li><a href="editroom.jsp">Edit Rooms</a></li>
 			<li><a href="addroom.jsp">Add a Room</a></li>
+                        <li><a href="room.jsp">View Rooms</a></li>
                         <li><a href="assignroom.jsp">Assign Room to a Session</a></li>
 		</ul>
 	</li>

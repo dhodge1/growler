@@ -55,13 +55,13 @@
         <div class="container-fixed">
             <br/><br/><br/>
             <div class="row">
-                <div class="span8">
+                
                     <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>User Suggested Speakers</h2>
-                </div>
+                
             </div>
             <br/>
             <div class="row">
-                <div class="span8">
+                
                     <form action="../../../action/adminuserspeaker.jsp" method="post">
                         <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
                             <tr>
@@ -97,7 +97,7 @@
                         </table>
                         <input type="submit" value="submit" class="button button-primary" />
                     </form>
-                </div>
+                
             </div>
         </div>
 

@@ -65,13 +65,13 @@
         <div class="container-fixed">
             <br/><br/><br/>
             <div class="row">
-                <div class="span8">
+                
                     <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Session Scheduler Tool</h2>
-                </div>
+                
             </div>
             <br/>
             <div class="row">
-                <div class="span8">
+                
                     <%
                         SimpleDateFormat dates = new SimpleDateFormat("E, MM-dd-yyyy");
                         SimpleDateFormat fmt = new SimpleDateFormat("h:mm a");
@@ -190,7 +190,7 @@
 
                         <!-- <input type="submit" id="send" value="Submit Schedule" class="button button-primary"/> -->
                     </form>
-                </div>
+                
             </div>
         </div>
 

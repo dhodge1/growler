@@ -1,22 +1,20 @@
 $(function() {
-    $("input").autoinline();
+    $("#tip, #tip2").autoinline();
 });
 $("#send").click(function(event) {
     $("#tip").css("border", "1px solid #CCC");
+    $("#error_id").hide();
     $("#tip2").css("border", "1px solid #CCC");
-    $("#error_first").hide();
-    $("#error_last").hide();
+    $("#error_email").hide();
     var emptyString = "";
-    var str1 = $("#tip").val();
-    var str2 = $("#tip2").val();
-    if ($.trim(str1) === emptyString) {
+    if ($("#tip").val() === emptyString) {
         $("#tip").css("border", "1px solid red");
-        $("#error_first").show();
+        $("#error_id").show();
         event.preventDefault();
     }
-    if ($.trim(str2) === emptyString) {
+    if ($("#tip2").val() === emptyString) {
         $("#tip2").css("border", "1px solid red");
-        $("#error_last").show();
+        $("#error_email").show();
         event.preventDefault();
     }
 });

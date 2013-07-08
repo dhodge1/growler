@@ -28,7 +28,13 @@
         <link rel="stylesheet" type="text/css" href="../../../css/general.css" /><!--General CSS-->
         <link rel="stylesheet" type="text/css" href="../../../css/theme.css" /><!--Theme CSS-->
         <link rel="stylesheet" href="/resources/demos/style.css" />
-
+        <style>
+            .message_container {
+                display: none;
+                color: red;
+                font-weight: bold;
+            }
+        </style>
         <script src="../../../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
     </head>
     <body id="growler1">
@@ -48,29 +54,38 @@
 
         <%@ include file="../../../includes/adminheader.jsp" %> 
         <%@ include file="../../../includes/adminnav.jsp" %>
-        <div class="container-fluid">
+        <div class="container-fixed">
             <br/><br/><br/>
             <div class="row">
-                <div class="span8">
+                
                     <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Add a Room</h2>
-                </div>
+                
             </div>
             <br/>
             <div class="row">
-                <div class="span8">
+                
                     <form id="action" method="post" action="../../../action/processaddroom.jsp" >
                         <fieldset>
                             <div class="form-group">
                                 <label class="required">Room ID:</label><br/>
                                 <input type="text" maxlength="10" id="tip" name="id" class="input-xlarge" data-content="Room ID, 10 Characters or Less"/><br/><br/>
+                                <span id="error_id" class="message_container">
+                                    <span>Please Enter a Room ID</span>
+                                </span>
                             </div>
                             <div class="form-group">
                                 <label class="required">Room Name:</label><br/>
                                 <input type="text" maxlength="20" id="tip1" name="name"  class="input-xlarge" data-content="Room Name, 20 Characters or Less"/><br/><br/>
+                                <span id="error_name" class="message_container">
+                                    <span>Please Enter a Room Name</span>
+                                </span>
                             </div>
                             <div class="form-group">
                                 <label class="required">Capacity:</label><br/>
                                 <input type="number" min="0" max="999" step="1" id="tip2" name="capacity"  data-content="Maximum Capacity, 0 to 999"/><br/><br/>
+                                <span id="error_capacity" class="message_container">
+                                    <span>Please Enter a Capacity</span>
+                                </span>
                             </div>
                             <div class="form-group">
                                 <label class="required">Building Name:</label><br/>
@@ -79,6 +94,9 @@
                                     <option value="KXTC">Knoxville Tech Center</option>
                                     <option value="KXOFFICE">Knoxville Office</option>
                                 </select>
+                                <span id="error_building" class="message_container">
+                                    <span>Please Select a Building</span>
+                                </span>
                             </div>
                             <br/>
                             <br/>
@@ -88,44 +106,15 @@
                             </div>
                         </fieldset>
                     </form>
-                </div>
+                
             </div>
         </div>
-    </div>
+    
     <%@ include file="../../../includes/footer.jsp" %>
     <%@ include file="../../../includes/scriptlist.jsp" %>
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
     <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>           
-    <script>
-        $(document).ready(function() {
-            $("#send").click(function(event) {
-                if ($("#tip").val() == "") {
-                    alert("Please enter a Room Number");
-                    $("#tip").focus();
-                    event.preventDefault();
-                }
-                else if ($("#tip1").val() == "") {
-                    alert("Please enter a Room name");
-                    event.preventDefault();
-                    $("#tip1").focus();
-                }
-                else if ($("#tip2").val() == "" || $("#tip2").val() <= 0) {
-                    alert("Please enter a Capacity greater than 0");
-                    event.preventDefault();
-                    $("#tip2").focus();
-                }
-                else if ($("#building").val() == 0) {
-                    alert("Please enter a Building name");
-                    event.preventDefault();
-                    $("#building").focus();
-                }
-                else {
-                    $("#action").attr("action", "../../../action/processaddroom.jsp");
-                }
-            });
-        });
-
-    </script>
+    <script src="../../../js/addroom.js"></script>
 </body>
 
 </html>

@@ -42,13 +42,13 @@
         <div class="container-fixed">
             <br/><br/><br/>
             <div class="row">
-                <div class="span8">
+                
                     <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Edit a Session</h2>
-                </div>
+                
             </div>
             <br/>
             <div class="row">
-                <div class="span8">
+                
                     <%
                         int id = Integer.parseInt(request.getParameter("id"));
                         SessionPersistence sp = new SessionPersistence();
@@ -69,7 +69,7 @@
                             <a id="cancel" class="button" href="session.jsp">Cancel</a>
                         </div>
                     </form>
-                </div>
+                
             </div>
         </div>
 

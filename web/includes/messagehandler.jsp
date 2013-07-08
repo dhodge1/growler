@@ -8,6 +8,7 @@
 <%  //Displaying error or success messages -- clear it out when done
     String message = (String) session.getAttribute("message");
     if (message != null && message.startsWith("Success:")) {
+        message = message.substring(7, message.length()-1);
         out.print("<p class=feedbackMessage-success>" + message + "</p>");
         session.removeAttribute("message");
     } else if (message != null && message.startsWith("Error:")) {

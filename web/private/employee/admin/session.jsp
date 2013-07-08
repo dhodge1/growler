@@ -52,13 +52,13 @@
         <div class="container-fixed">
             <br/><br/><br/>
             <div class="row">
-                <div class="span8">
+                
                     <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Sessions</h2>
-                </div>
+                
             </div>
             <br/>
             <div class="row">
-                <div class="span8">
+                
                     <%
                         //Get the year
                         int year = 2013;
@@ -158,7 +158,7 @@
                             <% } //close for loop
 %>
                         </table>
-                </div>
+                
             </div>
         </div>
 

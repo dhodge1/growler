@@ -63,14 +63,23 @@
                             <div class="form-group">
                                 <label class="required">Verification</label>
                                 <input name="verify" class="input-xlarge" type="text" id="tip" data-content="Enter the code you received from your password reset email." maxlength="60"/>
+                                <span id="error_verification" class="message_container">
+                                    <span>Please Enter The Verification Code</span>
+                                </span>
                             </div>
                             <div class="form-group">
                                 <label class="required">New Password</label>
                                 <input name="password" class="input-xlarge" type="password" id="tip2" data-content="Enter the new password." maxlength="60"/>
+                                <span id="error_password" class="message_container">
+                                    <span>Please Enter Your New Password</span>
+                                </span>
                             </div>
                             <div class="form-group">
                                 <label class="required">Confirm</label>
                                 <input name="password2" class="input-xlarge" type="password" id="tip3" data-content="Re-enter the new password." maxlength="60"/>
+                                <span id="error_password2" class="message_container">
+                                    <span>Please Repeat Your New Password</span>
+                                </span>
                             </div>
                             <input type="hidden" name="user" value="<% out.print(request.getParameter("id")); %>"/>
                             <input type="hidden" name="email" value="<% out.print(request.getParameter("email")); %>"/>
@@ -96,20 +105,6 @@
     <script src="../js/libs/sniui.auto-inline-help.1.0.0.min.js" type="text/javascript"></script>
 
     <!--Additional Script-->
-    <script>
-        $(function() {
-            $("#tip, #tip2, #tip3").autoinline();
-        });
-        $("#send").click(function() {
-            var emptyString = "";
-            if ($("#tip,#tip2,#tip3").val() === emptyString) {
-                $("#action").attr("action", "");
-                alert("Please enter information into all fields before submitting.");
-            }
-            else {
-                $("#action").attr("action", "../action/reset.jsp");
-            }
-        });
-    </script>
+    <script src="../js/resetpassword.js"></script>
 </body>
 </html>

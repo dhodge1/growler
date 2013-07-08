@@ -34,11 +34,11 @@ public class SpeakerPersistence extends GrowlerPersistence {
     /**
      * Sorts queries by the 2012 rank in ascending order
      */
-    final public String SORT_BY_2012_RANK_ASC = " order by ranks2012.rating asc";
+    final public String SORT_BY_2012_RANK_ASC = " order by ranks_2012.rating asc";
     /**
      * Sorts queries by the 2012 count in ascending order
      */
-    final public String SORT_BY_2012_COUNT_ASC = " order by ranks2012.count asc";
+    final public String SORT_BY_2012_COUNT_ASC = " order by ranks_2012.count asc";
     /**
      * Sorts queries by last name in descending order
      */
@@ -62,11 +62,11 @@ public class SpeakerPersistence extends GrowlerPersistence {
     /**
      * Sorts queries by the 2012 rank in descending order
      */
-    final public String SORT_BY_2012_RANK_DESC = " order by ranks2012.rating desc";
+    final public String SORT_BY_2012_RANK_DESC = " order by ranks_2012.rating desc";
     /**
      * Sorts queries by the 2012 rank in ascending order
      */
-    final public String SORT_BY_2012_COUNT_DESC = " order by ranks2012.count desc";
+    final public String SORT_BY_2012_COUNT_DESC = " order by ranks_2012.count desc";
 
     /**
      * Default constructor
@@ -202,7 +202,10 @@ public class SpeakerPersistence extends GrowlerPersistence {
             statement = connection.prepareStatement("select s.id as id, s.first_name as first_name, s.last_name as last_name, s.suggested_by as suggested_by, s.visible as visible, sum(sr.ranking) as points, count(sr.speaker_id) as votes, r.rating as rating, r.count as count from speaker s left join ranks_2012 r on r.speaker_id = s.id left join speaker_ranking sr on sr.speaker_id = s.id  group by (s.id) " + sort);
             Statement s2 = connection.createStatement();
             result = statement.executeQuery();
-            ResultSet result2 = s2.executeQuery("select s.id, sum(sr.ranking) as points, count(sr.speaker_id) as votes from speaker s left join speaker_ranking sr on s.id = sr.speaker_id group by s.id");
+            if (sort.equals(" order by rating desc, last_name") || sort.equals(" order by rating asc, last_name") || sort.equals(" order by count desc, last_name") || sort.equals(" order by count asc, last_name")){
+                sort = "";
+            }
+            ResultSet result2 = s2.executeQuery("select s.id, sum(sr.ranking) as points, count(sr.speaker_id) as votes from speaker s left join speaker_ranking sr on s.id = sr.speaker_id group by s.id " + sort);
             ArrayList<Speaker> speakers = new ArrayList<Speaker>();
             while (result.next() && result2.next()) {
                 Speaker s = new Speaker();

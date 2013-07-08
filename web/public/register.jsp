@@ -25,7 +25,13 @@
         <link rel="stylesheet" href="../css/prettify/prettify.css" /> 
         <link rel="stylesheet" type="text/css" href="../css/general.css" /><!--General CSS-->
         <link rel="stylesheet" href="draganddrop.css" /><!--Drag and drop style-->
-
+        <style>
+            .message_container {
+                display: none;
+                color: red;
+                font-weight: bold;
+            }
+        </style>
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->	
     </head>
     <body id="growler1">
@@ -33,54 +39,69 @@
         <div class="container-fixed">
             <div class="row">
                 <br/>
-                
-                    <h1>Techtoberfest Information System (TIS)</h1>
-                    <h3>TIS allows Scripps Employees the ability to not only stay abreast 
-                        of all Techtoberfest sessions, but also the opportunity to provide 
-                        valuable session feedback before, during, and after the event!</h3>
-                
+
+                <h1>Techtoberfest Information System (TIS)</h1>
+                <h3>TIS allows Scripps Employees the ability to not only stay abreast 
+                    of all Techtoberfest sessions, but also the opportunity to provide 
+                    valuable session feedback before, during, and after the event!</h3>
+
             </div>
             <br/><br/><br/>
             <div class="row">
-                
-                    <h2 class="bordered"><img src='../images/Techtoberfest2013small.png'/>Create An Account</h2>
-                
+
+                <h2 class="bordered"><img src='../images/Techtoberfest2013small.png'/>Create An Account</h2>
+
             </div>
             <br/>
             <div class="row">
-                
-                    <form method="POST" id="action" action="../action/adduser.jsp" onSubmit="return validateFields();">
-                
-                        <fieldset>
-                            
-                            <div class="form-group">
-                                <label class="required">Corporate ID</label>
-                                <input name="corporate" class="input-xlarge" type="text" id="tip1" data-content="Your 6 digit SNI Id" maxlength="6"/>
-                            </div>
-                            <div class="form-group">
-                                <label class="required">First Name</label>
-                                <input name="firstname" class="input-xlarge" type="text" id="tip2" data-content="Your First name, 20 characters or less please" maxlength="20"/>
-                            </div>
-                            <div class="form-group">
-                                <label class="required">Last Name</label>
-                                <input name="lastname" class="input-xlarge" type="text" id="tip3" data-content="Your Last name, 20 characters or less please" maxlength="20"/>
-                            </div>
-                            <div class="form-group">
-                                <label class="required">Password</label>
-                                <input name="password" class="input-xlarge" type="password" id="tip4" data-content="Your password, 20 characters or less" maxlength="20"/>
-                            </div>
-                            <div class="form-group">
-                                <label class="required">Email</label>
-                                <input name="password" class="input-xlarge" type="text" id="tip5" data-content="Your email" maxlength="50"/>
-                            </div>
-                            <div class="form-actions">
-                                <input id="send" class="button button-primary" value="Submit" type="submit">
-                                <a class="button" id="cancel" href="../index.jsp">Cancel</a>
-                            </div>
-                        </fieldset>
-                
+
+                <form method="POST" id="action" action="../action/adduser.jsp">
+
+                    <fieldset>
+
+                        <div class="form-group">
+                            <label class="required">Corporate ID</label>
+                            <input name="corporate" class="input-xlarge" type="text" id="tip" data-content="Your 6 digit SNI Id" maxlength="6"/>
+                            <span id="error_corporate" class="message_container">
+                                <span>Please Enter your Corporate ID</span>
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label class="required">First Name</label>
+                            <input name="firstname" class="input-xlarge" type="text" id="tip2" data-content="Your First name, 20 characters or less please" maxlength="20"/>
+                            <span id="error_first" class="message_container">
+                                <span>Please Enter your First Name</span>
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label class="required">Last Name</label>
+                            <input name="lastname" class="input-xlarge" type="text" id="tip3" data-content="Your Last name, 20 characters or less please" maxlength="20"/>
+                            <span id="error_last" class="message_container">
+                                <span>Please Enter your Last Name</span>
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label class="required">Password</label>
+                            <input name="password" class="input-xlarge" type="password" id="tip4" data-content="Your password, 20 characters or less" maxlength="20"/>
+                            <span id="error_password" class="message_container">
+                                <span>Please Enter A Password</span>
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label class="required">Email</label>
+                            <input name="password" class="input-xlarge" type="text" id="tip5" data-content="Your email" maxlength="50"/>
+                            <span id="error_email" class="message_container">
+                                <span>Please Enter your Email Address</span>
+                            </span>
+                        </div>
+                        <div class="form-actions">
+                            <input id="send" class="button button-primary" value="Submit" type="submit">
+                            <a class="button" id="cancel" href="../index.jsp">Cancel</a>
+                        </div>
+                    </fieldset>
+
                 </form>	
-                
+
             </div>
         </div>
         <br/>
@@ -96,30 +117,6 @@
         <script src="../js/libs/sniui.auto-inline-help.1.0.0.min.js" type="text/javascript"></script>
 
         <!--Additional Script-->
-        <script>
-
-
-                    $(function() {
-                        $("input").autoinline();
-                    });
-
-                    function validateFields() {
-                        //Starts with alphanumeric characters, can have a dot and more characters, must have an @, followed by "domain.00x"
-                        var corporate = $("#tip1").val();
-                        var first = $("#tip2").val();
-                        var last = $("#tip3").val();
-                        var password = $("#tip4").val();
-                        var email = $("#tip5").val();
-                        var emptyString = "";
-                        
-                        if (password === emptyString || corporate === emptyString || first === emptyString || last === emptyString || email === emptyString) {
-                            alert("Please fill in all information");
-                            return false;
-                        }
-                        else {
-                            return true;
-                        }
-                    }
-        </script>
+        <script src="../js/register.js"></script>
     </body>
 </html>

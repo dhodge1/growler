@@ -42,18 +42,18 @@
         <div class="container-fixed">
             <br/><br/><br/>
             <div class="row">
-                <div class="span8">
+                
                     <%
                         int themeId = (Integer.parseInt(request.getParameter("id")));
                         ThemePersistence tp = new ThemePersistence();
                         Theme theme = tp.getThemeByID(themeId);
                     %>
                     <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Edit A Theme: <%= theme.getName()%></h2>
-                </div>
+                
             </div>
             <br/>
             <div class="row">
-                <div class="span8">
+                
 
                     <form method="post" action="../../../action/processThemeEdit.jsp" onSubmit="return validateValues();">
                         <div class="form-group">
@@ -87,10 +87,10 @@
                         </div>
                         <input type="submit" value="Submit" class="button button-primary"/>
                     </form>
-                </div>
+                
             </div>
         </div>
-    </div>
+    
 
     <%@ include file="../../../includes/footer.jsp" %> 
     <%@ include file="../../../includes/scriptlist.jsp" %>

@@ -47,13 +47,13 @@
         <div class="container-fixed">
             <br/><br/><br/>
             <div class="row">
-                <div class="span8">
+                
                     <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Registration vs. Attendance</h2>
-                </div>
+                
             </div>
             <br/>
             <div class="row">
-                <div class="span8">
+                
                     <div class="row">
                         <h2 class = "bordered largeBottomMargin">Report: Those Who Attended And Registered</h2>
                     </div>
@@ -155,7 +155,7 @@
                                 }
                             %>
                         </table>
-                    </div>
+                    
                 </div>
             </div>
         </div>

@@ -45,13 +45,13 @@
         <div class="container-fixed">
             <br/><br/><br/>
             <div class="row">
-                <div class="span8">
+                
                     <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Assign Speaker to Session</h2>
-                </div>
+                
             </div>
             <br/>
             <div class="row">
-                <div class="span8">
+                
                     <%
                         SessionPersistence sessionPersist = new SessionPersistence();
                         SpeakerPersistence speakerPersist = new SpeakerPersistence();
@@ -95,7 +95,7 @@
                             <a id="cancel" class="button" href="session.jsp">Cancel</a>
                         </div>
                     </form>
-                </div>
+                
             </div>
         </div>
 
