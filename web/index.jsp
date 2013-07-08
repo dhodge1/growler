@@ -45,49 +45,47 @@
         <div class="container-fixed">
             <div class="row">
                 <br/>
-                
-                    <h1>Techtoberfest Information System (TIS)</h1>
-                    <h3>TIS allows Scripps Employees the ability to not only stay abreast 
-                        of all Techtoberfest sessions, but also the opportunity to provide 
-                        valuable session feedback before, during, and after the event!</h3>
-                
+                <h1>Techtoberfest Information System (TIS)</h1>
+                <h3>TIS allows Scripps Employees the ability to not only stay abreast 
+                    of all Techtoberfest sessions, but also the opportunity to provide 
+                    valuable session feedback before, during, and after the event!</h3>
+
             </div>
             <br/><br/><br/>
             <div class="row">
-                
+
                 <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;width:200px;" src='images/Techtoberfest2013small.png'/><span class="titlespan">Login to TIS</span></h2>
-                
+
             </div>
             <br/>
             <div class="row">
-                
-                    <%@include file="includes/messagehandler.jsp" %>
-                    <p id="error_global" class="message_container feedbackMessage-error">
-                        <span style="color: #000">An Employee ID and Password are required.</span>
-                    </p>
-                    <form action="action/login.jsp" method="post" id="form">
-                        <div class="form-group">
-                            <label style="font-size:11px">Employee ID</label>
-                            <input type="text" name="username" id="tip" data-content="Enter your User ID"/><br/>
-                            <span id="error_userid" class="message_container">
-                                <span>Please enter your Employee ID</span>
-                            </span>
-                            <br/>
-                            <label style="font-size:11px">Password</label>
-                            <input type="password" name="password" id="tip2" data-content="Enter your Password"/><br/>
-                            <span id="error_password" class="message_container">
-                                <span>Please enter a password</span>
-                            </span>
-                        </div>
-                        <div class="form-actions">
-                            <button class="button button-primary" id="send" type="submit">Login</button>
-                            <a href="public/requestreset.jsp">Forgot Password?</a>
-                        </div>
-                        <div class="form-actions">
-                            <span>Not Registered? <a href="public/register.jsp">Click here to register</a></span>
-                        </div>
-                    </form>
-                
+
+                <%@include file="includes/messagehandler.jsp" %>
+                <p id="error_global" class="message_container feedbackMessage-error">
+                    <span style="color: #000">An Employee ID and Password are required.</span>
+                </p>
+                <form action="action/login.jsp" method="post" id="form">
+                    <div class="form-group">
+                        <label style="font-size:11px">Employee ID</label>
+                        <input type="text" name="username" id="tip" data-content="Enter your User ID"/><br/>
+                        <span id="error_userid" class="message_container">
+                            <span>Please enter your Employee ID</span>
+                        </span>
+                        <br/>
+                        <label style="font-size:11px">Password</label>
+                        <input type="password" name="password" id="tip2" data-content="Enter your Password"/><br/>
+                        <span id="error_password" class="message_container">
+                            <span>Please enter a password</span>
+                        </span>
+                    </div>
+                    <div class="form-actions">
+                        <button class="button button-primary" id="send" type="submit">Login</button>
+                        <a href="public/requestreset.jsp">Forgot Password?</a>
+                    </div>
+                    <span>Not Registered? <a href="public/register.jsp">Click here to register</a></span>
+
+                </form>
+
             </div>
         </div>
         <br/>
