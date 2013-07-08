@@ -28,6 +28,13 @@
         <link rel="stylesheet" href="../../css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
         <script src="../../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
+        <style>
+            .message_container {
+                display: none;
+                color: red;
+                font-weight: bold;
+            }
+        </style>
         <script>
             $(function() {
                 $("#modalDialog").dialog({
@@ -77,13 +84,13 @@
         <div class="container-fixed">
             <br/><br/><br/>
             <div class="row">
-                <div class='span8'>
+                
                     <h2 class="bordered"><img src='../../images/Techtoberfest2013small.png'/>Acknowledge Session Attendance</h2>
-                </div>
+                
             </div>
             <br/>
             <div class="row">
-                <div class="span8">
+                
                     <%
                     String message = String.valueOf(session.getAttribute("message"));
                     if (!message.equals("null")) {
@@ -118,6 +125,7 @@
                                 out.print("</select><br/>");
                                 out.print("<label class=\"required\">Session Key:</label>");
                                 out.print("<input class=\"input-large\" id=\"tip\" type=\"text\" maxlength=\"4\" required=\"required\" name=\"skey\" data-content=\"Please enter the 4 character session key the instructor provided\"/>");
+                                out.print("<span id=\"error_key\" class=\"message_container\"><span>Please Enter a Session Key</span></span>");
                                 out.print("<input id=\"send\" type=\"submit\" value=\"Submit\" />");
                                 out.print("</form>");
                             }
@@ -125,27 +133,13 @@
                                 out.print("<p>There are currently no sessions available</p>");
                             }
                         %>   
-                </div>
+                
             </div>
         </div>
         <br/>
         <br/>
         <%@ include file="../../includes/footer.jsp" %> 
         <%@ include file="../../includes/scriptlist.jsp" %>
-        <script>
-            $(function() {
-                $("input").autoinline();
-            });
-            $("#send").click(function(event) {
-                var emptyString = "";
-                if ($("#tip").val() === emptyString) {
-                    alert("Please enter a Session Key.");
-                    event.preventDefault();
-                }
-                else {
-                    $("#action").attr("action", "../../action/processThemeSuggestion.jsp");
-                }
-            });
-        </script>
+        <script src="../../attendance.js"></script>
     </body>
 </html>

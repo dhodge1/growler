@@ -69,7 +69,7 @@
         <div class="container-fixed">
             <br/><br/><br/>
             <div class="row">
-                <div class='span8'>
+                
 				<%
                     //Get a list of Speakers by calling getUserRanks
                     ArrayList<Speaker> speakers = persist.getUserRanks(user);
@@ -81,11 +81,11 @@
                         out.print("<h2 class=bordered><img src='../images/Techtoberfest2013small.png'/>Your Speaker Ranks</h2>");
                     }
                 %>
-                </div>
+                
             </div>
             <br/>
             <div class="row">
-                <div class="span8">
+                
                     <%
                                             //If There are Ranked Speakers already, here is where they will be displayed
                                             if (speakers.size() > 0) {
@@ -145,7 +145,7 @@
                                                 }
                                             %>
 											</form>
-                </div>
+                
             </div>
         </div>
         <br/>

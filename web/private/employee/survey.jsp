@@ -53,7 +53,7 @@
         <div class="container-fixed">
             <br/><br/><br/>
             <div class="row">
-                <div class='span8'>
+                
 				<%
                     String sessionId = request.getParameter("sessionId");
                     SessionPersistence sp = new SessionPersistence();
@@ -68,7 +68,7 @@
                     }
                     %>
                     <h2 class = "bordered"><img src='../../images/Techtoberfest2013small.png'/>Confidential Survey - <% out.print(sp.getSessionByID((Integer.parseInt(sessionId))).getName());%></h2>
-                </div>
+                
             </div>
             <br/>
 			<%
@@ -79,7 +79,7 @@
                                         ResultSet qResult = newStatement.executeQuery("select id, text from question");
                                     %>
             <div class="row">
-                <div class="span8">
+                
                     <form id="action" action="../../action/processsurvey.jsp" method="post">
                                             <table>
                                                 <tr>
@@ -115,7 +115,7 @@
                                             <input id="send" class="button button-primary" type="submit" value="Submit Survey" />
 											</div>
                                         </form>
-                </div>
+                
             </div>
         </div>
         <br/>

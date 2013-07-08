@@ -10,7 +10,7 @@ $("#send").click(function(event) {
         $("#error_userid").show();
         $("#tip").css("border", "1px solid red");
     }
-    else if ($("#tip2").val() === emptyString) {
+    if ($("#tip2").val() === emptyString) {
         event.preventDefault();
         $("#error_password").show();
         $("#tip2").css("border", "1px solid red");

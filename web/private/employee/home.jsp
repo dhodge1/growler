@@ -52,20 +52,20 @@
         <div class="container-fixed">
             <br/><br/><br/>
             <div class="row">
-                <div class='span8'>
+                
                     <h2 class="bordered"><img src='../../images/Techtoberfest2013small.png'/>Welcome to Techtoberfest</h2>
-                </div>
+                
             </div>
             <br/>
             <div class="row">
-                <div class="span8">
+                
                     <h3>Themes</h3>
                                         <p>A place to view, rank, and suggest Themes for this year's Techtoberfest</p>
                                         <h3>Speakers</h3>
                                         <p>A place to view, rank, and suggest Speakers for this year's Techtoberfest</p>
                                         <h3>Sessions</h3>
                                         <p>A place to register interest in a session, view the schedule, acknowledge attendance to a session, and complete surveys for sessions in this year's Techtoberfest</p>
-                </div>
+                
             </div>
         </div>
         <br/>

@@ -58,7 +58,7 @@
         <div class="container-fixed">
             <br/><br/><br/>
             <div class="row">
-                <div class='span8'>
+                
 				<%
                     SpeakerPersistence persist = new SpeakerPersistence();
                     ArrayList<Speaker> speakers = persist.getUserRanks(user);
@@ -70,11 +70,11 @@
                         out.print("<h2 class=bordered><img src='../../images/Techtoberfest2013small.png'/>Your Speaker Rankings</h2>");
                     }
                 %>
-                </div>
+                
             </div>
             <br/>
             <div class="row">
-                <div class="span8">
+                
                     <%
 
                     if (speakers.size() > 0) {
@@ -113,7 +113,7 @@
                                                 }
                                             %>
                                         </form>
-                </div>
+                
             </div>
         </div>
         <br/>

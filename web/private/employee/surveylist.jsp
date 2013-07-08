@@ -57,7 +57,7 @@
         <div class="container-fixed">
             <br/><br/><br/>
             <div class="row">
-                <div class='span8'>
+                
 				<%
                     
                     int surveystaken = 0;
@@ -83,11 +83,11 @@
                         out.print("<h2 class=bordered><img src='../../images/Techtoberfest2013small.png'/>You have not attended any sessions</h2>");
                     }
                 %>
-                </div>
+                
             </div>
             <br/>
             <div class="row">
-                <div class="span8">
+                
                     <form action="../../action/processsurveyrequest.jsp" method="get" >
                                             <table>
                                                 <tr>
@@ -111,7 +111,7 @@
 %>
                                             </table>
                                         </form>
-                </div>
+                
             </div>
         </div>
         <br/>

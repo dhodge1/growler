@@ -60,15 +60,25 @@
         <%@ include file="../../includes/header.jsp" %> 
         <%@ include file="../../includes/testnav.jsp" %>
         <div class="container-fixed">
+            <div class="row">
+                <br/>
+                    <h1>Register Interest In a Session</h1>
+                    <h3>Below is a tentative list of events for this year's Techtoberfest.
+                    To show interest in a session, click on the checkbox next to an event and 
+                    press "Register" when you have selected the sessions you would like to attend.</h3>
+                    <h3>Registering does not mean you must attend an event, just that you have
+                     interest in that event.</h3>
+                
+            </div>
             <br/><br/><br/>
             <div class="row">
-                <div class='span9'>
+                
                     <h2 class="bordered"><img src='../../images/Techtoberfest2013small.png'/>View The <%= year%> Schedule</h2>
-                </div>
+                
             </div>
             <br/>
             <div class="row">
-                <div class="span9">
+                
                     <form method="post" action="../../action/registerinterest.jsp">
                         <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
                             <tr>
@@ -142,7 +152,7 @@
                             <input value="Register" id="send" type="submit" class="button button-primary"/>
                         </div>
                     </form>
-                </div>
+                
             </div>
         </div>
         <br/>

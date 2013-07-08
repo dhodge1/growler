@@ -30,6 +30,13 @@
         <link rel="stylesheet" href="../../css/prettify/prettify.css" /> 
         <link rel="stylesheet" type="text/css" href="../../css/general.css" /><!--General CSS-->
         <script src="../../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
+        <style>
+            .message_container {
+                display: none;
+                color: red;
+                font-weight: bold;
+            }
+        </style>
     </head>
     <body id="growler1">
         <%
@@ -48,24 +55,37 @@
         <%@ include file="../../includes/header.jsp" %> 
         <%@ include file="../../includes/testnav.jsp" %>
         <div class="container-fixed">
+            <div class="row">
+                <br/>
+                    <h1>Theme Suggestions</h1>
+                    <h3>Is there something you would like to see presented or discussed this year?  
+                    Feel free to submit your ideas here.</h3>
+                
+            </div>
             <br/><br/><br/>
             <div class="row">
-                <div class='span8'>
+                
                     <h2 class="bordered"><img src='../../images/Techtoberfest2013small.png'/>Suggest a New Theme</h2>
-                </div>
+                
             </div>
             <br/>
             <div class="row">
-                <div class="span8">
+                
                     <form method="POST" id="action" action="../../action/processThemeSuggestion.jsp">
                         <fieldset>
                             <div class="form-group">
                                 <label class="required">Theme Name</label>
                                 <input required="required" name="name" class="input-xlarge" type="text" id="tip" data-content="30 characters or less please" maxlength="30"/>
+                                <span id="error_theme_name" class="message_container">
+                                    <span>Please enter a Theme Name</span>
+                                </span>
                             </div>
                             <div class="form-group">
                                 <label class="required">Theme Description</label>
                                 <input required="required" name="description" class="input-xlarge" type="text" id="tip2" data-content="250 characters or less please" maxlength="250"/>
+                                <span id="error_theme_description" class="message_container">
+                                    <span>Please enter a Theme Description</span>
+                                </span>
                             </div>
                             <div class="form-group">
                                 <label>Why should we implement this theme?</label>
@@ -77,7 +97,7 @@
                             </div>
                         </fieldset>
                 </form>
-                </div>
+                
             </div>
         </div>
         <br/>
@@ -87,22 +107,6 @@
         <%@ include file="../../includes/scriptlist.jsp" %>
 
         <!--Additional Script-->
-        <script>
-            $(function() {
-                $("input").autoinline();
-            });
-            $("#send").click(function(event) {
-                var emptyString = "";
-                var str1 = $("#tip").val();
-                var str2 = $("#tip2").val();
-                if ($.trim(str1) === emptyString || $.trim(str2) === emptyString) {
-                    alert("Please enter both a theme name and theme description before submitting.");
-                    event.preventDefault();
-                }
-                else {
-                    $("#action").attr("action", "../../action/processThemeSuggestion.jsp");
-                }
-            });
-        </script>
+        <script src="../../js/themeentry.js"></script>
     </body>
 </html>

@@ -45,22 +45,22 @@
         <div class="container-fixed">
             <div class="row">
                 <br/>
-                <div class="span8">
+                
                     <h1>Techtoberfest Information System (TIS)</h1>
                     <h3>TIS allows Scripps Employees the ability to not only stay abreast 
                         of all Techtoberfest sessions, but also the opportunity to provide 
                         valuable session feedback before, during, and after the event!</h3>
-                </div>
+                
             </div>
             <br/><br/><br/>
             <div class="row">
-                <div class='span8'>
+                
                     <h2 class="bordered"><img src='images/Techtoberfest2013small.png'/>Login to TIS</h2>
-                </div>
+                
             </div>
             <br/>
             <div class="row">
-                <div class="span8">
+                
                     <%@include file="includes/messagehandler.jsp" %>
                     <form action="action/login.jsp" method="post" id="form">
                         <div class="form-group">
@@ -78,22 +78,18 @@
                         </div>
                         <div class="form-actions">
                             <button class="button button-primary" id="send" type="submit">Login</button>
-                            <a href="">Forgot Password?</a>
+                            <a href="public/requestreset.jsp">Forgot Password?</a>
                         </div>
                         <div class="form-actions">
-                            <span>Not Registered? <a href="">Click here to register</a></span>
+                            <span>Not Registered? <a href="public/register.jsp">Click here to register</a></span>
                         </div>
                     </form>
-                </div>
+                
             </div>
         </div>
         <br/>
         <br/>
         <%@include file="includes/footer.jsp" %>
-        <div id="modalDialog" title="Error logging in">
-            <p>Please Enter A Username and Password.</p>
-        </div>
-
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
         <script src="js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>
         <script src="js/libs/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>

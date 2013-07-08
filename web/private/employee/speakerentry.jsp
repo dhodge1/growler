@@ -26,6 +26,13 @@
         <link rel="stylesheet" href="../../css/prettify/prettify.css" /> 
         <link rel="stylesheet" type="text/css" href="../../css/general.css" /><!--General CSS-->
         <script src="../../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->	
+        <style>
+            .message_container {
+                display: none;
+                color: red;
+                font-weight: bold;
+            }
+        </style>
     </head>
     <body id="growler1">
             <%      int user = 0;
@@ -45,22 +52,28 @@
         <div class="container-fixed">
             <br/><br/><br/>
             <div class="row">
-                <div class='span8'>
+                
                     <h2 class="bordered"><img src='../../images/Techtoberfest2013small.png'/>Suggest a Speaker</h2>
-                </div>
+                
             </div>
             <br/>
             <div class="row">
-                <div class="span8">
+                
                     <form method="POST" id="action" action="../../action/processSpeakerSuggestion.jsp">
                         <fieldset>
                             <div class="form-group">
                                 <label class="required">Speaker First Name</label>
                                 <input required="required" name="first_name" class="input-xlarge" type="text" id="tip" data-content="30 characters or less please" maxlength="30"/>
+                                <span id="error_first" class="message_container">
+                                    <span>Please Enter a First Name</span>
+                                </span>
                             </div>
                             <div class="form-group">
                                 <label class="required">Speaker Last Name</label>
                                 <input required="required" name="last_name" class="input-xlarge" type="text" id="tip2" data-content="30 characters or less please" maxlength="30"/>
+                                <span id="error_last" class="message_container">
+                                    <span>Please Enter a Last Name</span>
+                                </span>
                             </div>
                             <div class="form-actions">
                                 <input type="submit" id="send" class="button button-primary" value="Send"/>
@@ -68,7 +81,7 @@
                             </div>
                         </fieldset> 
                 </form>	
-                </div>
+                
             </div>
         </div>
         <br/>
@@ -77,22 +90,6 @@
         <%@ include file="../../includes/scriptlist.jsp" %>
 
         <!--additional script-->
-        <script>
-            $(function() {
-                $("input").autoinline();
-            });
-            $("#send").click(function(event) {
-                var emptyString = "";
-                var str1 = $("#tip").val();
-                var str2 = $("#tip2").val();
-                if ($.trim(str1) === emptyString || $.trim(str2) === emptyString) {
-                    alert("Please enter both a first and last name before submitting.");
-                    event.preventDefault();
-                }
-                else {
-                    $("#action").attr("action", "../../action/processSpeakerSuggestion.jsp");
-                }
-            });
-        </script>
+        <script src="../../js/speaker.js"></script>
     </body>
 </html>

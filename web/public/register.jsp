@@ -33,24 +33,24 @@
         <div class="container-fixed">
             <div class="row">
                 <br/>
-                <div class="span8">
+                
                     <h1>Techtoberfest Information System (TIS)</h1>
                     <h3>TIS allows Scripps Employees the ability to not only stay abreast 
                         of all Techtoberfest sessions, but also the opportunity to provide 
                         valuable session feedback before, during, and after the event!</h3>
-                </div>
+                
             </div>
             <br/><br/><br/>
             <div class="row">
-                <div class='span8'>
+                
                     <h2 class="bordered"><img src='../images/Techtoberfest2013small.png'/>Create An Account</h2>
-                </div>
+                
             </div>
             <br/>
             <div class="row">
-                <div class="span8">
+                
                     <form method="POST" id="action" action="../action/adduser.jsp" onSubmit="return validateFields();">
-                    <div class="span5 offset3">
+                
                         <fieldset>
                             
                             <div class="form-group">
@@ -78,9 +78,9 @@
                                 <a class="button" id="cancel" href="../index.jsp">Cancel</a>
                             </div>
                         </fieldset>
-                    </div>   
+                
                 </form>	
-                </div>
+                
             </div>
         </div>
         <br/>
