@@ -68,14 +68,14 @@
                             <div class="form-group">
                                 <label class="required">Theme Name</label>
                                 <input required="required" name="name" class="input-xlarge" type="text" id="tip" data-content="30 characters or less please" maxlength="30"/>
-                                <span id="error_theme_name" class="message_container">
+                                <br/><span id="error_theme_name" class="message_container">
                                     <span>Please enter a Theme Name</span>
                                 </span>
                             </div>
                             <div class="form-group">
                                 <label class="required">Theme Description</label>
                                 <input required="required" name="description" class="input-xlarge" type="text" id="tip2" data-content="250 characters or less please" maxlength="250"/>
-                                <span id="error_theme_description" class="message_container">
+                                <br/><span id="error_theme_description" class="message_container">
                                     <span>Please enter a Theme Description</span>
                                 </span>
                             </div>

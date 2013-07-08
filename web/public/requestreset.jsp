@@ -65,14 +65,14 @@
                             <div class="form-group">
                                 <label class="required">User ID</label>
                                 <input name="id" class="input-xlarge" type="text" id="tip" data-content="Enter your User ID" maxlength="6"/>
-                                <span id="error_id" class="message_container">
+                                <br/><span id="error_id" class="message_container">
                                     <span>Please Enter Your User ID</span>
                                 </span>
                             </div>
                             <div class="form-group">
                                 <label class="required">Email Address</label>
                                 <input name="email" class="input-xlarge" type="text" id="tip2" data-content="Enter your Email Address" maxlength="50"/>
-                                <span id="error_email" class="message_container">
+                                <br/><span id="error_email" class="message_container">
                                     <span>Please Enter Your Email Address</span>
                                 </span>
                             </div>

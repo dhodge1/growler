@@ -84,21 +84,21 @@
                     <div class="form-group">
                         <label class="required">Room ID:</label>
                         <input type="text" maxlength="10" id="tip" name="id" class="input-xlarge" value="<% out.print(location.getId());%>" data-content="Room ID, 10 Characters or Less"/><br/>
-                        <span id="error_id" class="message_container">
+                        <br/><span id="error_id" class="message_container">
                             <span>Please Enter a Room ID</span>
                         </span>
                     </div>
                     <div class="form-group">
                         <label class="required">Room Name:</label>
                         <input type="text" maxlength="20" id="tip1" name="name"  class="input-xlarge" value="<% out.print(location.getDescription());%>" data-content="Room Name, 20 Characters or Less"/><br/>
-                        <span id="error_name" class="message_container">
+                        <br/><span id="error_name" class="message_container">
                             <span>Please Enter a Room Name</span>
                         </span>
                     </div>
                     <div class="form-group">
                         <label class="required">Capacity:</label>
                         <% out.print("<input value=\"" + location.getCapacity() + "\" type=\"number\" min=\"0\" max=\"999\" step=\"1\" id=\"tip2\" name=\"capacity\"  data-content=\"Maximum Capacity, 0 to 999\"/>");%><br/>
-                        <span id="error_capacity" class="message_container">
+                        <br/><span id="error_capacity" class="message_container">
                             <span>Please Enter a Capacity</span>
                         </span>
                     </div>
@@ -123,7 +123,7 @@
                                             out.print(" selected ");
                                         }%>>TBD</option>
                         </select>
-                        <span id="error_building" class="message_container">
+                        <br/><span id="error_building" class="message_container">
                             <span>Please Select a Building</span>
                         </span>
                     </div>

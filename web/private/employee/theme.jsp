@@ -66,10 +66,10 @@
 				<%
                     //If we didn't get any ranks, we tell the user to rank the themes
                     if (themes == null || themes.size() == 0) {
-                        out.print("<h2 class=bordered><img style="padding-bottom:0" src='../../images/Techtoberfest2013small.png'/><span class="titlespan">Themes - Drag & Drop Themes to Rank Them</span></h2>");
+                        out.print("<h2 class=bordered><img style=\"padding-bottom:0\" src='../../images/Techtoberfest2013small.png'/><span class=\"titlespan\">Themes - Drag & Drop Themes to Rank Them</span></h2>");
                         out.print("<a href=\"nondragtheme.jsp\">Non Drag and Drop Themes</a><br/>");
                     } else { //If we got themes, we let the user see them
-                        out.print("<h2 class=bordered><img style="padding-bottom:0" src='../../images/Techtoberfest2013small.png'/><span class="titlespan">Your Theme Ranks</span></h2>");
+                        out.print("<h2 class=bordered><img style=\"padding-bottom:0\" src='../../images/Techtoberfest2013small.png'/><span class=\"titlespan\">Your Theme Ranks</span></h2>");
                     }
                 %>
                 

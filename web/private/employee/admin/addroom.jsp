@@ -69,21 +69,21 @@
                             <div class="form-group">
                                 <label class="required">Room ID:</label><br/>
                                 <input type="text" maxlength="10" id="tip" name="id" class="input-xlarge" data-content="Room ID, 10 Characters or Less"/><br/><br/>
-                                <span id="error_id" class="message_container">
+                                <br/><span id="error_id" class="message_container">
                                     <span>Please Enter a Room ID</span>
                                 </span>
                             </div>
                             <div class="form-group">
                                 <label class="required">Room Name:</label><br/>
                                 <input type="text" maxlength="20" id="tip1" name="name"  class="input-xlarge" data-content="Room Name, 20 Characters or Less"/><br/><br/>
-                                <span id="error_name" class="message_container">
+                                <br/><span id="error_name" class="message_container">
                                     <span>Please Enter a Room Name</span>
                                 </span>
                             </div>
                             <div class="form-group">
                                 <label class="required">Capacity:</label><br/>
                                 <input type="number" min="0" max="999" step="1" id="tip2" name="capacity"  data-content="Maximum Capacity, 0 to 999"/><br/><br/>
-                                <span id="error_capacity" class="message_container">
+                                <br/><span id="error_capacity" class="message_container">
                                     <span>Please Enter a Capacity</span>
                                 </span>
                             </div>
@@ -94,7 +94,7 @@
                                     <option value="KXTC">Knoxville Tech Center</option>
                                     <option value="KXOFFICE">Knoxville Office</option>
                                 </select>
-                                <span id="error_building" class="message_container">
+                                <br/><span id="error_building" class="message_container">
                                     <span>Please Select a Building</span>
                                 </span>
                             </div>

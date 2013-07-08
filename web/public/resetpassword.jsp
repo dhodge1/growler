@@ -63,21 +63,21 @@
                             <div class="form-group">
                                 <label class="required">Verification</label>
                                 <input name="verify" class="input-xlarge" type="text" id="tip" data-content="Enter the code you received from your password reset email." maxlength="60"/>
-                                <span id="error_verification" class="message_container">
+                                <br/><span id="error_verification" class="message_container">
                                     <span>Please Enter The Verification Code</span>
                                 </span>
                             </div>
                             <div class="form-group">
                                 <label class="required">New Password</label>
                                 <input name="password" class="input-xlarge" type="password" id="tip2" data-content="Enter the new password." maxlength="60"/>
-                                <span id="error_password" class="message_container">
+                                <br/><span id="error_password" class="message_container">
                                     <span>Please Enter Your New Password</span>
                                 </span>
                             </div>
                             <div class="form-group">
                                 <label class="required">Confirm</label>
                                 <input name="password2" class="input-xlarge" type="password" id="tip3" data-content="Re-enter the new password." maxlength="60"/>
-                                <span id="error_password2" class="message_container">
+                                <br/><span id="error_password2" class="message_container">
                                     <span>Please Repeat Your New Password</span>
                                 </span>
                             </div>

@@ -64,14 +64,14 @@
                             <div class="form-group">
                                 <label class="required">Speaker First Name</label>
                                 <input required="required" name="first_name" class="input-xlarge" type="text" id="tip" data-content="30 characters or less please" maxlength="30"/>
-                                <span id="error_first" class="message_container">
+                                <br/><span id="error_first" class="message_container">
                                     <span>Please Enter a First Name</span>
                                 </span>
                             </div>
                             <div class="form-group">
                                 <label class="required">Speaker Last Name</label>
                                 <input required="required" name="last_name" class="input-xlarge" type="text" id="tip2" data-content="30 characters or less please" maxlength="30"/>
-                                <span id="error_last" class="message_container">
+                                <br/><span id="error_last" class="message_container">
                                     <span>Please Enter a Last Name</span>
                                 </span>
                             </div>

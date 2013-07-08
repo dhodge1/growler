@@ -125,7 +125,7 @@
                                 out.print("</select><br/>");
                                 out.print("<label class=\"required\">Session Key:</label>");
                                 out.print("<input class=\"input-large\" id=\"tip\" type=\"text\" maxlength=\"4\" required=\"required\" name=\"skey\" data-content=\"Please enter the 4 character session key the instructor provided\"/>");
-                                out.print("<span id=\"error_key\" class=\"message_container\"><span>Please Enter a Session Key</span></span>");
+                                out.print("<br/><span id=\"error_key\" class=\"message_container\"><span>Please Enter a Session Key</span></span>");
                                 out.print("<input id=\"send\" type=\"submit\" value=\"Submit\" />");
                                 out.print("</form>");
                             }

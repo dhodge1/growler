@@ -62,35 +62,35 @@
                         <div class="form-group">
                             <label class="required">Corporate ID</label>
                             <input name="corporate" class="input-xlarge" type="text" id="tip" data-content="Your 6 digit SNI Id" maxlength="6"/>
-                            <span id="error_corporate" class="message_container">
+                            <br/><span id="error_corporate" class="message_container">
                                 <span>Please Enter your Corporate ID</span>
                             </span>
                         </div>
                         <div class="form-group">
                             <label class="required">First Name</label>
                             <input name="firstname" class="input-xlarge" type="text" id="tip2" data-content="Your First name, 20 characters or less please" maxlength="20"/>
-                            <span id="error_first" class="message_container">
+                            <br/><span id="error_first" class="message_container">
                                 <span>Please Enter your First Name</span>
                             </span>
                         </div>
                         <div class="form-group">
                             <label class="required">Last Name</label>
                             <input name="lastname" class="input-xlarge" type="text" id="tip3" data-content="Your Last name, 20 characters or less please" maxlength="20"/>
-                            <span id="error_last" class="message_container">
+                            <br/><span id="error_last" class="message_container">
                                 <span>Please Enter your Last Name</span>
                             </span>
                         </div>
                         <div class="form-group">
                             <label class="required">Password</label>
                             <input name="password" class="input-xlarge" type="password" id="tip4" data-content="Your password, 20 characters or less" maxlength="20"/>
-                            <span id="error_password" class="message_container">
+                            <br/><span id="error_password" class="message_container">
                                 <span>Please Enter A Password</span>
                             </span>
                         </div>
                         <div class="form-group">
                             <label class="required">Email</label>
                             <input name="password" class="input-xlarge" type="text" id="tip5" data-content="Your email" maxlength="50"/>
-                            <span id="error_email" class="message_container">
+                            <br/><span id="error_email" class="message_container">
                                 <span>Please Enter your Email Address</span>
                             </span>
                         </div>
