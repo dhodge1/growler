@@ -46,7 +46,7 @@
             <br/><br/><br/>
             <div class="row">
                 
-                    <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Assign Speaker to Session</h2>
+                    <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/><span>Assign Speaker to Session</span></h2>
                 
             </div>
             <br/>

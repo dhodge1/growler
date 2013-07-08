@@ -57,7 +57,7 @@
             <br/><br/><br/>
             <div class="row">
                 
-                    <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Add a Theme</h2>
+                    <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/><span>Add a Theme</span></h2>
                 
             </div>
             <br/>

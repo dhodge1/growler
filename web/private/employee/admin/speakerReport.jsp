@@ -48,7 +48,7 @@
             <br/><br/><br/>
             <div class="row">
                 <div class="span8">
-                    <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Speaker Knowledge Report</h2>
+                    <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/><span>Speaker Knowledge Report</span></h2>
                 </div>
             </div>
             <br/>

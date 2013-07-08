@@ -49,7 +49,7 @@
             <br/><br/><br/>
             <div class="row">
                 
-                    <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Comments By Session</h2>
+                    <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/><span>Comments By Session</span></h2>
                 
             </div>
             <br/>

@@ -54,7 +54,7 @@
             <br/><br/><br/>
             <div class="row">
                 
-                    <h2 class="bordered"><img src='../images/Techtoberfest2013small.png'/>Request a New Password</h2>
+                    <h2 class="bordered"><img src='../images/Techtoberfest2013small.png'/><span>Request a New Password</span></h2>
                 
             </div>
             <br/>

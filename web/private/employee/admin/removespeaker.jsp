@@ -43,7 +43,7 @@
             <br/><br/><br/>
             <div class="row">
                 
-                    <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Remove a Speaker from a Session</h2>
+                    <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/><span>Remove a Speaker from a Session</span></h2>
                 
             </div>
             <br/>

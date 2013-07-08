@@ -60,7 +60,7 @@
             <br/><br/><br/>
             <div class="row">
 
-                <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Edit a Room</h2>
+                <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/><span>Edit a Room</span></h2>
 
             </div>
             <br/>

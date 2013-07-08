@@ -85,7 +85,7 @@
             <br/><br/><br/>
             <div class="row">
                 
-                    <h2 class="bordered"><img src='../../images/Techtoberfest2013small.png'/>Acknowledge Session Attendance</h2>
+                    <h2 class="bordered"><img src='../../images/Techtoberfest2013small.png'/><span>Acknowledge Session Attendance</span></h2>
                 
             </div>
             <br/>

@@ -34,7 +34,7 @@
             <br/><br/><br/>
             <div class="row">
                 
-                    <h2 class="bordered"><img src='../images/Techtoberfest2013small.png'/>Help Topics</h2>
+                    <h2 class="bordered"><img src='../images/Techtoberfest2013small.png'/><span>Help Topics</span></h2>
                 
             </div>
             <br/>

@@ -67,7 +67,7 @@
                         
                     }
                     %>
-                    <h2 class = "bordered"><img src='../../images/Techtoberfest2013small.png'/>Confidential Survey - <% out.print(sp.getSessionByID((Integer.parseInt(sessionId))).getName());%></h2>
+                    <h2 class = "bordered"><img src='../../images/Techtoberfest2013small.png'/><span>Confidential Survey - <% out.print(sp.getSessionByID((Integer.parseInt(sessionId))).getName());%></span></h2>
                 
             </div>
             <br/>

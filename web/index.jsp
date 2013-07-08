@@ -55,7 +55,7 @@
             <br/><br/><br/>
             <div class="row">
                 
-                    <h2 class="bordered"><img src='images/Techtoberfest2013small.png'/>Login to TIS</h2>
+                    <h2 class="bordered"><img src='images/Techtoberfest2013small.png'/><span>Login to TIS</span></h2>
                 
             </div>
             <br/>
@@ -64,13 +64,13 @@
                     <%@include file="includes/messagehandler.jsp" %>
                     <form action="action/login.jsp" method="post" id="form">
                         <div class="form-group">
-                            <label>User ID</label>
+                            <label style="font-size:11px">User ID</label>
                             <input type="text" name="username" id="tip" data-content="Enter your User ID"/><br/>
                             <span id="error_userid" class="message_container">
                                 <span>Please Enter a User ID</span>
                             </span>
                             <br/>
-                            <label>Password</label>
+                            <label style="font-size:11px">Password</label>
                             <input type="password" name="password" id="tip2" data-content="Enter your Password"/><br/>
                             <span id="error_password" class="message_container">
                                 <span>Please Enter a Password</span>

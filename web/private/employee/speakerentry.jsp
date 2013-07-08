@@ -53,7 +53,7 @@
             <br/><br/><br/>
             <div class="row">
                 
-                    <h2 class="bordered"><img src='../../images/Techtoberfest2013small.png'/>Suggest a Speaker</h2>
+                    <h2 class="bordered"><img src='../../images/Techtoberfest2013small.png'/><span>Suggest a Speaker</span></h2>
                 
             </div>
             <br/>

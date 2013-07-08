@@ -66,7 +66,7 @@
             <br/><br/><br/>
             <div class="row">
                 
-                    <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Session Scheduler Tool</h2>
+                    <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/><span>Session Scheduler Tool</span></h2>
                 
             </div>
             <br/>

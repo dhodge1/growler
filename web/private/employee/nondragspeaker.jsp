@@ -75,10 +75,10 @@
                     ArrayList<Speaker> speakers = persist.getUserRanks(user);
                     //If we didn't get any ranks, we tell the user to rank the Speakers
                     if (speakers == null || speakers.size() == 0) {
-                        out.print("<h2 class=bordered><img src='../images/Techtoberfest2013small.png'/>Speakers - Click To Order Speakers</h2>");
+                        out.print("<h2 class=bordered><img src='../images/Techtoberfest2013small.png'/><span>Speakers - Click To Order Speakers</span></h2>");
                     } else { //If we got speakers, we let the user see them
                         response.sendRedirect("../view/speaker.jsp");
-                        out.print("<h2 class=bordered><img src='../images/Techtoberfest2013small.png'/>Your Speaker Ranks</h2>");
+                        out.print("<h2 class=bordered><img src='../images/Techtoberfest2013small.png'/><span>Your Speaker Ranks</span></h2>");
                     }
                 %>
                 

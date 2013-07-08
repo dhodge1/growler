@@ -49,7 +49,7 @@
             <br/><br/><br/>
             <div class="row">
                 
-                    <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Surveys By Submission Time</h2>
+                    <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/><span>Surveys By Submission Time</span></h2>
                 
             </div>
             <br/>

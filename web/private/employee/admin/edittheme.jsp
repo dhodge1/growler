@@ -48,7 +48,7 @@
                         ThemePersistence tp = new ThemePersistence();
                         Theme theme = tp.getThemeByID(themeId);
                     %>
-                    <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Edit A Theme: <%= theme.getName()%></h2>
+                    <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/><span>Edit A Theme: <%= theme.getName()%></span></h2>
                 
             </div>
             <br/>
