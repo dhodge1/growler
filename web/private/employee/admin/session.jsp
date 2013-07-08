@@ -36,12 +36,14 @@
     <body id="growler1">
         <%
             int user = 0;
+            String sort = "";
             if (null == session.getAttribute("id")) {
                 response.sendRedirect("../../../index.jsp");
             } else if (!session.getAttribute("user").equals("admin")) {
                 response.sendRedirect("../../../index.jsp");
             }
             try {
+                sort = request.getParameter("sort");
                 user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
                 String name = String.valueOf(session.getAttribute("user"));
             } catch (Exception e) {
@@ -52,113 +54,151 @@
         <div class="container-fixed">
             <br/><br/><br/>
             <div class="row">
-                
-                    <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Sessions</h2>
-                
+
+                <h2 class="bordered"><img src='../../../images/Techtoberfest2013small.png'/>Sessions</h2>
+
             </div>
             <br/>
             <div class="row">
-                
-                    <%
-                        //Get the year
-                        int year = 2013;
-                        try {
-                            year = Integer.parseInt(request.getParameter("year"));
-                        } catch (Exception e) {
+
+                <%
+                    //Get the year
+                    int year = 2013;
+                    try {
+                        year = Integer.parseInt(request.getParameter("year"));
+                    } catch (Exception e) {
+                    }
+                    SessionPersistence sp = new SessionPersistence();
+                    LocationPersistence lp = new LocationPersistence();
+                    ArrayList<Session> sessions = sp.getThisYearSessions(year, "order by session_date, start_time, name");
+                    try {
+                        if (sort.equals("description_asc")) {
+                            sessions = sp.getThisYearSessions(year, " order by description asc");
+                        } else if (sort.equals("description_desc")) {
+                            sessions = sp.getThisYearSessions(year, " order by description desc");
+                        } else if (sort.equals("name_asc")) {
+                            sessions = sp.getThisYearSessions(year, " order by name asc");
+                        } else if (sort.equals("name_desc")) {
+                            sessions = sp.getThisYearSessions(year, " order by name desc");
+                        } else if (sort.equals("date_asc")) {
+                            sessions = sp.getThisYearSessions(year, " order by session_date asc");
+                        } else if (sort.equals("date_desc")) {
+                            sessions = sp.getThisYearSessions(year, " order by session_date desc");
+                        } else if (sort.equals("time_asc")) {
+                            sessions = sp.getThisYearSessions(year, " order by start_time asc");
+                        } else if (sort.equals("time_desc")) {
+                            sessions = sp.getThisYearSessions(year, " order by start_time desc");
+                        } else if (sort.equals("duration_asc")) {
+                            sessions = sp.getThisYearSessions(year, " order by duration asc");
+                        } else if (sort.equals("duration_desc")) {
+                            sessions = sp.getThisYearSessions(year, " order by duration desc");
                         }
-                        SessionPersistence sp = new SessionPersistence();
-                        LocationPersistence lp = new LocationPersistence();
-                        RegistrationPersistence rp = new RegistrationPersistence();
-                        ArrayList<Session> sessions = sp.getThisYearSessions(year);
-                    %>
-                    <form action="session.jsp" method="post">
-                        <select name="year">
-                            <option value="2013">2013</option>
-                            <option value="2012">2012</option>
-                            <!--Provisioned for future years! -->
-                        </select>
-                        <input value="Change Year" type="submit" class="button button-primary"/>
-                    </form>
-                    <section>
+                    } catch (Exception e) {
+                    }
+                %>
+                <form action="session.jsp" method="post">
+                    <select name="year">
+                        <option value="2013">2013</option>
+                        <option value="2012">2012</option>
+                        <!--Provisioned for future years! -->
+                    </select>
+                    <input value="Change Year" type="submit" class="button button-primary"/>
+                </form>
+                <section>
 
-                        <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
-                            <tr>
-                                <th>Session Name</th>
-                                <th>Description</th>
-                                <th>Date</th>
-                                <th>Time</th>
-                                <th>Duration</th>
-                                <th>Room #</th>
-                                <th>Room Name</th>
-                                <th>Building</th>
-                                <th>Capacity</th>
-                                <th>Key</th>
-                                <th>Speaker(s)</th>
-                                <th>Edit</th>
-                            </tr>
+                    <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
+                        <tr>
+                            <th>Session Name
+                                <a href="session.jsp?sort=name_asc"><i class="icon12-sortUp"></i></a>
+                                <a href="session.jsp?sort=name_desc"><i class="icon12-sortDown"></i></a>
+                            </th>
+                            <th>Description
+                                <a href="session.jsp?sort=description_asc"><i class="icon12-sortUp"></i></a>
+                                <a href="session.jsp?sort=description_desc"><i class="icon12-sortDown"></i></a>
+                            </th>
+                            <th>Date
+                                <a href="session.jsp?sort=date_asc"><i class="icon12-sortUp"></i></a>
+                                <a href="session.jsp?sort=date_desc"><i class="icon12-sortDown"></i></a>
+                            </th>
+                            <th>Time
+                                <a href="session.jsp?sort=time_asc"><i class="icon12-sortUp"></i></a>
+                                <a href="session.jsp?sort=time_desc"><i class="icon12-sortDown"></i></a>
+                            </th>
+                            <th>Duration
+                                <a href="session.jsp?sort=duration_asc"><i class="icon12-sortUp"></i></a>
+                                <a href="session.jsp?sort=duration_desc"><i class="icon12-sortDown"></i></a>
+                            </th>
+                            <th>Room #</th>
+                            <th>Room Name</th>
+                            <th>Building</th>
+                            <th>Capacity</th>
+                            <th>Key</th>
+                            <th>Speaker(s)</th>
+                            <th>Edit</th>
+                        </tr>
 
-                            <%
-                                SpeakerPersistence spkr = new SpeakerPersistence();
-                                for (int i = 0; i < sessions.size(); i++) {
-                            %>
-                            <tr>
+                        <%
+                            SpeakerPersistence spkr = new SpeakerPersistence();
+                            for (int i = 0; i < sessions.size(); i++) {
+                        %>
+                        <tr>
 
-                                <td><% out.print(sessions.get(i).getName());%></td>
-                                <td><% try {
-                                        if (!sessions.get(i).getDescription().equals(null)) {
-                                            out.print(sessions.get(i).getDescription());
-                                        }
-                                    } catch (Exception e) {
-                                        out.print("");
+                            <td><% out.print(sessions.get(i).getName());%></td>
+                            <td><% try {
+                                    if (!sessions.get(i).getDescription().equals(null)) {
+                                        out.print(sessions.get(i).getDescription());
                                     }
-                                    %></td>
-                                    <td><% SimpleDateFormat dates = new SimpleDateFormat("E, MM-dd-yyyy");
-                                    try {        
+                                } catch (Exception e) {
+                                    out.print("");
+                                }
+                                %></td>
+                            <td><% SimpleDateFormat dates = new SimpleDateFormat("E, MM-dd-yyyy");
+                                try {
                                     out.print(dates.format(sessions.get(i).getSessionDate()));
-                                    } catch(Exception e){
-                                    out.print("No Date");
-                                    }%></td>
-                                    <td><% SimpleDateFormat fmt = new SimpleDateFormat("h:mm a");
-                                    try {        
+                                } catch (Exception e) {
+                                            out.print("No Date");
+                                        }%></td>
+                            <td><% SimpleDateFormat fmt = new SimpleDateFormat("h:mm a");
+                                try {
                                     out.print(fmt.format(sessions.get(i).getStartTime()));
-                                    } catch(Exception e){
-                                        out.print("No Time");
-                                    }
-                                    %></td>
-                                    <td><% SimpleDateFormat fmt2 = new SimpleDateFormat("K ' hours and ' mm ' minutes'");
-                                    try {        
+                                } catch (Exception e) {
+                                    out.print("No Time");
+                                }
+                                %></td>
+                            <td><% SimpleDateFormat fmt2 = new SimpleDateFormat("K ' hours and ' mm ' minutes'");
+                                try {
                                     out.print(fmt2.format(sessions.get(i).getDuration()));
-                                    } catch (Exception e){
-                                        out.print("No Duration");
-                                    }
-                                    %></td>
-                                    <td><% Location l = lp.getLocationById(sessions.get(i).getLocation());
+                                } catch (Exception e) {
+                                    out.print("No Duration");
+                                }
+                                %></td>
+                            <td><% Location l = lp.getLocationById(sessions.get(i).getLocation());
                                         out.print(l.getId());%> </td>
-                                <td><% out.print(l.getDescription());%></td>
-                                <td><% out.print(l.getBuilding());%></td>
-                                <td><% out.print(l.getCapacity());%></td>
-                                <td><% out.print(sessions.get(i).getKey());%></td>
-                                <td>
-                                    <% ArrayList<Speaker> speakers = spkr.getSpeakersBySession(sessions.get(i).getId());
-                                        ListIterator<Speaker> iterator = speakers.listIterator();
-                                        while (iterator.hasNext()) {
-                                            Speaker s = iterator.next();
-                                            out.print("<strong>" + s.getLastName() + ", " + s.getFirstName() + "</strong>");
-                                            if (iterator.hasNext()) {
-                                                out.print(" and <br/>");
-                                            } else {
-                                                out.print("<br/><a href=\"removespeaker.jsp?sessionId=" + sessions.get(i).getId() + "\">Remove a Speaker</a>");
-                                            }
+                            <td><% out.print(l.getDescription());%></td>
+                            <td><% out.print(l.getBuilding());%></td>
+                            <td><% out.print(l.getCapacity());%></td>
+                            <td><% out.print(sessions.get(i).getKey());%></td>
+                            <td>
+                                <% ArrayList<Speaker> speakers = spkr.getSpeakersBySession(sessions.get(i).getId());
+                                    ListIterator<Speaker> iterator = speakers.listIterator();
+                                    while (iterator.hasNext()) {
+                                        Speaker s = iterator.next();
+                                        out.print("<strong>" + s.getLastName() + ", " + s.getFirstName() + "</strong>");
+                                        if (iterator.hasNext()) {
+                                            out.print(" and <br/>");
+                                        } else {
+                                            out.print("<br/><a href=\"removespeaker.jsp?sessionId=" + sessions.get(i).getId() + "\">Remove a Speaker</a>");
                                         }
-                                        out.print("<br/><a href=\"assignspeaker.jsp?sessionId=" + sessions.get(i).getId() + "\">Assign a Speaker</a>");
-                                    %>
-                                </td>
-                                <td><% out.print("<a href=\"sessionEdit.jsp?id=" + sessions.get(i).getId() + "\">Edit</a>");%></td>
-                            </tr>
-                            <% } //close for loop
-%>
-                        </table>
-                
+                                    }
+                                    out.print("<br/><a href=\"assignspeaker.jsp?sessionId=" + sessions.get(i).getId() + "\">Assign a Speaker</a>");
+                                %>
+                            </td>
+                            <td><% out.print("<a href=\"sessionEdit.jsp?id=" + sessions.get(i).getId() + "\">Edit</a>");%></td>
+                        </tr>
+                        <% } //close for loop
+                        %>
+                    </table>
+
             </div>
         </div>
 
