@@ -205,7 +205,7 @@ public class SpeakerPersistence extends GrowlerPersistence {
             if (sort.equals(" order by rating desc, last_name") || sort.equals(" order by rating asc, last_name") || sort.equals(" order by count desc, last_name") || sort.equals(" order by count asc, last_name")){
                 sort = "";
             }
-            ResultSet result2 = s2.executeQuery("select s.id, sum(sr.ranking) as points, count(sr.speaker_id) as votes from speaker s left join speaker_ranking sr on s.id = sr.speaker_id group by s.id " + sort);
+            ResultSet result2 = s2.executeQuery("select s.id, s.last_name, s.visible, sum(sr.ranking) as points, count(sr.speaker_id) as votes, s.suggested_by as suggested_by from speaker s left join speaker_ranking sr on s.id = sr.speaker_id group by s.id " + sort);
             ArrayList<Speaker> speakers = new ArrayList<Speaker>();
             while (result.next() && result2.next()) {
                 Speaker s = new Speaker();

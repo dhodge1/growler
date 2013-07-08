@@ -97,6 +97,18 @@
                         else if (sort.equals("times_desc") && !sort.isEmpty()) {
                             speakers = persist.getAllSpeakers(" order by count desc, last_name");
                         }
+                        else if (sort.equals("suggest_asc") && !sort.isEmpty()) {
+                            speakers = persist.getAllSpeakers(" order by suggested_by asc, last_name");
+                        }
+                        else if (sort.equals("suggest_desc") && !sort.isEmpty()) {
+                            speakers = persist.getAllSpeakers(" order by suggested_by desc, last_name");
+                        }
+                        else if (sort.equals("visible_asc") && !sort.isEmpty()) {
+                            speakers = persist.getAllSpeakers(" order by visible asc, last_name");
+                        }
+                        else if (sort.equals("visible_desc") && !sort.isEmpty()) {
+                            speakers = persist.getAllSpeakers(" order by visible desc, last_name");
+                        }
                     } catch (Exception e) {
                         speakers = persist.getAllSpeakers(" order by rating desc, last_name");
                     }
@@ -128,9 +140,15 @@
                             </th>
                             <th>New Rating</th>
                             <th>New Times Ranked</th>
-                            <th>Visible?</th>
+                            <th>Visible?
+                                <a href="speaker.jsp?sort=visible_asc"><i class="icon12-sortUp"></i></a>
+                                <a href="speaker.jsp?sort=visible_desc"><i class="icon12-sortDown"></i></a>
+                            </th>
                             <th>Ranked in 2012?</th>
-                            <th>Suggested By</th>
+                            <th>Suggested By
+                                <a href="speaker.jsp?sort=suggest_asc"><i class="icon12-sortUp"></i></a>
+                                <a href="speaker.jsp?sort=suggest_desc"><i class="icon12-sortDown"></i></a>
+                            </th>
                             <th>Remove Speaker</th>
                         </tr>
                         <%
@@ -188,9 +206,7 @@
                         <% } //close the for loop
 %>
                     </table>
-                    <div class="span2 offset3"><!--button div-->
                         <input type="submit" value="Submit" class="button button-primary" />
-                    </div>
                 </form>
 
             </div>

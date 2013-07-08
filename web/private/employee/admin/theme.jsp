@@ -44,12 +44,14 @@
     <body id="growler1">
         <%
             int user = 0;
+            String sort = "";
             if (null == session.getAttribute("id")) {
                 response.sendRedirect("../../../index.jsp");
             } else if (!session.getAttribute("user").equals("admin")) {
                 response.sendRedirect("../../../index.jsp");
             }
             try {
+                sort = request.getParameter("sort");
                 user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
                 String name = String.valueOf(session.getAttribute("user"));
             } catch (Exception e) {
@@ -70,17 +72,84 @@
                 
                     <%
                         ArrayList<Theme> themes = persist.getAllThemes(" order by rating desc, name asc ");
+                        try {
+                        if (sort.equals("name_desc") && !sort.isEmpty()) {
+                            themes = persist.getAllThemes(" order by name desc");
+                        }
+                        else if (sort.equals("name_asc") && !sort.isEmpty()) {
+                            themes = persist.getAllThemes(" order by name asc");
+                        }
+                        else if (sort.equals("reason_asc") && !sort.isEmpty()) {
+                            themes = persist.getAllThemes(" order by reason asc, id");
+                        }
+                        else if (sort.equals("reason_desc") && !sort.isEmpty()) {
+                            themes = persist.getAllThemes(" order by reason desc, id");
+                        }
+                        else if (sort.equals("description_asc") && !sort.isEmpty()) {
+                            themes = persist.getAllThemes(" order by description asc, name");
+                        }
+                        else if (sort.equals("description_desc") && !sort.isEmpty()) {
+                            themes = persist.getAllThemes(" order by description desc, name");
+                        }
+                        else if (sort.equals("rating_asc") && !sort.isEmpty()) {
+                            themes = persist.getAllThemes(" order by rating asc, name");
+                        }
+                        else if (sort.equals("rating_desc") && !sort.isEmpty()) {
+                            themes = persist.getAllThemes(" order by rating desc, name");
+                        }
+                        else if (sort.equals("times_asc") && !sort.isEmpty()) {
+                            themes = persist.getAllThemes(" order by count asc, name");
+                        }
+                        else if (sort.equals("times_desc") && !sort.isEmpty()) {
+                            themes = persist.getAllThemes(" order by count desc, name");
+                        }
+                        else if (sort.equals("creator_asc") && !sort.isEmpty()) {
+                            themes = persist.getAllThemes(" order by creator asc, name");
+                        }
+                        else if (sort.equals("creator_desc") && !sort.isEmpty()) {
+                            themes = persist.getAllThemes(" order by creator desc, name");
+                        }
+                        else if (sort.equals("visible_asc") && !sort.isEmpty()) {
+                            themes = persist.getAllThemes(" order by visible asc, name");
+                        }
+                        else if (sort.equals("visible_desc") && !sort.isEmpty()) {
+                            themes = persist.getAllThemes(" order by visible desc, name");
+                        }
+                    } catch (Exception e) {
+                        themes = persist.getAllThemes(" order by rating desc, name");
+                    }
                     %>
                     <form action="../../../action/admintheme.jsp" >
                         <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
                             <tr>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Reason</th>
-                                <th>Rating</th>
-                                <th>Times Rated</th>
-                                <th>Visible?</th>
-                                <th>Created By</th>
+                                <th>Name
+                                    <a href="theme.jsp?sort=name_asc"><i class="icon12-sortUp"></i></a>
+                                <a href="theme.jsp?sort=name_desc"><i class="icon12-sortDown"></i></a>
+                                </th>
+                                <th>Description
+                                    <a href="theme.jsp?sort=description_asc"><i class="icon12-sortUp"></i></a>
+                                <a href="theme.jsp?sort=description_desc"><i class="icon12-sortDown"></i></a>
+                                </th>
+                                <th>Reason
+                                    <a href="theme.jsp?sort=reason_asc"><i class="icon12-sortUp"></i></a>
+                                <a href="theme.jsp?sort=reason_desc"><i class="icon12-sortDown"></i></a>
+                                </th>
+                                <th>Rating
+                                    <a href="theme.jsp?sort=rating_asc"><i class="icon12-sortUp"></i></a>
+                                <a href="theme.jsp?sort=rating_desc"><i class="icon12-sortDown"></i></a>
+                                </th>
+                                <th>Times Rated
+                                    <a href="theme.jsp?sort=times_asc"><i class="icon12-sortUp"></i></a>
+                                <a href="theme.jsp?sort=times_desc"><i class="icon12-sortDown"></i></a>
+                                </th>
+                                <th>Visible?
+                                    <a href="theme.jsp?sort=visible_asc"><i class="icon12-sortUp"></i></a>
+                                <a href="theme.jsp?sort=visible_desc"><i class="icon12-sortDown"></i></a>
+                                </th>
+                                <th>Created By
+                                    <a href="theme.jsp?sort=creator_asc"><i class="icon12-sortUp"></i></a>
+                                <a href="theme.jsp?sort=creator_desc"><i class="icon12-sortDown"></i></a>
+                                </th>
                                 <th>Edit Theme</th>
                                 <th>Remove Theme</th>
                             </tr>
