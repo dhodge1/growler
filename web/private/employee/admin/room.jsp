@@ -36,12 +36,14 @@
     <body id="growler1">
         <%
             int user = 0;
+            String sort = "";
             if (null == session.getAttribute("id")) {
                 response.sendRedirect("../../../index.jsp");
             } else if (!session.getAttribute("user").equals("admin")) {
                 response.sendRedirect("../../../index.jsp");
             }
             try {
+                sort = request.getParameter("sort");
                 user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
                 String name = String.valueOf(session.getAttribute("user"));
             } catch (Exception e) {
@@ -61,16 +63,48 @@
                 <div class="span8">
                     <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
                         <tr>
-                            <th>Room Number</th>
-                            <th>Name</th>
-                            <th>Capacity</th>
-                            <th>Building</th>
+                            <th>Room Number
+                                <a href="room.jsp?sort=number_asc"><i class="icon12-sortUp"></i></a>
+                                <a href="room.jsp?sort=number_desc"><i class="icon12-sortDown"></i></a>
+                            </th>
+                            <th>Name
+                                <a href="room.jsp?sort=name_asc"><i class="icon12-sortUp"></i></a>
+                                <a href="room.jsp?sort=name_desc"><i class="icon12-sortDown"></i></a>
+                            </th>
+                            <th>Capacity
+                                <a href="room.jsp?sort=capacity_asc"><i class="icon12-sortUp"></i></a>
+                                <a href="room.jsp?sort=capacity_desc"><i class="icon12-sortDown"></i></a>
+                            </th>
+                            <th>Building
+                                <a href="room.jsp?sort=building_asc"><i class="icon12-sortUp"></i></a>
+                                <a href="room.jsp?sort=building_desc"><i class="icon12-sortDown"></i></a>
+                            </th>
                             <th>Edit</th>
                             <th>Remove</th>
                         </tr>
                         <%
                             LocationPersistence lp = new LocationPersistence();
-                            ArrayList<Location> locations = lp.getAllLocations();
+                            ArrayList<Location> locations = lp.getAllLocations(" ");
+                            try {
+                                if (sort.equals("number_asc")) {
+                                    locations = lp.getAllLocations(" order by id asc");
+                                } else if (sort.equals("number_desc")) {
+                                    locations = lp.getAllLocations(" order by id desc");
+                                } else if (sort.equals("name_asc")) {
+                                    locations = lp.getAllLocations(" order by description asc");
+                                } else if (sort.equals("name_desc")) {
+                                    locations = lp.getAllLocations(" order by description desc");
+                                } else if (sort.equals("capacity_asc")) {
+                                    locations = lp.getAllLocations(" order by capacity asc");
+                                } else if (sort.equals("capacity_desc")) {
+                                    locations = lp.getAllLocations(" order by capacity desc");
+                                } else if (sort.equals("building_asc")) {
+                                    locations = lp.getAllLocations(" order by building asc");
+                                } else if (sort.equals("building_desc")) {
+                                    locations = lp.getAllLocations(" order by building desc");
+                                }
+                            } catch (Exception e) {
+                            }
                             for (int i = 0; i < locations.size(); i++) {
                                 out.print("<tr>");
                                 out.print("<td>");

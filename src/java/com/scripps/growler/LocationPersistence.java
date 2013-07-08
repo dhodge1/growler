@@ -100,10 +100,10 @@ public class LocationPersistence extends GrowlerPersistence {
      * Gets a list of all locations
      * @return An ArrayList of all locations in the database
      */
-    public ArrayList<Location> getAllLocations() {
+    public ArrayList<Location> getAllLocations(String sort) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select id, description, capacity, building from location");
+            statement = connection.prepareStatement("select id, description, capacity, building from location " + sort);
             result = statement.executeQuery();
             ArrayList<Location> list = new ArrayList<Location>();
             while (result.next()) {
