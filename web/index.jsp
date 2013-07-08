@@ -82,7 +82,7 @@
                         <button class="button button-primary" id="send" type="submit">Login</button>
                         <a href="public/requestreset.jsp">Forgot Password?</a>
                     </div>
-                    <span>Not Registered? <a href="public/register.jsp">Click here to register</a></span>
+                    <span style="font-weight: bold;">Not Registered? <a href="public/register.jsp">Click here to register</a></span>
 
                 </form>
 
