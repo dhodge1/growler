@@ -9,7 +9,7 @@
         <div class="pageHeader-logo">
             <a href="/"></a>
         </div>
-        <nav class="pageHeader-utility right">
+        <nav class="pageHeader-utility right" style='padding-top: 4px;padding-right:4px;'>
             <ul>
                 <li class="first" style="color: white">
                     <%//Get the user's info, and post a welcome!

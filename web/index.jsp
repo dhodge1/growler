@@ -32,6 +32,7 @@
         <link rel="stylesheet" href="css/wijmo/jquery.wijmo-complete.all.2.3.2.min.css"/>
         <link rel="stylesheet" type="text/css" href="css/general.css" /><!--General CSS-->
         <script src="js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
+        <link rel="shortcut icon" type="image/png" href="images/scripps_favicon-32.ico">
         <style>
             .message_container {
                 display: none;
@@ -52,11 +53,8 @@
             </div>
             <br/><br/><br/>
             <div class="row">
-
                 <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='images/Techtoberfest2013small.png'/><span class="titlespan">Login to TIS</span></h2>
-
             </div>
-            <br/>
             <div class="row">
                 <%@include file="includes/messagehandler.jsp" %>
                 <p id="error_global" class="message_container feedbackMessage-error">
@@ -69,7 +67,6 @@
                         <span id="error_userid" class="message_container">
                             <span>Please enter your Employee ID</span>
                         </span>
-                        
                         <label style="padding-top:12px;">Password</label>
                         <input type="password" name="password" id="tip2" data-content="Enter your Password"/><br/>
                         <span id="error_password" class="message_container">
@@ -77,10 +74,10 @@
                         </span>
                     </div>
                     <div class="form-actions">
-                        <button class="button button-primary" id="send" type="submit">Login</button>
+                        <button class="button button-primary" id="send" type="submit" style="margin-right:4px;">Login</button>
                         <a href="public/requestreset.jsp">Forgot Password?</a>
                     </div>
-                    <span style="font-weight: bold;">Not Registered? <a href="public/register.jsp">Click here to register</a></span>
+                    <span style="font-weight: bold;">Not Registered? <a style='font-weight:normal;' href="public/register.jsp">Click here to register</a></span>
                 </form>
             </div>
         </div>
