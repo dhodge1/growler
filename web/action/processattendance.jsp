@@ -37,6 +37,7 @@
 
             boolean success = false;
 
+            DataConnection dataConnection = new DataConnection();
             Connection connection = dataConnection.sendConnection();
             PreparedStatement changeTime = connection.prepareStatement("set time_zone = 'US/Eastern'");
             changeTime.execute();
@@ -63,7 +64,7 @@
                         //if there aren't any sessions there, add attendance record to DB
                         statement.execute("insert into attendance (user_id, session_id, isSurveyTaken, surveySubmitTime) values ("
                                 + user + ", " + sessionId + ", false, null)");
-                        session.setAttribute("message", "Success: Sucessfully acknowledged!");
+                        session.setAttribute("message", "Success: Attendance sucessfully acknowledged!");
                         SessionPersistence sp = new SessionPersistence();
                         session.setAttribute("sessionName", sp.getSessionByID(sessionId).getName());
                         session.setAttribute("page", "../private/employee/attendance.jsp");

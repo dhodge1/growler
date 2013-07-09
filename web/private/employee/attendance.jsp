@@ -29,7 +29,8 @@
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
         <script src="../../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
-        <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>     
+        <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+        <script src='../../js/jquery.js'></script>
         <script src="../../attendance.js"></script>
         <style>
             .message_container {
@@ -65,20 +66,7 @@
             <br/>
             <div class="row">
                 
-                    <%
-                    String message = String.valueOf(session.getAttribute("message"));
-                    if (!message.equals("null")) {
-                        if (message.startsWith("Success:")) {
-                            out.print("<p id=\"topMessage\" class=feedbackMessage-success>" + message + "</p>");
-                            String sessionName = (String) session.getAttribute("sessionName");
-                            out.print("<div id=\"modalDialog\" title=\"Successfully Acknowledged Attendance for " + sessionName + "\"><p>Please take a survey.</p><p>This will enter you in a drawing for a fantastic prize.</p></div>");
-                            out.print("<div id=\"thanksDialog\" title=\"Thanks Anyway\"><p>Thanks anyway. You can always take a survey later.</p></div>");
-                        } else {
-                            out.print("<p class=feedbackMessage-error>" + message + "</p>");
-                        }
-                        session.removeAttribute("message");
-                    }
-                %>
+                    <%@ include file="../../includes/messagehandler.jsp"  %>
 
 <%
                             SessionPersistence sp = new SessionPersistence();
