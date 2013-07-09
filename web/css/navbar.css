@@ -1,5 +1,6 @@
 .globalNavigation {
 	border-bottom: 3px solid #b0b0b0;
+        padding-bottom: 2px;
 }
 .top-nav #navigation ul{
 height:40px;margin:-22px 0 -15px 230px;}
@@ -26,9 +27,9 @@ color:#002d56;position:relative;}
 .top-nav #navigation ul li span.delete-tab{
 display:none;}
 .non_drop {
-border-right:1px dotted #fff;margin-left:9px;padding-right:3px;height:25px!important;z-index:9;}
+border-right:1px dotted #fff;margin-left:9px;padding-right:3px;height:23px!important;z-index:9;}
 .brand_nav{
-margin-left:9px;padding-left: 3px;height:25px!important;z-index:9;font-family:"Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif; font-size:13px;}
+margin-left:9px;padding-left: 3px;height:23px!important;z-index:9;font-family:"Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif; font-size:13px;}
 .brand_nav:hover a{
 background:#fff!important;border-radius:3px 3px 0 0;-moz-border-radius:3px 3px 0 0;-webkit-border-radius:3px 3px 0 0;}
 .brand_nav:hover a span{
@@ -38,9 +39,9 @@ background:#fff!important;filter:none!important;color:#002d56;}
 .brand_nav:hover em,.brand_nav.selected em{
 background:url(../images/bootstrap/icon-set.png) no-repeat -173px -3px;display:inline-block;height:7px;margin-left:4px;position:relative;width:12px;}
 .brand_nav em{
-background:url(../images/bootstrap/icon-set.png) no-repeat -184px -3px;display:inline-block;height:7px;margin-left:4px;position:relative;width:12px;}
+background:url(../images/bootstrap/icon-set.png) no-repeat -184px -3px;display:inline-block;height:7px;margin-left:5px;position:relative;width:12px;}
 .brand_nav .child-menu{
-display:none;background:#fff;left:11px;margin:0!important;position:absolute;top:25px;padding:5px 0;height:auto!important;border-top:0!important;-webkit-border-radius:0 0 3px 3px;-moz-border-radius:0 0 3px 3px;border-radius:0 0 3px 3px;}
+display:none;background:#fff;left:12px;margin:0!important;position:absolute;top:27px;padding:5px 0;height:auto!important;border-top:0!important;-webkit-border-radius:0 0 3px 3px;-moz-border-radius:0 0 3px 3px;border-radius:0 0 3px 3px;}
 .brand_nav .child-menu-ul{
 min-width: 190px;}
 .brand_nav .child-menu li{

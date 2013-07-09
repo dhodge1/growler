@@ -91,8 +91,16 @@
 
         <%@ include file="../../../includes/footer.jsp" %> 
         <%@ include file="../../../includes/scriptlist.jsp" %>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script src="js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>
+        <script src="js/libs/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
+        <script src="js/libs/sniui.auto-inline-help.min.js" type="text/javascript"></script>
+        <script src="js/libs/sniui.auto-inline-help.1.0.0.min.js" type="text/javascript"></script>
 
         <!--Additional Script-->
         <script src="../../../js/themeentry.js"></script>
+        <script>$(function() {
+                $("input").autoinline();
+            });</script>
     </body>
 </html>

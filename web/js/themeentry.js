@@ -1,6 +1,3 @@
-$(function() {
-    $("input").autoinline();
-});
 $("#send").click(function(event) {
     $("#tip").css("border", "1px solid #CCC");
     $("#tip2").css("border", "1px solid #CCC");
