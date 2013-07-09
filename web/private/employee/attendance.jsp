@@ -28,6 +28,9 @@
         <link rel="stylesheet" href="../../css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
         <script src="../../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
+        <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>     
+        <script src="../../attendance.js"></script>
         <style>
             .message_container {
                 display: none;
@@ -35,35 +38,6 @@
                 font-weight: bold;
             }
         </style>
-        <script>
-            $(function() {
-                $("#modalDialog").dialog({
-                    resizable: false,
-                    height: 240,
-                    width: 700,
-                    modal: true,
-                    buttons: {
-                        "Take a Survey": function() {
-                            $(this).dialog("close");
-                            window.location = '../employee/surveylist.jsp';
-                        },
-                        "Don't take Survey": function() {
-                            $("#thanksDialog").dialog({
-                                height: 140,
-                                width: 500,
-                                buttons: {
-                                    "Ok": function() {
-                                        $(this).dialog("close");
-                                    }
-                                }
-                            });
-                            $(this).dialog("close");
-
-                        }
-                    }
-                });
-            });
-        </script>
     </head>
     <body id="growler1">
         <%
@@ -85,7 +59,7 @@
             <br/><br/><br/>
             <div class="row">
                 
-                    <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;width:200px;" src='../../images/Techtoberfest2013small.png'/><span class="titlespan">Acknowledge Session Attendance</span></h2>
+                    <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;width:165px;" src='../../images/Techtoberfest2013small.png'/><span class="titlespan">Acknowledge Session Attendance</span></h2>
                 
             </div>
             <br/>
@@ -140,6 +114,6 @@
         <br/>
         <%@ include file="../../includes/footer.jsp" %> 
         <%@ include file="../../includes/scriptlist.jsp" %>
-        <script src="../../attendance.js"></script>
+        
     </body>
 </html>

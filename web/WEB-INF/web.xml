@@ -16,4 +16,24 @@
         <servlet-name>SpeakerReportServlet</servlet-name>
         <url-pattern>/SpeakerReportServlet</url-pattern>
     </servlet-mapping>
+    <error-page> 
+        <error-code>400</error-code> 
+        <location>/error/error400.jsp</location> 
+    </error-page>
+    <error-page> 
+        <error-code>403</error-code> 
+        <location>/error/error403.jsp</location> 
+    </error-page>
+    <error-page> 
+        <error-code>404</error-code> 
+        <location>/error404.jsp</location> 
+    </error-page>
+    <error-page> 
+        <error-code>500</error-code> 
+        <location>/error/error500.jsp</location> 
+    </error-page>
+    <error-page> 
+        <error-code>503</error-code> 
+        <location>/error/error503.jsp</location> 
+    </error-page>
 </web-app>

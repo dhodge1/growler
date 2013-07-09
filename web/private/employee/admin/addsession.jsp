@@ -46,7 +46,7 @@
             <br/><br/><br/>
             <div class="row">
                 
-                    <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;width:200px;" src='../../../images/Techtoberfest2013small.png'/><span class="titlespan">Add a Session</span></h2>
+                    <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;width:165px;" src='../../../images/Techtoberfest2013small.png'/><span class="titlespan">Add a Session</span></h2>
                 
             </div>
             <br/>

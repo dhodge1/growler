@@ -44,7 +44,6 @@
         <%@ include file="includes/indexheader.jsp" %> 
         <div class="container-fixed">
             <div class="row">
-                <br/>
                 <h1>Techtoberfest Information System (TIS)</h1>
                 <h3>TIS allows Scripps Employees the ability to not only stay abreast 
                     of all Techtoberfest sessions, but also the opportunity to provide 
@@ -54,25 +53,24 @@
             <br/><br/><br/>
             <div class="row">
 
-                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;width:200px;" src='images/Techtoberfest2013small.png'/><span class="titlespan">Login to TIS</span></h2>
+                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='images/Techtoberfest2013small.png'/><span class="titlespan">Login to TIS</span></h2>
 
             </div>
             <br/>
             <div class="row">
-
                 <%@include file="includes/messagehandler.jsp" %>
                 <p id="error_global" class="message_container feedbackMessage-error">
                     <span style="color: #000">An Employee ID and Password are required.</span>
                 </p>
                 <form action="action/login.jsp" method="post" id="form">
                     <div class="form-group">
-                        <label style="font-size:11px">Employee ID</label>
+                        <label>Employee ID</label>
                         <input type="text" name="username" id="tip" data-content="Enter your User ID"/><br/>
                         <span id="error_userid" class="message_container">
                             <span>Please enter your Employee ID</span>
                         </span>
-                        <br/>
-                        <label style="font-size:11px">Password</label>
+                        
+                        <label style="padding-top:12px;">Password</label>
                         <input type="password" name="password" id="tip2" data-content="Enter your Password"/><br/>
                         <span id="error_password" class="message_container">
                             <span>Please enter a password</span>
@@ -83,13 +81,9 @@
                         <a href="public/requestreset.jsp">Forgot Password?</a>
                     </div>
                     <span style="font-weight: bold;">Not Registered? <a href="public/register.jsp">Click here to register</a></span>
-
                 </form>
-
             </div>
         </div>
-        <br/>
-        <br/>
         <%@include file="includes/footer.jsp" %>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
         <script src="js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>
