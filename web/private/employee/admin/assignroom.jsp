@@ -53,8 +53,8 @@
                     <%
                         SessionPersistence sessionPersist = new SessionPersistence();
                         LocationPersistence locationPersist = new LocationPersistence();
-                        ArrayList<Session> sessions = sessionPersist.getThisYearSessions(2013);
-                        ArrayList<Location> locations = locationPersist.getAllLocations();
+                        ArrayList<Session> sessions = sessionPersist.getThisYearSessions(2013, "");
+                        ArrayList<Location> locations = locationPersist.getAllLocations("");
                     %>
                     <form id="action" action="../../../action/processroomassign.jsp" method="post" onsubmit="return validateForm();">
                         <div class="form-group">

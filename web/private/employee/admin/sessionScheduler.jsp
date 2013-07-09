@@ -94,7 +94,7 @@
                             </tr>
                             <%
                                 java.sql.Time start = java.sql.Time.valueOf("07:00:00");
-                                ArrayList<Session> sessions = sp.getThisYearSessions(2013);
+                                ArrayList<Session> sessions = sp.getThisYearSessions(2013, "");
 
                                 for (int i = 0; i < 11; i++) {
                                     out.print("<tr>");
