@@ -1,0 +1,14 @@
+/* 
+    Document   : errors
+    Created on : Jul 10, 2013, 2:51:34 PM
+    Author     : 162107
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.error_container { 
+    background-color:#f0f0f0;border-color:#999;
+    padding: 12px 12px 12px 40px;
+    border: 1px solid;
+}
+

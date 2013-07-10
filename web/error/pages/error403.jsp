@@ -25,7 +25,7 @@
         <%@ include file="../../includes/indexheader.jsp" %> 
         <div class="container-fixed">
             <div class="row">
-                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='../../images/Techtoberfest2013small.png'/><span class="titlespan">Forbidden (Authorization Required)</span></h2>
+                <h1>Forbidden (Authorization Required)</h1>
             </div>
             <div class="row">
                 <p>We're sorry.  The page you are looking for has moved or does not exist.  We apologize for any inconvenience.</p>
