@@ -74,13 +74,13 @@
                             }
                         }
                         if (surveysleft == 0) {
-                            out.print("<h2 class=bordered><img style=\"padding-bottom:0;padding-left:0;width:165px;\" src='../../images/Techtoberfest2013small.png'/><span class=\"titlespan\">You have no Surveys</span></h2>");
+                            out.print("<h2 class=bordered><img style=\"padding-bottom:0;padding-left:0;\" src='../../images/Techtoberfest2013small.png'/><span class=\"titlespan\">You have no Surveys</span></h2>");
                         }
                         else {
-                            out.print("<h2 class=bordered><img style=\"padding-bottom:0;padding-left:0;width:165px;\" src='../../images/Techtoberfest2013small.png'/><span class=\"titlespan\">You have taken " + surveystaken + " surveys and have " + surveysleft + " left to take.</span></h2>");
+                            out.print("<h2 class=bordered><img style=\"padding-bottom:0;padding-left:0;\" src='../../images/Techtoberfest2013small.png'/><span class=\"titlespan\">You have taken " + surveystaken + " surveys and have " + surveysleft + " left to take.</span></h2>");
                         }
                     } else {
-                        out.print("<h2 class=bordered><img style=\"padding-bottom:0;padding-left:0;width:165px;\" src='../../images/Techtoberfest2013small.png'/><span class=\"titlespan\">You have not attended any sessions</span></h2>");
+                        out.print("<h2 class=bordered><img style=\"padding-bottom:0;padding-left:0;\" src='../../images/Techtoberfest2013small.png'/><span class=\"titlespan\">You have not attended any sessions</span></h2>");
                     }
                 %>
                 

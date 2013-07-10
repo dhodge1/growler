@@ -53,12 +53,12 @@
             <br/><br/><br/>
             <div class="row">
                 
-                    <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;width:165px;" src='../../images/Techtoberfest2013small.png'/><span class="titlespan">Suggest a Speaker</span></h2>
+                    <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='../../images/Techtoberfest2013small.png'/><span class="titlespan">Suggest a Speaker</span></h2>
                 
             </div>
             <br/>
             <div class="row">
-                
+                <%@include file="../../includes/messagehandler.jsp" %>
                     <form method="POST" id="action" action="../../action/processSpeakerSuggestion.jsp">
                         <fieldset>
                             <div class="form-group">
@@ -76,7 +76,7 @@
                                 </span>
                             </div>
                             <div class="form-actions">
-                                <input type="submit" id="send" class="button button-primary" value="Send"/>
+                                <input type="submit" id="send" class="button button-primary" value="Submit"/>
                                 <a class="button" id="cancel" href="../../view/speaker.jsp">Cancel</a>
                             </div>
                         </fieldset> 
@@ -87,7 +87,11 @@
         <br/>
         <br/>
         <%@ include file="../../includes/footer.jsp" %> 
-        <%@ include file="../../includes/scriptlist.jsp" %>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script src="../../js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>
+        <script src="../../js/libs/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
+        <script src="../../js/libs/sniui.auto-inline-help.min.js" type="text/javascript"></script>
+        <script src="../../js/libs/sniui.auto-inline-help.1.0.0.min.js" type="text/javascript"></script>
 
         <!--additional script-->
         <script src="../../js/speaker.js"></script>

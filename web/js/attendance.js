@@ -10,7 +10,4 @@ $("#send").click(function(event) {
         $("#error_key").show();
         event.preventDefault();
     }
-    else {
-        $("#action").attr("action", "../../action/processThemeSuggestion.jsp");
-    }
 });

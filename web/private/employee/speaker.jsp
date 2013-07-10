@@ -63,11 +63,11 @@
                     SpeakerPersistence persist = new SpeakerPersistence();
                     ArrayList<Speaker> speakers = persist.getUserRanks(user);
                     if (speakers == null || speakers.size() == 0) {
-                        out.print("<h2 class=bordered><img style=\"padding-bottom:0;padding-left:0;width:165px;\" src='../../images/Techtoberfest2013small.png'/><span class=\"titlespan\">Speakers - Drag & Drop Speakers to Rank Them</span></h2>");
+                        out.print("<h2 class=bordered><img style=\"padding-bottom:0;padding-left:0;\" src='../../images/Techtoberfest2013small.png'/><span class=\"titlespan\">Speakers - Drag & Drop Speakers to Rank Them</span></h2>");
                         out.print("<a href=\"nondragspeaker.jsp\">Non Drag and Drop Speakers</a><br/>");
 
                     } else {
-                        out.print("<h2 class=bordered><img style=\"padding-bottom:0;padding-left:0;width:165px;\" src='../../images/Techtoberfest2013small.png'/><span class=\"titlespan\">Your Speaker Rankings</span></h2>");
+                        out.print("<h2 class=bordered><img style=\"padding-bottom:0;padding-left:0;\" src='../../images/Techtoberfest2013small.png'/><span class=\"titlespan\">Your Speaker Rankings</span></h2>");
                     }
                 %>
                 

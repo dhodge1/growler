@@ -5,21 +5,33 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<style>
+    #modalDialog {
+        display:none;
+    }
+    #thanksDialog {
+        display:none;
+    }
+</style>
 <%  //Displaying error or success messages -- clear it out when done
     String message = (String) session.getAttribute("message");
-    if (message != null && message.startsWith("Success:")) {
+    String sessionName = "";
+    if (message != null && message.startsWith("Success:") && !message.contains("Attendance")) {
         message = message.substring(8, message.length() - 1);
         out.print("<p class=feedbackMessage-success>" + message + "</p>");
+        session.removeAttribute("message");
+    } else if (message != null && message.startsWith("Success: Attendance")) {
+        sessionName = (String) session.getAttribute("sessionName");
+        message = message.substring(8, message.length() - 1);
+        out.print("<p class=feedbackMessage-success>" + message + "</p>");
+        out.print("<div id='modalDialog' title='Successfully Acknowledged Attendance'>");
+        out.print("<p>Please take a survey.</p><p>This will enter you in a drawing for a fantastic prize.</p></div>");
+        out.print("<div id='thanksDialog' title='Thanks Anyway'>");
+        out.print("<p>Thanks anyway. You can always take a survey later.</p></div>");
         session.removeAttribute("message");
     } else if (message != null && message.startsWith("Error:")) {
         message = message.substring(6, message.length() - 1);
         out.print("<p class=feedbackMessage-error>" + message + "</p>");
-        session.removeAttribute("message");
-    } else if (message != null && message.startsWith("Success: Attendance")) {
-        out.print("<p id=\"topMessage\" class=feedbackMessage-success>" + message + "</p>");
-        String sessionName = (String) session.getAttribute("sessionName");
-        out.print("<div id=\"modalDialog\" title=\"Successfully Acknowledged Attendance for " + sessionName + "\"><p>Please take a survey.</p><p>This will enter you in a drawing for a fantastic prize.</p></div>");
-        out.print("<div id=\"thanksDialog\" title=\"Thanks Anyway\"><p>Thanks anyway. You can always take a survey later.</p></div>");
         session.removeAttribute("message");
     } else if (message != null) {
         out.print("<p class=feedbackMessage-info>" + message + "</p>");
@@ -27,6 +39,7 @@
     }
 %>
 <script>
+
     $(function() {
         $("#modalDialog").dialog({
             resizable: false,
@@ -53,6 +66,15 @@
                 }
             }
         });
+
     });
+
 </script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="../../js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>
+<script src="../../js/libs/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
+<script src="../../js/libs/sniui.auto-inline-help.min.js" type="text/javascript"></script>
+<script src="../../js/libs/sniui.auto-inline-help.1.0.0.min.js" type="text/javascript"></script>
+<script src='../../js/sniui.dialog.1.0.0.min.js'></script>
+<script src='../../js/sniui.dialog.1.1.0.min.js'></script>
 <script src='../../js/sniui.dialog.1.2.0.min.js'></script>

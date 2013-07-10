@@ -34,6 +34,7 @@
             String time = today.get(Calendar.HOUR) + ":" + today.get(Calendar.MINUTE) + ":" + today.get(Calendar.SECOND);
             int sessionId = Integer.parseInt(request.getParameter("session"));
             String key = request.getParameter("skey");
+            String sessionName = "";
 
             boolean success = false;
 
@@ -54,7 +55,7 @@
                 ResultSet keycheck = newStatement.executeQuery("select count(id) from session where session_key = '" + key + "'");
                 keycheck.next();
                 if (keycheck.getInt(1) == 0) {
-                    session.setAttribute("message", "Error: Invalid Session Key");
+                    session.setAttribute("message", "Error: Invalid Session Key ");
                 } else {
                     //Prevent the same time slot registration
                     ResultSet duplicate = statement.executeQuery("select count(a.session_id) from attendance a, session s where a.user_id = " + user + " and s.start_time = (select start_time from session where id = " + sessionId + ") and s.session_date = curdate() and a.session_id = s.id");
@@ -75,13 +76,14 @@
                     duplicate.close();
                 }
             }
-
+            
             connection.close();
             statement.close();
             result.close();
+            
             if (success) {
                 //Email the user a message that they should take a survey
-                response.sendRedirect("../model/emailer.jsp?session=" + sessionId);
+                response.sendRedirect("../action/emailer.jsp?session=" + sessionId);
             } else {
                 response.sendRedirect("../private/employee/attendance.jsp");
             }

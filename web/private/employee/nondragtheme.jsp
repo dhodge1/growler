@@ -80,10 +80,10 @@
                     ArrayList<Theme> themes = persist.getUserRanks(user);
                     //If we didn't get any ranks, we tell the user to rank the themes
                     if (themes == null || themes.size() == 0) {
-                        out.print("<h2 class=bordered><img style=\"padding-bottom:0;padding-left:0;width:165px;\" src='../../images/Techtoberfest2013small.png'/><span class=\"titlespan\">Themes - Click To Order Themes</span></h2>");
+                        out.print("<h2 class=bordered><img style=\"padding-bottom:0;padding-left:0;\" src='../../images/Techtoberfest2013small.png'/><span class=\"titlespan\">Themes - Click To Order Themes</span></h2>");
                     } else { //If we got themes, we let the user see them
                         response.sendRedirect("../../view/theme.jsp");
-                        out.print("<h2 class=bordered><img style=\"padding-bottom:0;padding-left:0;width:165px;\" src='../../images/Techtoberfest2013small.png'/><span class=\"titlespan\">Your Theme Ranks</span></h2>");
+                        out.print("<h2 class=bordered><img style=\"padding-bottom:0;padding-left:0;\" src='../../images/Techtoberfest2013small.png'/><span class=\"titlespan\">Your Theme Ranks</span></h2>");
                     }
                 %>
                 

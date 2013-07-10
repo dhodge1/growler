@@ -51,11 +51,11 @@
                 %>
         <div class="container-fixed">
             <div class="row">
-                    <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;width:165px;" src='../../images/Techtoberfest2013small.png'/><span class="titlespan">Welcome to Techtoberfest</span></h2>
+                    <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='../../images/Techtoberfest2013small.png'/><span class="titlespan">Welcome to Techtoberfest</span></h2>
             </div>
             <br/>
             <div class="row">
-                
+                <%@include file="../../includes/messagehandler.jsp" %>
                     <h3>Themes</h3>
                                         <p>A place to view, rank, and suggest Themes for this year's Techtoberfest</p>
                                         <h3>Speakers</h3>
