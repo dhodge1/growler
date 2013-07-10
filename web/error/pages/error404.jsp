@@ -26,7 +26,7 @@
         <%@ include file="../../includes/indexheader.jsp" %> 
         <div class="container-fixed">
             <div class="row">
-                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='../../images/Techtoberfest2013small.png'/><span class="titlespan">Page Not Found</span></h2>
+                <h1>Page Not Found</h2>
             </div>
             <br/>
             <div class="row">

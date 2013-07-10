@@ -43,7 +43,7 @@
     </head>
     <body id="growler1">
         <%@ include file="includes/indexheader.jsp" %> 
-        <div class="container-fixed">
+        <div class="container-fixed largeBottomMargin">
             <div class="row">
                 <h1>Techtoberfest Information System (TIS)</h1>
                 <h3>TIS allows Scripps Employees the ability to not only stay abreast 
@@ -52,7 +52,7 @@
 
             </div>
             <br/><br/><br/>
-            <div class="row">
+            <div class="row mediumBottomMargin">
                 <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='images/Techtoberfest2013small.png'/><span class="titlespan">Login to TIS</span></h2>
             </div>
             <div class="row">

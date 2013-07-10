@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
-  <header class="pageHeader">
+  <header class="pageHeader mediumBottomMargin">
     <div class="pageHeader-portal">
       <div class="pageHeader-logo">
       </div>
