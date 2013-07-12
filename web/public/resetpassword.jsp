@@ -34,7 +34,13 @@
         <link rel="stylesheet" href="../css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
         <link rel="stylesheet" href="../css/prettify/prettify.css" /> 
         <link rel="stylesheet" type="text/css" href="../css/general.css" /><!--General CSS-->
-
+        <style>
+            .message_container {
+                display: none;
+                color: red;
+                font-weight: bold;
+            }
+        </style>
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->	
     </head>
     <body id="growler1">

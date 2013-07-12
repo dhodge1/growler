@@ -5,10 +5,24 @@
     Description:
         Purpose of the stylesheet follows.
 */
-
+.error-fluid {
+    margin-left: 12px;
+    margin-right: 12px;
+}
 .error_container { 
     background-color:#f0f0f0;border-color:#999;
-    padding: 12px 12px 12px 40px;
+    padding: 12px;
     border: 1px solid;
+}
+.error_container a {
+    color: #0067b1;
+}
+.error_container a:visited {
+    color: #0067b1;
+}
+.error_heading {
+    font-family: Arial, sans-serif;
+    color: #333;
+    font-size: 24px;
 }
 

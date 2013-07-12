@@ -77,7 +77,6 @@
                         <button class="button button-primary" id="send" type="submit" style="margin-right:4px;">Login</button>
                         <a href="public/requestreset.jsp">Forgot Password?</a>
                     </div>
-                    <span style="font-weight: bold;">Not Registered? <a style='font-weight:normal;' href="public/register.jsp">Click here to register</a></span>
                 </form>
             </div>
         </div>

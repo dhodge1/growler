@@ -40,14 +40,15 @@
                 result.close();
                 statement.close();
                 connection.close();
-                session.setAttribute("user", name);
-                session.setAttribute("id", user);
-                response.sendRedirect("../private/employee/home.jsp");
+                //session.setAttribute("user", name);
+                //session.setAttribute("id", user);
+                session.setAttribute("message", "Success: Password reset successfully! ");
+                response.sendRedirect("../public/reset-successful.jsp");
             } else {
                 result.close();
                 statement.close();
                 connection.close();
-                session.setAttribute("message", "Error: Invalid credentials");
+                session.setAttribute("message", "Error: Invalid credentials ");
                 response.sendRedirect("../index.jsp");
             }
 

@@ -20,16 +20,20 @@
         <link rel="stylesheet" href="../../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="../../css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
         <script src="../../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
+    <link rel="stylesheet" href="../../css/errors.css"/>
     </head>
     <body id="growler1">
-        <%@ include file="../../includes/indexheader.jsp" %> 
-        <div class="container-fixed">
+        <%@ include file="../../includes/header.jsp" %>
+        <%@ include file="../../includes/testnav.jsp" %>
+        <div class="container-fixed mediumBottomMargin error-fluid">
+            <div class="content">
             <div class="row">
-                <h1>Service Unavailable</h1>
+                <h1 class="error_heading">Something went wrong</h1>
             </div>
+            <br/>
             <div class="row">
-                <p>We're sorry.  The page you are looking for has moved or does not exist.  We apologize for any inconvenience.</p>
-                <div class="feedbackMessage-info">
+                <p>We're sorry.  The application is temporarily unavailable.  Please try again later.  We apologize for any inconvenience.</p>
+                <div class="error_container">
                     If you need additional assistance or need further support, please contact the Support Desk.
                     <br/>
                     <br/>
@@ -48,6 +52,7 @@
                     </div>
                     (Requests submitted via Self-Service are assumed to be a standard priority.)
                 </div>
+            </div>
             </div>
         </div>
         <%@ include file="../../includes/footer.jsp" %> 

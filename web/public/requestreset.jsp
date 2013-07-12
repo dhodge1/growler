@@ -23,7 +23,7 @@
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <title>Password Reset</title>
+        <title>Request Password Reset</title>
 
         <link rel="stylesheet" href="../css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
         <link rel="stylesheet" href="../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
@@ -40,53 +40,56 @@
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->	
     </head>
     <body id="growler1">
-        <%@ include file="../includes/indexheader.jsp" %> 
-        <div class="container-fixed">
-            <div class="row">
-                <br/>
-                
-                    <h1>Techtoberfest Information System (TIS)</h1>
-                    <h3>TIS allows Scripps Employees the ability to not only stay abreast 
-                        of all Techtoberfest sessions, but also the opportunity to provide 
-                        valuable session feedback before, during, and after the event!</h3>
-                
+        <%@ include file="../includes/header.jsp" %> 
+        <%@ include file="../includes/publicnav.jsp" %>
+        <div class="container-fixed largeBottomMargin">
+            <div class="row mediumBottomMargin">
+                <ul class="breadcrumb">
+                    <li><a href="../index.jsp">Home</a></li>
+                    <li>Request Password Reset</li>
+                </ul>
             </div>
-            <br/><br/><br/>
-            <div class="row">
-                
-                    <h2 class="bordered"><img src='../images/Techtoberfest2013small.png'/><span class="titlespan">Request a New Password</span></h2>
-                
+            <div class="row largeBottomMargin">
+                <h1 style="font-weight:normal;">Request Password Reset</h1>
             </div>
-            <br/>
+            <div class="row mediumBottomMargin">
+                <p>Please enter the Email Address associated with your account and click Submit Request</p>
+            </div>
+            <div class="row mediumBottomMargin">
+                <label><span style="color: red;">*</span>Required field</label>
+            </div>
             <div class="row">
-                
+                <h2 class="bordered mediumBottomMargin">Request Details</h2>
+                <%@include file="../includes/messagehandler.jsp" %>
+                <p id="error_global" class="message_container feedbackMessage-error">
+                    <span style="color: #000">An email address is required.</span>
+                </p>
                     <form method="POST" id="action" action="../action/sendreset.jsp">
                         <fieldset>
-                            <div class="form-group">
-                                <label class="required">User ID</label>
-                                <input name="id" class="input-xlarge" type="text" id="tip" data-content="Enter your User ID" maxlength="6"/>
-                                <br/><span id="error_id" class="message_container">
-                                    <span>Please Enter Your User ID</span>
-                                </span>
-                            </div>
-                            <div class="form-group">
+                            <div class="form-group largeBottomMargin">
                                 <label class="required">Email Address</label>
-                                <input name="email" class="input-xlarge" type="text" id="tip2" data-content="Enter your Email Address" maxlength="50"/>
+                                <input name="email" class="input-xlarge" type="text" id="tip" data-content="Enter your Email Address" maxlength="50"/>
                                 <br/><span id="error_email" class="message_container">
-                                    <span>Please Enter Your Email Address</span>
+                                    <span>Please enter a Valid Email Address</span>
+                                </span>
+                                <span id="error_valid" class="message_container">
+                                    <span>Please enter a valid Email Address</span>
+                                </span>
+                                <span id="error_scripps" class="message_container">
+                                    <span>As a Scripps employee, you must request a password reset using the procedure outlined by the help desk.  Please cancel and contact the Help Desk if you need further assistance.</span>
+                                </span>
+                                <span id="error_final" class="message_container">
+                                    <span>This website is for Scripps Networks employees only. Please contact the SNI help desk for further assistance.</span>
                                 </span>
                             </div>
                             <div class="form-actions">
-                                <input class="button button-primary" id="send" value="Submit" type="submit"/>
-                                <a class="button" href="../index.jsp">Cancel</a>
+                                <input class="button button-primary" id="send" value="Submit Request" type="submit"/>
+                                <a href="../index.jsp">Cancel</a>
                             </div>
                         </fieldset>
                 </form>	
-                
             </div>
         </div>
-        <br/>
-        <br/>
     <%@ include file="../includes/footer.jsp" %> 
     <%@ include file="../includes/scriptlist.jsp" %>
 

@@ -24,10 +24,12 @@
         <link rel="stylesheet" href="../../css/errors.css"/>
     </head>
     <body id="growler1">
-        <%@ include file="../../includes/indexheader.jsp" %> 
-        <div class="container-fixed largeBottomMargin">
+        <%@ include file="../../includes/header.jsp" %>
+        <%@ include file="../../includes/testnav.jsp" %>
+        <div class="container-fixed mediumBottomMargin error-fluid">
+            <div class="content">
             <div class="row">
-                <h1>Page Not Found</h2>
+                <h1 class="error_heading">Page Not Found</h1>
             </div>
             <br/>
             <div class="row">
@@ -51,6 +53,7 @@
                     </div>
                     (Requests submitted via Self-Service are assumed to be a standard priority.)
                 </div>
+            </div>
             </div>
         </div>
         <%@ include file="../../includes/footer.jsp" %> 

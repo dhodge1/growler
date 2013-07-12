@@ -16,11 +16,10 @@
 <%
         Connection connection = dataConnection.sendConnection();
         Statement statement = connection.createStatement();
-        String user = request.getParameter("id");
         String email = request.getParameter("email");
         
         //ensure the person requesting the reset gave us the proper data
-        ResultSet result = statement.executeQuery("select id, name, email from user where id = " + Integer.parseInt(user) + " and email = '" + email + "'");
+        ResultSet result = statement.executeQuery("select id, name, email from user where email = '" + email + "'");
         while (result.next()){
             if (result.getString("name") == null) {
                 session.setAttribute("message", "Error: Invalid attributes");
@@ -28,8 +27,8 @@
             }
         }
         //Make the temporary password a hash of the System Date
-        statement.executeUpdate("update user set password = sha1(sysdate()) where id = " + Integer.parseInt(user));
-        ResultSet result2 = statement.executeQuery("select id, name, password, email from user where id = " + Integer.parseInt(user));
+        statement.executeUpdate("update user set password = sha1(sysdate()) where email = '" + email + "'");
+        ResultSet result2 = statement.executeQuery("select id, name, password, email from user where email = '" + email + "'");
         User u = new User();
         while (result2.next()) {
             u.setId(result2.getInt("id"));
@@ -70,14 +69,14 @@
 			message.setSubject("Your password has been reset");
 			message.setText("Dear " + u.getUserName() + ",\n\n" +
 				"We have received a notification for your password reset.\n" +
-                                "Please visit http://snitechtoberfest.elasticbeanstalk.com/view/resetpassword.jsp?id=" + u.getId() + "&email=" + u.getEmail() + " \n" +
+                                "Please visit http://sni-techtoberfest.elasticbeanstalk.com/view/resetpassword.jsp?id=" + u.getId() + "&email=" + u.getEmail() + " \n" +
                                 "Your verification code is: " + u.getPassword() + " \n" +
                                 "Thanks,\n\n Techtoberfest Admin Staff");
  
 			Transport.send(message);
  
 			results = "Done";
-                        session.setAttribute("message", "Success: Email has been sent!");
+                        session.setAttribute("message", "Success: Password reset requested successfully! ");
  
 		} catch (MessagingException e) {
                     results = "Failed " + e.getLocalizedMessage();
@@ -89,6 +88,6 @@
                     result2.close();
                     statement.close();
                     connection.close();
-                    response.sendRedirect("../index.jsp");
+                    response.sendRedirect("../public/reset-confirmed.jsp");
                 }
     %>
