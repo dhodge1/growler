@@ -26,14 +26,13 @@
     <body id="growler1">
         <%@ include file="../../includes/header.jsp" %>
         <%@ include file="../../includes/testnav.jsp" %>
-        <div class="container-fixed mediumBottomMargin error-fluid">
+        <div class="container-fixed error-fluid">
             <div class="content">
             <div class="row mediumBottomMargin">
                 <h1 class="error_heading">Page Not Found</h1>
             </div>
-            <br/>
             <div class="row mediumBottomMargin">
-                <p>We're sorry.  The page you are looking for has moved or does not exist.  We apologize for any inconvenience.</p>
+                <p class="error_p">We're sorry.  The page you are looking for has moved or does not exist.  We apologize for any inconvenience.</p>
                 <div class="error_container">
                     If you need additional assistance or need further support, please contact the Support Desk.
                     <br/>

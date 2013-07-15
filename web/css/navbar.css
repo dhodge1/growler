@@ -29,7 +29,7 @@ display:none;}
 .non_drop {
 border-right:1px dotted #fff;margin-left:9px;padding-right:3px;height:23px!important;z-index:9;}
 .brand_nav{
-margin-left:9px;padding-left: 3px;height:23px!important;z-index:9;font-family:"Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif; font-size:13px;}
+margin-left:2px;height:23px!important;z-index:9;font-family:"Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif; font-size:13px;}
 .brand_nav:hover a{
 background:#fff!important;border-radius:3px 3px 0 0;-moz-border-radius:3px 3px 0 0;-webkit-border-radius:3px 3px 0 0;}
 .brand_nav:hover a span{
@@ -39,15 +39,13 @@ background:#fff!important;filter:none!important;color:#002d56;}
 .brand_nav:hover em,.brand_nav.selected em{
 background:url(../images/bootstrap/icon-set.png) no-repeat -184px -3px;display:inline-block;height:7px;margin-left:4px;position:relative;width:12px;}
 .brand_nav em{
-background:url(../images/bootstrap/icon-set.png) no-repeat -173px -3px;display:inline-block;height:7px;margin-left:7px;position:relative;width:12px;}
+background:url(../images/bootstrap/icon-set.png) no-repeat -173px -3px;display:inline-block;height:7px;margin-left:5px;position:relative;width:12px;}
 .brand_nav .child-menu{
-display:none;border:1px solid #333;background:#fff;margin:0!important;position:absolute;top:27px;padding:5px 0;height:auto!important;border-top:0!important;-webkit-border-radius:0 0 3px 3px;-moz-border-radius:0 0 3px 3px;border-radius:0 0 3px 3px;}
-.brand_nav .child-menu-ul{
-min-width: 190px;}
+display:none;border:1px solid #ccc;background:#fff;margin:0!important;position:absolute;top:27px;padding:5px 0;height:auto!important;border-top:0!important;-webkit-border-radius:0 0 3px 3px;-moz-border-radius:0 0 3px 3px;border-radius:0 0 3px 3px;}
 .brand_nav .child-menu li{
 line-height:20px;height:auto!important;top:0!important;float:none!important;margin-right:0!important;}
 .brand_nav .child-menu li a{
-border-radius:0 0 0 0!important;padding:0 12px!important;font-family:verdana;font-size:12px;color:#333;display:block!important;float:none!important;white-space:nowrap;width:auto!important;text-decoration:none;}
+border-radius:0 0 0 0!important;padding-left: 12px;padding-right: 12px;font-family:verdana;font-size:12px;color:#333;display:block!important;float:none!important;white-space:nowrap;width:auto!important;text-decoration:none;}
 .brand_nav .child-menu li a:hover{
 background:#c9e5f6!important;color:#333!important;}
 .brand_nav:hover .child-menu{
@@ -55,3 +53,6 @@ display:block;}
 .modify-pages li{
 position:relative;
 list-style: none;}
+.brand_nav a {
+    padding-right: 8px;
+}

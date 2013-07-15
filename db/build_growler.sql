@@ -1,15 +1,3 @@
-/* Authors:
- * 	created by:
- * 	Justin Bauguess 	on 01/29/13
- *			
- *	edited by:
- *	Brandon Foster		from 02/05/13
- *			
- * Purpose:
- *	This script will drop and create every table designed.
- *	
- *	
- */
 drop database if exists growler_db;
 create database growler_db;
 use growler_db;
@@ -32,6 +20,7 @@ CREATE TABLE theme (
 	,year			year(4)
 	,visible		boolean
 	,reason			varchar(250) /*for user-suggested themes*/
+	,type			varchar(30)
 	);
 
 /*
@@ -220,12 +209,12 @@ insert into user values (808300, "Administrator", sha1('password'), NULL, NULL);
 
 
 /*Theme inserts*/
-INSERT INTO theme VALUES (1, "Cloud Computing", "All things Cloud, from IaaS, PaaS, DaaS, SaaS, to hosting providers, brokers, and cloud-enabling appliances", 202300, "2013", true, NULL);
-INSERT INTO theme VALUES (2, "Development Frameworks", "Any type of development framework, regardless of language", 202300, "2013", true, NULL);
-INSERT INTO theme VALUES (3, "Software Process/Lifecycle", "Waterfall, Agile, Scrum, Kanban, process improvements, new techniques", 202300, "2013", true, NULL);
-INSERT INTO theme VALUES (4, "Mobility", "Topics related to mobile computing in the enterprise, including mobile apps, phones, tablets, and other devices", 202300, "2013", true, NULL);
-INSERT INTO theme VALUES (5, "Social and Collaboration", "Tools and Techniques that make the enterprise more social and allow people to better communicate and collaborate when they are not in the same room, floor, building, city, state, or country", 202300, "2013", true, NULL);
-INSERT INTO theme VALUES (6, "Show and Tell", "Show and Tell (Description)", 202300, "2013", true, NULL);
+INSERT INTO theme VALUES (1, "Cloud Computing", "All things Cloud, from IaaS, PaaS, DaaS, SaaS, to hosting providers, brokers, and cloud-enabling appliances", 202300, "2013", true, NULL, 'Technical');
+INSERT INTO theme VALUES (2, "Development Frameworks", "Any type of development framework, regardless of language", 202300, "2013", true, NULL, 'Technical');
+INSERT INTO theme VALUES (3, "Software Process/Lifecycle", "Waterfall, Agile, Scrum, Kanban, process improvements, new techniques", 202300, "2013", true, NULL, 'Technical');
+INSERT INTO theme VALUES (4, "Mobility", "Topics related to mobile computing in the enterprise, including mobile apps, phones, tablets, and other devices", 202300, "2013", true, NULL, 'Technical');
+INSERT INTO theme VALUES (5, "Social and Collaboration", "Tools and Techniques that make the enterprise more social and allow people to better communicate and collaborate when they are not in the same room, floor, building, city, state, or country", 202300, "2013", true, NULL, 'Technical');
+INSERT INTO theme VALUES (6, "Show and Tell", "Show and Tell (Description)", 202300, "2013", true, NULL, 'Business');
 
 /*
  * Inserts the speakers from 2012
@@ -406,18 +395,6 @@ rating	DECIMAL(3, 2)
 ,speaker_id	int	REFERENCES speaker(id)
 ,count	int
 );
-
-/*
- * Loads a raw data file of session ranking data from last year
- * into the ranks_2012 table
- * ranks_2012: speaker_id, rating, and count
- */
-load data LOCAL infile 'C:/Users/162107/Documents/GitHub/growler/db/raw_data/ranks_2012_out.csv'
-into table ranks_2012
-fields terminated by ',';
-
-alter table session 
-add column session_key varchar(4) UNIQUE;
 
 /*
  * The Comments table is to store comments made after a survey.

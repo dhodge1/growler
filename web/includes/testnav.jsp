@@ -29,13 +29,13 @@
 			<li><a href="themeentry.jsp">Suggest a New Theme</a></li>
 		</ul>
 	</li>
-	<li class="brand_nav <%= speakerTab %>"><a href="#"><span>Speakers</span><em></em></a>
+	<li class="brand_nav <%= speakerTab %>"><a href="#" style='padding-left:8px;'><span class="nav_drop">Speakers</span><em></em></a>
 		<ul class="child-menu child-menu-ul">
 			<li><a href="speaker.jsp">Rank Preferred Speakers</a></li>
 			<li><a href="speakerentry.jsp">Suggest a New Speaker</a></li>
 		</ul>
 	</li>
-	<li class="brand_nav <%= sessionTab %>"><a href="#"><span>Sessions</span><em></em></a>
+	<li class="brand_nav <%= sessionTab %>"><a href="#" style='padding-left:8px;'><span class="nav_drop">Sessions</span><em></em></a>
 		<ul class="child-menu child-menu-ul">
 			<li><a href="sessionschedule.jsp">View Session Schedule</a></li>
 			<li><a href="attendance.jsp">Acknowledge Attendance</a></li>

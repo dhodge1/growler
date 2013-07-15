@@ -8,7 +8,7 @@
 --%>
 
 <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
-<link href="../../../css/navbar.css" rel="stylesheet">
+<link href="http://sni-techtoberfest.elasticbeanstalk.com/css/navbar.css" rel="stylesheet">
 <style>
     body {
         padding-bottom: 30px;
@@ -37,7 +37,7 @@
         home = active;
     }
 %>
-<link href="../../../css/responsive.1.2.0.css" rel="stylesheet">
+<link href="http://sni-techtoberfest.elasticbeanstalk.com/css/responsive.1.2.0.css" rel="stylesheet">
 <nav class="topnav">
 <nav class="globalNavigation modify-pages" id="navigation">
   <ul>
@@ -48,28 +48,28 @@
 			<li><a href="themeentry.jsp">Suggest a New Theme</a></li>
 		</ul>
 	</li>
-	<li class="brand_nav <%= speakerTab %>"><a href="#"><span>Speakers</span><em></em></a>
+	<li class="brand_nav <%= speakerTab %>"><a href="#"><span class="nav_drop">Speakers</span><em></em></a>
 		<ul class="child-menu child-menu-ul">
 			<li><a href="speaker.jsp">Edit Speakers</a></li>
 			<li><a href="speakerentry.jsp">Suggest a New Speaker</a></li>
                         <li><a href="assignspeaker.jsp">Assign Speaker to a Session</a></li>
 		</ul>
 	</li>
-	<li class="brand_nav <%= roomTab %>"><a href="#"><span>Rooms</span><em></em></a>
+	<li class="brand_nav <%= roomTab %>"><a href="#"><span class="nav_drop">Rooms</span><em></em></a>
 		<ul class="child-menu child-menu-ul">
 			<li><a href="addroom.jsp">Add a Room</a></li>
                         <li><a href="room.jsp">View Rooms</a></li>
                         <li><a href="assignroom.jsp">Assign Room to a Session</a></li>
 		</ul>
 	</li>
-	<li class="brand_nav <%= sessionTab %>"><a href="#"><span>Sessions</span><em></em></a>
+	<li class="brand_nav <%= sessionTab %>"><a href="#"><span class="nav_drop">Sessions</span><em></em></a>
 		<ul class="child-menu child-menu-ul">
 			<li><a href="sessionScheduler.jsp">Schedule Sessions</a></li>
 			<li><a href="session.jsp">View Sessions</a></li>
                         <li><a href="comments.jsp">Session Comments</a></li>
 		</ul>
 	</li>
-	<li class="brand_nav <%= reportTab %>"><a href="#"><span>Reports</span><em></em></a>
+	<li class="brand_nav <%= reportTab %>"><a href="#"><span class="nav_drop">Reports</span><em></em></a>
 		<ul class="child-menu child-menu-ul">
 			<li><a href="surveyReport.jsp">Users Who Completed Surveys</a></li>
                         <li><a href="interestReport.jsp">Interest in Sessions</a></li>

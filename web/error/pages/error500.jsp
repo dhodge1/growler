@@ -25,34 +25,33 @@
     <body id="growler1">
         <%@ include file="../../includes/header.jsp" %>
         <%@ include file="../../includes/testnav.jsp" %>
-        <div class="container-fixed mediumBottomMargin error-fluid">
+        <div class="container-fixed error-fluid">            
             <div class="content">
-            <div class="row">
-                <h1 class="error_heading">Something went wrong</h1>
-            </div>
-            <br/>
-            <div class="row">
-                <p>We're sorry.  The application is temporarily unavailable.  Please try again later.  We apologize for any inconvenience.</p>
-                <div class="error_container">
-                    If you need additional assistance or need further support, please contact the Support Desk.
-                    <br/>
-                    <br/>
-                    
-
-                    <div>
-                        <h5 style="display: inline-block">Phone:</h5> 865-560-4040 or 877-538-2025
-                    </div>
-                    <div>
-                        <h5 style="display: inline-block">Email: <a href="mailto:supportdesk@scrippsnetworks.com">supportdesk@scrippsnetworks.com</a>
-                        </h5>
-                    </div>
-                    <div>
-                        <h5 style="display: inline-block">Self-Service: <a href="https://support.scrippsnetworks.com">https://support.scrippsnetworks.com</a>
-                        </h5>
-                    </div>
-                    (Requests submitted via Self-Service are assumed to be a standard priority.)
+                <div class="row mediumBottomMargin">
+                    <h1 class="error_heading">Something went wrong</h1>
                 </div>
-            </div>
+                <div class="row mediumBottomMargin">
+                    <p class="error_p">We're sorry.  The application is temporarily unavailable.  Please try again later.  We apologize for any inconvenience.</p>
+                    <div class="error_container">
+                        If you need additional assistance or need further support, please contact the Support Desk.
+                        <br/>
+                        <br/>
+
+
+                        <div>
+                            <h5 style="display: inline-block">Phone:</h5> 865-560-4040 or 877-538-2025
+                        </div>
+                        <div>
+                            <h5 style="display: inline-block">Email: <a href="mailto:supportdesk@scrippsnetworks.com">supportdesk@scrippsnetworks.com</a>
+                            </h5>
+                        </div>
+                        <div>
+                            <h5 style="display: inline-block">Self-Service: <a href="https://support.scrippsnetworks.com">https://support.scrippsnetworks.com</a>
+                            </h5>
+                        </div>
+                        (Requests submitted via Self-Service are assumed to be a standard priority.)
+                    </div>
+                </div>
             </div>
         </div>
         <%@ include file="../../includes/footer.jsp" %> 

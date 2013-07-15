@@ -2,7 +2,7 @@
     Document   : speaker
     Created on : Feb 28, 2013, 7:15:03 PM
     Author     : Justin Bauguess & Jonathan C. McCowan
-    Purpose    : The theme (user) page is for users to rank themes according to 
+    Purpose    : The theme (user) page is for users to rank speakers according to 
                 their preferences.  The ranks are saved in the isolated_theme_ranking
                 table for now.  Once users are remembered, it will be saved in the 
                 theme_ranking table.  A record in that table will contain a user_id,
@@ -29,17 +29,53 @@
 
         <title>Speakers</title><!-- Title -->
 
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> 
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/speakers/base/jquery-ui.css" /> 
         <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-        <link rel="stylesheet" href="../../css/demo.css" />  
-        <link rel="stylesheet" href="../../css/draganddrop.css" /><!--Drag and drop style-->
         <link rel="stylesheet" type="text/css" href="../../css/general.css" /><!--General CSS-->
         <link rel="stylesheet" type="text/css" href="../../css/speaker.css" /><!--Speaker CSS-->
         <link rel="stylesheet" href="/resources/demos/style.css" />
 
-        <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
-        <script src="../../js/jquery.ui.touch-punch.min.js"></script>
+        
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
+        <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+        <script>
+            $(function() {
+                $("#speakers, #ranked").sortable({
+                    connectWith: ".connectedSortable",
+                    placeholder: "ui-state-highlight",
+                    update: function(event, ui) {
+                        $(this).find(".placeholder").remove();
+                        $("#speakers").find(":hidden").prop("name", "none");
+                        $("#ranked").find(":hidden").prop("name", "list");
+                        if ($("#ranked li").length > 9) {
+                            $("#speakers").sortable({
+                                disabled:true
+                            });
+                        } else {
+                            $("#speakers").sortable({
+                                disabled:false
+                            });
+                        }
+                    }
+                }).disableSelection();
+                $("#filter").change(function() {
+                    if ($("#filter").val() == 1) {
+                        $('#speakers li').filter('.Business').show();
+                        $('#speakers li').filter('.Technical').show();
+                    }
+                    else if ($("#filter").val() == 2) {
+                        $('#speakers li').filter('.Business').show();
+                        $('#speakers li').filter('.Technical').hide();
+                    }
+                    else if ($("#filter").val() == 3) {
+                        $('#speakers li').filter('.Business').hide();
+                        $('#speakers li').filter('.Technical').show();
+                    }
+                });
+
+            });
+        </script>
     </head>
     <body id="growler1">
         <%
@@ -55,13 +91,13 @@
         %>
         <%@ include file="../../includes/header.jsp" %> 
         <%@ include file="../../includes/testnav.jsp" %>
-        <div class="container-fixed">
-            <br/><br/><br/>
+        <div class="container-fixed mediumBottomMargin">
             <div class="row">
                 
 				<%
                     SpeakerPersistence persist = new SpeakerPersistence();
                     ArrayList<Speaker> speakers = persist.getUserRanks(user);
+                    ArrayList<Speaker> vspeakers = persist.getSpeakersByVisibility(true, persist.SORT_BY_LAST_NAME_ASC);
                     if (speakers == null || speakers.size() == 0) {
                         out.print("<h2 class=bordered><img style=\"padding-bottom:0;padding-left:0;\" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class=\"titlespan\">Speakers - Drag & Drop Speakers to Rank Them</span></h2>");
                         out.print("<a href=\"nondragspeaker.jsp\">Non Drag and Drop Speakers</a><br/>");
@@ -76,7 +112,6 @@
             <div class="row">
                 
                     <%
-
                     if (speakers.size() > 0) {
                         out.print("<table class=\"propertyGrid\">");
                         for (int i = 0; i < speakers.size(); i++) {
@@ -86,19 +121,18 @@
                         out.print("</table>");
                         out.print("<a href=\"../../action/removeSpeakerRanks.jsp?id=" + user + "\">Reset Ranks</a>");
                     }
-
-
                 %>
 				<%
                                             if (speakers == null || speakers.size() == 0) {
-                                                ArrayList<Speaker> vspeakers = persist.getSpeakersByVisibility(true, persist.SORT_BY_LAST_NAME_ASC);
                                         %>
                                         <form action="../../action/processSpeakerRanking.jsp">
-                                            <ul class="sortable">
+                                            <div class="row">
+                                            <div class="span5" style="overflow:auto;">
+                                            <ul id='speakers' class='connectedSortable'>
                                                 <%
                                                     for (int j = 0; j < vspeakers.size(); j++) {
                                                 %>
-                                                <li id="lisort"> 
+                                                <li> 
                                                     <% out.print(vspeakers.get(j).getLastName() + ", " + vspeakers.get(j).getFirstName());%>
                                                     <% out.print(giveStars.return2012Rank(vspeakers.get(j).getId()));%>
                                                     <% out.print(giveStars.returnCount(vspeakers.get(j).getId()));%>
@@ -108,32 +142,28 @@
                                                     }
                                                 %>
                                             </ul>
+                                            </div>
+                                            <div class='span5'>
+                                            <%
+                                                out.print("<ol id='ranked' class='connectedSortable'>");
+                                                out.print("<li class='placeholder'>Place speakers here</li>");
+                                                out.print("</ol>");
+                                            %>
+                                            </div>
+                                            </div>
+                                            <div class='row'>
                                             <% if (speakers == null || speakers.size() == 0) {
                                                     out.print("<div class=\"form-actions\"><input id=\"send\" type=\"submit\" value=\"Submit Rankings\" class=\"button button-primary\"/></div>");
+                                                    out.print("<a href=\"home.jsp\">Cancel</a>");
                                                 }
                                             %>
+                                            </div>
                                         </form>
                 
             </div>
         </div>
-        <br/>
-        <br/>
         <%@ include file="../../includes/footer.jsp" %>
-        <%@ include file="../../includes/scriptlist.jsp" %>
-        <%@ include file="../../includes/draganddrop.jsp" %>
 
-        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
-        <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
-        <script src="../../js/grabRanks.js"></script>
-
-        <!--Additional Script-->
-        <script>
-            $(function() {
-                $("#sortable").sortable({revert: true});
-                $("#draggable").draggable({connectToSortable: "#sortable", helper: "clone", revert: "invalid"});
-                $("ul, li").disableSelection();
-            });
-        </script>
     </body>
 </html>
 

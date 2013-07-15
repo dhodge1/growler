@@ -20,39 +20,38 @@
         <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
         <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
-    <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/errors.css"/>
+        <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/errors.css"/>
     </head>
     <body id="growler1">
         <%@ include file="../../includes/header.jsp" %>
         <%@ include file="../../includes/testnav.jsp" %>
-        <div class="container-fixed mediumBottomMargin error-fluid">
+        <div class="container-fixed error-fluid">
             <div class="content">
-            <div class="row">
-                <h1 class="error_heading">Not Authorized</h1>
-            </div>
-            <br/>
-            <div class="row">
-                <p>You do not have permission to view this page.  If you feel have have received this message in error, please contact the Support Desk.</p>
-                <div class="error_container">
-                    If you need additional assistance or need further support, please contact the Support Desk.
-                    <br/>
-                    <br/>
-                    
-
-                    <div>
-                        <h5 style="display: inline-block">Phone:</h5> 865-560-4040 or 877-538-2025
-                    </div>
-                    <div>
-                        <h5 style="display: inline-block">Email: <a href="mailto:supportdesk@scrippsnetworks.com">supportdesk@scrippsnetworks.com</a>
-                        </h5>
-                    </div>
-                    <div>
-                        <h5 style="display: inline-block">Self-Service: <a href="https://support.scrippsnetworks.com">https://support.scrippsnetworks.com</a>
-                        </h5>
-                    </div>
-                    (Requests submitted via Self-Service are assumed to be a standard priority.)
+                <div class="row mediumBottomMargin">
+                    <h1 class="error_heading">Not Authorized</h1>
                 </div>
-            </div>
+                <div class="row mediumBottomMargin">
+                    <p class="error_p">You do not have permission to view this page.  If you feel have have received this message in error, please contact the Support Desk.</p>
+                    <div class="error_container">
+                        If you need additional assistance or need further support, please contact the Support Desk.
+                        <br/>
+                        <br/>
+
+
+                        <div>
+                            <h5 style="display: inline-block">Phone:</h5> 865-560-4040 or 877-538-2025
+                        </div>
+                        <div>
+                            <h5 style="display: inline-block">Email: <a href="mailto:supportdesk@scrippsnetworks.com">supportdesk@scrippsnetworks.com</a>
+                            </h5>
+                        </div>
+                        <div>
+                            <h5 style="display: inline-block">Self-Service: <a href="https://support.scrippsnetworks.com">https://support.scrippsnetworks.com</a>
+                            </h5>
+                        </div>
+                        (Requests submitted via Self-Service are assumed to be a standard priority.)
+                    </div>
+                </div>
             </div>
         </div>
         <%@ include file="../../includes/footer.jsp" %> 

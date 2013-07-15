@@ -13,6 +13,7 @@
     background-color:#f0f0f0;border-color:#999;
     padding: 12px;
     border: 1px solid;
+    margin-top: -4px;
 }
 .error_container a {
     color: #0067b1;
@@ -24,5 +25,8 @@
     font-family: Arial, sans-serif;
     color: #333;
     font-size: 24px;
+    margin-top: -4px;
 }
-
+.error_p {
+    margin-top: -4px;
+}
