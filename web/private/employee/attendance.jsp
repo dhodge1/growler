@@ -24,13 +24,13 @@
         <title>Acknowledge Session Attendance</title><!-- Title -->
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="../../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
-        <link rel="stylesheet" href="../../css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
+        <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
+        <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
-        <script src="../../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
+        <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
-        <script src='../../js/jquery.js'></script>
+        <script src='http://sni-techtoberfest.elasticbeanstalk.com/js/jquery.js'></script>
         <script src="../../attendance.js"></script>
         <style>
             .message_container {
@@ -60,7 +60,7 @@
             <br/><br/><br/>
             <div class="row">
                 
-                    <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='../../images/Techtoberfest2013small.png'/><span class="titlespan">Acknowledge Session Attendance</span></h2>
+                    <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Acknowledge Session Attendance</span></h2>
                 
             </div>
             <br/>
@@ -100,9 +100,9 @@
         </div>
         <%@ include file="../../includes/footer.jsp" %> 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-        <script src="../../js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>
-        <script src="../../js/libs/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
-        <script src="../../js/libs/sniui.auto-inline-help.min.js" type="text/javascript"></script>
-        <script src="../../js/libs/sniui.auto-inline-help.1.0.0.min.js" type="text/javascript"></script>
+        <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>
+        <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
+        <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/sniui.auto-inline-help.min.js" type="text/javascript"></script>
+        <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/sniui.auto-inline-help.1.0.0.min.js" type="text/javascript"></script>
     </body>
 </html>

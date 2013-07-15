@@ -186,7 +186,7 @@ public class ThemePersistence extends GrowlerPersistence {
     public ArrayList<Theme> getThemesByVisibility(boolean v) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select id, name, description, creator, visible from theme where visible = ?");
+            statement = connection.prepareStatement("select id, name, description, creator, visible, type from theme where visible = ? order by name");
             statement.setBoolean(1, v);
             result = statement.executeQuery();
             ArrayList<Theme> themes = new ArrayList<Theme>();
@@ -197,6 +197,7 @@ public class ThemePersistence extends GrowlerPersistence {
                 t.setDescription(result.getString("description"));
                 t.setCreatorId(result.getInt("creator"));
                 t.setVisible(result.getBoolean("visible"));
+                t.setType(result.getString("type"));
                 themes.add(t);
             }
             closeJDBC();
@@ -240,7 +241,7 @@ public class ThemePersistence extends GrowlerPersistence {
     public ArrayList<Theme> getRankedThemes() {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select t.id, t.name, u.name as creator, sum(r.theme_rank) as rating, count(r.theme_id) as count, t.visible from theme t LEFT JOIN theme_ranking r on t.id = r.theme_id LEFT JOIN user u on u.id = t.creator group by t.id  order by rating desc, name");
+            statement = connection.prepareStatement("select t.id, t.name, t.type, u.name as creator, sum(r.theme_rank) as rating, count(r.theme_id) as count, t.visible from theme t LEFT JOIN theme_ranking r on t.id = r.theme_id LEFT JOIN user u on u.id = t.creator group by t.id  order by rating desc, name");
             ArrayList<Theme> themes = new ArrayList<Theme>();
             while (result.next()) {
                 Theme t = new Theme();
@@ -250,6 +251,7 @@ public class ThemePersistence extends GrowlerPersistence {
                 t.setRank(result.getInt("rating"));
                 t.setCount(result.getInt("count"));
                 t.setVisible(result.getBoolean("visible"));
+                t.setType(result.getString("type"));
                 themes.add(t);
             }
             closeJDBC();
@@ -290,7 +292,7 @@ public class ThemePersistence extends GrowlerPersistence {
     public ArrayList<Theme> getAllThemes(String sort) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select t.id as id, t.name as name, u.id as creator, sum(r.theme_rank) as rating, count(r.theme_id) as count, t.visible as visible, t.description as description, t.reason as reason from theme t LEFT JOIN theme_ranking r on t.id = r.theme_id LEFT JOIN user u on u.id = t.creator group by t.id " + sort);
+            statement = connection.prepareStatement("select t.id as id, t.type as type, t.name as name, u.id as creator, sum(r.theme_rank) as rating, count(r.theme_id) as count, t.visible as visible, t.description as description, t.reason as reason from theme t LEFT JOIN theme_ranking r on t.id = r.theme_id LEFT JOIN user u on u.id = t.creator group by t.id " + sort);
             result = statement.executeQuery();
             ArrayList<Theme> themes = new ArrayList<Theme>();
             while (result.next()) {
@@ -303,6 +305,7 @@ public class ThemePersistence extends GrowlerPersistence {
                 t.setVisible(result.getBoolean("visible"));
                 t.setRank(result.getInt("rating"));
                 t.setCount(result.getInt("count"));
+                t.setType(result.getString("type"));
                 themes.add(t);
             }
             closeJDBC();
@@ -326,13 +329,15 @@ public class ThemePersistence extends GrowlerPersistence {
                     + "reason = ?, "
                     + "creator = ?, "
                     + "visible = ? "
+                    + "type = ?"
                     + "where id = ?");
             statement.setString(1, t.getName());
             statement.setString(2, t.getDescription());
             statement.setString(3, t.getReason());
             statement.setInt(4, t.getCreatorId());
             statement.setBoolean(5, t.getVisible());
-            statement.setInt(6, t.getId());
+            statement.setString(6, t.getType());
+            statement.setInt(7, t.getId());
             success = statement.execute();
             closeJDBC();
         } catch (Exception e) {

@@ -18,21 +18,21 @@
         <title>404 Error</title><!-- Title -->
         <meta name="description" content="Techtoberfest 404 Error Page" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="../../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
-        <link rel="stylesheet" href="../../css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-        <script src="../../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
-        <link rel="stylesheet" href="../../css/errors.css"/>
+        <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
+        <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
+        <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
+        <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/errors.css"/>
     </head>
     <body id="growler1">
         <%@ include file="../../includes/header.jsp" %>
         <%@ include file="../../includes/testnav.jsp" %>
         <div class="container-fixed mediumBottomMargin error-fluid">
             <div class="content">
-            <div class="row">
+            <div class="row mediumBottomMargin">
                 <h1 class="error_heading">Page Not Found</h1>
             </div>
             <br/>
-            <div class="row">
+            <div class="row mediumBottomMargin">
                 <p>We're sorry.  The page you are looking for has moved or does not exist.  We apologize for any inconvenience.</p>
                 <div class="error_container">
                     If you need additional assistance or need further support, please contact the Support Desk.

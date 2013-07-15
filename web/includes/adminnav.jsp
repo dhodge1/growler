@@ -7,7 +7,7 @@
                 be able to look at.
 --%>
 
-<link rel="stylesheet" href="../../../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
+<link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
 <link href="../../../css/navbar.css" rel="stylesheet">
 <style>
     body {

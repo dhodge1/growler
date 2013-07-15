@@ -44,6 +44,8 @@ public class Theme {
      * How many times a theme has been ranked
      */
     private int count;
+    
+    private String type;
 
     /**
      * Default constructor
@@ -241,4 +243,14 @@ public class Theme {
     public void setYear(int i) {
         this.year = i;
     }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+    
+    
 }

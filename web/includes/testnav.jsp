@@ -1,5 +1,5 @@
-<link href="../../css/navbar.css" rel="stylesheet">
-<link rel="stylesheet" href="../../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
+<link href="http://sni-techtoberfest.elasticbeanstalk.com/css/navbar.css" rel="stylesheet">
+<link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
 
 <% 
     String active = " selected ";
@@ -18,7 +18,7 @@
         home = " selected ";
     }
 %>
-<link href="../../css/responsive.1.2.0.css" rel="stylesheet">
+<link href="http://sni-techtoberfest.elasticbeanstalk.com/css/responsive.1.2.0.css" rel="stylesheet">
 <nav class="topnav">
 <nav class="globalNavigation modify-pages" id="navigation">
   <ul>

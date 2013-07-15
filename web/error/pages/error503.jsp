@@ -17,10 +17,10 @@
         <title>503 Error</title><!-- Title -->
         <meta name="description" content="Techtoberfest 503 Error Page" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="../../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
-        <link rel="stylesheet" href="../../css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-        <script src="../../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
-    <link rel="stylesheet" href="../../css/errors.css"/>
+        <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
+        <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
+        <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
+    <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/errors.css"/>
     </head>
     <body id="growler1">
         <%@ include file="../../includes/header.jsp" %>

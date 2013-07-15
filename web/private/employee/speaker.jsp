@@ -30,15 +30,15 @@
         <title>Speakers</title><!-- Title -->
 
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> 
-        <link rel="stylesheet" href="../../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
-        <link rel="stylesheet" href="../../css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
+        <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
+        <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
         <link rel="stylesheet" href="../../css/demo.css" />  
         <link rel="stylesheet" href="../../css/draganddrop.css" /><!--Drag and drop style-->
         <link rel="stylesheet" type="text/css" href="../../css/general.css" /><!--General CSS-->
         <link rel="stylesheet" type="text/css" href="../../css/speaker.css" /><!--Speaker CSS-->
         <link rel="stylesheet" href="/resources/demos/style.css" />
 
-        <script src="../../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
+        <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <script src="../../js/jquery.ui.touch-punch.min.js"></script>
     </head>
     <body id="growler1">
@@ -63,11 +63,11 @@
                     SpeakerPersistence persist = new SpeakerPersistence();
                     ArrayList<Speaker> speakers = persist.getUserRanks(user);
                     if (speakers == null || speakers.size() == 0) {
-                        out.print("<h2 class=bordered><img style=\"padding-bottom:0;padding-left:0;\" src='../../images/Techtoberfest2013small.png'/><span class=\"titlespan\">Speakers - Drag & Drop Speakers to Rank Them</span></h2>");
+                        out.print("<h2 class=bordered><img style=\"padding-bottom:0;padding-left:0;\" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class=\"titlespan\">Speakers - Drag & Drop Speakers to Rank Them</span></h2>");
                         out.print("<a href=\"nondragspeaker.jsp\">Non Drag and Drop Speakers</a><br/>");
 
                     } else {
-                        out.print("<h2 class=bordered><img style=\"padding-bottom:0;padding-left:0;\" src='../../images/Techtoberfest2013small.png'/><span class=\"titlespan\">Your Speaker Rankings</span></h2>");
+                        out.print("<h2 class=bordered><img style=\"padding-bottom:0;padding-left:0;\" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class=\"titlespan\">Your Speaker Rankings</span></h2>");
                     }
                 %>
                 

@@ -34,17 +34,55 @@
         <title>Themes</title><!-- Title -->
 
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> 
-        <link rel="stylesheet" href="../../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
-        <link rel="stylesheet" href="../../css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-        <link rel="stylesheet" href="../../css/demo.css" />  
-        <link rel="stylesheet" href="../../css/draganddrop.css" /><!--Drag and drop style-->
+        <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
+        <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
         <link rel="stylesheet" type="text/css" href="../../css/general.css" /><!--General CSS-->
-        <link rel="stylesheet" type="text/css" href="../../css/theme.css" /><!--Theme CSS-->
-        <script src="../../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
-        <script src="../../js/jquery.ui.touch-punch.min.js"></script>
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+        <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+        <style>
+            #themes li {
+                list-style-type: none;
+                height:30px;
+            }
+        </style>
+        <!--Additional Script-->
+        <script>
+            $(function() {
+                $("#themes, #ranked").sortable({
+                    connectWith: ".connectedSortable",
+                    placeholder: "ui-state-highlight",
+                    update: function(event, ui) {
+                        $(this).find(".placeholder").remove();
+                        $("#themes").find(":hidden").prop("name", "none");
+                        $("#ranked").find(":hidden").prop("name", "list");
+                        if ($("#ranked li").length > 9) {
+                            $("#themes").sortable({
+                                revert:true
+                            });
+                        }
+                    }
+                }).disableSelection();
+                $("#filter").change(function() {
+                    if ($("#filter").val() == 1) {
+                        $('#themes li').filter('.Business').show();
+                        $('#themes li').filter('.Technical').show();
+                    }
+                    else if ($("#filter").val() == 2) {
+                        $('#themes li').filter('.Business').show();
+                        $('#themes li').filter('.Technical').hide();
+                    }
+                    else if ($("#filter").val() == 3) {
+                        $('#themes li').filter('.Business').hide();
+                        $('#themes li').filter('.Technical').show();
+                    }
+                });
+
+            });
+        </script>
     </head>
     <body id="growler1">  
-        
+
         <%
             int user = 0;
             if (null == session.getAttribute("id")) {
@@ -56,85 +94,97 @@
             } catch (Exception e) {
             }
             ArrayList<Theme> themes = persist.getUserRanks(user);
+            ArrayList<Theme> vthemes = persist.getThemesByVisibility(true);
         %>
-            <%@ include file="../../includes/header.jsp" %> 
-            <%@ include file="../../includes/testnav.jsp" %>
-        <div class="container-fixed">
-            <br/><br/><br/>
-            <div class="row">
-                
-				<%
+        <%@ include file="../../includes/header.jsp" %> 
+        <%@ include file="../../includes/testnav.jsp" %>
+        <div class="container-fixed largeBottomMargin">
+            <div class="row mediumBottomMargin">
+                <ul class="breadcrumb" style='padding-top:12px;'>
+                    <li><a href="home.jsp">Home</a></li>
+                    <li>Theme Ranking</li>
+                </ul>
+            </div>
+            <div class="row largeBottomMargin">
+                <h1 style="font-weight:normal;">Rank Themes</h1>
+            </div>
+            <div class="row largeBottomMargin">
+                <p style='font-size: 16px; font-family: Arial;'>We want to hear from you!  Please let us know the top 10 presentation themes you would be interested in attending for this year's Techtoberfest.</p>
+            </div>
+            <div class="row mediumBottomMargin">
+                <%
                     //If we didn't get any ranks, we tell the user to rank the themes
                     if (themes == null || themes.size() == 0) {
-                        out.print("<h2 class=bordered><img style=\"padding-bottom:0;padding-left:0;\" src='../../images/Techtoberfest2013small.png'/><span class=\"titlespan\">Themes - Drag & Drop Themes to Rank Them</span></h2>");
-                        out.print("<a href=\"nondragtheme.jsp\">Non Drag and Drop Themes</a><br/>");
+                        out.print("<h2 class=\"bordered mediumBottomMargin\"><img style=\"padding-bottom:0;padding-left:0;\" id=\"logo\" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class=\"titlespan\">Which presentations are you most interested in?</span></h2>");
+                        out.print("<span class=\"mediumBottomMargin\">Please note: If desired, you can provide a ranking for less than 10 presentation themes.  There is also a <a href=\"nondragtheme.jsp\">non drag and drop version</a> available.</span>");
                     } else { //If we got themes, we let the user see them
-                        out.print("<h2 class=bordered><img style=\"padding-bottom:0;padding-left:0;\" src='../../images/Techtoberfest2013small.png'/><span class=\"titlespan\">Your Theme Ranks</span></h2>");
+                        out.print("<h2 class=bordered><img style=\"padding-bottom:0;padding-left:0;\" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class=\"titlespan\">Your Theme Ranks</span></h2>");
                     }
                 %>
-                
+
             </div>
-            <br/>
-            <div class="row">
-                
-                    <%
-                                            //If There are Ranked Themes already, here is where they will be displayed
-                                            if (themes.size() > 0) {
-                                                out.print("<table class=\"propertyGrid\">");
-                                                for (int i = 0; i < themes.size(); i++) {
-                                                    out.print("<tr><th>Rank " + (i + 1) + "</th><td>" + themes.get(i).getName() + "</td></tr>");
-                                                }
+            <div class="row mediumBottomMargin">
+                <%
+                    //If There are Ranked Themes already, here is where they will be displayed
+                    if (themes.size() > 0) {
+                        out.print("<table class=\"propertyGrid\">");
+                        for (int i = 0; i < themes.size(); i++) {
+                            out.print("<tr><th>Rank " + (i + 1) + "</th><td>" + themes.get(i).getName() + "</td></tr>");
+                        }
+                        out.print("</table><br/>");
+                        out.print("<a href=\"../../action/removeThemeRanks.jsp?id=" + user + "\">Reset Ranks</a>");
+                    }
+                %>
+                <form action="../../action/processThemeRanking.jsp" >
+                    <div class="row">
+                        <div class="span5" style='overflow:auto;height:300px;'>
+                            <span>Available Presentation Themes</span><br/>
+                            <select id="filter">
+                                <option value="1">All Themes</option>
+                                <option value="2">Business Themes</option>
+                                <option value="3">Technical Themes</option>
+                            </select>
+                            <ul id="themes" class="connectedSortable">
+                                <%
+                                    if (themes == null || themes.size() == 0) {
 
-                                                out.print("</table><br/>");
-                                                out.print("<a href=\"../../action/removeThemeRanks.jsp?id=" + user + "\">Reset Ranks</a>");
 
-                                            }
+                                        for (int i = 0; i < vthemes.size(); i++) {
+                                %>
 
+                                <%
+                                            out.print("<li class=\"" + vthemes.get(i).getType() + "\">");
+                                            out.print(vthemes.get(i).getName() + " : ");
+                                            out.print(vthemes.get(i).getDescription());
+                                            out.print("<input type=\"hidden\" name=\"list\" value=\"" + vthemes.get(i).getId() + "\" >");
+                                            out.print("</li>");
+                                        }
+                                    }
+                                %>
+                            </ul>
+                        </div>
+                        <div class="span5">
+                            <span>Presentations Themes I'm Interested In</span>
+                            <ol id="ranked" class="connectedSortable" >
+                                <li class="placeholder">Place Ranked Themes Here</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="row mediumBottomMargin">
+                        <% if (themes == null || themes.size() == 0) {
+                                out.print("<input id=\"send\" style=\"padding-right: 6px;\" type=\"submit\" value=\"Submit Rankings\" class=\"button button-primary\"/>");
+                                out.print("<a href=\"home.jsp\">Cancel</a>");
+                            }
+                        %>
+                    </div>
+                </form>
+                    <div class='row'>
+                        <strong>Presentation not listed? </strong><a href='themeentry.jsp'>Click here to suggest a new theme</a>
+                    </div>
 
-                                        %>
-                                        <form action="../../action/processThemeRanking.jsp" >
-                                            <ul id="sortable">
-                                                <%
-                                                    if (themes == null || themes.size() == 0) {
-
-                                                        ArrayList<Theme> vthemes = persist.getThemesByVisibility(true);
-                                                        for (int i = 0; i < vthemes.size(); i++) {
-                                                %>
-                                                <li class="ui-state-default" id="lisort">
-                                                    <%
-                                                        out.print(vthemes.get(i).getName() + " : ");
-                                                        out.print(vthemes.get(i).getDescription());
-                                                        out.print("<input type=\"hidden\" name=\"list\" value=\"" + vthemes.get(i).getId() + "\" >");
-                                                    %></li><%
-                                                            }
-                                                        }
-                                                    %>
-                                            </ul>	
-                                            <% if (themes == null || themes.size() == 0) {
-                                                    out.print("<input id=\"send\" type=\"submit\" value=\"Submit Rankings\" class=\"button button-primary\"/>");
-                                                }
-                                            %>
-                                        </form>
-                
             </div>
         </div>
-        <br/>
-        <br/>
-
         <%@ include file="../../includes/footer.jsp" %>
-        <%@ include file="../../includes/scriptlist.jsp" %>
-        <%@ include file="../../includes/draganddrop.jsp" %>
-
-        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
-        <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
-        <!--Additional Script-->
-        <script>
-            $(function() {
-                $("#sortable").sortable({revert: true});
-                $("#draggable").draggable({connectToSortable: "#sortable", helper: "clone", revert: "invalid"});
-                $("ul, li").disableSelection();
-            });
-        </script>
     </body>
 </html>
 

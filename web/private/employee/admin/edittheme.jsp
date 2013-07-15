@@ -14,10 +14,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="../../../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
-        <link rel="stylesheet" href="../../../css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
+        <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
+        <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
         <link rel="stylesheet" href="../../../css/draganddrop.css" /><!--Drag and drop style-->
-        <script src="../../../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
+        <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
         <link rel="stylesheet" type="text/css" href="css/general.css" /><!--General CSS-->
         <link rel="stylesheet" type="text/css" href="css/help.css" /><!--Help CSS-->
@@ -48,7 +48,7 @@
                         ThemePersistence tp = new ThemePersistence();
                         Theme theme = tp.getThemeByID(themeId);
                     %>
-                    <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='../../../images/Techtoberfest2013small.png'/><span class="titlespan">Edit A Theme: <%= theme.getName()%></span></h2>
+                    <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Edit A Theme: <%= theme.getName()%></span></h2>
                 
             </div>
             <br/>
