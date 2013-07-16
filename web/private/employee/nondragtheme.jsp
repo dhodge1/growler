@@ -77,8 +77,9 @@
         <%@ include file="../../includes/header.jsp" %> 
         <%@ include file="../../includes/testnav.jsp" %>
         <div class="container-fixed largeBottomMargin">
+            <div class="row mediumBottomMargin"></div>
             <div class="row mediumBottomMargin">
-                <ul class="breadcrumb" style='padding-top:12px;'>
+                <ul class="breadcrumb">
                     <li><a href="home.jsp">Home</a></li>
                     <li>Theme Ranking</li>
                 </ul>

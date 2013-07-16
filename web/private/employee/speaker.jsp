@@ -33,6 +33,11 @@
         <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+        <style>
+            #speakers li{
+                list-style-type: none;
+            }
+        </style>
         <script>
             $(function() {
                $("#speakerss, #ranked").sortable({
@@ -94,8 +99,9 @@
         <%@ include file="../../includes/header.jsp" %> 
         <%@ include file="../../includes/testnav.jsp" %>
         <div class="container-fixed largeBottomMargin">
+            <div class="row mediumBottomMargin"></div>
             <div class="row mediumBottomMargin">
-                <ul class="breadcrumb" style='padding-top:12px;'>
+                <ul class="breadcrumb">
                     <li><a href="home.jsp">Home</a></li>
                     <li>Speaker Ranking</li>
                 </ul>

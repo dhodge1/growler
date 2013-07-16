@@ -44,6 +44,12 @@
                 list-style-type: none;
                 height:30px;
             }
+            #filter {
+                width: 50%;
+            }
+            #themes {
+                margin:0;
+            }
         </style>
         <!--Additional Script-->
         <script>
@@ -107,8 +113,9 @@
         <%@ include file="../../includes/header.jsp" %> 
         <%@ include file="../../includes/testnav.jsp" %>
         <div class="container-fixed largeBottomMargin">
+            <div class="row mediumBottomMargin"></div>
             <div class="row mediumBottomMargin">
-                <ul class="breadcrumb" style='padding-top:12px;'>
+                <ul class="breadcrumb">
                     <li><a href="home.jsp">Home</a></li>
                     <li>Theme Ranking</li>
                 </ul>
@@ -148,13 +155,21 @@
                 if (themes == null || themes.size() == 0) {
                     out.print("<form action='../../action/processThemeRanking.jsp'>");
                     out.print("<div class='row mediumBottomMargin'>");
-                    out.print("<div class='span5' style='overflow:auto;height:300px;'>");
-                    out.print("<span><strong>Available Presentation Themes</strong></span><br/>");
-                    out.print("<select id='filter'>");
+                    out.print("<div class='row'>");
+                    out.print("<div class='span5'>");
+                    out.print("<span><strong>Available Presentation Themes</strong></span>");
+                    out.print("</div>");
+                    out.print("<div class='span5'>");
+                    out.print("<span><strong>Presentations Themes I'm Interested In</strong></span>");
+                    out.print("</div>");
+                    out.print("</div>");
+                    out.print("<div>");
+                    out.print("<select id='filter' class='pullLeft'>");
                     out.print("<option value='1'>All Themes</option>");
                     out.print("<option value='2'>Business Themes</option>");
                     out.print("<option value='3'>Technical Themes</option>");
                     out.print("</select>");
+                    out.print("<div class='span5' style='overflow:auto;height:300px;'>");
                     out.print("<ul id='themes' class='connectedSortable'>");
                     for (int i = 0; i < vthemes.size(); i++) {
                         out.print("<li class=\"" + vthemes.get(i).getType() + "\">");
@@ -165,8 +180,8 @@
                     }
                     out.print("</ul>");
                     out.print("</div>");
+                    out.print("</div>");
                     out.print("<div class='span5'>");
-                    out.print("<span><strong>Presentations Themes I'm Interested In</strong></span>");
                     out.print("<ol id='ranked' class='connectedSortable' >");
                     out.print("<li class='placeholder'>Place Ranked Themes Here</li>");
                     out.print("</ol>");

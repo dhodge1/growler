@@ -19,16 +19,21 @@
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Welcome to Techtoberfest!</title><!-- Title -->
+        <link rel="shortcut icon" type="image/png" href="http://sni-techtoberfest.elasticbeanstalk.com/images/scripps_favicon-32.ico">
         <link rel="stylesheet" href="../../css/bootstrap.css"/>
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> 
         <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
         <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <style>
+            .carousel-indicators {
+                position: relative;
+                left: 400px;
+                top: 90px;
+            }
             .carousel-indicators li {
                 background: #c0c0c0;
             }
-
             .carousel-indicators .active {
                 background: #333333;
             }
@@ -49,42 +54,47 @@
             }
         %>
         <div class="container-fixed largeBottomMargin">
+            <div class="row mediumBottomMargin"></div>
             <div class="row mediumBottomMargin">
                 <h1>Welcome to the 2013 Techtoberfest Information System!</h1>
             </div>
-            <div class="row mediumBottomMargin">
+            <div class="row largeBottomMargin">
                 <div id="this-carousel-id" class="carousel slide">
-                    <div class="carousel-inner">
-                        <div class="item active">
-                            <h3>In October, the Knoxville office will host its fourth annual "Techtoberfest", a gathering of Scripps Networks Interactive employees from around the globe, sharing the present and future technology within our company via a series of amazing presentations.</h3>  
-                            <img src="http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png"/>
-                        </div>
-                        <div class="item">
-                            <h3>All feedback is encouraged to ensure this years event goes off without a hitch!  From user rankings to suggestions, the Techtoberfest Information System (TIS) is here to ensure your voice is heard before, during and after the Techtoberfest 2013 ends.</h3>  
-                            <img src="http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png"/>
-                        </div>
-                        <div class="item">
-                            <h3>For this year's Techtoberfest, even though no registration is required, we encourage employees to provide their level of interest for any/all desired presentation sessions.  There will even be surveys available for those wanting to provide feedback regarding sessions they have attended.</h3>  
-                            <img src="http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png"/>
-                        </div>
-
-                    </div><!-- .carousel-inner -->
-                    <!--  next and previous controls here
-                          href values must reference the id for this carousel -->
-                    <a class="carousel-control left" href="#this-carousel-id" data-slide="prev">&lsaquo;</a>
-                    <a class="carousel-control right" href="#this-carousel-id" data-slide="next">&rsaquo;</a>
                     <ol class="carousel-indicators">
                         <li data-target="#this-carousel-id" data-slide-to="0" class="active"></li>
                         <li data-target="#this-carousel-id" data-slide-to="1"></li>
                         <li data-target="#this-carousel-id" data-slide-to="2"></li>
                     </ol>
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <div class="span8"><h3>In October, the Knoxville office will host its fourth annual "Techtoberfest", a gathering of Scripps Networks Interactive employees from around the globe, sharing the present and future technology within our company via a series of amazing presentations.</h3></div>
+                            <div class="span4"><img src="http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png"/></div>
+                        </div>
+                        <div class="item">
+                            <div class="span8"><h3>All feedback is encouraged to ensure this years event goes off without a hitch!  From user rankings to suggestions, the Techtoberfest Information System (TIS) is here to ensure your voice is heard before, during and after the Techtoberfest 2013 ends.</h3></div>
+                            <div class="span4"><img src="http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png"/></div>
+                        </div>
+                        <div class="item">
+                            <div class="span8"><h3>For this year's Techtoberfest, even though no registration is required, we encourage employees to provide their level of interest for any/all desired presentation sessions.  There will even be surveys available for those wanting to provide feedback regarding sessions they have attended.</h3></div>
+                            <div class="span4"><img src="http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png"/></div>
+                        </div>
+                    </div><!-- .carousel-inner -->
+                    <!--  next and previous controls here
+                          href values must reference the id for this carousel -->
+                    <!--<a class="carousel-control left" href="#this-carousel-id" data-slide="prev">&lsaquo;</a>
+                    <a class="carousel-control right" href="#this-carousel-id" data-slide="next">&rsaquo;</a>-->
+
                 </div>
+
             </div>
+            <div class="row largeBottomMargin"></div>
             <div class="row">
                 <%@include file="../../includes/messagehandler.jsp" %>
-                <div class="span5"><!-- Themes Area -->
+                <div class="span6"><!-- Themes Area -->
                     <div class="row largeBottomMargin">
-                        <h2 class="bordered">View/Rank Proposed Themes</h2>
+                        <div class="row mediumBottomMargin">
+                            <h2 class="bordered">View/Rank Proposed Themes</h2>
+                        </div>
                         <p>The Techtoberfest Committee wants to hear from you!  As the 2013 Techtoberfest draws near we want to make sure we provide you with the most desirable technology presentations possible.  We want to know what topics YOU are most interested in.</p>
                         <p>So we've compiled a list of possible themes and we would love to know which ones you would rank as your top 5 or 10...Rank Now!</p>
                     </div>
@@ -92,7 +102,7 @@
                         <a href="theme.jsp" class="button button-primary">Rank Themes</a>
                     </div>
                 </div>
-                <div class="span5"><!-- Speakers area -->
+                <div class="span6"><!-- Speakers area -->
                     <div class="row largeBottomMargin">
                         <h2 class="bordered">View/Rank Proposed Speakers</h2>
                         <p>They say one of the best ways to make a good connection with your audience is to tell a great story.  In order to do that you need great speakers; therefore we need your help!  Who do YOU want to hear from?</p>
