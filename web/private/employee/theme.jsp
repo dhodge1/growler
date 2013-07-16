@@ -30,9 +30,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
         <title>Themes</title><!-- Title -->
-
+        <link rel="shortcut icon" type="image/png" href="http://sni-techtoberfest.elasticbeanstalk.com/images/scripps_favicon-32.ico">
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> 
         <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
@@ -151,7 +150,7 @@
                     out.print("<form action='../../action/processThemeRanking.jsp'>");
                     out.print("<div class='row mediumBottomMargin'>");
                     out.print("<div class='span5' style='overflow:auto;height:300px;'>");
-                    out.print("<span>Available Presentation Themes</span><br/>");
+                    out.print("<span><strong>Available Presentation Themes</strong></span><br/>");
                     out.print("<select id='filter'>");
                     out.print("<option value='1'>All Themes</option>");
                     out.print("<option value='2'>Business Themes</option>");
@@ -162,21 +161,20 @@
                         out.print("<li class=\"" + vthemes.get(i).getType() + "\">");
                         out.print(vthemes.get(i).getName() + " : ");
                         out.print(vthemes.get(i).getDescription());
-                        out.print("<input type=\"hidden\" name=\"list\" value=\"" + vthemes.get(i).getId() + "\" >");
+                        out.print("<input type=\"hidden\" name=\"list\" value=\"" + vthemes.get(i).getId() + "\" />");
                         out.print("</li>");
                     }
                     out.print("</ul>");
                     out.print("</div>");
                     out.print("<div class='span5'>");
-                    out.print("<span>Presentations Themes I'm Interested In</span>");
+                    out.print("<span><strong>Presentations Themes I'm Interested In</strong></span>");
                     out.print("<ol id='ranked' class='connectedSortable' >");
                     out.print("<li class='placeholder'>Place Ranked Themes Here</li>");
                     out.print("</ol>");
                     out.print("</div>");
                     out.print("</div>");
                     out.print("<div class='row mediumBottomMargin'>");
-                    out.print("<input id=\"send\" style=\"padding-right: 6px;\" type=\"submit\" value=\"Submit Rankings\" class=\"button button-primary\"/>");
-                    out.print("<a href=\"home.jsp\">Cancel</a>");
+                    out.print("<div class=\"form-actions\"><input id=\"send\" type=\"submit\" value=\"Submit My Ranking\" class=\"button button-primary\"/><a href=\"home.jsp\">Cancel</a></div>");
                     out.print("</div>");
                     out.print("<div class='row'>");
                     out.print("<strong>Presentation not listed? </strong><a href='themeentry.jsp'>Click here to suggest a new theme</a>");

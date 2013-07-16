@@ -121,7 +121,7 @@ public class SpeakerPersistence extends GrowlerPersistence {
         try {
             initializeJDBC();
             statement = connection.prepareStatement("select id, first_name,"
-                    + "last_name, suggested_by, visible from speaker "
+                    + "last_name, suggested_by, visible, type from speaker "
                     + "where id = ?");
             statement.setInt(1, id);
             result = statement.executeQuery();
@@ -132,6 +132,7 @@ public class SpeakerPersistence extends GrowlerPersistence {
                 s.setLastName(result.getString("last_name"));
                 s.setSuggestedBy(result.getInt("suggested_by"));
                 s.setVisible(result.getBoolean("visible"));
+                s.setType(result.getString("type"));
             }
             closeJDBC();
             return (s);
@@ -170,7 +171,7 @@ public class SpeakerPersistence extends GrowlerPersistence {
         try {
             initializeJDBC();
             statement = connection.prepareStatement("select id, first_name,"
-                    + "last_name, suggested_by, visible from speaker "
+                    + "last_name, suggested_by, visible, type from speaker "
                     + "where first_name = ? and last_name = ?");
             statement.setString(1, first);
             statement.setString(2, last);
@@ -182,6 +183,7 @@ public class SpeakerPersistence extends GrowlerPersistence {
                 s.setLastName(result.getString("last_name"));
                 s.setSuggestedBy(result.getInt("suggested_by"));
                 s.setVisible(result.getBoolean("visible"));
+                s.setType(result.getString("type"));
             }
             closeJDBC();
             return (s);
@@ -199,7 +201,7 @@ public class SpeakerPersistence extends GrowlerPersistence {
     public ArrayList<Speaker> getAllSpeakers(String sort) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select s.id as id, s.first_name as first_name, s.last_name as last_name, s.suggested_by as suggested_by, s.visible as visible, sum(sr.ranking) as points, count(sr.speaker_id) as votes, r.rating as rating, r.count as count from speaker s left join ranks_2012 r on r.speaker_id = s.id left join speaker_ranking sr on sr.speaker_id = s.id  group by (s.id) " + sort);
+            statement = connection.prepareStatement("select s.id as id, s.first_name as first_name, s.last_name as last_name, s.type as type, s.suggested_by as suggested_by, s.visible as visible, sum(sr.ranking) as points, count(sr.speaker_id) as votes, r.rating as rating, r.count as count from speaker s left join ranks_2012 r on r.speaker_id = s.id left join speaker_ranking sr on sr.speaker_id = s.id  group by (s.id) " + sort);
             Statement s2 = connection.createStatement();
             result = statement.executeQuery();
             if (sort.equals(" order by rating desc, last_name") || sort.equals(" order by rating asc, last_name") || sort.equals(" order by count desc, last_name") || sort.equals(" order by count asc, last_name")){
@@ -214,6 +216,7 @@ public class SpeakerPersistence extends GrowlerPersistence {
                 s.setLastName(result.getString("last_name"));
                 s.setSuggestedBy(result.getInt("suggested_by"));
                 s.setVisible(result.getBoolean("visible"));
+                s.setType(result.getString("type"));
                 try {
                     s.setRank2012(result.getDouble("rating"));
                     s.setCount2012(result.getInt("count"));
@@ -243,7 +246,7 @@ public class SpeakerPersistence extends GrowlerPersistence {
         try {
             initializeJDBC();
             statement = connection.prepareStatement("select id, first_name, last_name, "
-                    + "suggested_by, visible from speaker where suggested_by = ?"
+                    + "suggested_by, visible, type from speaker where suggested_by = ?"
                     + " ?");
             statement.setInt(1, id);
             statement.setString(2, sort);
@@ -256,6 +259,7 @@ public class SpeakerPersistence extends GrowlerPersistence {
                 s.setLastName(result.getString("last_name"));
                 s.setSuggestedBy(result.getInt("suggested_by"));
                 s.setVisible(result.getBoolean("visible"));
+                s.setType(result.getString("type"));
                 speakers.add(s);
             }
             closeJDBC();
@@ -276,7 +280,7 @@ public class SpeakerPersistence extends GrowlerPersistence {
         try {
             initializeJDBC();
             statement = connection.prepareStatement("select id, first_name, last_name, "
-                    + "suggested_by, visible from speaker where suggested_by <> 202300");
+                    + "suggested_by, visible, type from speaker where suggested_by <> 202300");
             result = statement.executeQuery();
             ArrayList<Speaker> speakers = new ArrayList<Speaker>();
             while (result.next()) {
@@ -286,6 +290,7 @@ public class SpeakerPersistence extends GrowlerPersistence {
                 s.setLastName(result.getString("last_name"));
                 s.setSuggestedBy(result.getInt("suggested_by"));
                 s.setVisible(result.getBoolean("visible"));
+                s.setType(result.getString("type"));
                 speakers.add(s);
             }
             closeJDBC();
@@ -305,7 +310,7 @@ public class SpeakerPersistence extends GrowlerPersistence {
     public ArrayList<Speaker> getSpeakersByVisibility(boolean v, String sort) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select id, first_name, last_name, suggested_by, visible from speaker where visible = ? " + sort);
+            statement = connection.prepareStatement("select id, first_name, last_name, suggested_by, visible, type from speaker where visible = ? " + sort);
             statement.setBoolean(1, v);
             result = statement.executeQuery();
             ArrayList<Speaker> speakers = new ArrayList<Speaker>();
@@ -316,6 +321,7 @@ public class SpeakerPersistence extends GrowlerPersistence {
                 s.setLastName(result.getString("last_name"));
                 s.setSuggestedBy(result.getInt("suggested_by"));
                 s.setVisible(result.getBoolean("visible"));
+                s.setType(result.getString("type"));
                 speakers.add(s);
             }
             closeJDBC();
@@ -361,12 +367,14 @@ public class SpeakerPersistence extends GrowlerPersistence {
                     + "last_name = ?, "
                     + "suggested_by = ?, "
                     + "visible = ? "
+                    + "type = ?"
                     + "where id = ?");
             statement.setString(1, s.getFirstName());
             statement.setString(2, s.getLastName());
             statement.setInt(3, s.getSuggestedBy());
             statement.setBoolean(4, s.getVisible());
-            statement.setInt(5, s.getId());
+            statement.setString(5, s.getType());
+            statement.setInt(6, s.getId());
             success = statement.execute();
             closeJDBC();
         } catch (Exception e) {
@@ -380,11 +388,11 @@ public class SpeakerPersistence extends GrowlerPersistence {
      * @return A list of speakers that have been ranked by a user
      */
     public ArrayList<Speaker> getUserRanks(int id) {
+        ArrayList<Speaker> speakers = new ArrayList<Speaker>();
         try {
             initializeJDBC();
             statement = connection.prepareStatement("select s.id, s.first_name, s.last_name, s.suggested_by, s.visible, sum(r.ranking) as rating, count(r.speaker_id) as count from speaker s, speaker_ranking r where s.id = r.speaker_id and r.user_id = " + id + " group by (s.id) order by rating desc");
-            result = statement.executeQuery();
-            ArrayList<Speaker> speakers = new ArrayList<Speaker>();
+            result = statement.executeQuery();    
             while (result.next()) {
                 Speaker s = new Speaker();
                 s.setId(result.getInt("s.id"));
@@ -400,7 +408,7 @@ public class SpeakerPersistence extends GrowlerPersistence {
             return speakers;
         } catch (Exception e) {
         }
-        return null;
+        return speakers;
     }
     
     public ArrayList<Speaker> getSpeakersBySession(int session) {

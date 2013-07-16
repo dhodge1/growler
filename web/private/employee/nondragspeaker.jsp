@@ -19,34 +19,41 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
         <title>Speakers</title><!-- Title -->
-
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> 
+        <link rel="shortcut icon" type="image/png" href="http://sni-techtoberfest.elasticbeanstalk.com/images/scripps_favicon-32.ico">
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/speakers/base/jquery-ui.css" /> 
         <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-        <link rel="stylesheet" href="../../css/demo.css" />  
-        <link rel="stylesheet" type="text/css" href="../../css/general.css" /><!--General CSS-->
-        <link rel="stylesheet" type="text/css" href="../../css/theme.css" /><!--Theme CSS-->
         <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
         <!--Additional Script-->
         <script>
             $().ready(function() {
-                $('#add').click(function() {
-                    return !$('#visible option:selected').appendTo('#list');
-                });
-                $('#remove').click(function() {
-                    return !$('#list option:selected').appendTo('#visible');
-                });
-                $('#send').click(function(event) {
-                    if ($('#list').has('option').length == 0) {
-                        alert('Please select some Speakers to rank');
-                        event.preventDefault();
+                //What happens when you click an available theme
+                $("#speakers li").click(function() {
+                    $("#ranked").find(".placeholder").remove(); //Remove the placeholder
+                    var id = ($(this).find(":checkbox").prop("id")); //Get the ID of the checkbox
+                    if ($(this).find("#" + id).prop("checked") === true) { //If it's already checked
+                        $(this).find("#" + id).prop("checked", false); //Make it unchecked
+                        $("#speakers").find("#" + id).prop("checked", false); //Make it unchecked
+                        $("#ranked").find("#" + id).parent().remove();
                     }
                     else {
-                        $('#action').attr("action", "../../action/processSpeakerRanking.jsp");
+                        $(this).find("#" + id).prop("checked", true); //Otherwise, check it
+                        ($("#ranked")).append($(this).clone(true)); //Add it to the ranked list
+                    }
+                    $("#speakers").find(":hidden").prop("name", "none");
+                    $("#ranked").find(":hidden").prop("name", "list");
+                });
+                $("#filter").on("keyup", function() {
+                    var text = $("#filter").val();
+                    if (text !== "") {
+                        $("#speakers li").filter(":contains('" + text + "')").show();
+                        $("#speakers li").filter(":not(:contains('" + text + "'))").hide();
+                    }
+                    else if (text === "") {
+                        $("#speakers li").show();
                     }
                 });
             });
@@ -63,98 +70,84 @@
                 String name = String.valueOf(session.getAttribute("user"));
             } catch (Exception e) {
             }
+            ArrayList<Speaker> speakers = persist.getUserRanks(user);
+            ArrayList<Speaker> vspeakers = persist.getSpeakersByVisibility(true, persist.SORT_BY_LAST_NAME_ASC);
         %>
         <%@ include file="../../includes/header.jsp" %> 
-        <%@ include file="../includes/testnav.jsp" %>
-        <div class="container-fixed">
-            <br/><br/><br/>
-            <div class="row">
-                
-				<%
-                    //Get a list of Speakers by calling getUserRanks
-                    ArrayList<Speaker> speakers = persist.getUserRanks(user);
-                    //If we didn't get any ranks, we tell the user to rank the Speakers
+        <%@ include file="../../includes/testnav.jsp" %>
+        <div class="container-fixed largeBottomMargin">
+            <div class="row mediumBottomMargin">
+                <ul class="breadcrumb" style='padding-top:12px;'>
+                    <li><a href="home.jsp">Home</a></li>
+                    <li>Speaker Ranking</li>
+                </ul>
+            </div>
+            <div class="row largeBottomMargin">
+                <h1 style="font-weight:normal;">Rank Speakers</h1>
+            </div>
+            <% if (speakers == null || speakers.size() == 0) {
+                    out.print("<div class='row largeBottomMargin'>");
+                    out.print("<p style='font-size: 16px; font-family: Arial;'>We want to hear from you!  Please let us know the top 10 speakers you would be interested in attending for this year's Techtoberfest.</p>");
+                    out.print("</div>");
+                }
+            %>
+            <div class="row mediumBottomMargin">
+                <%
+                    //If we didn't get any ranks, we tell the user to rank the speakers
                     if (speakers == null || speakers.size() == 0) {
-                        out.print("<h2 class=bordered><img style=\"padding-bottom:0;padding-left:0;\" src='../images/Techtoberfest2013small.png'/><span class=\"titlespan\">Speakers - Click To Order Speakers</span></h2>");
+                        out.print("<h2 class=\"bordered mediumBottomMargin\"><img style=\"padding-bottom:0;padding-left:0;\" id=\"logo\" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class=\"titlespan\">Which speakers are you most interested in?</span></h2>");
+                        out.print("<span class=\"mediumBottomMargin\">Please note: If desired, you can provide a ranking for less than 10 speakers.</span>");
                     } else { //If we got speakers, we let the user see them
-                        response.sendRedirect("../view/speaker.jsp");
-                        out.print("<h2 class=bordered><img style=\"padding-bottom:0;padding-left:0;\" src='../images/Techtoberfest2013small.png'/><span class=\"titlespan\">Your Speaker Ranks</span></h2>");
+                        out.print("<h2 class=bordered><img style=\"padding-bottom:0;padding-left:0;\" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class=\"titlespan\">Your Speaker Ranks</span></h2>");
                     }
                 %>
-                
             </div>
-            <br/>
-            <div class="row">
-                
-                    <%
-                                            //If There are Ranked Speakers already, here is where they will be displayed
-                                            if (speakers.size() > 0) {
-                                                out.print("<table class=\"propertyGrid\">");
-                                                for (int i = 0; i < speakers.size(); i++) {
-                                                    out.print("<tr><th>Rank " + (i + 1) + "</th><td>" + speakers.get(i).getLastName() + ", " + speakers.get(i).getFirstName() + "</td></tr>");
-                                                }
-
-                                                out.print("</table><br/>");
-                                                out.print("<a href=\"../../action/removeSpeakerRanks.jsp?id=" + user + "\">Reset Ranks</a>");
-
-                                            } else {
-                                            }
-
-
-                                        %>
-
-                                        <form id="action" action="../../action/processSpeakerRanking.jsp" name="Speakers">
-                                            <table>
-                                                <tr>
-                                                    <td>
-
-                                                        <%
-                                                            if (speakers == null || speakers.size() == 0) {
-                                                                out.print("<select id=\"visible\" name=\"visible\" size=\"10\" MULTIPLE>");
-                                                                ArrayList<Speaker> vspeakers = persist.getSpeakersByVisibility(true, persist.SORT_BY_LAST_NAME_ASC);
-                                                                for (int i = 0; i < vspeakers.size(); i++) {
-                                                                    int sId = vspeakers.get(i).getId();
-                                                                    out.print("<option value=\"" + sId + "\">");
-                                                                    out.print(vspeakers.get(i).getLastName() + ", " + vspeakers.get(i).getFirstName() + ": " + persist.getRanksByID(sId).getRank2012() + " out of " + persist.getRanksByID(sId).getCount2012() + " surveys");
-                                                                    out.print("</option>");
-                                                                }
-                                                                out.print("</select>");
-
-
-                                                        %>
-
-                                                    </td>
-                                                    <td align="center" valign="middle">
-
-                                                        <br>
-
-                                                        <br/>
-
-                                                    </td>
-                                                    <td>
-                                                        <%
-                                                            out.print("<select id=\"list\" name=\"list\" size=\"10\" MULTIPLE>");
-                                                            out.print("</select>");%>
-                                                    </td>
-                                                </tr>
-                                            </table>    
-                                            <%
-                                                    out.print("<input id=\"add\" type=\"Button\" value=\"Add >>\" style=\"width:100px\"><br/><br/>");
-                                                    out.print("<input id=\"remove\" type=\"Button\" value=\"<< Remove\" style=\"width:100px\"><br/><br/>");
-                                                    out.print("<input type=\"Submit\" value=\"Send Ranks\" id=\"send\" class=\"button button-primary\"/>");
-                                                }
-                                            %>
-											</form>
-                
-            </div>
+            <%
+                out.print("<div class='row mediumBottomMargin'>");
+                //If There are Ranked Speakers already, here is where they will be displayed
+                if (speakers.size() > 0) {
+                    out.print("<table class=\"propertyGrid\">");
+                    for (int i = 0; i < speakers.size(); i++) {
+                        out.print("<tr><th>Rank " + (i + 1) + "</th><td>" + speakers.get(i).getFullName() + "</td></tr>");
+                    }
+                    out.print("</table><br/>");
+                    out.print("<a href=\"../../action/removeSpeakerRanks.jsp?id=" + user + "\">Reset Ranks</a>");
+                    out.print("</div>");
+                }
+                if (speakers == null || speakers.size() == 0) {
+                    out.print("<form action='../../action/processSpeakerRanking.jsp'>");
+                    out.print("<div class='row mediumBottomMargin'>");
+                    out.print("<div class='span5' style='overflow:auto;height:300px;'>");
+                    out.print("<input id='filter' type='text' name='filter' />");
+                    out.print("<ul id='speakers'>");
+                    for (int i = 0; i < vspeakers.size(); i++) {
+                        out.print("<li class=\"" + vspeakers.get(i).getType() + "\">");
+                        out.print("<input type='checkbox' disabled='disabled' id='" + vspeakers.get(i).getId() + "'/>");
+                        out.print(vspeakers.get(i).getFullName());
+                        out.print("<input type=\"hidden\" name=\"list\" value=\"" + vspeakers.get(i).getId() + "\" />");
+                        out.print("</li>");
+                    }
+                    out.print("</ul>");
+                    out.print("</div>");
+                    out.print("<div class='span5'>");
+                    out.print("<span><strong>Speakers I'm Interested In</strong></span>");
+                    out.print("<ol id='ranked'>");
+                    out.print("<li class='placeholder'>Ranked Speakers</li>");
+                    out.print("</ol>");
+                    out.print("</div>");
+                    out.print("</div>");
+                    out.print("<div class='row mediumBottomMargin'>");
+                    out.print("<div class=\"form-actions\"><input id=\"send\" type=\"submit\" value=\"Submit My Ranking\" class=\"button button-primary\"/><a href=\"home.jsp\">Cancel</a></div>");
+                    out.print("</div>");
+                    out.print("<div class='row'>");
+                    out.print("<strong>Speaker not listed? </strong><a href='speakerentry.jsp'>Click here to suggest a new speaker</a>");
+                    out.print("</div>");
+                    out.print("</div>");
+                    out.print("</div>");
+                    out.print("</form>");
+                }
+            %>
         </div>
-        <br/>
-        <br/>
-
         <%@ include file="../../includes/footer.jsp" %>
-        <%@ include file="../../includes/scriptlist.jsp" %>
-
-
-
     </body>
 </html>

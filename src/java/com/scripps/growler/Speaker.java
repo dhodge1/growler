@@ -44,6 +44,8 @@ public class Speaker {
      * The times a speaker was ranked at last year's Techtoberfest
      */
     private int count2012;
+    
+    private String type;
 
     /**
      * Default constructor
@@ -211,5 +213,17 @@ public class Speaker {
      */
     public void setCount2012(int count) {
         this.count2012 = count;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+    
+    public String getFullName() {
+        return (this.lastName + ", " + this.firstName);
     }
 }

@@ -22,9 +22,6 @@
                     catch (Exception e) {
                         
                     }
-                %>
-        <%
-            
             Connection connection = dataConnection.sendConnection();
             Statement statement = connection.createStatement();
             String sql = "delete from speaker_ranking where user_id = " + user;
