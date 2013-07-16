@@ -58,17 +58,7 @@
                     },
                     stop: function(event, ui) {
                         if ($("#ranked li").length > 9) {
-                            $("#themes").sortable({
-                                disabled: true
-                            });
-                        }
-                    },
-                    start: function(event, ui) {
-                        if ($("#ranked li").length >= 10) {
-                            $("#themes").sortable({
-                                connectWith: ".connectedSortable",
-                                placeholder: "ui-state-highlight"
-                            });
+                            $("#themes").sortable('disable');
                         }
                     }
                 }).disableSelection();
@@ -86,7 +76,16 @@
                         $('#themes li').filter('.Technical').show();
                     }
                 });
-
+                $("#ranked").mouseenter(function(){
+                   if ($("#ranked li").length > 9 ) {
+                       $("#themes").sortable('enable');
+                   }
+                });
+                $("#ranked").mouseleave(function(){
+                   if ($("#ranked li").length > 9 ) {
+                       $("#themes").sortable('disable');
+                   }
+                });
             });
         </script>
     </head>

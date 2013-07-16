@@ -35,21 +35,17 @@
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
         <script>
             $(function() {
-                $("#speakers, #ranked").sortable({
+               $("#speakerss, #ranked").sortable({
                     connectWith: ".connectedSortable",
                     placeholder: "ui-state-highlight",
                     update: function(event, ui) {
                         $(this).find(".placeholder").remove();
-                        $("#speakers").find(":hidden").prop("name", "none");
+                        $("#speakerss").find(":hidden").prop("name", "none");
                         $("#ranked").find(":hidden").prop("name", "list");
+                    },
+                    stop: function(event, ui) {
                         if ($("#ranked li").length > 9) {
-                            $("#speakers").sortable({
-                                disabled: true
-                            });
-                        } else {
-                            $("#speakers").sortable({
-                                disabled: false
-                            });
+                            $("#speakers").sortable('disable');
                         }
                     }
                 }).disableSelection();
@@ -66,6 +62,16 @@
                         $('#speakers li').filter('.Business').hide();
                         $('#speakers li').filter('.Technical').show();
                     }
+                });
+                $("#ranked").mouseenter(function(){
+                   if ($("#ranked li").length > 9 ) {
+                       $("#speakers").sortable('enable');
+                   }
+                });
+                $("#ranked").mouseleave(function(){
+                   if ($("#ranked li").length > 9 ) {
+                       $("#speakers").sortable('disable');
+                   }
                 });
             });
         </script>
