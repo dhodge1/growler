@@ -7,11 +7,6 @@
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
 <%@page import="com.scripps.growler.*" %>
-<jsp:useBean id="theme" class="com.scripps.growler.Theme" scope="page" />
-<jsp:useBean id="persist" class="com.scripps.growler.ThemePersistence" scope="page" />
-<jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="page" />
-<jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page" />
-<jsp:useBean id="giveStars" class="com.scripps.growler.GiveStars" scope="page" />
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
@@ -24,49 +19,105 @@
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Welcome to Techtoberfest!</title><!-- Title -->
+        <link rel="stylesheet" href="../../css/bootstrap.css"/>
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> 
         <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-        <link rel="stylesheet" href="../../css/demo.css" />  
-        <link rel="stylesheet" href="../../css/draganddrop.css" /><!--Drag and drop style-->
-        <link rel="stylesheet" type="text/css" href="../../css/general.css" /><!--General CSS-->
-        <link rel="stylesheet" type="text/css" href="../../css/theme.css" /><!--Theme CSS-->
         <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
+        <style>
+            .carousel-indicators li {
+                background: #c0c0c0;
+            }
+
+            .carousel-indicators .active {
+                background: #333333;
+            }
+        </style>
     </head>
     <body id="growler1">    
         <%@ include file="../../includes/header.jsp" %> 
         <%@ include file="../../includes/testnav.jsp" %>
-                <%
-                    String user = "";
-                    if (null == session.getAttribute("id")) {
-                        response.sendRedirect("../../index.jsp");
-                    }
-                    try {
-                        user = String.valueOf(session.getAttribute("id"));
-                        String name = String.valueOf(session.getAttribute("user"));                  
-                    }
-                    catch (Exception e) {
-                        
-                    }
-                %>
-        <div class="container-fixed">
-            <div class="row">
-                    <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Welcome to Techtoberfest</span></h2>
+        <%
+            String user = "";
+            if (null == session.getAttribute("id")) {
+                response.sendRedirect("../../index.jsp");
+            }
+            try {
+                user = String.valueOf(session.getAttribute("id"));
+                String name = String.valueOf(session.getAttribute("user"));
+            } catch (Exception e) {
+            }
+        %>
+        <div class="container-fixed largeBottomMargin">
+            <div class="row mediumBottomMargin">
+                <h1>Welcome to the 2013 Techtoberfest Information System!</h1>
             </div>
-            <br/>
+            <div class="row mediumBottomMargin">
+                <div id="this-carousel-id" class="carousel slide">
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <h3>In October, the Knoxville office will host its fourth annual "Techtoberfest", a gathering of Scripps Networks Interactive employees from around the globe, sharing the present and future technology within our company via a series of amazing presentations.</h3>  
+                            <img src="http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png"/>
+                        </div>
+                        <div class="item">
+                            <h3>All feedback is encouraged to ensure this years event goes off without a hitch!  From user rankings to suggestions, the Techtoberfest Information System (TIS) is here to ensure your voice is heard before, during and after the Techtoberfest 2013 ends.</h3>  
+                            <img src="http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png"/>
+                        </div>
+                        <div class="item">
+                            <h3>For this year's Techtoberfest, even though no registration is required, we encourage employees to provide their level of interest for any/all desired presentation sessions.  There will even be surveys available for those wanting to provide feedback regarding sessions they have attended.</h3>  
+                            <img src="http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png"/>
+                        </div>
+
+                    </div><!-- .carousel-inner -->
+                    <!--  next and previous controls here
+                          href values must reference the id for this carousel -->
+                    <a class="carousel-control left" href="#this-carousel-id" data-slide="prev">&lsaquo;</a>
+                    <a class="carousel-control right" href="#this-carousel-id" data-slide="next">&rsaquo;</a>
+                    <ol class="carousel-indicators">
+                        <li data-target="#this-carousel-id" data-slide-to="0" class="active"></li>
+                        <li data-target="#this-carousel-id" data-slide-to="1"></li>
+                        <li data-target="#this-carousel-id" data-slide-to="2"></li>
+                    </ol>
+                </div>
+            </div>
             <div class="row">
                 <%@include file="../../includes/messagehandler.jsp" %>
-                    <h3>Themes</h3>
-                                        <p>A place to view, rank, and suggest Themes for this year's Techtoberfest</p>
-                                        <h3>Speakers</h3>
-                                        <p>A place to view, rank, and suggest Speakers for this year's Techtoberfest</p>
-                                        <h3>Sessions</h3>
-                                        <p>A place to register interest in a session, view the schedule, acknowledge attendance to a session, and complete surveys for sessions in this year's Techtoberfest</p>
-                
+                <div class="span5"><!-- Themes Area -->
+                    <div class="row largeBottomMargin">
+                        <h2 class="bordered">View/Rank Proposed Themes</h2>
+                        <p>The Techtoberfest Committee wants to hear from you!  As the 2013 Techtoberfest draws near we want to make sure we provide you with the most desirable technology presentations possible.  We want to know what topics YOU are most interested in.</p>
+                        <p>So we've compiled a list of possible themes and we would love to know which ones you would rank as your top 5 or 10...Rank Now!</p>
+                    </div>
+                    <div class="row">
+                        <a href="theme.jsp" class="button button-primary">Rank Themes</a>
+                    </div>
+                </div>
+                <div class="span5"><!-- Speakers area -->
+                    <div class="row largeBottomMargin">
+                        <h2 class="bordered">View/Rank Proposed Speakers</h2>
+                        <p>They say one of the best ways to make a good connection with your audience is to tell a great story.  In order to do that you need great speakers; therefore we need your help!  Who do YOU want to hear from?</p>
+                        <p>Just like with themes, we've compiled a list of proposed speakers for the 2013 Techtoberfest and we would love to know which ones you would rank as your top 5 or 10...Rank Now!</p>
+                    </div>
+                    <div class="row">
+                        <a href="speaker.jsp" class="button button-primary">Rank Speakers</a>
+                    </div>
+                </div>
             </div>
         </div>
         <%@ include file="../../includes/footer.jsp" %>
-        <%@ include file="../../includes/scriptlist.jsp" %>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/jquery-1.7.2.min.js"><\/script>')</script>
+        <!-- Bootstrap jQuery plugins compiled and minified -->
+        <script src="../../js/bootstrap.min.js"></script>
+        <script src="../../js/bootstrap-carousel.js"></script>
+        <script src="../../js/bootstrap-transition.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('.carousel').carousel({
+                    interval: 4000
+                });
+            });
+        </script>
     </body>
 </html>
 
