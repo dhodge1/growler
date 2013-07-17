@@ -34,18 +34,56 @@
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
         <style>
-            #speakers li{
+            #speakers li {
                 list-style-type: none;
+                cursor: move;
+                border: 1px solid #ccc;
+                overflow: auto;
+                padding: 3px;
+                margin: 5px;
+                border-top: 6px solid #0067b1;
+                box-shadow: 2px 2px 2px 2px #ccc;
+                -webkit-box-shadow: 2px 2px 2px 2px #ccc;
+            }
+            #ranked li {
+                list-style-type: decimal-leading-zero;
+                cursor: move;
+                border: 1px solid #ccc;
+                overflow: auto;
+                padding: 3px;
+                margin: 5px;
+                border-top: 6px solid #0067b1;
+                box-shadow: 2px 2px 2px 2px #ccc;
+                -webkit-box-shadow: 2px 2px 2px 2px #ccc;
+            }
+            #ranked {
+                list-style-position: inside;
+            }
+            #filter {
+                width: 100%;
+            }
+            #speakers {
+                margin:0;
+                border: 1px solid #ccc;
+            }
+            #ranked {
+                border: 1px solid #ccc;
+            }
+            .centerRow {
+                margin-left: 4px;
+            }
+            .interestLabel {
+                margin-left:25px;
             }
         </style>
         <script>
             $(function() {
-               $("#speakerss, #ranked").sortable({
+                $("#speakers, #ranked").sortable({
                     connectWith: ".connectedSortable",
                     placeholder: "ui-state-highlight",
                     update: function(event, ui) {
                         $(this).find(".placeholder").remove();
-                        $("#speakerss").find(":hidden").prop("name", "none");
+                        $("#speakers").find(":hidden").prop("name", "none");
                         $("#ranked").find(":hidden").prop("name", "list");
                     },
                     stop: function(event, ui) {
@@ -68,14 +106,23 @@
                         $('#speakers li').filter('.Technical').show();
                     }
                 });
-                $("#ranked").mouseenter(function(){
-                   if ($("#ranked li").length > 9 ) {
-                       $("#speakers").sortable('enable');
-                   }
+                $("#ranked").mouseenter(function() {
+                    if ($("#ranked li").length > 9) {
+                        $("#speakers").sortable('enable');
+                        $("#speakers li").css("cursor", "move");
+                    }
                 });
-                $("#ranked").mouseleave(function(){
-                   if ($("#ranked li").length > 9 ) {
-                       $("#speakers").sortable('disable');
+                $("#ranked").mouseleave(function() {
+                    if ($("#ranked li").length > 9) {
+                        $("#speakers").sortable('disable');
+                        $("#speakers li").css("cursor", "default");
+                    }
+                });
+                $("#send").click(function(event) {
+                   $("#ranked").find(".placeholder").remove(); //Remove the placeholder
+                   if ($("#ranked li").length === 0) {
+                       event.preventDefault();
+                       alert("Please rank at least one speaker before submitting.");
                    }
                 });
             });
@@ -106,7 +153,6 @@
                     <li>Speaker Ranking</li>
                 </ul>
             </div>
-
             <div class="row largeBottomMargin">
                 <h1 style="font-weight:normal;">Rank Speakers</h1>
             </div>
@@ -114,6 +160,7 @@
                     out.print("<div class='row largeBottomMargin'>");
                     out.print("<p style='font-size: 16px; font-family: Arial;'>We want to hear from you!  Please let us know the top 10 speakers you would be interested in listening to for this year's Techtoberfest.</p>");
                     out.print("</div>");
+                    out.print("<div class='row largeBottomMargin'></div>");
                 }
             %>
             <div class="row mediumBottomMargin">
@@ -121,15 +168,14 @@
                     if (speakers == null || speakers.size() == 0) {
                         out.print("<h2 class='bordered mediumBottomMargin'><img style=\"padding-bottom:0;padding-left:0;\" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class=\"titlespan\">Which speakers are you most interested in?</span></h2>");
                         out.print("<span class=\"mediumBottomMargin\">Please note: If desired, you can provide a ranking for less than 10 presentation speakers.  There is also a <a href=\"nondragspeaker.jsp\">non drag and drop version</a> available.</span>");
-
                     } else {
                         out.print("<h2 class=bordered><img style=\"padding-bottom:0;padding-left:0;\" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class=\"titlespan\">Your Speaker Rankings</span></h2>");
                     }
                 %>
             </div>
-            <div class="row">
                 <%
                     if (speakers.size() > 0) {
+                        out.print("<div class='row mediumBottomMargin'>");
                         out.print("<table class=\"propertyGrid\">");
                         for (int i = 0; i < speakers.size(); i++) {
                             out.print("<tr><th>Rank " + (i + 1) + "</th><td>" + speakers.get(i).getLastName()
@@ -137,50 +183,58 @@
                         }
                         out.print("</table>");
                         out.print("<a href=\"../../action/removeSpeakerRanks.jsp?id=" + user + "\">Reset Ranks</a>");
+                        out.print("</div>");
                     }
                     if (speakers == null || speakers.size() == 0) {
 
                         out.print("<form action='../../action/processSpeakerRanking.jsp'>");
+                        out.print("<div class='row mediumBottomMargin' style='margin-left:4px;'>");
+                        out.print("<div class='row smallBottomMargin'>");
+                        out.print("<div class='span5'>");
+                        out.print("<span><strong>Available Speakers</strong></span>");
+                        out.print("</div>");
+                        out.print("<div class='span5'>");
+                        out.print("<span class='interestLabel'><strong>Speakers I'm Interested In</strong></span>");
+                        out.print("</div>");
+                        out.print("</div>");
                         out.print("<div class='row'>");
-                        out.print("<div class='span5' style='overflow:auto;'>");
-                        out.print("<span><strong>Available Speakers</strong></span><br/>");
+                        out.print("<div class='span5'>");
+                        out.print("<div class='row'>");
                         out.print("<select id='filter'>");
                         out.print("<option value='1'>All Speakers</option>");
                         out.print("<option value='2'>Business Speakers</option>");
                         out.print("<option value='3'>Technical Speakers</option>");
                         out.print("</select>");
+                        out.print("</div>");
+                        out.print("<div class='row' style='overflow:auto;height:345px;'>");
                         out.print("<ul id='speakers' class='connectedSortable'>");
-
                         for (int j = 0; j < vspeakers.size(); j++) {
                             out.print("<li class=\"" + vspeakers.get(j).getType() + "\">");
                             out.print(vspeakers.get(j).getLastName() + ", " + vspeakers.get(j).getFirstName());
-                            out.print(giveStars.return2012Rank(vspeakers.get(j).getId()));
-                            out.print(giveStars.returnCount(vspeakers.get(j).getId()));
                             out.print("<input type=\"hidden\" name=\"list\" value=\"" + vspeakers.get(j).getId() + "\" />");
                             out.print("</li>");
                         }
                         out.print("</ul>");
                         out.print("</div>");
+                        out.print("</div>");
                         out.print("<div class='span5'>");
-                        out.print("<span><strong>Speakers I'm Interested In</strong></span>");
                         out.print("<ol id='ranked' class='connectedSortable'>");
                         out.print("<li class='placeholder'>Place speakers here</li>");
                         out.print("</ol>");
                         out.print("</div>");
                         out.print("</div>");
+                        out.print("</div>");
+                        out.print("<div class='row mediumBottomMargin'>");
+                        out.print("<div class=\"form-actions\"><input id=\"send\" type=\"submit\" value=\"Submit My Ranking\" class=\"button button-primary\"/><a href=\"home.jsp\">Cancel</a></div>");
+                        out.print("</div>");
+                        out.print("<div class='row'>");
+                        out.print("<strong>Speaker not listed? </strong><a href='speakerentry.jsp'>Click here to suggest a new speaker</a>");
+                        out.print("</div>");
+                        out.print("</div>");
+                        out.print("</div>");
+                        out.print("</form>");
                     }
                 %>
-            </div>
-            <% if (speakers == null || speakers.size() == 0) {
-                    out.print("<div class='row'>");
-                    out.print("<div class=\"form-actions\"><input id=\"send\" type=\"submit\" value=\"Submit My Ranking\" class=\"button button-primary\"/><a href=\"home.jsp\">Cancel</a></div>");
-                    out.print("</form>");
-                    out.print("</div>");
-                    out.print("<div class='row'>");
-                    out.print("<strong>Speaker not listed? </strong><a href='speakerentry.jsp'>Click here to suggest a new speaker</a>");
-                    out.print("</div>");
-                }
-            %>
         </div><!-- End Container Fixed -->
         <%@ include file="../../includes/footer.jsp" %>
     </body>

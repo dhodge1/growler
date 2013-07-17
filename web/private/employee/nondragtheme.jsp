@@ -57,8 +57,58 @@
                         $("#themes li").show();
                     }
                 });
+                $("#send").click(function(event) {
+                   $("#ranked").find(".placeholder").remove(); //Remove the placeholder
+                   if ($("#ranked li").length === 0) {
+                       event.preventDefault();
+                       alert("Please rank at least one theme before submitting.");
+                   }
+                });
             });
         </script>
+        <style>
+            #themes li {
+                list-style-type: none;
+                height:95px;
+                border: 1px solid #ccc;
+                overflow: auto;
+                padding: 3px;
+                margin: 5px;
+                border-top: 6px solid #0067b1;
+                box-shadow: 2px 2px 2px 2px #ccc;
+                -webkit-box-shadow: 2px 2px 2px 2px #ccc;
+            }
+            #ranked li {
+                list-style-type: none;
+                height:95px;
+                border: 1px solid #ccc;
+                overflow: auto;
+                padding: 3px;
+                margin: 5px;
+                border-top: 6px solid #0067b1;
+                box-shadow: 2px 2px 2px 2px #ccc;
+                -webkit-box-shadow: 2px 2px 2px 2px #ccc;
+            }
+            #ranked {
+                list-style-position: inside;
+            }
+            #filter {
+                width: 100%;
+            }
+            #themes {
+                margin:0;
+                border: 1px solid #ccc;
+            }
+            #ranked {
+                border: 1px solid #ccc;
+            }
+            .centerRow {
+                margin-left: 4px;
+            }
+            .interestLabel {
+                margin-left:25px;
+            }
+        </style>
     </head>
     <body id="growler1">  
         <%
@@ -91,6 +141,7 @@
                     out.print("<div class='row largeBottomMargin'>");
                     out.print("<p style='font-size: 16px; font-family: Arial;'>We want to hear from you!  Please let us know the top 10 presentation themes you would be interested in attending for this year's Techtoberfest.</p>");
                     out.print("</div>");
+                    out.print("<div class='row largeBottomMargin'></div>");
                 }
             %>
             <div class="row mediumBottomMargin">
@@ -118,9 +169,21 @@
                 }
                 if (themes == null || themes.size() == 0) {
                     out.print("<form action='../../action/processThemeRanking.jsp'>");
-                    out.print("<div class='row mediumBottomMargin'>");
-                    out.print("<div class='span5' style='overflow:auto;height:300px;'>");
+                    out.print("<div class='row mediumBottomMargin' style='margin-left:4px;'>");
+                    out.print("<div class='row smallBottomMargin'>");
+                    out.print("<div class='span5'>");
+                    out.print("<span><strong>Available Themes</strong></span>");
+                    out.print("</div>");
+                    out.print("<div class='span5'>");
+                    out.print("<span><strong>Presentations Themes I'm Interested In</strong></span>");
+                    out.print("</div>");
+                    out.print("</div>");
+                    out.print("<div class='row'>");
+                    out.print("<div class='span5'>");
+                    out.print("<div class='row'>");
                     out.print("<input id='filter' type='text' name='filter' />");
+                    out.print("</div>");
+                    out.print("<div class='row' style='overflow:auto;height:300px;'>");
                     out.print("<ul id='themes'>");
                     for (int i = 0; i < vthemes.size(); i++) {
                         out.print("<li class=\"" + vthemes.get(i).getType() + "\">");
@@ -132,11 +195,12 @@
                     }
                     out.print("</ul>");
                     out.print("</div>");
+                    out.print("</div>");
                     out.print("<div class='span5'>");
-                    out.print("<span><strong>Presentations Themes I'm Interested In</strong></span>");
                     out.print("<ol id='ranked'>");
                     out.print("<li class='placeholder'>Ranked Themes</li>");
                     out.print("</ol>");
+                    out.print("</div>");
                     out.print("</div>");
                     out.print("</div>");
                     out.print("<div class='row mediumBottomMargin'>");

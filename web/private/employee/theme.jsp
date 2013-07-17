@@ -42,13 +42,46 @@
         <style>
             #themes li {
                 list-style-type: none;
-                height:30px;
+                height:95px;
+                cursor: move;
+                border: 1px solid #ccc;
+                overflow: auto;
+                padding: 3px;
+                margin: 5px;
+                border-top: 6px solid #0067b1;
+                box-shadow: 2px 2px 2px 2px #ccc;
+                -webkit-box-shadow: 2px 2px 2px 2px #ccc;
+            }
+            #ranked li {
+                list-style-type: decimal-leading-zero;
+                height:95px;
+                cursor: move;
+                border: 1px solid #ccc;
+                overflow: auto;
+                padding: 3px;
+                margin: 5px;
+                border-top: 6px solid #0067b1;
+                box-shadow: 2px 2px 2px 2px #ccc;
+                -webkit-box-shadow: 2px 2px 2px 2px #ccc;
+            }
+            #ranked {
+                list-style-position: inside;
             }
             #filter {
-                width: 50%;
+                width: 100%;
             }
             #themes {
                 margin:0;
+                border: 1px solid #ccc;
+            }
+            #ranked {
+                border: 1px solid #ccc;
+            }
+            .centerRow {
+                margin-left: 4px;
+            }
+            .interestLabel {
+                margin-left:25px;
             }
         </style>
         <!--Additional Script-->
@@ -56,6 +89,7 @@
             $(function() {
                 $("#themes, #ranked").sortable({
                     connectWith: ".connectedSortable",
+                    cursor: "move",
                     placeholder: "ui-state-highlight",
                     update: function(event, ui) {
                         $(this).find(".placeholder").remove();
@@ -85,11 +119,20 @@
                 $("#ranked").mouseenter(function(){
                    if ($("#ranked li").length > 9 ) {
                        $("#themes").sortable('enable');
+                       $("#themes li").css("cursor", "move");
                    }
                 });
                 $("#ranked").mouseleave(function(){
                    if ($("#ranked li").length > 9 ) {
                        $("#themes").sortable('disable');
+                       $("#themes li").css("cursor", "default");
+                   }
+                });
+                $("#send").click(function(event) {
+                   $("#ranked").find(".placeholder").remove(); //Remove the placeholder
+                   if ($("#ranked li").length === 0) {
+                       event.preventDefault();
+                       alert("Please rank at least one theme before submitting.");
                    }
                 });
             });
@@ -127,6 +170,7 @@
                     out.print("<div class='row largeBottomMargin'>");
                     out.print("<p style='font-size: 16px; font-family: Arial;'>We want to hear from you!  Please let us know the top 10 presentation themes you would be interested in attending for this year's Techtoberfest.</p>");
                     out.print("</div>");
+                    out.print("<div class='row largeBottomMargin'></div>");
                 }
             %>
             <div class="row mediumBottomMargin">
@@ -154,27 +198,30 @@
                 }
                 if (themes == null || themes.size() == 0) {
                     out.print("<form action='../../action/processThemeRanking.jsp'>");
-                    out.print("<div class='row mediumBottomMargin'>");
-                    out.print("<div class='row'>");
+                    out.print("<div class='row mediumBottomMargin' style='margin-left:4px;'>");
+                    out.print("<div class='row smallBottomMargin'>");
                     out.print("<div class='span5'>");
                     out.print("<span><strong>Available Presentation Themes</strong></span>");
                     out.print("</div>");
                     out.print("<div class='span5'>");
-                    out.print("<span><strong>Presentations Themes I'm Interested In</strong></span>");
+                    out.print("<span class='interestLabel'><strong>Presentations Themes I'm Interested In</strong></span>");
                     out.print("</div>");
                     out.print("</div>");
-                    out.print("<div>");
-                    out.print("<select id='filter' class='pullLeft'>");
+                    out.print("<div class='row'>");
+                    out.print("<div class='span5'>");
+                    out.print("<div class='row'>");
+                    out.print("<select id='filter'>");
                     out.print("<option value='1'>All Themes</option>");
                     out.print("<option value='2'>Business Themes</option>");
                     out.print("<option value='3'>Technical Themes</option>");
                     out.print("</select>");
-                    out.print("<div class='span5' style='overflow:auto;height:300px;'>");
+                    out.print("</div>");
+                    out.print("<div class='row' style='overflow:auto;height:1005px;'>");
                     out.print("<ul id='themes' class='connectedSortable'>");
                     for (int i = 0; i < vthemes.size(); i++) {
                         out.print("<li class=\"" + vthemes.get(i).getType() + "\">");
-                        out.print(vthemes.get(i).getName() + " : ");
-                        out.print(vthemes.get(i).getDescription());
+                        out.print("<strong>" + vthemes.get(i).getName() + "</strong><br/>");
+                        out.print("Description: " + vthemes.get(i).getDescription());
                         out.print("<input type=\"hidden\" name=\"list\" value=\"" + vthemes.get(i).getId() + "\" />");
                         out.print("</li>");
                     }
@@ -185,6 +232,7 @@
                     out.print("<ol id='ranked' class='connectedSortable' >");
                     out.print("<li class='placeholder'>Place Ranked Themes Here</li>");
                     out.print("</ol>");
+                    out.print("</div>");
                     out.print("</div>");
                     out.print("</div>");
                     out.print("<div class='row mediumBottomMargin'>");
