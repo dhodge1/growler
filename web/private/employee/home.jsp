@@ -37,6 +37,9 @@
             .carousel-indicators .active {
                 background: #333333;
             }
+            .carousel-text {
+                color: #fff;
+            }
         </style>
     </head>
     <body id="growler1">    
@@ -67,16 +70,19 @@
                     </ol>
                     <div class="carousel-inner">
                         <div class="item active">
-                            <div class="span8"><h3>In October, the Knoxville office will host its fourth annual "Techtoberfest", a gathering of Scripps Networks Interactive employees from around the globe, sharing the present and future technology within our company via a series of amazing presentations.</h3></div>
-                            <div class="span4"><img src="http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png"/></div>
+                            <div class="row"><img src="http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013large.png"/></div>
+                            <div class="carousel-caption"><h3 class="carousel-text">In October, the Knoxville office will host its fourth annual "Techtoberfest", a gathering of Scripps Networks Interactive employees from around the globe, sharing the present and future technology within our company via a series of amazing presentations.</h3></div>
+                            
                         </div>
                         <div class="item">
-                            <div class="span8"><h3>All feedback is encouraged to ensure this years event goes off without a hitch!  From user rankings to suggestions, the Techtoberfest Information System (TIS) is here to ensure your voice is heard before, during and after the Techtoberfest 2013 ends.</h3></div>
-                            <div class="span4"><img src="http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png"/></div>
+                            <div class="row"><img src="http://sni-techtoberfest.elasticbeanstalk.com/images/slider_image1.jpg"/></div>
+                            <div class="carousel-caption"><h3 class="carousel-text">All feedback is encouraged to ensure this years event goes off without a hitch!  From user rankings to suggestions, the Techtoberfest Information System (TIS) is here to ensure your voice is heard before, during and after the Techtoberfest 2013 ends.</h3></div>
+                            
                         </div>
                         <div class="item">
-                            <div class="span8"><h3>For this year's Techtoberfest, even though no registration is required, we encourage employees to provide their level of interest for any/all desired presentation sessions.  There will even be surveys available for those wanting to provide feedback regarding sessions they have attended.</h3></div>
-                            <div class="span4"><img src="http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png"/></div>
+                            <div class="row"><img src="http://sni-techtoberfest.elasticbeanstalk.com/images/slider_image2.jpg"/></div>
+                            <div class="carousel-caption"><h3 class="carousel-text">For this year's Techtoberfest, even though no registration is required, we encourage employees to provide their level of interest for any/all desired presentation sessions.  There will even be surveys available for those wanting to provide feedback regarding sessions they have attended.</h3></div>
+                            
                         </div>
                     </div><!-- .carousel-inner -->
                     <!--  next and previous controls here

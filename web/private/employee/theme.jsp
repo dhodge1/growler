@@ -39,10 +39,11 @@
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+        <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>
+        <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/sniui.tool-tip.1.2.0.min.js" type="text/javascript"></script>
         <style>
             #themes li {
                 list-style-type: none;
-                height:95px;
                 cursor: move;
                 border: 1px solid #ccc;
                 overflow: auto;
@@ -54,7 +55,6 @@
             }
             #ranked li {
                 list-style-type: decimal-leading-zero;
-                height:95px;
                 cursor: move;
                 border: 1px solid #ccc;
                 overflow: auto;
@@ -102,6 +102,7 @@
                         }
                     }
                 }).disableSelection();
+                $(".Business, .Technical").toolTip();
                 $("#filter").change(function() {
                     if ($("#filter").val() == 1) {
                         $('#themes li').filter('.Business').show();
@@ -116,24 +117,24 @@
                         $('#themes li').filter('.Technical').show();
                     }
                 });
-                $("#ranked").mouseenter(function(){
-                   if ($("#ranked li").length > 9 ) {
-                       $("#themes").sortable('enable');
-                       $("#themes li").css("cursor", "move");
-                   }
+                $("#ranked").mouseenter(function() {
+                    if ($("#ranked li").length > 9) {
+                        $("#themes").sortable('enable');
+                        $("#themes li").css("cursor", "move");
+                    }
                 });
-                $("#ranked").mouseleave(function(){
-                   if ($("#ranked li").length > 9 ) {
-                       $("#themes").sortable('disable');
-                       $("#themes li").css("cursor", "default");
-                   }
+                $("#ranked").mouseleave(function() {
+                    if ($("#ranked li").length > 9) {
+                        $("#themes").sortable('disable');
+                        $("#themes li").css("cursor", "default");
+                    }
                 });
                 $("#send").click(function(event) {
-                   $("#ranked").find(".placeholder").remove(); //Remove the placeholder
-                   if ($("#ranked li").length === 0) {
-                       event.preventDefault();
-                       alert("Please rank at least one theme before submitting.");
-                   }
+                    $("#ranked").find(".placeholder").remove(); //Remove the placeholder
+                    if ($("#ranked li").length === 0) {
+                        event.preventDefault();
+                        alert("Please rank at least one theme before submitting.");
+                    }
                 });
             });
         </script>
@@ -216,12 +217,12 @@
                     out.print("<option value='3'>Technical Themes</option>");
                     out.print("</select>");
                     out.print("</div>");
-                    out.print("<div class='row' style='overflow:auto;height:1005px;'>");
+                    out.print("<div class='row' style='overflow:auto;height:345px;'>");
                     out.print("<ul id='themes' class='connectedSortable'>");
                     for (int i = 0; i < vthemes.size(); i++) {
-                        out.print("<li class=\"" + vthemes.get(i).getType() + "\">");
-                        out.print("<strong>" + vthemes.get(i).getName() + "</strong><br/>");
-                        out.print("Description: " + vthemes.get(i).getDescription());
+                        String desc = vthemes.get(i).getDescription();
+                        out.print("<li class=\"" + vthemes.get(i).getType() + "\" data-content=\"" + desc + "\"  title=\"" + vthemes.get(i).getName() + "\" data-placement='left'>");
+                        out.print("<span><strong>" + vthemes.get(i).getName() + "</strong></span>");
                         out.print("<input type=\"hidden\" name=\"list\" value=\"" + vthemes.get(i).getId() + "\" />");
                         out.print("</li>");
                     }
