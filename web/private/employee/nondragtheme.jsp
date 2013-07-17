@@ -28,6 +28,8 @@
         <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+        <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>
+        <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/sniui.tool-tip.1.2.0.min.js" type="text/javascript"></script>
         <!--Additional Script-->
         <script>
             $().ready(function() {
@@ -47,6 +49,7 @@
                     $("#themes").find(":hidden").prop("name", "none");
                     $("#ranked").find(":hidden").prop("name", "list");
                 });
+                $(".Business, .Technical").toolTip();
                 $("#filter").on("keyup", function() {
                     var text = $("#filter").val();
                     if (text !== "") {
@@ -186,10 +189,9 @@
                     out.print("<div class='row' style='overflow:auto;height:300px;'>");
                     out.print("<ul id='themes'>");
                     for (int i = 0; i < vthemes.size(); i++) {
-                        out.print("<li class=\"" + vthemes.get(i).getType() + "\">");
+                        out.print("<li class=\"" + vthemes.get(i).getType() + "\" data-content=\"" + vthemes.get(i).getDescription() + "\"  title=\"" + vthemes.get(i).getName() + "\" data-placement='left'>");
                         out.print("<input type='checkbox' disabled='disabled' id='" + vthemes.get(i).getId() + "'/>");
-                        out.print(vthemes.get(i).getName() + " : ");
-                        out.print(vthemes.get(i).getDescription());
+                        out.print(vthemes.get(i).getName());
                         out.print("<input type=\"hidden\" name=\"list\" value=\"" + vthemes.get(i).getId() + "\" />");
                         out.print("</li>");
                     }
