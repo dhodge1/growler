@@ -189,13 +189,7 @@
                 out.print("<div class='row mediumBottomMargin'>");
                 //If There are Ranked Themes already, here is where they will be displayed
                 if (themes.size() > 0) {
-                    out.print("<table class=\"propertyGrid\">");
-                    for (int i = 0; i < themes.size(); i++) {
-                        out.print("<tr><th>Rank " + (i + 1) + "</th><td>" + themes.get(i).getName() + "</td></tr>");
-                    }
-                    out.print("</table><br/>");
-                    out.print("<a href=\"../../action/removeThemeRanks.jsp?id=" + user + "\">Reset Ranks</a>");
-                    out.print("</div>");
+                    response.sendRedirect("theme-confirm.jsp");
                 }
                 if (themes == null || themes.size() == 0) {
                     out.print("<form action='../../action/processThemeRanking.jsp'>");
@@ -236,11 +230,13 @@
                     out.print("</div>");
                     out.print("</div>");
                     out.print("</div>");
+                    out.print("<div style='margin-left:4px'>");
                     out.print("<div class='row mediumBottomMargin'>");
                     out.print("<div class=\"form-actions\"><input id=\"send\" type=\"submit\" value=\"Submit My Ranking\" class=\"button button-primary\"/><a href=\"home.jsp\">Cancel</a></div>");
                     out.print("</div>");
                     out.print("<div class='row'>");
                     out.print("<strong>Presentation not listed? </strong><a href='themeentry.jsp'>Click here to suggest a new theme</a>");
+                    out.print("</div>");
                     out.print("</div>");
                     out.print("</div>");
                     out.print("</div>");

@@ -49,7 +49,7 @@
         persist.setUserRanks(newThemes, user);
 
 
-        session.setAttribute("message", "Success: Your votes have been recorded");
+        session.setAttribute("message", "Success: Your theme ranking(s) have been submitted successfully!");
     }
-    response.sendRedirect("../private/employee/theme.jsp");
+    response.sendRedirect("../private/employee/theme-confirm.jsp");
 %>

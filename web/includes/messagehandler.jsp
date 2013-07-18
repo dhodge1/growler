@@ -17,12 +17,12 @@
     String message = (String) session.getAttribute("message");
     String sessionName = "";
     if (message != null && message.startsWith("Success:") && !message.contains("Attendance")) {
-        message = message.substring(8, message.length() - 1);
+        message = message.substring(8, message.length());
         out.print("<p class=feedbackMessage-success>" + message + "</p>");
         session.removeAttribute("message");
     } else if (message != null && message.startsWith("Success: Attendance")) {
         sessionName = (String) session.getAttribute("sessionName");
-        message = message.substring(8, message.length() - 1);
+        message = message.substring(8, message.length());
         out.print("<p class=feedbackMessage-success>" + message + "</p>");
         out.print("<div id='modalDialog' title='Successfully Acknowledged Attendance'>");
         out.print("<p>Please take a survey.</p><p>This will enter you in a drawing for a fantastic prize.</p></div>");
@@ -30,7 +30,7 @@
         out.print("<p>Thanks anyway. You can always take a survey later.</p></div>");
         session.removeAttribute("message");
     } else if (message != null && message.startsWith("Error:")) {
-        message = message.substring(6, message.length() - 1);
+        message = message.substring(6, message.length());
         out.print("<p class=feedbackMessage-error>" + message + "</p>");
         session.removeAttribute("message");
     } else if (message != null) {

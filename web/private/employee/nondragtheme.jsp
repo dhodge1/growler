@@ -34,17 +34,14 @@
         <script>
             $().ready(function() {
                 //What happens when you click an available theme
-                $("#themes li").click(function() {
+                $(":checkbox").click(function() {
                     $("#ranked").find(".placeholder").remove(); //Remove the placeholder
-                    var id = ($(this).find(":checkbox").prop("id")); //Get the ID of the checkbox
-                    if ($(this).find("#" + id).prop("checked") === true) { //If it's already checked
-                        $(this).find("#" + id).prop("checked", false); //Make it unchecked
-                        $("#themes").find("#" + id).prop("checked", false); //Make it unchecked
-                        $("#ranked").find("#" + id).parent().remove();
+                    var id = ($(this).prop("id")); //Get the ID of the checkbox
+                    if ($(this).prop("checked") === true) { 
+                        ($("#ranked")).append($(this).parent().clone(true)); //Add it to the ranked list
                     }
                     else {
-                        $(this).find("#" + id).prop("checked", true); //Otherwise, check it
-                        ($("#ranked")).append($(this).clone(true)); //Add it to the ranked list
+                        $("#ranked").find("#" + id).parent().remove(); //Remove it from the list
                     }
                     $("#themes").find(":hidden").prop("name", "none");
                     $("#ranked").find(":hidden").prop("name", "list");
@@ -72,7 +69,6 @@
         <style>
             #themes li {
                 list-style-type: none;
-                height:95px;
                 border: 1px solid #ccc;
                 overflow: auto;
                 padding: 3px;
@@ -82,8 +78,7 @@
                 -webkit-box-shadow: 2px 2px 2px 2px #ccc;
             }
             #ranked li {
-                list-style-type: none;
-                height:95px;
+                list-style-type: decimal-leading-zero;
                 border: 1px solid #ccc;
                 overflow: auto;
                 padding: 3px;
@@ -162,13 +157,7 @@
                 out.print("<div class='row mediumBottomMargin'>");
                 //If There are Ranked Themes already, here is where they will be displayed
                 if (themes.size() > 0) {
-                    out.print("<table class=\"propertyGrid\">");
-                    for (int i = 0; i < themes.size(); i++) {
-                        out.print("<tr><th>Rank " + (i + 1) + "</th><td>" + themes.get(i).getName() + "</td></tr>");
-                    }
-                    out.print("</table><br/>");
-                    out.print("<a href=\"../../action/removeThemeRanks.jsp?id=" + user + "\">Reset Ranks</a>");
-                    out.print("</div>");
+                    response.sendRedirect("theme-confirm.jsp");
                 }
                 if (themes == null || themes.size() == 0) {
                     out.print("<form action='../../action/processThemeRanking.jsp'>");
@@ -186,11 +175,11 @@
                     out.print("<div class='row'>");
                     out.print("<input id='filter' type='text' name='filter' />");
                     out.print("</div>");
-                    out.print("<div class='row' style='overflow:auto;height:300px;'>");
+                    out.print("<div class='row' style='overflow:auto;height:345px;'>");
                     out.print("<ul id='themes'>");
                     for (int i = 0; i < vthemes.size(); i++) {
                         out.print("<li class=\"" + vthemes.get(i).getType() + "\" data-content=\"" + vthemes.get(i).getDescription() + "\"  title=\"" + vthemes.get(i).getName() + "\" data-placement='left'>");
-                        out.print("<input type='checkbox' disabled='disabled' id='" + vthemes.get(i).getId() + "'/>");
+                        out.print("<input type='checkbox' id='" + vthemes.get(i).getId() + "'/>");
                         out.print(vthemes.get(i).getName());
                         out.print("<input type=\"hidden\" name=\"list\" value=\"" + vthemes.get(i).getId() + "\" />");
                         out.print("</li>");

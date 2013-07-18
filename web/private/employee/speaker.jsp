@@ -175,15 +175,7 @@
             </div>
                 <%
                     if (speakers.size() > 0) {
-                        out.print("<div class='row mediumBottomMargin'>");
-                        out.print("<table class=\"propertyGrid\">");
-                        for (int i = 0; i < speakers.size(); i++) {
-                            out.print("<tr><th>Rank " + (i + 1) + "</th><td>" + speakers.get(i).getLastName()
-                                    + ", " + speakers.get(i).getFirstName() + "</td></tr>");
-                        }
-                        out.print("</table>");
-                        out.print("<a href=\"../../action/removeSpeakerRanks.jsp?id=" + user + "\">Reset Ranks</a>");
-                        out.print("</div>");
+                        response.sendRedirect("speaker-confirm.jsp");
                     }
                     if (speakers == null || speakers.size() == 0) {
 
@@ -194,7 +186,7 @@
                         out.print("<span><strong>Available Speakers</strong></span>");
                         out.print("</div>");
                         out.print("<div class='span5'>");
-                        out.print("<span class='interestLabel'><strong>Speakers I'm Interested In</strong></span>");
+                        out.print("<span class='interestLabel'><strong>Speakers I'm Interested In</strong></span><span class='pullRight'><a href='#'>View Bios</a></span>");
                         out.print("</div>");
                         out.print("</div>");
                         out.print("<div class='row'>");

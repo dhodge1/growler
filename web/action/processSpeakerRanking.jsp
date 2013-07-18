@@ -45,7 +45,7 @@
                 sp.setUserRanks(newSpeakers, user);
                 
 
-                session.setAttribute("message", "Success: Your votes have been recorded");
+                session.setAttribute("message", "Success: Your speaker ranking(s) have been submitted successfully!");
             }
-            response.sendRedirect("../private/employee/speaker.jsp");
+            response.sendRedirect("../private/employee/speaker-confirm.jsp");
         %>

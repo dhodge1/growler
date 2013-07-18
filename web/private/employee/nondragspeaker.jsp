@@ -31,17 +31,14 @@
         <script>
             $().ready(function() {
                 //What happens when you click an available theme
-                $("#speakers li").click(function() {
+                $(":checkbox").click(function() {
                     $("#ranked").find(".placeholder").remove(); //Remove the placeholder
-                    var id = ($(this).find(":checkbox").prop("id")); //Get the ID of the checkbox
-                    if ($(this).find("#" + id).prop("checked") === true) { //If it's already checked
-                        $(this).find("#" + id).prop("checked", false); //Make it unchecked
-                        $("#speakers").find("#" + id).prop("checked", false); //Make it unchecked
-                        $("#ranked").find("#" + id).parent().remove();
+                    var id = ($(this).prop("id")); //Get the ID of the checkbox
+                    if ($(this).prop("checked") === true) { 
+                        ($("#ranked")).append($(this).parent().clone(true)); //Add it to the ranked list
                     }
                     else {
-                        $(this).find("#" + id).prop("checked", true); //Otherwise, check it
-                        ($("#ranked")).append($(this).clone(true)); //Add it to the ranked list
+                        $("#ranked").find("#" + id).parent().remove(); //Remove it from the list
                     }
                     $("#speakers").find(":hidden").prop("name", "none");
                     $("#ranked").find(":hidden").prop("name", "list");
@@ -77,7 +74,7 @@
                 -webkit-box-shadow: 2px 2px 2px 2px #ccc;
             }
             #ranked li {
-                list-style-type: none;
+                list-style-type: decimal-leading-zero;
                 border: 1px solid #ccc;
                 overflow: auto;
                 padding: 3px;
@@ -156,13 +153,7 @@
                 out.print("<div class='row mediumBottomMargin'>");
                 //If There are Ranked Speakers already, here is where they will be displayed
                 if (speakers.size() > 0) {
-                    out.print("<table class=\"propertyGrid\">");
-                    for (int i = 0; i < speakers.size(); i++) {
-                        out.print("<tr><th>Rank " + (i + 1) + "</th><td>" + speakers.get(i).getFullName() + "</td></tr>");
-                    }
-                    out.print("</table><br/>");
-                    out.print("<a href=\"../../action/removeSpeakerRanks.jsp?id=" + user + "\">Reset Ranks</a>");
-                    out.print("</div>");
+                    response.sendRedirect("speaker-confirm.jsp");
                 }
                 if (speakers == null || speakers.size() == 0) {
                     out.print("<form action='../../action/processSpeakerRanking.jsp'>");
@@ -172,7 +163,7 @@
                     out.print("<span><strong>Available Speakers</strong></span>");
                     out.print("</div>");
                     out.print("<div class='span5'>");
-                    out.print("<span><strong>Speakers I'm Interested In</strong></span>");
+                    out.print("<span><strong>Speakers I'm Interested In</strong></span><span class='pullRight'><a href='#'>View Bios</a></span>");
                     out.print("</div>");
                     out.print("</div>");
                     out.print("<div class='row'>");
@@ -184,7 +175,7 @@
                     out.print("<ul id='speakers'>");
                     for (int i = 0; i < vspeakers.size(); i++) {
                         out.print("<li class=\"" + vspeakers.get(i).getType() + "\">");
-                        out.print("<input type='checkbox' disabled='disabled' id='" + vspeakers.get(i).getId() + "'/>");
+                        out.print("<input type='checkbox' id='" + vspeakers.get(i).getId() + "'/>");
                         out.print(vspeakers.get(i).getFullName());
                         out.print("<input type=\"hidden\" name=\"list\" value=\"" + vspeakers.get(i).getId() + "\" />");
                         out.print("</li>");
