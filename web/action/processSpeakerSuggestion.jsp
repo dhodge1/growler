@@ -29,6 +29,7 @@
                 %>
         <% String first_name = request.getParameter("first_name");
             String last_name = request.getParameter("last_name");
+            String reason = request.getParameter("reason");
             String admin = request.getParameter("admin");
 
             Speaker s = new Speaker();
@@ -47,7 +48,7 @@
             if (user == 808300) {
                 response.sendRedirect("../private/employee/admin/userspeaker.jsp");
             } else {
-                session.setAttribute("message", "Success: Speaker " + s.getLastName() + ", " + s.getFirstName() + " successfully added!");
-                response.sendRedirect("../private/employee/speaker.jsp");
+                session.setAttribute("message", "Success: Your suggestion has been submitted successfully!");
+                response.sendRedirect("../private/employee/speakerentry-confirm.jsp");
             }
         %>

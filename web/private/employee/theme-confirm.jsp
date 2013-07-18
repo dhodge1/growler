@@ -28,7 +28,7 @@
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> 
         <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-        <link rel="stylesheet" type="text/css" href="../../css/general.css" /><!--General CSS-->
+        <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
@@ -82,11 +82,11 @@
                     out.print("<div class='row largeBottomMargin'>");
                     out.print("<div class='span4'>");
                     out.print("<table class=\"table table-alternatingRow\">");
-                    out.print("<thead><tr><th>Rank</th><th>Theme</th></tr></thead>");
+                    out.print("<thead><tr><th>Rank</th><th>Presentation Theme</th></tr></thead><tbody>");
                     for (int i = 0; i < themes.size(); i++) {
                         out.print("<tr><td>" + (i + 1) + "</td><td>" + themes.get(i).getName() + "</td></tr>");
                     }
-                    out.print("</table>");
+                    out.print("</tbody></table>");
                     out.print("</div>");
                     out.print("</div>");
                     out.print("<div class='row largeBottomMargin'>");

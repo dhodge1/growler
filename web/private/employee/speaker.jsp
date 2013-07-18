@@ -31,6 +31,7 @@
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/speakers/base/jquery-ui.css" /> 
         <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
+        <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
         <style>
@@ -65,6 +66,8 @@
             #speakers {
                 margin:0;
                 border: 1px solid #ccc;
+                overflow-y:scroll;
+                height:345px;
             }
             #ranked {
                 border: 1px solid #ccc;
@@ -74,6 +77,9 @@
             }
             .interestLabel {
                 margin-left:25px;
+            }
+            .pullRight {
+                float: right;
             }
         </style>
         <script>
@@ -178,18 +184,14 @@
                         response.sendRedirect("speaker-confirm.jsp");
                     }
                     if (speakers == null || speakers.size() == 0) {
-
                         out.print("<form action='../../action/processSpeakerRanking.jsp'>");
-                        out.print("<div class='row mediumBottomMargin' style='margin-left:4px;'>");
-                        out.print("<div class='row smallBottomMargin'>");
-                        out.print("<div class='span5'>");
+                        out.print("<div class='row mediumBottomMargin'>");
+                        out.print("<div class='span5 smallBottomMargin'>");
                         out.print("<span><strong>Available Speakers</strong></span>");
                         out.print("</div>");
-                        out.print("<div class='span5'>");
+                        out.print("<div class='span5 smallBottomMargin'>");
                         out.print("<span class='interestLabel'><strong>Speakers I'm Interested In</strong></span><span class='pullRight'><a href='#'>View Bios</a></span>");
                         out.print("</div>");
-                        out.print("</div>");
-                        out.print("<div class='row'>");
                         out.print("<div class='span5'>");
                         out.print("<div class='row'>");
                         out.print("<select id='filter'>");
@@ -198,7 +200,6 @@
                         out.print("<option value='3'>Technical Speakers</option>");
                         out.print("</select>");
                         out.print("</div>");
-                        out.print("<div class='row' style='overflow:auto;height:345px;'>");
                         out.print("<ul id='speakers' class='connectedSortable'>");
                         for (int j = 0; j < vspeakers.size(); j++) {
                             out.print("<li class=\"" + vspeakers.get(j).getType() + "\">");
@@ -208,20 +209,14 @@
                         }
                         out.print("</ul>");
                         out.print("</div>");
-                        out.print("</div>");
                         out.print("<div class='span5'>");
                         out.print("<ol id='ranked' class='connectedSortable'>");
                         out.print("<li class='placeholder'>Place speakers here</li>");
                         out.print("</ol>");
                         out.print("</div>");
                         out.print("</div>");
-                        out.print("</div>");
-                        out.print("<div class='row mediumBottomMargin'>");
                         out.print("<div class=\"form-actions\"><input id=\"send\" type=\"submit\" value=\"Submit My Ranking\" class=\"button button-primary\"/><a href=\"home.jsp\">Cancel</a></div>");
-                        out.print("</div>");
-                        out.print("<div class='row'>");
                         out.print("<strong>Speaker not listed? </strong><a href='speakerentry.jsp'>Click here to suggest a new speaker</a>");
-                        out.print("</div>");
                         out.print("</div>");
                         out.print("</div>");
                         out.print("</form>");

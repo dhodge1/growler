@@ -34,7 +34,7 @@
                 $(":checkbox").click(function() {
                     $("#ranked").find(".placeholder").remove(); //Remove the placeholder
                     var id = ($(this).prop("id")); //Get the ID of the checkbox
-                    if ($(this).prop("checked") === true) { 
+                    if ($(this).prop("checked") === true) {
                         ($("#ranked")).append($(this).parent().clone(true)); //Add it to the ranked list
                     }
                     else {
@@ -54,11 +54,11 @@
                     }
                 });
                 $("#send").click(function(event) {
-                   $("#ranked").find(".placeholder").remove(); //Remove the placeholder
-                   if ($("#ranked li").length === 0) {
-                       event.preventDefault();
-                       alert("Please rank at least one speaker before submitting.");
-                   }
+                    $("#ranked").find(".placeholder").remove(); //Remove the placeholder
+                    if ($("#ranked li").length === 0) {
+                        event.preventDefault();
+                        alert("Please rank at least one speaker before submitting.");
+                    }
                 });
             });
         </script>
@@ -87,11 +87,14 @@
                 list-style-position: inside;
             }
             #filter {
-                width: 100%;
+                width: 88%;
+                margin-left: 2px;
             }
             #speakers {
                 margin:0;
                 border: 1px solid #ccc;
+                overflow-y:scroll;
+                height:345px;
             }
             #ranked {
                 border: 1px solid #ccc;
@@ -101,6 +104,9 @@
             }
             .interestLabel {
                 margin-left:25px;
+            }
+            .pullRight {
+                float: right;
             }
         </style>
     </head>
@@ -117,6 +123,9 @@
             }
             ArrayList<Speaker> speakers = persist.getUserRanks(user);
             ArrayList<Speaker> vspeakers = persist.getSpeakersByVisibility(true, persist.SORT_BY_LAST_NAME_ASC);
+            if (speakers.size() > 0) {
+                response.sendRedirect("speaker-confirm.jsp");
+            }
         %>
         <%@ include file="../../includes/header.jsp" %> 
         <%@ include file="../../includes/testnav.jsp" %>
@@ -143,35 +152,31 @@
                     //If we didn't get any ranks, we tell the user to rank the speakers
                     if (speakers == null || speakers.size() == 0) {
                         out.print("<h2 class=\"bordered mediumBottomMargin\"><img style=\"padding-bottom:0;padding-left:0;\" id=\"logo\" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class=\"titlespan\">Which speakers are you most interested in?</span></h2>");
-                        out.print("<span class=\"mediumBottomMargin\">Please note: If desired, you can provide a ranking for less than 10 speakers.</span>");
+                        out.print("<span class=\"mediumBottomMargin\">Select the speakers you are most interested in.  If desired, you can provide a ranking for less than 10 speakers.  There is also a <a href='speaker.jsp'>drag and drop version</a> available.</span><br/>");
+                        out.print("<span class='mediumBottomMargin'><strong>Note:</strong> The order in which you select the item is the order they will be ranked.</span>");
                     } else { //If we got speakers, we let the user see them
                         out.print("<h2 class=bordered><img style=\"padding-bottom:0;padding-left:0;\" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class=\"titlespan\">Your Speaker Ranks</span></h2>");
                     }
                 %>
             </div>
             <%
-                out.print("<div class='row mediumBottomMargin'>");
+                out.print("<div class='row'>");
                 //If There are Ranked Speakers already, here is where they will be displayed
-                if (speakers.size() > 0) {
-                    response.sendRedirect("speaker-confirm.jsp");
-                }
+
                 if (speakers == null || speakers.size() == 0) {
                     out.print("<form action='../../action/processSpeakerRanking.jsp'>");
-                    out.print("<div class='row mediumBottomMargin' style='margin-left:4px;'>");
-                    out.print("<div class='row smallBottomMargin'>");
-                    out.print("<div class='span5'>");
+                    out.print("<div class='row mediumBottomMargin'>");                    
+                    out.print("<div class='span5 smallBottomMargin'>");
                     out.print("<span><strong>Available Speakers</strong></span>");
                     out.print("</div>");
-                    out.print("<div class='span5'>");
-                    out.print("<span><strong>Speakers I'm Interested In</strong></span><span class='pullRight'><a href='#'>View Bios</a></span>");
+                    out.print("<div class='span5 smallBottomMargin'>");
+                    out.print("<span class='interestLabel'><strong>Speakers I'm Interested In</strong></span><span class='pullRight'><a href='#'>View Bios</a></span>");
                     out.print("</div>");
-                    out.print("</div>");
-                    out.print("<div class='row'>");
                     out.print("<div class='span5'>");
                     out.print("<div class='row'>");
+                    out.print("<span><strong>Filter:</strong></span>");
                     out.print("<input id='filter' type='text' name='filter' />");
                     out.print("</div>");
-                    out.print("<div class='row' style='overflow:auto;height:345px;'>");
                     out.print("<ul id='speakers'>");
                     for (int i = 0; i < vspeakers.size(); i++) {
                         out.print("<li class=\"" + vspeakers.get(i).getType() + "\">");
@@ -182,20 +187,14 @@
                     }
                     out.print("</ul>");
                     out.print("</div>");
-                    out.print("</div>");
                     out.print("<div class='span5'>");
                     out.print("<ol id='ranked'>");
                     out.print("<li class='placeholder'>Ranked Speakers</li>");
                     out.print("</ol>");
                     out.print("</div>");
                     out.print("</div>");
-                    out.print("</div>");
-                    out.print("<div class='row mediumBottomMargin'>");
                     out.print("<div class=\"form-actions\"><input id=\"send\" type=\"submit\" value=\"Submit My Ranking\" class=\"button button-primary\"/><a href=\"home.jsp\">Cancel</a></div>");
-                    out.print("</div>");
-                    out.print("<div class='row'>");
                     out.print("<strong>Speaker not listed? </strong><a href='speakerentry.jsp'>Click here to suggest a new speaker</a>");
-                    out.print("</div>");
                     out.print("</div>");
                     out.print("</div>");
                     out.print("</form>");

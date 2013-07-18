@@ -46,7 +46,7 @@
                 session.setAttribute("message", "Success: Theme Successfully added!");
                 response.sendRedirect("../private/employee/admin/theme.jsp");
             } else {
-                session.setAttribute("message", "Success: Theme Successfully added!");
-                response.sendRedirect("../private/employee/theme.jsp");
+                session.setAttribute("message", "Success: Your suggestion has been submitted successfully!");
+                response.sendRedirect("../private/employee/themeentry-confirm.jsp");
             }
         %>

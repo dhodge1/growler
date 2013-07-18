@@ -35,9 +35,8 @@
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> 
         <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-        <link rel="stylesheet" type="text/css" href="../../css/general.css" /><!--General CSS-->
+        <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
         <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>
         <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/sniui.tool-tip.1.2.0.min.js" type="text/javascript"></script>
@@ -73,6 +72,8 @@
             #themes {
                 margin:0;
                 border: 1px solid #ccc;
+                overflow-y:scroll;
+                height:345px;
             }
             #ranked {
                 border: 1px solid #ccc;
@@ -84,7 +85,6 @@
                 margin-left:25px;
             }
         </style>
-        <!--Additional Script-->
         <script>
             $(function() {
                 $("#themes, #ranked").sortable({
@@ -140,7 +140,6 @@
         </script>
     </head>
     <body id="growler1">  
-
         <%
             int user = 0;
             if (null == session.getAttribute("id")) {
@@ -153,6 +152,9 @@
             }
             ArrayList<Theme> themes = persist.getUserRanks(user);
             ArrayList<Theme> vthemes = persist.getThemesByVisibility(true);
+            if (themes.size() > 0) {
+                response.sendRedirect("theme-confirm.jsp");
+            }
         %>
         <%@ include file="../../includes/header.jsp" %> 
         <%@ include file="../../includes/testnav.jsp" %>
@@ -186,23 +188,16 @@
                 %>
             </div>
             <%
-                out.print("<div class='row mediumBottomMargin'>");
-                //If There are Ranked Themes already, here is where they will be displayed
-                if (themes.size() > 0) {
-                    response.sendRedirect("theme-confirm.jsp");
-                }
+                out.print("<div class='row'>");
                 if (themes == null || themes.size() == 0) {
                     out.print("<form action='../../action/processThemeRanking.jsp'>");
-                    out.print("<div class='row mediumBottomMargin' style='margin-left:4px;'>");
-                    out.print("<div class='row smallBottomMargin'>");
-                    out.print("<div class='span5'>");
+                    out.print("<div class='row mediumBottomMargin'>");
+                    out.print("<div class='span5 smallBottomMargin'>");
                     out.print("<span><strong>Available Presentation Themes</strong></span>");
                     out.print("</div>");
-                    out.print("<div class='span5'>");
+                    out.print("<div class='span5 smallBottomMargin'>");
                     out.print("<span class='interestLabel'><strong>Presentations Themes I'm Interested In</strong></span>");
                     out.print("</div>");
-                    out.print("</div>");
-                    out.print("<div class='row'>");
                     out.print("<div class='span5'>");
                     out.print("<div class='row'>");
                     out.print("<select id='filter'>");
@@ -211,7 +206,6 @@
                     out.print("<option value='3'>Technical Themes</option>");
                     out.print("</select>");
                     out.print("</div>");
-                    out.print("<div class='row' style='overflow:auto;height:345px;'>");
                     out.print("<ul id='themes' class='connectedSortable'>");
                     for (int i = 0; i < vthemes.size(); i++) {
                         String desc = vthemes.get(i).getDescription();
@@ -222,22 +216,14 @@
                     }
                     out.print("</ul>");
                     out.print("</div>");
-                    out.print("</div>");
                     out.print("<div class='span5'>");
                     out.print("<ol id='ranked' class='connectedSortable' >");
                     out.print("<li class='placeholder'>Place Ranked Themes Here</li>");
                     out.print("</ol>");
                     out.print("</div>");
                     out.print("</div>");
-                    out.print("</div>");
-                    out.print("<div style='margin-left:4px'>");
-                    out.print("<div class='row mediumBottomMargin'>");
                     out.print("<div class=\"form-actions\"><input id=\"send\" type=\"submit\" value=\"Submit My Ranking\" class=\"button button-primary\"/><a href=\"home.jsp\">Cancel</a></div>");
-                    out.print("</div>");
-                    out.print("<div class='row'>");
                     out.print("<strong>Presentation not listed? </strong><a href='themeentry.jsp'>Click here to suggest a new theme</a>");
-                    out.print("</div>");
-                    out.print("</div>");
                     out.print("</div>");
                     out.print("</div>");
                     out.print("</form>");

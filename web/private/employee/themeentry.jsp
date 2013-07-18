@@ -29,7 +29,6 @@
         <link rel="stylesheet" href="../../css/draganddrop.css" /><!--Drag and drop style-->
         <link rel="stylesheet" href="../../css/prettify/prettify.css" /> 
         <link rel="stylesheet" href="../../css/wijmo/jquery.wijmo-complete.all.2.3.2.min.css"/>
-        <link rel="stylesheet" type="text/css" href="../../css/general.css" /><!--General CSS-->
         <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <link rel="shortcut icon" type="image/png" href="../../images/scripps_favicon-32.ico">
         <style>
@@ -57,54 +56,56 @@
         <%@ include file="../../includes/header.jsp" %> 
         <%@ include file="../../includes/testnav.jsp" %>
         <div class="container-fixed">
-            <div class="row">
-                <br/>
-                    <h1>Theme Suggestions</h1>
-                    <h3>Is there something you would like to see presented or discussed this year?  
-                    Feel free to submit your ideas here.</h3>
-                
+            <div class="row mediumBottomMargin"></div>
+            <div class="row mediumBottomMargin">
+                <ul class="breadcrumb">
+                    <li><a href="home.jsp">Home</a></li>
+                    <li>Suggest a Presentation Theme</li>
+                </ul>
             </div>
-            <br/><br/><br/>
-            <div class="row">
-                
-                    <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Suggest a New Theme</span></h2>
-                
+            <div class="row mediumBottomMargin">
+                <h1>Suggest a Presentation Theme</h1>
             </div>
-            <br/>
+            <div class="row mediumBottomMargin" style="border:1px dashed #ccc"></div>
+            <div class="row mediumBottomMargin">
+                <span>Is there a new presentation theme you would like to suggest for this years Techtoberfest?  We would LOVE to know more about it.</span>
+            </div>
+            <div class="row mediumBottomMargin">
+                <label><span style="color: red;">*</span>Required field</label>
+            </div>
+            <div class="row mediumBottomMargin">
+                    <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Suggestion Details</span></h2>
+            </div>
             <div class="row">
                 <%@include file="../../includes/messagehandler.jsp" %>
                     <form method="POST" id="action" action="../../action/processThemeSuggestion.jsp">
                         <fieldset>
                             <div class="form-group">
-                                <label class="required">Theme Name</label>
+                                <label class="required">Presentation Theme Name</label>
                                 <input required="required" name="name" class="input-xlarge" type="text" id="tip" data-content="30 characters or less please" maxlength="30"/>
                                 <br/><span id="error_theme_name" class="message_container">
-                                    <span>Please enter a Theme Name</span>
+                                    <span>Please enter a Presentation Theme Name</span>
                                 </span>
                             </div>
                             <div class="form-group">
-                                <label class="required">Theme Description</label>
+                                <label class="required">Presentation Theme Description</label>
                                 <input required="required" name="description" class="input-xlarge" type="text" id="tip2" data-content="250 characters or less please" maxlength="250"/>
                                 <br/><span id="error_theme_description" class="message_container">
-                                    <span>Please enter a Theme Description</span>
+                                    <span>Please enter a Presentation Theme Description</span>
                                 </span>
                             </div>
                             <div class="form-group">
-                                <label>Why should we implement this theme?</label>
-                                <input name="reason" class="input-xlarge" type="text" id="tip3" data-content="Help us understand what this theme suggestion means to you" maxlength="250"/>
+                                <label>Why should this presentation be added to this years Techtoberfest?</label>
+                                <textarea name="reason" id="tip3" data-content="Help us understand what this theme suggestion means to you" rows="5" cols="50" maxlength="250"></textarea>
                             </div>
                             <div class="form-actions">
-                                <input type="submit" id="send" class="button button-primary" value="Submit" />
+                                <input type="submit" id="send" class="button button-primary" value="Submit Suggestion" />
                                 <a class="button" id="cancel" href="theme.jsp">Cancel</a>
                             </div>
                         </fieldset>
                 </form>
-                
             </div>
         </div>
-        <br/>
-        <br/>
-
         <%@ include file="../../includes/footer.jsp" %> 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
         <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>

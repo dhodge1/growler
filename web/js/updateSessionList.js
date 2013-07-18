@@ -49,6 +49,4 @@ function updateSessionList(selectBox) {
     };
     xmlhttp.open("POST", "../../../action/updateSessionLive.jsp?id=" + id + "&date=" + date + "&time=" + time, true);
     xmlhttp.send();
-
-
 }

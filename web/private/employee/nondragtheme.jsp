@@ -37,7 +37,7 @@
                 $(":checkbox").click(function() {
                     $("#ranked").find(".placeholder").remove(); //Remove the placeholder
                     var id = ($(this).prop("id")); //Get the ID of the checkbox
-                    if ($(this).prop("checked") === true) { 
+                    if ($(this).prop("checked") === true) {
                         ($("#ranked")).append($(this).parent().clone(true)); //Add it to the ranked list
                     }
                     else {
@@ -58,11 +58,11 @@
                     }
                 });
                 $("#send").click(function(event) {
-                   $("#ranked").find(".placeholder").remove(); //Remove the placeholder
-                   if ($("#ranked li").length === 0) {
-                       event.preventDefault();
-                       alert("Please rank at least one theme before submitting.");
-                   }
+                    $("#ranked").find(".placeholder").remove(); //Remove the placeholder
+                    if ($("#ranked li").length === 0) {
+                        event.preventDefault();
+                        alert("Please rank at least one theme before submitting.");
+                    }
                 });
             });
         </script>
@@ -91,11 +91,14 @@
                 list-style-position: inside;
             }
             #filter {
-                width: 100%;
+                width: 88%;
+                margin-left: 2px;
             }
             #themes {
                 margin:0;
                 border: 1px solid #ccc;
+                overflow-y: scroll;
+                height:340px;
             }
             #ranked {
                 border: 1px solid #ccc;
@@ -121,6 +124,9 @@
             }
             ArrayList<Theme> themes = persist.getUserRanks(user);
             ArrayList<Theme> vthemes = persist.getThemesByVisibility(true);
+            if (themes.size() > 0) {
+                response.sendRedirect("theme-confirm.jsp");
+            }
         %>
         <%@ include file="../../includes/header.jsp" %> 
         <%@ include file="../../includes/testnav.jsp" %>
@@ -147,35 +153,31 @@
                     //If we didn't get any ranks, we tell the user to rank the themes
                     if (themes == null || themes.size() == 0) {
                         out.print("<h2 class=\"bordered mediumBottomMargin\"><img style=\"padding-bottom:0;padding-left:0;\" id=\"logo\" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class=\"titlespan\">Which presentations are you most interested in?</span></h2>");
-                        out.print("<span class=\"mediumBottomMargin\">Please note: If desired, you can provide a ranking for less than 10 presentation themes.</span>");
+                        out.print("<span class=\"mediumBottomMargin\">Select the presentation themes you are most interested in.  If desired, you can provide a ranking for less than 10 presentation themes.  There is also a <a href='theme.jsp'>drag and drop version</a> available.</span><br/>");
+                        out.print("<span class='mediumBottomMargin'><strong>Note:</strong> The order in which you select the item is the order they will be ranked.</span>");
                     } else { //If we got themes, we let the user see them
                         out.print("<h2 class=bordered><img style=\"padding-bottom:0;padding-left:0;\" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class=\"titlespan\">Your Theme Ranks</span></h2>");
                     }
                 %>
             </div>
             <%
-                out.print("<div class='row mediumBottomMargin'>");
+                out.print("<div class='row'>");
                 //If There are Ranked Themes already, here is where they will be displayed
-                if (themes.size() > 0) {
-                    response.sendRedirect("theme-confirm.jsp");
-                }
+
                 if (themes == null || themes.size() == 0) {
                     out.print("<form action='../../action/processThemeRanking.jsp'>");
-                    out.print("<div class='row mediumBottomMargin' style='margin-left:4px;'>");
-                    out.print("<div class='row smallBottomMargin'>");
-                    out.print("<div class='span5'>");
+                    out.print("<div class='row mediumBottomMargin'>");
+                    out.print("<div class='span5 smallBottomMargin'>");
                     out.print("<span><strong>Available Themes</strong></span>");
                     out.print("</div>");
-                    out.print("<div class='span5'>");
+                    out.print("<div class='span5 smallBottomMargin'>");
                     out.print("<span><strong>Presentations Themes I'm Interested In</strong></span>");
                     out.print("</div>");
-                    out.print("</div>");
-                    out.print("<div class='row'>");
                     out.print("<div class='span5'>");
                     out.print("<div class='row'>");
+                    out.print("<span><strong>Filter:</strong></span>");
                     out.print("<input id='filter' type='text' name='filter' />");
                     out.print("</div>");
-                    out.print("<div class='row' style='overflow:auto;height:345px;'>");
                     out.print("<ul id='themes'>");
                     for (int i = 0; i < vthemes.size(); i++) {
                         out.print("<li class=\"" + vthemes.get(i).getType() + "\" data-content=\"" + vthemes.get(i).getDescription() + "\"  title=\"" + vthemes.get(i).getName() + "\" data-placement='left'>");
@@ -186,20 +188,14 @@
                     }
                     out.print("</ul>");
                     out.print("</div>");
-                    out.print("</div>");
                     out.print("<div class='span5'>");
                     out.print("<ol id='ranked'>");
                     out.print("<li class='placeholder'>Ranked Themes</li>");
                     out.print("</ol>");
                     out.print("</div>");
                     out.print("</div>");
-                    out.print("</div>");
-                    out.print("<div class='row mediumBottomMargin'>");
                     out.print("<div class=\"form-actions\"><input id=\"send\" type=\"submit\" value=\"Submit My Ranking\" class=\"button button-primary\"/><a href=\"home.jsp\">Cancel</a></div>");
-                    out.print("</div>");
-                    out.print("<div class='row'>");
                     out.print("<strong>Presentation not listed? </strong><a href='themeentry.jsp'>Click here to suggest a new theme</a>");
-                    out.print("</div>");
                     out.print("</div>");
                     out.print("</div>");
                     out.print("</form>");

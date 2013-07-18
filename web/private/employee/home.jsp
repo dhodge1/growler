@@ -26,10 +26,11 @@
         <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
         <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <style>
-            .carousel-indicators {
-                position: relative;
-                left: 400px;
-                top: 90px;
+            .carousel-caption {
+                position: absolute;
+                width: 900px;
+                margin-left: auto;
+                margin-right:auto;
             }
             .carousel-indicators li {
                 background: #c0c0c0;
@@ -39,6 +40,24 @@
             }
             .carousel-text {
                 color: #fff;
+            }
+            .carousel-indicators.middle {
+                left: 0;
+                right: 0;
+                top: auto;
+                bottom: 5px;
+                text-align: center;
+            }
+            .carousel-indicators.middle li {
+                float: none;
+                display: inline-block;
+            }
+            h3 {
+                text-align: center;
+            }
+            .c_img {
+                margin-left: auto;
+                margin-right:auto;
             }
         </style>
     </head>
@@ -63,60 +82,47 @@
             </div>
             <div class="row largeBottomMargin">
                 <div id="this-carousel-id" class="carousel slide">
-                    <ol class="carousel-indicators">
+                    <ol class="carousel-indicators middle">
                         <li data-target="#this-carousel-id" data-slide-to="0" class="active"></li>
                         <li data-target="#this-carousel-id" data-slide-to="1"></li>
                         <li data-target="#this-carousel-id" data-slide-to="2"></li>
                     </ol>
                     <div class="carousel-inner">
                         <div class="item active">
-                            <div class="row"><img src="http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013large.png"/></div>
+                            <img class='c_img' src="../../images/Techtoberfest2013large.png"/>
                             <div class="carousel-caption"><h3 class="carousel-text">In October, the Knoxville office will host its fourth annual "Techtoberfest", a gathering of Scripps Networks Interactive employees from around the globe, sharing the present and future technology within our company via a series of amazing presentations.</h3></div>
-                            
                         </div>
                         <div class="item">
-                            <div class="row"><img src="http://sni-techtoberfest.elasticbeanstalk.com/images/slider_image1.jpg"/></div>
-                            <div class="carousel-caption"><h3 class="carousel-text">All feedback is encouraged to ensure this years event goes off without a hitch!  From user rankings to suggestions, the Techtoberfest Information System (TIS) is here to ensure your voice is heard before, during and after the Techtoberfest 2013 ends.</h3></div>
-                            
+                            <img  class='c_img' src="../../images/slider_photo1.jpg"/>
+                            <div class="carousel-caption"><h3 class="carousel-text">All feedback is encouraged to ensure this years event goes off without a hitch!  From user rankings to suggestions, the Techtoberfest Information System (TIS) is here to ensure your voice is heard before, during and after the Techtoberfest 2013 ends.</h3></div>                            
                         </div>
                         <div class="item">
-                            <div class="row"><img src="http://sni-techtoberfest.elasticbeanstalk.com/images/slider_image2.jpg"/></div>
+                            <img class='c_img' src="../../images/slider_photo2.jpg"/>
                             <div class="carousel-caption"><h3 class="carousel-text">For this year's Techtoberfest, even though no registration is required, we encourage employees to provide their level of interest for any/all desired presentation sessions.  There will even be surveys available for those wanting to provide feedback regarding sessions they have attended.</h3></div>
-                            
                         </div>
                     </div><!-- .carousel-inner -->
                     <!--  next and previous controls here
                           href values must reference the id for this carousel -->
                     <!--<a class="carousel-control left" href="#this-carousel-id" data-slide="prev">&lsaquo;</a>
                     <a class="carousel-control right" href="#this-carousel-id" data-slide="next">&rsaquo;</a>-->
-
                 </div>
-
             </div>
             <div class="row largeBottomMargin"></div>
             <div class="row">
                 <%@include file="../../includes/messagehandler.jsp" %>
                 <div class="span6"><!-- Themes Area -->
-                    <div class="row largeBottomMargin">
-                        <div class="row mediumBottomMargin">
-                            <h2 class="bordered">View/Rank Proposed Themes</h2>
-                        </div>
+                        <h2 class="bordered">View/Rank Proposed Themes</h2>
+                        <div class='mediumBottomMargin'></div>
                         <p>The Techtoberfest Committee wants to hear from you!  As the 2013 Techtoberfest draws near we want to make sure we provide you with the most desirable technology presentations possible.  We want to know what topics YOU are most interested in.</p>
-                        <p>So we've compiled a list of possible themes and we would love to know which ones you would rank as your top 5 or 10...Rank Now!</p>
-                    </div>
-                    <div class="row">
+                        <p class='largeBottomMargin'>So we've compiled a list of possible themes and we would love to know which ones you would rank as your top 5 or 10...Rank Now!</p>
                         <a href="theme.jsp" class="button button-primary">Rank Themes</a>
-                    </div>
                 </div>
                 <div class="span6"><!-- Speakers area -->
-                    <div class="row largeBottomMargin">
                         <h2 class="bordered">View/Rank Proposed Speakers</h2>
+                        <div class='mediumBottomMargin'></div>
                         <p>They say one of the best ways to make a good connection with your audience is to tell a great story.  In order to do that you need great speakers; therefore we need your help!  Who do YOU want to hear from?</p>
-                        <p>Just like with themes, we've compiled a list of proposed speakers for the 2013 Techtoberfest and we would love to know which ones you would rank as your top 5 or 10...Rank Now!</p>
-                    </div>
-                    <div class="row">
+                        <p class='largeBottomMargin'>Just like with themes, we've compiled a list of proposed speakers for the 2013 Techtoberfest and we would love to know which ones you would rank as your top 5 or 10...Rank Now!</p>
                         <a href="speaker.jsp" class="button button-primary">Rank Speakers</a>
-                    </div>
                 </div>
             </div>
         </div>

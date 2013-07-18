@@ -479,6 +479,35 @@ public class SessionPersistence extends GrowlerPersistence {
         }
         return null;
     }
+    
+    public ArrayList<Session> getThisYearSessions(int year, String sort, int limit) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select id, name, description, session_date, start_time, location, track, duration, session_key from session where extract(YEAR FROM session_date) = ? and extract(MONTH FROM session_date) = '10' " + sort + " limit ?, 15");
+            statement.setInt(1, year);
+            statement.setInt(2, limit);
+            result = statement.executeQuery();
+            sessions = new ArrayList<Session>();
+            while (result.next()) {
+                Session s = new Session();
+                s.setId(result.getInt("id"));
+                s.setName(result.getString("name"));
+                s.setDescription(result.getString("description"));
+                s.setSessionDate(result.getDate("session_date"));
+                s.setStartTime(result.getTime("start_time"));
+                s.setLocation(result.getString("location"));
+                s.setTrack(result.getString("track"));
+                s.setDuration(result.getTime("duration"));
+                s.setKey(result.getString("session_key"));
+                sessions.add(s);
+            }
+            return sessions;
+        } catch (Exception e) {
+        } finally {
+            closeJDBC();
+        }
+        return sessions;
+    }
 
     public ArrayList<Session> getThisYearSessions(int year, String sort) {
         try {

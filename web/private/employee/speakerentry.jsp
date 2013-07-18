@@ -19,7 +19,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <title>Speaker Entry</title>
-
+        <link rel="shortcut icon" type="image/png" href="http://sni-techtoberfest.elasticbeanstalk.com/images/scripps_favicon-32.ico">
         <link rel="stylesheet" href="../../css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
         <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
@@ -49,16 +49,28 @@
         %>
         <%@ include file="../../includes/header.jsp" %> 
         <%@ include file="../../includes/testnav.jsp" %>
-        <div class="container-fixed">
-            <br/><br/><br/>
-            <div class="row">
-                
-                    <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Suggest a Speaker</span></h2>
-                
+        <div class="container-fixed mediumBottomMargin">
+            <div class="row mediumBottomMargin"></div>
+            <div class="row mediumBottomMargin">
+                <ul class="breadcrumb">
+                    <li><a href="home.jsp">Home</a></li>
+                    <li>Suggest a Speaker</li>
+                </ul>
             </div>
-            <br/>
+            <div class="row mediumBottomMargin">
+                <h1>Suggest a Speaker</h1>
+            </div>
+            <div class="row mediumBottomMargin" style="border:1px dashed #ccc"></div>
+            <div class="row mediumBottomMargin">
+                <span>Is there a new speaker you would like to suggest for this years Techtoberfest?  We would LOVE to know more about them.</span>
+            </div>
+            <div class="row mediumBottomMargin">
+                <label><span style="color: red;">*</span>Required field</label>
+            </div>
+            <div class="row mediumBottomMargin">
+                <h2 class="bordered"><img style="padding-left:0px;padding-bottom:0px;" src="http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png"/><span class="titlespan">Suggestion Details</span></h2>
+            </div>
             <div class="row">
-                <%@include file="../../includes/messagehandler.jsp" %>
                     <form method="POST" id="action" action="../../action/processSpeakerSuggestion.jsp">
                         <fieldset>
                             <div class="form-group">
@@ -75,17 +87,22 @@
                                     <span>Please Enter a Last Name</span>
                                 </span>
                             </div>
+                            <div class="form-group">
+                                <label>Why should this speaker be added to this years Techtoberfest?</label>
+                                <textarea name="reason" id="tip3" data-content="250 characters or less please" rows="5" cols="50" maxlength="250">
+                                </textarea>
+                                <br/><span id="error_reason" class="message_container">
+                                    <span>Please Enter a Reason</span>
+                                </span>
+                            </div>
                             <div class="form-actions">
-                                <input type="submit" id="send" class="button button-primary" value="Submit"/>
-                                <a class="button" id="cancel" href="../../view/speaker.jsp">Cancel</a>
+                                <input type="submit" id="send" class="button button-primary" value="Submit Suggestion"/>
+                                <a class="button" id="cancel" href="speaker.jsp">Cancel</a>
                             </div>
                         </fieldset> 
-                </form>	
-                
+                </form>	  
             </div>
         </div>
-        <br/>
-        <br/>
         <%@ include file="../../includes/footer.jsp" %> 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
         <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>
