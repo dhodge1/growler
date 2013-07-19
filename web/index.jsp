@@ -11,6 +11,7 @@
 <%@page import="com.scripps.growler.DataConnection" %>
 <jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="page" />
 <jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page" />
+<%@page import="com.scripps.growler.*" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
@@ -81,6 +82,56 @@
             </div>
         </div>
         <%@include file="includes/footer.jsp" %>
+        <%
+            Enumeration<String> headerNames = request.getHeaderNames();
+            out.print("<table>");
+            out.print("<tr>");
+            out.print("<th>");
+            out.print("Header Name");
+            out.print("</th>");
+            out.print("<th>");
+            out.print("Content");
+            out.print("</th>");
+            out.print("</tr>");
+            while (headerNames.hasMoreElements()) {
+                String header = headerNames.nextElement();
+                out.print("<tr>");
+                out.print("<td>");
+                out.print(header);
+                out.print("</td>");
+                out.print("<td>");
+                out.print(request.getHeader(header));
+                out.print("</td>");
+                out.print("</tr>");
+            }
+            out.print("</table>");
+
+            if (request.getHeader("sn_employee_id") != null) {
+                String first_name = request.getHeader("sn_first_name");
+                String last_name = request.getHeader("sn_last_name");
+                String email = request.getHeader("sn_email");
+                String id = request.getHeader("sn_employee_id");
+                String name = last_name + ", " + first_name;
+                UserPersistence up = new UserPersistence();
+                User u = up.getUserByEmail(email);
+                User newUser = new User();
+                if (u != null) {
+                    session.setAttribute("user", u.getUserName());
+                    session.setAttribute("id", u.getCorporateId());
+                    //response.sendRedirect("../private/employee/home.jsp");
+                } else if (!id.equals(null) || !id.equals("null")) {
+                    newUser.setId(Integer.parseInt(id));
+                    newUser.setCorporateId(id);
+                    newUser.setUserName(name);
+                    newUser.setEmail(email);
+                    up.addUser(newUser);
+                    //response.sendRedirect("../private/employee/home.jsp");
+                }
+                out.print(newUser.getUserName());
+                out.print(newUser.getCorporateId());
+                
+            }
+        %>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
         <script src="js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>
         <script src="js/libs/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>

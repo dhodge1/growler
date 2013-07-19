@@ -18,25 +18,23 @@
     String email = request.getHeader("sn_email");
     String id = request.getHeader("sn_employee_id");
     String name = last_name + ", " + first_name;
-
-    UserPersistence up = new UserPersistence();
-    User u = up.getUserByEmail(email);
-
-    if (u != null) {
-        session.setAttribute("user", u.getUserName());
-        session.setAttribute("id", u.getCorporateId());
-        response.sendRedirect("../private/employee/home.jsp");
-    } else if (!id.equals(null) || !id.equals("null")) {
-        User newUser = new User();
-        newUser.setId(Integer.parseInt(id));
-        newUser.setCorporateId(id);
-        newUser.setUserName(name);
-        newUser.setEmail(email);
-        up.addUser(newUser);
-        response.sendRedirect("../private/employee/home.jsp");
+    try {
+        UserPersistence up = new UserPersistence();
+        User u = up.getUserByEmail(email);
+        if (u != null) {
+            session.setAttribute("user", u.getUserName());
+            session.setAttribute("id", u.getCorporateId());
+            //response.sendRedirect("../private/employee/home.jsp");
+        } else if (!id.equals(null) || !id.equals("null")) {
+            User newUser = new User();
+            newUser.setId(Integer.parseInt(id));
+            newUser.setCorporateId(id);
+            newUser.setUserName(name);
+            newUser.setEmail(email);
+            up.addUser(newUser);
+            //response.sendRedirect("../private/employee/home.jsp");
+        }
+    } catch (Exception e) {
+        //do nothing
     }
-
-
-
-
 %>

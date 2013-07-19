@@ -107,6 +107,12 @@ public class UserPersistence extends GrowlerPersistence {
     public void addUser(User user) {
         try {
             initializeJDBC();
+            statement = connection.prepareStatement("insert into user (id, corporate_id, name, email) values (?, ?, ?, ?)");
+            statement.setInt(1, user.getId());
+            statement.setString(2, user.getCorporateId());
+            statement.setString(3, user.getUserName());
+            statement.setString(4, user.getEmail());
+            statement.execute();
             closeJDBC();
 
         } catch (Exception e) {

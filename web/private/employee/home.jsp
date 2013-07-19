@@ -27,12 +27,11 @@
         <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <style>
             .carousel {
-                box-shadow: 2px 2px 2px 2px #ccc;
-                -webkit-box-shadow: 2px 2px 2px 2px #ccc;
+                box-shadow: 1px 1px 7px 7px #ccc;
+                -webkit-box-shadow: 1px 1px 7px 7px #ccc;
             }
             .carousel-caption {
                 position: absolute;
-                width: 900px;
                 margin-left: auto;
                 margin-right:auto;
                 opacity: 50%;
