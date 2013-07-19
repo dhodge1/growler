@@ -26,11 +26,16 @@
         <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
         <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <style>
+            .carousel {
+                box-shadow: 2px 2px 2px 2px #ccc;
+                -webkit-box-shadow: 2px 2px 2px 2px #ccc;
+            }
             .carousel-caption {
                 position: absolute;
                 width: 900px;
                 margin-left: auto;
                 margin-right:auto;
+                opacity: 50%;
             }
             .carousel-indicators li {
                 background: #c0c0c0;
@@ -52,8 +57,10 @@
                 float: none;
                 display: inline-block;
             }
-            h3 {
+            h1,h3 {
                 text-align: center;
+                color:#333;
+                font-family: Arial, Helvetica, sans-serif;
             }
             .c_img {
                 margin-left: auto;
@@ -136,7 +143,7 @@
         <script>
             $(document).ready(function() {
                 $('.carousel').carousel({
-                    interval: 4000
+                    interval: 60000
                 });
             });
         </script>

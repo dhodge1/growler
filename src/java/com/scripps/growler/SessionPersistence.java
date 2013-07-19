@@ -590,6 +590,24 @@ public class SessionPersistence extends GrowlerPersistence {
         }
         return sessions;
     }
+    
+    public int getThisYearSessionCount(int year) {
+        int rows = 0;
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select count(id) from session where extract(YEAR FROM session_date) = ?");
+            statement.setInt(1, year);
+            result = statement.executeQuery();    
+            while (result.next()){
+                rows = result.getInt(1);
+            }
+        } catch(Exception e) {
+            
+        } finally {
+            closeJDBC();
+        }
+        return rows;
+    }
 
     public void assignSpeakerTeam() {
     }

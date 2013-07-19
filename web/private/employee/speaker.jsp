@@ -61,7 +61,8 @@
                 list-style-position: inside;
             }
             #filter {
-                width: 100%;
+                width: 97.5%;
+                margin-left: 1.28%;
             }
             #speakers {
                 margin:0;
@@ -153,29 +154,28 @@
         <%@ include file="../../includes/testnav.jsp" %>
         <div class="container-fixed largeBottomMargin">
             <div class="row mediumBottomMargin"></div>
-            <div class="row mediumBottomMargin">
+            <div class="row">
                 <ul class="breadcrumb">
                     <li><a href="home.jsp">Home</a></li>
-                    <li>Speaker Ranking</li>
+                    <li>Rank Speakers</li>
                 </ul>
             </div>
-            <div class="row largeBottomMargin">
+            <div class="row mediumBottomMargin">
                 <h1 style="font-weight:normal;">Rank Speakers</h1>
             </div>
             <% if (speakers == null || speakers.size() == 0) {
                     out.print("<div class='row largeBottomMargin'>");
                     out.print("<p style='font-size: 16px; font-family: Arial;'>We want to hear from you!  Please let us know the top 10 speakers you would be interested in listening to for this year's Techtoberfest.</p>");
                     out.print("</div>");
-                    out.print("<div class='row largeBottomMargin'></div>");
+                    out.print("<div class='row mediumBottomMargin'></div>");
                 }
             %>
             <div class="row mediumBottomMargin">
                 <%
                     if (speakers == null || speakers.size() == 0) {
                         out.print("<h2 class='bordered mediumBottomMargin'><img style=\"padding-bottom:0;padding-left:0;\" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class=\"titlespan\">Which speakers are you most interested in?</span></h2>");
-                        out.print("<span class=\"mediumBottomMargin\">Please note: If desired, you can provide a ranking for less than 10 presentation speakers.  There is also a <a href=\"nondragspeaker.jsp\">non drag and drop version</a> available.</span>");
-                    } else {
-                        out.print("<h2 class=bordered><img style=\"padding-bottom:0;padding-left:0;\" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class=\"titlespan\">Your Speaker Rankings</span></h2>");
+                        out.print("<span><strong>Please note:</strong> If desired, you can provide a ranking for less than 10 presentation speakers.  There is also a <a href=\"nondragspeaker.jsp\">non drag and drop version</a> available.</span>");
+                        out.print("<div class='mediumBottomMargin'></div>");
                     }
                 %>
             </div>
@@ -183,14 +183,15 @@
                     if (speakers.size() > 0) {
                         response.sendRedirect("speaker-confirm.jsp");
                     }
+                    out.print("<div class='row'>");
                     if (speakers == null || speakers.size() == 0) {
                         out.print("<form action='../../action/processSpeakerRanking.jsp'>");
                         out.print("<div class='row mediumBottomMargin'>");
                         out.print("<div class='span5 smallBottomMargin'>");
-                        out.print("<span><strong>Available Speakers</strong></span>");
+                        out.print("<span><strong>Available Speakers</strong></span><span class='pullRight'><a href='#'>View Bios</a></span>");
                         out.print("</div>");
                         out.print("<div class='span5 smallBottomMargin'>");
-                        out.print("<span class='interestLabel'><strong>Speakers I'm Interested In</strong></span><span class='pullRight'><a href='#'>View Bios</a></span>");
+                        out.print("<span class='interestLabel'><strong>Speakers I'm Interested In</strong></span>");
                         out.print("</div>");
                         out.print("<div class='span5'>");
                         out.print("<div class='row'>");
@@ -203,7 +204,7 @@
                         out.print("<ul id='speakers' class='connectedSortable'>");
                         for (int j = 0; j < vspeakers.size(); j++) {
                             out.print("<li class=\"" + vspeakers.get(j).getType() + "\">");
-                            out.print(vspeakers.get(j).getLastName() + ", " + vspeakers.get(j).getFirstName());
+                            out.print("<span><strong>" + vspeakers.get(j).getLastName() + ", " + vspeakers.get(j).getFirstName() + "</strong></span>");
                             out.print("<input type=\"hidden\" name=\"list\" value=\"" + vspeakers.get(j).getId() + "\" />");
                             out.print("</li>");
                         }

@@ -67,7 +67,8 @@
                 list-style-position: inside;
             }
             #filter {
-                width: 100%;
+                width: 97.5%;
+                margin-left: 1.28%;
             }
             #themes {
                 margin:0;
@@ -160,20 +161,20 @@
         <%@ include file="../../includes/testnav.jsp" %>
         <div class="container-fixed largeBottomMargin">
             <div class="row mediumBottomMargin"></div>
-            <div class="row mediumBottomMargin">
+            <div class="row">
                 <ul class="breadcrumb">
                     <li><a href="home.jsp">Home</a></li>
-                    <li>Theme Ranking</li>
+                    <li>Rank Themes</li>
                 </ul>
             </div>
-            <div class="row largeBottomMargin">
+            <div class="row mediumBottomMargin">
                 <h1 style="font-weight:normal;">Rank Themes</h1>
             </div>
             <% if (themes == null || themes.size() == 0) {
                     out.print("<div class='row largeBottomMargin'>");
                     out.print("<p style='font-size: 16px; font-family: Arial;'>We want to hear from you!  Please let us know the top 10 presentation themes you would be interested in attending for this year's Techtoberfest.</p>");
                     out.print("</div>");
-                    out.print("<div class='row largeBottomMargin'></div>");
+                    out.print("<div class='row mediumBottomMargin'></div>");
                 }
             %>
             <div class="row mediumBottomMargin">
@@ -181,10 +182,9 @@
                     //If we didn't get any ranks, we tell the user to rank the themes
                     if (themes == null || themes.size() == 0) {
                         out.print("<h2 class=\"bordered mediumBottomMargin\"><img style=\"padding-bottom:0;padding-left:0;\" id=\"logo\" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class=\"titlespan\">Which presentations are you most interested in?</span></h2>");
-                        out.print("<span class=\"mediumBottomMargin\">Please note: If desired, you can provide a ranking for less than 10 presentation themes.  There is also a <a href=\"nondragtheme.jsp\">non drag and drop version</a> available.</span>");
-                    } else { //If we got themes, we let the user see them
-                        out.print("<h2 class=bordered><img style=\"padding-bottom:0;padding-left:0;\" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class=\"titlespan\">Your Theme Ranks</span></h2>");
-                    }
+                        out.print("<span><strong>Please note:</strong> If desired, you can provide a ranking for less than 10 presentation themes.  There is also a <a href=\"nondragtheme.jsp\">non drag and drop version</a> available.</span>");
+                        out.print("<div class='mediumBottomMargin'></div>");
+                    } 
                 %>
             </div>
             <%

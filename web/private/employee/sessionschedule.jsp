@@ -56,7 +56,7 @@
             SessionPersistence sp = new SessionPersistence();
             LocationPersistence lp = new LocationPersistence();
             RegistrationPersistence rp = new RegistrationPersistence();
-            ArrayList<Session> sessions = sp.getThisYearSessions(year, " ");
+            ArrayList<Session> sessions = sp.getThisYearSessions(year, " order by session_date, start_time, name ", 0);
         %>
         <%@ include file="../../includes/header.jsp" %> 
         <%@ include file="../../includes/testnav.jsp" %>
@@ -79,7 +79,7 @@
                 <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Schedule</span></h2>
             </div>
             <div class="row">
-                <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
+                <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder" id="sessionTable">
                     <thead>
                         <tr>
                             <th>Date</th>
@@ -133,11 +133,20 @@
                 </table>
                 <div class="pager">
                     <ul>
+                        <% int currentPage = 1;%>
                         <li class="pager-arrow"><a href="#"><i class="icon12-first"></i></a></li>
                         <li class="pager-arrow"><a href="#"><i class="icon12-first"></i></a></li>
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
+                                <% int rows = sp.getThisYearSessionCount(year);
+                                    int pages = 0;
+                                    if (rows % 15 == 0) {
+                                        pages = (rows / 15);
+                                    } else {
+                                        pages = (rows / 15) + 1;
+                                    }
+                                    for (int i = 0; i < pages; i++) {
+                                        out.print("<li class=\"page\" name=\"" + (i + 1) + "\"><a href='#'>" + (i + 1) + "</a></li>");
+                                    }
+                                %>
                         <li class="pager-arrow"><a href="#"><i class="icon12-next"></i></a></li>
                         <li class="pager-arrow"><a href="#"><i class="icon12-last"></i></a></li>
                     </ul>
@@ -145,7 +154,13 @@
             </div>
         </div>
         <%@ include file="../../includes/footer.jsp" %>
-        <%@ include file="../../includes/scriptlist.jsp" %>
+        <script src="../../js/updateSessions.js"></script>
+        <script src="../../js/jquery.dataTables.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('#sessionTable').dataTable();
+            });
+        </script>
     </body>
 </html>
 
