@@ -19,10 +19,22 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
+        <style>
+            .pullRight {
+                float:right;
+                font-weight: normal;
+                font-family: Arial;
+                font-size: 11px;
+                position: relative;
+                top: 30px;
+            }
+        </style>
     </head>
     <body id="growler1">
         <%@ include file="../includes/indexheader.jsp" %> 
+        <%@ include file="../includes/usernav.jsp" %> 
         <div class="container-fixed largeBottomMargin">
+            <div class='row mediumBottomMargin'></div>
             <div class="row">
                 <ul class="breadcrumb">
                     <li><a href="home.jsp">Home</a></li>
@@ -30,13 +42,13 @@
                 </ul>
             </div>
             <div class="row">
-                    <h1 class="mediumBottomMargin">Techtoberfest Information System (TIS)</h1>
-                    <h3>TIS allows Scripps Employees the ability to not only stay abreast 
-                        of all Techtoberfest sessions, but also the opportunity to provide 
-                        valuable session feedback before, during, and after the event!</h3>
+                <h1 class="mediumBottomMargin">Techtoberfest Information System (TIS)</h1>
+                <h3>TIS allows Scripps Employees the ability to not only stay abreast 
+                    of all Techtoberfest sessions, but also the opportunity to provide 
+                    valuable session feedback before, during, and after the event!</h3>
             </div>
             <div class="row">
-                <h2 class="bordered"><img id="logo" style="padding-left:0;padding-bottom:0;" src='../images/Techtoberfest2013small.png'/><span class="titlespan">Help Topics</span></h2><span class="pullRight">View in PDF</span>
+                <h2 class="bordered"><img id="logo" style="padding-left:0;padding-bottom:0;" src='../images/Techtoberfest2013small.png'/><span class="titlespan">Help Topics</span><span class="pullRight"><a href='#'>View in PDF</a></span></h2>
             </div>
             <div class="row">
                 <div class="accordion" id="accordion-parent">
@@ -154,12 +166,12 @@
         <%@ include file="../includes/scriptlist.jsp" %>
         <script>
             $(document).ready(function() {
-            $(".accordion-toggle").click(function() {
-               $('.accordion-toggle').removeClass("accordion-selected");
-               $(this).addClass("accordion-selected");
+                $(".accordion-toggle").click(function() {
+                    $('.accordion-toggle').removeClass("accordion-selected");
+                    $(this).addClass("accordion-selected");
+                });
             });
-            });
-            
+
         </script>
     </body>
 </html>
