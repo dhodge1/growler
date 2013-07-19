@@ -19,7 +19,7 @@
                         }
                     %>
                 </li>
-                <li><a href="../../help.jsp">Help</a></li>
+                <li><a href="../../public/help.jsp">Help</a></li>
                 <li><a href="../../action/logout.jsp">Logout</a></li>
             </ul>
         </nav> 
