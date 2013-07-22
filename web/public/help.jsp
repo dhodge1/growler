@@ -38,17 +38,18 @@
             <div class="row">
                 <ul class="breadcrumb">
                     <li><a href="home.jsp">Home</a></li>
-                    <li>Help</li>
+                    <li>Techtoberfest Help</li>
                 </ul>
             </div>
-            <div class="row">
-                <h1 class="mediumBottomMargin">Techtoberfest Information System (TIS)</h1>
-                <h3>TIS allows Scripps Employees the ability to not only stay abreast 
-                    of all Techtoberfest sessions, but also the opportunity to provide 
-                    valuable session feedback before, during, and after the event!</h3>
+            <div class="row mediumBottomMargin">
+                <h1>Techtoberfest Help</h1>
             </div>
-            <div class="row">
-                <h2 class="bordered"><img id="logo" style="padding-left:0;padding-bottom:0;" src='../images/Techtoberfest2013small.png'/><span class="titlespan">Help Topics</span><span class="pullRight"><a href='#'>View in PDF</a></span></h2>
+            <div class="row mediumBottomMargin" style="border:1px dashed #ccc"></div>
+            <div class="row largeBottomMargin">
+                <span>Click on a topic below to have the help content displayed.</span>
+            </div>
+            <div class="row mediumBottomMargin">
+                <h2 class="bordered"><img id="logo" style="padding-left:0;padding-bottom:0;" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Help By Topic</span><span class="pullRight"><a href='#'>View in PDF</a></span></h2>
             </div>
             <div class="row">
                 <div class="accordion" id="accordion-parent">

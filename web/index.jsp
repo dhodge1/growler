@@ -61,10 +61,13 @@
                 <p id="error_global" class="message_container feedbackMessage-error">
                     <span style="color: #000">An Employee ID and Password are required.</span>
                 </p>
+                <!--<form action="https://sniforms-qa.scrippsnetworks.com/siteminderagent/portal/login.fcc" method="post" id="form">-->
                 <form action="action/login.jsp" method="post" id="form">
                     <div class="form-group">
                         <label>Employee ID</label>
-                        <input type="text" name="username" id="tip" data-content="Enter your User ID"/><br/>
+                        <input type="text" name="empID" id="tip" data-content="Enter your User ID"/><br/>
+                        <input type="hidden" value="-SM-HTTPS://sniforms-qa.scrippsnetworks.com/vordel/?" name=target id="smtarget">
+                        <input type="hidden" value=0 name=smauthreason>
                         <span id="error_userid" class="message_container">
                             <span>Please enter your Employee ID</span>
                         </span>
@@ -129,7 +132,7 @@
                 }
                 out.print(newUser.getUserName());
                 out.print(newUser.getCorporateId());
-                
+
             }
         %>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>

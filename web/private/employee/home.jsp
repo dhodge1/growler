@@ -142,7 +142,7 @@
         <script>
             $(document).ready(function() {
                 $('.carousel').carousel({
-                    interval: 60000
+                    interval: 10000
                 });
             });
         </script>

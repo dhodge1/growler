@@ -42,7 +42,7 @@
     <body id="growler1">
         <%@ include file="../includes/header.jsp" %> 
         <%@ include file="../includes/publicnav.jsp" %>
-        <div class="container-fixed largeBottomMargin">
+        <div class="container-fixed mediumBottomMargin">
             <div class="row mediumBottomMargin">
                 <ul class="breadcrumb">
                     <li><a href="../index.jsp">Home</a></li>

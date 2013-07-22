@@ -5,8 +5,7 @@
     Purpose    : Processes data received from sessionschedule.jsp.
                  First, it clears the previous registrations of interest for the user.
                  Next, it takes the interests received from the form and inserts them
-                 into the database.  Finally, it returns to the sessionschedule page
-                 with a success message.
+                 into the database.  Finally, it returns to the confirmation page.
 --%>
 
 <%@page import="java.util.*"%>
@@ -62,11 +61,11 @@
                     }
                 }
             }
-            session.setAttribute("message", "Success: Your interest has been registered!");
+            session.setAttribute("message", "Success: Your interest has been submitted successfully!");
         } catch (Exception e) {
             //It makes it here if/when it cannot process the for loop because of a null pointer - which means there are no sessions to register
             session.setAttribute("message", "Success: Your interests have been removed!");
         }
-        response.sendRedirect("../private/employee/sessionschedule.jsp");
+        response.sendRedirect("../private/employee/sessioninterest-confirm.jsp");
 
     %>

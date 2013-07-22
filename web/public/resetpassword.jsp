@@ -45,25 +45,21 @@
     </head>
     <body id="growler1">
         <%@ include file="../includes/indexheader.jsp" %> 
-        <div class="container-fixed">
+        
+        <div class="container-fixed mediumBottomMargin">
+            <div class="row mediumBottomMargin"></div>
             <div class="row">
-                <br/>
-                <div class="span8">
                     <h1>Techtoberfest Information System (TIS)</h1>
                     <h3>TIS allows Scripps Employees the ability to not only stay abreast 
                         of all Techtoberfest sessions, but also the opportunity to provide 
                         valuable session feedback before, during, and after the event!</h3>
-                </div>
             </div>
             <br/><br/><br/>
             <div class="row">
-                <div class='span8'>
                     <h2 class="bordered"><img src='../images/Techtoberfest2013small.png'/><span class="titlespan">Reset Your Password</span></h2>
-                </div>
             </div>
             <br/>
             <div class="row">
-                <div class="span8">
                     <form method="POST" id="action" action="../action/reset.jsp">
                         <fieldset>
                             <div class="form-group">
@@ -95,11 +91,8 @@
                             </div>
                         </fieldset>
                 </form>	
-                </div>
             </div>
         </div>
-        <br/>
-        <br/>
     <%@ include file="../includes/footer.jsp" %> 
     <%@ include file="../includes/scriptlist.jsp" %>
 

@@ -27,7 +27,7 @@ color:#002d56;position:relative;}
 .top-nav #navigation ul li span.delete-tab{
 display:none;}
 .non_drop {
-border-right:1px dotted #fff;margin-left:9px;padding-right:3px;height:23px!important;z-index:9;}
+border-right:1px dotted #fff;margin-left:9px;padding-right:3px;height:24px!important;z-index:9;}
 .brand_nav{
 margin-left:2px;height:23px!important;z-index:9;font-family:"Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif; font-size:13px;}
 .brand_nav:hover a{
