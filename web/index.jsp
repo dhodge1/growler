@@ -61,8 +61,8 @@
                 <p id="error_global" class="message_container feedbackMessage-error">
                     <span style="color: #000">An Employee ID and Password are required.</span>
                 </p>
-                <!--<form action="action/login.jsp" method="post" id="form">-->
-                <form action="https://sniforms-qa.scrippsnetworks.com/siteminderagent/portal/index.html?TYPE=33554433&REALMOID=06-490b1004-244a-109f-bdf2-84f1ed4a0000&GUID=&SMAUTHREASON=0&METHOD=GET&SMAGENTNAME=-SM-qqTTNRp8HuVz4vfjuz8PpwRSGfFdF8v5ee9waRpRop7zciV2VtF46AXySxgHy%2bZO&TARGET=-SM-HTTPS%3a%2f%2fsniforms--qa%2escrippsnetworks%2ecom%2fvordel%2f%3fReturnURL%3dhttp%3a%2f%2ftechtoberfest--dev%2escrippsnetworks%2ecom%2f" method="post" id="form">
+                <form action="action/login.jsp" method="post" id="form">
+                <!--<form action="https://sniforms-qa.scrippsnetworks.com/siteminderagent/portal/index.html?TYPE=33554433&REALMOID=06-490b1004-244a-109f-bdf2-84f1ed4a0000&GUID=&SMAUTHREASON=0&METHOD=GET&SMAGENTNAME=-SM-qqTTNRp8HuVz4vfjuz8PpwRSGfFdF8v5ee9waRpRop7zciV2VtF46AXySxgHy%2bZO&TARGET=-SM-HTTPS%3a%2f%2fsniforms--qa%2escrippsnetworks%2ecom%2fvordel%2f%3fReturnURL%3dhttp%3a%2f%2ftechtoberfest--dev%2escrippsnetworks%2ecom%2f" method="post" id="form">-->
                     <div class="form-group">
                         <label>Employee ID</label>
                         <input type="text" name="empID" id="tip" data-content="Enter your Employee ID"/><br/>
