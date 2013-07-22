@@ -59,7 +59,7 @@
                 <span>The Techtoberfest committee thanks you for your suggestion!</span>
             </div>
             <div class="row mediumBottomMargin">
-                <a href='home.jsp'>Return to homepage</a>
+                <a href='../../private/employee/home.jsp'>Return to homepage</a>
             </div>
         </div>
         <%@ include file="../../includes/footer.jsp" %> 

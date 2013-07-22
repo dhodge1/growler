@@ -61,13 +61,14 @@
                 <p id="error_global" class="message_container feedbackMessage-error">
                     <span style="color: #000">An Employee ID and Password are required.</span>
                 </p>
-                <!--<form action="https://sniforms-qa.scrippsnetworks.com/siteminderagent/portal/login.fcc" method="post" id="form">-->
-                <form action="action/login.jsp" method="post" id="form">
+                <!--<form action="action/login.jsp" method="post" id="form">-->
+                <form action="https://sniforms-qa.scrippsnetworks.com/siteminderagent/portal/index.html?TYPE=33554433&REALMOID=06-490b1004-244a-109f-bdf2-84f1ed4a0000&GUID=&SMAUTHREASON=0&METHOD=GET&SMAGENTNAME=-SM-qqTTNRp8HuVz4vfjuz8PpwRSGfFdF8v5ee9waRpRop7zciV2VtF46AXySxgHy%2bZO&TARGET=-SM-HTTPS%3a%2f%2fsniforms--qa%2escrippsnetworks%2ecom%2fvordel%2f%3fReturnURL%3dhttp%3a%2f%2ftechtoberfest--dev%2escrippsnetworks%2ecom%2f" method="post" id="form">
                     <div class="form-group">
                         <label>Employee ID</label>
-                        <input type="text" name="empID" id="tip" data-content="Enter your User ID"/><br/>
+                        <input type="text" name="empID" id="tip" data-content="Enter your Employee ID"/><br/>
                         <input type="hidden" value="-SM-HTTPS://sniforms-qa.scrippsnetworks.com/vordel/?" name=target id="smtarget">
                         <input type="hidden" value=0 name=smauthreason>
+                        <input type="hidden" name="SMAGENTNAME" value='-SM-qqTTNRp8HuVz4vfjuz8PpwRSGfFdF8v5ee9waRpRop7zciV2VtF46AXySxgHy+ZO' />
                         <span id="error_userid" class="message_container">
                             <span>Please enter your Employee ID</span>
                         </span>
@@ -86,29 +87,6 @@
         </div>
         <%@include file="includes/footer.jsp" %>
         <%
-            Enumeration<String> headerNames = request.getHeaderNames();
-            out.print("<table>");
-            out.print("<tr>");
-            out.print("<th>");
-            out.print("Header Name");
-            out.print("</th>");
-            out.print("<th>");
-            out.print("Content");
-            out.print("</th>");
-            out.print("</tr>");
-            while (headerNames.hasMoreElements()) {
-                String header = headerNames.nextElement();
-                out.print("<tr>");
-                out.print("<td>");
-                out.print(header);
-                out.print("</td>");
-                out.print("<td>");
-                out.print(request.getHeader(header));
-                out.print("</td>");
-                out.print("</tr>");
-            }
-            out.print("</table>");
-
             if (request.getHeader("sn_employee_id") != null) {
                 String first_name = request.getHeader("sn_first_name");
                 String last_name = request.getHeader("sn_last_name");
@@ -121,18 +99,17 @@
                 if (u != null) {
                     session.setAttribute("user", u.getUserName());
                     session.setAttribute("id", u.getCorporateId());
-                    //response.sendRedirect("../private/employee/home.jsp");
                 } else if (!id.equals(null) || !id.equals("null")) {
                     newUser.setId(Integer.parseInt(id));
                     newUser.setCorporateId(id);
                     newUser.setUserName(name);
                     newUser.setEmail(email);
                     up.addUser(newUser);
-                    //response.sendRedirect("../private/employee/home.jsp");
+                    session.setAttribute("user", newUser.getUserName());
+                    session.setAttribute("id", newUser.getCorporateId());
                 }
-                out.print(newUser.getUserName());
-                out.print(newUser.getCorporateId());
-
+                response.setHeader("Location", "http://sni-tecthoberfest.elasticbeanstalk.com/private/employee/home.jsp");
+                response.sendRedirect("/private/employee/home.jsp");
             }
         %>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>

@@ -22,7 +22,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Techtoberfest Session Schedule</title><!-- Title -->
+        <title>View Session Schedule</title><!-- Title -->
         <link rel="shortcut icon" type="image/png" href="http://sni-techtoberfest.elasticbeanstalk.com/images/scripps_favicon-32.ico">
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> 
         <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
@@ -73,7 +73,7 @@
             <div class="row mediumBottomMargin"></div>
             <div class="row mediumBottomMargin">
                 <ul class="breadcrumb">
-                    <li><a href="home.jsp">Home</a></li>
+                    <li><a href="../../private/employee/home.jsp">Home</a></li>
                     <li>Session Schedule</li>
                 </ul>
             </div>
@@ -170,7 +170,7 @@
                 </div>
             </div>
             <div class="row">
-                <strong>Interested in a session?</strong> <a href="sessioninterest.jsp">Let us Know</a>
+                <strong>Interested in a session?</strong> <a href="../../private/employee/sessioninterest.jsp">Let us Know</a>
             </div>
         </div>
         <%@ include file="../../includes/footer.jsp" %>

@@ -13,7 +13,7 @@
 <jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="page" />
 <jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page" />
         <%
-            String username = request.getParameter("username");
+            String username = request.getParameter("empID");
             String password = request.getParameter("password");
             // Here you put the check on the username and password            
             MessageDigest sha = MessageDigest.getInstance("sha-1");

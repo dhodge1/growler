@@ -22,7 +22,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Your Ranked Themes</title><!-- Title -->
+        <title>Your Ranked Speakers</title><!-- Title -->
         <link rel="shortcut icon" type="image/png" href="http://sni-techtoberfest.elasticbeanstalk.com/images/scripps_favicon-32.ico">
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> 
         <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
@@ -68,7 +68,7 @@
                 <%
                     //If we didn't get any ranks, we tell the user to rank the speakers
                     if (speakers == null || speakers.size() == 0) {
-                        response.sendRedirect("speaker.jsp");
+                        response.sendRedirect("../../private/employee/speaker.jsp");
                     } else { //If we got speakers, we let the user see them
                         out.print("<div class='row largeBottomMargin' style='margin-left:4px'>");
                         out.print("<span>Thank you for providing us with the presentation speakers you are most interested in attending for this years Techtoberfest!  We value your opinion and particiapation.  Below is a listing of the speakers and ranks you provided.</span>");
@@ -89,8 +89,8 @@
                     out.print("</div>");
                     out.print("</div>");
                     out.print("<div class='row largeBottomMargin'>");
-                    out.print("<a class='firstLink' href=\"home.jsp\">Return to homepage</a>");
-                    out.print("<a class='firstLink' href=\"speakerentry.jsp\">Suggest a new speaker</a>");
+                    out.print("<a class='firstLink' href=\"../../private/employee/home.jsp\">Return to homepage</a>");
+                    out.print("<a class='firstLink' href=\"../../private/employee/speakerentry.jsp\">Suggest a new speaker</a>");
                     out.print("<a href='../../action/removeSpeakerRanks.jsp?id=" + user + "'>Reset Your Ranks</a>");
                     out.print("</div>");
                 }

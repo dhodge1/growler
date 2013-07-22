@@ -21,7 +21,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Theme Entry</title>
+        <title>Suggest a New Theme</title>
         <link rel="stylesheet" href="../../css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
         <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
@@ -100,7 +100,7 @@
                             </div>
                             <div class="form-actions">
                                 <input type="submit" id="send" class="button button-primary" value="Submit Suggestion" />
-                                <a class="button" id="cancel" href="theme.jsp">Cancel</a>
+                                <a class="button" id="cancel" href="../../private/employee/theme.jsp">Cancel</a>
                             </div>
                         </fieldset>
                 </form>

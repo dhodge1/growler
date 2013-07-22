@@ -71,7 +71,7 @@
             <div class="row mediumBottomMargin">
                 <ul class="breadcrumb">
                     <li><a href="home.jsp">Home</a></li>
-                    <li><a href="sessionschedule.jsp">Session Schedule</a></li>
+                    <li><a href="../../private/employee/sessionschedule.jsp">Session Schedule</a></li>
                     <li>Provide Session Interest</li>
                 </ul>
             </div>
@@ -108,7 +108,7 @@
                     </div>
                     <div class="form-actions">
                         <input type="submit" class="button button-primary" value="Submit Interest"/>
-                        <a href="sessionschedule.jsp">Cancel</a>
+                        <a href="../../private/employee/sessionschedule.jsp">Cancel</a>
                     </div>
                 </form>
             </div>

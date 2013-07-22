@@ -26,7 +26,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Speakers</title><!-- Title -->
+        <title>Rank Your Preferred Speakers</title><!-- Title -->
         <link rel="shortcut icon" type="image/png" href="http://sni-techtoberfest.elasticbeanstalk.com/images/scripps_favicon-32.ico">
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/speakers/base/jquery-ui.css" /> 
         <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
@@ -156,7 +156,7 @@
             <div class="row mediumBottomMargin"></div>
             <div class="row">
                 <ul class="breadcrumb">
-                    <li><a href="home.jsp">Home</a></li>
+                    <li><a href="../../private/employee/home.jsp">Home</a></li>
                     <li>Rank Speakers</li>
                 </ul>
             </div>
@@ -174,14 +174,14 @@
                 <%
                     if (speakers == null || speakers.size() == 0) {
                         out.print("<h2 class='bordered mediumBottomMargin'><img style=\"padding-bottom:0;padding-left:0;\" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class=\"titlespan\">Which speakers are you most interested in?</span></h2>");
-                        out.print("<span><strong>Please note:</strong> If desired, you can provide a ranking for less than 10 presentation speakers.  There is also a <a href=\"nondragspeaker.jsp\">non drag and drop version</a> available.</span>");
+                        out.print("<span><strong>Please note:</strong> If desired, you can provide a ranking for less than 10 presentation speakers.  There is also a <a href=\"../../private/employee/nondragspeaker.jsp\">non drag and drop version</a> available.</span>");
                         out.print("<div class='mediumBottomMargin'></div>");
                     }
                 %>
             </div>
                 <%
                     if (speakers.size() > 0) {
-                        response.sendRedirect("speaker-confirm.jsp");
+                        response.sendRedirect("../../private/employee/speaker-confirm.jsp");
                     }
                     out.print("<div class='row'>");
                     if (speakers == null || speakers.size() == 0) {
@@ -216,8 +216,8 @@
                         out.print("</ol>");
                         out.print("</div>");
                         out.print("</div>");
-                        out.print("<div class=\"form-actions\"><input id=\"send\" type=\"submit\" value=\"Submit My Ranking\" class=\"button button-primary\"/><a href=\"home.jsp\">Cancel</a></div>");
-                        out.print("<strong>Speaker not listed? </strong><a href='speakerentry.jsp'>Click here to suggest a new speaker</a>");
+                        out.print("<div class=\"form-actions\"><input id=\"send\" type=\"submit\" value=\"Submit My Ranking\" class=\"button button-primary\"/><a href=\"../../private/employee/home.jsp\">Cancel</a></div>");
+                        out.print("<strong>Speaker not listed? </strong><a href='../../private/employee/speakerentry.jsp'>Click here to suggest a new speaker</a>");
                         out.print("</div>");
                         out.print("</div>");
                         out.print("</form>");

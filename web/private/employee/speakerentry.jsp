@@ -18,7 +18,7 @@
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <title>Speaker Entry</title>
+        <title>Suggest a New Speaker</title>
         <link rel="shortcut icon" type="image/png" href="http://sni-techtoberfest.elasticbeanstalk.com/images/scripps_favicon-32.ico">
         <link rel="stylesheet" href="../../css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
         <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
@@ -53,7 +53,7 @@
             <div class="row mediumBottomMargin"></div>
             <div class="row mediumBottomMargin">
                 <ul class="breadcrumb">
-                    <li><a href="home.jsp">Home</a></li>
+                    <li><a href="../../private/employee/home.jsp">Home</a></li>
                     <li>Suggest a Speaker</li>
                 </ul>
             </div>
@@ -97,7 +97,7 @@
                             </div>
                             <div class="form-actions">
                                 <input type="submit" id="send" class="button button-primary" value="Submit Suggestion"/>
-                                <a class="button" id="cancel" href="speaker.jsp">Cancel</a>
+                                <a class="button" id="cancel" href="../../private/employee/home.jsp">Cancel</a>
                             </div>
                         </fieldset> 
                 </form>	  

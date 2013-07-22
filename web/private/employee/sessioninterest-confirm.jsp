@@ -59,7 +59,7 @@
                 <span>The Techtoberfest committee thanks you for your session interest!</span>
             </div>
             <div class="row mediumBottomMargin">
-                <a href='sessionschedule.jsp'>Return to session schedule</a>
+                <a href='../../private/employee/sessionschedule.jsp'>Return to session schedule</a>
             </div>
         </div>
         <%@ include file="../../includes/footer.jsp" %> 

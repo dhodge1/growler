@@ -69,7 +69,7 @@
                 <%
                     //If we didn't get any ranks, we tell the user to rank the themes
                     if (themes == null || themes.size() == 0) {
-                        response.sendRedirect("theme.jsp");
+                        response.sendRedirect("../../private/employee/theme.jsp");
                     } else { //If we got themes, we let the user see them
                         out.print("<div class='row largeBottomMargin' style='margin-left:4px'>");
                         out.print("<span>Thank you for providing us with the presentation themes you are most interested in attending for this years Techtoberfest!  We value your opinion and particiapation.  Below is a listing of the themes and ranks you provided.</span>");
@@ -90,8 +90,8 @@
                     out.print("</div>");
                     out.print("</div>");
                     out.print("<div class='row largeBottomMargin'>");
-                    out.print("<a class='firstLink' href=\"home.jsp\">Return to homepage</a>");
-                    out.print("<a class='firstLink' href=\"themeentry.jsp\">Suggest a new theme</a>");
+                    out.print("<a class='firstLink' href=\"../../private/employee/home.jsp\">Return to homepage</a>");
+                    out.print("<a class='firstLink' href=\"../../private/employee/themeentry.jsp\">Suggest a new theme</a>");
                     out.print("<a href='../../action/removeThemeRanks.jsp?id=" + user + "'>Reset Your Ranks</a>");
                     out.print("</div>");
                 }
