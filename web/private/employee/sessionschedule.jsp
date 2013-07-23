@@ -42,6 +42,9 @@
                 position: relative;
                 top: 30px;
             }
+            .modals{
+                display:none;
+            }
         </style>
     </head>
     <body id="growler1">  
@@ -121,12 +124,19 @@
                                 out.print(sessions.get(i).getName());
                                 out.print("</td>");
                                 out.print("<td>");
-                                out.print("<a href='#'>View</a>");
+                                out.print("<a class='showModal'><input type='hidden' value='" + sessions.get(i).getId() + "' />View</a>");
+                                out.print("<div class='modals' id='modal" + sessions.get(i).getId() + "' title='" + sessions.get(i).getName() + "'>");
+                                out.print(sessions.get(i).getDescription());
+                                out.print("</div>");
                                 out.print("</td>");
                                 out.print("<td>");
                                 ArrayList<Speaker> speakers = sp.getSpeakersForSession(sessions.get(i).getId());
-                                for (int j = 0; j < speakers.size(); j++){
-                                    out.print(speakers.get(j).getFullName() + "<br/>");
+                                for (int j = 0; j < speakers.size(); j++) {
+                                    out.print("<a class='showModal'>");
+                                    out.print(speakers.get(j).getFullName() + "<input type='hidden' value='" + speakers.get(j).getId() + "' /></a><br/>");
+                                    out.print("<div class='modals' id='modalspk" + speakers.get(j).getId() + "' title='" + speakers.get(j).getFullName() + "'>");
+                                    out.print("Bio goes here!");
+                                    out.print("</div>");
                                 }
                                 out.print("</td>");
                                 out.print("<td>");
@@ -175,7 +185,7 @@
             </div>
             <% Calendar today = Calendar.getInstance();
                 if (today.get(Calendar.MONTH) != 9) { //if it's not October
-            %>
+%>
             <div class="row">
                 <strong>Interested in a session?</strong> <a href="../../private/employee/sessioninterest.jsp">Let us Know</a>
             </div>
@@ -183,7 +193,7 @@
         </div>
         <%@ include file="../../includes/footer.jsp" %>
         <script src="../../js/updateSessions.js"></script>
-        <script src="../../js/jquery.dataTables.js"></script>
+        <script src="../../js/libs/sniui.dialog.1.2.0.js"></script>
         <script>
                             $(document).ready(function() {
                                 var page = 1;
@@ -195,7 +205,17 @@
                                 }
                                 unActive();
                                 $("#page1").addClass("active");
+                                
+                                $(".modals").dialog({ autoOpen: false});
+                                $(".showModal").click(function(){
+                                    var session = $(this).children().val();
+                                    $("#modal" + session).dialog("open");
+                                    var speaker = $(this).children().val();
+                                    $("#modalspk" + speaker).dialog("open");
+                                });
+                                
                             });
+
                             function pageJump() {
                                 var pageNo = parseInt($("#pagejump").val());
                                 var pages = Math.floor(($("#total").val() / parseInt($("#show_per_page").val())) + 1);
@@ -246,7 +266,7 @@
                                         $("#row" + i).hide();
                                     }
                                     var startingPoint = 1 + ((parseInt(newPage) - 1) * parseInt($("#show_per_page").val()));
-                                    for (var i = startingPoint; i < startingPoint + parseInt($("#show_per_page").val()) ; i++) {
+                                    for (var i = startingPoint; i < startingPoint + parseInt($("#show_per_page").val()); i++) {
                                         $("#row" + i).show();
                                     }
                                     unActive();

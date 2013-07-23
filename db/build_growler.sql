@@ -131,6 +131,7 @@ CREATE TABLE attendance (
 	,session_id	int	REFERENCES session(id)
 	,isSurveyTaken	boolean	DEFAULT '0'
 	,surveySubmitTime datetime
+	,isKeyGiven boolean DEFAULT '0'
 	,CONSTRAINT pk_attendance PRIMARY KEY(user_id, session_id)
 	);
 	

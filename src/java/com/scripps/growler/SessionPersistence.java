@@ -613,11 +613,12 @@ public class SessionPersistence extends GrowlerPersistence {
         ArrayList<Speaker> speakers = new ArrayList<Speaker>();
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select s.first_name, s.last_name from speaker s, session ses, speaker_team t where t.speaker_id = s.id and t.session_id = ses.id and ses.id = ?");
+            statement = connection.prepareStatement("select s.first_name, s.id, s.last_name from speaker s, session ses, speaker_team t where t.speaker_id = s.id and t.session_id = ses.id and ses.id = ?");
             statement.setInt(1, session);
             result = statement.executeQuery();    
             while (result.next()){
                 Speaker s = new Speaker();
+                s.setId(result.getInt("id"));
                 s.setFirstName(result.getString("first_name"));
                 s.setLastName(result.getString("last_name"));
                 speakers.add(s);
