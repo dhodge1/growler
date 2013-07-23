@@ -29,13 +29,16 @@
                 %>
         <% String first_name = request.getParameter("first_name");
             String last_name = request.getParameter("last_name");
+            String type = request.getParameter("type");
             String reason = request.getParameter("reason");
             String admin = request.getParameter("admin");
 
             Speaker s = new Speaker();
             s.setFirstName(first_name);
             s.setLastName(last_name);
+            s.setType(type);
             s.setSuggestedBy(user);
+            s.setReason(reason);
             s.setVisible(false);
             Speaker s2 = persist.getSpeakerByName(first_name, last_name);
             if (s.getFirstName() == s2.getFirstName() && s.getLastName() == s2.getLastName()) {

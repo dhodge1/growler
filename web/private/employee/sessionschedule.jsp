@@ -169,9 +169,13 @@
                     </div>
                 </div>
             </div>
+            <% Calendar today = Calendar.getInstance();
+                if (today.get(Calendar.MONTH) != 9) { //if it's not October
+            %>
             <div class="row">
                 <strong>Interested in a session?</strong> <a href="../../private/employee/sessioninterest.jsp">Let us Know</a>
             </div>
+            <%  } //end if %>
         </div>
         <%@ include file="../../includes/footer.jsp" %>
         <script src="../../js/updateSessions.js"></script>

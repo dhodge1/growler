@@ -46,6 +46,8 @@ public class Speaker {
     private int count2012;
     
     private String type;
+    
+    private String reason;
 
     /**
      * Default constructor
@@ -222,6 +224,16 @@ public class Speaker {
     public void setType(String type) {
         this.type = type;
     }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+    
+    
     
     public String getFullName() {
         return (this.lastName + ", " + this.firstName);

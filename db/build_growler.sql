@@ -70,6 +70,7 @@ CREATE TABLE speaker (
 	,suggested_by		int			REFERENCES user(id)
 	,visible		boolean
 	,type			varchar(30)
+	,reason			varchar(250)
 	);
 
 /*
@@ -220,54 +221,54 @@ INSERT INTO theme VALUES (6, "Show and Tell", "Show and Tell (Description)", 202
 /*
  * Inserts the speakers from 2012
 */
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (49, "Ian", "Ratner", 202300, TRUE, "Technical");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (1, "Ram", "Karra", 202300, TRUE, "Technical");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (2,"Deborah","Cliburn",202300, TRUE, "Technical");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (3,"Prashanth","Chakrapani",202300, TRUE, "Technical");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (4,"Scott","Cruze",202300, TRUE, "Technical");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (5,"Mark","Kelly",202300, TRUE, "Technical");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (6,"Jim","Senter",202300, TRUE, "Technical");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (7,"Phil","Spann",202300, TRUE, "Technical");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (8,"Jeffrey","Allen",202300, TRUE, "Business");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (9,"Bhaumik","Shah",202300, TRUE, "Technical");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (10,"Panagiotis","Tzerefos",202300, TRUE, "Technical");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (11,"Ben","Pack",202300, TRUE, "Technical");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (12,"David","Tucker",202300, TRUE, "Technical");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (13,"Matt","Peter",202300, TRUE, "Technical");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (14,"Pedro","Lopez",202300, TRUE, "Technical");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (15,"John","Hills",202300, TRUE, "Technical");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (16,"Bryan","Fails",202300, TRUE, "Technical");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (17,"Glen","Wright",202300, TRUE, "Technical");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (18,"Kevin","Barry",202300, TRUE, "Business");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (19,"Jeffery","Kissinger",202300, TRUE, "Business");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (20,"Beth","Jackson",202300, TRUE, "Business");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (21,"Brian","Hinsley",202300, TRUE, "Technical");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (22,"Drew","Fredrick",202300, TRUE, "Technical");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (23,"Glen","Ireland",202300, TRUE, "Technical");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (24,"Robert","Clarence",202300, TRUE, "Technical");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (25,"Sarah","Cottay",202300, TRUE, "Technical");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (26,"Channing","Dawson",202300, TRUE, "Business");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (27,"Mike","Campbell",202300, TRUE, "Business");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (28,"Joshua","Eldridge",202300, TRUE, "Business");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (29,"Bruce","Parker",202300, TRUE, "Technical");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (30,"Robin","Wilde",202300, TRUE, "Technical");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (31,"Lydia","Cordell",202300, TRUE, "Technical");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (32,"Team","Nirvana",202300, TRUE, "Technical");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (33,"Amy","Thomason",202300, TRUE, "Technical");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (34,"Charles","Lewis",202300, TRUE, "Technical");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (35,"Jonathan","Williams",202300, TRUE, "Technical");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (36,"Scott","Gentry",202300, TRUE, "Technical");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (37,"Jason","Norton",202300, TRUE, "Technical");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (38,"Michael","Wehrle",202300, TRUE, "Technical");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (39,"Shane","Closser",202300, TRUE, "Business");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (40,"Selene","Tolbert",202300, TRUE, "Technical");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (41,"Michael","Berger",202300, TRUE, "Technical");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (42,"Kamlesh","Sharma",202300, TRUE, "Technical");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (43,"Kabita","Nayak",202300, TRUE, "Technical");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (44,"Herb","Himes",202300, TRUE, "Technical");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (45,"Stefanie","Edinger",202300, TRUE, "Business");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (46, "Phil", "Cornell", 202300, TRUE, "Business");
-insert into speaker (id, first_name, last_name, suggested_by, visible) values (47,"Allen", "Shacklock", 202300, TRUE, "Technical");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (49, "Ian", "Ratner", 202300, TRUE, "Technical");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (1, "Ram", "Karra", 202300, TRUE, "Technical");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (2,"Deborah","Cliburn",202300, TRUE, "Technical");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (3,"Prashanth","Chakrapani",202300, TRUE, "Technical");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (4,"Scott","Cruze",202300, TRUE, "Technical");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (5,"Mark","Kelly",202300, TRUE, "Technical");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (6,"Jim","Senter",202300, TRUE, "Technical");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (7,"Phil","Spann",202300, TRUE, "Technical");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (8,"Jeffrey","Allen",202300, TRUE, "Business");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (9,"Bhaumik","Shah",202300, TRUE, "Technical");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (10,"Panagiotis","Tzerefos",202300, TRUE, "Technical");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (11,"Ben","Pack",202300, TRUE, "Technical");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (12,"David","Tucker",202300, TRUE, "Technical");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (13,"Matt","Peter",202300, TRUE, "Technical");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (14,"Pedro","Lopez",202300, TRUE, "Technical");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (15,"John","Hills",202300, TRUE, "Technical");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (16,"Bryan","Fails",202300, TRUE, "Technical");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (17,"Glen","Wright",202300, TRUE, "Technical");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (18,"Kevin","Barry",202300, TRUE, "Business");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (19,"Jeffery","Kissinger",202300, TRUE, "Business");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (20,"Beth","Jackson",202300, TRUE, "Business");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (21,"Brian","Hinsley",202300, TRUE, "Technical");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (22,"Drew","Fredrick",202300, TRUE, "Technical");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (23,"Glen","Ireland",202300, TRUE, "Technical");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (24,"Robert","Clarence",202300, TRUE, "Technical");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (25,"Sarah","Cottay",202300, TRUE, "Technical");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (26,"Channing","Dawson",202300, TRUE, "Business");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (27,"Mike","Campbell",202300, TRUE, "Business");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (28,"Joshua","Eldridge",202300, TRUE, "Business");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (29,"Bruce","Parker",202300, TRUE, "Technical");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (30,"Robin","Wilde",202300, TRUE, "Technical");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (31,"Lydia","Cordell",202300, TRUE, "Technical");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (32,"Team","Nirvana",202300, TRUE, "Technical");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (33,"Amy","Thomason",202300, TRUE, "Technical");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (34,"Charles","Lewis",202300, TRUE, "Technical");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (35,"Jonathan","Williams",202300, TRUE, "Technical");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (36,"Scott","Gentry",202300, TRUE, "Technical");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (37,"Jason","Norton",202300, TRUE, "Technical");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (38,"Michael","Wehrle",202300, TRUE, "Technical");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (39,"Shane","Closser",202300, TRUE, "Business");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (40,"Selene","Tolbert",202300, TRUE, "Technical");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (41,"Michael","Berger",202300, TRUE, "Technical");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (42,"Kamlesh","Sharma",202300, TRUE, "Technical");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (43,"Kabita","Nayak",202300, TRUE, "Technical");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (44,"Herb","Himes",202300, TRUE, "Technical");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (45,"Stefanie","Edinger",202300, TRUE, "Business");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (46, "Phil", "Cornell", 202300, TRUE, "Business");
+insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (47,"Allen", "Shacklock", 202300, TRUE, "Technical");
 
 /*
  * Loads a raw data file of session data from last year

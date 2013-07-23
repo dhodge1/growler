@@ -56,110 +56,102 @@
                     <div class="accordion-group">
                         <div class="accordion-toggle accordion-selected" data-toggle="collapse" data-parent="#accordion-parent" data-target="#collapse1">
                             <i class="icon12-previous"></i>
-                            <a>How Do I Rate a Theme?</a>
+                            <a>How to set/reset your password</a>
                         </div><!-- /.accordion-toggle-->
                         <div id="collapse1" class="accordion-body collapse in">
-                            <div class="accordion-inner">To Rate a Theme, click on Themes tab.  Drag and drop to rearrange
-                                the themes in the order you want to rate them.  Only the top ten
-                                themes will be ranked.  After rearranging the speakers click 
-                                "Submit" at the bottom of the page.  The ratings for the top ten 
-                                themes will then be saved.
+                            <div class="accordion-inner">
+                                Step 1: From the log in screen, click on the <a href='../../public/requestreset.jsp'>Forgot Password</a> link. <br/>
+                                Step 2: Enter your Scripps Networks Email Address and press the <strong>Submit Request</strong> button.<br/>
+                                Step 3: Given this website utilizes a single sign-on feature, if you cannot log in, there could be a problem with your network password. You should receive the following error message, “As a Scripps employee, you must request a password reset using the procedure outlined by the help desk. Please cancel and contact the Help Desk if you need further assistance.”<br/>
                             </div>
                         </div><!--/#collapse1-->
                     </div><!--/.accordion-group-->
                     <div class="accordion-group">
                         <div class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-parent" data-target="#collapse2">
                             <i class="icon12-previous"></i>
-                            <a>How Do I Suggest a Theme?</a>
+                            <a>How to rank a theme</a>
                         </div><!-- /.accordion-toggle-->
                         <div id="collapse2" class="accordion-body collapse">
-                            <div class="accordion-inner">To Suggest a Theme, click on the Themes tab.  Type in the name of 
-                                the theme (30 character max),the description (250 character max),
-                                and a reason (optional, 250 character max).  Click "Submit."  
-                                The theme will be saved.<br/><br/>Suggested themes will not be visible until they are made so by 
-                                the administrator.
+                            <div class="accordion-inner">Step 1: Click on the <strong>Themes</strong> drop down menu and select <em>Rank Preferred Themes</em>. <br/>
+                                Step 2a: Using the drag and drop feature, select the theme(s) you want to rank from the <strong>Available Presentation Themes</strong> section and drop them over to the <strong>Presentation Themes I’m Interested In</strong> section. <br/>
+                                Step 2b: Using the non drag and drop feature, click on the themes you want to rank. The order in which you select the themes is the order in which they will be ranked.<br/>
+                                Step 3: Once all the themes you want to rank have been selected, press the <strong>Submit My Ranking</strong> button. <br/>
+                                <strong>- This feature will only be made available for a limited time. <br/>
+                                - Ten (10) is the maximum number of themes available to be ranked.</strong>
                             </div>
                         </div><!--/#collapse2-->
                     </div><!--/.accordion-group-->
                     <div class="accordion-group">
                         <div class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-parent" data-target="#collapse3">
                             <i class="icon12-previous"></i>
-                            <a>How Do I Rate a Speaker?</a>
+                            <a>How to rank a speaker</a>
                         </div><!-- /.accordion-toggle-->
                         <div id="collapse3" class="accordion-body collapse">
-                            <div class="accordion-inner">To Rate a Speaker, click on the speakers tab.  Drag and drop to rearrange
-                                the speaker's names in the order you want to rate them.  Only the top
-                                ten speakers will be ranked.  After rearranging the speakers click 
-                                "Submit" at the bottom of the page.  The ratings for those speakers 
-                                will then be saved.
+                            <div class="accordion-inner">
+                                Step 1: Click on the <strong>Speakers</strong> drop down menu and select <em>Rank Preferred Speakers</em>. <br/>
+                                Step 2a: Using the drag and drop feature, select the speaker(s) you want to rank from the <strong>Available Speakers</strong> section and drop them over to the <strong>Speakers I’m Interested In</strong> section.<br/>
+                                Step 2b: Using the non drag and drop feature, click on the speakers you want to rank. The order in which you select the speakers is the order in which they will be ranked.<br/>
+                                Step 3: Once all the speakers you want to rank have been selected, press the <strong>Submit My Ranking</strong> button. <br/>
+                                <strong>- This feature will only be made available for a limited time. <br/>
+                                - Ten (10) is the maximum number of speakers available to be ranked.</strong>
                             </div>
                         </div><!--/#collapse3-->
                     </div><!--/.accordion-group-->
                     <div class="accordion-group">
                         <div class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-parent" data-target="#collapse4">
                             <i class="icon12-previous"></i>
-                            <a>How Do I Suggest a Speaker?</a>
+                            <a>How to suggest a theme</a>
                         </div><!-- /.accordion-toggle-->
                         <div id="collapse4" class="accordion-body collapse">
-                            <div class="accordion-inner">To Suggest a Speaker, click on Suggest a Speaker tab.  Type in the 
-                                first name of the speaker (30 character max) and the last name
-                                of the speaker (30 character max).  Click "Submit".  The theme 
-                                will be saved.<br/><br/>Suggested speakers will not be visible until they are made so by 
-                                the administrator.
+                            <div class="accordion-inner">
+                                Step 1: Click on the <strong>Themes</strong> drop down menu and select <em>Suggest A New Theme</em>. <br/>
+                                Step 2: Fill out the form and press the <strong>Submit Suggestion</strong> button. <br/>
+                                <strong>- This feature will only be made available for a limited time.</strong>
                             </div>
                         </div><!--/#collapse4-->
                     </div><!--/.accordion-group-->
                     <div class="accordion-group">
                         <div class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-parent" data-target="#collapse5">
                             <i class="icon12-previous"></i>
-                            <a>How Do I Attend a Session?</a>
+                            <a>How to suggest a speaker</a>
                         </div><!-- /.accordion-toggle-->
                         <div id="collapse5" class="accordion-body collapse">
-                            <div class="accordion-inner">After you attend the session the speaker will provide you with a code to verify your attendance.
-                                <br/><br/>You can acknowledge your attendance from the end of the session until 15 minutes after the session ends.
+                            <div class="accordion-inner">
+                                Step 1: Click on the <strong>Speakers</strong> drop down menu and select <em>Suggest A New Speaker</em>. <br/>
+                                Step 2: Fill out the form and press the <strong>Submit Suggestion</strong> button. <br/>
+                                <strong>- This feature will only be made available for a limited time.</strong>
                             </div>
                         </div><!--/#collapse5-->
                     </div><!--/.accordion-group-->
                     <div class="accordion-group">
                         <div class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-parent" data-target="#collapse6">
                             <i class="icon12-previous"></i>
-                            <a>How Do I Fill Out a Survey?</a>
+                            <a>How to provide your interest for a Techtoberfest topic</a>
                         </div><!-- /.accordion-toggle-->
                         <div id="collapse6" class="accordion-body collapse">
-                            <div class="accordion-inner">Once you have acknowledged attendance, you may visit the Survey List page to view the surveys you are eligible to take.  Click on a link to take a survey.
+                            <div class="accordion-inner">
+                                Step 1: Click on the <strong>Sessions</strong> drop down menu and select <em>View Session Schedule</em>. <br/>
+                                Step 2: Review the proposed schedule<br/>
+                                Step 3: Select the <a href='../../private/employee/sessioninterest.jsp'>Interested in a session</a> link, located below the session schedule table.<br/>
+                                Step 4: Select the topic(s) you are interested in attending and press the <strong>Submit Interest</strong> button. <br/>
+                                <strong>- This feature will only be made available for a limited time.</strong>
                             </div>
                         </div><!--/#collapse6-->
                     </div><!--/.accordion-group-->
                     <div class="accordion-group">
                         <div class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-parent" data-target="#collapse7">
                             <i class="icon12-previous"></i>
-                            <a>How Do I Show Interest in a Future Session</a>
+                            <a>How to provide session feedback</a>
                         </div><!-- /.accordion-toggle-->
                         <div id="collapse7" class="accordion-body collapse">
-                            <div class="accordion-inner">Visit the View Session Schedule page, and click on as many sessions as you are interested in.  You may also remove interest in a session from that page.
+                            <div class="accordion-inner">
+                                Step 1: Click on the <strong>Sessions</strong> drop down menu and select <em>Submit Session Feedback</em>. <br/>
+                                Step 2: Complete the survey wizard<br/>
+                                <strong>- If a session survey is completed within 30 minutes of you attending that session, your name will be entered into a raffle drawing. <br/>
+                                - Session surveys can be submitted at any time</strong>
                             </div>
                         </div><!--/#collapse7-->
-                    </div><!--/.accordion-group-->
-                    <div class="accordion-group">
-                        <div class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-parent" data-target="#collapse8">
-                            <i class="icon12-previous"></i>
-                            <a>How Do I Set/Reset My Password?</a>
-                        </div><!-- /.accordion-toggle-->
-                        <div id="collapse8" class="accordion-body collapse">
-                            <div class="accordion-inner">At the login page you may decide to register as a new user or click the "forgot my password" link to reset your password.
-                            </div>
-                        </div><!--/#collapse8-->
-                    </div><!--/.accordion-group-->
-                    <div class="accordion-group">
-                        <div class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-parent" data-target="#collapse9">
-                            <i class="icon12-previous"></i>
-                            <a>How Do I Leverage my Corporate Credentials?</a>
-                        </div><!-- /.accordion-toggle-->
-                        <div id="collapse9" class="accordion-body collapse">
-                            <div class="accordion-inner">Visit the link at the Log-In screen that says "Register Corporate Credentials".  Once you sign-in, you will automatically be added to the Techtoberfest Information System.
-                            </div>
-                        </div><!--/#collapse9-->
-                    </div><!--/.accordion-group-->                
+                    </div><!--/.accordion-group-->              
                 </div><!--/.accordion-->
             </div>
         </div>

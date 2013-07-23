@@ -155,7 +155,7 @@
                     //If we didn't get any ranks, we tell the user to rank the speakers
                     if (speakers == null || speakers.size() == 0) {
                         out.print("<h2 class=\"bordered mediumBottomMargin\"><img style=\"padding-bottom:0;padding-left:0;\" id=\"logo\" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class=\"titlespan\">Which speakers are you most interested in?</span></h2>");
-                        out.print("<span>Select the speakers you are most interested in.  If desired, you can provide a ranking for less than 10 speakers.  There is also a <a href='../../private/employee/speaker.jsp'>drag and drop version</a> available.</span><br/>");
+                        out.print("<span>Please drag and drop the speakers you are most interest in and rank them 1-10.  If desired, you can provide a ranking for less than 10 speakers.  There is also a <a href='../../private/employee/speaker.jsp'>drag and drop version</a> available.</span><br/>");
                         out.print("<span><strong>Note:</strong> The order in which you select the item is the order they will be ranked.</span>");
                         out.print("<div class='mediumBottomMargin'></div>");
                     }
@@ -170,7 +170,7 @@
                     out.print("<span><strong>Available Speakers</strong></span>");
                     out.print("</div>");
                     out.print("<div class='span5 smallBottomMargin'>");
-                    out.print("<span class='interestLabel'><strong>Speakers I'm Interested In</strong></span><span class='pullRight'><a href='#'>View Bios</a></span>");
+                    out.print("<span class='interestLabel'><strong>Speakers I'm Interested In</strong></span><span class='pullRight'><a href='#'>Last years ranking</a></span>");
                     out.print("</div>");
                     out.print("<div class='span5'>");
                     out.print("<div class='row'>");

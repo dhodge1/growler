@@ -88,10 +88,14 @@
                                 </span>
                             </div>
                             <div class="form-group">
-                                <label class="required">Presentation Theme Description</label>
-                                <input required="required" name="description" class="input-xlarge" type="text" id="tip2" data-content="250 characters or less please" maxlength="250"/>
-                                <br/><span id="error_theme_description" class="message_container">
-                                    <span>Please enter a Presentation Theme Description</span>
+                                <label class="required">What type of presentation is this?</label>
+                                <select name="type" id="tip2" class="input-xlarge" data-content="Choose a type: Business or Technical">
+                                    <option value="null">Please Select a Type</option>
+                                    <option value="Business">Business</option>
+                                    <option value="Technical">Technical</option>
+                                </select>
+                                <br/><span id="error_theme_type" class="message_container">
+                                    <span>Please select a theme type</span>
                                 </span>
                             </div>
                             <div class="form-group">

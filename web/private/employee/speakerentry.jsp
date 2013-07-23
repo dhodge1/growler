@@ -73,27 +73,35 @@
             <div class="row">
                     <form method="POST" id="action" action="../../action/processSpeakerSuggestion.jsp">
                         <fieldset>
-                            <div class="form-group">
+                            <div class="form-group inline">
                                 <label class="required">Speaker First Name</label>
                                 <input required="required" name="first_name" class="input-xlarge" type="text" id="tip" data-content="30 characters or less please" maxlength="30"/>
                                 <br/><span id="error_first" class="message_container">
-                                    <span>Please Enter a First Name</span>
+                                    <span>Please enter a first name</span>
                                 </span>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group inline">
                                 <label class="required">Speaker Last Name</label>
                                 <input required="required" name="last_name" class="input-xlarge" type="text" id="tip2" data-content="30 characters or less please" maxlength="30"/>
                                 <br/><span id="error_last" class="message_container">
-                                    <span>Please Enter a Last Name</span>
+                                    <span>Please enter a last name</span>
+                                </span>
+                            </div>
+                            <div class='form-group'>
+                                <label class='required'>What type of speaker is this?</label>
+                                <select name="type" id="tip3" class="input-xlarge" data-content="Choose a type: Business or Technical">
+                                    <option value="null">Please Select a Type</option>
+                                    <option value="Business">Business</option>
+                                    <option value="Technical">Technical</option>
+                                </select>
+                                <br/><span id="error_type" class="message_container">
+                                    <span>Please select a type</span>
                                 </span>
                             </div>
                             <div class="form-group">
                                 <label>Why should this speaker be added to this years Techtoberfest?</label>
-                                <textarea name="reason" id="tip3" data-content="250 characters or less please" rows="5" cols="50" maxlength="250">
+                                <textarea name="reason" id="tip4" data-content="250 characters or less please" rows="5" cols="50" maxlength="250">
                                 </textarea>
-                                <br/><span id="error_reason" class="message_container">
-                                    <span>Please Enter a Reason</span>
-                                </span>
                             </div>
                             <div class="form-actions">
                                 <input type="submit" id="send" class="button button-primary" value="Submit Suggestion"/>

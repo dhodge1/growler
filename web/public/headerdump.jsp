@@ -67,5 +67,14 @@
             out.print("</table>");
             
             %>
+            <h2>Cookies</h2>
+            <%
+            Cookie[] cookies = request.getCookies();
+            for (int i = 0; i < cookies.length; i++) {
+                out.print(cookies[i].getName() + ": " + cookies[i].getValue());
+            }
+
+            
+            %>
     </body>
 </html>

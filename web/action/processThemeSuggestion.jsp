@@ -28,7 +28,7 @@
                     }
                 %>
         <% String name = request.getParameter("name");
-            String description = request.getParameter("description");
+            String type = request.getParameter("type");
             String reason = "";
             try {
                 reason = request.getParameter("reason");
@@ -37,7 +37,7 @@
             }
             Theme t = new Theme();
             t.setName(name);
-            t.setDescription(description);
+            t.setType(type);
             t.setCreatorId(user);
             t.setReason(reason);
             t.setVisible(false);

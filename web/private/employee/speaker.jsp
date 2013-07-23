@@ -174,7 +174,7 @@
                 <%
                     if (speakers == null || speakers.size() == 0) {
                         out.print("<h2 class='bordered mediumBottomMargin'><img style=\"padding-bottom:0;padding-left:0;\" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class=\"titlespan\">Which speakers are you most interested in?</span></h2>");
-                        out.print("<span><strong>Please note:</strong> If desired, you can provide a ranking for less than 10 presentation speakers.  There is also a <a href=\"../../private/employee/nondragspeaker.jsp\">non drag and drop version</a> available.</span>");
+                        out.print("<span>Please drag and drop the speakers you are most interest in and rank them 1-10.  If desired, you can provide a ranking for less than 10 speakers.  There is also a <a href=\"../../private/employee/nondragspeaker.jsp\">non drag and drop version</a> available.</span>");
                         out.print("<div class='mediumBottomMargin'></div>");
                     }
                 %>
@@ -188,7 +188,7 @@
                         out.print("<form action='../../action/processSpeakerRanking.jsp'>");
                         out.print("<div class='row mediumBottomMargin'>");
                         out.print("<div class='span5 smallBottomMargin'>");
-                        out.print("<span><strong>Available Speakers</strong></span><span class='pullRight'><a href='#'>View Bios</a></span>");
+                        out.print("<span><strong>Available Speakers</strong></span><span class='pullRight'><a href='#'>Last years ranking</a></span>");
                         out.print("</div>");
                         out.print("<div class='span5 smallBottomMargin'>");
                         out.print("<span class='interestLabel'><strong>Speakers I'm Interested In</strong></span>");
