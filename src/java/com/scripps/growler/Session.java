@@ -46,6 +46,8 @@ public class Session {
      * The unique key that allows users to attend a session
      */
     private String key;
+    
+    private boolean survey;
 
     public Session() {
     }
@@ -201,4 +203,14 @@ public class Session {
     public void setKey(String k) {
         this.key = k;
     }
+
+    public boolean isSurvey() {
+        return survey;
+    }
+
+    public void setSurvey(boolean survey) {
+        this.survey = survey;
+    }
+    
+    
 }

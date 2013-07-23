@@ -68,7 +68,7 @@
         <%@ include file="../../includes/testnav.jsp" %>
         <div class="container-fixed largeBottomMargin">
             <div class="row mediumBottomMargin"></div>
-            <div class="row mediumBottomMargin">
+            <div class="row">
                 <ul class="breadcrumb">
                     <li><a href="home.jsp">Home</a></li>
                     <li><a href="../../private/employee/sessionschedule.jsp">Session Schedule</a></li>

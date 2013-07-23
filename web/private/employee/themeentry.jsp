@@ -57,7 +57,7 @@
         <%@ include file="../../includes/testnav.jsp" %>
         <div class="container-fixed">
             <div class="row mediumBottomMargin"></div>
-            <div class="row mediumBottomMargin">
+            <div class="row">
                 <ul class="breadcrumb">
                     <li><a href="home.jsp">Home</a></li>
                     <li>Suggest a Presentation Theme</li>
@@ -67,7 +67,7 @@
                 <h1>Suggest a Presentation Theme</h1>
             </div>
             <div class="row mediumBottomMargin" style="border:1px dashed #ccc"></div>
-            <div class="row mediumBottomMargin">
+            <div class="row largeBottomMargin">
                 <span>Is there a new presentation theme you would like to suggest for this years Techtoberfest?  We would LOVE to know more about it.</span>
             </div>
             <div class="row mediumBottomMargin">

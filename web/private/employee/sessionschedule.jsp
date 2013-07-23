@@ -71,7 +71,7 @@
         <%@ include file="../../includes/testnav.jsp" %>
         <div class="container-fixed largeBottomMargin">
             <div class="row mediumBottomMargin"></div>
-            <div class="row mediumBottomMargin">
+            <div class="row">
                 <ul class="breadcrumb">
                     <li><a href="../../private/employee/home.jsp">Home</a></li>
                     <li>Session Schedule</li>
@@ -124,6 +124,10 @@
                                 out.print("<a href='#'>View</a>");
                                 out.print("</td>");
                                 out.print("<td>");
+                                ArrayList<Speaker> speakers = sp.getSpeakersForSession(sessions.get(i).getId());
+                                for (int j = 0; j < speakers.size(); j++){
+                                    out.print(speakers.get(j).getFullName() + "<br/>");
+                                }
                                 out.print("</td>");
                                 out.print("<td>");
                                 SimpleDateFormat fmt2 = new SimpleDateFormat("K ' hours, ' mm ' minutes'");
@@ -184,7 +188,7 @@
                             $(document).ready(function() {
                                 var page = 1;
                                 var total = $("#total").val();
-                                var pages = Math.floor(($("#total").val() / $("#show_per_page").val()) + 1);
+                                var pages = Math.floor(($("#total").val() / parseInt($("#show_per_page").val())) + 1);
                                 $("#current_page").val(1);
                                 for (var i = 16; i < total + 1; i++) {
                                     $("#row" + i).hide();
@@ -194,14 +198,14 @@
                             });
                             function pageJump() {
                                 var pageNo = parseInt($("#pagejump").val());
-                                var pages = Math.floor(($("#total").val() / $("#show_per_page").val()) + 1);
+                                var pages = Math.floor(($("#total").val() / parseInt($("#show_per_page").val())) + 1);
                                 if (pageNo <= pages) {
                                     page(pageNo);
                                 }
                             }
                             function next() {
                                 var page = $("#current_page").val();
-                                var pages = Math.floor(($("#total").val() / $("#show_per_page").val()) + 1);
+                                var pages = Math.floor(($("#total").val() / parseInt($("#show_per_page").val())) + 1);
                                 if (parseInt(page) === parseInt(pages)) {
                                     //do nothing
                                 } else {
@@ -209,8 +213,8 @@
                                     for (var i = 0; i < $("#total").val() + 1; i++) {
                                         $("#row" + i).hide();
                                     }
-                                    var startingPoint = ((parseInt(newPage) - 1) * $("#show_per_page").val());
-                                    for (var i = startingPoint; i < startingPoint + $("#show_per_page").val(); i++) {
+                                    var startingPoint = ((parseInt(newPage) - 1) * parseInt($("#show_per_page").val()));
+                                    for (var i = startingPoint; i < startingPoint + parseInt($("#show_per_page").val()); i++) {
                                         $("#row" + i).show();
                                     }
                                     $("#current_page").val(newPage);
@@ -220,11 +224,11 @@
                                 }
                             }
                             function last() {
-                                var pages = Math.floor(($("#total").val() / $("#show_per_page").val()) + 1);
+                                var pages = Math.floor(($("#total").val() / parseInt($("#show_per_page").val())) + 1);
                                 for (var i = 0; i < $("#total").val() + 1; i++) {
                                     $("#row" + i).hide();
                                 }
-                                for (var i = ($("#show_per_page").val() * (pages - 1)); i < ($("#show_per_page").val() * pages); i++) {
+                                for (var i = (parseInt($("#show_per_page").val()) * (pages - 1)); i < (parseInt($("#show_per_page").val()) * pages); i++) {
                                     $("#row" + i).show();
                                 }
                                 $("#current_page").val(pages);
@@ -233,7 +237,7 @@
                             }
                             function prev() {
                                 var page = $("#current_page").val();
-                                var pages = Math.floor(($("#total").val() / $("#show_per_page").val()) + 1);
+                                var pages = Math.floor(($("#total").val() / parseInt($("#show_per_page").val())) + 1);
                                 if (parseInt(page) === 1) {
                                     //do nothing
                                 } else {
@@ -241,8 +245,8 @@
                                     for (var i = 0; i < $("#total").val() + 1; i++) {
                                         $("#row" + i).hide();
                                     }
-                                    var startingPoint = ((parseInt(newPage) - 1) * $("#show_per_page").val());
-                                    for (var i = startingPoint; i < startingPoint + $("#show_per_page").val() + 1; i++) {
+                                    var startingPoint = 1 + ((parseInt(newPage) - 1) * parseInt($("#show_per_page").val()));
+                                    for (var i = startingPoint; i < startingPoint + parseInt($("#show_per_page").val()) ; i++) {
                                         $("#row" + i).show();
                                     }
                                     unActive();
@@ -251,11 +255,11 @@
                                 }
                             }
                             function first() {
-                                var pages = Math.floor(($("#total").val() / $("#show_per_page").val()) + 1);
+                                var pages = Math.floor(($("#total").val() / parseInt($("#show_per_page").val())) + 1);
                                 for (var i = 0; i < $("#total").val() + 1; i++) {
                                     $("#row" + i).hide();
                                 }
-                                for (var i = (0); i < $("#show_per_page").val() + 1; i++) {
+                                for (var i = (0); i < parseInt($("#show_per_page").val()) + 1; i++) {
                                     $("#row" + i).show();
                                 }
                                 $("#current_page").val(1);
@@ -267,7 +271,7 @@
                                 for (var i = 0; i < $("#total").val() + 1; i++) {
                                     $("#row" + i).hide();
                                 }
-                                for (var i = ($("#show_per_page").val() * (number - 1)); i < (15 * number) + 1; i++) {
+                                for (var i = (parseInt($("#show_per_page").val()) * (number - 1)) + 1; i < (parseInt($("#show_per_page").val()) * number) + 1; i++) {
                                     $("#row" + i).show();
                                 }
                                 unActive();
@@ -276,7 +280,7 @@
                                 active(page);
                             }
                             function unActive() {
-                                var pages = Math.floor(($("#total").val() / $("#show_per_page").val()) + 1);
+                                var pages = Math.floor(($("#total").val() / parseInt($("#show_per_page").val())) + 1);
                                 for (var i = 1; i < pages + 1; i++) {
                                     $("#page" + i).removeClass("active");
                                 }

@@ -43,7 +43,7 @@
         <%@ include file="../includes/header.jsp" %> 
         <%@ include file="../includes/publicnav.jsp" %>
         <div class="container-fixed mediumBottomMargin">
-            <div class="row mediumBottomMargin">
+            <div class="row">
                 <ul class="breadcrumb">
                     <li><a href="../index.jsp">Home</a></li>
                     <li>Request Password Reset</li>

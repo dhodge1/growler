@@ -51,7 +51,7 @@
         <%@ include file="../../includes/testnav.jsp" %>
         <div class="container-fixed mediumBottomMargin">
             <div class="row mediumBottomMargin"></div>
-            <div class="row mediumBottomMargin">
+            <div class="row">
                 <ul class="breadcrumb">
                     <li><a href="../../private/employee/home.jsp">Home</a></li>
                     <li>Suggest a Speaker</li>
@@ -61,7 +61,7 @@
                 <h1>Suggest a Speaker</h1>
             </div>
             <div class="row mediumBottomMargin" style="border:1px dashed #ccc"></div>
-            <div class="row mediumBottomMargin">
+            <div class="row largeBottomMargin">
                 <span>Is there a new speaker you would like to suggest for this years Techtoberfest?  We would LOVE to know more about them.</span>
             </div>
             <div class="row mediumBottomMargin">

@@ -158,7 +158,7 @@
                         out.print("<h2 class=\"bordered mediumBottomMargin\"><img style=\"padding-bottom:0;padding-left:0;\" id=\"logo\" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class=\"titlespan\">Which presentations are you most interested in?</span></h2>");
                         out.print("<span>Please drag and drop the presentation themes you are most interest in and rank them 1-10.  If desired, you can provide a ranking for less than 10 themes.  There is also a <a href='../../private/employee/theme.jsp'>drag and drop version</a> available.</span><br/>");
                         out.print("<span><strong>Note:</strong> The order in which you select the item is the order they will be ranked.</span>");
-                        out.print("<div class='mediumBottomMargin'></div>");
+                        out.print("<div class='row largeBottomMargin'></div>");
                     } 
                 %>
             </div>

@@ -147,7 +147,7 @@
                     out.print("<div class='row largeBottomMargin'>");
                     out.print("<p style='font-size: 16px; font-family: Arial;'>We want to hear from you!  Please let us know the top 10 speakers you would be interested in attending for this year's Techtoberfest.</p>");
                     out.print("</div>");
-                    out.print("<div class='row mediumBottomMargin'></div>");
+                    out.print("<div class='row largeBottomMargin'></div>");
                 }
             %>
             <div class="row mediumBottomMargin">
@@ -165,7 +165,7 @@
                 out.print("<div class='row'>");
                 if (speakers == null || speakers.size() == 0) {
                     out.print("<form action='../../action/processSpeakerRanking.jsp'>");
-                    out.print("<div class='row mediumBottomMargin'>");                    
+                    out.print("<div class='row mediumBottomMargin'>");
                     out.print("<div class='span5 smallBottomMargin'>");
                     out.print("<span><strong>Available Speakers</strong></span>");
                     out.print("</div>");

@@ -229,4 +229,32 @@ public class AttendancePersistence extends GrowlerPersistence {
         
         return null;
     }
+    
+    public ArrayList<Session> getUsersAttendanceInYear(int user, int year){
+        String query = "select s.id, s.name, s.session_date, s.start_time, a.isSurveyTaken from session s left join attendance a on a.session_id = s.id and a.user_id = ? and extract(year from session_date) = ? order by session_date, start_time, name";
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement(query);
+            statement.setInt(1, user);
+            statement.setInt(2, year);
+            result = statement.executeQuery();
+            ArrayList<Session> sessions = new ArrayList<Session>();
+            while (result.next()){
+                Session s = new Session();
+                s.setId(result.getInt("id"));
+                s.setName(result.getString("name"));
+                s.setSessionDate(result.getDate("session_date"));
+                s.setStartTime(result.getTime("start_time"));
+                s.setSurvey(result.getBoolean("isSurveyTaken"));
+                sessions.add(s);
+            }
+            return sessions;
+        }
+        catch (Exception e) {
+        }
+        finally {
+            closeJDBC();
+        }
+        return null;
+    }
 }
