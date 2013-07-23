@@ -118,19 +118,21 @@
                         var q3 = $("#q3").val();
                         var q4 = $("#q4").val();
                         var comments = $("#comment").val();
-                        $.post("../../action/submitSurvey.jsp", 
-                    {
-                        user: user,
-                        sessionId: session,
-                        q1: q1,
-                        q2: q2,
-                        q3: q3,
-                        q4: q4,
-                        comment: comments
-                    }, function(data, success){
-                    }
-                );
-                        
+                        var key = $("#key").val();
+                        $.post("../../action/submitSurvey.jsp",
+                                {
+                                    user: user,
+                                    sessionId: session,
+                                    q1: q1,
+                                    q2: q2,
+                                    q3: q3,
+                                    q4: q4,
+                                    comment: comments,
+                                    key: key
+                                }, function(data, success) {
+                        }
+                        );
+
                         $("#code").hide();
                         $("#confirm").show();
                         $("#actions").hide();
@@ -160,16 +162,14 @@
             }
             try {
                 user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
-                String name = String.valueOf(session.getAttribute("user"));
             } catch (Exception e) {
             }
-            
-            AttendancePersistence ap = new AttendancePersistence();
-            ArrayList<Session> sessions = ap.getUsersAttendanceInYear(user, 2013);
+            SessionPersistence sp = new SessionPersistence();
+            sp.createThisYearSessions(2013);
         %>
         <%@ include file="../../includes/header.jsp" %> 
         <%@ include file="../../includes/testnav.jsp" %>
-        <div class="container-fixed">
+        <div class="container-fixed mediumBottomMargin">
             <div class="row mediumBottomMargin"></div>
             <div class="row">
                 <ul class="breadcrumb">
@@ -213,12 +213,13 @@
             <div class="row">
                 <input type="hidden" id="step" name="step" value="1"/>
                 <input type="hidden" id="session" name="session"/>
-                <input type="hidden" id="user" name="user" value=<%= user %>/>
+                <input type="hidden" id="user" name="user" value=<%= user%>/>
                 <input type="hidden" id="q1" name="q1"/>
                 <input type="hidden" id="q2" name="q2"/>
                 <input type="hidden" id="q3" name="q3"/>
                 <input type="hidden" id="q4" name="q4"/>
                 <input type="hidden" id="comment" name="comment"/>
+                <input type="hidden" id="sessionkey" name="sessionkey"/>
                 <div id="dateselector" class="smallBottomMargin">
                     <span><strong>Session dates:</strong></span>
                     <select name="date" id="date">
@@ -228,20 +229,22 @@
                 </div>
                 <table id="table" class="table">
                     <%
+                        AttendancePersistence ap = new AttendancePersistence();
+                        ArrayList<Session> sessions = ap.getUsersAttendanceInYear(user);
                         for (int i = 0; i < sessions.size(); i++) {
                             if (i % 2 == 0) {
                                 out.print("<tr>");
                             }
                             out.print("<td class='" + sessions.get(i).getSessionDate() + "'>");
-                            out.print("<input type='radio' name='survey' value='" + sessions.get(i).getId());
-                            if (sessions.get(i).isSurvey()){
+                            out.print("<input type='radio' name='survey' value='" + sessions.get(i).getId() + "'");
+                            if (sessions.get(i).isSurvey() == true) {
                                 out.print(" disabled ");
                             }
-                            out.print("' />");
+                            out.print(" />");
                             out.print("<span class='divider'>" + sessions.get(i).getSessionDate() + "</span>");
                             out.print("<span class='divider'>" + sessions.get(i).getStartTime() + "</span>");
                             out.print("<span>" + sessions.get(i).getName());
-                            if (sessions.get(i).isSurvey()){
+                            if (sessions.get(i).isSurvey() == true) {
                                 out.print(" * ");
                             }
                             out.print("</span>");
@@ -254,33 +257,33 @@
                 </table>
                 <div id="survey" class="mediumBottomMargin">
                     <table class="table">
-                    <%
-                        DataConnection dataConnection = new DataConnection();
-                        Connection newConnect = dataConnection.sendConnection();
-                        Statement newStatement = newConnect.createStatement();
-                        ResultSet qResult = newStatement.executeQuery("select id, text from question");
-                        while (qResult.next()) {
-                    %>
-                    <tr>
-                        <td><label><% out.print(qResult.getString("text"));%></label></td>
-                        <td><div class="form-group inline">
-                        <input type="radio" value="1" <% out.print(" name=q" + qResult.getInt("id"));%>><span class="checkbox inline divider" >Strongly Disagree</span>
-                        <input type="radio" value="3" <% out.print(" name=q" + qResult.getInt("id"));%>><span class="checkbox inline divider" >Neutral</span>
-                        <input type="radio" value="5" <% out.print(" name=q" + qResult.getInt("id"));%>><span class="checkbox inline" >Strongly Agree</span>
-                    </div></td>
-                    </tr>
-                    <% }
-                        qResult.close();
-                        newStatement.close();
-                        newConnect.close();
-                    %>
+                        <%
+                            DataConnection dataConnection = new DataConnection();
+                            Connection newConnect = dataConnection.sendConnection();
+                            Statement newStatement = newConnect.createStatement();
+                            ResultSet qResult = newStatement.executeQuery("select id, text from question");
+                            while (qResult.next()) {
+                        %>
+                        <tr>
+                            <td><label><% out.print(qResult.getString("text"));%></label></td>
+                            <td><div class="form-group inline">
+                                    <input type="radio" value="1" <% out.print(" name=q" + qResult.getInt("id"));%>><span class="checkbox inline divider" >Strongly Disagree</span>
+                                    <input type="radio" value="3" <% out.print(" name=q" + qResult.getInt("id"));%>><span class="checkbox inline divider" >Neutral</span>
+                                    <input type="radio" value="5" <% out.print(" name=q" + qResult.getInt("id"));%>><span class="checkbox inline" >Strongly Agree</span>
+                                </div></td>
+                        </tr>
+                        <% }
+                            qResult.close();
+                            newStatement.close();
+                            newConnect.close();
+                        %>
                     </table>
                     <label>Comments:</label><textarea maxlength="250" cols="50" rows="5" name="comment" id="commentbox"></textarea>
                 </div>
                 <div id="code">
                     <div class="form-group">
                         <label>Please enter the session code you were provided</label>
-                        <input class="input-xlarge" maxlength="4" name="session_key" />
+                        <input class="input-xlarge" maxlength="4" name="key" id="key" />
                     </div>
                     <p style="color:red">Note: Session codes are provided for each session.  This code not only helps the Techtoberfest Committee verify your session attendance, but it also serves as a raffle ticket if provided within 30 minutes of you attending a particular session.  If you do not have the code for this session, you may leave this field blank and continue with the survey.</p>
                 </div>

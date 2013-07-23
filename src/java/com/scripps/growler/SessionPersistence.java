@@ -629,7 +629,39 @@ public class SessionPersistence extends GrowlerPersistence {
         }
         return speakers;
     }
+    
+    public boolean checkKey(String key){
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("set time_zone = 'US/Eastern'");
+            statement.execute();
+            statement = connection.prepareStatement("select count(id) from session where session_key = ? and session_date = curdate() and addtime(addtime(start_time, duration), '-00:15:00') <= curtime() and addtime(addtime(start_time,duration), '00:15:00') >= curtime()");
+            statement.setString(1, key);
+            result = statement.executeQuery();
+            while (result.next()){
+                if (result.getInt(1) > 0){
+                    return true;
+                }
+            }
+        } catch(Exception e) {
+            
+        } finally {
+            closeJDBC();
+        }
+        return false;
+    }
 
-    public void assignSpeakerTeam() {
+    public void createThisYearSessions(int year){
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("create or replace view thisyearsession as (select s.id, s.name, s.session_date, s.start_time from session s where extract(year from s.session_date) = ?)");
+            statement.setInt(1, year);
+            statement.execute();
+        } catch(Exception e) {
+            
+        } finally {
+            closeJDBC();
+        }
+        
     }
 }

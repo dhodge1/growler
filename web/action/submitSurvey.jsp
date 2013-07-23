@@ -48,10 +48,20 @@
             } catch (Exception e) {
                 //No comment found
             }
+            
+            String key = request.getParameter("key");
+            SessionPersistence sp = new SessionPersistence();
+            boolean keyAccepted = sp.checkKey(key);
             Attendance addRecord = new Attendance();
             addRecord.setUserId(user);
             addRecord.setSessionId(Integer.parseInt(sessionId));
             addRecord.setIsSurveyTaken(true);
+            if (keyAccepted){
+                addRecord.setIsKeyGiven(true);
+            }
+            else {
+                addRecord.setIsKeyGiven(false);
+            }
             ap.addAttendance(addRecord);
             Connection connection = dataConnection.sendConnection();
             Statement statement = connection.createStatement();
@@ -65,5 +75,4 @@
             connection.close();
             statement.close();
             session.removeAttribute("session");
-            SessionPersistence sp = new SessionPersistence();
         %>

@@ -18,6 +18,7 @@ public class Attendance {
     private Boolean isSurveyTaken;
     private java.sql.Timestamp surveySubmitTime;
     private java.sql.Date dateRegistered;
+    private Boolean keyGiven;
 
     /**
      * Default constructor
@@ -118,6 +119,14 @@ public class Attendance {
 
     public void setDateRegistered(Date dateRegistered) {
         this.dateRegistered = dateRegistered;
+    }
+
+    public Boolean getIsKeyGiven() {
+        return keyGiven;
+    }
+
+    public void setIsKeyGiven(Boolean keyGiven) {
+        this.keyGiven = keyGiven;
     }
 
     

@@ -45,31 +45,35 @@ public class AttendancePersistence extends GrowlerPersistence {
      */
     public AttendancePersistence() {
     }
-    
+
     /**
      * Adds an attendance record to the database
+     *
      * @param a The attendance record to add
      */
     public void addAttendance(Attendance a) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("insert into attendance " +
-                    " (user_id, session_id, isSurveyTaken) " +
-                    " values (?, ?, ?)");
+            statement = connection.prepareStatement("set time_zone = 'US/Eastern'");
+            statement.execute();
+            statement = connection.prepareStatement("insert into attendance "
+                    + " (user_id, session_id, isSurveyTaken, isKeyGiven) "
+                    + " values (?, ?, ?, ?)");
             statement.setInt(1, a.getUserId());
             statement.setInt(2, a.getSessionId());
             statement.setBoolean(3, a.getIsSurveyTaken());
+            statement.setBoolean(4, a.getIsKeyGiven());
             statement.execute();
             closeJDBC();
-        }
-        catch(Exception e){
-            
+        } catch (Exception e) {
         }
     }
-    
+
     /**
-     * Deletes an attendance record from the database: Only if the user hasn't taken a survey
-     * @param a 
+     * Deletes an attendance record from the database: Only if the user hasn't
+     * taken a survey
+     *
+     * @param a
      */
     public void deleteAttendance(Attendance a) {
         try {
@@ -79,9 +83,7 @@ public class AttendancePersistence extends GrowlerPersistence {
             statement.setInt(2, a.getSessionId());
             statement.execute();
             closeJDBC();
-        }
-        catch(Exception e){
-            
+        } catch (Exception e) {
         }
     }
 
@@ -162,7 +164,7 @@ public class AttendancePersistence extends GrowlerPersistence {
         }
         return null;
     }
-    
+
     public int getCountBySession(int session) {
         try {
             initializeJDBC();
@@ -205,13 +207,13 @@ public class AttendancePersistence extends GrowlerPersistence {
         }
         return null;
     }
-    
+
     public ArrayList<Attendance> getAttendanceBySubmitTime() {
         try {
             initializeJDBC();
             statement = connection.prepareStatement("select user_id, session_id, surveySubmitTime from attendance where isSurveyTaken = true order by surveySubmitTime");
             result = statement.executeQuery();
-            while (result.next()){
+            while (result.next()) {
                 Attendance a = new Attendance();
                 a.setUserId(result.getInt("user_id"));
                 a.setSessionId(result.getInt("session_id"));
@@ -219,27 +221,22 @@ public class AttendancePersistence extends GrowlerPersistence {
                 attendances.add(a);
             }
             return attendances;
-        }
-        catch (Exception e) {
-            
-        }
-        finally {
+        } catch (Exception e) {
+        } finally {
             closeJDBC();
         }
-        
+
         return null;
     }
-    
-    public ArrayList<Session> getUsersAttendanceInYear(int user, int year){
-        String query = "select s.id, s.name, s.session_date, s.start_time, a.isSurveyTaken from session s left join attendance a on a.session_id = s.id and a.user_id = ? and extract(year from session_date) = ? order by session_date, start_time, name";
+
+    public ArrayList<Session> getUsersAttendanceInYear(int user) {
+        ArrayList<Session> sessions = new ArrayList<Session>();
         try {
             initializeJDBC();
-            statement = connection.prepareStatement(query);
+            statement = connection.prepareStatement("select s.id as id, s.name as name, s.session_date as session_date, s.start_time as start_time, a.isSurveyTaken as isSurveyTaken from thisyearsession s left join attendance a on a.session_id = s.id and a.user_id = ? order by session_date, start_time, name");
             statement.setInt(1, user);
-            statement.setInt(2, year);
-            result = statement.executeQuery();
-            ArrayList<Session> sessions = new ArrayList<Session>();
-            while (result.next()){
+            result = statement.executeQuery();    
+            while (result.next()) {
                 Session s = new Session();
                 s.setId(result.getInt("id"));
                 s.setName(result.getString("name"));
@@ -249,12 +246,10 @@ public class AttendancePersistence extends GrowlerPersistence {
                 sessions.add(s);
             }
             return sessions;
-        }
-        catch (Exception e) {
-        }
-        finally {
+        } catch (Exception e) {
+        } finally {
             closeJDBC();
         }
-        return null;
+        return sessions;
     }
 }
