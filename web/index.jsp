@@ -40,6 +40,91 @@
                 font-weight: bold;
             }
         </style>
+        <SCRIPT type=text/javascript>
+var objQSTR = new Object();
+
+function getFuncs() {
+  getStatus();
+  setTarget();
+  breakFrame();
+  document.login.USER.focus();
+}
+
+function breakFrame()  {
+  if (top.location != location) {
+    top.location.href = document.location.href ;
+  }
+}
+
+function getCookie(Name) {
+  var search = Name + "="
+  var returnvalue = "";
+  if (document.cookie.length > 0) {
+    offset = document.cookie.indexOf(search)
+    // if cookie exists
+    if (offset != -1) { 
+      offset += search.length
+      // set index of beginning of value
+      end = document.cookie.indexOf(";", offset);
+      // set index of end of cookie value
+      if (end == -1) end = document.cookie.length;
+      returnvalue=unescape(document.cookie.substring(offset, end))
+      }
+   }
+  return returnvalue;
+}
+
+function deleteCookie( name, path, domain ) {
+  if ( getCookie( name ) ) document.cookie = name + "=" +
+    ( ( path ) ? ";path=" + path : "") +
+    ( ( domain ) ? ";domain=" + domain : "" ) +
+    ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+  }
+
+function getStatus ()   {
+  var curDomain = document.domain;
+  var status = getCookie( 'BadLogin' );
+  if (status == 1)   {
+	document.getElementById('error').style.display = '';
+	deleteCookie('BadLogin', '/', '.scrippsnetworks.com');
+  }
+}
+
+function setTarget()   {
+  // Build an empty URL structure in which we will store
+  // the individual query values by key.
+   window.location.search.replace(
+    new RegExp( "([^?=&]+)(=([^&]*))?", "g" ),
+      function( $0, $1, $2, $3 ){
+        objQSTR[ $1 ] = $3;
+      });
+
+   if (objQSTR["TARGET"] != "undefined" || objQSTR["TARGET"] != "") {
+     var smForward=unescape(objQSTR["TARGET"]);
+     if (smForward.search(/jitterbug/i) >= 0) {
+       if (smForward.search(/\?/) >= 0) {
+         smForward = smForward.replace(new RegExp(/\.com\/(.*)\?/),".com/cr/cma/index/?");
+       } else {
+         smForward = smForward.replace(new RegExp(/\.com\/(.*)$/), ".com/cr/cma/index/");
+       }
+
+     }
+
+     document.getElementById("smtarget").value=smForward;
+   }
+}
+
+function gup( name )   {
+  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+  var regexS = "[\\?&]"+name+"=([^&#]*)";
+  var regex = new RegExp( regexS );
+  var results = regex.exec( document.location.href );
+  if( results == null )
+	return "";
+  else
+	return results[1];
+}
+</SCRIPT>
     </head>
     <body id="growler1">
         <%@ include file="includes/indexheader.jsp" %> 
@@ -61,19 +146,19 @@
                 <p id="error_global" class="message_container feedbackMessage-error">
                     <span style="color: #000">An Employee ID and Password are required.</span>
                 </p>
-                <form action="action/login.jsp" method="post" id="form">
-                <!--<form action="https://sniforms-qa.scrippsnetworks.com/siteminderagent/portal/index.html?TYPE=33554433&REALMOID=06-490b1004-244a-109f-bdf2-84f1ed4a0000&GUID=&SMAUTHREASON=0&METHOD=GET&SMAGENTNAME=-SM-qqTTNRp8HuVz4vfjuz8PpwRSGfFdF8v5ee9waRpRop7zciV2VtF46AXySxgHy%2bZO&TARGET=-SM-HTTPS%3a%2f%2fsniforms--qa%2escrippsnetworks%2ecom%2fvordel%2f%3fReturnURL%3dhttp%3a%2f%2ftechtoberfest--dev%2escrippsnetworks%2ecom%2f" method="post" id="form">-->
+                <!--<form action="action/login.jsp" method="post" id="form">-->
+                <form action="https://sniforms-qa.scrippsnetworks.com/siteminderagent/portal/login.fcc" method="post" id="form">
                     <div class="form-group">
                         <label>Employee ID</label>
-                        <input type="text" name="empID" id="tip" data-content="Enter your Employee ID"/><br/>
-                        <input type="hidden" value="-SM-HTTPS://sniforms-qa.scrippsnetworks.com/vordel/?" name=target id="smtarget">
+                        <input type="text" name="USER" id="tip" data-content="Enter your Employee ID"/><br/> <!-- empID -->
+                        <input type="hidden" value="-SM-HTTPS://sniforms--qa.scrippsnetworks.com/vordel/?ReturnURL=http://techtoberfest--dev.scrippsnetworks.com/" name="target" id="smtarget">
                         <input type="hidden" value=0 name=smauthreason>
-                        <input type="hidden" name="SMAGENTNAME" value='-SM-qqTTNRp8HuVz4vfjuz8PpwRSGfFdF8v5ee9waRpRop7zciV2VtF46AXySxgHy+ZO' />
+                        <input type="hidden" name="SMAGENTNAME" value='-SM-qqTTNRp8HuVz4vfjuz8PpwRSGfFdF8v5ee9waRpRop7zciV2VtF46AXySxgHy%2bZO' />
                         <span id="error_userid" class="message_container">
                             <span>Please enter your Employee ID</span>
                         </span>
                         <label style="padding-top:12px;">Password</label>
-                        <input type="password" name="password" id="tip2" data-content="Enter your Password"/><br/>
+                        <input type="password" name="PASSWORD" id="tip2" data-content="Enter your Password"/><br/>
                         <span id="error_password" class="message_container">
                             <span>Please enter a password</span>
                         </span>

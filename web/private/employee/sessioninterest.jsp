@@ -40,6 +40,11 @@
                 position: relative;
                 top: 30px;
             }
+            input[type="checkbox"] {
+                position:relative;
+                bottom: 5px;
+                margin-right: 6px;
+            }
         </style>
     </head>
     <body id="growler1">  
@@ -78,7 +83,7 @@
             <div class="row mediumBottomMargin">
                 <h1>Provide Session Interest</h1>
             </div>
-            <div class="row mediumBottomMargin" style="border:1px dashed #ccc"></div>
+            <div class="row mediumBottomMargin" style="border:1px dotted #ccc"></div>
             <div class="row largeBottomMargin">
                 <span>Did a particular topic pique your interest?  Let us know.<br/>Simply check on the checkbox next to the session topics(s) you're interested in and press <strong>Submit Interest</strong>.</span>
             </div>

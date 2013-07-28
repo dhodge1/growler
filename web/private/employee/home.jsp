@@ -23,7 +23,6 @@
         <link rel="stylesheet" href="../../css/bootstrap.css"/>
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> 
         <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
-        <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
         <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <style>
             .carousel {
@@ -37,17 +36,17 @@
                 opacity: 50%;
             }
             #this-carousel-id{
-                height:540px;
+                height:450px;
                 width:900px;
                 margin-left: auto;
                 margin-right: auto;
             }
             .carousel .item {
-                height:540px;
+                height:450px;
                 width:900px;
             }
             .carousel .item .active {
-                height:540px;
+                height:450px;
                 width:900px
             }
             .carousel-indicators li {
@@ -132,7 +131,7 @@
                 <%@include file="../../includes/messagehandler.jsp" %>
                 <%
                     Calendar today = Calendar.getInstance();
-                    if (today.get(Calendar.MONTH) == 7 ){ //if it's August
+                    if (today.get(Calendar.MONTH) <= 7 ){ //if it's August
                         %>
                         <%@include file="../../includes/august_home.jsp" %>
                         <%
@@ -149,6 +148,7 @@
         <script>window.jQuery || document.write('<script src="js/jquery-1.7.2.min.js"><\/script>')</script>
         <!-- Bootstrap jQuery plugins compiled and minified -->
         <script src="../../js/bootstrap.min.js"></script>
+        <script src="../../js/collapse.min.js"></script>
         <script src="../../js/bootstrap-carousel.js"></script>
         <script src="../../js/bootstrap-transition.js"></script>
         <script>

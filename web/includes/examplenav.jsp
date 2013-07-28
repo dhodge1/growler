@@ -3,9 +3,9 @@
     Created on : Jun 27, 2013, 2:07:01 PM
     Author     : 162107
 --%>
-<link rel="stylesheet" href="../css/bootstrap/css/bootstrap.css"/>
-<link rel="stylesheet" href="../css/bootstrap/css/bootstrap-responsive.css"/>
-<script src="../css/bootstrap/js/bootstrap.js"></script>
+<link rel="stylesheet" href="../../css/bootstrap/css/bootstrap.css"/>
+<link rel="stylesheet" href="../../css/bootstrap/css/bootstrap-responsive.css"/>
+<script src="../../css/bootstrap/js/bootstrap.js"></script>
 <div id="navbar-example" class="navbar navbar-static">
               <div class="navbar-inner">
                 <div class="container" style="width: auto;">
@@ -47,5 +47,6 @@
                 </div>
               </div>
             </div> <!-- /navbar-example -->
-            <script>$('.dropdown-toggle').dropdown();</script>
+            <script>
+                $(document).ready(function() {$('.dropdown-toggle').dropdown()});</script>
 

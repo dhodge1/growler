@@ -49,7 +49,7 @@
         %>
         <%@ include file="../../includes/header.jsp" %> 
         <%@ include file="../../includes/testnav.jsp" %>
-        <div class="container-fixed mediumBottomMargin">
+        <div class="container-fixed">
             <div class="row mediumBottomMargin"></div>
             <div class="row">
                 <ul class="breadcrumb">
@@ -58,11 +58,11 @@
                 </ul>
             </div>
             <div class="row mediumBottomMargin">
-                <h1>Suggest a Speaker</h1>
+                <h1 style="font-weight:normal;">Suggest a Speaker</h1>
             </div>
-            <div class="row mediumBottomMargin" style="border:1px dashed #ccc"></div>
+            <div class="row mediumBottomMargin" style="border:1px dotted #ccc"></div>
             <div class="row largeBottomMargin">
-                <span>Is there a new speaker you would like to suggest for this years Techtoberfest?  We would LOVE to know more about them.</span>
+                <h3 style='font-size: 16px; font-family: Arial;'>Is there a new speaker you would like to suggest for this years Techtoberfest?  We would LOVE to know more about them.</h3>
             </div>
             <div class="row mediumBottomMargin">
                 <label><span style="color: red;">*</span>Required field</label>
@@ -82,7 +82,7 @@
                             </div>
                             <div class="form-group inline">
                                 <label class="required">Speaker Last Name</label>
-                                <input required="required" name="last_name" class="input-xlarge" type="text" id="tip2" data-content="30 characters or less please" maxlength="30"/>
+                                <input required="required" name="last_name" class="input-xlarge" type="text" id="tip2" data-content="Please enter no more than 30 characters" maxlength="30"/>
                                 <br/><span id="error_last" class="message_container">
                                     <span>Please enter a last name</span>
                                 </span>
@@ -95,17 +95,17 @@
                                     <option value="Technical">Technical</option>
                                 </select>
                                 <br/><span id="error_type" class="message_container">
-                                    <span>Please select a type</span>
+                                    <span>Please select a speaker type</span>
                                 </span>
                             </div>
                             <div class="form-group">
                                 <label>Why should this speaker be added to this years Techtoberfest?</label>
-                                <textarea name="reason" id="tip4" data-content="250 characters or less please" rows="5" cols="50" maxlength="250">
+                                <textarea name="reason" id="tip4" data-content="Please enter no more than 250 characters" rows="5" cols="50" maxlength="250">
                                 </textarea>
                             </div>
                             <div class="form-actions">
                                 <input type="submit" id="send" class="button button-primary" value="Submit Suggestion"/>
-                                <a class="button" id="cancel" href="../../private/employee/home.jsp">Cancel</a>
+                                <a id="cancel" href="../../private/employee/home.jsp">Cancel</a>
                             </div>
                         </fieldset> 
                 </form>	  

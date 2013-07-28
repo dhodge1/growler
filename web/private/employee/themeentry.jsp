@@ -25,8 +25,7 @@
         <link rel="stylesheet" href="../../css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
         <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-        <link rel="stylesheet" href="../../css/demo.css" />
-        <link rel="stylesheet" href="../../css/draganddrop.css" /><!--Drag and drop style-->
+        <link rel="stylesheet" type="text/css" href="../../css/general.css" /><!--General CSS-->
         <link rel="stylesheet" href="../../css/prettify/prettify.css" /> 
         <link rel="stylesheet" href="../../css/wijmo/jquery.wijmo-complete.all.2.3.2.min.css"/>
         <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
@@ -59,16 +58,16 @@
             <div class="row mediumBottomMargin"></div>
             <div class="row">
                 <ul class="breadcrumb">
-                    <li><a href="home.jsp">Home</a></li>
-                    <li>Suggest a Presentation Theme</li>
+                    <li><a href="../../private/employee/home.jsp">Home</a></li>
+                    <li>Suggest a New Theme</li>
                 </ul>
             </div>
             <div class="row mediumBottomMargin">
-                <h1>Suggest a Presentation Theme</h1>
+                <h1 style="margin-top:0px;font-weight: normal;">Suggest a Presentation Theme</h1>
             </div>
-            <div class="row mediumBottomMargin" style="border:1px dashed #ccc"></div>
+            <div class="row mediumBottomMargin" style="border:1px dotted #ccc"></div>
             <div class="row largeBottomMargin">
-                <span>Is there a new presentation theme you would like to suggest for this years Techtoberfest?  We would LOVE to know more about it.</span>
+                <span style='font-size: 16px; font-family: Arial;'>Is there a new presentation theme you would like to suggest for this years Techtoberfest?  We would LOVE to know more about it.</span>
             </div>
             <div class="row mediumBottomMargin">
                 <label><span style="color: red;">*</span>Required field</label>
@@ -82,9 +81,9 @@
                         <fieldset>
                             <div class="form-group">
                                 <label class="required">Presentation Theme Name</label>
-                                <input required="required" name="name" class="input-xlarge" type="text" id="tip" data-content="30 characters or less please" maxlength="30"/>
+                                <input required="required" name="name" class="input-xlarge" type="text" id="tip" data-content="Please enter no more than 30 characters" maxlength="30"/>
                                 <br/><span id="error_theme_name" class="message_container">
-                                    <span>Please enter a Presentation Theme Name</span>
+                                    <span>Please enter a presentation theme name</span>
                                 </span>
                             </div>
                             <div class="form-group">
@@ -95,7 +94,7 @@
                                     <option value="Technical">Technical</option>
                                 </select>
                                 <br/><span id="error_theme_type" class="message_container">
-                                    <span>Please select a theme type</span>
+                                    <span>Please select a presentation theme type</span>
                                 </span>
                             </div>
                             <div class="form-group">
@@ -104,7 +103,7 @@
                             </div>
                             <div class="form-actions">
                                 <input type="submit" id="send" class="button button-primary" value="Submit Suggestion" />
-                                <a class="button" id="cancel" href="../../private/employee/theme.jsp">Cancel</a>
+                                <a id="cancel" href="../../private/employee/theme.jsp">Cancel</a>
                             </div>
                         </fieldset>
                 </form>

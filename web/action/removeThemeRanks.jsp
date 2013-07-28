@@ -27,7 +27,6 @@
             Connection connection = dataConnection.sendConnection();
             Statement statement = connection.createStatement();
             int success = statement.executeUpdate("delete from theme_ranking where user_id = " + user);
-            session.setAttribute("message", "Success: Your Rankings have been removed!");
             connection.close();
             statement.close();
             response.sendRedirect("../private/employee/theme.jsp");

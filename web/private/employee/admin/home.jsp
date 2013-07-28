@@ -4,14 +4,6 @@
     Author     : Justin Bauguess
     Purpose    : Serves as a launch page for the rest of the application
 --%>
-<%@page import="java.util.*"%>
-<%@page import="java.sql.*"%>
-<%@page import="com.scripps.growler.*" %>
-<jsp:useBean id="theme" class="com.scripps.growler.Theme" scope="page" />
-<jsp:useBean id="persist" class="com.scripps.growler.ThemePersistence" scope="page" />
-<jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="page" />
-<jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page" />
-<jsp:useBean id="giveStars" class="com.scripps.growler.GiveStars" scope="page" />
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
@@ -21,54 +13,66 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
+        <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-        <title>Welcome to Techtoberfest!</title><!-- Title -->
-
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> 
+        <title>Suggest a New Theme</title>
+        <link rel="stylesheet" href="../../css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
         <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-        <link rel="stylesheet" href="../../../css/demo.css" />  
-        <link rel="stylesheet" href="../../../css/draganddrop.css" /><!--Drag and drop style-->
-        <link rel="stylesheet" type="text/css" href="../../../css/general.css" /><!--General CSS-->
-        <link rel="stylesheet" type="text/css" href="../../../css/theme.css" /><!--Theme CSS-->
-
+        <link rel="stylesheet" type="text/css" href="../../css/general.css" /><!--General CSS-->
+        <link rel="stylesheet" href="../../../css/prettify/prettify.css" /> 
+        <link rel="stylesheet" href="../../../css/wijmo/jquery.wijmo-complete.all.2.3.2.min.css"/>
         <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
+        <link rel="shortcut icon" type="image/png" href="../../../images/scripps_favicon-32.ico">
+        <style>
+            .message_container {
+                display: none;
+                color: red;
+                font-weight: bold;
+            }
+        </style>
     </head>
-    <body id="growler1">    
-
-        <%@ include file="../../../includes/adminheader.jsp" %> 
+    <body id="growler1">
+        <%
+                    int user = 0;
+                    if (null == session.getAttribute("id")) {
+                        response.sendRedirect("../../../index.jsp");
+                    }
+                    try {
+                        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+                        String name = String.valueOf(session.getAttribute("user"));                  
+                    }
+                    catch (Exception e) {
+                        
+                    }
+        %>
+        <%@ include file="../../../includes/header.jsp" %> 
         <%@ include file="../../../includes/adminnav.jsp" %>
-        <div class="container-fixed">
-            <br/><br/><br/>
-            <div class="row">
-                
-                    <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Welcome to Techtoberfest!</span></h2>
-                
+        <div class="container-fixed mediumBottomMargin">
+            <div class="row mediumBottomMargin"></div>
+            <div class="row largeBottomMargin">
+                <h1 style="margin-top:0px;font-weight: normal;">Welcome to the Tecthoberfest Information System!</h1>
             </div>
-            <br/>
+            <div class="row mediumBottomMargin">
+                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Admin Details</span></h2>
+            </div>
             <div class="row">
+                <h3>Themes Menu</h3>
+                <p>This section allows you to manage new and existing themes.</p>
 
-                    <h3>Themes</h3>
-                    <p>A place to edit and add Themes for this year's Techtoberfest</p>
-                    <h3>Speakers</h3>
-                    <p>A place to edit and add Speakers, and assign them to speak at sessions for this year's Techtoberfest</p>
-                    <h3>Sessions</h3>
-                    <p>A place to add and view sessions in this year's Techtoberfest</p>
-                    <h3>Rooms</h3>
-                    <p>A place to add, edit, and assign rooms for this year's Techtoberfest</p>
-                    <h3>Reports</h3>
-                    <p>A place to view real time reports based on the information gathered so far about this year's Techtoberfest</p>
+                <h3>Speakers Menu</h3>
+                <p>This section allows you to manage new and existing speakers, including assigning speakers to sessions.</p>
 
+                <h3>Sessions Menu</h3>
+                <p>This section allows you to manage and view the latest sessions.</p>
+
+                <h3>Rooms Menu</h3>
+                <p>This section allows you to manage room assignments for each session.</p>
+
+                <h3>Reports menu</h3>
+                <p>This section allows you to view real-time Techtoberfest reports.</p>
             </div>
         </div>
-
-        <%@ include file="../../../includes/footer.jsp" %>
-        <%@ include file="../../../includes/scriptlist.jsp" %>
-
-        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
-        <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+        <%@ include file="../../../includes/footer.jsp" %> 
     </body>
 </html>
-

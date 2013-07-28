@@ -40,8 +40,10 @@ background:#fff!important;filter:none!important;color:#002d56;}
 background:url(../images/bootstrap/icon-set.png) no-repeat -184px -3px;display:inline-block;height:7px;margin-left:4px;position:relative;width:12px;}
 .brand_nav em{
 background:url(../images/bootstrap/icon-set.png) no-repeat -173px -3px;display:inline-block;height:7px;margin-left:5px;position:relative;width:12px;}
+.brand_nav .child-menu .firstnav{
+display:none;border:1px solid #ccc;background:#fff;margin:0!important;position:absolute;top:28px; left:11px;padding:5px 0;height:auto!important;border-top:0!important;-webkit-border-radius:0 0 3px 3px;-moz-border-radius:0 0 3px 3px;border-radius:0 0 3px 3px;}
 .brand_nav .child-menu{
-display:none;border:1px solid #ccc;background:#fff;margin:0!important;position:absolute;top:27px;padding:5px 0;height:auto!important;border-top:0!important;-webkit-border-radius:0 0 3px 3px;-moz-border-radius:0 0 3px 3px;border-radius:0 0 3px 3px;}
+display:none;border:1px solid #ccc;background:#fff;margin:0!important;position:absolute;top:28px; left:-1px;padding:5px 0;height:auto!important;border-top:0!important;-webkit-border-radius:0 0 3px 3px;-moz-border-radius:0 0 3px 3px;border-radius:0 0 3px 3px;}
 .brand_nav .child-menu li{
 line-height:20px;height:auto!important;top:0!important;float:none!important;margin-right:0!important;}
 .brand_nav .child-menu li a{

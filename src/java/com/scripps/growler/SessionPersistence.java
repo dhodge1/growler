@@ -509,6 +509,15 @@ public class SessionPersistence extends GrowlerPersistence {
         return sessions;
     }
 
+    /**
+     * Returns a list of sessions for a given year
+     * 
+     * Information includes id, name, description, session_date, start_time, location, track, duration and key
+     * 
+     * @param year The year to query against
+     * @param sort The sorting criteria
+     * @return A list of each session in the given year, sorted by the given criteria
+     */
     public ArrayList<Session> getThisYearSessions(int year, String sort) {
         try {
             initializeJDBC();
@@ -564,6 +573,11 @@ public class SessionPersistence extends GrowlerPersistence {
         return true;
     }
     
+    /**
+     * Gets sessions that haven't been scheduled for Techtoberfest
+     * 
+     * @return The list of unscheduled sessions
+     */
     public ArrayList<Session> getUnscheduledSessions() {
         try {
             initializeJDBC();
@@ -591,6 +605,7 @@ public class SessionPersistence extends GrowlerPersistence {
         return sessions;
     }
     
+    
     public int getThisYearSessionCount(int year) {
         int rows = 0;
         try {
@@ -609,6 +624,14 @@ public class SessionPersistence extends GrowlerPersistence {
         return rows;
     }
     
+    /**
+     * Returns who is speaking for a session
+     * 
+     * Useful because there are times where multiple people may present for a session
+     * 
+     * @param session the session ID
+     * @return A list of speakers for a session
+     */
     public ArrayList<Speaker> getSpeakersForSession(int session){
         ArrayList<Speaker> speakers = new ArrayList<Speaker>();
         try {
@@ -631,6 +654,12 @@ public class SessionPersistence extends GrowlerPersistence {
         return speakers;
     }
     
+    /**
+     * Validates that a key is correct for a session
+     * 
+     * @param key
+     * @return true if the key matches, false if it's wrong
+     */
     public boolean checkKey(String key){
         try {
             initializeJDBC();
@@ -652,6 +681,11 @@ public class SessionPersistence extends GrowlerPersistence {
         return false;
     }
 
+    /**
+     * Creates a view to use in queries
+     * 
+     * @param year The year to create the view for
+     */
     public void createThisYearSessions(int year){
         try {
             initializeJDBC();

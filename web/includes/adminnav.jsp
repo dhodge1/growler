@@ -6,14 +6,8 @@
                 in the admin folder.  It contains links that only the admin should 
                 be able to look at.
 --%>
-
-<link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
 <link href="http://sni-techtoberfest.elasticbeanstalk.com/css/navbar.css" rel="stylesheet">
-<style>
-    body {
-        padding-bottom: 30px;
-    }
-</style>
+<link href="../../../css/boostrap-responsive.css" rel="stylesheet">
 <%
     String pageURI = request.getRequestURI();
     String active = " selected ";
@@ -37,29 +31,28 @@
         home = active;
     }
 %>
-<link href="http://sni-techtoberfest.elasticbeanstalk.com/css/responsive.1.2.0.css" rel="stylesheet">
 <nav class="topnav">
 <nav class="globalNavigation modify-pages" id="navigation">
   <ul>
 	<li class="non_drop <%= home %>" style="padding-right:12px" ><a href="home.jsp"><span>Home</span></a></li>
 	<li class="brand_nav <%= themeTab %>" style="padding-left:12px"><a href="#"><span>Themes</span><em></em></a>
-		<ul class="child-menu child-menu-ul">
-			<li><a href="theme.jsp">Edit Themes</a></li>
-			<li><a href="themeentry.jsp">Suggest a New Theme</a></li>
+		<ul class="child-menu child-menu-ul firstnav">
+			<li><a href="../../../private/employee/admin/theme.jsp">Edit Themes</a></li>
+			<li><a href="../../../private/employee/admin/themeentry.jsp">Suggest a New Theme</a></li>
 		</ul>
 	</li>
 	<li class="brand_nav <%= speakerTab %>"><a href="#"><span class="nav_drop">Speakers</span><em></em></a>
 		<ul class="child-menu child-menu-ul">
-			<li><a href="speaker.jsp">Edit Speakers</a></li>
-			<li><a href="speakerentry.jsp">Suggest a New Speaker</a></li>
-                        <li><a href="assignspeaker.jsp">Assign Speaker to a Session</a></li>
+			<li><a href="../../../private/employee/admin/speaker.jsp">Edit Speakers</a></li>
+			<li><a href="../../../private/employee/admin/speakerentry.jsp">Suggest a New Speaker</a></li>
+                        <li><a href="../../../private/employee/admin/assignspeaker.jsp">Assign Speaker to a Session</a></li>
 		</ul>
 	</li>
 	<li class="brand_nav <%= roomTab %>"><a href="#"><span class="nav_drop">Rooms</span><em></em></a>
 		<ul class="child-menu child-menu-ul">
-			<li><a href="addroom.jsp">Add a Room</a></li>
-                        <li><a href="room.jsp">View Rooms</a></li>
-                        <li><a href="assignroom.jsp">Assign Room to a Session</a></li>
+			<li><a href="../../../private/employee/admin/addroom.jsp">Add a Room</a></li>
+                        <li><a href="../../../private/employee/admin/room.jsp">View Rooms</a></li>
+                        <li><a href="../../../private/employee/admin/assignroom.jsp">Assign Room to a Session</a></li>
 		</ul>
 	</li>
 	<li class="brand_nav <%= sessionTab %>"><a href="#"><span class="nav_drop">Sessions</span><em></em></a>

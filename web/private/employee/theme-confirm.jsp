@@ -64,7 +64,7 @@
             <div class="row mediumBottomMargin">
                 <h1 style="font-weight:normal;">Theme Ranking Confirmation</h1>
             </div>
-            <div style="border:1px dashed #ddd;" class=" row mediumBottomMargin"></div>
+            <div style="border:1px dotted #ddd;" class=" row mediumBottomMargin"></div>
             <div class="row mediumBottomMargin">
                 <%
                     //If we didn't get any ranks, we tell the user to rank the themes
@@ -72,7 +72,8 @@
                         response.sendRedirect("../../private/employee/theme.jsp");
                     } else { //If we got themes, we let the user see them
                         out.print("<div class='row largeBottomMargin' style='margin-left:4px'>");
-                        out.print("<span>Thank you for providing us with the presentation themes you are most interested in attending for this years Techtoberfest!  We value your opinion and particiapation.  Below is a listing of the themes and ranks you provided.</span>");
+                        out.print("<span>Thank you for providing us with the presentation themes you are most interested in attending for this years’ Techtoberfest! We value your opinion and participation. Below is a listing of the themes and rankings you provided.</span><br/>");
+                        out.print("<span>Remember: Now that your ranking has been submitted, you can not submit another unless you <a href='../../action/removeThemeRanks.jsp?id=" + user + "'>reset/clear</a> this one. An option to reset your previous ranking will now be provided via the ranking page.</span>");
                         out.print("</div>");
                     }
                 %>
@@ -80,7 +81,7 @@
             <%
                 if (themes.size() > 0) {
                     out.print("<div class='row largeBottomMargin'>");
-                    out.print("<div class='span4'>");
+                    out.print("<div class='span3'>");
                     out.print("<table class=\"table table-alternatingRow\">");
                     out.print("<thead><tr><th>Rank</th><th>Presentation Theme</th></tr></thead><tbody>");
                     for (int i = 0; i < themes.size(); i++) {
@@ -89,10 +90,9 @@
                     out.print("</tbody></table>");
                     out.print("</div>");
                     out.print("</div>");
-                    out.print("<div class='row largeBottomMargin'>");
+                    out.print("<div class='row'>");
                     out.print("<a class='firstLink' href=\"../../private/employee/home.jsp\">Return to homepage</a>");
                     out.print("<a class='firstLink' href=\"../../private/employee/themeentry.jsp\">Suggest a new theme</a>");
-                    out.print("<a href='../../action/removeThemeRanks.jsp?id=" + user + "'>Reset Your Ranks</a>");
                     out.print("</div>");
                 }
             %>

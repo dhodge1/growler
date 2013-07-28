@@ -1,7 +1,7 @@
-
-<link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
+<%@page import="java.util.Calendar"%>
 <link href="http://sni-techtoberfest.elasticbeanstalk.com/css/navbar.css" rel="stylesheet">
-<% 
+<link href="../../css/boostrap-responsive.css" rel="stylesheet">
+<%
     String active = " selected ";
     String pageURI = request.getRequestURI();
     String home = "";
@@ -17,30 +17,34 @@
     } else if (pageURI.contains("home")) {
         home = " selected ";
     }
+    Calendar calendar = Calendar.getInstance();
 %>
-<link href="http://sni-techtoberfest.elasticbeanstalk.com/css/responsive.1.2.0.css" rel="stylesheet">
-<nav class="topnav">
-<nav class="globalNavigation modify-pages" id="navigation">
-  <ul>
-	<li class="non_drop <%= home %>" style="padding-right:12px" ><a href="../../private/employee/home.jsp"><span>Home</span></a></li>
-	<li class="brand_nav <%= themeTab %>" style="padding-left:12px"><a href="#"><span>Themes</span><em></em></a>
-		<ul class="child-menu child-menu-ul">
-			<li><a href="../../private/employee/theme.jsp">Rank Preferred Themes</a></li>
-			<li><a href="../../private/employee/themeentry.jsp">Suggest a New Theme</a></li>
-		</ul>
-	</li>
-	<li class="brand_nav <%= speakerTab %>"><a href="#" style='padding-left:8px;'><span class="nav_drop">Speakers</span><em></em></a>
-		<ul class="child-menu child-menu-ul">
-			<li><a href="../../private/employee/speaker.jsp">Rank Preferred Speakers</a></li>
-			<li><a href="../../private/employee/speakerentry.jsp">Suggest a New Speaker</a></li>
-		</ul>
-	</li>
-	<li class="brand_nav <%= sessionTab %>"><a href="#" style='padding-left:8px;'><span class="nav_drop">Sessions</span><em></em></a>
-		<ul class="child-menu child-menu-ul">
-			<li><a href="../../private/employee/sessionschedule.jsp">View Session Schedule</a></li>
-			<li><a href="../../private/employee/surveylist.jsp">Submit Session Feedback</a></li>
-		</ul>
-	</li>
-  </ul>
-</nav>
+<nav class="topnav navbar">
+        <nav class="globalNavigation modify-pages nav-collapse" id="navigation">
+            <ul class="nav">
+                <li class="non_drop <%= home%>" style="padding-right:12px" ><a href="../../private/employee/home.jsp"><span>Home</span></a></li>
+                <% if (calendar.get(Calendar.MONTH) < 8) { // if it's before September%>
+                <li class="brand_nav <%= themeTab%>" style="padding-left:12px"><a href="#"><span>Themes</span><em></em></a>
+                    <ul class="child-menu child-menu-ul firstnav" style="left:11px;">
+                        <li><a href="../../private/employee/theme.jsp">Rank Preferred Themes</a></li>
+                        <li><a href="../../private/employee/themeentry.jsp">Suggest a New Theme</a></li>
+                    </ul>
+                </li>
+                <li class="brand_nav <%= speakerTab%>"><a href="#" style='padding-left:8px;'><span class="nav_drop">Speakers</span><em></em></a>
+                    <ul class="child-menu child-menu-ul">
+                        <li><a href="../../private/employee/speaker.jsp">Rank Preferred Speakers</a></li>
+                        <li><a href="../../private/employee/speakerentry.jsp">Suggest a New Speaker</a></li>
+                    </ul>
+                </li>
+                <% } //end if %>
+                <% if (calendar.get(Calendar.MONTH) > 7) { // if it's after August%>
+                <li class="brand_nav <%= sessionTab%>"><a href="#" style='padding-left:8px;'><span class="nav_drop">Sessions</span><em></em></a>
+                    <ul class="child-menu child-menu-ul firstnav">
+                        <li><a href="../../private/employee/sessionschedule.jsp">View Session Schedule</a></li>
+                        <li><a href="../../private/employee/surveylist.jsp">Submit Session Feedback</a></li>
+                    </ul>
+                </li>
+                <% } %>
+            </ul>
+        </nav>
 </nav>

@@ -11,11 +11,6 @@
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
 <%@page import="com.scripps.growler.*" %>
-<jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="page" />
-<jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page" />
-<jsp:useBean id="giveStars" class="com.scripps.growler.GiveStars" scope="page" />
-<jsp:useBean id="persist" class="com.scripps.growler.ThemePersistence" scope="page" />
-<jsp:useBean id="upersist" class="com.scripps.growler.UserPersistence" scope="page" />
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
@@ -27,148 +22,175 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-        <title>Admin Themes</title><!-- Title -->
-
+        <title>Manage Themes</title><!-- Title -->
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> 
         <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-        <link rel="stylesheet" href="../../../css/demo.css" />  
-        <link rel="stylesheet" href="../../../css/draganddrop.css" /><!--Drag and drop style-->
         <link rel="stylesheet" type="text/css" href="../../../css/general.css" /><!--General CSS-->
-        <link rel="stylesheet" type="text/css" href="../../../css/theme.css" /><!--Theme CSS-->
-        <link rel="stylesheet" href="/resources/demos/style.css" />
-
+        <link rel="shortcut icon" type="image/png" href="../../../images/scripps_favicon-32.ico">
         <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
+        <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+        <style>
+            .table {
+                margin-bottom: 0px;
+            }
+            .pullRight {
+                float:right;
+                font-weight: normal;
+                font-family: Arial;
+                font-size: 11px;
+                position: relative;
+                top: 30px;
+            }
+            .modals{
+                display:none;
+            }
+        </style>
     </head>
     <body id="growler1">
         <%
             int user = 0;
-            String sort = "";
             if (null == session.getAttribute("id")) {
                 response.sendRedirect("../../../index.jsp");
             } else if (!session.getAttribute("user").equals("admin")) {
                 response.sendRedirect("../../../index.jsp");
             }
             try {
-                sort = request.getParameter("sort");
                 user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
                 String name = String.valueOf(session.getAttribute("user"));
             } catch (Exception e) {
             }
+            ThemePersistence persist = new ThemePersistence();
+            ArrayList<Theme> themes = persist.getAllThemes(" order by name asc ");
         %>
-
         <%@ include file="../../../includes/adminheader.jsp" %> 
         <%@ include file="../../../includes/adminnav.jsp" %>
-        <div class="container-fixed">
-            <br/><br/><br/>
+        <div class="container-fixed largeBottomMargin">
+            <div class="row mediumBottomMargin"></div>
             <div class="row">
-
-                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Themes</span></h2>
-
+                <ul class="breadcrumb">
+                    <li><a href="../../../private/employee/home.jsp">Home</a></li>
+                    <li>Manage Themes</li>
+                </ul>
             </div>
-            <br/>
+            <div class="row mediumBottomMargin">
+                <h1>Manage Themes</h1>
+            </div>
+            <div class="row mediumBottomMargin" style="border:1px dotted #ccc"></div>
+            <div class="row largeBottomMargin">
+                <span>Use the table below to add, edit or delete existing themes.</span>
+            </div>
+            <div class="row mediumBottomMargin">
+                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Theme Details</span><a href="#" class="pullRight button button-primary">Add Theme</a></h2>
+            </div>
             <div class="row">
-
-                <%
-                    ArrayList<Theme> themes = persist.getAllThemes(" order by rating desc, name asc ");
-                    try {
-                        if (sort.equals("name_desc") && !sort.isEmpty()) {
-                            themes = persist.getAllThemes(" order by name desc");
-                        } else if (sort.equals("name_asc") && !sort.isEmpty()) {
-                            themes = persist.getAllThemes(" order by name asc");
-                        } else if (sort.equals("reason_asc") && !sort.isEmpty()) {
-                            themes = persist.getAllThemes(" order by reason asc, id");
-                        } else if (sort.equals("reason_desc") && !sort.isEmpty()) {
-                            themes = persist.getAllThemes(" order by reason desc, id");
-                        } else if (sort.equals("description_asc") && !sort.isEmpty()) {
-                            themes = persist.getAllThemes(" order by description asc, name");
-                        } else if (sort.equals("description_desc") && !sort.isEmpty()) {
-                            themes = persist.getAllThemes(" order by description desc, name");
-                        } else if (sort.equals("rating_asc") && !sort.isEmpty()) {
-                            themes = persist.getAllThemes(" order by rating asc, name");
-                        } else if (sort.equals("rating_desc") && !sort.isEmpty()) {
-                            themes = persist.getAllThemes(" order by rating desc, name");
-                        } else if (sort.equals("times_asc") && !sort.isEmpty()) {
-                            themes = persist.getAllThemes(" order by count asc, name");
-                        } else if (sort.equals("times_desc") && !sort.isEmpty()) {
-                            themes = persist.getAllThemes(" order by count desc, name");
-                        } else if (sort.equals("creator_asc") && !sort.isEmpty()) {
-                            themes = persist.getAllThemes(" order by creator asc, name");
-                        } else if (sort.equals("creator_desc") && !sort.isEmpty()) {
-                            themes = persist.getAllThemes(" order by creator desc, name");
-                        } else if (sort.equals("visible_asc") && !sort.isEmpty()) {
-                            themes = persist.getAllThemes(" order by visible asc, name");
-                        } else if (sort.equals("visible_desc") && !sort.isEmpty()) {
-                            themes = persist.getAllThemes(" order by visible desc, name");
-                        }
-                    } catch (Exception e) {
-                        themes = persist.getAllThemes(" order by rating desc, name");
-                    }
-                %>
                 <form action="../../../action/admintheme.jsp" >
+                    <input type='hidden' id='current_page' value="1" />
+                    <input type='hidden' id='show_per_page' value='20' />
+                    <input type='hidden' id='total' value='<%= themes.size()%>'/>
                     <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
-                        <tr>
-                            <th>Name
-                                <a href="theme.jsp?sort=name_asc"><i class="icon12-sortUp"></i></a>
-                                <a href="theme.jsp?sort=name_desc"><i class="icon12-sortDown"></i></a>
-                            </th>
-                            <th>Description
-                                <a href="theme.jsp?sort=description_asc"><i class="icon12-sortUp"></i></a>
-                                <a href="theme.jsp?sort=description_desc"><i class="icon12-sortDown"></i></a>
-                            </th>
-                            <th>Reason
-                                <a href="theme.jsp?sort=reason_asc"><i class="icon12-sortUp"></i></a>
-                                <a href="theme.jsp?sort=reason_desc"><i class="icon12-sortDown"></i></a>
-                            </th>
-                            <th>Rating
-                                <a href="theme.jsp?sort=rating_asc"><i class="icon12-sortUp"></i></a>
-                                <a href="theme.jsp?sort=rating_desc"><i class="icon12-sortDown"></i></a>
-                            </th>
-                            <th>Times Rated
-                                <a href="theme.jsp?sort=times_asc"><i class="icon12-sortUp"></i></a>
-                                <a href="theme.jsp?sort=times_desc"><i class="icon12-sortDown"></i></a>
-                            </th>
-                            <th>Visible?
-                                <a href="theme.jsp?sort=visible_asc"><i class="icon12-sortUp"></i></a>
-                                <a href="theme.jsp?sort=visible_desc"><i class="icon12-sortDown"></i></a>
-                            </th>
-                            <th>Created By
-                                <a href="theme.jsp?sort=creator_asc"><i class="icon12-sortUp"></i></a>
-                                <a href="theme.jsp?sort=creator_desc"><i class="icon12-sortDown"></i></a>
-                            </th>
-                            <th>Edit Theme</th>
-                            <th>Remove Theme</th>
-                        </tr>
-                        <%
-                            for (int i = 0; i < themes.size(); i++) {
-                        %>
-                        <tr>
-                            <td><% out.print(themes.get(i).getName());%>
-                                <input type="hidden" name="list" value="<% out.print(themes.get(i).getId());%>" /></td>
-                            <td><% out.print(themes.get(i).getDescription());%></td>
-                                <td><% if (themes.get(i).getReason() != null) {
-                                        out.print(themes.get(i).getReason());
-                                    }%></td>
-                            <td><% out.print(themes.get(i).getRank());%></td>
-                            <td><% out.print(themes.get(i).getCount());%></td>
-                            <td><input type="checkbox" name="visible" value="<% out.print(themes.get(i).getId());%>"
-                                       <% if (themes.get(i).getVisible() == true) {
-                                                   out.print(" checked");
-                                               }%>/></td>
-                            <td><% out.print(upersist.getUserByID(themes.get(i).getCreatorId()).getUserName());%></td>
-                            <td><a href="edittheme.jsp?id=<%out.print(themes.get(i).getId());%>">Edit</a></td>
-                            <td><a href="../../../action/removeTheme.jsp?id=<%out.print(themes.get(i).getId());%>">Remove</a></td>
-                        </tr>
-                        <% } //close the for loop %>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Category</th>
+                                <th>Added By</th>
+                                <th>Visible</th>
+                                <th>Ranking Details</th>
+                                <th><!-- Actions --></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%
+                                for (int i = 0; i < themes.size(); i++) {
+                            %>
+                            <tr <% out.print("id='row" + i + "'");%>>
+                                <td><%= themes.get(i).getName()%></td>
+                                <td><a class="showModal"><% out.print("<input type='hidden' value='" + themes.get(i).getId() + "' />");%>View</a>
+                                <% out.print("<div class='modals' id='modal" + themes.get(i).getId() + "' title='" + themes.get(i).getName() + "'>");
+                                        out.print(themes.get(i).getDescription());
+                                        out.print("</div>");
+                                    %></td>
+                                <td><% out.print(themes.get(i).getType());%></td>
+                                <td><% out.print(themes.get(i).getCreatorId());%></td>
+                                <td><% if (themes.get(i).getVisible()) {
+                                    out.print("True");
+                                } else {
+                                    out.print("False");
+                                }
+                                %></td>
+                                <td><a class="showModal2"><% out.print("<input type='hidden' value='" + themes.get(i).getId() + "' />");%>View</a>
+                                <% out.print("<div class='modals' id='modalrank" + themes.get(i).getId() + "' title='" + themes.get(i).getName() + "'>");
+                                        out.print(themes.get(i).getRank() + " points out of " + themes.get(i).getCount() + " votes");
+                                        out.print("</div>");
+                                    %>    
+                                </td>
+                                <td>
+                                    <div class="actionMenu">
+                                        <a class="actionMenu-toggle" data-toggle="dropdown" href="#">Actions<b class="caret"></b></a>
+                                        <ul class="actionMenu-menu" role="menu">
+                                            <li><a <% out.print("href='../../../private/employee/admin/edittheme.jsp?id=" + themes.get(i).getId() + "'");  %>><i class="icon16-approve"></i>Edit</a></li>
+                                            <li><a href="#"><i class="icon16-approve"></i>Delete</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <% } //close the for loop %>
+                        </tbody>
                     </table>
-                    <input type="submit" value="Submit" class="button button-primary" />
+                    <div class="pager">
+                        <ul>
+                            <li class="pager-arrow"><a onclick="first();"><i class="icon12-first"></i></a></li>
+                            <li class="pager-arrow"><a onclick="prev();"><i class="icon12-previous"></i></a></li>
+                                    <% int rows = themes.size();
+                                        int pages = 0;
+                                        if (rows % 15 == 0) {
+                                            pages = (rows / 15);
+                                        } else {
+                                            pages = (rows / 15) + 1;
+                                        }
+                                        for (int i = 0; i < pages; i++) {
+                                            out.print("<li id=\"page" + (i + 1) + "\"><a onclick='page(" + (i + 1) + ");'>" + (i + 1) + "</a></li>");
+                                        }
+                                    %>
+                            <li class="pager-arrow"><a onclick="next();"><i class="icon12-next"></i></a></li>
+                            <li class="pager-arrow"><a onclick="last();"><i class="icon12-last"></i></a></li>
+                        </ul>
+                        <div class="pager-pageJump">
+                            <span>Page <input class="input-mini" onchange="pageJump();" type="text" id="pagejump"/> of <%= pages%></span>
+                        </div>
+                    </div>
                 </form>
-
             </div>
         </div>
         <%@ include file="../../../includes/footer.jsp" %>
-        <%@ include file="../../../includes/scriptlist.jsp" %>
+        <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/bootstrap-dropdown.2.0.4.min.js"></script>
+        <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/sniui.dialog.1.2.0.js"></script>
+        <script src="../../../js/pagination.js"></script>
+        <script>
+                                $(document).ready(function() {
+                                    var page = 1;
+                                    $("#current_page").val(page);
+                                    var total = parseInt($("#total").val());
+                                    var pages = Math.floor((total / parseInt($("#show_per_page").val())) + 1);
+                                    for (var i = 20; i < total + 1; i++) {
+                                        $("#row" + i).hide();
+                                    }
+                                    unActive();
+                                    $("#page1").addClass("active");
+                                    $(".modals").dialog({autoOpen: false});
+                                    $(".showModal").click(function() {
+                                        var theme = $(this).children().val();
+                                        $("#modal" + theme).dialog("open");
+                                    });
+                                    $(".showModal2").click(function() {
+                                        var rank = $(this).children().val();
+                                        $("#modalrank" + rank).dialog("open");
+                                    });
+
+                                });
+        </script>
     </body>
 </html>
 

@@ -33,7 +33,7 @@
     <body id="growler1">
         <%@ include file="../includes/indexheader.jsp" %> 
         <%@ include file="../includes/usernav.jsp" %> 
-        <div class="container-fixed largeBottomMargin">
+        <div class="container-fixed mediumBottomMargin">
             <div class='row mediumBottomMargin'></div>
             <div class="row">
                 <ul class="breadcrumb">
@@ -44,12 +44,12 @@
             <div class="row mediumBottomMargin">
                 <h1>Techtoberfest Help</h1>
             </div>
-            <div class="row mediumBottomMargin" style="border:1px dashed #ccc"></div>
+            <div class="row mediumBottomMargin" style="border:1px dotted #ccc"></div>
             <div class="row largeBottomMargin">
                 <span>Click on a topic below to have the help content displayed.</span>
             </div>
             <div class="row mediumBottomMargin">
-                <h2 class="bordered"><img id="logo" style="padding-left:0;padding-bottom:0;" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Help By Topic</span><span class="pullRight"><a href='#'>View in PDF</a></span></h2>
+                <h2 class="bordered"><img id="logo" style="padding-left:0;padding-bottom:0;" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Help By Topic</span><span class="pullRight"><a href='#'>View as PDF</a></span></h2>
             </div>
             <div class="row">
                 <div class="accordion" id="accordion-parent">
@@ -75,7 +75,7 @@
                             <div class="accordion-inner">Step 1: Click on the <strong>Themes</strong> drop down menu and select <em>Rank Preferred Themes</em>. <br/>
                                 Step 2a: Using the drag and drop feature, select the theme(s) you want to rank from the <strong>Available Presentation Themes</strong> section and drop them over to the <strong>Presentation Themes I’m Interested In</strong> section. <br/>
                                 Step 2b: Using the non drag and drop feature, click on the themes you want to rank. The order in which you select the themes is the order in which they will be ranked.<br/>
-                                Step 3: Once all the themes you want to rank have been selected, press the <strong>Submit My Ranking</strong> button. <br/>
+                                Step 3: Once all the themes you want to rank have been selected, press the <strong>Submit My Ranking</strong> button. <br/><br/>
                                 <strong>- This feature will only be made available for a limited time. <br/>
                                 - Ten (10) is the maximum number of themes available to be ranked.</strong>
                             </div>
@@ -91,7 +91,7 @@
                                 Step 1: Click on the <strong>Speakers</strong> drop down menu and select <em>Rank Preferred Speakers</em>. <br/>
                                 Step 2a: Using the drag and drop feature, select the speaker(s) you want to rank from the <strong>Available Speakers</strong> section and drop them over to the <strong>Speakers I’m Interested In</strong> section.<br/>
                                 Step 2b: Using the non drag and drop feature, click on the speakers you want to rank. The order in which you select the speakers is the order in which they will be ranked.<br/>
-                                Step 3: Once all the speakers you want to rank have been selected, press the <strong>Submit My Ranking</strong> button. <br/>
+                                Step 3: Once all the speakers you want to rank have been selected, press the <strong>Submit My Ranking</strong> button. <br/><br/>
                                 <strong>- This feature will only be made available for a limited time. <br/>
                                 - Ten (10) is the maximum number of speakers available to be ranked.</strong>
                             </div>
@@ -105,7 +105,7 @@
                         <div id="collapse4" class="accordion-body collapse">
                             <div class="accordion-inner">
                                 Step 1: Click on the <strong>Themes</strong> drop down menu and select <em>Suggest A New Theme</em>. <br/>
-                                Step 2: Fill out the form and press the <strong>Submit Suggestion</strong> button. <br/>
+                                Step 2: Fill out the form and press the <strong>Submit Suggestion</strong> button. <br/><br/>
                                 <strong>- This feature will only be made available for a limited time.</strong>
                             </div>
                         </div><!--/#collapse4-->
@@ -118,7 +118,7 @@
                         <div id="collapse5" class="accordion-body collapse">
                             <div class="accordion-inner">
                                 Step 1: Click on the <strong>Speakers</strong> drop down menu and select <em>Suggest A New Speaker</em>. <br/>
-                                Step 2: Fill out the form and press the <strong>Submit Suggestion</strong> button. <br/>
+                                Step 2: Fill out the form and press the <strong>Submit Suggestion</strong> button. <br/><br/>
                                 <strong>- This feature will only be made available for a limited time.</strong>
                             </div>
                         </div><!--/#collapse5-->
@@ -133,7 +133,7 @@
                                 Step 1: Click on the <strong>Sessions</strong> drop down menu and select <em>View Session Schedule</em>. <br/>
                                 Step 2: Review the proposed schedule<br/>
                                 Step 3: Select the <a href='../../private/employee/sessioninterest.jsp'>Interested in a session</a> link, located below the session schedule table.<br/>
-                                Step 4: Select the topic(s) you are interested in attending and press the <strong>Submit Interest</strong> button. <br/>
+                                Step 4: Select the topic(s) you are interested in attending and press the <strong>Submit Interest</strong> button. <br/><br/>
                                 <strong>- This feature will only be made available for a limited time.</strong>
                             </div>
                         </div><!--/#collapse6-->
@@ -147,7 +147,7 @@
                             <div class="accordion-inner">
                                 Step 1: Click on the <strong>Sessions</strong> drop down menu and select <em>Submit Session Feedback</em>. <br/>
                                 Step 2: Complete the survey wizard<br/>
-                                <strong>- If a session survey is completed within 30 minutes of you attending that session, your name will be entered into a raffle drawing. <br/>
+                                <strong>- If a session survey is completed within 30 minutes of you attending that session, your name will be entered into a raffle drawing. <br/><br/>
                                 - Session surveys can be submitted at any time</strong>
                             </div>
                         </div><!--/#collapse7-->
