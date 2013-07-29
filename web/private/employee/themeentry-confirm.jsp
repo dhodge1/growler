@@ -48,7 +48,7 @@
         <%@ include file="../../includes/testnav.jsp" %>
         <div class="container-fixed largeBottomMargin">
             <div class="row mediumBottomMargin"></div>
-            <div class="row mediumBottomMargin">
+            <div class="row">
                 <%@include file="../../includes/messagehandler.jsp" %>
             </div>
             <div class="row mediumBottomMargin">

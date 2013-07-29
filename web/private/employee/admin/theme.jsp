@@ -117,9 +117,9 @@
                                 <td><% out.print(themes.get(i).getType());%></td>
                                 <td><% out.print(themes.get(i).getCreatorId());%></td>
                                 <td><% if (themes.get(i).getVisible()) {
-                                        out.print("True");
+                                        out.print("<i class='icon16-check'></i>");
                                     } else {
-                                        out.print("False");
+                                        out.print("");
                                     }
                                     %></td>
                                 <td><a class="showModal2"><% out.print("<input type='hidden' value='" + themes.get(i).getId() + "' />");%>View</a>
@@ -139,7 +139,7 @@
                                                         out.print(themes.get(i).getName());
                                                         out.print("</div>");
                                                     %>
-                                                    <i class="icon16-approve"></i>Delete</a></li>
+                                                    <i class="icon16-pageRemove"></i>Delete</a></li>
                                         </ul>
                                     </div>
                                 </td>

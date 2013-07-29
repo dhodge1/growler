@@ -5,15 +5,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<style>
-    #modalDialog {
-        display:none;
-    }
-    #thanksDialog {
-        display:none;
-    }
-</style>
 <%  //Displaying error or success messages -- clear it out when done
+    //Success messages start with "Success:", therefore we trim off the first 8 chars
+    //Error messages start with "Error:", therefore we trim off the first 6 chars
+    //The messages are sent (typically) from the pages in the action folder.
     String message = (String) session.getAttribute("message");
     String sessionName = "";
     if (message != null && message.startsWith("Success:") && !message.contains("Attendance")) {
@@ -38,43 +33,3 @@
         session.removeAttribute("message");
     }
 %>
-<script>
-
-    $(function() {
-        $("#modalDialog").dialog({
-            resizable: false,
-            height: 240,
-            width: 700,
-            modal: true,
-            buttons: {
-                "Take a Survey": function() {
-                    $(this).dialog("close");
-                    window.location = '../employee/surveylist.jsp';
-                },
-                "Don't take Survey": function() {
-                    $("#thanksDialog").dialog({
-                        height: 140,
-                        width: 500,
-                        buttons: {
-                            "Ok": function() {
-                                $(this).dialog("close");
-                            }
-                        }
-                    });
-                    $(this).dialog("close");
-
-                }
-            }
-        });
-
-    });
-
-</script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>
-<script src="../../js/libs/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
-<script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/sniui.auto-inline-help.min.js" type="text/javascript"></script>
-<script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/sniui.auto-inline-help.1.0.0.min.js" type="text/javascript"></script>
-<script src='../../js/sniui.dialog.1.0.0.min.js'></script>
-<script src='../../js/sniui.dialog.1.1.0.min.js'></script>
-<script src='../../js/sniui.dialog.1.2.0.min.js'></script>

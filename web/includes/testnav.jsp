@@ -39,7 +39,7 @@
                 <% } //end if %>
                 <% if (calendar.get(Calendar.MONTH) > 7) { // if it's after August%>
                 <li class="brand_nav <%= sessionTab%>"><a href="#" style='padding-left:8px;'><span class="nav_drop">Sessions</span><em></em></a>
-                    <ul class="child-menu child-menu-ul firstnav">
+                    <ul class="child-menu child-menu-ul firstnav" style="left:11px;">
                         <li><a href="../../private/employee/sessionschedule.jsp">View Session Schedule</a></li>
                         <li><a href="../../private/employee/surveylist.jsp">Submit Session Feedback</a></li>
                     </ul>

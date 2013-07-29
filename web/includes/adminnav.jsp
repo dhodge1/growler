@@ -36,7 +36,7 @@
   <ul>
 	<li class="non_drop <%= home %>" style="padding-right:12px" ><a href="home.jsp"><span>Home</span></a></li>
 	<li class="brand_nav <%= themeTab %>" style="padding-left:12px"><a href="#"><span>Themes</span><em></em></a>
-		<ul class="child-menu child-menu-ul firstnav">
+		<ul class="child-menu child-menu-ul firstnav" style="left:11px;">
 			<li><a href="../../../private/employee/admin/theme.jsp">Edit Themes</a></li>
 			<li><a href="../../../private/employee/admin/themeentry.jsp">Suggest a New Theme</a></li>
 		</ul>

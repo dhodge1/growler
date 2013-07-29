@@ -27,7 +27,7 @@ color:#002d56;position:relative;}
 .top-nav #navigation ul li span.delete-tab{
 display:none;}
 .non_drop {
-border-right:1px dotted #fff;margin-left:9px;padding-right:3px;height:24px!important;z-index:9;}
+border-right:1px dotted #fff;margin-left:9px;padding-right:3px;height:24px!important;z-index:9;padding-top: 8px;}
 .brand_nav{
 margin-left:2px;height:23px!important;z-index:9;font-family:"Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif; font-size:13px;}
 .brand_nav:hover a{
@@ -37,9 +37,9 @@ color:#002d56!important;}
 .top-nav #navigation ul li.brand_nav a:hover{
 background:#fff!important;filter:none!important;color:#002d56;}
 .brand_nav:hover em,.brand_nav.selected em{
-background:url(../images/bootstrap/icon-set.png) no-repeat -184px -3px;display:inline-block;height:7px;margin-left:4px;position:relative;width:12px;}
+background:url(../images/bootstrap/icon-set.png) no-repeat -184px -3px;display:inline-block;height:7px;margin-left:6px;position:relative;width:12px;}
 .brand_nav em{
-background:url(../images/bootstrap/icon-set.png) no-repeat -173px -3px;display:inline-block;height:7px;margin-left:5px;position:relative;width:12px;}
+background:url(../images/bootstrap/icon-set.png) no-repeat -173px -3px;display:inline-block;height:7px;margin-left:6px;position:relative;width:12px;}
 .brand_nav .child-menu .firstnav{
 display:none;border:1px solid #ccc;background:#fff;margin:0!important;position:absolute;top:28px; left:11px;padding:5px 0;height:auto!important;border-top:0!important;-webkit-border-radius:0 0 3px 3px;-moz-border-radius:0 0 3px 3px;border-radius:0 0 3px 3px;}
 .brand_nav .child-menu{
