@@ -168,59 +168,59 @@
             <div class='row largeBottomMargin'>
                 <p style='font-size: 16px; font-family: Arial;'>We want to hear from you!  Please let us know the top 10 speakers you would be interested in attending for this year's Techtoberfest.</p>
             </div>
-            <div class='row largeBottomMargin'></div>
+            <div class='row mediumBottomMargin'></div>
             <div class="row mediumBottomMargin">
                 <h2 class="bordered mediumBottomMargin"><img style="padding-bottom:0;padding-left:0;" id="logo" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Which speakers are you most interested in?</span></h2>
                 <span>Select the speakers you are most interested in. If desired, you can provide a ranking for less than 10 speakers. Once your ranking has been submitted, you can not submit another unless you choose to reset/clear your previous one.  There is also a <a href='../../private/employee/speaker.jsp'>drag and drop version</a> available.</span><br/>
                 <span><strong>Note:</strong> The order in which you select the item is the order they will be ranked.</span>
-                <div class='mediumBottomMargin'></div>
-            </div>
-            <form action='../../action/processSpeakerRanking.jsp'>
-                <div class='row mediumBottomMargin'>
-                    <div class='span5 smallBottomMargin'>
-                        <span><strong>Available Speakers</strong></span>
-                    </div>
-                    <div class='span5 smallBottomMargin'>
-                        <span class='interestLabel'><strong>Speakers I'm Interested In</strong></span><span class='pullRight'><a href='#'>Last years ranking</a></span>
-                    </div>
-                    <div class='span5'>
+                <div class='row largeBottomMargin'></div>
 
-                        <span class="keywordFilter" style="width:100%;">
-                            <i class="icon16-magnifySmall"></i>
-                            <span class="keywordFilter-wrapper">
-                                <input type="search" id="filter" value="Filter..." />
+                <form action='../../action/processSpeakerRanking.jsp'>
+                    <div class='row mediumBottomMargin'>
+                        <div class='span5 smallBottomMargin'>
+                            <span><strong>Available Speakers</strong></span>
+                        </div>
+                        <div class='span5 smallBottomMargin'>
+                            <span class='interestLabel'><strong>Speakers I'm Interested In</strong></span><span class='pullRight'><a href='#'>Last years ranking</a></span>
+                        </div>
+                        <div class='span5'>
+
+                            <span class="keywordFilter" style="width:100%;">
+                                <i class="icon16-magnifySmall"></i>
+                                <span class="keywordFilter-wrapper">
+                                    <input type="search" id="filter" value="Filter..." />
+                                </span>
+                                <a class="keywordFilter-clear" onclick="clearFilter();"><i class="icon16-close"></i></a>
                             </span>
-                            <a class="keywordFilter-clear" onclick="clearFilter();"><i class="icon16-close"></i></a>
-                        </span>
 
-                        <ul id='speakers'>
-                            <%
-                                for (int i = 0; i < vspeakers.size(); i++) {
-                                    out.print("<li class=\"" + vspeakers.get(i).getType() + "\">");
-                                    out.print("<input type='checkbox' id='" + vspeakers.get(i).getId() + "'/>");
-                                    out.print(vspeakers.get(i).getFullName());
-                                    out.print("<input type=\"hidden\" name=\"list\" value=\"" + vspeakers.get(i).getId() + "\" />");
-                                    out.print("</li>");
-                                }
-                            %>
-                        </ul>
+                            <ul id='speakers'>
+                                <%
+                                    for (int i = 0; i < vspeakers.size(); i++) {
+                                        out.print("<li class=\"" + vspeakers.get(i).getType() + "\">");
+                                        out.print("<input type='checkbox' id='" + vspeakers.get(i).getId() + "'/>");
+                                        out.print(vspeakers.get(i).getFullName());
+                                        out.print("<input type=\"hidden\" name=\"list\" value=\"" + vspeakers.get(i).getId() + "\" />");
+                                        out.print("</li>");
+                                    }
+                                %>
+                            </ul>
+                        </div>
+                        <div class='span5'>
+                            <ol id='ranked'>
+                                <li class='placeholder'>Ranked Speakers</li>
+                            </ol>
+                        </div>
                     </div>
-                    <div class='span5'>
-                        <ol id='ranked'>
-                            <li class='placeholder'>Ranked Speakers</li>
-                        </ol>
-                    </div>
-                </div>
 
-                <div class="form-actions"><input id="send" type="submit" value="Submit My Ranking" class="button button-primary"/><a href="../../private/employee/home.jsp">Cancel</a></div>
-                <input id='previously' name='previously' type='hidden' value=<%= speakers.size()%>/>
-                <strong>Speaker not listed? </strong><a href='../../private/employee/speakerentry.jsp'>Click here to suggest a new speaker</a>                    
+                    <div class="form-actions"><input id="send" type="submit" value="Submit My Ranking" class="button button-primary"/><a href="../../private/employee/home.jsp">Cancel</a></div>
+                    <input id='previously' name='previously' type='hidden' value=<%= speakers.size()%>/>
+                    <strong>Speaker not listed? </strong><a href='../../private/employee/speakerentry.jsp'>Click here to suggest a new speaker</a>                    
 
-            </form>
+                </form>
 
 
 
-
+            </div>
         </div>
         <%@ include file="../../includes/footer.jsp" %>
     </body>

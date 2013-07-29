@@ -184,16 +184,14 @@
             <div class="row mediumBottomMargin">
                 <h1 style="font-weight:normal;">Rank Your Preferred Themes</h1>
             </div>
-
             <div class='row largeBottomMargin'>
                 <p style='font-size: 16px; font-family: Arial;'>We want to hear from you!  Please let us know the top 10 presentation themes you would be interested in attending for this year's Techtoberfest.</p>
             </div>
-            <div class='row largeBottomMargin'></div>
-
+            <div class='row mediumBottomMargin'></div>
             <div class="row mediumBottomMargin">
                 <h2 class="bordered mediumBottomMargin"><img style="padding-bottom:0;padding-left:0;" id="logo" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Which presentations are you most interested in?</span></h2>
                 <span>Please drag and drop the presentation themes you are most interested in and rank them 1-10. If desired, you can provide a ranking for less than 10 themes. Once your ranking has been submitted, you can not submit another unless you choose to reset/clear your previous one.<br/><strong>Note:</strong>  There is also a <a href="../../private/employee/nondragtheme.jsp">non drag and drop version</a> available.</span>
-                <div class='mediumBottomMargin'></div>
+                <div class='row largeBottomMargin'></div>
 
                     <form action='../../action/processThemeRanking.jsp'>
                         <div class='row mediumBottomMargin'>
