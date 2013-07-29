@@ -106,22 +106,24 @@
                                 for (int i = 0; i < themes.size(); i++) {
                             %>
                             <tr <% out.print("id='row" + i + "'");%>>
-                                <td><%= themes.get(i).getName()%></td>
+                                <td><%= themes.get(i).getName()%>
+                                    <input type="hidden" <% out.print("id='rowfor" + themes.get(i).getId() + "'"); %> />
+                                </td>
                                 <td><a class="showModal"><% out.print("<input type='hidden' value='" + themes.get(i).getId() + "' />");%>View</a>
-                                <% out.print("<div class='modals' id='modal" + themes.get(i).getId() + "' title='" + themes.get(i).getName() + "'>");
+                                    <% out.print("<div class='modals' id='modal" + themes.get(i).getId() + "' title='" + themes.get(i).getName() + "'>");
                                         out.print(themes.get(i).getDescription());
                                         out.print("</div>");
                                     %></td>
                                 <td><% out.print(themes.get(i).getType());%></td>
                                 <td><% out.print(themes.get(i).getCreatorId());%></td>
                                 <td><% if (themes.get(i).getVisible()) {
-                                    out.print("True");
-                                } else {
-                                    out.print("False");
-                                }
-                                %></td>
+                                        out.print("True");
+                                    } else {
+                                        out.print("False");
+                                    }
+                                    %></td>
                                 <td><a class="showModal2"><% out.print("<input type='hidden' value='" + themes.get(i).getId() + "' />");%>View</a>
-                                <% out.print("<div class='modals' id='modalrank" + themes.get(i).getId() + "' title='" + themes.get(i).getName() + "'>");
+                                    <% out.print("<div class='modals' id='modalrank" + themes.get(i).getId() + "' title='" + themes.get(i).getName() + "'>");
                                         out.print(themes.get(i).getRank() + " points out of " + themes.get(i).getCount() + " votes");
                                         out.print("</div>");
                                     %>    
@@ -130,8 +132,14 @@
                                     <div class="actionMenu">
                                         <a class="actionMenu-toggle" data-toggle="dropdown" href="#">Actions<b class="caret"></b></a>
                                         <ul class="actionMenu-menu" role="menu">
-                                            <li><a <% out.print("href='../../../private/employee/admin/edittheme.jsp?id=" + themes.get(i).getId() + "'");  %>><i class="icon16-approve"></i>Edit</a></li>
-                                            <li><a href="#"><i class="icon16-approve"></i>Delete</a></li>
+                                            <li><a <% out.print("href='../../../private/employee/admin/edittheme.jsp?id=" + themes.get(i).getId() + "'");%>><i class="icon16-approve"></i>Edit</a></li>
+                                            <li><a class="showModal3"><% out.print("<input type='hidden' name='delete' value='" + themes.get(i).getId() + "' />"); %>
+                                                    <% out.print("<div class='modalDelete' id='modaldelete" + themes.get(i).getId() + "' title='Delete Confirmation'>");
+                                                        out.print("Is it ok to delete this theme?<br/><br/>");
+                                                        out.print(themes.get(i).getName());
+                                                        out.print("</div>");
+                                                    %>
+                                                    <i class="icon16-approve"></i>Delete</a></li>
                                         </ul>
                                     </div>
                                 </td>
@@ -180,6 +188,29 @@
                                     unActive();
                                     $("#page1").addClass("active");
                                     $(".modals").dialog({autoOpen: false});
+                                    $(".modalDelete").dialog({
+                                        autoOpen: false,
+                                        buttons: {
+                                            'ok': {
+                                                'class': 'button button-primary',
+                                                click: function() {
+                                                    var theme = $(this).prop("id");
+                                                    theme = theme.substring(11);
+                                                    $.post("../../../action/removeTheme.jsp", {id: theme}, function(data, success) {});
+                                                    $("#rowfor" + theme).parent().parent().remove();
+                                                    $(this).dialog('close');
+                                                },
+                                                text: 'Yes'
+                                            },
+                                            'cancel': {
+                                                click: function() {
+                                                    
+                                                    $(this).dialog('close');
+                                                },
+                                                text: 'No, return to manage themes table'
+                                            }
+                                        },
+                                    });
                                     $(".showModal").click(function() {
                                         var theme = $(this).children().val();
                                         $("#modal" + theme).dialog("open");
@@ -187,6 +218,10 @@
                                     $(".showModal2").click(function() {
                                         var rank = $(this).children().val();
                                         $("#modalrank" + rank).dialog("open");
+                                    });
+                                    $(".showModal3").click(function() {
+                                        var theme = $(this).children().val();
+                                        $("#modaldelete" + theme).dialog("open");
                                     });
 
                                 });
