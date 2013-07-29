@@ -32,6 +32,8 @@ public class User {
     private String email;
     
     private String volunteer;
+    
+    private String role;
 
     /**
      * Default constructor
@@ -127,4 +129,13 @@ public class User {
     public void setVolunteer(String volunteer) {
         this.volunteer = volunteer;
     }    
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+    
 }

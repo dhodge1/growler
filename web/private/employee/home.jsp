@@ -8,6 +8,37 @@
 <%@page import="java.sql.*"%>
 <%@page import="com.scripps.growler.*" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+            if (request.getHeader("sn_employee_id") != null) {
+                String first_name = request.getHeader("sn_first_name");
+                String last_name = request.getHeader("sn_last_name");
+                String email = request.getHeader("sn_email");
+                String id = request.getHeader("sn_employee_id");
+                String name = last_name + ", " + first_name;
+                UserPersistence up = new UserPersistence();
+                User u = up.getUserByEmail(email);
+                User newUser = new User();
+                if (u != null) {
+                    session.setAttribute("user", u.getUserName());
+                    session.setAttribute("id", u.getCorporateId());
+                    if (u.getRole() == "admin") {
+                        session.setAttribute("role", "admin");
+                    }
+                } else if (!id.equals(null) || !id.equals("null")) {
+                    newUser.setId(Integer.parseInt(id));
+                    newUser.setCorporateId(id);
+                    newUser.setUserName(name);
+                    newUser.setEmail(email);
+                    up.addUser(newUser);
+                    session.setAttribute("user", newUser.getUserName());
+                    session.setAttribute("id", newUser.getCorporateId());
+                    if (id.equals("160240") || id.equals("")) { //if it's Ian R. or Brian S.
+                        session.setAttribute("role", "admin");
+                    }
+                }
+                //response.sendRedirect("/private/employee/home.jsp");
+            }
+        %>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->

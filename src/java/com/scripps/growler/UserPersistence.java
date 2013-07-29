@@ -51,7 +51,7 @@ public class UserPersistence extends GrowlerPersistence {
     public User getUserByEmail(String email) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select id, name, corporate_id, email from user where email = ?");
+            statement = connection.prepareStatement("select u.id, u.name, u.corporate_id, u.email, r.role from user u, roles r where email = ? and r.user_id = u.id");
             statement.setString(1, email);
             result = statement.executeQuery();
             if (result.next()) {
@@ -60,7 +60,7 @@ public class UserPersistence extends GrowlerPersistence {
                 u.setUserName(result.getString("name"));
                 u.setEmail(email);
                 u.setCorporateId(result.getString("corporate_id"));
-                closeJDBC();
+                u.setRole(result.getString("role"));
                 return u;
             }
             

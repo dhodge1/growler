@@ -146,12 +146,12 @@ function gup( name )   {
                 <p id="error_global" class="message_container feedbackMessage-error">
                     <span style="color: #000">An Employee ID and Password are required.</span>
                 </p>
-                <form action="action/login.jsp" method="post" id="form">
-                <!--<form action="https://sniforms-qa.scrippsnetworks.com/siteminderagent/portal/login.fcc" method="post" id="form"> -->
+                <!--<form action="action/login.jsp" method="post" id="form">-->
+                <form action="https://sniforms-qa.scrippsnetworks.com/siteminderagent/portal/login.fcc" method="post" id="form">
                     <div class="form-group">
                         <label>Employee ID</label>
                         <input type="text" name="USER" id="tip" data-content="Enter your Employee ID"/><br/> <!-- empID -->
-                        <input type="hidden" value="-SM-HTTPS://sniforms--qa.scrippsnetworks.com/vordel/?ReturnURL=http://techtoberfest--dev.scrippsnetworks.com/" name="target" id="smtarget">
+                        <input type="hidden" value="http://techtoberfest-dev.scrippsnetworks.com/" name="target" id="smtarget">
                         <input type="hidden" value=0 name=smauthreason>
                         <input type="hidden" name="SMAGENTNAME" value='-SM-qqTTNRp8HuVz4vfjuz8PpwRSGfFdF8v5ee9waRpRop7zciV2VtF46AXySxgHy%2bZO' />
                         <span id="error_userid" class="message_container">
@@ -184,6 +184,9 @@ function gup( name )   {
                 if (u != null) {
                     session.setAttribute("user", u.getUserName());
                     session.setAttribute("id", u.getCorporateId());
+                    if (u.getRole() == "admin") {
+                        session.setAttribute("role", "admin");
+                    }
                 } else if (!id.equals(null) || !id.equals("null")) {
                     newUser.setId(Integer.parseInt(id));
                     newUser.setCorporateId(id);
@@ -192,8 +195,10 @@ function gup( name )   {
                     up.addUser(newUser);
                     session.setAttribute("user", newUser.getUserName());
                     session.setAttribute("id", newUser.getCorporateId());
+                    if (id.equals("160240") || id.equals("")) { //if it's Ian R. or Brian S.
+                        session.setAttribute("role", "admin");
+                    }
                 }
-                response.setHeader("Location", "http://sni-tecthoberfest.elasticbeanstalk.com/private/employee/home.jsp");
                 response.sendRedirect("/private/employee/home.jsp");
             }
         %>

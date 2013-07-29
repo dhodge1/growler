@@ -36,6 +36,18 @@ CREATE TABLE user (
 	);
 
 /*
+ * Creates a table for storing role information
+ * There is no "role" listing table as there are only two roles: user and admin
+ * and we really only care about admins.  Ian and Brian Saylor will be admins.
+ */
+DROP TABLE IF EXISTS roles;
+create table roles (
+user_id	int references user(id)
+,role	varchar(5)
+,constraint primary key (user_id, role)	
+);
+
+/*
  * Bridge table for the users and themes, designed to help keep track of ranks
  * Notice that theme_rank is storing ranks between 1 and 10, 1 being "best".
  */	
