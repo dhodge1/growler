@@ -15,6 +15,8 @@ public class DataConnection {
     static Logger logger = Logger.getLogger(DataConnection.class);
     private final String DBNAME = "growler_db";
     private final String DBUSER = "root";
+    private final String PRODUSER = "admin";
+    private final String PRODPASS = "gr0wlerz";
     private final String DBPASS = "password";
     private final String LOCAL = "localhost";
     private final String AMAZON = "aa1kghi1e8rhlu6.cllctpcw9g9x.us-east-1.rds.amazonaws.com";

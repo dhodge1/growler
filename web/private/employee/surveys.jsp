@@ -90,16 +90,16 @@
                     if (page === 2) {
                         $("#errors").html("<span>Please answer all questions.</span>");
                         if (!$("input[name='q1']:checked")) {
-                            $("input[name='q1']:checked").find(".errors .question").html("<span>This field is required.</span>");
+                            $("#error1").html("<span>This field is required.</span>");
                         }
                         if (!$("input[name='q2']:checked")) {
-                            $("input[name='q2']:checked").find(".errors .question").html("<span>This field is required.</span>");
+                            $("#error2").html("<span>This field is required.</span>");
                         }
                         if (!$("input[name='q3']:checked")) {
-                            $("input[name='q3']:checked").find(".errors .question").html("<span>This field is required.</span>");
+                            $("#error3").html("<span>This field is required.</span>");
                         }
                         if (!$("input[name='q4']:checked")) {
-                            $("input[name='q4']:checked").find(".errors .question").html("<span>This field is required.</span>");
+                            $("#error4").html("<span>This field is required.</span>");
                         }
                         $("#errors").show();
                     }
@@ -110,6 +110,7 @@
                     $("#errors").hide();
                     if (step === 1) {
                         changeMouseOnIndicators();
+                        $("#errors").hide();
                         if ($("input[name='survey']:checked").length) {
                             $("#session").val($("input[name='survey']:checked").val());
                             $("#dateselector").hide();
@@ -126,6 +127,7 @@
                     }
                     if (step === 2) {
                         changeMouseOnIndicators();
+                        $("#errors").hide();
                         $("#progress1").css("cursor", "pointer");
                         if ($("input[name='q1']:checked").length && $("input[name='q2']:checked").length && $("input[name='q3']:checked").length && $("input[name='q4']:checked").length) {
                             $("#q1").val($("input[name='q1']:checked").val());
@@ -275,7 +277,7 @@
                 <div id='errors' class='errors feedbackMessage-error mediumBottomMargin row'>
                 </div>
                 <div class="row">
-                <table id="table" class="table span9">
+                <table id="table" class="table span9 largeBottomMargin" style="margin-left: -6px;">
                     
                     <%
                         AttendancePersistence ap = new AttendancePersistence();
@@ -306,8 +308,8 @@
                     
                 </table>
                 </div>
-                <div id="survey" class="mediumBottomMargin row">
-                    <table class="table">
+                <div id="survey" class="largeBottomMargin row">
+                    <table class="table" style="margin-left: -8px;">
                         <%
                             DataConnection dataConnection = new DataConnection();
                             Connection newConnect = dataConnection.sendConnection();
@@ -321,7 +323,7 @@
                                     <input type="radio" value="1" <% out.print(" name=q" + qResult.getInt("id"));%>><span class="checkbox inline divider" >Strongly Disagree</span>
                                     <input type="radio" value="3" <% out.print(" name=q" + qResult.getInt("id"));%>><span class="checkbox inline divider" >Neutral</span>
                                     <input type="radio" value="5" <% out.print(" name=q" + qResult.getInt("id"));%>><span class="checkbox inline" >Strongly Agree</span>
-                                </div><div class='errors question'></div></td>
+                                </div><div class='errors question' <% out.print("id='error" + qResult.getInt("id") + "'"); %>></div></td>
                         </tr>
                         <% }
                             qResult.close();

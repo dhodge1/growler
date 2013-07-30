@@ -38,6 +38,8 @@
                         return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
                     };
                 });
+                $("#resetModal").dialog({autoOpen: false});
+                $("#rankModal").dialog({autoOpen: false});
                 //What happens when you click an available theme
                 $(":checkbox").click(function() {
                     $("#ranked").find(".placeholder").remove(); //Remove the placeholder
@@ -52,7 +54,7 @@
                     $("#themes").find(":hidden").prop("name", "none");
                     $("#ranked").find(":hidden").prop("name", "list");
                 });
-                $(".Business, .Technical").toolTip();
+                $("#themes li").toolTip();
                 $("#filter").on("keyup", function() {
                     var text = $("#filter").val();
                     if (text !== "") {
@@ -67,11 +69,11 @@
                     $("#ranked").find(".placeholder").remove(); //Remove the placeholder
                     if ($("#ranked li").length === 0) {
                         event.preventDefault();
-                        alert("Please rank at least one theme before submitting.");
+                        $("#rankModal").dialog("open");
                     }
                     if (parseInt($("#previously").val()) > 0) {
                         event.preventDefault();
-                        alert("Please reset your rankings before submitting again.")
+                        $("#resetModal").dialog("open");
                     }
                 });
             });
@@ -178,7 +180,7 @@
                 </ul>
             </div>
             <% if (themes.size() > 0) {%>
-            <div class="mediumBottomMargin">
+            <div class="mediumBottomMargin row">
                 <p class="feedbackMessage-warning">You have already submitted a ranking for your preferred presentation themes.  In order to submit a different ranking, you must reset your previous one.
                     <% out.print("<a href='../../action/removeThemeRanks.jsp?id=" + user + "'>Reset your previous ranking now.</a>");%>
                 </p>
@@ -232,7 +234,7 @@
                             </ol>
                         </div>
                     </div>
-                    <div class='form-actions'>
+                    <div class='form-actions smallBottomMargin'>
                         <input id="send" type="submit" value="Submit My Ranking" class="button button-primary"/>
                         <a href="../../private/employee/home.jsp">Cancel</a>
                         <input id='previously' name='previously' type='hidden' value=<%= themes.size()%>/>
@@ -242,5 +244,7 @@
             </div>
         </div>
         <%@ include file="../../includes/footer.jsp" %>
+        <div id='resetModal' title='Error'>You must reset the previous ranking you’ve submitted before submitting another</div>
+        <div id='rankModal' title='Error'>Please rank at least one theme before submitting.</div>
     </body>
 </html>

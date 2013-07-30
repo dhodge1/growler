@@ -35,6 +35,8 @@
                         return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
                     };
                 });
+                $("#resetModal").dialog({autoOpen: false});
+                $("#rankModal").dialog({autoOpen: false});
                 //What happens when you click an available theme
                 $(":checkbox").click(function() {
                     $("#ranked").find(".placeholder").remove(); //Remove the placeholder
@@ -63,11 +65,11 @@
                     $("#ranked").find(".placeholder").remove(); //Remove the placeholder
                     if ($("#ranked li").length === 0) {
                         event.preventDefault();
-                        alert("Please rank at least one speaker before submitting.");
+                        $("#rankModal").dialog("open");
                     }
                     if (parseInt($("#previously").val()) > 0) {
                         event.preventDefault();
-                        alert("Please reset your rankings before submitting again.")
+                        $("#resetModal").dialog("open");
                     }
                 });
             });
@@ -173,7 +175,7 @@
                 </ul>
             </div>
             <% if (speakers.size() > 0) {%>
-            <div class="mediumBottomMargin">
+            <div class="mediumBottomMargin row">
                 <p class="feedbackMessage-warning">You have already submitted a ranking for your preferred speakers.  In order to submit a different ranking, you must reset your previous one.
                     <% out.print("<a href='../../action/removeSpeakerRanks.jsp?id=" + user + "'>Reset your previous ranking now.</a>");%>
                 </p>
@@ -207,21 +209,18 @@
                                 </span>
                             </div>
                             <div class='span6 smallBottomMargin'>
-                                <span class='interestLabel'><strong>Speakers I'm Interested In</strong></span><span class='pullRight'><a class='showModal'>
-                                        <div class='modals' id='ranks' title="Last Year's top 10">
-                                            <ol>
-                                                <li>Matt Peter: 4.93</li>
-                                                <li>John Hills: 4.92</li>
-                                                <li>Ram Karra: 4.80</li>
-                                                <li>Joshua Eldridge: 4.78</li>
-                                                <li>Kevin Barry: 4.76</li>
-                                                <li>Amy Thomason: 4.75</li>
-                                                <li>Robin Wilde: 4.75</li>
-                                                <li>Kamlesh Sharma: 4.75</li>
-                                                <li>Jonathan Williams: 4.75</li>
-                                                <li>Kabita Nayak: 4.75</li>
-                                            </ol>
-                                        </div>Last year's top 10</a>
+                                <span class='interestLabel'><strong>Speakers I'm Interested In</strong></span><span class='pullRight'><a class='showModal' data-content='<ol>
+                                            <li>Matt Peter: 4.93</li>
+                                            <li>John Hills: 4.92</li>
+                                            <li>Ram Karra: 4.80</li>
+                                            <li>Joshua Eldridge: 4.78</li>
+                                            <li>Kevin Barry: 4.76</li>
+                                            <li>Amy Thomason: 4.75</li>
+                                            <li>Robin Wilde: 4.75</li>
+                                            <li>Kamlesh Sharma: 4.75</li>
+                                            <li>Jonathan Williams: 4.75</li>
+                                            <li>Kabita Nayak: 4.75</li>
+                                        </ol>' title="Last year's top 10" id='top10'>Last year's top 10</a>
                                 </span>
                             </div>
                         </div>
@@ -244,7 +243,7 @@
                         </div>
                     </div>
 
-                    <div class="form-actions"><input id="send" type="submit" value="Submit My Ranking" class="button button-primary"/><a href="../../private/employee/home.jsp">Cancel</a></div>
+                    <div class="form-actions smallBottomMargin"><input id="send" type="submit" value="Submit My Ranking" class="button button-primary"/><a href="../../private/employee/home.jsp">Cancel</a></div>
                     <input id='previously' name='previously' type='hidden' value=<%= speakers.size()%>/>
                     <strong>Speaker not listed? </strong><a href='../../private/employee/speakerentry.jsp'>Click here to suggest a new speaker</a>                    
 
@@ -255,15 +254,14 @@
             </div>
         </div>
         <%@ include file="../../includes/footer.jsp" %>
+        <div id='resetModal' title='Error'>You must reset the previous ranking you’ve submitted before submitting another</div>
+        <div id='rankModal' title='Error'>Please rank at least one speaker before submitting.</div>
         <script src="../../js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>
         <script src="../../js/libs/sniui.user-inline-help.1.2.0.min.js" type="text/javascript"></script>
         <script>
             $(document).ready(function() {
                 $('#spkrtypeHelp').userInlineHelp();
-                $('#ranks').dialog({autoOpen: false, closeText: "hide"});
-                $('.showModal').click(function() {
-                    $('#ranks').dialog("open");
-                });
+                $('#top10').userInlineHelp();
             });
         </script>
     </body>

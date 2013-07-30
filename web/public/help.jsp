@@ -32,10 +32,10 @@
     </head>
     <body id="growler1">
         <%@ include file="../includes/indexheader.jsp" %> 
-        <%  if (null != session.getAttribute("id")) {%>
+        <%  if (session.getAttribute("id") != null) {%>
         <%@ include file="../includes/usernav.jsp" %> 
         <% } //end if %>
-        <div class="container-fixed">
+        <div class="container-fixed mediumBottomMargin">
             <div class='row mediumBottomMargin'></div>
             <div class="row">
                 <ul class="breadcrumb">
@@ -50,7 +50,7 @@
             <div class="row largeBottomMargin">
                 <span>Click on a topic below to have the help content displayed.</span>
             </div>
-            <div class="row mediumBottomMargin">
+            <div class="row">
                 <h2 class="bordered"><img id="logo" style="padding-left:0;padding-bottom:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Help By Topic</span><span class="pullRight"><a href='#'>View as PDF</a></span></h2>
             </div>
             <div class="row">

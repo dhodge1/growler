@@ -97,6 +97,8 @@
         </style>
         <script>
             $(function() {
+                $("#resetModal").dialog({autoOpen: false});
+                $("#rankModal").dialog({autoOpen: false});
                 $("#themes, #ranked").sortable({
                     connectWith: ".connectedSortable",
                     cursor: "move",
@@ -105,6 +107,7 @@
                         $(this).find("label").remove();
                         $("#themes").find(":hidden").prop("name", "none");
                         $("#ranked").find(":hidden").prop("name", "list");
+                        $("#ranked li[rel=tooltip]").off('.toolTip');
                     },
                     stop: function(event, ui) {
                         if ($("#ranked li").length > 9) {
@@ -112,7 +115,8 @@
                         }
                     }
                 }).disableSelection();
-                $(".Business, .Technical").toolTip();
+                $("li[rel=toolTip]").toolTip();
+                //$(".Business, .Technical").toolTip();
                 $("#filter").change(function() {
                     if ($("#filter").val() == 1) {
                         $('#themes li').filter('.Business').show();
@@ -143,11 +147,11 @@
                     $("#ranked").find("label").remove(); //Remove the placeholder
                     if ($("#ranked li").length === 0) {
                         event.preventDefault();
-                        alert("Please rank at least one theme before submitting.");
+                        $("#rankModal").dialog("open");
                     }
                     if (parseInt($("#previously").val()) > 0) {
                         event.preventDefault();
-                        alert("Please reset your rankings before submitting again.")
+                        $("#resetModal").dialog("open");
                     }
                 });
             });
@@ -178,8 +182,8 @@
                 </ul>
             </div>
             <% if (themes.size() > 0) {%>
-            <div class="mediumBottomMargin">
-                <p class="feedbackMessage-warning">You have already submitted a ranking for your preferred presentation themes.  In order to submit a different ranking, you must reset your previous one.
+            <div class="mediumBottomMargin row feedbackMessage-warning">
+                <p>You have already submitted a ranking for your preferred presentation themes.  In order to submit a different ranking, you must reset your previous one.
                     <% out.print("<a href='../../action/removeThemeRanks.jsp?id=" + user + "'>Reset your previous ranking now.</a>");%>
                 </p>
             </div>
@@ -190,7 +194,7 @@
             <div class='row largeBottomMargin'>
                 <h3>We want to hear from you!  Please let us know the top 10 presentation themes you would be interested in attending for this year's Techtoberfest.</h3>
             </div>
-            <div class='row mediumBottomMargin'></div>
+            <div class='row largeBottomMargin'></div>
             <div class="row mediumBottomMargin">
                 <h2 class="bordered mediumBottomMargin"><img style="padding-bottom:0;padding-left:0;" id="logo" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Which presentations are you most interested in?</span></h2>
                 <span>Please drag and drop the presentation themes you are most interested in and rank them 1-10. If desired, you can provide a ranking for less than 10 themes. Once your ranking has been submitted, you can not submit another unless you choose to reset/clear your previous one.<br/></span>
@@ -199,7 +203,7 @@
                 <div class='row largeBottomMargin'></div>
 
                 <form action='../../action/processThemeRanking.jsp'>
-                    <div class='row mediumBottomMargin'>
+                    <div class='row largeBottomMargin'>
                         <div class='span5 smallBottomMargin'>
                             <span><strong>Available Presentation Themes</strong></span>
                         </div>
@@ -218,7 +222,7 @@
                                 <%
                                     for (int i = 0; i < vthemes.size(); i++) {
                                         String desc = vthemes.get(i).getDescription();
-                                        out.print("<li class=\"" + vthemes.get(i).getType() + "\" data-content=\"" + desc + "\"  title=\"" + vthemes.get(i).getName() + "\" data-placement='left'>");
+                                        out.print("<li rel='toolTip' class=\"" + vthemes.get(i).getType() + "\" data-content=\"" + desc + "\"  title=\"" + vthemes.get(i).getName() + "\" data-placement='left'>");
                                         out.print("<span><strong>" + vthemes.get(i).getName() + "</strong></span>");
                                         out.print("<input type=\"hidden\" name=\"list\" value=\"" + vthemes.get(i).getId() + "\" />");
                                         out.print("</li>");
@@ -242,5 +246,7 @@
             </div>
         </div>
         <%@ include file="../../includes/footer.jsp" %>
+        <div id='resetModal' title='Error'>You must reset the previous ranking you’ve submitted before submitting another</div>
+        <div id='rankModal' title='Error'>Please rank at least one theme before submitting.</div>
     </body>
 </html>

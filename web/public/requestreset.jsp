@@ -41,8 +41,11 @@
     </head>
     <body id="growler1">
         <%@ include file="../includes/indexheader.jsp" %> 
-        <%@ include file="../includes/publicnav.jsp" %>
+        <%  if (session.getAttribute("id") != null) {%>
+        <%@ include file="../includes/usernav.jsp" %> 
+        <% } //end if %>
         <div class="container-fixed mediumBottomMargin">
+            <div class='row mediumBottomMargin'></div>
             <div class="row">
                 <ul class="breadcrumb">
                     <li><a href="../index.jsp">Home</a></li>
@@ -54,7 +57,7 @@
             </div>
             <div class='row mediumBottomMargin' style='border: 1px dotted #ccc;'></div>
             <div class="row mediumBottomMargin">
-                <p>Please enter the Email Address associated with your account and click Submit Request</p>
+                <p>Please enter the email address associated with your account and click Submit Request</p>
             </div>
             <div class="row mediumBottomMargin">
                 <label><span style="color: red;">*</span>Required field</label>
@@ -71,10 +74,10 @@
                                 <label class="required">Email Address</label>
                                 <input name="email" class="input-xlarge" type="text" id="tip" data-content="Enter your Email Address" maxlength="50"/>
                                 <br/><span id="error_email" class="message_container">
-                                    <span>Please enter a Valid Email Address</span>
+                                    <span>Please enter a valid email address</span>
                                 </span>
                                 <span id="error_valid" class="message_container">
-                                    <span>Please enter a valid Email Address</span>
+                                    <span>Please enter a valid email address</span>
                                 </span>
                                 <span id="error_scripps" class="message_container">
                                     <span>As a Scripps employee, you must request a password reset using the procedure outlined by the help desk.  Please cancel and contact the Help Desk if you need further assistance.</span>

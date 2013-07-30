@@ -102,6 +102,8 @@
         </style>
         <script>
             $(function() {
+                $("#resetModal").dialog({autoOpen: false});
+                $("#rankModal").dialog({autoOpen: false});
                 $("#speakers, #ranked").sortable({
                     connectWith: ".connectedSortable",
                     placeholder: "ui-state-highlight",
@@ -146,11 +148,11 @@
                     $("#ranked").find("label").remove(); //Remove the placeholder
                     if ($("#ranked li").length === 0) {
                         event.preventDefault();
-                        alert("Please rank at least one speaker before submitting.");
+                        $("#rankModal").dialog("open");
                     }
                     if (parseInt($("#previously").val()) > 0) {
                         event.preventDefault();
-                        alert("Please reset your rankings before submitting again.")
+                        $("#resetModal").dialog("open");
                     }
                 });
             });
@@ -182,7 +184,7 @@
                 </ul>
             </div>
             <% if (speakers.size() > 0) {%>
-            <div class="mediumBottomMargin">
+            <div class="mediumBottomMargin row">
                 <p class="feedbackMessage-warning">You have already submitted a ranking for your preferred speakers.  In order to submit a different ranking, you must reset your previous one.
                     <% out.print("<a href='../../action/removeSpeakerRanks.jsp?id=" + user + "'>Reset your previous ranking now.</a>");%>
                 </p>
@@ -191,7 +193,7 @@
             <div class="row mediumBottomMargin">
                 <h1 style="font-weight:normal;">Rank Your Preferred Speakers</h1>
             </div>
-            <div class='row mediumBottomMargin'>
+            <div class='row largeBottomMargin'>
                 <h3>We want to hear from you!  Please let us know the top 10 speakers you would be interested in listening to for this year's Techtoberfest.</h3>
             </div>
             <div class='row largeBottomMargin'></div>
@@ -203,12 +205,10 @@
                 <div class='row mediumBottomMargin'></div>
 
                 <form action='../../action/processSpeakerRanking.jsp'>
-                    <div class='row mediumBottomMargin'>
+                    <div class='row largeBottomMargin'>
                         <div class='span5 smallBottomMargin'>
                             <span><strong>Last Year's Speakers</strong><i id="spkrtypeHelp" class="icon12-info" data-content="Business Speakers - Any speaker providing technical information in a non-technical way, appealing to both IT and non-IT users.<br/><br/>Technical Speakers - Speakers with a technical background providing mid to high level technical information, appealing to mainly IT users with technical backgrounds." title="Speaker Types"></i></span>
-                            <span class='pullRight'><a class='showModal'>
-                                    <div class='modals' id='ranks' title="Last Year's top 10">
-                                        <ol>
+                            <span class='pullRight'><a class='showModal' data-content='<ol>
                                             <li>Matt Peter: 4.93</li>
                                             <li>John Hills: 4.92</li>
                                             <li>Ram Karra: 4.80</li>
@@ -219,8 +219,7 @@
                                             <li>Kamlesh Sharma: 4.75</li>
                                             <li>Jonathan Williams: 4.75</li>
                                             <li>Kabita Nayak: 4.75</li>
-                                        </ol>
-                                    </div>Last year's top 10</a>
+                                        </ol>' title="Last year's top 10" id='top10'>Last year's top 10</a>
                             </span>
 
                         </div>
@@ -259,15 +258,15 @@
             </div>
         </div><!-- End Container Fixed -->
         <%@ include file="../../includes/footer.jsp" %>
+        <div id='resetModal' title='Error'>You must reset the previous ranking you’ve submitted before submitting another</div>
+        <div id='rankModal' title='Error'>Please rank at least one speaker before submitting.</div>
         <script src="../../js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>
+        <script src="../../js/libs/sniui.dialog.1.2.0.js"></script>
         <script src="../../js/libs/sniui.user-inline-help.1.2.0.min.js" type="text/javascript"></script>
         <script>
             $(document).ready(function() {
                 $('#spkrtypeHelp').userInlineHelp();
-                $('#ranks').dialog({autoOpen: false, closeText: "hide"});
-                $('.showModal').click(function() {
-                    $('#ranks').dialog("open");
-                });
+                $('#top10').userInlineHelp();
                 $(".breadcrumb li").last().addClass("ieFix");
             });
         </script>
