@@ -53,7 +53,7 @@
         <%@ include file="../../includes/header.jsp" %> 
         <%@ include file="../../includes/testnav.jsp" %>
         <div class="container-fixed">
-            <div class="row mediumBottomMargin"></div>
+            <div class="row mediumBottomMargin largeBottomMargin"></div>
             <div class="row">
                 <ul class="breadcrumb">
                     <li><a href="../../private/employee/home.jsp">Home</a></li>

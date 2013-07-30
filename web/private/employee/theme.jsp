@@ -232,7 +232,7 @@
                             </ol>
                         </div>
                     </div>
-                    <div class='form-actions'>
+                    <div class='form-actions smallBottomMargin'>
                         <input id="send" type="submit" value="Submit My Ranking" class="button button-primary"/>
                         <a href="../../private/employee/home.jsp">Cancel</a>
                         <input id='previously' name='previously' type='hidden' value=<%= themes.size()%>/>
