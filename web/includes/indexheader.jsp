@@ -11,7 +11,7 @@
       </div>
         <nav class="pageHeader-utility right">
             <ul>
-                <li class="first" style="color: white;padding-top:12px; padding-right: 12px;"><a href="public/help.jsp">Help</a></li>
+                <li class="first" style="color: white;padding-top:12px; padding-right: 12px;"><a href="../public/help.jsp">Help</a></li>
             </ul>
         </nav>
     </div>

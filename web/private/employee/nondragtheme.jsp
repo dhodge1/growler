@@ -46,6 +46,7 @@
                     var id = ($(this).prop("id")); //Get the ID of the checkbox
                     if ($(this).prop("checked") === true) {
                         ($("#ranked")).append($(this).parent().clone(true)); //Add it to the ranked list
+                        $("#ranked li[rel=tooltip]").off('.toolTip');
                     }
                     else {
                         $("#ranked").find("#" + id).parent().remove(); //Remove it from the list
@@ -221,7 +222,7 @@
                         <div class='span5'>
                             <ul id='themes'>
                                 <%        for (int i = 0; i < vthemes.size(); i++) {
-                                        out.print("<li class=\"" + vthemes.get(i).getType() + "\" data-content=\"" + vthemes.get(i).getDescription() + "\"  title=\"" + vthemes.get(i).getName() + "\" data-placement='left'>");
+                                        out.print("<li rel='toolTip' class=\"" + vthemes.get(i).getType() + "\" data-content=\"" + vthemes.get(i).getDescription() + "\"  title=\"" + vthemes.get(i).getName() + "\" data-placement='left'>");
                                         out.print("<input type='checkbox' id='" + vthemes.get(i).getId() + "'/>");
                                         out.print(vthemes.get(i).getName());
                                         out.print("<input type=\"hidden\" name=\"list\" value=\"" + vthemes.get(i).getId() + "\" />");

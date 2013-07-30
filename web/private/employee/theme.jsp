@@ -107,7 +107,6 @@
                         $(this).find("label").remove();
                         $("#themes").find(":hidden").prop("name", "none");
                         $("#ranked").find(":hidden").prop("name", "list");
-                        $("#ranked li[rel=tooltip]").off('.toolTip');
                     },
                     stop: function(event, ui) {
                         if ($("#ranked li").length > 9) {

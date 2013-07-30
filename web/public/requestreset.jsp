@@ -63,7 +63,7 @@
                 <label><span style="color: red;">*</span>Required field</label>
             </div>
             <div class="row">
-                <h2 class="bordered mediumBottomMargin">Request Details</h2>
+                <h2 class="bordered mediumBottomMargin"><span style='position:relative; bottom:6px;'>Request Details</span></h2>
                 <%@include file="../includes/messagehandler.jsp" %>
                 <p id="error_global" class="message_container feedbackMessage-error">
                     <span style="color: #000">An email address is required.</span>

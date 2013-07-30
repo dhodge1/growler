@@ -80,7 +80,7 @@
     <body id="growler1">
         <%@ include file="includes/indexheader.jsp" %> 
         <div class='row mediumBottomMargin'></div>
-        <div class="container-fixed mediumBottomMargin">
+        <div class="container-fixed largeBottomMargin">
             <div class="row">
                 <h1>Techtoberfest Information System (TIS)</h1>
                 <h3>TIS allows Scripps Employees the ability to not only stay abreast 
