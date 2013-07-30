@@ -36,6 +36,9 @@
                 color: red;
                 font-weight: bold;
             }
+            h3 {
+                font-weight:normal;
+            }
         </style>
     </head>
     <body id="growler1">
@@ -63,11 +66,11 @@
                 </ul>
             </div>
             <div class="row mediumBottomMargin">
-                <h1 style="margin-top:0px;font-weight: normal;">Suggest a Presentation Theme</h1>
+                <h1 style="margin-top:0px;font-weight: normal;">Suggest a New Theme</h1>
             </div>
-            <div class="row mediumBottomMargin" style="border:1px dotted #ccc"></div>
+            <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
             <div class="row largeBottomMargin">
-                <span style='font-size: 16px; font-family: Arial;'>Is there a new presentation theme you would like to suggest for this years Techtoberfest?  We would LOVE to know more about it.</span>
+                <h3>Is there a new presentation theme you would like to suggest for this years Techtoberfest?  We would LOVE to know more about it.</h3>
             </div>
             <div class="row mediumBottomMargin">
                 <label><span style="color: red;">*</span>Required field</label>

@@ -32,19 +32,21 @@
     </head>
     <body id="growler1">
         <%@ include file="../includes/indexheader.jsp" %> 
+        <%  if (null != session.getAttribute("id")) {%>
         <%@ include file="../includes/usernav.jsp" %> 
-        <div class="container-fixed mediumBottomMargin">
+        <% } //end if %>
+        <div class="container-fixed">
             <div class='row mediumBottomMargin'></div>
             <div class="row">
                 <ul class="breadcrumb">
                     <li><a href="home.jsp">Home</a></li>
-                    <li>Techtoberfest Help</li>
+                    <li class='ieFix'>Techtoberfest Help</li>
                 </ul>
             </div>
             <div class="row mediumBottomMargin">
                 <h1>Techtoberfest Help</h1>
             </div>
-            <div class="row mediumBottomMargin" style="border:1px dotted #ccc"></div>
+            <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
             <div class="row largeBottomMargin">
                 <span>Click on a topic below to have the help content displayed.</span>
             </div>
@@ -146,8 +148,8 @@
                         <div id="collapse7" class="accordion-body collapse">
                             <div class="accordion-inner">
                                 Step 1: Click on the <strong>Sessions</strong> drop down menu and select <em>Submit Session Feedback</em>. <br/>
-                                Step 2: Complete the survey wizard<br/>
-                                <strong>- If a session survey is completed within 30 minutes of you attending that session, your name will be entered into a raffle drawing. <br/><br/>
+                                Step 2: Complete the survey wizard<br/><br/>
+                                <strong>- If a session survey is completed within 30 minutes of you attending that session, your name will be entered into a raffle drawing. <br/>
                                 - Session surveys can be submitted at any time</strong>
                             </div>
                         </div><!--/#collapse7-->

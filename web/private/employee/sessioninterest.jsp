@@ -77,13 +77,13 @@
                 <ul class="breadcrumb">
                     <li><a href="home.jsp">Home</a></li>
                     <li><a href="../../private/employee/sessionschedule.jsp">Session Schedule</a></li>
-                    <li>Provide Session Interest</li>
+                    <li class='ieFix'>Provide Session Interest</li>
                 </ul>
             </div>
             <div class="row mediumBottomMargin">
                 <h1>Provide Session Interest</h1>
             </div>
-            <div class="row mediumBottomMargin" style="border:1px dotted #ccc"></div>
+            <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
             <div class="row largeBottomMargin">
                 <span>Did a particular topic pique your interest?  Let us know.<br/>Simply check on the checkbox next to the session topics(s) you're interested in and press <strong>Submit Interest</strong>.</span>
             </div>

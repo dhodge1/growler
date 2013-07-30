@@ -62,6 +62,7 @@
                 list-style-position: inside;
                 height: 368px;
                 background: #ddd;
+                border: 1px solid #ccc;
             }
             #filter {
                 width: 97.5%;
@@ -73,9 +74,6 @@
                 overflow-y:auto;
                 height:345px;
             }
-            #ranked {
-                border: 1px solid #ccc;
-            }
             .centerRow {
                 margin-left: 4px;
             }
@@ -85,6 +83,22 @@
             .pullRight {
                 float: right;
             }
+            .modals{
+                display:none;
+                background: #fff;
+            }
+            h3 {
+                font-weight: normal;
+            }
+            i {
+                margin-left: 3px;
+            }
+            .ieFix {}
+            .ieFix:after {display: none;}
+            .showModal {
+                color:#0067b1;
+                text-decoration: underline;
+            }
         </style>
         <script>
             $(function() {
@@ -92,7 +106,7 @@
                     connectWith: ".connectedSortable",
                     placeholder: "ui-state-highlight",
                     update: function(event, ui) {
-                        $(this).find(".placeholder").remove();
+                        $(this).find("label").remove();
                         $("#speakers").find(":hidden").prop("name", "none");
                         $("#ranked").find(":hidden").prop("name", "list");
                     },
@@ -129,7 +143,7 @@
                     }
                 });
                 $("#send").click(function(event) {
-                    $("#ranked").find(".placeholder").remove(); //Remove the placeholder
+                    $("#ranked").find("label").remove(); //Remove the placeholder
                     if ($("#ranked li").length === 0) {
                         event.preventDefault();
                         alert("Please rank at least one speaker before submitting.");
@@ -159,12 +173,12 @@
         %>
         <%@ include file="../../includes/header.jsp" %> 
         <%@ include file="../../includes/testnav.jsp" %>
-        <div class="container-fixed largeBottomMargin">
+        <div class="container-fixed mediumBottomMargin">
             <div class="row mediumBottomMargin"></div>
             <div class="row">
                 <ul class="breadcrumb">
                     <li><a href="../../private/employee/home.jsp">Home</a></li>
-                    <li>Rank Your Preferred Speakers</li>
+                    <li class='ieFix'>Rank Your Preferred Speakers</li>
                 </ul>
             </div>
             <% if (speakers.size() > 0) {%>
@@ -177,19 +191,38 @@
             <div class="row mediumBottomMargin">
                 <h1 style="font-weight:normal;">Rank Your Preferred Speakers</h1>
             </div>
-            <div class='row largeBottomMargin'>
-                <p style='font-size: 16px; font-family: Arial;'>We want to hear from you!  Please let us know the top 10 speakers you would be interested in listening to for this year's Techtoberfest.</p>
+            <div class='row mediumBottomMargin'>
+                <h3>We want to hear from you!  Please let us know the top 10 speakers you would be interested in listening to for this year's Techtoberfest.</h3>
             </div>
             <div class='row largeBottomMargin'></div>
             <div class="row mediumBottomMargin">
                 <h2 class='bordered mediumBottomMargin'><img style='padding-bottom:0;padding-left:0;' src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class='titlespan'>Which speakers are you most interested in?</span></h2>
-                <span>Please drag and drop the speakers you are most interested in and rank them 1-10. If desired, you can provide a ranking for less than 10 speakers. Once your ranking has been submitted, you can not submit another unless you choose to reset/clear your previous one.  <br/><strong>Note:</strong>There is also a <a href=../../private/employee/nondragspeaker.jsp>non drag and drop version</a> available.</span>
+                <span>Please drag and drop the speakers you are most interested in and rank them 1-10. If desired, you can provide a ranking for less than 10 speakers. Once your ranking has been submitted, you can not submit another unless you choose to reset/clear your previous one.  <br/></span>
+                <div class='smallBottomMargin'></div>
+                <span><strong>Note: </strong>There is also a <a href=../../private/employee/nondragspeaker.jsp>non drag and drop version</a> available.</span>
                 <div class='row mediumBottomMargin'></div>
 
                 <form action='../../action/processSpeakerRanking.jsp'>
                     <div class='row mediumBottomMargin'>
                         <div class='span5 smallBottomMargin'>
-                            <span><strong>Available Speakers</strong></span><span class='pullRight'><a href='#'>Last years ranking</a></span>
+                            <span><strong>Last Year's Speakers</strong><i id="spkrtypeHelp" class="icon12-info" data-content="Business Speakers - Any speaker providing technical information in a non-technical way, appealing to both IT and non-IT users.<br/><br/>Technical Speakers - Speakers with a technical background providing mid to high level technical information, appealing to mainly IT users with technical backgrounds." title="Speaker Types"></i></span>
+                            <span class='pullRight'><a class='showModal'>
+                                    <div class='modals' id='ranks' title="Last Year's top 10">
+                                        <ol>
+                                            <li>Matt Peter: 4.93</li>
+                                            <li>John Hills: 4.92</li>
+                                            <li>Ram Karra: 4.80</li>
+                                            <li>Joshua Eldridge: 4.78</li>
+                                            <li>Kevin Barry: 4.76</li>
+                                            <li>Amy Thomason: 4.75</li>
+                                            <li>Robin Wilde: 4.75</li>
+                                            <li>Kamlesh Sharma: 4.75</li>
+                                            <li>Jonathan Williams: 4.75</li>
+                                            <li>Kabita Nayak: 4.75</li>
+                                        </ol>
+                                    </div>Last year's top 10</a>
+                            </span>
+
                         </div>
                         <div class='span5 smallBottomMargin'>
                             <span class='interestLabel'><strong>Speakers I'm Interested In</strong></span>
@@ -215,7 +248,7 @@
                         </div>
                         <div class='span5'>
                             <ol id='ranked' class='connectedSortable'>
-                                <li class='placeholder'>Place speakers here</li>
+                                <label>Please drag and drop your selections here</label>
                             </ol>
                         </div>
                     </div>
@@ -226,6 +259,18 @@
             </div>
         </div><!-- End Container Fixed -->
         <%@ include file="../../includes/footer.jsp" %>
+        <script src="../../js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>
+        <script src="../../js/libs/sniui.user-inline-help.1.2.0.min.js" type="text/javascript"></script>
+        <script>
+            $(document).ready(function() {
+                $('#spkrtypeHelp').userInlineHelp();
+                $('#ranks').dialog({autoOpen: false, closeText: "hide"});
+                $('.showModal').click(function() {
+                    $('#ranks').dialog("open");
+                });
+                $(".breadcrumb li").last().addClass("ieFix");
+            });
+        </script>
     </body>
 </html>
 

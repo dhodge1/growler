@@ -100,6 +100,7 @@
                 border-top: 6px solid #79BDEB;
                 box-shadow: 2px 2px 2px 2px #ccc;
                 -webkit-box-shadow: 2px 2px 2px 2px #ccc;
+                background: #fff;
             }
             #ranked li {
                 list-style-type: decimal-leading-zero;
@@ -110,6 +111,7 @@
                 border-top: 6px solid #79BDEB;
                 box-shadow: 2px 2px 2px 2px #ccc;
                 -webkit-box-shadow: 2px 2px 2px 2px #ccc;
+                background: #fff;
             }
             #ranked {
                 list-style-position: inside;
@@ -127,13 +129,27 @@
                 height:340px;
             }
             #ranked {
+                margin:0;
+                height: 340px;
+                background: #ddd;
                 border: 1px solid #ccc;
+                margin-left: -25px;
             }
             .centerRow {
                 margin-left: 4px;
             }
             .interestLabel {
                 margin-left:25px;
+                top:10px;
+                position:relative;
+            }
+            .pullRight {
+                float: right;
+                top:10px;
+                position:relative;
+            }
+            h3 {
+                font-weight:normal;
             }
         </style>
     </head>
@@ -153,12 +169,12 @@
         %>
         <%@ include file="../../includes/header.jsp" %> 
         <%@ include file="../../includes/testnav.jsp" %>
-        <div class="container-fixed largeBottomMargin">
+        <div class="container-fixed mediumBottomMargin">
             <div class="row mediumBottomMargin"></div>
             <div class="row">
                 <ul class="breadcrumb">
                     <li><a href="../../private/employee/home.jsp">Home</a></li>
-                    <li>Rank Your Preferred Themes</li>
+                    <li class='ieFix'>Rank Your Preferred Themes</li>
                 </ul>
             </div>
             <% if (themes.size() > 0) {%>
@@ -172,35 +188,35 @@
                 <h1 style="font-weight:normal;">Rank Your Preferred Themes</h1>
             </div>
 
-            <div class='row largeBottomMargin'>
-                <p style='font-size: 16px; font-family: Arial;'>We want to hear from you!  Please let us know the top 10 presentation themes you would be interested in attending for this year's Techtoberfest.</p>
+            <div class='row mediumBottomMargin'>
+                <h3>We want to hear from you!  Please let us know the top 10 presentation themes you would be interested in attending for this year's Techtoberfest.</h3>
             </div>
             <div class='row mediumBottomMargin'></div>
 
             <div class="row mediumBottomMargin">
                 <h2 class="bordered mediumBottomMargin"><img style="padding-bottom:0;padding-left:0;" id="logo" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Which presentations are you most interested in?</span></h2>
                 <span>Select the presentation themes you are most interested in. If desired, you can provide a ranking for less than 10 presentation themes. Once your ranking has been submitted, you can not submit another unless you choose to reset/clear your previous one.  There is also a <a href='../../private/employee/theme.jsp'>drag and drop version</a> available.</span><br/>
+                <div class='smallBottomMargin'></div>
                 <span><strong>Note:</strong> The order in which you select the item is the order they will be ranked.</span>
                 <div class='row largeBottomMargin'></div>
 
                 <form action='../../action/processThemeRanking.jsp'>
                     <div class='row mediumBottomMargin'>
-                        <div class='span5 smallBottomMargin'>
-                            <span><strong>Available Themes</strong></span>
-                        </div>
-                        <div class='span5 smallBottomMargin'>
-                            <span class='interestLabel'><strong>Presentations Themes I'm Interested In</strong></span>
-                        </div>
-                        <div class='span5'>
-                            
-                                <span class="keywordFilter" style="width:100%;">
+                        <div class='row span10' style='background: #ddd;'>
+                            <div class='span6 smallBottomMargin'>
+                                <span class="keywordFilter" style="width:100%; margin-top: 6px;">
                                     <i class="icon16-magnifySmall"></i>
                                     <span class="keywordFilter-wrapper">
                                         <input type="search" id="filter" value="Filter..." />
                                     </span>
                                     <a class="keywordFilter-clear" onclick="clearFilter();"><i class="icon16-close"></i></a>
                                 </span>
-                            
+                            </div>
+                            <div class='span6 smallBottomMargin'>
+                                <span class='interestLabel'><strong>Presentations Themes I'm Interested In</strong></span>
+                            </div>
+                        </div>
+                        <div class='span5'>
                             <ul id='themes'>
                                 <%        for (int i = 0; i < vthemes.size(); i++) {
                                         out.print("<li class=\"" + vthemes.get(i).getType() + "\" data-content=\"" + vthemes.get(i).getDescription() + "\"  title=\"" + vthemes.get(i).getName() + "\" data-placement='left'>");
@@ -213,7 +229,6 @@
                         </div>
                         <div class='span5'>
                             <ol id='ranked'>
-                                <li class='placeholder'>Ranked Themes</li>
                             </ol>
                         </div>
                     </div>

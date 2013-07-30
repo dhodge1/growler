@@ -85,6 +85,7 @@
                 border-top: 6px solid #79BDEB;
                 box-shadow: 2px 2px 2px 2px #ccc;
                 -webkit-box-shadow: 2px 2px 2px 2px #ccc;
+                background: #fff;
             }
             #ranked li {
                 list-style-type: decimal-leading-zero;
@@ -95,9 +96,15 @@
                 border-top: 6px solid #79BDEB;
                 box-shadow: 2px 2px 2px 2px #ccc;
                 -webkit-box-shadow: 2px 2px 2px 2px #ccc;
+                background: #fff;
             }
             #ranked {
                 list-style-position: inside;
+                height: 345px;
+                background: #ddd;
+                border: 1px solid #ccc;
+                margin:0;
+                margin-left: -25px;
             }
             #filtertext {
                 margin-left:1.28%
@@ -111,22 +118,33 @@
                 overflow-y:scroll;
                 height:345px;
             }
-            #ranked {
-                border: 1px solid #ccc;
-            }
             .centerRow {
                 margin-left: 4px;
             }
             .interestLabel {
                 margin-left:25px;
+                top:10px;
+                position:relative;
             }
             .pullRight {
                 float: right;
+                top:10px;
+                position:relative;
             }
             input[type="checkbox"] {
                 position:relative;
                 bottom: 5px;
                 margin-right: 6px;
+            }
+            h3 {
+                font-weight:normal;
+            }
+            .showModal {
+                color:#0067b1;
+                text-decoration: underline;
+            }
+            .modals {
+                background: #fff;
             }
         </style>
     </head>
@@ -146,12 +164,12 @@
         %>
         <%@ include file="../../includes/header.jsp" %> 
         <%@ include file="../../includes/testnav.jsp" %>
-        <div class="container-fixed largeBottomMargin">
+        <div class="container-fixed mediumBottomMargin">
             <div class="row mediumBottomMargin"></div>
             <div class="row">
                 <ul class="breadcrumb">
                     <li><a href="../../private/employee/home.jsp">Home</a></li>
-                    <li>Rank Speakers</li>
+                    <li class='ieFix'>Rank Your Preferred Speakers</li>
                 </ul>
             </div>
             <% if (speakers.size() > 0) {%>
@@ -162,37 +180,52 @@
             </div>
             <% } //end if  %>
             <div class="row mediumBottomMargin">
-                <h1 style="font-weight:normal;">Rank Speakers</h1>
+                <h1 style="font-weight:normal;">Rank Your Preferred Speakers</h1>
             </div>
 
-            <div class='row largeBottomMargin'>
-                <p style='font-size: 16px; font-family: Arial;'>We want to hear from you!  Please let us know the top 10 speakers you would be interested in attending for this year's Techtoberfest.</p>
+            <div class='row mediumBottomMargin'>
+                <h3>We want to hear from you!  Please let us know the top 10 speakers you would be interested in attending for this year's Techtoberfest.</h3>
             </div>
             <div class='row mediumBottomMargin'></div>
             <div class="row mediumBottomMargin">
                 <h2 class="bordered mediumBottomMargin"><img style="padding-bottom:0;padding-left:0;" id="logo" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Which speakers are you most interested in?</span></h2>
                 <span>Select the speakers you are most interested in. If desired, you can provide a ranking for less than 10 speakers. Once your ranking has been submitted, you can not submit another unless you choose to reset/clear your previous one.  There is also a <a href='../../private/employee/speaker.jsp'>drag and drop version</a> available.</span><br/>
+                <div class='smallBottomMargin'></div>
                 <span><strong>Note:</strong> The order in which you select the item is the order they will be ranked.</span>
                 <div class='row largeBottomMargin'></div>
 
                 <form action='../../action/processSpeakerRanking.jsp'>
                     <div class='row mediumBottomMargin'>
-                        <div class='span5 smallBottomMargin'>
-                            <span><strong>Available Speakers</strong></span>
-                        </div>
-                        <div class='span5 smallBottomMargin'>
-                            <span class='interestLabel'><strong>Speakers I'm Interested In</strong></span><span class='pullRight'><a href='#'>Last years ranking</a></span>
+                        <div class='row span10' style='background:#ddd;'>
+                            <div class='span6 smallBottomMargin'>
+                                <span class="keywordFilter" style="width:100%; margin-top: 6px;">
+                                    <i class="icon16-magnifySmall"></i>
+                                    <span class="keywordFilter-wrapper">
+                                        <input type="search" id="filter" value="Filter..." />
+                                    </span>
+                                    <a class="keywordFilter-clear" onclick="clearFilter();"><i class="icon16-close"></i></a>
+                                </span>
+                            </div>
+                            <div class='span6 smallBottomMargin'>
+                                <span class='interestLabel'><strong>Speakers I'm Interested In</strong></span><span class='pullRight'><a class='showModal'>
+                                        <div class='modals' id='ranks' title="Last Year's top 10">
+                                            <ol>
+                                                <li>Matt Peter: 4.93</li>
+                                                <li>John Hills: 4.92</li>
+                                                <li>Ram Karra: 4.80</li>
+                                                <li>Joshua Eldridge: 4.78</li>
+                                                <li>Kevin Barry: 4.76</li>
+                                                <li>Amy Thomason: 4.75</li>
+                                                <li>Robin Wilde: 4.75</li>
+                                                <li>Kamlesh Sharma: 4.75</li>
+                                                <li>Jonathan Williams: 4.75</li>
+                                                <li>Kabita Nayak: 4.75</li>
+                                            </ol>
+                                        </div>Last year's top 10</a>
+                                </span>
+                            </div>
                         </div>
                         <div class='span5'>
-
-                            <span class="keywordFilter" style="width:100%;">
-                                <i class="icon16-magnifySmall"></i>
-                                <span class="keywordFilter-wrapper">
-                                    <input type="search" id="filter" value="Filter..." />
-                                </span>
-                                <a class="keywordFilter-clear" onclick="clearFilter();"><i class="icon16-close"></i></a>
-                            </span>
-
                             <ul id='speakers'>
                                 <%
                                     for (int i = 0; i < vspeakers.size(); i++) {
@@ -207,7 +240,6 @@
                         </div>
                         <div class='span5'>
                             <ol id='ranked'>
-                                <li class='placeholder'>Ranked Speakers</li>
                             </ol>
                         </div>
                     </div>
@@ -223,5 +255,16 @@
             </div>
         </div>
         <%@ include file="../../includes/footer.jsp" %>
+        <script src="../../js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>
+        <script src="../../js/libs/sniui.user-inline-help.1.2.0.min.js" type="text/javascript"></script>
+        <script>
+            $(document).ready(function() {
+                $('#spkrtypeHelp').userInlineHelp();
+                $('#ranks').dialog({autoOpen: false, closeText: "hide"});
+                $('.showModal').click(function() {
+                    $('#ranks').dialog("open");
+                });
+            });
+        </script>
     </body>
 </html>

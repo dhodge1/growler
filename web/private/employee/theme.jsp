@@ -91,6 +91,9 @@
             .interestLabel {
                 margin-left:25px;
             }
+            h3 {
+                font-weight: normal;
+            }
         </style>
         <script>
             $(function() {
@@ -99,7 +102,7 @@
                     cursor: "move",
                     placeholder: "ui-state-highlight",
                     update: function(event, ui) {
-                        $(this).find(".placeholder").remove();
+                        $(this).find("label").remove();
                         $("#themes").find(":hidden").prop("name", "none");
                         $("#ranked").find(":hidden").prop("name", "list");
                     },
@@ -137,7 +140,7 @@
                     }
                 });
                 $("#send").click(function(event) {
-                    $("#ranked").find(".placeholder").remove(); //Remove the placeholder
+                    $("#ranked").find("label").remove(); //Remove the placeholder
                     if ($("#ranked li").length === 0) {
                         event.preventDefault();
                         alert("Please rank at least one theme before submitting.");
@@ -166,15 +169,15 @@
         %>
         <%@ include file="../../includes/header.jsp" %> 
         <%@ include file="../../includes/testnav.jsp" %>
-        <div class="container-fixed largeBottomMargin">
+        <div class="container-fixed mediumBottomMargin">
             <div class="row mediumBottomMargin"></div>
             <div class="row">
                 <ul class="breadcrumb">
                     <li><a href="../../private/employee/home.jsp">Home</a></li>
-                    <li>Rank Your Preferred Themes</li>
+                    <li class='ieFix'>Rank Your Preferred Themes</li>
                 </ul>
             </div>
-            <% if (themes.size() > 0) {  %>
+            <% if (themes.size() > 0) {%>
             <div class="mediumBottomMargin">
                 <p class="feedbackMessage-warning">You have already submitted a ranking for your preferred presentation themes.  In order to submit a different ranking, you must reset your previous one.
                     <% out.print("<a href='../../action/removeThemeRanks.jsp?id=" + user + "'>Reset your previous ranking now.</a>");%>
@@ -185,55 +188,57 @@
                 <h1 style="font-weight:normal;">Rank Your Preferred Themes</h1>
             </div>
             <div class='row largeBottomMargin'>
-                <p style='font-size: 16px; font-family: Arial;'>We want to hear from you!  Please let us know the top 10 presentation themes you would be interested in attending for this year's Techtoberfest.</p>
+                <h3>We want to hear from you!  Please let us know the top 10 presentation themes you would be interested in attending for this year's Techtoberfest.</h3>
             </div>
             <div class='row mediumBottomMargin'></div>
             <div class="row mediumBottomMargin">
                 <h2 class="bordered mediumBottomMargin"><img style="padding-bottom:0;padding-left:0;" id="logo" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Which presentations are you most interested in?</span></h2>
-                <span>Please drag and drop the presentation themes you are most interested in and rank them 1-10. If desired, you can provide a ranking for less than 10 themes. Once your ranking has been submitted, you can not submit another unless you choose to reset/clear your previous one.<br/><strong>Note:</strong>  There is also a <a href="../../private/employee/nondragtheme.jsp">non drag and drop version</a> available.</span>
+                <span>Please drag and drop the presentation themes you are most interested in and rank them 1-10. If desired, you can provide a ranking for less than 10 themes. Once your ranking has been submitted, you can not submit another unless you choose to reset/clear your previous one.<br/></span>
+                <div class='smallBottomMargin'></div>
+                <span><strong>Note:</strong>  There is also a <a href="../../private/employee/nondragtheme.jsp">non drag and drop version</a> available.</span>
                 <div class='row largeBottomMargin'></div>
 
-                    <form action='../../action/processThemeRanking.jsp'>
-                        <div class='row mediumBottomMargin'>
-                            <div class='span5 smallBottomMargin'>
-                                <span><strong>Available Presentation Themes</strong></span>
-                            </div>
-                            <div class='span5 smallBottomMargin'>
-                                <span class='interestLabel'><strong>Presentations Themes I'm Interested In</strong></span>
-                            </div>
-                            <div class='span5'>
-                                <div class='row'>
-                                    <select id='filter'>
-                                        <option value='1'>All Themes</option>
-                                        <option value='2'>Business Themes</option>
-                                        <option value='3'>Technical Themes</option>
-                                    </select>
-                                </div>
-                                <ul id='themes' class='connectedSortable'>
-                                    <%
-                                        for (int i = 0; i < vthemes.size(); i++) {
-                                            String desc = vthemes.get(i).getDescription();
-                                            out.print("<li class=\"" + vthemes.get(i).getType() + "\" data-content=\"" + desc + "\"  title=\"" + vthemes.get(i).getName() + "\" data-placement='left'>");
-                                            out.print("<span><strong>" + vthemes.get(i).getName() + "</strong></span>");
-                                            out.print("<input type=\"hidden\" name=\"list\" value=\"" + vthemes.get(i).getId() + "\" />");
-                                            out.print("</li>");
-                                        }
-                                    %>
-                                </ul>
-                            </div>
-                            <div class='span5'>
-                                <ol id='ranked' class='connectedSortable' >
-                                    <li class='placeholder'>Place Ranked Themes Here</li>
-                                </ol>
-                            </div>
+                <form action='../../action/processThemeRanking.jsp'>
+                    <div class='row mediumBottomMargin'>
+                        <div class='span5 smallBottomMargin'>
+                            <span><strong>Available Presentation Themes</strong></span>
                         </div>
-                        <div class='form-actions'>
-                            <input id="send" type="submit" value="Submit My Ranking" class="button button-primary"/>
-                            <a href="../../private/employee/home.jsp">Cancel</a>
-                            <input id='previously' name='previously' type='hidden' value=<%= themes.size() %>/>
+                        <div class='span5 smallBottomMargin'>
+                            <span class='interestLabel'><strong>Presentations Themes I'm Interested In</strong></span>
                         </div>
-                        <strong>Presentation not listed? </strong><a href='../../private/employee/themeentry.jsp'>Click here to suggest a new theme</a>
-                    </form>
+                        <div class='span5'>
+                            <div class='row'>
+                                <select id='filter'>
+                                    <option value='1'>All Themes</option>
+                                    <option value='2'>Business Themes</option>
+                                    <option value='3'>Technical Themes</option>
+                                </select>
+                            </div>
+                            <ul id='themes' class='connectedSortable'>
+                                <%
+                                    for (int i = 0; i < vthemes.size(); i++) {
+                                        String desc = vthemes.get(i).getDescription();
+                                        out.print("<li class=\"" + vthemes.get(i).getType() + "\" data-content=\"" + desc + "\"  title=\"" + vthemes.get(i).getName() + "\" data-placement='left'>");
+                                        out.print("<span><strong>" + vthemes.get(i).getName() + "</strong></span>");
+                                        out.print("<input type=\"hidden\" name=\"list\" value=\"" + vthemes.get(i).getId() + "\" />");
+                                        out.print("</li>");
+                                    }
+                                %>
+                            </ul>
+                        </div>
+                        <div class='span5'>
+                            <ol id='ranked' class='connectedSortable' >
+                                <label>Please drag and drop your selections here</label>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class='form-actions'>
+                        <input id="send" type="submit" value="Submit My Ranking" class="button button-primary"/>
+                        <a href="../../private/employee/home.jsp">Cancel</a>
+                        <input id='previously' name='previously' type='hidden' value=<%= themes.size()%>/>
+                    </div>
+                    <strong>Presentation not listed? </strong><a href='../../private/employee/themeentry.jsp'>Click here to suggest a new theme</a>
+                </form>
             </div>
         </div>
         <%@ include file="../../includes/footer.jsp" %>

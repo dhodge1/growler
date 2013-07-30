@@ -75,13 +75,13 @@
             <div class="row">
                 <ul class="breadcrumb">
                     <li><a href="../../private/employee/home.jsp">Home</a></li>
-                    <li>Session Schedule</li>
+                    <li class='ieFix'>Session Schedule</li>
                 </ul>
             </div>
             <div class="row mediumBottomMargin">
                 <h1>2013 Session Schedule</h1>
             </div>
-            <div class="row mediumBottomMargin" style="border:1px dotted #ccc"></div>
+            <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
             <div class="row largeBottomMargin">
                 <span>Below is the latest session schedule for this years Techtoberfest event.</span>
             </div>

@@ -54,7 +54,7 @@
             <div class="row mediumBottomMargin">
                 <h1>Theme Suggestion Confirmation</h1>
             </div>
-            <div class="row mediumBottomMargin" style="border:1px dotted #ccc"></div>
+            <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
             <div class="row largeBottomMargin">
                 <span>The Techtoberfest committee thanks you for your suggestion!</span>
             </div>

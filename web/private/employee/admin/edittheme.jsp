@@ -8,7 +8,6 @@
 <!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!--> 
 <html class="no-js" lang="en"> <!--<![endif]-->
-
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -37,88 +36,100 @@
             } catch (Exception e) {
             }
         %>
+        <%
+            int themeId = (Integer.parseInt(request.getParameter("id")));
+            ThemePersistence tp = new ThemePersistence();
+            Theme theme = tp.getThemeByID(themeId);
+        %>
         <%@ include file="../../../includes/adminheader.jsp" %> 
         <%@ include file="../../../includes/adminnav.jsp" %>
         <div class="container-fixed">
-            <br/><br/><br/>
+            <div class="row mediumBottomMargin"></div>
             <div class="row">
-                
-                    <%
-                        int themeId = (Integer.parseInt(request.getParameter("id")));
-                        ThemePersistence tp = new ThemePersistence();
-                        Theme theme = tp.getThemeByID(themeId);
-                    %>
-                    <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Edit A Theme: <%= theme.getName()%></span></h2>
-                
+                <ul class="breadcrumb">
+                    <li><a href="../../../private/employee/admin/home.jsp">Home</a></li>
+                    <li>Edit Theme</li>
+                </ul>
             </div>
-            <br/>
+            <div class="row mediumBottomMargin">
+                <h1 style="margin-top:0px;font-weight: normal;">Edit Theme</h1>
+            </div>
+            <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
+            <div class="row mediumBottomMargin">
+                <label><span style="color: red;">*</span>Required field</label>
+            </div>
+            <div class="row mediumBottomMargin">
+                    <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Suggestion Details</span></h2>
+            </div>
             <div class="row">
-                
-
-                    <form method="post" action="../../../action/processThemeEdit.jsp" onSubmit="return validateValues();">
-                        <div class="form-group">
-                            <label class="required">Theme Name: </label>
-                            <input id="name" name="name" type="text" data-content="Enter the name of the Theme" value="<% out.print(theme.getName());%>" maxlength="30"/>
-                            <input name="id" type="hidden" value="<% out.print(theme.getId());%>" />
-                        </div>
-                        <div class="form-group">
-                            <label class="required">Theme Description: </label>
-                            <input name="description" id="description" type="text" data-content="Enter the Description" value="<% out.print(theme.getDescription());%>" maxlength="250"/>
-                        </div>
-                        <div class="form-group">
-                            <label class="required">Theme Reason: </label>
-                            <input name="reason" id="reason" type="text" data-content="Enter a reason for the Theme" value="<% out.print(theme.getReason());%>" maxlength="250"/>
-                        </div>
-                        <div class="form-group">
-                            <label class="required">Theme Creator: </label>
-                            <input name="creator" id="creator" type="text" data-content="Enter a Creator ID for the Theme" value="<% out.print(theme.getCreatorId());%>"/>
-                        </div>
-                        <div class="form-group">
-                            <label class="required">Visible: </label>
-                            <input type="radio" name="visible" value="true"
-                                   <% if (theme.getVisible()) {
-                                                               out.print("checked");
-                                                           }%>/>True<br/>
-                            <input type="radio" name="visible" value="false"
-                                   <% if (!theme.getVisible()) {
+                <form method="post" action="../../../action/processThemeEdit.jsp" onSubmit="return validateValues();">
+                    <div class="form-group">
+                        <label class="required">Theme Name: </label>
+                        <input id="name" name="name" type="text" data-content="Enter the name of the Theme" value="<% out.print(theme.getName());%>" maxlength="30"/>
+                        <input name="id" type="hidden" value="<% out.print(theme.getId());%>" />
+                    </div>
+                    <div class="form-group">
+                        <label class="required">Theme Description: </label>
+                        <input name="description" id="description" type="text" data-content="Enter the Description" value="<% out.print(theme.getDescription());%>" maxlength="250"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="required">Theme Category: </label>
+                        <select name="category">
+                            <option value="0"> Select a Category </option>
+                            <option value="Business">Business</option>
+                            <option value="Technical">Technical</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="required">Theme Creator: </label>
+                        <input name="creator" id="creator" type="text" data-content="Enter a Creator ID for the Theme" value="<% out.print(theme.getCreatorId());%>"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="required">Visible: </label>
+                        <input type="radio" name="visible" value="true"
+                               <% if (theme.getVisible()) {
                                            out.print("checked");
-                                       }
-                                   %>/>False<br/>
-                        </div>
-                        <input type="submit" value="Submit" class="button button-primary"/>
-                    </form>
-                
+                                       }%>/>True<br/>
+                        <input type="radio" name="visible" value="false"
+                               <% if (!theme.getVisible()) {
+                                       out.print("checked");
+                                   }
+                               %>/>False<br/>
+                    </div>
+                    <input type="submit" value="Submit" class="button button-primary"/>
+                </form>
+
             </div>
         </div>
-    
 
-    <%@ include file="../../../includes/footer.jsp" %> 
-    <%@ include file="../../../includes/scriptlist.jsp" %>
-    <script>
-                                        $(function() {
-                                            $("input").autoinline();
-                                        });
-                                        function validateValues() {
-                                            var myname = document.getElementById("name");
-                                            if (!myname.value) {
-                                                alert('Please enter a Session Name');
-                                                myname.focus();
-                                                return false;
-                                            }
-                                            var mydate = document.getElementById("description");
-                                            if (!mydate.value) {
-                                                alert('Please enter a description');
-                                                mydate.focus();
-                                                return false;
-                                            }
-                                            var mylocation = document.getElementById("reason");
-                                            if (!mylocation.value) {
-                                                alert('Please enter a reason');
-                                                mylocation.focus();
-                                                return false;
-                                            }
-                                            return true;
-                                        }
-    </script>
-</body>
+
+        <%@ include file="../../../includes/footer.jsp" %> 
+        <%@ include file="../../../includes/scriptlist.jsp" %>
+        <script>
+                    $(function() {
+                        $("input").autoinline();
+                    });
+                    function validateValues() {
+                        var myname = document.getElementById("name");
+                        if (!myname.value) {
+                            alert('Please enter a Session Name');
+                            myname.focus();
+                            return false;
+                        }
+                        var mydate = document.getElementById("description");
+                        if (!mydate.value) {
+                            alert('Please enter a description');
+                            mydate.focus();
+                            return false;
+                        }
+                        var mylocation = document.getElementById("reason");
+                        if (!mylocation.value) {
+                            alert('Please enter a reason');
+                            mylocation.focus();
+                            return false;
+                        }
+                        return true;
+                    }
+        </script>
+    </body>
 </html>

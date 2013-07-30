@@ -34,16 +34,9 @@
     </head>
     <body id="growler1">
         <%
-                    int user = 0;
-                    if (null == session.getAttribute("id")) {
+                    
+                    if (null == session.getAttribute("role")) {
                         response.sendRedirect("../../../index.jsp");
-                    }
-                    try {
-                        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
-                        String name = String.valueOf(session.getAttribute("user"));                  
-                    }
-                    catch (Exception e) {
-                        
                     }
         %>
         <%@ include file="../../../includes/header.jsp" %> 

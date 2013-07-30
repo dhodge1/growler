@@ -40,18 +40,19 @@
         <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->	
     </head>
     <body id="growler1">
-        <%@ include file="../includes/header.jsp" %> 
+        <%@ include file="../includes/indexheader.jsp" %> 
         <%@ include file="../includes/publicnav.jsp" %>
         <div class="container-fixed mediumBottomMargin">
             <div class="row">
                 <ul class="breadcrumb">
                     <li><a href="../index.jsp">Home</a></li>
-                    <li>Request Password Reset</li>
+                    <li class="ieFix">Request Password Reset</li>
                 </ul>
             </div>
-            <div class="row largeBottomMargin">
+            <div class="row mediumBottomMargin">
                 <h1 style="font-weight:normal;">Request Password Reset</h1>
             </div>
+            <div class='row mediumBottomMargin' style='border: 1px dotted #ccc;'></div>
             <div class="row mediumBottomMargin">
                 <p>Please enter the Email Address associated with your account and click Submit Request</p>
             </div>

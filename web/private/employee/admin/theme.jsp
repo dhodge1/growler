@@ -50,16 +50,8 @@
     </head>
     <body id="growler1">
         <%
-            int user = 0;
-            if (null == session.getAttribute("id")) {
+            if (null == session.getAttribute("role")) {
                 response.sendRedirect("../../../index.jsp");
-            } else if (!session.getAttribute("role").equals("admin")) {
-                response.sendRedirect("../../../index.jsp");
-            }
-            try {
-                user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
-                String name = String.valueOf(session.getAttribute("user"));
-            } catch (Exception e) {
             }
             ThemePersistence persist = new ThemePersistence();
             ArrayList<Theme> themes = persist.getAllThemes(" order by name asc ");
@@ -77,7 +69,7 @@
             <div class="row mediumBottomMargin">
                 <h1>Manage Themes</h1>
             </div>
-            <div class="row mediumBottomMargin" style="border:1px dotted #ccc"></div>
+            <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
             <div class="row largeBottomMargin">
                 <span>Use the table below to add, edit or delete existing themes.</span>
             </div>
@@ -107,7 +99,7 @@
                             %>
                             <tr <% out.print("id='row" + i + "'");%>>
                                 <td><%= themes.get(i).getName()%>
-                                    <input type="hidden" <% out.print("id='rowfor" + themes.get(i).getId() + "'"); %> />
+                                    <input type="hidden" <% out.print("id='rowfor" + themes.get(i).getId() + "'");%> />
                                 </td>
                                 <td><a class="showModal"><% out.print("<input type='hidden' value='" + themes.get(i).getId() + "' />");%>View</a>
                                     <% out.print("<div class='modals' id='modal" + themes.get(i).getId() + "' title='" + themes.get(i).getName() + "'>");
@@ -133,7 +125,7 @@
                                         <a class="actionMenu-toggle" data-toggle="dropdown" href="#">Actions<b class="caret"></b></a>
                                         <ul class="actionMenu-menu" role="menu">
                                             <li><a <% out.print("href='../../../private/employee/admin/edittheme.jsp?id=" + themes.get(i).getId() + "'");%>><i class="icon16-approve"></i>Edit</a></li>
-                                            <li><a class="showModal3"><% out.print("<input type='hidden' name='delete' value='" + themes.get(i).getId() + "' />"); %>
+                                            <li><a class="showModal3"><% out.print("<input type='hidden' name='delete' value='" + themes.get(i).getId() + "' />");%>
                                                     <% out.print("<div class='modalDelete' id='modaldelete" + themes.get(i).getId() + "' title='Delete Confirmation'>");
                                                         out.print("Is it ok to delete this theme?<br/><br/>");
                                                         out.print(themes.get(i).getName());
@@ -196,7 +188,8 @@
                                                 click: function() {
                                                     var theme = $(this).prop("id");
                                                     theme = theme.substring(11);
-                                                    $.post("../../../action/removeTheme.jsp", {id: theme}, function(data, success) {});
+                                                    $.post("../../../action/removeTheme.jsp", {id: theme}, function(data, success) {
+                                                    });
                                                     $("#rowfor" + theme).parent().parent().remove();
                                                     $(this).dialog('close');
                                                 },
@@ -204,7 +197,7 @@
                                             },
                                             'cancel': {
                                                 click: function() {
-                                                    
+
                                                     $(this).dialog('close');
                                                 },
                                                 text: 'No, return to manage themes table'

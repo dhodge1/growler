@@ -32,6 +32,9 @@
                 color: red;
                 font-weight: bold;
             }
+            h3 {
+                font-weight:normal;
+            }
         </style>
     </head>
     <body id="growler1">
@@ -54,15 +57,15 @@
             <div class="row">
                 <ul class="breadcrumb">
                     <li><a href="../../private/employee/home.jsp">Home</a></li>
-                    <li>Suggest a Speaker</li>
+                    <li>Suggest a New Speaker</li>
                 </ul>
             </div>
             <div class="row mediumBottomMargin">
-                <h1 style="font-weight:normal;">Suggest a Speaker</h1>
+                <h1 style="font-weight:normal;">Suggest a New Speaker</h1>
             </div>
-            <div class="row mediumBottomMargin" style="border:1px dotted #ccc"></div>
+            <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
             <div class="row largeBottomMargin">
-                <h3 style='font-size: 16px; font-family: Arial;'>Is there a new speaker you would like to suggest for this years Techtoberfest?  We would LOVE to know more about them.</h3>
+                <h3>Is there a new speaker you would like to suggest for this years Techtoberfest?  We would LOVE to know more about them.</h3>
             </div>
             <div class="row mediumBottomMargin">
                 <label><span style="color: red;">*</span>Required field</label>

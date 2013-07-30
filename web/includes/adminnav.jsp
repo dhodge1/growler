@@ -57,20 +57,20 @@
 	</li>
 	<li class="brand_nav <%= sessionTab %>"><a href="#"><span class="nav_drop">Sessions</span><em></em></a>
 		<ul class="child-menu child-menu-ul">
-			<li><a href="sessionScheduler.jsp">Schedule Sessions</a></li>
-			<li><a href="session.jsp">View Sessions</a></li>
-                        <li><a href="comments.jsp">Session Comments</a></li>
+			<li><a href="../../../private/employee/admin/sessionScheduler.jsp">Schedule Sessions</a></li>
+			<li><a href="../../../private/employee/admin/session.jsp">View Sessions</a></li>
+                        <li><a href="../../../private/employee/admin/comments.jsp">Session Comments</a></li>
 		</ul>
 	</li>
 	<li class="brand_nav <%= reportTab %>"><a href="#"><span class="nav_drop">Reports</span><em></em></a>
 		<ul class="child-menu child-menu-ul">
-			<li><a href="surveyReport.jsp">Users Who Completed Surveys</a></li>
-                        <li><a href="interestReport.jsp">Interest in Sessions</a></li>
-			<li><a href="registrationAttendanceReport.jsp">Registration vs. Attendance</a></li>
-                        <li><a href="expectationReport.jsp">Session Met Expectations</a></li>
-			<li><a href="speakerReport.jsp">Speaker Was Knowledgeable</a></li>
-                        <li><a href="presentationReport.jsp">Best Presentation Skills</a></li>
-                        <li><a href="overallReport.jsp">Best Overall Session</a></li>
+			<li><a href="../../../private/employee/admin/surveyReport.jsp">Users Who Completed Surveys</a></li>
+                        <li><a href="../../../private/employee/admin/interestReport.jsp">Interest in Sessions</a></li>
+			<li><a href="../../../private/employee/admin/registrationAttendanceReport.jsp">Registration vs. Attendance</a></li>
+                        <li><a href="../../../private/employee/admin/expectationReport.jsp">Session Met Expectations</a></li>
+			<li><a href="../../../private/employee/admin/speakerReport.jsp">Speaker Was Knowledgeable</a></li>
+                        <li><a href="../../../private/employee/admin/presentationReport.jsp">Best Presentation Skills</a></li>
+                        <li><a href="../../../private/employee/admin/overallReport.jsp">Best Overall Session</a></li>
 		</ul>
 	</li>
   </ul>

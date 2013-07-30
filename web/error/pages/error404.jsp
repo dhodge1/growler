@@ -26,7 +26,7 @@
     <body id="growler1">
         <%@ include file="../../includes/header.jsp" %>
         <%@ include file="../../includes/testnav.jsp" %>
-        <div class="container-fixed error-fluid">
+        <div class="container-fixed">
             <div class="content">
             <div class="row mediumBottomMargin">
                 <h1 class="error_heading">Page Not Found</h1>

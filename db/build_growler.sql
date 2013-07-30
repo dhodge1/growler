@@ -46,6 +46,11 @@ user_id	int references user(id)
 ,role	varchar(5)
 ,constraint primary key (user_id, role)	
 );
+/*
+ * Give Ian and Brian the roles they need.
+ */
+insert into roles (user_id, role) values (160240, 'admin');
+insert into roles (user_id, role) values (160445, 'admin');
 
 /*
  * Bridge table for the users and themes, designed to help keep track of ranks
@@ -242,7 +247,6 @@ insert into speaker (id, first_name, last_name, suggested_by, visible, type) val
 insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (5,"Mark","Kelly",202300, TRUE, "Technical");
 insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (6,"Jim","Senter",202300, TRUE, "Technical");
 insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (7,"Phil","Spann",202300, TRUE, "Technical");
-insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (8,"Jeffrey","Allen",202300, TRUE, "Business");
 insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (9,"Bhaumik","Shah",202300, TRUE, "Technical");
 insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (10,"Panagiotis","Tzerefos",202300, TRUE, "Technical");
 insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (11,"Ben","Pack",202300, TRUE, "Technical");
