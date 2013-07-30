@@ -6,7 +6,7 @@
                 in the admin folder.  It contains links that only the admin should 
                 be able to look at.
 --%>
-<link href="http://sni-techtoberfest.elasticbeanstalk.com/css/navbar.css" rel="stylesheet">
+<link href="http://growler-dev.elasticbeanstalk.com/css/navbar.css" rel="stylesheet">
 <link href="../../../css/boostrap-responsive.css" rel="stylesheet">
 <%
     String pageURI = request.getRequestURI();

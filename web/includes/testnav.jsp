@@ -1,6 +1,6 @@
 <%@page import="java.util.Calendar"%>
-<link href="http://sni-techtoberfest.elasticbeanstalk.com/css/navbar.css" rel="stylesheet">
-<link href="../../css/boostrap-responsive.css" rel="stylesheet">
+<link href="http://growler-dev.elasticbeanstalk.com/css/navbar.css" rel="stylesheet">
+<link href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" rel="stylesheet">
 <%
     String active = " selected ";
     String pageURI = request.getRequestURI();
@@ -20,7 +20,7 @@
     Calendar calendar = Calendar.getInstance();
 %>
 <nav class="topnav navbar">
-        <nav class="globalNavigation modify-pages nav-collapse" id="navigation">
+        <nav class="globalNavigation modify-pages" id="navigation">
             <ul class="nav">
                 <li class="non_drop <%= home%>" style="padding-right:12px" ><a href="../../private/employee/home.jsp"><span>Home</span></a></li>
                 <% if (calendar.get(Calendar.MONTH) < 8) { // if it's before September%>

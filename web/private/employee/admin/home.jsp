@@ -17,12 +17,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Suggest a New Theme</title>
         <link rel="stylesheet" href="../../css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
-        <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
-        <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
+        <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
+        <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
         <link rel="stylesheet" type="text/css" href="../../css/general.css" /><!--General CSS-->
         <link rel="stylesheet" href="../../../css/prettify/prettify.css" /> 
         <link rel="stylesheet" href="../../../css/wijmo/jquery.wijmo-complete.all.2.3.2.min.css"/>
-        <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
+        <script src="http://growler-dev.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <link rel="shortcut icon" type="image/png" href="../../../images/scripps_favicon-32.ico">
         <style>
             .message_container {
@@ -47,7 +47,7 @@
                 <h1 style="margin-top:0px;font-weight: normal;">Welcome to the Tecthoberfest Information System!</h1>
             </div>
             <div class="row mediumBottomMargin">
-                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Admin Details</span></h2>
+                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Admin Details</span></h2>
             </div>
             <div class="row">
                 <h3>Themes Menu</h3>

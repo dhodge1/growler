@@ -125,3 +125,8 @@ function unActive() {
 function active(page) {
     $("#page" + page).addClass("active");
 }
+
+function pageJump(){
+    var p = parseInt($("#pagejump").val(), 10);
+    page(p);
+}

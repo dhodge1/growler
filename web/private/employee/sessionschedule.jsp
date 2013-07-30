@@ -23,11 +23,11 @@
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>View Session Schedule</title><!-- Title -->
-        <link rel="shortcut icon" type="image/png" href="http://sni-techtoberfest.elasticbeanstalk.com/images/scripps_favicon-32.ico">
+        <link rel="shortcut icon" type="image/png" href="http://growler-dev.elasticbeanstalk.com/images/scripps_favicon-32.ico">
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> 
-        <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
-        <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-        <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
+        <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
+        <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
+        <script src="http://growler-dev.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
         <style>
@@ -44,6 +44,14 @@
             }
             .modals{
                 display:none;
+            }
+            h1 {
+                font-weight: normal;
+            }
+            .showModal {
+                color:#0067b1;
+                text-decoration: underline;
+                cursor: pointer;
             }
         </style>
     </head>
@@ -70,7 +78,7 @@
         %>
         <%@ include file="../../includes/header.jsp" %> 
         <%@ include file="../../includes/testnav.jsp" %>
-        <div class="container-fixed largeBottomMargin">
+        <div class="container-fixed">
             <div class="row mediumBottomMargin"></div>
             <div class="row">
                 <ul class="breadcrumb">
@@ -83,10 +91,15 @@
             </div>
             <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
             <div class="row largeBottomMargin">
-                <span>Below is the latest session schedule for this years Techtoberfest event.</span>
+                <span>Below is the latest session schedule for this years Techtoberfest event.  
+                    <% Calendar today = Calendar.getInstance();
+                if (today.get(Calendar.MONTH) != 9) { //if it's not October %>
+                    <strong>Think you may be interested in attending a session?</strong>  <a href="../../private/employee/sessioninterest.jsp">Let us know which ones.</a>
+                    <%  } //end if %>
+                </span>
             </div>
             <div class="row mediumBottomMargin">
-                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Schedule Details</span><span class="pullRight"><a href='#'>View as PDF</a></span></h2>
+                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Schedule Details</span><span class="pullRight"><a href='#'>View as PDF</a></span></h2>
             </div>
             <div class="row largeBottomMargin">
                 <input type='hidden' id='current_page' value="1" />
@@ -182,13 +195,6 @@
                     </div>
                 </div>
             </div>
-            <% Calendar today = Calendar.getInstance();
-                if (today.get(Calendar.MONTH) != 9) { //if it's not October
-%>
-            <div class="row">
-                <strong>Interested in a session?</strong> <a href="../../private/employee/sessioninterest.jsp">Let us Know</a>
-            </div>
-            <%  } //end if %>
         </div>
         <%@ include file="../../includes/footer.jsp" %>        
         <script src="../../js/libs/sniui.dialog.1.2.0.js"></script>
@@ -204,7 +210,7 @@
                                 }
                                 unActive();
                                 $("#page1").addClass("active");
-                                $(".modals").dialog({autoOpen: false});
+                                $(".modals").dialog({autoOpen: false, closeText: "hide"});
                                 $(".showModal").click(function() {
                                     var session = $(this).children().val();
                                     $("#modal" + session).dialog("open");

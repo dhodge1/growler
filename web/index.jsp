@@ -64,7 +64,7 @@
         <link rel="stylesheet" href="css/wijmo/jquery.wijmo-complete.all.2.3.2.min.css"/>
         <link rel="stylesheet" type="text/css" href="css/general.css" /><!--General CSS-->
         <script src="js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
-        <link rel="shortcut icon" type="image/png" href="http://sni-techtoberfest.elasticbeanstalk.com/images/scripps_favicon-32.ico">
+        <link rel="shortcut icon" type="image/png" href="http://growler-dev.elasticbeanstalk.com/images/scripps_favicon-32.ico">
         <style>
             .message_container {
                 display: none;
@@ -102,7 +102,7 @@
                     <div class="form-group">
                         <label>Employee ID</label>
                         <input type="text" name="USER" id="tip" data-content="Enter your Employee ID"/><br/>
-                        <input type="hidden" value="http://techtoberfest-dev.scrippsnetworks.com/private/employee/home.jsp" name="target" id="smtarget">
+                        <input type="hidden" value="http://snit.scrippsnetworks.com/private/employee/home.jsp" name="target" id="smtarget">
                         <input type="hidden" value=0 name=smauthreason>
                         <input type="hidden" name="SMAGENTNAME" value='-SM-qqTTNRp8HuVz4vfjuz8PpwRSGfFdF8v5ee9waRpRop7zciV2VtF46AXySxgHy%2bZO' />
                         <span id="error_userid" class="message_container">

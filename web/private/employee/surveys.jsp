@@ -21,11 +21,11 @@
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Session Surveys</title><!-- Title -->
-        <link rel="shortcut icon" type="image/png" href="http://sni-techtoberfest.elasticbeanstalk.com/images/scripps_favicon-32.ico">
+        <link rel="shortcut icon" type="image/png" href="http://growler-dev.elasticbeanstalk.com/images/scripps_favicon-32.ico">
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> 
-        <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
-        <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-        <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
+        <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
+        <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
+        <script src="http://growler-dev.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
         <script>
@@ -75,9 +75,41 @@
                         $("#step").val(2);
                     }
                 });
+                
+                function changeMouseOnIndicators() {
+                    for (var i = 1; i < 4; i++){
+                        $("#progress" + i).css("cursor", "default");
+                    }
+                }
+                
+                function showErrors(page) {
+                    if (page === 1) {
+                        $("#errors").html("<span>Please select a session.</span>");
+                        $("#errors").show();
+                    }
+                    if (page === 2) {
+                        $("#errors").html("<span>Please answer all questions.</span>");
+                        if (!$("input[name='q1']:checked")) {
+                            $("input[name='q1']:checked").find(".errors .question").html("<span>This field is required.</span>");
+                        }
+                        if (!$("input[name='q2']:checked")) {
+                            $("input[name='q2']:checked").find(".errors .question").html("<span>This field is required.</span>");
+                        }
+                        if (!$("input[name='q3']:checked")) {
+                            $("input[name='q3']:checked").find(".errors .question").html("<span>This field is required.</span>");
+                        }
+                        if (!$("input[name='q4']:checked")) {
+                            $("input[name='q4']:checked").find(".errors .question").html("<span>This field is required.</span>");
+                        }
+                        $("#errors").show();
+                    }
+                }
+                
                 $("#continue").click(function() {
                     var step = parseInt($("#step").val());
+                    $("#errors").hide();
                     if (step === 1) {
+                        changeMouseOnIndicators();
                         if ($("input[name='survey']:checked").length) {
                             $("#session").val($("input[name='survey']:checked").val());
                             $("#dateselector").hide();
@@ -89,10 +121,12 @@
                             $("#progress2").addClass("current");
                         }
                         else {
-                            alert('Please select a session');
+                            showErrors(1);
                         }
                     }
                     if (step === 2) {
+                        changeMouseOnIndicators();
+                        $("#progress1").css("cursor", "pointer");
                         if ($("input[name='q1']:checked").length && $("input[name='q2']:checked").length && $("input[name='q3']:checked").length && $("input[name='q4']:checked").length) {
                             $("#q1").val($("input[name='q1']:checked").val());
                             $("#q2").val($("input[name='q2']:checked").val());
@@ -107,10 +141,13 @@
                             $("#progress3").addClass("current");
                         }
                         else {
-                            alert('Please answer all questions');
+                            showErrors(2);
                         }
                     }
                     if (step === 3) {
+                        changeMouseOnIndicators();
+                        $("#progress1").css("cursor", "pointer");
+                        $("#progress2").css("cursor", "pointer");
                         var user = $("#userid").val();
                         var session = $("#session").val();
                         var q1 = $("#q1").val();
@@ -152,6 +189,15 @@
                 bottom: 5px;
                 margin-right: 6px;
             }
+            h1 {
+                font-weight: normal;
+            }
+            #continue {
+                cursor: pointer;
+            }
+            .errors {
+                display: none;
+            }
         </style>
     </head>
     <body id="growler1">
@@ -169,7 +215,7 @@
         %>
         <%@ include file="../../includes/header.jsp" %> 
         <%@ include file="../../includes/testnav.jsp" %>
-        <div class="container-fixed mediumBottomMargin">
+        <div class="container-fixed largeBottomMargin">
             <div class="row mediumBottomMargin"></div>
             <div class="row">
                 <ul class="breadcrumb">
@@ -210,7 +256,6 @@
                     </div>
                 </section>
             </div>
-            <div class="row">
                 <input type="hidden" id="step" name="step" value="1"/>
                 <input type="hidden" id="session" name="session"/>
                 <input type="hidden" id="user" name="user" value=<%= user%>/>
@@ -220,14 +265,18 @@
                 <input type="hidden" id="q4" name="q4"/>
                 <input type="hidden" id="comment" name="comment"/>
                 <input type="hidden" id="sessionkey" name="sessionkey"/>
-                <div id="dateselector" class="smallBottomMargin">
+                <div id="dateselector" class="smallBottomMargin row">
                     <span><strong>Session dates:</strong></span>
                     <select name="date" id="date">
                         <option value="1">10/17</option>
                         <option value="2">10/18</option>
                     </select>
                 </div>
-                <table id="table" class="table">
+                <div id='errors' class='errors feedbackMessage-error mediumBottomMargin row'>
+                </div>
+                <div class="row">
+                <table id="table" class="table span9">
+                    
                     <%
                         AttendancePersistence ap = new AttendancePersistence();
                         ArrayList<Session> sessions = ap.getUsersAttendanceInYear(user);
@@ -254,8 +303,10 @@
                             }
                         }
                     %>    
+                    
                 </table>
-                <div id="survey" class="mediumBottomMargin">
+                </div>
+                <div id="survey" class="mediumBottomMargin row">
                     <table class="table">
                         <%
                             DataConnection dataConnection = new DataConnection();
@@ -270,7 +321,7 @@
                                     <input type="radio" value="1" <% out.print(" name=q" + qResult.getInt("id"));%>><span class="checkbox inline divider" >Strongly Disagree</span>
                                     <input type="radio" value="3" <% out.print(" name=q" + qResult.getInt("id"));%>><span class="checkbox inline divider" >Neutral</span>
                                     <input type="radio" value="5" <% out.print(" name=q" + qResult.getInt("id"));%>><span class="checkbox inline" >Strongly Agree</span>
-                                </div></td>
+                                </div><div class='errors question'></div></td>
                         </tr>
                         <% }
                             qResult.close();
@@ -280,14 +331,14 @@
                     </table>
                     <label>Comments:</label><textarea maxlength="250" cols="50" rows="5" name="comment" id="commentbox"></textarea>
                 </div>
-                <div id="code">
+                <div id="code" class="row mediumBottomMargin">
                     <div class="form-group">
                         <label>Please enter the session code you were provided</label>
                         <input class="input-xlarge" maxlength="4" name="key" id="key" />
                     </div>
                     <p style="color:red">Note: Session codes are provided for each session.  This code not only helps the Techtoberfest Committee verify your session attendance, but it also serves as a raffle ticket if provided within 30 minutes of you attending a particular session.  If you do not have the code for this session, you may leave this field blank and continue with the survey.</p>
                 </div>
-                <div id="confirm">
+                <div id="confirm" class="row mediumBottomMargin">
                     <p class="feedbackMessage-success">Your survey has been submitted successfully!</p>
                     <div class="mediumBottomMargin">
                         <p>The Techtoberfest committee appreciates your feedback and thanks you for attending Tecthoberfest 2013!</p>
@@ -297,10 +348,9 @@
                         <a href="../../private/employee/home.jsp">Return to homepage</a>
                     </div>
                 </div>
-                <div class="form-actions" id="actions">
-                    <a onclick="" id="continue" class="button button-primary">Continue</a><a href="../../private/employee/sessionschedule.jsp">Cancel</a>
+                <div class="form-actions row" id="actions">
+                    <a id="continue" class="button button-primary">Continue</a><a href="../../private/employee/sessionschedule.jsp">Cancel</a>
                 </div>
-            </div>
         </div>
         <%@ include file="../../includes/footer.jsp" %>
     </body>
