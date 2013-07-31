@@ -230,10 +230,11 @@
                 <h1>Techtoberfest: Session Survey Feeback</h1>
             </div>
             <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
-            <div class="row mediumBottomMargin">
+            <div class="row largeBottomMargin">
                 <p>We want to hear from you!  Please answer a few short questions to help us improve our service and your experience.  Only one survey can be submitted per session.  We thank you for your feedback!</p>
                 <p><strong>Note:</strong>  As an incentive...if you complete a survey for a session and provide the appropriate session code within 30 minutes of attending, your name will be added to our raffle drawing.</p>
             </div>
+            <div class='row mediumBottomMargin'></div>
             <div class="row mediumBottomMargin">
                 <section class="progressIndicator clearFix">
                     <ul class="progressIndicator-list">

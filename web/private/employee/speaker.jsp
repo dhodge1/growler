@@ -63,6 +63,7 @@
                 height: 368px;
                 background: #ddd;
                 border: 1px solid #ccc;
+                margin-left:0px;
             }
             #filter {
                 width: 97.5%;
@@ -73,6 +74,10 @@
                 border: 1px solid #ccc;
                 overflow-y:auto;
                 height:345px;
+            }
+            #ranked label {
+                padding-left:3px;
+                padding-top: 3px;
             }
             .centerRow {
                 margin-left: 4px;

@@ -93,33 +93,31 @@
             <div class="row mediumBottomMargin">
                 <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Session Topics</span></h2>
             </div>
-            <div>
-                <form id="form" method="post" action="../../action/registerinterest.jsp">
-                    <div class="form-group">
-                        <table class="table table-alternatingRow">
-                        <% 
-                        for (int i = 0; i < sessions.size(); i++){
-                            if (i % 4 == 0) {
-                                out.print("<tr>");
+            <form id="form" method="post" action="../../action/registerinterest.jsp">
+                <div class="form-group row">
+                    <table class="table table-alternatingRow">
+                        <%
+                            for (int i = 0; i < sessions.size(); i++) {
+                                if (i % 4 == 0) {
+                                    out.print("<tr>");
+                                }
+                                out.print("<td>");
+                                out.print("<input type='checkbox' name='interest' value='" + sessions.get(i).getId() + "' />");
+                                out.print("<input type='hidden' name='name' value='" + sessions.get(i).getId() + "' />");
+                                out.print("<span>" + sessions.get(i).getName() + "</span>");
+                                out.print("</td>");
+                                if (i % 4 == 3) {
+                                    out.print("</tr>");
+                                }
                             }
-                            out.print("<td>");
-                            out.print("<input type='checkbox' name='interest' value='" + sessions.get(i).getId() + "' />");
-                            out.print("<input type='hidden' name='name' value='" + sessions.get(i).getId() + "' />");
-                            out.print("<span>" + sessions.get(i).getName() +"</span>");
-                            out.print("</td>");
-                            if (i % 4 == 3) {
-                                out.print("</tr>");
-                            }
-                        }
                         %>
-                        </table>
-                    </div>
-                    <div class="form-actions">
-                        <input type="submit" class="button button-primary" value="Submit Interest"/>
-                        <a href="../../private/employee/sessionschedule.jsp">Cancel</a>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <%@ include file="../../includes/footer.jsp" %>
+                    </table>
+                </div>
+                <div class="form-actions row" style='padding-top:12px;'>
+                    <input type="submit" class="button button-primary" value="Submit Interest"/>
+                    <a href="../../private/employee/sessionschedule.jsp">Cancel</a>
+                </div>
+            </form>
+    </div>
+    <%@ include file="../../includes/footer.jsp" %>
 </html>

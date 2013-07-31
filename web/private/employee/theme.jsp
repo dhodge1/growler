@@ -55,6 +55,10 @@
                 box-shadow: 2px 2px 2px 2px #ccc;
                 -webkit-box-shadow: 2px 2px 2px 2px #ccc;
             }
+            #ranked label {
+                padding-left:3px;
+                padding-top: 3px;
+            }
             #ranked li {
                 list-style-type: decimal-leading-zero;
                 cursor: move;
@@ -84,6 +88,7 @@
             }
             #ranked {
                 border: 1px solid #ccc;
+                margin-left:0px;
             }
             .centerRow {
                 margin-left: 4px;
