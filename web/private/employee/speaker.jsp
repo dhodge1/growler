@@ -113,7 +113,7 @@
                             'class': 'button button-primary',
                             click: function() {
                                 $(this).dialog('close');
-                            }, text: "OK"}
+                            }, text: "OK"}, modal: true
                     }});
                 $("#rankModal").dialog({
                     autoOpen: false,
@@ -123,7 +123,7 @@
                             'class': 'button button-primary',
                             click: function() {
                                 $(this).dialog('close');
-                            }, text: "OK"}
+                            }, text: "OK"}, modal: true
                     }});
                 $("#speakers, #ranked").sortable({
                     connectWith: ".connectedSortable",
@@ -282,7 +282,6 @@
         <div id='resetModal' title='Error'>You must reset the previous ranking you’ve submitted before submitting another.</div>
         <div id='rankModal' title='Error'>Please rank at least one speaker before submitting.</div>
         <script src="../../js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>
-        <script src="../../js/libs/sniui.dialog.1.2.0.js"></script>
         <script src="../../js/libs/sniui.user-inline-help.1.2.0.min.js" type="text/javascript"></script>
         <script>
             $(document).ready(function() {

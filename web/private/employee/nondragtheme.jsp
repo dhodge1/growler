@@ -47,7 +47,8 @@
                             'class': 'button button-primary',
                             click: function() {
                                 $(this).dialog('close');
-                            }, text: "OK"}
+                            }, text: "OK"},
+                        modal: true
                     }});
                 $("#rankModal").dialog({
                     autoOpen: false,
@@ -57,7 +58,8 @@
                             'class': 'button button-primary',
                             click: function() {
                                 $(this).dialog('close');
-                            }, text: "OK"}
+                            }, text: "OK"},
+                        modal: true
                     }});
                 //What happens when you click an available theme
                 $(":checkbox").click(function() {

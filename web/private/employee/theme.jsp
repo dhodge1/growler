@@ -109,6 +109,7 @@
                             click: function() {
                                 $(this).dialog('close');
                             }, text: "OK"}
+                        , modal: true
                     }});
                 $("#rankModal").dialog({
                     autoOpen: false,
@@ -119,6 +120,7 @@
                             click: function() {
                                 $(this).dialog('close');
                             }, text: "OK"}
+                                , modal: true
                     }});
                 $("#themes, #ranked").sortable({
                     connectWith: ".connectedSortable",
