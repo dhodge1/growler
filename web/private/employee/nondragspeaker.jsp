@@ -35,8 +35,20 @@
                         return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
                     };
                 });
-                $("#resetModal").dialog({autoOpen: false});
-                $("#rankModal").dialog({autoOpen: false});
+                $("#resetModal").dialog({
+                    autoOpen: false,
+                    buttons: {
+                        OK: function() {
+                            $(this).dialog("close");
+                        }
+                    }});
+                $("#rankModal").dialog({
+                    autoOpen: false,
+                    buttons: {
+                        OK: function() {
+                            $(this).dialog("close");
+                        }
+                    }});
                 //What happens when you click an available theme
                 $(":checkbox").click(function() {
                     $("#ranked").find(".placeholder").remove(); //Remove the placeholder
@@ -63,7 +75,7 @@
                 });
                 $("#send").click(function(event) {
                     $("#ranked").find(".placeholder").remove(); //Remove the placeholder
-                    if ($("#ranked li").length === 0) {
+                    if ($("#ranked li").length === 0 && parseInt($("#previously").val()) === 0) {
                         event.preventDefault();
                         $("#rankModal").dialog("open");
                     }
@@ -75,6 +87,7 @@
             });
             function clearFilter() {
                 $("#filter").val("");
+                $("#speakers li").show();
             }
         </script>
         <style>
@@ -148,6 +161,9 @@
             .modals {
                 background: #fff;
             }
+            .ui-dialog-titlebar-close {
+                visibility: hidden;
+            }
         </style>
     </head>
     <body id="growler1">  
@@ -197,7 +213,7 @@
                 <div class='row largeBottomMargin'></div>
 
                 <form action='../../action/processSpeakerRanking.jsp'>
-                    <div class='row mediumBottomMargin'>
+                    <div class='row largeBottomMargin'>
                         <div class='row span10' style='background:#ddd;'>
                             <div class='span6 smallBottomMargin'>
                                 <span class="keywordFilter" style="width:100%; margin-top: 6px;">
@@ -210,17 +226,17 @@
                             </div>
                             <div class='span6 smallBottomMargin'>
                                 <span class='interestLabel'><strong>Speakers I'm Interested In</strong></span><span class='pullRight'><a class='showModal' data-content='<ol>
-                                            <li>Matt Peter: 4.93</li>
-                                            <li>John Hills: 4.92</li>
-                                            <li>Ram Karra: 4.80</li>
-                                            <li>Joshua Eldridge: 4.78</li>
-                                            <li>Kevin Barry: 4.76</li>
-                                            <li>Amy Thomason: 4.75</li>
-                                            <li>Robin Wilde: 4.75</li>
-                                            <li>Kamlesh Sharma: 4.75</li>
-                                            <li>Jonathan Williams: 4.75</li>
-                                            <li>Kabita Nayak: 4.75</li>
-                                        </ol>' title="Last year's top 10" id='top10'>Last year's top 10</a>
+                                                                                                                                         <li>Matt Peter: 4.93</li>
+                                                                                                                                         <li>John Hills: 4.92</li>
+                                                                                                                                         <li>Ram Karra: 4.80</li>
+                                                                                                                                         <li>Joshua Eldridge: 4.78</li>
+                                                                                                                                         <li>Kevin Barry: 4.76</li>
+                                                                                                                                         <li>Amy Thomason: 4.75</li>
+                                                                                                                                         <li>Robin Wilde: 4.75</li>
+                                                                                                                                         <li>Kamlesh Sharma: 4.75</li>
+                                                                                                                                         <li>Jonathan Williams: 4.75</li>
+                                                                                                                                         <li>Kabita Nayak: 4.75</li>
+                                                                                                                                         </ol>' title="Last year's top 10" id='top10'>Last year's top 10</a>
                                 </span>
                             </div>
                         </div>
@@ -254,7 +270,7 @@
             </div>
         </div>
         <%@ include file="../../includes/footer.jsp" %>
-        <div id='resetModal' title='Error'>You must reset the previous ranking you’ve submitted before submitting another</div>
+        <div id='resetModal' title='Error'>You must reset the previous ranking you’ve submitted before submitting another.</div>
         <div id='rankModal' title='Error'>Please rank at least one speaker before submitting.</div>
         <script src="../../js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>
         <script src="../../js/libs/sniui.user-inline-help.1.2.0.min.js" type="text/javascript"></script>

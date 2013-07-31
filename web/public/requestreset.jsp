@@ -57,7 +57,7 @@
             </div>
             <div class='row mediumBottomMargin' style='border: 1px dotted #ccc;'></div>
             <div class="row mediumBottomMargin">
-                <p>Please enter the email address associated with your account and click Submit Request</p>
+                <p>Please enter the email address associated with your account and click Submit Request.</p>
             </div>
             <div class="row mediumBottomMargin">
                 <label><span style="color: red;">*</span>Required field</label>

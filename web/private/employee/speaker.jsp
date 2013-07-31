@@ -99,11 +99,26 @@
                 color:#0067b1;
                 text-decoration: underline;
             }
+            .ui-dialog-titlebar-close {
+                visibility: hidden;
+            }
         </style>
         <script>
             $(function() {
-                $("#resetModal").dialog({autoOpen: false});
-                $("#rankModal").dialog({autoOpen: false});
+                $("#resetModal").dialog({
+                    autoOpen: false,
+                    buttons: {
+                        OK: function() {
+                            $(this).dialog("close");
+                        }
+                    }});
+                $("#rankModal").dialog({
+                    autoOpen: false,
+                    buttons: {
+                        OK: function() {
+                            $(this).dialog("close");
+                        }
+                    }});
                 $("#speakers, #ranked").sortable({
                     connectWith: ".connectedSortable",
                     placeholder: "ui-state-highlight",
@@ -258,7 +273,7 @@
             </div>
         </div><!-- End Container Fixed -->
         <%@ include file="../../includes/footer.jsp" %>
-        <div id='resetModal' title='Error'>You must reset the previous ranking you’ve submitted before submitting another</div>
+        <div id='resetModal' title='Error'>You must reset the previous ranking you’ve submitted before submitting another.</div>
         <div id='rankModal' title='Error'>Please rank at least one speaker before submitting.</div>
         <script src="../../js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>
         <script src="../../js/libs/sniui.dialog.1.2.0.js"></script>

@@ -94,11 +94,26 @@
             h3 {
                 font-weight: normal;
             }
+            .ui-dialog-titlebar-close {
+                visibility: hidden;
+            }
         </style>
         <script>
             $(function() {
-                $("#resetModal").dialog({autoOpen: false});
-                $("#rankModal").dialog({autoOpen: false});
+                $("#resetModal").dialog({
+                    autoOpen: false,
+                    buttons: {
+                        OK: function() {
+                            $(this).dialog("close");
+                        }
+                    }});
+                $("#rankModal").dialog({
+                    autoOpen: false,
+                    buttons: {
+                        OK: function() {
+                            $(this).dialog("close");
+                        }
+                    }});
                 $("#themes, #ranked").sortable({
                     connectWith: ".connectedSortable",
                     cursor: "move",

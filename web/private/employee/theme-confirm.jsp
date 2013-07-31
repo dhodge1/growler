@@ -65,7 +65,6 @@
                 <h1 style="font-weight:normal;">Theme Ranking Confirmation</h1>
             </div>
             <div style="border:1px dotted #ddd;" class=" row mediumBottomMargin"></div>
-            <div class="row mediumBottomMargin">
                 <%
                     //If we didn't get any ranks, we tell the user to rank the themes
                     if (themes == null || themes.size() == 0) {
@@ -76,12 +75,9 @@
                         out.print("<span><strong>Remember:</strong> Now that your ranking has been submitted, you can not submit another unless you <a href='../../action/removeThemeRanks.jsp?id=" + user + "'>reset/clear</a> this one. An option to reset your previous ranking will now be provided via the ranking page.</span>");
                         out.print("</div>");
                     }
-                %>
-            </div>
-            <%
+                
                 if (themes.size() > 0) {
-                    out.print("<div class='row mediumBottomMargin'>");
-                    out.print("<div class='span3'>");
+                    out.print("<div class='row mediumBottomMargin span3'>");
                     out.print("<table class=\"table table-alternatingRow\">");
                     out.print("<thead><tr><th>Rank</th><th>Presentation Theme</th></tr></thead><tbody>");
                     for (int i = 0; i < themes.size(); i++) {
@@ -89,14 +85,13 @@
                     }
                     out.print("</tbody></table>");
                     out.print("</div>");
-                    out.print("</div>");
                     out.print("<div class='row'>");
                     out.print("<a class='firstLink' href=\"../../private/employee/home.jsp\">Return to homepage</a>");
                     out.print("<a class='firstLink' href=\"../../private/employee/themeentry.jsp\">Suggest a new theme</a>");
                     out.print("</div>");
                 }
             %>
-        </div>
+            </div>
         <%@ include file="../../includes/footer.jsp" %>
     </body>
 </html>

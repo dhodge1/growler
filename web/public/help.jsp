@@ -39,7 +39,7 @@
             <div class='row mediumBottomMargin'></div>
             <div class="row">
                 <ul class="breadcrumb">
-                    <li><a href="home.jsp">Home</a></li>
+                    <li><a href="../../private/employee/home.jsp">Home</a></li>
                     <li class='ieFix'>Techtoberfest Help</li>
                 </ul>
             </div>

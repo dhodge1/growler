@@ -64,30 +64,24 @@
                 <h1 style="font-weight:normal;">Speaker Ranking Confirmation</h1>
             </div>
             <div style="border:1px dashed #ddd;" class=" row mediumBottomMargin"></div>
-            <div class="row mediumBottomMargin">
-                <%
-                    //If we didn't get any ranks, we tell the user to rank the speakers
-                    if (speakers == null || speakers.size() == 0) {
-                        response.sendRedirect("../../private/employee/speaker.jsp");
-                    } else { //If we got speakers, we let the user see them
-                        out.print("<div class='row largeBottomMargin' style='margin-left:4px'>");
-                        out.print("<span>Thank you for providing us with the speakers you are most interested in for this years' Techtoberfest! We value your opinion and participation. Below is a listing of the speakers and rankings you provided.</span><br/><br/>");
-                        out.print("<span><strong>Remember:</strong> Now that your ranking has been submitted, you can not submit another unless you <a href='../../action/removeSpeakerRanks.jsp?id=" + user + "'>reset/clear</a> this one. An option to reset your previous ranking will now be provided via the ranking page.</span>");
-                        out.print("</div>");
-                    }
-                %>
-            </div>
             <%
+                //If we didn't get any ranks, we tell the user to rank the speakers
+                if (speakers == null || speakers.size() == 0) {
+                    response.sendRedirect("../../private/employee/speaker.jsp");
+                } else { //If we got speakers, we let the user see them
+                    out.print("<div class='row largeBottomMargin' style='margin-left:4px'>");
+                    out.print("<span>Thank you for providing us with the speakers you are most interested in for this years' Techtoberfest! We value your opinion and participation. Below is a listing of the speakers and rankings you provided.</span><br/><br/>");
+                    out.print("<span><strong>Remember:</strong> Now that your ranking has been submitted, you can not submit another unless you <a href='../../action/removeSpeakerRanks.jsp?id=" + user + "'>reset/clear</a> this one. An option to reset your previous ranking will now be provided via the ranking page.</span>");
+                    out.print("</div>");
+                }
                 if (speakers.size() > 0) {
-                    out.print("<div class='row mediumBottomMargin'>");
-                    out.print("<div class='span3'>");
+                    out.print("<div class='row mediumBottomMargin span3'>");
                     out.print("<table class=\"table table-alternatingRow\">");
                     out.print("<thead><tr><th>Rank</th><th>Speaker</th></tr></thead><tbody>");
                     for (int i = 0; i < speakers.size(); i++) {
                         out.print("<tr><td>" + (i + 1) + "</td><td>" + speakers.get(i).getFullName() + "</td></tr>");
                     }
                     out.print("</tbody></table>");
-                    out.print("</div>");
                     out.print("</div>");
                     out.print("<div class='row'>");
                     out.print("<a class='firstLink' href=\"../../private/employee/home.jsp\">Return to homepage</a>");

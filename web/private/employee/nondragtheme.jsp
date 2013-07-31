@@ -33,13 +33,26 @@
         <!--Additional Script-->
         <script>
             $().ready(function() {
+                //case-insensitive filtering
                 jQuery.expr[":"].icontains = jQuery.expr.createPseudo(function(arg) {
                     return function(elem) {
                         return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
                     };
                 });
-                $("#resetModal").dialog({autoOpen: false});
-                $("#rankModal").dialog({autoOpen: false});
+                $("#resetModal").dialog({
+                    autoOpen: false,
+                    buttons: {
+                        OK: function() {
+                            $(this).dialog("close");
+                        }
+                    }});
+                $("#rankModal").dialog({
+                    autoOpen: false,
+                    buttons: {
+                        OK: function() {
+                            $(this).dialog("close");
+                        }
+                    }});
                 //What happens when you click an available theme
                 $(":checkbox").click(function() {
                     $("#ranked").find(".placeholder").remove(); //Remove the placeholder
@@ -68,7 +81,7 @@
                 });
                 $("#send").click(function(event) {
                     $("#ranked").find(".placeholder").remove(); //Remove the placeholder
-                    if ($("#ranked li").length === 0) {
+                    if ($("#ranked li").length === 0 && parseInt($("#previously").val()) === 0) {
                         event.preventDefault();
                         $("#rankModal").dialog("open");
                     }
@@ -80,6 +93,7 @@
             });
             function clearFilter() {
                 $("#filter").val("");
+                $("#themes li").show();
             }
         </script>
         <style>
@@ -154,6 +168,9 @@
             h3 {
                 font-weight:normal;
             }
+            .ui-dialog-titlebar-close {
+                visibility: hidden;
+            }
         </style>
     </head>
     <body id="growler1">  
@@ -204,7 +221,7 @@
                 <div class='row largeBottomMargin'></div>
 
                 <form action='../../action/processThemeRanking.jsp'>
-                    <div class='row mediumBottomMargin'>
+                    <div class='row largeBottomMargin'>
                         <div class='row span10' style='background: #ddd;'>
                             <div class='span6 smallBottomMargin'>
                                 <span class="keywordFilter" style="width:100%; margin-top: 6px;">
@@ -245,7 +262,7 @@
             </div>
         </div>
         <%@ include file="../../includes/footer.jsp" %>
-        <div id='resetModal' title='Error'>You must reset the previous ranking you’ve submitted before submitting another</div>
+        <div id='resetModal' title='Error'>You must reset the previous ranking you’ve submitted before submitting another.</div>
         <div id='rankModal' title='Error'>Please rank at least one theme before submitting.</div>
     </body>
 </html>
