@@ -69,14 +69,14 @@
                 if (speakers == null || speakers.size() == 0) {
                     response.sendRedirect("../../private/employee/speaker.jsp");
                 } else { //If we got speakers, we let the user see them
-                    out.print("<div class='row largeBottomMargin' style='margin-left:4px'>");
+                    out.print("<div class='row largeBottomMargin'>");
                     out.print("<span>Thank you for providing us with the speakers you are most interested in for this years' Techtoberfest! We value your opinion and participation. Below is a listing of the speakers and rankings you provided.</span><br/><br/>");
                     out.print("<span><strong>Remember:</strong> Now that your ranking has been submitted, you can not submit another unless you <a href='../../action/removeSpeakerRanks.jsp?id=" + user + "'>reset/clear</a> this one. An option to reset your previous ranking will now be provided via the ranking page.</span>");
                     out.print("</div>");
                 }
                 if (speakers.size() > 0) {
-                    out.print("<div class='row mediumBottomMargin span3'>");
-                    out.print("<table class=\"table table-alternatingRow\">");
+                    out.print("<div class='row largeBottomMargin'>");
+                    out.print("<table class=\"table table-alternatingRow span3\" style='margin-left:0px;'>");
                     out.print("<thead><tr><th>Rank</th><th>Speaker</th></tr></thead><tbody>");
                     for (int i = 0; i < speakers.size(); i++) {
                         out.print("<tr><td>" + (i + 1) + "</td><td>" + speakers.get(i).getFullName() + "</td></tr>");
