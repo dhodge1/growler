@@ -99,25 +99,31 @@
                 color:#0067b1;
                 text-decoration: underline;
             }
-            .ui-dialog-titlebar-close {
-                visibility: hidden;
+            .no-close .ui-dialog-titlebar-close {
+                display: none;
             }
         </style>
         <script>
             $(function() {
                 $("#resetModal").dialog({
                     autoOpen: false,
+                    dialogClass: "no-close",
                     buttons: {
-                        OK: function() {
-                            $(this).dialog("close");
-                        }
+                        'ok': {
+                            'class': 'button button-primary',
+                            click: function() {
+                                $(this).dialog('close');
+                            }, text: "OK"}
                     }});
                 $("#rankModal").dialog({
                     autoOpen: false,
+                    dialogClass: "no-close",
                     buttons: {
-                        OK: function() {
-                            $(this).dialog("close");
-                        }
+                        'ok': {
+                            'class': 'button button-primary',
+                            click: function() {
+                                $(this).dialog('close');
+                            }, text: "OK"}
                     }});
                 $("#speakers, #ranked").sortable({
                     connectWith: ".connectedSortable",
@@ -224,17 +230,17 @@
                         <div class='span5 smallBottomMargin'>
                             <span><strong>Last Year's Speakers</strong><i id="spkrtypeHelp" class="icon12-info" data-content="Business Speakers - Any speaker providing technical information in a non-technical way, appealing to both IT and non-IT users.<br/><br/>Technical Speakers - Speakers with a technical background providing mid to high level technical information, appealing to mainly IT users with technical backgrounds." title="Speaker Types"></i></span>
                             <span class='pullRight'><a class='showModal' data-content='<ol>
-                                            <li>Matt Peter: 4.93</li>
-                                            <li>John Hills: 4.92</li>
-                                            <li>Ram Karra: 4.80</li>
-                                            <li>Joshua Eldridge: 4.78</li>
-                                            <li>Kevin Barry: 4.76</li>
-                                            <li>Amy Thomason: 4.75</li>
-                                            <li>Robin Wilde: 4.75</li>
-                                            <li>Kamlesh Sharma: 4.75</li>
-                                            <li>Jonathan Williams: 4.75</li>
-                                            <li>Kabita Nayak: 4.75</li>
-                                        </ol>' title="Last year's top 10" id='top10'>Last year's top 10</a>
+                                                       <li>Matt Peter: 4.93</li>
+                                                       <li>John Hills: 4.92</li>
+                                                       <li>Ram Karra: 4.80</li>
+                                                       <li>Joshua Eldridge: 4.78</li>
+                                                       <li>Kevin Barry: 4.76</li>
+                                                       <li>Amy Thomason: 4.75</li>
+                                                       <li>Robin Wilde: 4.75</li>
+                                                       <li>Kamlesh Sharma: 4.75</li>
+                                                       <li>Jonathan Williams: 4.75</li>
+                                                       <li>Kabita Nayak: 4.75</li>
+                                                       </ol>' title="Last year's top 10" id='top10'>Last year's top 10</a>
                             </span>
 
                         </div>

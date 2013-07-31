@@ -94,25 +94,31 @@
             h3 {
                 font-weight: normal;
             }
-            .ui-dialog-titlebar-close {
-                visibility: hidden;
+            .no-close .ui-dialog-titlebar-close {
+                display: none;
             }
         </style>
         <script>
             $(function() {
                 $("#resetModal").dialog({
                     autoOpen: false,
+                    dialogClass: "no-close",
                     buttons: {
-                        OK: function() {
-                            $(this).dialog("close");
-                        }
+                        'ok': {
+                            'class': 'button button-primary',
+                            click: function() {
+                                $(this).dialog('close');
+                            }, text: "OK"}
                     }});
                 $("#rankModal").dialog({
                     autoOpen: false,
+                    dialogClass: "no-close",
                     buttons: {
-                        OK: function() {
-                            $(this).dialog("close");
-                        }
+                        'ok': {
+                            'class': 'button button-primary',
+                            click: function() {
+                                $(this).dialog('close');
+                            }, text: "OK"}
                     }});
                 $("#themes, #ranked").sortable({
                     connectWith: ".connectedSortable",
