@@ -216,10 +216,10 @@
                 <h1 style="font-weight:normal;">Rank Your Preferred Themes</h1>
             </div>
 
-            <div class='row mediumBottomMargin'>
+            <div class='row largeBottomMargin'>
                 <h3>We want to hear from you!  Please let us know the top 10 presentation themes you would be interested in attending for this year's Techtoberfest.</h3>
             </div>
-            <div class='row mediumBottomMargin'></div>
+            <div class='row largeBottomMargin'></div>
 
             <div class="row mediumBottomMargin">
                 <h2 class="bordered mediumBottomMargin"><img style="padding-bottom:0;padding-left:0;" id="logo" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Which presentations are you most interested in?</span></h2>
