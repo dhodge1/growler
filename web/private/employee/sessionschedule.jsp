@@ -93,7 +93,7 @@
             <div class="row largeBottomMargin">
                 <span>Below is the latest session schedule for this years Techtoberfest event.  
                     <% Calendar today = Calendar.getInstance();
-                if (today.get(Calendar.MONTH) != 9) { //if it's not October %>
+                        if (today.get(Calendar.MONTH) != 9) { //if it's not October %>
                     <strong>Think you may be interested in attending a session?</strong>  <a href="../../private/employee/sessioninterest.jsp">Let us know which ones.</a>
                     <%  } //end if %>
                 </span>
@@ -120,7 +120,7 @@
                     </thead>
                     <tbody id='tablebody'>
                         <%
-                            
+
                             LocationPersistence lp = new LocationPersistence();
                             ArrayList<Session> sessions = sp.getThisYearSessions(year, " order by session_date, start_time, name ");
                             for (int i = 0; i < sessions.size(); i++) {
@@ -210,7 +210,16 @@
                                 }
                                 unActive();
                                 $("#page1").addClass("active");
-                                $(".modals").dialog({autoOpen: false, closeText: "hide"});
+                                $(".modals").dialog({
+                                    autoOpen: false,
+                                    dialogClass: "no-close",
+                                    buttons: {
+                                        'ok': {
+                                            'class': 'button button-primary',
+                                            click: function() {
+                                                $(this).dialog('close');
+                                            }, text: "OK"}, modal: true
+                                    }});
                                 $(".showModal").click(function() {
                                     var session = $(this).children().val();
                                     $("#modal" + session).dialog("open");
