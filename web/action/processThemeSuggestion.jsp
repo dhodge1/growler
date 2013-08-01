@@ -31,18 +31,12 @@
             String name = request.getParameter("name");
             String type = request.getParameter("type");
             String reason = "";
-            String visible;
             try {
                 reason = request.getParameter("reason");
             } catch (Exception e) {
                 reason = "";
             }
-            try {
-                visible = request.getParameter("visible");
-                t.setVisible(true);
-            } catch (Exception e) {
                 t.setVisible(false);
-            }
             t.setName(name);
             t.setType(type);
             t.setCreatorId(user);

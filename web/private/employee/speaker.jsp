@@ -212,7 +212,7 @@
             <% if (speakers.size() > 0) {%>
             <div class="mediumBottomMargin row">
                 <p class="feedbackMessage-warning">You have already submitted a ranking for your preferred speakers.  In order to submit a different ranking, you must reset your previous one.
-                    <% out.print("<a href='../../action/removeSpeakerRanks.jsp?id=" + user + "'>Reset your previous ranking now.</a>");%>
+                    <% out.print("<a href='../../action/removeSpeakerRanks.jsp?return=drag&id=" + user + "'>Reset your previous ranking now.</a>");%>
                 </p>
             </div>
             <% } //end if  %>
