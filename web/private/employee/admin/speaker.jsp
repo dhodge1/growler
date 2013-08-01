@@ -41,9 +41,9 @@
             int user = 0;
             String sort = "";
             if (null == session.getAttribute("id")) {
-                response.sendRedirect("../../../index.jsp");
+               // response.sendRedirect("../../../index.jsp");
             } else if (!session.getAttribute("role").equals("admin")) {
-                response.sendRedirect("../../../index.jsp");
+              //  response.sendRedirect("../../../index.jsp");
             }
             try {
                 sort = request.getParameter("sort");

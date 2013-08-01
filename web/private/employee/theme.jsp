@@ -235,7 +235,7 @@
                             <span><strong>Available Presentation Themes</strong></span>
                         </div>
                         <div class='span5 smallBottomMargin'>
-                            <span class='interestLabel'><strong>Presentations Themes I'm Interested In</strong></span>
+                            <span><strong>Presentations Themes I'm Interested In</strong></span>
                         </div>
                         <div class='span5'>
                             <div class='row'>

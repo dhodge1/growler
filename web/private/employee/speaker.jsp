@@ -250,7 +250,7 @@
 
                         </div>
                         <div class='span5 smallBottomMargin'>
-                            <span class='interestLabel'><strong>Speakers I'm Interested In</strong></span>
+                            <span><strong>Speakers I'm Interested In</strong></span>
                         </div>
                         <div class='span5'>
                             <div class='row'>
