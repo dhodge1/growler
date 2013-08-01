@@ -56,9 +56,10 @@
                 <h1>Speaker Suggestion Confirmation</h1>
             </div>
             <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
-            <div class="row largeBottomMargin">
+            <div class="row">
                 <span>The Techtoberfest committee thanks you for your suggestion!</span>
             </div>
+            <div style='margin-bottom:17px;'></div>
             <div class="row">
                 <a href='../../private/employee/home.jsp'>Return to homepage</a>
             </div>

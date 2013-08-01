@@ -78,7 +78,7 @@
                 
                 if (themes.size() > 0) {
                     out.print("<div class='row largeBottomMargin'>");
-                    out.print("<table class=\"table table-alternatingRow span3\" style='margin-left:0px;'>");
+                    out.print("<table class=\"table table-alternatingRow span5\" style='margin-left:0px;'>");
                     out.print("<thead><tr><th>Rank</th><th>Presentation Theme</th></tr></thead><tbody>");
                     for (int i = 0; i < themes.size(); i++) {
                         out.print("<tr><td>" + (i + 1) + "</td><td>" + themes.get(i).getName() + "</td></tr>");

@@ -78,7 +78,7 @@
                         <fieldset>
                             <div class="form-group inline">
                                 <label class="required">Speaker First Name</label>
-                                <input required="required" name="first_name" class="input-xlarge" type="text" id="tip" data-content="30 characters or less please" maxlength="30"/>
+                                <input required="required" name="first_name" class="input-xlarge" type="text" id="tip" data-content="Please enter no more than 30 characters" maxlength="30"/>
                                 <br/><span id="error_first" class="message_container">
                                     <span>Please enter a first name</span>
                                 </span>

@@ -172,7 +172,7 @@
                 });
                 $("#send").click(function(event) {
                     $("#ranked").find("label").remove(); //Remove the placeholder
-                    if ($("#ranked li").length === 0) {
+                    if ($("#ranked li").length === 0 && parseInt($("#previously").val()) === 0) {
                         event.preventDefault();
                         $("#rankModal").dialog("open");
                     }
@@ -273,7 +273,7 @@
             </div>
         </div>
         <%@ include file="../../includes/footer.jsp" %>
-        <div id='resetModal' title='Error'>You must reset the previous ranking you’ve submitted before submitting another</div>
+        <div id='resetModal' title='Error'>You must reset the previous ranking you’ve submitted before submitting another.</div>
         <div id='rankModal' title='Error'>Please rank at least one theme before submitting.</div>
     </body>
 </html>

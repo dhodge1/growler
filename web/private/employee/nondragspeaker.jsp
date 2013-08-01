@@ -199,7 +199,7 @@
             <% if (speakers.size() > 0) {%>
             <div class="mediumBottomMargin row">
                 <p class="feedbackMessage-warning">You have already submitted a ranking for your preferred speakers.  In order to submit a different ranking, you must reset your previous one.
-                    <% out.print("<a href='../../action/removeSpeakerRanks.jsp?id=" + user + "'>Reset your previous ranking now.</a>");%>
+                    <% out.print("<a href='../../action/removeSpeakerRanks.jsp?return=non&id=" + user + "'>Reset your previous ranking now.</a>");%>
                 </p>
             </div>
             <% } //end if  %>
@@ -219,7 +219,7 @@
                 <div class='row largeBottomMargin'></div>
 
                 <form action='../../action/processSpeakerRanking.jsp'>
-                    <div class='row largeBottomMargin'>
+                    <div class='row mediumBottomMargin'>
                         <div class='row span10' style='background:#ddd;'>
                             <div class='span6 smallBottomMargin'>
                                 <span class="keywordFilter" style="width:100%; margin-top: 6px;">
@@ -231,7 +231,7 @@
                                 </span>
                             </div>
                             <div class='span6 smallBottomMargin'>
-                                <span class='interestLabel'><strong>Speakers I'm Interested In</strong></span><span class='pullRight'><a class='showModal' data-content='<ol>
+                                <span><strong>Speakers I'm Interested In</strong></span><span class='pullRight'><a class='showModal' data-content='<ol>
                                                                                                                                          <li>Matt Peter: 4.93</li>
                                                                                                                                          <li>John Hills: 4.92</li>
                                                                                                                                          <li>Ram Karra: 4.80</li>

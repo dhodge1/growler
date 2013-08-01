@@ -111,7 +111,7 @@
                         <label style="padding-top:12px;">Password</label>
                         <input type="password" name="PASSWORD" id="tip2" data-content="Enter your Password"/><br/>
                         <span id="error_password" class="message_container">
-                            <span>Please enter a password</span>
+                            <span>Please enter your password</span>
                         </span>
                     </div>
                     <div class="form-actions">

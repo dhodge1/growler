@@ -76,7 +76,7 @@
                 }
                 if (speakers.size() > 0) {
                     out.print("<div class='row largeBottomMargin'>");
-                    out.print("<table class=\"table table-alternatingRow span3\" style='margin-left:0px;'>");
+                    out.print("<table class=\"table table-alternatingRow span5\" style='margin-left:0px;'>");
                     out.print("<thead><tr><th>Rank</th><th>Speaker</th></tr></thead><tbody>");
                     for (int i = 0; i < speakers.size(); i++) {
                         out.print("<tr><td>" + (i + 1) + "</td><td>" + speakers.get(i).getFullName() + "</td></tr>");

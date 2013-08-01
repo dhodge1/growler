@@ -172,7 +172,7 @@
                 });
                 $("#send").click(function(event) {
                     $("#ranked").find("label").remove(); //Remove the placeholder
-                    if ($("#ranked li").length === 0) {
+                    if ($("#ranked li").length === 0 && parseInt($("#previously").val()) === 0) {
                         event.preventDefault();
                         $("#rankModal").dialog("open");
                     }

@@ -20,7 +20,7 @@
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <title>Theme Entry</title>
+        <title>Add a Presentation Theme</title>
 
         <link rel="stylesheet" href="../../../css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
         <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
@@ -53,42 +53,67 @@
 
         <%@ include file="../../../includes/adminheader.jsp" %> 
         <%@ include file="../../../includes/adminnav.jsp" %>  
-        <div class="container-fixed">
-            <br/><br/><br/>
+        <div class="container-fixed largeBottomMargin">
+            <div class="mediumBottomMargin row"></div>
             <div class="row">
-                
-                    <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Add a Theme</span></h2>
-                
+                <ul class="breadcrumb">
+                    <li><a href="../../../private/employee/admin/home.jsp">Home</a></li>
+                    <li class='ieFix'>Add a Presentation Theme</li>
+                </ul>
             </div>
-            <br/>
+            <div class='row mediumBottomMargin'>
+                <h1 style="margin-top:0px;font-weight: normal;">Add a New Theme</h1>
+            </div>
+            <div class='mediumBottomMargin row' style='border: 1px dotted #ddd;'></div>
+            <div class="row largeBottomMargin">
+                <h3>Please fill out the form below to add a new presentation theme.</h3>
+            </div>
+            <div class="row mediumBottomMargin">
+                <label><span style="color: red;">*</span>Required field</label>
+            </div>
             <div class="row">
-                
+                    <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Add a Theme</span></h2>
+            </div>
+            <div class="row">
                     <form method="POST" id="action" action="../../../action/processThemeSuggestion.jsp">
                         <fieldset>
                             <div class="form-group">
-                                <label class="required">Theme Name</label>
+                                <label class="required">Theme name</label>
                                 <input required="required" name="name" class="input-xlarge" type="text" id="tip" data-content="30 characters or less please" maxlength="30"/>
                                 <br/><span id="error_theme_name" class="message_container">
-                                    <span>Please enter a Theme Name</span>
+                                    <span>Please enter a theme name</span>
                                 </span>
                             </div>
                             <div class="form-group">
-                                <label class="required">Theme Description</label>
+                                <label class="required">Theme description</label>
                                 <input required="required" name="description" class="input-xlarge" type="text" id="tip2" data-content="250 characters or less please" maxlength="250"/>
                                 <br/><span id="error_theme_description" class="message_container">
-                                    <span>Please enter a Theme Description</span>
+                                    <span>Please enter a theme description</span>
                                 </span>
                             </div>
+                            <div class="form-group">
+                                <label class="required">Theme category</label>
+                                <select name="type">
+                                    <option value="0"> Select a Category </option>
+                                    <option value="Business">Business</option>
+                                    <option value="Technical">Technical</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="required">Theme added by</label>
+                                <input type="text" name="creator" <% out.print("value='" + user + "'"); %> />
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" name="visible"/><label class="required">Make theme visible to users?</label>
+                            </div>
                             <div class="form-actions">
-                                <input class="button button-primary" id="send" type="submit" value="Send" name="Submit" />
-                                <a class="button" id="cancel" href="theme.jsp">Cancel</a>
+                                <input class="button button-primary" id="send" type="submit" value="Add Theme" name="Submit" />
+                                <a id="cancel" href="../../../private/employee/admin/theme.jsp">Cancel</a>
                             </div>
                         </fieldset>
                     </form>		
-                
             </div>
         </div>
-
         <%@ include file="../../../includes/footer.jsp" %> 
         <%@ include file="../../../includes/scriptlist.jsp" %>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>

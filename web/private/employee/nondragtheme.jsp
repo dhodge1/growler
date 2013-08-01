@@ -208,7 +208,7 @@
             <% if (themes.size() > 0) {%>
             <div class="mediumBottomMargin row">
                 <p class="feedbackMessage-warning">You have already submitted a ranking for your preferred presentation themes.  In order to submit a different ranking, you must reset your previous one.
-                    <% out.print("<a href='../../action/removeThemeRanks.jsp?id=" + user + "'>Reset your previous ranking now.</a>");%>
+                    <% out.print("<a href='../../action/removeThemeRanks.jsp?return=non&id=" + user + "'>Reset your previous ranking now.</a>");%>
                 </p>
             </div>
             <% } //end if  %>
@@ -241,7 +241,7 @@
                                 </span>
                             </div>
                             <div class='span6 smallBottomMargin'>
-                                <span class='interestLabel'><strong>Presentations Themes I'm Interested In</strong></span>
+                                <span><strong>Presentations Themes I'm Interested In</strong></span>
                             </div>
                         </div>
                         <div class='span5'>

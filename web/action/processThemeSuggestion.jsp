@@ -16,37 +16,44 @@
 <jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page" />
 <%
                     int user = 0;
+                    String role = "";
                     if (null == session.getAttribute("id")) {
                         response.sendRedirect("../index.jsp");
                     }
                     try {
+                        role = (String)session.getAttribute("role");
                         user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
-                        String name = String.valueOf(session.getAttribute("user"));                  
                     }
                     catch (Exception e) {
                         
                     }
-                %>
-        <% String name = request.getParameter("name");
+                    Theme t = new Theme();
+            String name = request.getParameter("name");
             String type = request.getParameter("type");
             String reason = "";
+            String visible;
             try {
                 reason = request.getParameter("reason");
             } catch (Exception e) {
                 reason = "";
             }
-            Theme t = new Theme();
+            try {
+                visible = request.getParameter("visible");
+                t.setVisible(true);
+            } catch (Exception e) {
+                t.setVisible(false);
+            }
             t.setName(name);
             t.setType(type);
             t.setCreatorId(user);
             t.setReason(reason);
-            t.setVisible(false);
             persist.addTheme(t);
-            if (user == 808300) {
+            if (role.equals("admin")) {
                 session.setAttribute("message", "Success: Theme Successfully added!");
-                response.sendRedirect("../private/employee/admin/theme.jsp");
+                response.sendRedirect("../private/employee/admin/themeentry-confirm.jsp");
             } else {
                 session.setAttribute("message", "Success: Your suggestion has been submitted successfully!");
+                session.setAttribute("theme", t.getName());
                 response.sendRedirect("../private/employee/themeentry-confirm.jsp");
             }
         %>

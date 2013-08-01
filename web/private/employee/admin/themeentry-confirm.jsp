@@ -17,10 +17,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Theme Entry Confirmation</title>
         <link rel="shortcut icon" type="image/png" href="http://growler-dev.elasticbeanstalk.com/images/scripps_favicon-32.ico">
-        <link rel="stylesheet" href="../../css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
+        <link rel="stylesheet" href="../../../css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
         <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-        <link rel="stylesheet" href="../../css/prettify/prettify.css" /> 
+        <link rel="stylesheet" href="../../../css/prettify/prettify.css" /> 
         <script src="http://growler-dev.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <script src="http://growler-dev.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->	
         <style>
@@ -34,7 +34,7 @@
     <body id="growler1">
             <%      int user = 0;
                     if (null == session.getAttribute("id")) {
-                        response.sendRedirect("../../index.jsp");
+                        response.sendRedirect(".././../index.jsp");
                     }
                     try {
                         user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
@@ -44,25 +44,25 @@
                         
                     }
         %>
-        <%@ include file="../../includes/header.jsp" %> 
-        <%@ include file="../../includes/testnav.jsp" %>
+        <%@ include file="../../../includes/header.jsp" %> 
+        <%@ include file="../../../includes/adminnav.jsp" %>
         <div class="container-fixed largeBottomMargin">
             <div class="row mediumBottomMargin"></div>
             <div class="row">
-                <%@include file="../../includes/messagehandler.jsp" %>
+                <%@include file="../../../includes/messagehandler.jsp" %>
             </div>
             <div class="row mediumBottomMargin">
                 <h1>Theme Suggestion Confirmation</h1>
             </div>
             <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
-            <div class="row">
-                <span>The Techtoberfest committee thanks you for your suggestion!</span>
+            <div class="row largeBottomMargin">
+                <span><% out.print((String)session.getAttribute("theme")); %></span>
             </div>
-            <div style='margin-bottom:17px;'></div>
             <div class="row">
-                <a href='../../private/employee/home.jsp'>Return to homepage</a>
+                <a href='../../../private/employee/admin/theme.jsp'>Return to manage themes</a>
+                <a href='../../../private/employee/admin/themeentry.jsp'>Add another theme</a>
             </div>
         </div>
-        <%@ include file="../../includes/footer.jsp" %> 
+        <%@ include file="../../../includes/footer.jsp" %> 
     </body>
 </html>
