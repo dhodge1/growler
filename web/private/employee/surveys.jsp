@@ -30,49 +30,37 @@
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
         <script>
             $(document).ready(function() {
-                $('td').filter('.2013-10-17').show();
-                $('td').filter('.2013-10-18').hide();
+                $('td').filter('.2013-10-17morning').show();
+                $('td').filter('.2013-10-17afternoon').hide();
+                $('td').filter('.2013-10-18morning').hide();
+                $('td').filter('.2013-10-18afternoon').hide();
                 $("#survey").hide();
                 $("#code").hide();
                 $("#confirm").hide();
                 $("#date").change(function() {
-                    if ($("#date").val() == 1) {
-                        $('td').filter('.2013-10-17').hide();
-                        $('td').filter('.2013-10-17 .08').show();
-                        $('td').filter('.2013-10-17 .09').show();
-                        $('td').filter('.2013-10-17 .10').show();
-                        $('td').filter('.2013-10-17 .11').show();
-                        $('td').filter('.2013-10-18').hide();
+                    if ($("#date").val() === "1") {
+                        $('td').filter('.2013-10-17morning').show();
+                        $('td').filter('.2013-10-17afternoon').hide();
+                        $('td').filter('.2013-10-18morning').hide();
+                        $('td').filter('.2013-10-18afternoon').hide();
                     }
-                    else if ($("#date").val() == 2) {
-                        $('td').filter('.2013-10-18').hide();
-                        $('td').filter('.2013-10-17').hide();
-                        $('td').filter('.2013-10-17 .12').show();
-                        $('td').filter('.2013-10-17 .13').show();
-                        $('td').filter('.2013-10-17 .14').show();
-                        $('td').filter('.2013-10-17 .15').show();
-                        $('td').filter('.2013-10-17 .16').show();
-                        $('td').filter('.2013-10-17 .17').show();
-                        $('td').filter('.2013-10-17 .18').show();
+                    else if ($("#date").val() === "2") {
+                        $('td').filter('.2013-10-17morning').hide();
+                        $('td').filter('.2013-10-17afternoon').show();
+                        $('td').filter('.2013-10-18morning').hide();
+                        $('td').filter('.2013-10-18afternoon').hide();
                     }
-                    else if ($("#date").val() == 3) {
-                        $('td').filter('.2013-10-18').hide();
-                        $('td').filter('.2013-10-17').hide();
-                        $('td').filter('.2013-10-18 .08').show();
-                        $('td').filter('.2013-10-18 .09').show();
-                        $('td').filter('.2013-10-18 .10').show();
-                        $('td').filter('.2013-10-18 .11').show();
+                    else if ($("#date").val() === "3") {
+                        $('td').filter('.2013-10-17morning').hide();
+                        $('td').filter('.2013-10-17afternoon').hide();
+                        $('td').filter('.2013-10-18morning').show();
+                        $('td').filter('.2013-10-18afternoon').hide();
                     }
-                    else if ($("#date").val() == 4) {
-                        $('td').filter('.2013-10-18').hide();
-                        $('td').filter('.2013-10-17').hide();
-                        $('td').filter('.2013-10-18 .12').show();
-                        $('td').filter('.2013-10-18 .13').show();
-                        $('td').filter('.2013-10-18 .14').show();
-                        $('td').filter('.2013-10-18 .15').show();
-                        $('td').filter('.2013-10-18 .16').show();
-                        $('td').filter('.2013-10-18 .17').show();
-                        $('td').filter('.2013-10-18 .18').show();
+                    else if ($("#date").val() === "4") {
+                        $('td').filter('.2013-10-17morning').hide();
+                        $('td').filter('.2013-10-17afternoon').hide();
+                        $('td').filter('.2013-10-18morning').hide();
+                        $('td').filter('.2013-10-18afternoon').show();
                     }
                 });
                 $("#progress1").click(function() {
@@ -85,6 +73,8 @@
                         $("#survey").hide();
                         $("#code").hide();
                         $("#confirm").hide();
+                        $("#errors").hide();
+                        $("#errorsquestion").hide();
                         $("#dateselector").show();
                         $("#table").show();
                         $("#step").val(1);
@@ -100,18 +90,20 @@
                         $("#survey").show();
                         $("#code").hide();
                         $("#confirm").hide();
+                        $("#errors").hide();
+                        $("#errorsquestion").hide();
                         $("#dateselector").hide();
                         $("#table").hide();
                         $("#step").val(2);
                     }
                 });
-                
+
                 function changeMouseOnIndicators() {
-                    for (var i = 1; i < 4; i++){
+                    for (var i = 1; i < 4; i++) {
                         $("#progress" + i).css("cursor", "default");
                     }
                 }
-                
+
                 function showErrors(page) {
                     if (page === 1) {
                         $("#errors").html("<span>Please select a session.</span>");
@@ -119,25 +111,27 @@
                     }
                     if (page === 2) {
                         $("#errors").html("<span>Please answer all questions.</span>");
-                        if (!$("input[name='q1']:checked")) {
+                        $("#errorsquestion").show();
+                        if (!($("input[name='q1']:checked").length)) {
                             $("#error1").html("<span>This field is required.</span>");
                         }
-                        if (!$("input[name='q2']:checked")) {
+                        if (!($("input[name='q2']:checked").length)) {
                             $("#error2").html("<span>This field is required.</span>");
                         }
-                        if (!$("input[name='q3']:checked")) {
+                        if (!($("input[name='q3']:checked").length)) {
                             $("#error3").html("<span>This field is required.</span>");
                         }
-                        if (!$("input[name='q4']:checked")) {
+                        if ((!$("input[name='q4']:checked").length)) {
                             $("#error4").html("<span>This field is required.</span>");
                         }
                         $("#errors").show();
                     }
                 }
-                
+
                 $("#continue").click(function() {
                     var step = parseInt($("#step").val());
                     $("#errors").hide();
+                    $("#errorsquestion").hide();
                     if (step === 1) {
                         changeMouseOnIndicators();
                         $("#progress1").css("cursor", "pointer");
@@ -180,9 +174,6 @@
                     }
                     if (step === 3) {
                         changeMouseOnIndicators();
-                        $("#progress1").css("cursor", "pointer");
-                        $("#progress2").css("cursor", "pointer");
-                        $("#progress3").css("cursor", "pointer");
                         var user = $("#userid").val();
                         var session = $("#session").val();
                         var q1 = $("#q1").val();
@@ -232,6 +223,10 @@
             }
             .errors {
                 display: none;
+            }
+            .errorsquestion {
+                color: red;
+                font-weight: bold;
             }
         </style>
     </head>
@@ -292,106 +287,123 @@
                     </div>
                 </section>
             </div>
-                <input type="hidden" id="step" name="step" value="1"/>
-                <input type="hidden" id="session" name="session"/>
-                <input type="hidden" id="user" name="user" value=<%= user%>/>
-                <input type="hidden" id="q1" name="q1"/>
-                <input type="hidden" id="q2" name="q2"/>
-                <input type="hidden" id="q3" name="q3"/>
-                <input type="hidden" id="q4" name="q4"/>
-                <input type="hidden" id="comment" name="comment"/>
-                <input type="hidden" id="sessionkey" name="sessionkey"/>
-                <div id="dateselector" class="smallBottomMargin row">
-                    <span><strong>Session Dates:</strong></span>
-                    <select name="date" id="date">
-                        <option value="1">10/17 Morning Sessions</option>
-                        <option value="2">10/17 Afternoon Sessions</option>
-                        <option value="3">10/18 Morning Sessions</option>
-                        <option value="4">10/18 Afternoon Sessions</option>
-                    </select>
-                </div>
-                <div id='errors' class='errors feedbackMessage-error mediumBottomMargin row'>
-                </div>
-                <div class="row">
-                <table id="table" class="table span9 largeBottomMargin" style="margin-left: -6px;">
-                    
+            <input type="hidden" id="step" name="step" value="1"/>
+            <input type="hidden" id="session" name="session"/>
+            <input type="hidden" id="user" name="user" value=<%= user%>/>
+            <input type="hidden" id="q1" name="q1"/>
+            <input type="hidden" id="q2" name="q2"/>
+            <input type="hidden" id="q3" name="q3"/>
+            <input type="hidden" id="q4" name="q4"/>
+            <input type="hidden" id="comment" name="comment"/>
+            <input type="hidden" id="sessionkey" name="sessionkey"/>
+            <div id="dateselector" class="smallBottomMargin row">
+                <span><strong>Session Dates:</strong></span>
+                <select name="date" id="date" class="input-large">
+                    <option value="1">10/17 Morning Sessions</option>
+                    <option value="2">10/17 Afternoon Sessions</option>
+                    <option value="3">10/18 Morning Sessions</option>
+                    <option value="4">10/18 Afternoon Sessions</option>
+                </select>
+            </div>
+            <div id='errors' class='errors feedbackMessage-error mediumBottomMargin row'>
+            </div>
+            <div class="row" id="table">
+                <table class="table" style="margin-left: -6px;">
+
                     <%
                         AttendancePersistence ap = new AttendancePersistence();
                         ArrayList<Session> sessions = ap.getUsersAttendanceInYear(user);
+                        SimpleDateFormat fmt = new SimpleDateFormat("h:mm a");
+                        int surveyCount = 0;
                         for (int i = 0; i < sessions.size(); i++) {
-                            if (i % 2 == 0) {
-                                out.print("<tr>");
+                            out.print("<tr>");
+                            out.print("<td class='" + sessions.get(i).getSessionDate());
+                            int time = Integer.parseInt(sessions.get(i).getStartTime().toString().substring(0, 2));
+                            if (time >= 8 && time <= 11) {
+                                out.print("morning");
+                            } else {
+                                out.print("afternoon");
                             }
-                            out.print("<td class='" + sessions.get(i).getSessionDate() + " ");
-                            String time = sessions.get(i).getStartTime().toString().substring(0, 1);
-                                    out.print(time);
-                                    out.print("'>");
+                            out.print("'>");
                             out.print("<input type='radio' name='survey' value='" + sessions.get(i).getId() + "'");
                             if (sessions.get(i).isSurvey() == true) {
                                 out.print(" disabled ");
                             }
                             out.print(" />");
-                            out.print("<span class='divider'>" + sessions.get(i).getSessionDate() + "</span>");
-                            out.print("<span class='divider'>" + sessions.get(i).getStartTime() + "</span>");
+                            out.print("<span class='divider'>");
+                            try {
+                                out.print(fmt.format(sessions.get(i).getStartTime()));
+                            } catch (Exception e) {
+                                out.print("No Time");
+                            }
+                            out.print("</span>");
                             out.print("<span>" + sessions.get(i).getName());
                             if (sessions.get(i).isSurvey() == true) {
                                 out.print(" * ");
+                                surveyCount++;
                             }
                             out.print("</span>");
                             out.print("</td>");
-                            if (i % 2 == 1) {
-                                out.print("</tr>");
-                            }
+                            out.print("</tr>");
+
                         }
+
                     %>    
-                    
                 </table>
+                <% if (surveyCount > 0) {
+                        out.print("<span>* A survey for this session has already been submitted by you.</span>");
+                        out.print("<div class='largeBottomMargin'></div>");
+                    }
+                else {
+                    out.print("<div style='margin-bottom: 15px;'></div>");
+                }
+                %>
+            </div>
+            <div id="survey" class="largeBottomMargin row">
+                <table class="table" style="margin-left: -8px;">
+                    <%
+                        DataConnection dataConnection = new DataConnection();
+                        Connection newConnect = dataConnection.sendConnection();
+                        Statement newStatement = newConnect.createStatement();
+                        ResultSet qResult = newStatement.executeQuery("select id, text from question");
+                        while (qResult.next()) {
+                    %>
+                    <tr>
+                        <td><label><% out.print(qResult.getString("text"));%></label></td>
+                        <td><div class="form-group inline">
+                                <input type="radio" value="1" <% out.print(" name=q" + qResult.getInt("id"));%>><span class="checkbox inline divider" >Strongly Disagree</span>
+                                <input type="radio" value="3" <% out.print(" name=q" + qResult.getInt("id"));%>><span class="checkbox inline divider" >Neutral</span>
+                                <input type="radio" value="5" <% out.print(" name=q" + qResult.getInt("id"));%>><span class="checkbox inline" >Strongly Agree</span>
+                            </div><div class='errorsquestion' <% out.print("id='error" + qResult.getInt("id") + "'");%>></div></td>
+                    </tr>
+                    <% }
+                        qResult.close();
+                        newStatement.close();
+                        newConnect.close();
+                    %>
+                </table>
+                <label>Comments:</label><textarea maxlength="250" cols="50" rows="5" name="comment" id="commentbox"></textarea>
+            </div>
+            <div id="code" class="row mediumBottomMargin">
+                <div class="form-group">
+                    <label>Please enter the session code you were provided</label>
+                    <input class="input-xlarge" maxlength="4" name="key" id="key" />
                 </div>
-                <div id="survey" class="largeBottomMargin row">
-                    <table class="table" style="margin-left: -8px;">
-                        <%
-                            DataConnection dataConnection = new DataConnection();
-                            Connection newConnect = dataConnection.sendConnection();
-                            Statement newStatement = newConnect.createStatement();
-                            ResultSet qResult = newStatement.executeQuery("select id, text from question");
-                            while (qResult.next()) {
-                        %>
-                        <tr>
-                            <td><label><% out.print(qResult.getString("text"));%></label></td>
-                            <td><div class="form-group inline">
-                                    <input type="radio" value="1" <% out.print(" name=q" + qResult.getInt("id"));%>><span class="checkbox inline divider" >Strongly Disagree</span>
-                                    <input type="radio" value="3" <% out.print(" name=q" + qResult.getInt("id"));%>><span class="checkbox inline divider" >Neutral</span>
-                                    <input type="radio" value="5" <% out.print(" name=q" + qResult.getInt("id"));%>><span class="checkbox inline" >Strongly Agree</span>
-                                </div><div class='errors question' <% out.print("id='error" + qResult.getInt("id") + "'"); %>></div></td>
-                        </tr>
-                        <% }
-                            qResult.close();
-                            newStatement.close();
-                            newConnect.close();
-                        %>
-                    </table>
-                    <label>Comments:</label><textarea maxlength="250" cols="50" rows="5" name="comment" id="commentbox"></textarea>
+                <p style="color:red">Note: Session codes are provided for each session.  This code not only helps the Techtoberfest Committee verify your session attendance, but it also serves as a raffle ticket if provided within 30 minutes of you attending a particular session.  If you do not have the code for this session, you may leave this field blank and continue with the survey.</p>
+            </div>
+            <div id="confirm" class="row">
+                <p class="feedbackMessage-success">Your survey has been submitted successfully!</p>
+                <div class="mediumBottomMargin">
+                    <p>The Techtoberfest committee appreciates your feedback and thanks you for attending Tecthoberfest 2013!</p>
                 </div>
-                <div id="code" class="row mediumBottomMargin">
-                    <div class="form-group">
-                        <label>Please enter the session code you were provided</label>
-                        <input class="input-xlarge" maxlength="4" name="key" id="key" />
-                    </div>
-                    <p style="color:red">Note: Session codes are provided for each session.  This code not only helps the Techtoberfest Committee verify your session attendance, but it also serves as a raffle ticket if provided within 30 minutes of you attending a particular session.  If you do not have the code for this session, you may leave this field blank and continue with the survey.</p>
+                <div class="form-actions">
+                    <a href="../../private/employee/surveys.jsp">Submit another survey</a>
+                    <a href="../../private/employee/home.jsp">Return to homepage</a>
                 </div>
-                <div id="confirm" class="row mediumBottomMargin">
-                    <p class="feedbackMessage-success">Your survey has been submitted successfully!</p>
-                    <div class="mediumBottomMargin">
-                        <p>The Techtoberfest committee appreciates your feedback and thanks you for attending Tecthoberfest 2013!</p>
-                    </div>
-                    <div class="form-actions">
-                        <a href="../../private/employee/surveys.jsp">Submit another survey</a>
-                        <a href="../../private/employee/home.jsp">Return to homepage</a>
-                    </div>
-                </div>
-                <div class="form-actions row" id="actions">
-                    <a id="continue" class="button button-primary">Continue</a><a href="../../private/employee/sessionschedule.jsp">Cancel</a>
-                </div>
+            </div>
+            <div class="form-actions row" id="actions">
+                <a id="continue" class="button button-primary">Continue</a><a href="../../private/employee/sessionschedule.jsp">Cancel</a>
+            </div>
         </div>
         <%@ include file="../../includes/footer.jsp" %>
     </body>

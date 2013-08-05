@@ -58,9 +58,10 @@
                 <h1>Session Interest Confirmation</h1>
             </div>
             <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
-            <div class="row largeBottomMargin">
+            <div class="row">
                 <span>The Techtoberfest committee thanks you for your session interest!</span>
             </div>
+            <div style='margin-bottom:17px;'></div>
             <div class="row mediumBottomMargin">
                 <a href='../../private/employee/sessionschedule.jsp'>Return to session schedule</a>
             </div>

@@ -41,8 +41,9 @@
             int user = 0;
             if (null == session.getAttribute("id")) {
                 response.sendRedirect("../../../index.jsp");
-            } else if (!session.getAttribute("role").equals("admin")) {
-                response.sendRedirect("../../../index.jsp");
+            //} else if (!session.getAttribute("role").equals("admin")) {
+            //    response.sendRedirect("../../../index.jsp");
+           // }
             }
             try {
                 user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
@@ -107,7 +108,7 @@
                                 <input type="text" name="creator" <% out.print("value='" + user + "'"); %> />
                             </div>
                             <div class="form-group">
-                                <input type="checkbox" name="visible" value="true"/><label class="required">Make speaker visible to users?</label>
+                                <input type="checkbox" name="visible" value="true"/><label class="required checkbox inline">Make speaker visible to users?</label>
                             </div>
                             <div class="form-actions">
                                 <input class="button button-primary" id="send" type="submit" value="Add Theme" name="Submit" />

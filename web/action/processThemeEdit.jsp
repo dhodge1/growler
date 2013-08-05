@@ -26,12 +26,12 @@
         String desc = request.getParameter("description");
         String creator = request.getParameter("creator");
         ThemePersistence tp = new ThemePersistence();
-        Theme t = new Theme();
+        Theme t = tp.getThemeByID(id);
         t.setId(id);
         t.setName(name);
         t.setDescription(desc);
         t.setCreatorId(Integer.parseInt(creator));
-        if (request.getParameter("visible").equals("true")) {
+        if (request.getParameterValues("visible")[0].equals("true")) {
             t.setVisible(true);
         }
         else {

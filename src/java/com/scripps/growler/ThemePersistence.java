@@ -328,7 +328,7 @@ public class ThemePersistence extends GrowlerPersistence {
                     + "description = ?, "
                     + "reason = ?, "
                     + "creator = ?, "
-                    + "visible = ? "
+                    + "visible = ?, "
                     + "type = ?"
                     + "where id = ?");
             statement.setString(1, t.getName());

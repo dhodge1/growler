@@ -46,11 +46,14 @@
             .modals{
                 display:none;
             }
+            .no-close .ui-dialog-titlebar-close {
+                display: none;
+            }
         </style>
     </head>
     <body id="growler1">
         <%
-            if (null == session.getAttribute("role")) {
+            if (null == session.getAttribute("id")) {
                 response.sendRedirect("../../../index.jsp");
             }
             ThemePersistence persist = new ThemePersistence();
@@ -74,7 +77,7 @@
                 <span>Use the table below to add, edit or delete existing themes.</span>
             </div>
             <div class="row mediumBottomMargin">
-                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Theme Details</span><a href="#" class="pullRight button button-primary">Add Theme</a></h2>
+                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Theme Details</span><a href="../../../private/employee/themeentry.jsp" class="pullRight button button-primary">Add Theme</a></h2>
             </div>
             <div class="row">
                 <form action="../../../action/admintheme.jsp" >
@@ -145,10 +148,10 @@
                             <li class="pager-arrow"><a onclick="prev();"><i class="icon12-previous"></i></a></li>
                                     <% int rows = themes.size();
                                         int pages = 0;
-                                        if (rows % 15 == 0) {
-                                            pages = (rows / 15);
+                                        if (rows % 20 == 0) {
+                                            pages = (rows / 20);
                                         } else {
-                                            pages = (rows / 15) + 1;
+                                            pages = (rows / 20) + 1;
                                         }
                                         for (int i = 0; i < pages; i++) {
                                             out.print("<li id=\"page" + (i + 1) + "\"><a onclick='page(" + (i + 1) + ");'>" + (i + 1) + "</a></li>");

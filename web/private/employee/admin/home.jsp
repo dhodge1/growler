@@ -15,7 +15,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Suggest a New Theme</title>
+        <title>Welcome to the Techtoberfest Information System!</title>
         <link rel="stylesheet" href="../../css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
         <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
@@ -35,7 +35,7 @@
     <body id="growler1">
         <%
                     
-                    if (null == session.getAttribute("role")) {
+                    if (null == session.getAttribute("id")) {
                         response.sendRedirect("../../../index.jsp");
                     }
         %>

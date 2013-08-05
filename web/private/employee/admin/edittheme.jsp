@@ -27,8 +27,9 @@
             int user = 0;
             if (null == session.getAttribute("id")) {
                 response.sendRedirect("../../../index.jsp");
-            } else if (!session.getAttribute("role").equals("admin")) {
-                response.sendRedirect("../../../index.jsp");
+           // } else if (!session.getAttribute("role").equals("admin")) {
+           //     response.sendRedirect("../../../index.jsp");
+          //  }
             }
             try {
                 user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
@@ -62,7 +63,7 @@
                     <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Theme Details</span></h2>
             </div>
             <div class="row">
-                <form method="post" action="../../../action/processThemeEdit.jsp" onSubmit="return validateValues();">
+                <form method="post" action="../../../action/processThemeEdit.jsp">
                     <div class="form-group">
                         <label class="required">Theme name</label>
                         <input id="name" name="name" type="text" data-content="Enter the name of the Theme" value="<% out.print(theme.getName());%>" maxlength="30"/>
@@ -76,8 +77,8 @@
                         <label class="required">Theme category</label>
                         <select name="category">
                             <option value="0"> Select a Category </option>
-                            <option value="Business" <% if (theme.getType().equals("Business")) { out.print("selected"); } %>>Business</option>
-                            <option value="Technical" <% if (theme.getType().equals("Technical")) { out.print("selected"); } %>>Technical</option>
+                            <option value="Business" <% //if (theme.getType().equals("Business")) { out.print("selected"); } %>>Business</option>
+                            <option value="Technical" <% //if (theme.getType().equals("Technical")) { out.print("selected"); } %>>Technical</option>
                         </select>
                     </div>
                     <div class="form-group">

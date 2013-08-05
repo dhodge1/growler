@@ -16,7 +16,7 @@
 <jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page" />
 <%
     int user = 0;
-    if (null == session.getAttribute("role")) {
+    if (null == session.getAttribute("id")) {
         response.sendRedirect("../index.jsp");
     }
     try {
