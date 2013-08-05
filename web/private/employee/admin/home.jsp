@@ -49,9 +49,8 @@
                 if (u != null) {
                     session.setAttribute("user", u.getUserName());
                     session.setAttribute("id", u.getCorporateId());
-                    if (u.getRole() == "admin"|| id == "162107" || id == "161301") {
+                    if (u.getRole().equals("admin")) {
                         session.setAttribute("role", "admin");
-                        response.sendRedirect("/admin/home.jsp");
                     }
                 } else if (!id.equals(null) || !id.equals("null")) {
                     newUser.setId(Integer.parseInt(id));
@@ -63,7 +62,6 @@
                     session.setAttribute("id", newUser.getCorporateId());
                     if (id.equals("160240") || id.equals("160445") || id.equals("162107") || id.equals("161301")) { //if it's Ian R. or Brian S.
                         session.setAttribute("role", "admin");
-                        response.sendRedirect("/admin/home.jsp");
                     }
                 }
             }
@@ -79,7 +77,7 @@
         <div class="container-fixed mediumBottomMargin">
             <div class="row mediumBottomMargin"></div>
             <div class="row largeBottomMargin">
-                <h1 style="margin-top:0px;font-weight: normal;">Welcome to the Tecthoberfest Information System! <%= session.getAttribute("role") %><%= session.getAttribute("id") %></h1>
+                <h1 style="margin-top:0px;font-weight: normal;">Welcome to the Tecthoberfest Information System!</h1>
             </div>
             <div class="row mediumBottomMargin">
                 <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Admin Details</span></h2>
