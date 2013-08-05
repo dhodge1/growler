@@ -108,7 +108,7 @@
                             <select name="location">
                                 <%
                                     LocationPersistence lp = new LocationPersistence();
-                                    ArrayList<Location> locations = lp.getAllLocations();
+                                    ArrayList<Location> locations = lp.getAllLocations(" ");
                                     for (int i = 0; i < locations.size(); i++) {
                                         out.print("<option value=" + locations.get(i).getId() + ">" + locations.get(i).getDescription() + "</option>");
                                     }

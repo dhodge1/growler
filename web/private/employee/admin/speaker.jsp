@@ -158,9 +158,15 @@
                             <td><% out.print(speakers.get(i).getLastName() + ", " + speakers.get(i).getFirstName());%>
                                 <input name="list" type="hidden" value="<% out.print(speakers.get(i).getId());%>" />
                                 <%
+                                String decimal = "";
+                                try {
                                     double d = speakers.get(i).getRank2012();
                                     java.text.DecimalFormat df = new java.text.DecimalFormat("0.00");
-                                    String decimal = df.format(d);
+                                    decimal = df.format(d);
+                                }
+                                catch (Exception e) {
+                                    decimal = "";
+                                }
                                 %><br/>
                                 Last Name:<input name="last" value="<% out.print(speakers.get(i).getLastName());%>"><br/>
                                 First Name:<input name="first" value="<% out.print(speakers.get(i).getFirstName());%>">

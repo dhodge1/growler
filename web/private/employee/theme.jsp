@@ -230,7 +230,7 @@
                 <div class='row largeBottomMargin'></div>
 
                 <form action='../../action/processThemeRanking.jsp'>
-                    <div class='row largeBottomMargin'>
+                    <div class='row mediumBottomMargin'>
                         <div class='span5 smallBottomMargin'>
                             <span><strong>Available Presentation Themes</strong></span>
                         </div>

@@ -15,39 +15,30 @@
 <jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="page" />
 <jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page" />
 <%
-                    int user = 0;
-                    String role = "";
-                    if (null == session.getAttribute("id")) {
-                        response.sendRedirect("../index.jsp");
-                    }
-                    try {
-                        role = (String)session.getAttribute("role");
-                        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
-                    }
-                    catch (Exception e) {
-                        
-                    }
-                    Theme t = new Theme();
-            String name = request.getParameter("name");
-            String type = request.getParameter("type");
-            String reason = "";
-            try {
-                reason = request.getParameter("reason");
-            } catch (Exception e) {
-                reason = "";
-            }
-                t.setVisible(false);
-            t.setName(name);
-            t.setType(type);
-            t.setCreatorId(user);
-            t.setReason(reason);
-            persist.addTheme(t);
-            if (role.equals("admin")) {
-                session.setAttribute("message", "Success: Theme Successfully added!");
-                response.sendRedirect("../private/employee/admin/themeentry-confirm.jsp");
-            } else {
-                session.setAttribute("message", "Success: Your suggestion has been submitted successfully!");
-                session.setAttribute("theme", t.getName());
-                response.sendRedirect("../private/employee/themeentry-confirm.jsp");
-            }
-        %>
+    int user = 0;
+    if (null == session.getAttribute("id")) {
+        response.sendRedirect("../index.jsp");
+    }
+    try {
+        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+    } catch (Exception e) {
+    }
+    Theme t = new Theme();
+    String name = request.getParameter("name");
+    String type = request.getParameter("type");
+    String reason = "";
+    try {
+        reason = request.getParameter("reason");
+    } catch (Exception e) {
+        reason = "";
+    }
+    t.setVisible(false);
+    t.setName(name);
+    t.setType(type);
+    t.setCreatorId(user);
+    t.setReason(reason);
+    persist.addTheme(t);
+    session.setAttribute("message", "Success: Your suggestion has been submitted successfully!");
+    response.sendRedirect("../private/employee/themeentry-confirm.jsp");
+
+%>

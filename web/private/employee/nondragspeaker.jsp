@@ -143,8 +143,8 @@
                 margin-left: 4px;
             }
             .interestLabel {
-                margin-left:25px;
                 top:10px;
+                left:-12px;
                 position:relative;
             }
             .pullRight {
@@ -169,6 +169,9 @@
             }
             .no-close .ui-dialog-titlebar-close {
                 display: none;
+            }
+            .keywordFilter-clear {
+                cursor: pointer;
             }
         </style>
     </head>
@@ -219,7 +222,7 @@
                 <div class='row largeBottomMargin'></div>
 
                 <form action='../../action/processSpeakerRanking.jsp'>
-                    <div class='row mediumBottomMargin'>
+                    <div class='row largeBottomMargin'>
                         <div class='row span10' style='background:#ddd;'>
                             <div class='span6 smallBottomMargin'>
                                 <span class="keywordFilter" style="width:100%; margin-top: 6px;">
@@ -231,7 +234,7 @@
                                 </span>
                             </div>
                             <div class='span6 smallBottomMargin'>
-                                <span><strong>Speakers I'm Interested In</strong></span><span class='pullRight'><a class='showModal' data-content='<ol>
+                                <span class='interestLabel'><strong>Speakers I'm Interested In</strong></span><span class='pullRight'><a class='showModal' data-content='<ol>
                                                                                                                                          <li>Matt Peter: 4.93</li>
                                                                                                                                          <li>John Hills: 4.92</li>
                                                                                                                                          <li>Ram Karra: 4.80</li>

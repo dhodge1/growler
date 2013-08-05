@@ -53,6 +53,12 @@
                 text-decoration: underline;
                 cursor: pointer;
             }
+            .pager li {
+                cursor: pointer;
+            }
+            .no-close .ui-dialog-titlebar-close {
+                display: none;
+            }
         </style>
     </head>
     <body id="growler1">  

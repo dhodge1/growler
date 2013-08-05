@@ -164,8 +164,8 @@
                 margin-left: 4px;
             }
             .interestLabel {
-                margin-left:25px;
                 top:10px;
+                left:-12px;
                 position:relative;
             }
             .pullRight {
@@ -178,6 +178,9 @@
             }
             .no-close .ui-dialog-titlebar-close {
                 display: none;
+            }
+            .keywordFilter-clear {
+                cursor: pointer;
             }
         </style>
     </head>
@@ -241,7 +244,7 @@
                                 </span>
                             </div>
                             <div class='span6 smallBottomMargin'>
-                                <span><strong>Presentations Themes I'm Interested In</strong></span>
+                                <span class='interestLabel'><strong>Presentations Themes I'm Interested In</strong></span>
                             </div>
                         </div>
                         <div class='span5'>

@@ -231,7 +231,7 @@
                 <div class='row mediumBottomMargin'></div>
 
                 <form action='../../action/processSpeakerRanking.jsp'>
-                    <div class='row largeBottomMargin'>
+                    <div class='row mediumBottomMargin'>
                         <div class='span5 smallBottomMargin'>
                             <span><strong>Last Year's Speakers</strong><i id="spkrtypeHelp" class="icon12-info" data-content="Business Speakers - Any speaker providing technical information in a non-technical way, appealing to both IT and non-IT users.<br/><br/>Technical Speakers - Speakers with a technical background providing mid to high level technical information, appealing to mainly IT users with technical backgrounds." title="Speaker Types"></i></span>
                             <span class='pullRight'><a class='showModal' data-content='<ol>

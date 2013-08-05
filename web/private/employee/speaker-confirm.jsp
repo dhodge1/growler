@@ -71,7 +71,7 @@
                 } else { //If we got speakers, we let the user see them
                     out.print("<div class='row largeBottomMargin'>");
                     out.print("<span>Thank you for providing us with the speakers you are most interested in for this years' Techtoberfest! We value your opinion and participation. Below is a listing of the speakers and rankings you provided.</span><br/><br/>");
-                    out.print("<span><strong>Remember:</strong> Now that your ranking has been submitted, you can not submit another unless you <a href='../../action/removeSpeakerRanks.jsp?id=" + user + "'>reset/clear</a> this one. An option to reset your previous ranking will now be provided via the ranking page.</span>");
+                    out.print("<span><strong>Remember:</strong> Now that your ranking has been submitted, you can not submit another unless you <a href='../../action/removeSpeakerRanks.jsp?return=drag&id=" + user + "'>reset/clear</a> this one. An option to reset your previous ranking will now be provided via the ranking page.</span>");
                     out.print("</div>");
                 }
                 if (speakers.size() > 0) {
