@@ -64,6 +64,7 @@
                     }
                 });
                 $("#progress1").click(function() {
+                    changeMouseOnIndicators();
                     if (parseInt($("#step").val()) !== 4) {
                         for (var i = 0; i < 4; i++) {
                             $('#progress' + i).removeClass("current");
@@ -74,13 +75,15 @@
                         $("#code").hide();
                         $("#confirm").hide();
                         $("#errors").hide();
-                        $("#errorsquestion").hide();
+                        $(".errorsquestion").hide();
                         $("#dateselector").show();
                         $("#table").show();
                         $("#step").val(1);
                     }
                 });
                 $("#progress2").click(function() {
+                    changeMouseOnIndicators();
+                    $("#progress1").css("cursor", "pointer");
                     if (parseInt($("#step").val()) > 2 && parseInt($("#step").val()) !== 4) {
                         for (var i = 2; i < 4; i++) {
                             $('#progress' + i).removeClass("current");
@@ -91,7 +94,7 @@
                         $("#code").hide();
                         $("#confirm").hide();
                         $("#errors").hide();
-                        $("#errorsquestion").hide();
+                        $(".errorsquestion").hide();
                         $("#dateselector").hide();
                         $("#table").hide();
                         $("#step").val(2);
@@ -108,21 +111,22 @@
                     if (page === 1) {
                         $("#errors").html("<span>Please select a session.</span>");
                         $("#errors").show();
+                        $(".errorsquestion").hide();
                     }
                     if (page === 2) {
                         $("#errors").html("<span>Please answer all questions.</span>");
-                        $("#errorsquestion").show();
+                        $(".errorsquestion").hide();
                         if (!($("input[name='q1']:checked").length)) {
-                            $("#error1").html("<span>This field is required.</span>");
+                            $("#error1").html("<span>This field is required.</span>").show();
                         }
                         if (!($("input[name='q2']:checked").length)) {
-                            $("#error2").html("<span>This field is required.</span>");
+                            $("#error2").html("<span>This field is required.</span>").show();
                         }
                         if (!($("input[name='q3']:checked").length)) {
-                            $("#error3").html("<span>This field is required.</span>");
+                            $("#error3").html("<span>This field is required.</span>").show();
                         }
                         if ((!$("input[name='q4']:checked").length)) {
-                            $("#error4").html("<span>This field is required.</span>");
+                            $("#error4").html("<span>This field is required.</span>").show();
                         }
                         $("#errors").show();
                     }
@@ -131,7 +135,7 @@
                 $("#continue").click(function() {
                     var step = parseInt($("#step").val());
                     $("#errors").hide();
-                    $("#errorsquestion").hide();
+                    $(".errorsquestion").hide();
                     if (step === 1) {
                         changeMouseOnIndicators();
                         $("#progress1").css("cursor", "pointer");

@@ -51,7 +51,7 @@
                 <span>Click on a topic below to have the help content displayed.</span>
             </div>
             <div class="row">
-                <h2 class="bordered"><img id="logo" style="padding-left:0;padding-bottom:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Help By Topic</span><span class="pullRight"><a href='Techtoberfest_HelpDocumentation_2013.pdf'>View as PDF</a></span></h2>
+                <h2 class="bordered"><img id="logo" style="padding-left:0;padding-bottom:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Help By Topic</span><span class="pullRight"><a href='Techtoberfest_HelpDocumentation_2013.pdf' target="blank">View as PDF</a></span></h2>
             </div>
             <div class="row">
                 <div class="accordion" id="accordion-parent">

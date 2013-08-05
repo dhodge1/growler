@@ -5,6 +5,9 @@
     Purpose    : Serves as a launch page for the rest of the application
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.*"%>
+<%@page import="java.sql.*"%>
+<%@page import="com.scripps.growler.*" %>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
@@ -34,6 +37,38 @@
     </head>
     <body id="growler1">
         <%
+            if (request.getHeader("sn_employee_id") != null) {
+                String first_name = request.getHeader("sn_first_name");
+                String last_name = request.getHeader("sn_last_name");
+                String email = request.getHeader("sn_email");
+                String id = request.getHeader("sn_employee_id");
+                String name = last_name + ", " + first_name;
+                UserPersistence up = new UserPersistence();
+                User u = up.getUserByEmail(email);
+                User newUser = new User();
+                if (u != null) {
+                    session.setAttribute("user", u.getUserName());
+                    session.setAttribute("id", u.getCorporateId());
+                    if (u.getRole() == "admin"|| id == "162107" || id == "161301") {
+                        session.setAttribute("role", "admin");
+                        response.sendRedirect("/admin/home.jsp");
+                    }
+                } else if (!id.equals(null) || !id.equals("null")) {
+                    newUser.setId(Integer.parseInt(id));
+                    newUser.setCorporateId(id);
+                    newUser.setUserName(name);
+                    newUser.setEmail(email);
+                    up.addUser(newUser);
+                    session.setAttribute("user", newUser.getUserName());
+                    session.setAttribute("id", newUser.getCorporateId());
+                    if (id.equals("160240") || id.equals("160445") || id.equals("162107") || id.equals("161301")) { //if it's Ian R. or Brian S.
+                        session.setAttribute("role", "admin");
+                        response.sendRedirect("/admin/home.jsp");
+                    }
+                }
+            }
+        %>
+        <%
                     
                     if (null == session.getAttribute("id")) {
                         response.sendRedirect("../../../index.jsp");
@@ -44,7 +79,7 @@
         <div class="container-fixed mediumBottomMargin">
             <div class="row mediumBottomMargin"></div>
             <div class="row largeBottomMargin">
-                <h1 style="margin-top:0px;font-weight: normal;">Welcome to the Tecthoberfest Information System!</h1>
+                <h1 style="margin-top:0px;font-weight: normal;">Welcome to the Tecthoberfest Information System! <%= session.getAttribute("role") %><%= session.getAttribute("id") %></h1>
             </div>
             <div class="row mediumBottomMargin">
                 <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Admin Details</span></h2>
