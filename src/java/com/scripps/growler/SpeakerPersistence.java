@@ -445,4 +445,23 @@ public class SpeakerPersistence extends GrowlerPersistence {
         return null;
     }
     
+    public int getSpeakersAssignments(int speaker) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select count(speaker_id) from speaker_team where session_id in (select ses.id from session ses where extract(year from session_date) = 2013) and speaker_id = ?");
+            statement.setInt(1, speaker);
+            result = statement.executeQuery();
+            int count = 0;
+            while (result.next()){
+                count = result.getInt(1);
+            }
+            return count;
+        } catch(Exception e) {
+            
+        } finally {
+            closeJDBC();
+        }
+        return 0;
+    }
+    
 }

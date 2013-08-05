@@ -23,8 +23,6 @@
                     catch (Exception e) {
                         
                     }
-                %>
-        <%
             String idString = request.getParameter("id");
             Connection connection = dataConnection.sendConnection();
             Statement statement = connection.createStatement();
@@ -34,8 +32,6 @@
             int success = statement.executeUpdate(sql);
             String sql2 = "delete from speaker_team where speaker_id = " + idString;
             statement.executeUpdate(sql2);
-            session.setAttribute("message", "Success: The Speaker " + s.getLastName() + ", " + s.getFirstName() + " has been deleted!");
             connection.close();
-            statement.close();
-            response.sendRedirect("../private/employee/admin/speaker.jsp");
+            statement.close();            
             %>

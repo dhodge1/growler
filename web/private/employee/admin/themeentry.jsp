@@ -75,7 +75,7 @@
                     <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Add a Theme</span></h2>
             </div>
             <div class="row">
-                    <form method="POST" id="action" action="../../../action/processThemeSuggestion.jsp">
+                    <form method="POST" id="action" action="../../../action/processThemeAdd.jsp">
                         <fieldset>
                             <div class="form-group">
                                 <label class="required">Theme name</label>
@@ -104,7 +104,7 @@
                                 <input type="text" name="creator" <% out.print("value='" + user + "'"); %> />
                             </div>
                             <div class="form-group">
-                                <input type="checkbox" name="visible"/><label class="required">Make theme visible to users?</label>
+                                <input type="checkbox" name="visible" value="true"/><label class="required">Make theme visible to users?</label>
                             </div>
                             <div class="form-actions">
                                 <input class="button button-primary" id="send" type="submit" value="Add Theme" name="Submit" />

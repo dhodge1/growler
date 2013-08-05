@@ -9,7 +9,6 @@
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
 <%@page import="com.scripps.growler.*" %>
-<%@include file="../includes/isadmin.jsp" %>
     <%
                     int user = 0;
                     if (null == session.getAttribute("id")) {
@@ -22,20 +21,15 @@
                     catch (Exception e) {
                         
                     }
-                %>
-    <%
         int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
         String desc = request.getParameter("description");
-        String reason = request.getParameter("reason");
         String creator = request.getParameter("creator");
-        
         ThemePersistence tp = new ThemePersistence();
         Theme t = new Theme();
         t.setId(id);
         t.setName(name);
         t.setDescription(desc);
-        t.setReason(reason);
         t.setCreatorId(Integer.parseInt(creator));
         if (request.getParameter("visible").equals("true")) {
             t.setVisible(true);
@@ -44,7 +38,7 @@
             t.setVisible(false);
         }
         tp.updateTheme(t);
-        
-        session.setAttribute("message", "Success: Theme successfully changed");
-        response.sendRedirect("../private/employee/admin/theme.jsp");
+        session.setAttribute("message", "Success: The following theme has been edited successfully!");
+        session.setAttribute("theme", name);
+        response.sendRedirect("../private/employee/admin/themeedit-confirm.jsp");
     %>

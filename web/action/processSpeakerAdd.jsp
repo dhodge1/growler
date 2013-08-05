@@ -16,7 +16,7 @@
 <jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page" />
 <%
     int user = 0;
-    if (null == session.getAttribute("id")) {
+    if (null == session.getAttribute("role")) {
         response.sendRedirect("../index.jsp");
     }
     try {
@@ -24,23 +24,35 @@
         String name = String.valueOf(session.getAttribute("user"));
     } catch (Exception e) {
     }
-%>
-<% String first_name = request.getParameter("first_name");
+    Speaker s = new Speaker();
+    String first_name = request.getParameter("first_name");
     String last_name = request.getParameter("last_name");
     String type = request.getParameter("type");
-    String reason = request.getParameter("reason");
-
-    Speaker s = new Speaker();
+    String visible = "";
+    int creator = 0;
+    try {
+        creator = Integer.parseInt(request.getParameter("creator"));
+    } catch (Exception e) {
+        creator = user;
+    }
+    try {
+        visible = request.getParameter("visible");
+        if (visible.equals("true")) {
+            s.setVisible(true);
+        } else {
+            s.setVisible(false);
+        }
+    } catch (Exception e) {
+        s.setVisible(false);
+    }
     s.setFirstName(first_name);
     s.setLastName(last_name);
     s.setType(type);
-    s.setSuggestedBy(user);
-    s.setReason(reason);
-    s.setVisible(false);
-
+    s.setSuggestedBy(creator);
     persist.addSpeaker(s);
 
-    session.setAttribute("message", "Success: Your suggestion has been submitted successfully!");
-    response.sendRedirect("../private/employee/speakerentry-confirm.jsp");
+    session.setAttribute("message", "Success: The following speaker has been added successfully!");
+    session.setAttribute("speaker", last_name + ", " + first_name);
+    response.sendRedirect("../private/employee/admin/speakerentry-confirm.jsp");
 
 %>

@@ -1,12 +1,13 @@
 <%-- 
-    Document   : speakerentry
-    Created on : Feb 27, 2013, 11:55:19 PM
+    Document   : themeentry
+    Created on : Feb 27, 2013, 12:17:43 AM
     Author     : Justin Bauguess & Jonathan C. McCowan
-    Purpose    : The purpose of speakerentry(admin) is to enter a speaker into
-                 the speaker table.  It uses the file action/processSpeakerSuggestion
-                 , which is the same file speakerentry for regular users.
+    Purpose    : The purpose of themeentry is to allow the administrator to
+                enter a theme into the database.  By default, it will not be 
+                visible.  This can be changed with the admin/theme.jsp file.  It 
+                uses the same action file (processThemeSuggestion) but will forward
+                to a different page based on being an admin (or not).
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
@@ -19,7 +20,7 @@
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <title>Speaker Entry</title>
+        <title>Add a Speaker</title>
 
         <link rel="stylesheet" href="../../../css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
         <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
@@ -33,7 +34,7 @@
                 font-weight: bold;
             }
         </style>
-        <script src="http://growler-dev.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->	
+        <script src="http://growler-dev.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
     </head>
     <body id="growler1">
         <%
@@ -51,43 +52,71 @@
         %>
 
         <%@ include file="../../../includes/adminheader.jsp" %> 
-        <%@ include file="../../../includes/adminnav.jsp" %>
-        <div class="container-fixed">
-            <br/><br/><br/>
+        <%@ include file="../../../includes/adminnav.jsp" %>  
+        <div class="container-fixed largeBottomMargin">
+            <div class="mediumBottomMargin row"></div>
             <div class="row">
-                
-                    <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Add a Speaker</span></h2>
-                
+                <ul class="breadcrumb">
+                    <li><a href="../../../private/employee/admin/home.jsp">Home</a></li>
+                    <li class='ieFix'>Add a Speaker</li>
+                </ul>
             </div>
-            <br/>
+            <div class='row mediumBottomMargin'>
+                <h1 style="margin-top:0px;font-weight: normal;">Add a New Speaker</h1>
+            </div>
+            <div class='mediumBottomMargin row' style='border: 1px dotted #ddd;'></div>
+            <div class="row largeBottomMargin">
+                <h3>Please fill out the form below to add a new speaker.</h3>
+            </div>
+            <div class="row mediumBottomMargin">
+                <label><span style="color: red;">*</span>Required field</label>
+            </div>
             <div class="row">
-                
-                    <form method="POST" id="action" action="../../../action/processSpeakerSuggestion.jsp">
+                    <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Add a Speaker</span></h2>
+            </div>
+            <div class="row">
+                    <form method="POST" id="action" action="../../action/processSpeakerAdd.jsp">
                         <fieldset>
-                            <div class="form-group">
+                            <div class="form-group inline">
                                 <label class="required">Speaker First Name</label>
-                                <input required="required" name="first_name" class="input-xlarge" type="text" id="tip" data-content="30 characters or less please" maxlength="30"/>
+                                <input required="required" name="first_name" class="input-xlarge" type="text" id="tip" data-content="Please enter no more than 30 characters" maxlength="30"/>
                                 <br/><span id="error_first" class="message_container">
-                                    <span>Please Enter a First Name</span>
+                                    <span>Please enter a first name</span>
+                                </span>
+                            </div>
+                            <div class="form-group inline">
+                                <label class="required">Speaker Last Name</label>
+                                <input required="required" name="last_name" class="input-xlarge" type="text" id="tip2" data-content="Please enter no more than 30 characters" maxlength="30"/>
+                                <br/><span id="error_last" class="message_container">
+                                    <span>Please enter a last name</span>
+                                </span>
+                            </div>
+                            <div class='form-group'>
+                                <label class='required'>What type of speaker is this?</label>
+                                <select name="type" id="tip3" class="input-xlarge" data-content="Choose a type: Business or Technical">
+                                    <option value="null">Please Select a Type</option>
+                                    <option value="Business">Business</option>
+                                    <option value="Technical">Technical</option>
+                                </select>
+                                <br/><span id="error_type" class="message_container">
+                                    <span>Please select a speaker type</span>
                                 </span>
                             </div>
                             <div class="form-group">
-                                <label class="required">Speaker Last Name</label>
-                                <input required="required" name="last_name" class="input-xlarge" type="text" id="tip2" data-content="30 characters or less please" maxlength="30"/>
-                                <br/><span id="error_last" class="message_container">
-                                    <span>Please Enter a Last Name</span>
-                                </span>
+                                <label class="required">Speaker added by</label>
+                                <input type="text" name="creator" <% out.print("value='" + user + "'"); %> />
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" name="visible" value="true"/><label class="required">Make speaker visible to users?</label>
                             </div>
                             <div class="form-actions">
-                                <input class="button button-primary" id="send" type="submit" value="Submit" name="submit"/>
-                                <a class="button" id="cancel" href="speaker.jsp">Cancel</a>
+                                <input class="button button-primary" id="send" type="submit" value="Add Theme" name="Submit" />
+                                <a id="cancel" href="../../../private/employee/admin/speaker.jsp">Cancel</a>
                             </div>
                         </fieldset>
-                    </form>	
-                
+                    </form>		
             </div>
         </div>
-
         <%@ include file="../../../includes/footer.jsp" %> 
         <%@ include file="../../../includes/scriptlist.jsp" %>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -96,6 +125,10 @@
         <script src="js/libs/sniui.auto-inline-help.min.js" type="text/javascript"></script>
         <script src="js/libs/sniui.auto-inline-help.1.0.0.min.js" type="text/javascript"></script>
 
-        <script src="../../../js/speaker.js"></script>
+        <!--Additional Script-->
+        <script src="../../../js/themeentry.js"></script>
+        <script>$(function() {
+                $("input").autoinline();
+            });</script>
     </body>
 </html>

@@ -25,7 +25,7 @@
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <title>Admin Speaker</title><!-- Title -->
+        <title>Manage Speakers</title><!-- Title -->
 
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> 
         <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
@@ -38,223 +38,176 @@
     </head>
     <body id="growler1">
         <%
-            int user = 0;
-            String sort = "";
-            if (null == session.getAttribute("id")) {
-               // response.sendRedirect("../../../index.jsp");
-            } else if (!session.getAttribute("role").equals("admin")) {
-              //  response.sendRedirect("../../../index.jsp");
+            if (null == session.getAttribute("role")) {
+                response.sendRedirect("../../../index.jsp");
             }
-            try {
-                sort = request.getParameter("sort");
-                user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
-                String name = String.valueOf(session.getAttribute("user"));
-            } catch (Exception e) {
-            }
+            SpeakerPersistence persist = new SpeakerPersistence();
+            ArrayList<Speaker> speakers = persist.getAllSpeakers(" order by last_name");
         %>
         <%@ include file="../../../includes/adminheader.jsp" %> 
         <%@ include file="../../../includes/adminnav.jsp" %>
-        <div class="container-fixed">
-            <br/><br/><br/>
+        <div class="container-fixed largeBottomMargin">
+            <div class="row mediumBottomMargin"></div>
             <div class="row">
-
-                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Speakers</span></h2>
-
+                <ul class="breadcrumb">
+                    <li><a href="../../../private/employee/home.jsp">Home</a></li>
+                    <li>Manage Speakers</li>
+                </ul>
             </div>
-            <br/>
+            <div class="row mediumBottomMargin">
+                <h1>Manage Speakers</h1>
+            </div>
+            <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
+            <div class="row largeBottomMargin">
+                <span>Use the table below to add, edit or delete existing speakers.</span>
+            </div>
+            <div class="row mediumBottomMargin">
+                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Speaker Details</span><a href="#" class="pullRight button button-primary">Add Speaker</a></h2>
+            </div>
             <div class="row">
-
-                <%
-                    ArrayList<Speaker> speakers = persist.getAllSpeakers(" order by rating desc, last_name");
-                    try {
-                        if (sort.equals("name_desc") && !sort.isEmpty()) {
-                            speakers = persist.getAllSpeakers(" order by last_name desc");
-                        }
-                        else if (sort.equals("name_asc") && !sort.isEmpty()) {
-                            speakers = persist.getAllSpeakers(" order by last_name asc");
-                        }
-                        else if (sort.equals("curvotes_asc") && !sort.isEmpty()) {
-                            speakers = persist.getAllSpeakers(" order by votes asc, id");
-                        }
-                        else if (sort.equals("curvotes_desc") && !sort.isEmpty()) {
-                            speakers = persist.getAllSpeakers(" order by votes desc, id");
-                        }
-                        else if (sort.equals("curpoints_asc") && !sort.isEmpty()) {
-                            speakers = persist.getAllSpeakers(" order by points asc, id");
-                        }
-                        else if (sort.equals("curpoints_desc") && !sort.isEmpty()) {
-                            speakers = persist.getAllSpeakers(" order by points desc, id");
-                        }
-                        else if (sort.equals("rating_asc") && !sort.isEmpty()) {
-                            speakers = persist.getAllSpeakers(" order by rating asc, last_name");
-                        }
-                        else if (sort.equals("rating_desc") && !sort.isEmpty()) {
-                            speakers = persist.getAllSpeakers(" order by rating desc, last_name");
-                        }
-                        else if (sort.equals("times_asc") && !sort.isEmpty()) {
-                            speakers = persist.getAllSpeakers(" order by count asc, last_name");
-                        }
-                        else if (sort.equals("times_desc") && !sort.isEmpty()) {
-                            speakers = persist.getAllSpeakers(" order by count desc, last_name");
-                        }
-                        else if (sort.equals("suggest_asc") && !sort.isEmpty()) {
-                            speakers = persist.getAllSpeakers(" order by suggested_by asc, last_name");
-                        }
-                        else if (sort.equals("suggest_desc") && !sort.isEmpty()) {
-                            speakers = persist.getAllSpeakers(" order by suggested_by desc, last_name");
-                        }
-                        else if (sort.equals("visible_asc") && !sort.isEmpty()) {
-                            speakers = persist.getAllSpeakers(" order by visible asc, last_name");
-                        }
-                        else if (sort.equals("visible_desc") && !sort.isEmpty()) {
-                            speakers = persist.getAllSpeakers(" order by visible desc, last_name");
-                        }
-                    } catch (Exception e) {
-                        speakers = persist.getAllSpeakers(" order by rating desc, last_name");
-                    }
-                %>
-
-
-                <form id="entry" name="entry" action="../../../action/adminspeaker.jsp" method="post" onSubmit="return checkRange();">
+                <form action="../../../action/admintheme.jsp" >
+                    <input type='hidden' id='current_page' value="1" />
+                    <input type='hidden' id='show_per_page' value='20' />
+                    <input type='hidden' id='total' value='<%= speakers.size()%>'/>
                     <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
-                        <tr>
-                            <th>Speaker Name
-                                <a href="speaker.jsp?sort=name_asc"><i class="icon12-sortUp"></i></a>
-                                <a href="speaker.jsp?sort=name_desc"><i class="icon12-sortDown"></i></a>
-                            </th>
-                            <th>Current Votes
-                                <a href="speaker.jsp?sort=curvotes_asc"><i class="icon12-sortUp"></i></a>
-                                <a href="speaker.jsp?sort=curvotes_desc"><i class="icon12-sortDown"></i></a>
-                            </th>
-                            <th>Current Points
-                                <a href="speaker.jsp?sort=curpoints_asc"><i class="icon12-sortUp"></i></a>
-                                <a href="speaker.jsp?sort=curpoints_desc"><i class="icon12-sortDown"></i></a>
-                            </th>
-                            <th>2012 Rating
-                                <a href="speaker.jsp?sort=rating_asc"><i class="icon12-sortUp"></i></a>
-                                <a href="speaker.jsp?sort=rating_desc"><i class="icon12-sortDown"></i></a>
-                            </th>
-                            <th>Times Ranked
-                                <a href="speaker.jsp?sort=times_asc"><i class="icon12-sortUp"></i></a>
-                                <a href="speaker.jsp?sort=times_desc"><i class="icon12-sortDown"></i></a>
-                            </th>
-                            <th>New Rating</th>
-                            <th>New Times Ranked</th>
-                            <th>Visible?
-                                <a href="speaker.jsp?sort=visible_asc"><i class="icon12-sortUp"></i></a>
-                                <a href="speaker.jsp?sort=visible_desc"><i class="icon12-sortDown"></i></a>
-                            </th>
-                            <th>Ranked in 2012?</th>
-                            <th>Suggested By
-                                <a href="speaker.jsp?sort=suggest_asc"><i class="icon12-sortUp"></i></a>
-                                <a href="speaker.jsp?sort=suggest_desc"><i class="icon12-sortDown"></i></a>
-                            </th>
-                            <th>Remove Speaker</th>
-                        </tr>
-                        <%
-                            for (int i = 0; i < speakers.size(); i++) {
-                        %>
-                        <tr>
-                            <td><% out.print(speakers.get(i).getLastName() + ", " + speakers.get(i).getFirstName());%>
-                                <input name="list" type="hidden" value="<% out.print(speakers.get(i).getId());%>" />
-                                <%
-                                String decimal = "";
-                                try {
-                                    double d = speakers.get(i).getRank2012();
-                                    java.text.DecimalFormat df = new java.text.DecimalFormat("0.00");
-                                    decimal = df.format(d);
-                                }
-                                catch (Exception e) {
-                                    decimal = "";
-                                }
-                                %><br/>
-                                Last Name:<input name="last" value="<% out.print(speakers.get(i).getLastName());%>"><br/>
-                                First Name:<input name="first" value="<% out.print(speakers.get(i).getFirstName());%>">
-                            </td>
-                            <td><% out.print(speakers.get(i).getCount());%></td>
-                            <td><% out.print(speakers.get(i).getRank());%></td>
-                            <td><% out.print(decimal);%></td>
-                            <td><% out.print(speakers.get(i).getCount2012());%></td>
-                            <td>
-                                <%
-
-                                    out.print("<input id=\"" + speakers.get(i).getId() + "\" type=\"number\" maxlength=\"4\" min=\"0\" max=\"5\" step=\".01\" name=\"newrank\" value=" + decimal + " />");
-                                %>
-                            </td>
-                            <td>
-                                <%
-                                    int c = speakers.get(i).getCount2012();
-                                    out.print("<input id=\"" + speakers.get(i).getId() + "\" type=\"number\" min=\"0\" max=\"100\" name=\"newcount\" value=" + c + " />");
-                                %>
-                            </td>
-                            <td><input name="visible" type="checkbox" value="<% out.print(speakers.get(i).getId());%>"
-                                       <%
-                                           if (speakers.get(i).getVisible() == true) {
-                                               out.print("checked");
-                                           }
-                                       %> />
-                            </td>
-                            <td><input name="lastyear" type="checkbox" value="<% out.print(speakers.get(i).getId());%>"
-                                       <%
-                                           if (speakers.get(i).getRank2012() > 0) {
-                                               out.print("checked");
-                                           }
-                                       %>/></td>
-                            <td>
-                                <% out.print(upersist.getUserByID(speakers.get(i).getSuggestedBy()).getUserName());%>
-                                <% if (upersist.getUserByID(speakers.get(i).getSuggestedBy()).getId() == 202300) {
-                                        out.print("<br/><a href=\"../../../action/changeSpeaker.jsp?id=" + speakers.get(i).getId() + "\" >Change Default to Suggested</a>");
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Added By</th>
+                                <th>Visible</th>
+                                <th>Ranking Details</th>
+                                <th>Assigned to Session?</th>
+                                <th><!-- Actions --></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%
+                                for (int i = 0; i < speakers.size(); i++) {
+                            %>
+                            <tr <% out.print("id='row" + i + "'");%>>
+                                <td>
+                                    <input type="hidden" <% out.print("id='rowfor" + speakers.get(i).getId() + "'");%> />
+                                </td>
+                                <td><% out.print(speakers.get(i).getType());%></td>
+                                <td><% out.print(speakers.get(i).getSuggestedBy());%></td>
+                                <td><% if (speakers.get(i).getVisible()) {
+                                        out.print("<i class='icon16-check'></i>");
+                                    } else {
+                                        out.print("");
+                                    }
+                                    %></td>
+                                <td><a class="showModal2"><% out.print("<input type='hidden' value='" + speakers.get(i).getId() + "' />");%>View</a>
+                                    <% out.print("<div class='modals' id='modalrank" + speakers.get(i).getId() + "' title='" + speakers.get(i).getFullName() + "'>");
+                                        out.print(speakers.get(i).getRank() + " points out of " + speakers.get(i).getCount() + " votes");
+                                        out.print("</div>");
+                                    %>    
+                                </td>
+                                <td><% if (persist.getSpeakersAssignments(speakers.get(i).getId()) != 0) {
+                                        out.print("<i class='icon16-check'></i>");
+                                    } else {
+                                        out.print("");
                                     }%>
 
-                            </td>
-                            <td><%out.print("<a href=\"../../../action/removeSpeaker.jsp?id=" + speakers.get(i).getId() + "\">Remove</a></td>");%></td>
-                        </tr>
-                        <% } //close the for loop
-%>
+                                </td>
+                                <td>
+                                    <div class="actionMenu">
+                                        <a class="actionMenu-toggle" data-toggle="dropdown" href="#">Actions<b class="caret"></b></a>
+                                        <ul class="actionMenu-menu" role="menu">
+                                            <li><a <% out.print("href='../../../private/employee/admin/editspeaker.jsp?id=" + speakers.get(i).getId() + "'");%>><i class="icon16-approve"></i>Edit</a></li>
+                                            <li><a class="showModal3"><% out.print("<input type='hidden' name='delete' value='" + speakers.get(i).getId() + "' />");%>
+                                                    <% out.print("<div class='modalDelete' id='modaldelete" + speakers.get(i).getId() + "' title='Delete Confirmation'>");
+                                                        out.print("Is it ok to delete this speaker?<br/><br/>");
+                                                        out.print(speakers.get(i).getFullName());
+                                                        out.print("</div>");
+                                                    %>
+                                                    <i class="icon16-pageRemove"></i>Delete</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <% } //close the for loop %>
+                        </tbody>
                     </table>
-                        <input type="submit" value="Submit" class="button button-primary" />
+                    <div class="pager">
+                        <ul>
+                            <li class="pager-arrow"><a onclick="first();"><i class="icon12-first"></i></a></li>
+                            <li class="pager-arrow"><a onclick="prev();"><i class="icon12-previous"></i></a></li>
+                                    <% int rows = speakers.size();
+                                        int pages = 0;
+                                        if (rows % 15 == 0) {
+                                            pages = (rows / 15);
+                                        } else {
+                                            pages = (rows / 15) + 1;
+                                        }
+                                        for (int i = 0; i < pages; i++) {
+                                            out.print("<li id=\"page" + (i + 1) + "\"><a onclick='page(" + (i + 1) + ");'>" + (i + 1) + "</a></li>");
+                                        }
+                                    %>
+                            <li class="pager-arrow"><a onclick="next();"><i class="icon12-next"></i></a></li>
+                            <li class="pager-arrow"><a onclick="last();"><i class="icon12-last"></i></a></li>
+                        </ul>
+                        <div class="pager-pageJump">
+                            <span>Page <input class="input-mini" onchange="pageJump();" type="text" id="pagejump"/> of <%= pages%></span>
+                        </div>
+                    </div>
                 </form>
-
             </div>
         </div>
-
-        <%@ include file="../../../includes/footer.jsp" %> 
-        <%@ include file="../../../includes/scriptlist.jsp" %>
+        <%@ include file="../../../includes/footer.jsp" %>
+        <script src="http://growler-dev.elasticbeanstalk.com/js/libs/bootstrap-dropdown.2.0.4.min.js"></script>
+        <script src="http://growler-dev.elasticbeanstalk.com/js/libs/sniui.dialog.1.2.0.js"></script>
+        <script src="../../../js/pagination.js"></script>
         <script>
-                    function checkRange() {
-                        var lastyear = document.getElementsByName("lastyear");
-                        var newranks = document.getElementsByName("newrank");
-                        for (var i = 0; i < newranks.length; i++) {
-                            if ((newranks[i].value > 5.0 || newranks[i].value < 0.01 || isNaN(newranks[i].value)) && lastyear[i].checked == true) {
-                                alert('Ranks must be between 0 and 5');
-                                newranks[i].focus();
-                                return false;
-                            }
-                            if (lastyear[i].checked == true && newranks[i].value == 0) {
-                                alert('Speakers who spoke last year must have a Rank value.')
-                                newranks[i].focus();
-                                return false;
-                            }
-                        }
-                        var newcounts = document.getElementsByName("newcount");
-                        for (var j = 0; j < newcounts.length; j++) {
-                            newcounts[j].value = Math.floor(newcounts[j].value);
-                            //newcounts[j] = Math.floor(newcounts[j]);
-                            if (newcounts[j].value > 100 || newcounts[j].value < 0 || isNaN(newcounts[j].value)) {
-                                alert('Counts must be between 0 and 100');
-                                newcounts[j].focus();
-                                return false;
-                            }
-                            if (lastyear[j].checked == true && newcounts[j].value == 0) {
-                                alert('Speakers who spoke last year must have a Count value.')
-                                newcounts[j].focus();
-                                return false;
-                            }
-                        }
-                        return true;
-                    }
+                                $(document).ready(function() {
+                                    var page = 1;
+                                    $("#current_page").val(page);
+                                    var total = parseInt($("#total").val());
+                                    var pages = Math.floor((total / parseInt($("#show_per_page").val())) + 1);
+                                    for (var i = 20; i < total + 1; i++) {
+                                        $("#row" + i).hide();
+                                    }
+                                    unActive();
+                                    $("#page1").addClass("active");
+                                    $(".modals").dialog({autoOpen: false});
+                                    $(".modalDelete").dialog({
+                                        autoOpen: false,
+                                        buttons: {
+                                            'ok': {
+                                                'class': 'button button-primary',
+                                                click: function() {
+                                                    var speaker = $(this).prop("id");
+                                                    theme = theme.substring(11);
+                                                    $.post("../../../action/removeSpeaker.jsp", {id: speaker}, function(data, success) {
+                                                    });
+                                                    $("#rowfor" + speaker).parent().parent().remove();
+                                                    $(this).dialog('close');
+                                                },
+                                                text: 'Yes'
+                                            },
+                                            'cancel': {
+                                                click: function() {
 
-        </script><!--Validation-->
+                                                    $(this).dialog('close');
+                                                },
+                                                text: 'No, return to manage speakers table'
+                                            }
+                                        },
+                                    });
+                                    $(".showModal").click(function() {
+                                        var theme = $(this).children().val();
+                                        $("#modal" + theme).dialog("open");
+                                    });
+                                    $(".showModal2").click(function() {
+                                        var rank = $(this).children().val();
+                                        $("#modalrank" + rank).dialog("open");
+                                    });
+                                    $(".showModal3").click(function() {
+                                        var theme = $(this).children().val();
+                                        $("#modaldelete" + theme).dialog("open");
+                                    });
 
+                                });
+        </script>
     </body>
 </html>
