@@ -31,9 +31,9 @@
         LocationPersistence lp = new LocationPersistence();
         try {
                 lp.addLocation(l);
-                session.setAttribute("message", "Success: Room successfully added!");
+                session.setAttribute("message", "Success: The following room was added successfully!");
             } catch (Exception e) {
-                session.setAttribute("message", "Error: Adding Room failed.");
+                session.setAttribute("message", "Error: The following room was not added successfully.");
             } finally {
             session.setAttribute("room", l.getDescription());
             response.sendRedirect("../private/employee/admin/roomadd-confirm.jsp");

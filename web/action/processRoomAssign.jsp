@@ -37,16 +37,16 @@
                 s = sp.getSessionByID(sessionId);
                 s.setLocation(roomId);
                 sp.updateSession(s);
-                session.setAttribute("message", "Success: Room " + l.getDescription() + " successfully assigned to Session " + h.getName() + "!");
+                //session.setAttribute("message", "Success: Room " + l.getDescription() + " successfully assigned to Session " + h.getName() + "!");
             }
             catch (Exception e) {
                 
-                session.setAttribute("message", "Error: Room " + l.getDescription() + " already assigned to Session " + h.getName());
+               // session.setAttribute("message", "Error: Room " + l.getDescription() + " already assigned to Session " + h.getName());
             }
                 
         }
         else {
-            session.setAttribute("message", "Error: Room " + l.getDescription() + " already assigned to another Session at that time.");
+           // session.setAttribute("message", "Error: Room " + l.getDescription() + " already assigned to another Session at that time.");
         }
             response.sendRedirect("../private/employee/admin/room.jsp");
         

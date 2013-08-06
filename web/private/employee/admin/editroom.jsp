@@ -18,17 +18,11 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-        <title>Admin Rooms</title><!-- Title -->
-
+        <title>Edit Room</title><!-- Title -->
+        <link rel="shortcut icon" type="image/png" href="../../../images/scripps_favicon-32.ico">
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> 
         <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-        <link rel="stylesheet" href="../../../css/demo.css" />  
-        <link rel="stylesheet" href="../../../css/draganddrop.css" /><!--Drag and drop style-->
-        <link rel="stylesheet" type="text/css" href="../../../css/general.css" /><!--General CSS-->
-        <link rel="stylesheet" type="text/css" href="../../../css/theme.css" /><!--Theme CSS-->
-        <link rel="stylesheet" href="/resources/demos/style.css" />
         <style>
             .message_container {
                 display: none;
@@ -36,7 +30,6 @@
                 font-weight: bold;
             }
         </style>
-
         <script src="http://growler-dev.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
     </head>
     <body id="growler1">
@@ -53,51 +46,59 @@
             } catch (Exception e) {
             }
         %>
+        <%
+            String id = "TBD";
+            LocationPersistence lp = new LocationPersistence();
+            Location location;
+            try {
+                id = request.getParameter("id");
+                location = lp.getLocationById(id);
+            } catch (Exception e) {
+                id = "TBD";
+                location = lp.getLocationById("TBD");
+            }
 
+
+        %>
         <%@ include file="../../../includes/adminheader.jsp" %> 
         <%@ include file="../../../includes/adminnav.jsp" %>
         <div class="container-fixed">
-            <br/><br/><br/>
+            <div class="row mediumBottomMargin"></div>
             <div class="row">
-
-                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Edit a Room</span></h2>
-
+                <ul class="breadcrumb">
+                    <li><a href="../../../private/employee/admin/home.jsp">Home</a></li>
+                    <li class='ieFix'>Edit Room</li>
+                </ul>
             </div>
-            <br/>
-            <div class="row">
-
-                <%
-                    String id = "TBD";
-                    LocationPersistence lp = new LocationPersistence();
-                    Location location;
-                    try {
-                        id = request.getParameter("id");
-                        location = lp.getLocationById(id);
-                    } catch (Exception e) {
-                        id = "TBD";
-                        location = lp.getLocationById("TBD");
-                    }
-
-
-                %>
+            <div class="row mediumBottomMargin">
+                <h1 style="margin-top:0px;font-weight: normal;">Edit Room</h1>
+            </div>
+            <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
+            <div class="row mediumBottomMargin">
+                <label><span style="color: red;">*</span>Required field</label>
+            </div>
+            <div class="row mediumBottomMargin">
+                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Room Details</span></h2>
+            </div>
+            <div class="row largeBottomMargin">
                 <form id="action" method="post" action="../../../action/processroom.jsp">
                     <div class="form-group">
                         <label class="required">Room ID:</label>
-                        <input type="text" maxlength="10" id="tip" name="id" class="input-xlarge" value="<% out.print(location.getId());%>" data-content="Room ID, 10 Characters or Less"/><br/>
+                        <input type="text" maxlength="10" id="tip" name="id" class="input-xlarge" value="<% out.print(location.getId());%>" data-content="Room ID, 10 Characters or Less"/>
                         <br/><span id="error_id" class="message_container">
                             <span>Please Enter a Room ID</span>
                         </span>
                     </div>
                     <div class="form-group">
                         <label class="required">Room Name:</label>
-                        <input type="text" maxlength="20" id="tip1" name="name"  class="input-xlarge" value="<% out.print(location.getDescription());%>" data-content="Room Name, 20 Characters or Less"/><br/>
+                        <input type="text" maxlength="20" id="tip1" name="name"  class="input-xlarge" value="<% out.print(location.getDescription());%>" data-content="Room Name, 20 Characters or Less"/>
                         <br/><span id="error_name" class="message_container">
                             <span>Please Enter a Room Name</span>
                         </span>
                     </div>
                     <div class="form-group">
                         <label class="required">Capacity:</label>
-                        <% out.print("<input value=\"" + location.getCapacity() + "\" type=\"number\" min=\"0\" max=\"999\" step=\"1\" id=\"tip2\" name=\"capacity\"  data-content=\"Maximum Capacity, 0 to 999\"/>");%><br/>
+                        <% out.print("<input value=\"" + location.getCapacity() + "\" type=\"number\" min=\"0\" max=\"999\" step=\"1\" id=\"tip2\" name=\"capacity\"  data-content=\"Maximum Capacity, 0 to 999\"/>");%>
                         <br/><span id="error_capacity" class="message_container">
                             <span>Please Enter a Capacity</span>
                         </span>
@@ -113,26 +114,25 @@
                                 }
                             %>
                             <option value="0"> - Please Select a Building- </option>
-                                    <option value="KXTC" <% if (building.equals("KXTC")) {
-                                            out.print(" selected ");
-                                        }%>>Knoxville Tech Center</option>
+                            <option value="KXTC" <% if (building.equals("KXTC")) {
+                                    out.print(" selected ");
+                                }%>>Knoxville Tech Center</option>
                             <option value="KXOFFICE" <% if (building.equals("KXOFFICE")) {
                                     out.print(" selected ");
                                 }%>>Knoxville Office</option>
-                                    <option value="TBD" <% if (building.equals("TBD")) {
-                                            out.print(" selected ");
-                                        }%>>TBD</option>
+                            <option value="TBD" <% if (building.equals("TBD")) {
+                                    out.print(" selected ");
+                                }%>>TBD</option>
                         </select>
                         <br/><span id="error_building" class="message_container">
                             <span>Please Select a Building</span>
                         </span>
                     </div>
-                    <br/>
-                    <br/>
-                    <input id="send" type="submit" value="Submit Changes" class="button button-primary"/>
-                    <a id="cancel" class="button" href="room.jsp">Cancel</a>
+                    <div class='form-actions'>
+                        <input id="send" type="submit" value="Save Changes" class="button button-primary"/>
+                        <a id="cancel" href="room.jsp">Cancel</a>
+                    </div>
                 </form>
-
             </div>
         </div>
 

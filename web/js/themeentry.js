@@ -14,7 +14,7 @@ $("#send").click(function(event) {
         $("#error_theme_name").show();
         event.preventDefault();
     }
-    if ((str2) == "0") {
+    if ((str2) === "0") {
         $("#tip2").css("border", "1px solid red");
         $("#error_theme_type").show();
         event.preventDefault();

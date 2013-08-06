@@ -27,7 +27,6 @@
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> 
         <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-        <link rel="stylesheet" type="text/css" href="../../../css/general.css" /><!--General CSS-->
         <link rel="shortcut icon" type="image/png" href="../../../images/scripps_favicon-32.ico">
         <script src="http://growler-dev.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
@@ -70,7 +69,7 @@
                             <div class="row">
                                 <ul class="breadcrumb">
                                     <li><a href="../../../private/employee/home.jsp">Home</a></li>
-                                    <li>Manage Speakers</li>
+                                    <li class='ieFix'>Manage Speakers</li>
                                 </ul>
                             </div>
                             <div class="row mediumBottomMargin">
@@ -80,10 +79,10 @@
                             <div class="row largeBottomMargin">
                                 <span>Use the table below to add, edit or delete existing speakers.</span>
                             </div>
+                            <div class='row largeBottomMargin'></div>
                             <div class="row mediumBottomMargin">
                                 <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Speaker Details</span><a href="../../../private/employee/admin/speakerentry.jsp" class="pullRight button button-primary">Add Speaker</a></h2>
                             </div>
-                            <div class='largeBottomMargin'></div>
                             <div class="row">
                                 <form>
                                     <input type='hidden' id='current_page' value="1" />

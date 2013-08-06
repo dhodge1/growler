@@ -102,7 +102,7 @@
                         <div class='form-group'>
                             <label class='required'>What type of speaker is this?</label>
                             <select name="type" id="tip3" class="input-xlarge" data-content="Choose a type: Business or Technical">
-                                <option value="null">Please Select a Type</option>
+                                <option value="0">Please Select a Type</option>
                                 <option value="Business">Business</option>
                                 <option value="Technical">Technical</option>
                             </select>

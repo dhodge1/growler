@@ -79,6 +79,7 @@
             <div class="row largeBottomMargin">
                 <span>Use the table below to add, edit or delete existing themes.</span>
             </div>
+            <div class="row largeBottomMargin"></div>
             <div class="row mediumBottomMargin">
                 <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Theme Details</span><a href="../../../private/employee/themeentry.jsp" class="pullRight button button-primary">Add Theme</a></h2>
             </div>
