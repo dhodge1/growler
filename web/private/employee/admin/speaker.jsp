@@ -50,6 +50,9 @@
             .no-close .ui-dialog-titlebar-close {
                 display: none;
             }
+            .pager li {
+                cursor: pointer;
+            }
         </style>
     </head>
     <body id="growler1">
@@ -80,6 +83,7 @@
                             <div class="row mediumBottomMargin">
                                 <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Speaker Details</span><a href="../../../private/employee/admin/speakerentry.jsp" class="pullRight button button-primary">Add Speaker</a></h2>
                             </div>
+                            <div class='largeBottomMargin'></div>
                             <div class="row">
                                 <form>
                                     <input type='hidden' id='current_page' value="1" />

@@ -31,10 +31,11 @@
         LocationPersistence lp = new LocationPersistence();
         try {
                 lp.addLocation(l);
-                session.setAttribute("message", "Success: Room " + l.getDescription() + " successfully added!");
+                session.setAttribute("message", "Success: Room successfully added!");
             } catch (Exception e) {
-                session.setAttribute("message", "Error: Adding Room " + l.getDescription() + " failed.");
+                session.setAttribute("message", "Error: Adding Room failed.");
             } finally {
-            response.sendRedirect("../private/employee/admin/room.jsp");
+            session.setAttribute("room", l.getDescription());
+            response.sendRedirect("../private/employee/admin/roomadd-confirm.jsp");
         }
     %>

@@ -121,6 +121,7 @@
                                     if (speakerPersist.getSpeakersBySession(sessions.get(i).getId()).size() == 0) {
                                         out.print("<input type='radio' name='session' value=\"" + sessions.get(i).getId() + "\">");
                                     } else {
+                                        out.print("<input type='radio' name='session' value=\"" + sessions.get(i).getId() + "\">");
                                         out.print("<i class='icon16-success'></i>");
                                     }
                                     out.print(dates.format(sessions.get(i).getSessionDate()) + ", " + fmt.format(sessions.get(i).getStartTime()) + ", " + sessions.get(i).getName());
@@ -129,6 +130,7 @@
                             %>
                         </ol>
                     </div>
+                    <div class="largeBottomMargin"><i class='icon16-success'></i> Indicates a session already has a speaker</div>
                     <div class="form-actions">
                         <input id="send" type="submit" class="button button-primary" value="Assign Speaker"/>
                         <a id="cancel" href="../../../private/employee/admin/speaker.jsp">Cancel</a>
@@ -152,17 +154,17 @@
                                     $("#filter").on("keyup", function() {
                                         var text = $("#filter").val();
                                         if (text !== "") {
-                                            $("ol li").filter(":icontains('" + text + "')").show();
-                                            $("ol li").filter(":not(:icontains('" + text + "'))").hide();
+                                            $("#sessions li").filter(":icontains('" + text + "')").show();
+                                            $("#sessions li").filter(":not(:icontains('" + text + "'))").hide();
                                         }
                                         else if (text === "") {
-                                            $("ol li").show();
+                                            $("#sessions li").show();
                                         }
                                     });
                                 });
                                 function clearFilter() {
                                     $("#filter").val("");
-                                    $("#speakers li").show();
+                                    $("#sessions li").show();
                                 }
         </script>
     </body>

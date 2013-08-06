@@ -22,8 +22,8 @@
                     }
                 %>
     <% 
-        String roomId = request.getParameter("roomId");
-        int sessionId = Integer.parseInt(request.getParameter("sessionId"));
+        String roomId = request.getParameter("location");
+        int sessionId = Integer.parseInt(request.getParameter("session"));
         
         SessionPersistence sp = new SessionPersistence();
         LocationPersistence lp = new LocationPersistence();
@@ -48,6 +48,6 @@
         else {
             session.setAttribute("message", "Error: Room " + l.getDescription() + " already assigned to another Session at that time.");
         }
-            response.sendRedirect("../private/employee/admin/session.jsp");
+            response.sendRedirect("../private/employee/admin/room.jsp");
         
     %>

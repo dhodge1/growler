@@ -15,12 +15,11 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Add Speaker Confirmation</title>
+        <title>Add Room Confirmation</title>
         <link rel="shortcut icon" type="image/png" href="http://growler-dev.elasticbeanstalk.com/images/scripps_favicon-32.ico">
         <link rel="stylesheet" href="../../../css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
         <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-        <link rel="stylesheet" href="../../../css/prettify/prettify.css" /> 
         <script src="http://growler-dev.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <script src="http://growler-dev.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->	
         <style>
@@ -52,18 +51,18 @@
                 <%@include file="../../../includes/messagehandler.jsp" %>
             </div>
             <div class="row mediumBottomMargin">
-                <h1>Add Speaker Confirmation</h1>
+                <h1>Add Room Confirmation</h1>
             </div>
             <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
             <div class="row mediumBottomMargin">
-                <span>Click <a>here</a> to assign this speaker to a session.</span>
+                <span>Click <a>here</a> to assign this room to a session.</span>
             </div>
             <div class="row largeBottomMargin">
-                <span><% out.print((String)session.getAttribute("speaker")); %></span>
+                <span><% out.print((String)session.getAttribute("room")); %></span>
             </div>
             <div class="row">
-                <a href='../../../private/employee/admin/speaker.jsp'>Return to manage speakers</a>
-                <a href='../../../private/employee/admin/speakerentry.jsp'>Add another speaker</a>
+                <a href='../../../private/employee/admin/room.jsp'>Return to manage rooms</a>
+                <a href='../../../private/employee/admin/addroom.jsp'>Add another room</a>
             </div>
         </div>
         <%@ include file="../../../includes/footer.jsp" %> 

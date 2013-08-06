@@ -19,20 +19,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <title>Add a Room</title><!-- Title -->
-
+        <link rel="shortcut icon" type="image/png" href="../../../images/scripps_favicon-32.ico">
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> 
         <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-        <link rel="stylesheet" href="../../../css/demo.css" />  
-        <link rel="stylesheet" href="../../../css/draganddrop.css" /><!--Drag and drop style-->
-        <link rel="stylesheet" type="text/css" href="../../../css/general.css" /><!--General CSS-->
-        <link rel="stylesheet" type="text/css" href="../../../css/theme.css" /><!--Theme CSS-->
-        <link rel="stylesheet" href="/resources/demos/style.css" />
         <style>
             .message_container {
                 display: none;
                 color: red;
                 font-weight: bold;
+            }
+            h1, h3 {
+                font-weight: normal;
             }
         </style>
         <script src="http://growler-dev.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
@@ -55,15 +53,28 @@
         <%@ include file="../../../includes/adminheader.jsp" %> 
         <%@ include file="../../../includes/adminnav.jsp" %>
         <div class="container-fixed">
-            <br/><br/><br/>
+            <div class="mediumBottomMargin row"></div>
             <div class="row">
-                
-                    <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Add a Room</span></h2>
-                
+                <ul class="breadcrumb">
+                    <li><a href="../../../private/employee/admin/home.jsp">Home</a></li>
+                    <li class='ieFix'>Add a Room</li>
+                </ul>
             </div>
-            <br/>
-            <div class="row">
-                
+            <div class='row mediumBottomMargin'>
+                <h1 style="margin-top:0px;font-weight: normal;">Add a New Room</h1>
+            </div>
+            <div class='mediumBottomMargin row' style='border: 1px dotted #ddd;'></div>
+            <div class="row largeBottomMargin">
+                <h3>Please fill out the form below to add a new room.</h3>
+            </div>
+            <div class="row mediumBottomMargin">
+                <label><span style="color: red;">*</span>Required field</label>
+            </div>
+            <div class="row mediumBottomMargin">
+                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Add a Room</span></h2>
+            </div>
+            <div class="row mediumBottomMargin">
+                <%@include file="../../../includes/messagehandler.jsp" %>
                     <form id="action" method="post" action="../../../action/processaddroom.jsp" >
                         <fieldset>
                             <div class="form-group">
@@ -98,18 +109,14 @@
                                     <span>Please Select a Building</span>
                                 </span>
                             </div>
-                            <br/>
-                            <br/>
-                            <br/>
                             <div class="form-actions">
                                 <input id="send" type="submit" value="Submit" class="button button-primary"/>
+                                <a href='../../../private/employee/admin/room.jsp'>Cancel</a>
                             </div>
                         </fieldset>
                     </form>
-                
             </div>
         </div>
-    
     <%@ include file="../../../includes/footer.jsp" %>
     <%@ include file="../../../includes/scriptlist.jsp" %>
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  

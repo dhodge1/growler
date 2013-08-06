@@ -19,7 +19,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="shortcut icon" type="image/png" href="../../images/scripps_favicon-32.ico">
+        <link rel="shortcut icon" type="image/png" href="../../../images/scripps_favicon-32.ico">
         <title>Add a Presentation Theme</title>
 
         <link rel="stylesheet" href="../../../css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />

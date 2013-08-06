@@ -16,7 +16,7 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <title>Assign a Speaker to a Session</title><!-- Title -->
+        <title>Assign a Room to a Session</title><!-- Title -->
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
@@ -56,7 +56,7 @@
     <body id="growler1">
         <%
             int user = 0;
-            int speakerPassed = 0;
+            String roomPassed = "TBD";
             if (null == session.getAttribute("id")) {
                 response.sendRedirect("../../../index.jsp");
             } else if (!session.getAttribute("role").equals("admin")) {
@@ -65,7 +65,7 @@
             try {
                 user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
                 String name = String.valueOf(session.getAttribute("user"));
-                speakerPassed = Integer.parseInt(request.getParameter("speakerId"));
+                roomPassed = (request.getParameter("roomId"));
             } catch (Exception e) {
             }
         %>
@@ -77,15 +77,15 @@
             <div class="row">
                 <ul class="breadcrumb">
                     <li><a href="../../../private/employee/admin/home.jsp">Home</a></li>
-                    <li class='ieFix'>Assign A Speaker</li>
+                    <li class='ieFix'>Assign A Room</li>
                 </ul>
             </div>
             <div class="row mediumBottomMargin">
-                <h1 style="margin-top:0px;font-weight: normal;">Assign A Speaker</h1>
+                <h1 style="margin-top:0px;font-weight: normal;">Assign A Room</h1>
             </div>
             <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
             <div class="row largeBottomMargin">
-                <h3>To assign a speaker to a session, choose an available session from the list and press the <strong>Assign</strong> button.</h3>
+                <h3>To assign a room to a session, choose an available session from the list and press the <strong>Assign</strong> button.</h3>
             </div>
             <div class="row largeBottomMargin"></div>
             <div class="row mediumBottomMargin">
@@ -94,13 +94,13 @@
             <div class="row largeBottomMargin">
                 <%
                     SessionPersistence sessionPersist = new SessionPersistence();
-                    SpeakerPersistence speakerPersist = new SpeakerPersistence();
-                    Speaker speaker = speakerPersist.getSpeakerByID(speakerPassed);
+                    LocationPersistence locationPersist = new LocationPersistence();
+                    Location location = locationPersist.getLocationById(roomPassed);
                     ArrayList<Session> sessions = sessionPersist.getThisYearSessions(2013, " order by session_date");
                 %>
-                <form id="action" action="../../../action/processSessionAssign.jsp" method="post">
-                    <div class="form-group"><% out.print(speaker.getLastName() + ", " + speaker.getFirstName() + "<strong> | Current ranking: </strong>" + speaker.getRank());%>
-                    <input type="hidden" name="speaker" value="<%= speaker.getId() %>"/>
+                <form id="action" action="../../../action/processRoomAssign.jsp" method="post">
+                    <div class="form-group"><% out.print(location.getId() + ", " + location.getDescription() + ", " + location.getBuilding());%>
+                    <input type="hidden" name="location" value="<%= location.getId() %>"/>
                     </div>
                     <div class="form-group">
                         <span class="keywordFilter">
@@ -118,9 +118,10 @@
                                 //Get a list of all sessions
                                 for (int i = 0; i < sessions.size(); i++) {
                                     out.print("<li>");
-                                    if (speakerPersist.getSpeakersBySession(sessions.get(i).getId()).size() == 0) {
+                                    if (locationPersist.getRoomAssignments(location.getId()).size() == 0) {
                                         out.print("<input type='radio' name='session' value=\"" + sessions.get(i).getId() + "\">");
                                     } else {
+                                        out.print("<input type='radio' name='session' value=\"" + sessions.get(i).getId() + "\">");
                                         out.print("<i class='icon16-success'></i>");
                                     }
                                     out.print(dates.format(sessions.get(i).getSessionDate()) + ", " + fmt.format(sessions.get(i).getStartTime()) + ", " + sessions.get(i).getName());
@@ -129,9 +130,10 @@
                             %>
                         </ol>
                     </div>
+                    <div class="largeBottomMargin"><i class='icon16-success'></i> Indicates a session already has been assigned to <%= location.getDescription() %>.</div>
                     <div class="form-actions">
-                        <input id="send" type="submit" class="button button-primary" value="Assign Speaker"/>
-                        <a id="cancel" href="../../../private/employee/admin/speaker.jsp">Cancel</a>
+                        <input id="send" type="submit" class="button button-primary" value="Assign Room"/>
+                        <a id="cancel" href="../../../private/employee/admin/room.jsp">Cancel</a>
                     </div>
                 </form>
             </div>
@@ -152,17 +154,17 @@
                                     $("#filter").on("keyup", function() {
                                         var text = $("#filter").val();
                                         if (text !== "") {
-                                            $("ol li").filter(":icontains('" + text + "')").show();
-                                            $("ol li").filter(":not(:icontains('" + text + "'))").hide();
+                                            $("#sessions li").filter(":icontains('" + text + "')").show();
+                                            $("#sessions li").filter(":not(:icontains('" + text + "'))").hide();
                                         }
                                         else if (text === "") {
-                                            $("ol li").show();
+                                            $("#sessions li").show();
                                         }
                                     });
                                 });
                                 function clearFilter() {
                                     $("#filter").val("");
-                                    $("#speakers li").show();
+                                    $("#sessions li").show();
                                 }
         </script>
     </body>

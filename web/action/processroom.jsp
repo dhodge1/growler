@@ -32,10 +32,11 @@
         LocationPersistence lp = new LocationPersistence();
         try {
             lp.updateLocation(l);
-            session.setAttribute("message", "Success: Room " + l.getDescription() + " successfully updated!");
+            session.setAttribute("message", "Success: Room successfully updated!");
         } catch (Exception x) {
-            session.setAttribute("message", "Error: Room " + l.getDescription() + " did not update.");
+            session.setAttribute("message", "Error: Room did not update.");
         } finally {
-            response.sendRedirect("../private/employee/admin/room.jsp");
+            session.setAttribute("room", l.getDescription());
+            response.sendRedirect("../private/employee/admin/roomedit-confirm.jsp");
         }
     %>

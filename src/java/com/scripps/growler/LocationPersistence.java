@@ -122,4 +122,28 @@ public class LocationPersistence extends GrowlerPersistence {
         }
         return null;
     }
+    
+    public ArrayList<Session> getRoomAssignments(String location) {
+        ArrayList<Session> sessions = new ArrayList<Session>();
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select id, name, session_date, start_time, duration from session where location = ? and extract(year from session_date) = 2013 ");
+            statement.setString(1, location);
+            result = statement.executeQuery();
+            while (result.next()){
+                Session session = new Session();
+                session.setId(result.getInt("id"));
+                session.setName(result.getString("name"));
+                session.setSessionDate(result.getDate("session_date"));
+                session.setStartTime(result.getTime("start_time"));
+                session.setDuration(result.getTime("duration"));
+                sessions.add(session);
+            }
+        } catch (Exception e) {
+            
+        } finally {
+            closeJDBC();
+        }
+        return sessions;
+    }
 }

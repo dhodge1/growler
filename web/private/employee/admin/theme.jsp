@@ -49,6 +49,9 @@
             .no-close .ui-dialog-titlebar-close {
                 display: none;
             }
+            .pager li {
+                cursor: pointer;
+            }
         </style>
     </head>
     <body id="growler1">
