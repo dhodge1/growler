@@ -43,7 +43,9 @@
             .no-close .ui-dialog-titlebar-close {
                 display: none;
             }
-            
+            h1, h3 {
+                font-weight: normal;
+            }
             .pager li {
                 cursor: pointer;
             }
@@ -82,7 +84,7 @@
                             </div>
                             <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
                             <div class="row largeBottomMargin">
-                                <span>Use the table below to add, edit or delete existing rooms.</span>
+                                <h3>Use the table below to add, edit or delete existing rooms.</h3>
                             </div>
                             <div class='row largeBottomMargin'></div>
                             <div class="row mediumBottomMargin">

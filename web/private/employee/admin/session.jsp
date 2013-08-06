@@ -21,190 +21,282 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-        <title>Techtoberfest Sessions</title><!-- Title -->
-
+        <title>Manage Session Schedule</title><!-- Title -->
+        <link rel="shortcut icon" type="image/png" href="../../../images/scripps_favicon-32.ico">
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> 
         <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-        <link rel="stylesheet" href="../../../css/demo.css" />  
-        <link rel="stylesheet" type="text/css" href="../../../css/general.css" /><!--General CSS-->
-        <link rel="stylesheet" type="text/css" href="../../../css/speaker.css" /><!--Survey CSS-->
-        <link rel="stylesheet" href="/resources/demos/style.css" />
         <script src="http://growler-dev.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
+        <style>
+            .table {
+                margin-bottom: 0px;
+            }
+            .pullRight {
+                float:right;
+                font-weight: normal;
+                font-family: Arial;
+                font-size: 11px;
+                position: relative;
+                top: 24px;
+            }
+            .showModal, .showModal2, .showModal3 {
+                color:#0067b1;
+                text-decoration: underline;
+                cursor: pointer;
+            }
+            h1, h3 {
+                font-weight: normal;
+            }
+            .modals{
+                display:none;
+            }
+            .no-close .ui-dialog-titlebar-close {
+                display: none;
+            }
+            .pager li {
+                cursor: pointer;
+            }
+        </style>
     </head>
     <body id="growler1">
         <%
             int user = 0;
-            String sort = "";
             if (null == session.getAttribute("id")) {
                 response.sendRedirect("../../../index.jsp");
             } else if (!session.getAttribute("role").equals("admin")) {
                 response.sendRedirect("../../../index.jsp");
             }
             try {
-                sort = request.getParameter("sort");
                 user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
-                String name = String.valueOf(session.getAttribute("user"));
             } catch (Exception e) {
             }
+            //Get the year
+            int year = 2013;
+            try {
+                year = Integer.parseInt(request.getParameter("year"));
+            } catch (Exception e) {
+            }
+            SessionPersistence sp = new SessionPersistence();
+            ArrayList<Session> sessions = sp.getThisYearSessions(year, " order by session_date, start_time, name ");
         %>
         <%@ include file="../../../includes/adminheader.jsp" %> 
         <%@ include file="../../../includes/adminnav.jsp" %>
         <div class="container-fixed">
-            <br/><br/><br/>
+            <div class="row mediumBottomMargin"></div>
             <div class="row">
-
-                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Sessions</span></h2>
-
+                <ul class="breadcrumb">
+                    <li><a href="../../../private/employee/home.jsp">Home</a></li>
+                    <li class='ieFix'>Manage Session Schedule</li>
+                </ul>
             </div>
-            <br/>
-            <div class="row">
-
-                <%
-                    //Get the year
-                    int year = 2013;
-                    try {
-                        year = Integer.parseInt(request.getParameter("year"));
-                    } catch (Exception e) {
-                    }
-                    SessionPersistence sp = new SessionPersistence();
-                    LocationPersistence lp = new LocationPersistence();
-                    ArrayList<Session> sessions = sp.getThisYearSessions(year, "order by session_date, start_time, name");
-                    try {
-                        if (sort.equals("description_asc")) {
-                            sessions = sp.getThisYearSessions(year, " order by description asc");
-                        } else if (sort.equals("description_desc")) {
-                            sessions = sp.getThisYearSessions(year, " order by description desc");
-                        } else if (sort.equals("name_asc")) {
-                            sessions = sp.getThisYearSessions(year, " order by name asc");
-                        } else if (sort.equals("name_desc")) {
-                            sessions = sp.getThisYearSessions(year, " order by name desc");
-                        } else if (sort.equals("date_asc")) {
-                            sessions = sp.getThisYearSessions(year, " order by session_date asc");
-                        } else if (sort.equals("date_desc")) {
-                            sessions = sp.getThisYearSessions(year, " order by session_date desc");
-                        } else if (sort.equals("time_asc")) {
-                            sessions = sp.getThisYearSessions(year, " order by start_time asc");
-                        } else if (sort.equals("time_desc")) {
-                            sessions = sp.getThisYearSessions(year, " order by start_time desc");
-                        } else if (sort.equals("duration_asc")) {
-                            sessions = sp.getThisYearSessions(year, " order by duration asc");
-                        } else if (sort.equals("duration_desc")) {
-                            sessions = sp.getThisYearSessions(year, " order by duration desc");
-                        }
-                    } catch (Exception e) {
-                    }
-                %>
-                <form action="session.jsp" method="post">
-                    <select name="year">
-                        <option value="2013">2013</option>
-                        <option value="2012">2012</option>
+            <div class="row mediumBottomMargin">
+                <h1>Manage Session Schedule</h1>
+            </div>
+            <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
+            <div class="row largeBottomMargin">
+                <h3>Use the table below to add, edit or delete existing sessions.</h3>
+            </div>
+            <div class="row largeBottomMargin"></div>
+            <div class="row mediumBottomMargin">
+                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Schedule Details</span><a href="../../../private/employee/admin/sessionScheduler.jsp" class="pullRight button button-primary">Schedule Sessions</a></h2>
+            </div>
+            <div class='row smallBottomMargin'>
+                <label class="inline"><strong>Select Year:</strong></label>
+                    <select name="year" id="year">
+                        <option value="2013" <% if (year == 2013) {
+                                out.print(" selected ");
+                            }
+                                %>>2013</option>
+                                <option value="2012" <% if (year == 2012) {
+                                        out.print(" selected ");
+                                    }%>>2012</option>
                         <!--Provisioned for future years! -->
                     </select>
-                    <input value="Change Year" type="submit" class="button button-primary"/>
-                </form>
-                <section>
-
+            </div>
+            <div class="row largeBottomMargin">
+                <form>
+                    <input type='hidden' id='current_page' value="1" />
+                    <input type='hidden' id='show_per_page' value='15' />
+                    <input type='hidden' id='total' value='<%= sessions.size()%>'/>
                     <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
-                        <tr>
-                            <th>Session Name
-                                <a href="session.jsp?sort=name_asc"><i class="icon12-sortUp"></i></a>
-                                <a href="session.jsp?sort=name_desc"><i class="icon12-sortDown"></i></a>
-                            </th>
-                            <th>Description
-                                <a href="session.jsp?sort=description_asc"><i class="icon12-sortUp"></i></a>
-                                <a href="session.jsp?sort=description_desc"><i class="icon12-sortDown"></i></a>
-                            </th>
-                            <th>Date
-                                <a href="session.jsp?sort=date_asc"><i class="icon12-sortUp"></i></a>
-                                <a href="session.jsp?sort=date_desc"><i class="icon12-sortDown"></i></a>
-                            </th>
-                            <th>Time
-                                <a href="session.jsp?sort=time_asc"><i class="icon12-sortUp"></i></a>
-                                <a href="session.jsp?sort=time_desc"><i class="icon12-sortDown"></i></a>
-                            </th>
-                            <th>Duration
-                                <a href="session.jsp?sort=duration_asc"><i class="icon12-sortUp"></i></a>
-                                <a href="session.jsp?sort=duration_desc"><i class="icon12-sortDown"></i></a>
-                            </th>
-                            <th>Room #</th>
-                            <th>Room Name</th>
-                            <th>Building</th>
-                            <th>Capacity</th>
-                            <th>Key</th>
-                            <th>Speaker(s)</th>
-                            <th>Edit</th>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Topic</th>
+                                <th>Description</th>
+                                <th>Speaker(s)</th>
+                                <th>Session Duration</th>
+                                <th>Location</th>
+                                <th>Capacity</th>
+                                <th><!-- Actions --></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%
 
-                        <%
-                            SpeakerPersistence spkr = new SpeakerPersistence();
-                            for (int i = 0; i < sessions.size(); i++) {
-                        %>
-                        <tr>
-
-                            <td><% out.print(sessions.get(i).getName());%></td>
-                            <td><% try {
-                                    if (!sessions.get(i).getDescription().equals(null)) {
-                                        out.print(sessions.get(i).getDescription());
-                                    }
-                                } catch (Exception e) {
-                                    out.print("");
-                                }
-                                %></td>
-                            <td><% SimpleDateFormat dates = new SimpleDateFormat("E, MM-dd-yyyy");
-                                try {
+                                LocationPersistence lp = new LocationPersistence();
+                                for (int i = 0; i < sessions.size(); i++) {
+                                    out.print("<tr id='row" + (i + 1) + "'>");
+                                    out.print("<td>");
+                                    SimpleDateFormat dates = new SimpleDateFormat("MM/dd/yyyy");
+                                    SimpleDateFormat dates2 = new SimpleDateFormat("MM/dd");
                                     out.print(dates.format(sessions.get(i).getSessionDate()));
-                                } catch (Exception e) {
-                                            out.print("No Date");
-                                        }%></td>
-                            <td><% SimpleDateFormat fmt = new SimpleDateFormat("h:mm a");
-                                try {
-                                    out.print(fmt.format(sessions.get(i).getStartTime()));
-                                } catch (Exception e) {
-                                    out.print("No Time");
-                                }
-                                %></td>
-                            <td><% SimpleDateFormat fmt2 = new SimpleDateFormat("K ' hours and ' mm ' minutes'");
-                                try {
-                                    out.print(fmt2.format(sessions.get(i).getDuration()));
-                                } catch (Exception e) {
-                                    out.print("No Duration");
-                                }
-                                %></td>
-                            <td><% Location l = lp.getLocationById(sessions.get(i).getLocation());
-                                        out.print(l.getId());%> </td>
-                            <td><% out.print(l.getDescription());%></td>
-                            <td><% out.print(l.getBuilding());%></td>
-                            <td><% out.print(l.getCapacity());%></td>
-                            <td><% out.print(sessions.get(i).getKey());%></td>
-                            <td>
-                                <% ArrayList<Speaker> speakers = spkr.getSpeakersBySession(sessions.get(i).getId());
-                                    ListIterator<Speaker> iterator = speakers.listIterator();
-                                    while (iterator.hasNext()) {
-                                        Speaker s = iterator.next();
-                                        out.print("<strong>" + s.getLastName() + ", " + s.getFirstName() + "</strong>");
-                                        if (iterator.hasNext()) {
-                                            out.print(" and <br/>");
-                                        } else {
-                                            out.print("<br/><a href=\"removespeaker.jsp?sessionId=" + sessions.get(i).getId() + "\">Remove a Speaker</a>");
-                                        }
+                                    out.print("</td>");
+                                    out.print("<td>");
+                                    SimpleDateFormat fmt = new SimpleDateFormat("h:mm a");
+                                    try {
+                                        out.print(fmt.format(sessions.get(i).getStartTime()));
+                                    } catch (Exception e) {
+                                        out.print("No Time");
                                     }
-                                    out.print("<br/><a href=\"assignspeaker.jsp?sessionId=" + sessions.get(i).getId() + "\">Assign a Speaker</a>");
-                                %>
-                            </td>
-                            <td><% out.print("<a href=\"sessionEdit.jsp?id=" + sessions.get(i).getId() + "\">Edit</a>");%></td>
-                        </tr>
-                        <% } //close for loop
-                        %>
+                                    out.print("</td>");
+                                    out.print("<td>");
+                                    out.print(sessions.get(i).getName());
+                                    out.print("</td>");
+                                    out.print("<td>");
+                                    out.print("<a class='showModal'><input type='hidden' value='" + sessions.get(i).getId() + "' />View</a>");
+                                    out.print("<div class='modals' id='modal" + sessions.get(i).getId() + "' title='" + sessions.get(i).getName() + "'>");
+                                    out.print(sessions.get(i).getDescription());
+                                    out.print("</div>");
+                                    out.print("</td>");
+                                    out.print("<td>");
+                                    ArrayList<Speaker> speakers = sp.getSpeakersForSession(sessions.get(i).getId());
+                                    if (speakers.size() != 0) {
+                                    for (int j = 0; j < speakers.size(); j++) {
+                                        out.print("<a class='showModal'>");
+                                        out.print(speakers.get(j).getFullName() + "<input type='hidden' value='" + speakers.get(j).getId() + "' /></a><br/>");
+                                        out.print("<div class='modals' id='modalspkr" + speakers.get(j).getId() + "' title='" + speakers.get(j).getFullName() + "'>");
+                                        out.print(""); //The Bio information goes here?
+                                        out.print("</div>");
+                                    }
+                                    } else {
+                                        out.print("<a href='../../../private/employee/admin/assignsession.jsp?sessionId=" + sessions.get(i).getId() + "'>Assign a Speaker</a>");
+                                    }
+                                    
+                                    out.print("</td>");
+                                    out.print("<td>");
+                                    SimpleDateFormat fmt2 = new SimpleDateFormat("K ' hours, ' mm ' minutes'");
+                                    out.print(fmt2.format(sessions.get(i).getDuration()));
+                                    out.print("</td>");
+                                    out.print("<td>");
+                                    out.print(lp.getLocationById(sessions.get(i).getLocation()).getDescription() + "<br/>" + lp.getLocationById(sessions.get(i).getLocation()).getBuilding());
+                                    out.print("</td>");
+                                    out.print("<td>");
+                                    out.print(lp.getLocationById(sessions.get(i).getLocation()).getCapacity());
+                                    out.print("</td>");
+                                    out.print("<td>");
+                                    out.print("<div class='actionMenu'><a class='actionMenu-toggle' data-toggle='dropdown' href='#'>Actions<b class='caret'></b></a>");
+                                    out.print("<ul class='actionMenu-menu' role='menu'>");
+                                    out.print("<li><a href='../../../private/employee/admin/editsession.jsp?id=" + sessions.get(i).getId() + "'><i class='icon16-approve'></i>Edit</a></li>");
+                                    out.print("<li><a class='showModal3'><input type='hidden' name='delete' value='" + sessions.get(i).getId() + "' />");
+                                    out.print("<div class='modalDelete' id='modaldelete" + sessions.get(i).getId() + "' title='Delete Confirmation'>");
+                                    out.print("Is it ok to delete this session?<br/><br/>");
+                                    out.print(sessions.get(i).getName() + " | " + dates2.format(sessions.get(i).getSessionDate()) + " | " + fmt.format(sessions.get(i).getStartTime()));
+                                    out.print("</div>");
+                                    out.print("<i class='icon16-pageRemove'></i>Delete</a></li>");
+                                    out.print("</ul>");
+                                    out.print("</td>");
+                                    out.print("</tr>");
+                                }
+                            %>
+                        </tbody>
                     </table>
-
+                    <div class="pager">
+                        <ul>
+                            <li class="pager-arrow"><a onclick="first();"><i class="icon12-first"></i></a></li>
+                            <li class="pager-arrow"><a onclick="prev();"><i class="icon12-previous"></i></a></li>
+                                    <% int rows = sessions.size();
+                                        int pages = 0;
+                                        if (rows % 15 == 0) {
+                                            pages = (rows / 15);
+                                        } else {
+                                            pages = (rows / 15) + 1;
+                                        }
+                                        for (int f = 0; f < pages; f++) {
+                                            out.print("<li id=\"page" + (f + 1) + "\"><a onclick='page(" + (f + 1) + ");'>" + (f + 1) + "</a></li>");
+                                        }
+                                    %>
+                            <li class="pager-arrow"><a onclick="next();"><i class="icon12-next"></i></a></li>
+                            <li class="pager-arrow"><a onclick="last();"><i class="icon12-last"></i></a></li>
+                        </ul>
+                        <div class="pager-pageJump">
+                            <span>Page <input class="input-mini" onchange="pageJump();" type="text" id="pagejump"/> of <%= pages%></span>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
+        <%@ include file="../../../includes/footer.jsp" %>
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
+        <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+        <script src="http://growler-dev.elasticbeanstalk.com/js/libs/bootstrap-dropdown.2.0.4.min.js"></script>
+        <script src="http://growler-dev.elasticbeanstalk.com/js/libs/sniui.dialog.1.2.0.js"></script>
+        <script src="../../../js/pagination.js"></script>
+        <script>
+                                $(document).ready(function() {
+                                    var page = 1;
+                                    $("#current_page").val(page);
+                                    var total = parseInt($("#total").val());
+                                    var pages = Math.floor((total / parseInt($("#show_per_page").val())) + 1);
+                                    for (var i = 15; i < total + 1; i++) {
+                                        $("#row" + i).hide();
+                                    }
+                                    unActive();
+                                    $("#page1").addClass("active");
+                                    $(".modals").dialog({autoOpen: false, dialogClass: "no-close",
+                                        buttons: {
+                                            'ok': {
+                                                'class': 'button button-primary',
+                                                click: function() {
+                                                    $(this).dialog('close');
+                                                },
+                                                text: 'Ok'
+                                            }}
+                                    });
+                                    $(".modalDelete").dialog({
+                                        autoOpen: false,
+                                        dialogClass: "no-close",
+                                        buttons: {
+                                            'ok': {
+                                                'class': 'button button-primary',
+                                                click: function() {
+                                                    var session = $(this).prop("id");
+                                                    session = session.substring(11);
+                                                    $.post("../../../action/removeSession.jsp", {id: session}, function(data, success) {
+                                                    });
+                                                    $("#rowfor" + session).parent().parent().remove();
+                                                    $(this).dialog('close');
+                                                },
+                                                text: 'Yes'
+                                            },
+                                            'cancel': {
+                                                click: function() {
 
-        <%@ include file="../../../includes/footer.jsp" %> 
-        <%@ include file="../../../includes/scriptlist.jsp" %>
+                                                    $(this).dialog('close');
+                                                },
+                                                text: 'No, return to manage sessions table'
+                                            }
+                                        },
+                                    });
+                                    $("#year").change(function(){
+                                        var year = (parseInt($("#year").val()));
+                                        window.location.href = "http://snit.scrippsnetworks.com/private/employee/admin/session.jsp?year=" + year;
+                                    });
+                                    $(".showModal").click(function() {
+                                        var session = $(this).children().val();
+                                        $("#modal" + session).dialog("open");
+                                    });
+                                    $(".showModal2").click(function() {
+                                        var speaker = $(this).children().val();
+                                        $("#modalspkr" + speaker).dialog("open");
+                                    });
+                                    $(".showModal3").click(function() {
+                                        var session = $(this).children().val();
+                                        $("#modaldelete" + session).dialog("open");
+                                    });
 
-
+                                });
+        </script>
     </body>
 </html>

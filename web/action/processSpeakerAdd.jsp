@@ -24,33 +24,22 @@
         String name = String.valueOf(session.getAttribute("user"));
     } catch (Exception e) {
     }
-    Speaker s = new Speaker();
-    String first_name = request.getParameter("first_name");
-    String last_name = request.getParameter("last_name");
-    String type = request.getParameter("type");
-    String visible = "";
-    int creator = 0;
-    try {
-        creator = Integer.parseInt(request.getParameter("creator"));
-    } catch (Exception e) {
-        creator = user;
-    }
-    try {
-        visible = request.getParameter("visible");
-        if (visible.equals("true")) {
-            s.setVisible(true);
+        String first_name = request.getParameter("first_name");
+        String last_name = request.getParameter("last_name");
+        String type = request.getParameter("type");
+        String creator = request.getParameter("creator");
+        SpeakerPersistence sp = new SpeakerPersistence();
+        Speaker speaker = new Speaker();
+        if (request.getParameter("visible") != null) {
+            speaker.setVisible(true);
         } else {
-            s.setVisible(false);
+            speaker.setVisible(false);
         }
-    } catch (Exception e) {
-        s.setVisible(false);
-    }
-    s.setFirstName(first_name);
-    s.setLastName(last_name);
-    s.setType(type);
-    s.setSuggestedBy(creator);
-    persist.addSpeaker(s);
-
+        speaker.setFirstName(first_name);
+        speaker.setLastName(last_name);
+        speaker.setType(type);
+        speaker.setSuggestedBy(Integer.parseInt(creator));
+        sp.addSpeaker(speaker);
     session.setAttribute("message", "Success: The following speaker has been added successfully!");
     session.setAttribute("speaker", last_name + ", " + first_name);
     response.sendRedirect("../private/employee/admin/speakerentry-confirm.jsp");

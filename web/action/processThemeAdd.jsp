@@ -25,35 +25,25 @@
     }
     Theme t = new Theme();
     String name = request.getParameter("name");
+    String description = request.getParameter("description");
     String type = request.getParameter("type");
-    String reason = "";
-    String visible = "";
     int creator;
-    try {
-        reason = request.getParameter("reason");
-    } catch (Exception e) {
-        reason = "";
-    }
     try {
         creator = Integer.parseInt(request.getParameter("creator"));
     } catch (Exception e) {
         creator = (user);
     }
-    try {
-        visible = request.getParameter("visible");
-        if (visible.equals("true")) {
-            t.setVisible(true);
-        }
-        else {
-            t.setVisible(false);
-        }
-    } catch(Exception e) {
+    if (request.getParameter("visible") != null){
+        t.setVisible(true);
+    }
+    else  {
         t.setVisible(false);
     }
     t.setName(name);
+    t.setDescription(description);
     t.setType(type);
     t.setCreatorId(creator);
-    persist.addTheme(t);
+    persist.addAdminTheme(t);
     session.setAttribute("message", "Success: The following theme has been added successfully!");
     session.setAttribute("theme", name);
     response.sendRedirect("../private/employee/admin/themeentry-confirm.jsp");

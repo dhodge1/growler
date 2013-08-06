@@ -121,7 +121,7 @@
                             <input type="checkbox" name="visible" value="true"/><label class="required checkbox inline">Make speaker visible to users?</label>
                         </div>
                         <div class="form-actions">
-                            <input class="button button-primary" id="send" type="submit" value="Add Theme" name="Submit" />
+                            <input class="button button-primary" id="send" type="submit" value="Add Speaker" name="Submit" />
                             <a id="cancel" href="../../../private/employee/admin/speaker.jsp">Cancel</a>
                         </div>
                     </fieldset>

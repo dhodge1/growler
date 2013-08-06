@@ -35,13 +35,21 @@
             .table {
                 margin-bottom: 0px;
             }
+            h1, h3 {
+                font-weight: normal;
+            }
+            .showModal, .showModal2, .showModal3 {
+                color:#0067b1;
+                text-decoration: underline;
+                cursor: pointer;
+            }
             .pullRight {
                 float:right;
                 font-weight: normal;
                 font-family: Arial;
                 font-size: 11px;
                 position: relative;
-                top: 30px;
+                top: 24px;
             }
             .modals{
                 display:none;
@@ -77,7 +85,7 @@
                             </div>
                             <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
                             <div class="row largeBottomMargin">
-                                <span>Use the table below to add, edit or delete existing speakers.</span>
+                                <h3>Use the table below to add, edit or delete existing speakers.</h3>
                             </div>
                             <div class='row largeBottomMargin'></div>
                             <div class="row mediumBottomMargin">

@@ -23,7 +23,7 @@
         <%
 
             int speakerId = Integer.parseInt(request.getParameter("speaker"));
-            int sessionId = Integer.parseInt(request.getParameter("session"));
+            int sessionId = Integer.parseInt(request.getParameter("sessionId"));
             
             
             DataConnection dc = new DataConnection();
@@ -39,14 +39,14 @@
                 Session s= sp.getSessionByID(sessionId);
                 try {
                     statement.execute();
-                    session.setAttribute("message", "Success: Speaker " + k.getLastName() + ", " + k.getFirstName() + " successfully assigned to Session " + s.getName() + "!");
+                  //  session.setAttribute("message", "Success: Speaker " + k.getLastName() + ", " + k.getFirstName() + " successfully assigned to Session " + s.getName() + "!");
                 } catch (Exception e) {
                     //If the insert fails, it's a primary key violation, so display that message gracefully
-                    session.setAttribute("message", "Error: Speaker " + k.getLastName() + ", " + k.getFirstName() + " was already assigned to Session " + s.getName());
+                   // session.setAttribute("message", "Error: Speaker " + k.getLastName() + ", " + k.getFirstName() + " was already assigned to Session " + s.getName());
                 } finally {
                     statement.close();
                     connection.close();
                 }
             
-            response.sendRedirect("../private/employee/admin/speaker.jsp");
+            response.sendRedirect("../private/employee/admin/session.jsp");
         %>

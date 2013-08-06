@@ -24,7 +24,7 @@
                     session.setAttribute("id", u.getCorporateId());
                     if (u.getRole().equals("admin")) {
                         session.setAttribute("role", "admin");
-                        //response.sendRedirect("/admin/home.jsp");
+                        response.sendRedirect("../../private/employee/admin/home.jsp");
                     }
                 } else if (!id.equals(null) || !id.equals("null")) {
                     newUser.setId(Integer.parseInt(id));
@@ -36,7 +36,7 @@
                     session.setAttribute("id", newUser.getCorporateId());
                     if (id.equals("160240") || id.equals("160445") || id.equals("162107") || id.equals("161301")) { //if it's Ian R. or Brian S.
                         session.setAttribute("role", "admin");
-                        //response.sendRedirect("/admin/home.jsp");
+                        //response.sendRedirect("../../private/employee/admin/home.jsp");
                     }
                 }
             }

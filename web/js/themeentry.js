@@ -21,7 +21,7 @@ $("#send").click(function(event) {
     }
     if ((str3) === emptyString) {
         $("#tip3").css("border", "1px solid red");
-        $("#error_theme_description").hide();
+        $("#error_theme_description").show();
         event.preventDefault();
     }
 });

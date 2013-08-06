@@ -122,9 +122,9 @@ public class SpeakerPersistence extends GrowlerPersistence {
     public Speaker getSpeakerByID(int id) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select id, first_name,"
-                    + "last_name, suggested_by, visible, type, reason from speaker "
-                    + "where id = ?");
+            statement = connection.prepareStatement("select s.id, s.first_name,"
+                    + "s.last_name, s.suggested_by, s.visible, s.type, s.reason from speaker s "
+                    + "where s.id = ?");
             statement.setInt(1, id);
             result = statement.executeQuery();
             Speaker s = new Speaker();
@@ -143,7 +143,7 @@ public class SpeakerPersistence extends GrowlerPersistence {
         }
         return null;
     }
-    
+
     public Speaker getRanksByID(int id) {
         Speaker s = new Speaker();
         try {
@@ -151,25 +151,23 @@ public class SpeakerPersistence extends GrowlerPersistence {
             statement = connection.prepareStatement("select rating, count from ranks_2012 where speaker_id = ?");
             statement.setInt(1, id);
             result = statement.executeQuery();
-            while (result.next()){
+            while (result.next()) {
                 s.setCount2012(result.getInt("count"));
                 s.setRank2012(result.getDouble("rating"));
                 return s;
             }
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             s.setCount2012(0);
             s.setRank2012(0);
             return s;
-        }
-        finally {
+        } finally {
             closeJDBC();
         }
         s.setCount2012(0);
-            s.setRank2012(0);
-            return s;
+        s.setRank2012(0);
+        return s;
     }
-    
+
     public Speaker getSpeakerByName(String first, String last) {
         try {
             initializeJDBC();
@@ -208,7 +206,7 @@ public class SpeakerPersistence extends GrowlerPersistence {
             statement = connection.prepareStatement("select s.id as id, s.first_name as first_name, s.last_name as last_name, s.reason as reason, s.type as type, s.suggested_by as suggested_by, s.visible as visible, sum(sr.ranking) as points, count(sr.speaker_id) as votes, r.rating as rating, r.count as count from speaker s left join ranks_2012 r on r.speaker_id = s.id left join speaker_ranking sr on sr.speaker_id = s.id  group by (s.id) " + sort);
             Statement s2 = connection.createStatement();
             result = statement.executeQuery();
-            if (sort.equals(" order by rating desc, last_name") || sort.equals(" order by rating asc, last_name") || sort.equals(" order by count desc, last_name") || sort.equals(" order by count asc, last_name")){
+            if (sort.equals(" order by rating desc, last_name") || sort.equals(" order by rating asc, last_name") || sort.equals(" order by count desc, last_name") || sort.equals(" order by count asc, last_name")) {
                 sort = "";
             }
             ResultSet result2 = s2.executeQuery("select s.id, s.last_name, s.visible, sum(sr.ranking) as points, count(sr.speaker_id) as votes, s.suggested_by as suggested_by from speaker s left join speaker_ranking sr on s.id = sr.speaker_id group by s.id " + sort);
@@ -227,11 +225,11 @@ public class SpeakerPersistence extends GrowlerPersistence {
                     s.setCount2012(result.getInt("count"));
                     s.setRank(result2.getInt("points"));
                     s.setCount(result2.getInt("votes"));
-                    
+
                 } catch (Exception e) {
                 }
-                    speakers.add(s);
-                
+                speakers.add(s);
+
             }
             closeJDBC();
             return (speakers);
@@ -273,7 +271,7 @@ public class SpeakerPersistence extends GrowlerPersistence {
         }
         return null;
     }
-    
+
     /**
      * Gets a list of speaker objects based on who suggested them
      *
@@ -399,7 +397,7 @@ public class SpeakerPersistence extends GrowlerPersistence {
         try {
             initializeJDBC();
             statement = connection.prepareStatement("select s.id, s.first_name, s.last_name, s.suggested_by, s.visible, sum(r.ranking) as rating, count(r.speaker_id) as count from speaker s, speaker_ranking r where s.id = r.speaker_id and r.user_id = " + id + " group by (s.id) order by rating desc");
-            result = statement.executeQuery();    
+            result = statement.executeQuery();
             while (result.next()) {
                 Speaker s = new Speaker();
                 s.setId(result.getInt("s.id"));
@@ -417,7 +415,7 @@ public class SpeakerPersistence extends GrowlerPersistence {
         }
         return speakers;
     }
-    
+
     public ArrayList<Speaker> getSpeakersBySession(int session) {
         try {
             initializeJDBC();
@@ -425,7 +423,7 @@ public class SpeakerPersistence extends GrowlerPersistence {
             statement.setInt(1, session);
             result = statement.executeQuery();
             ArrayList<Speaker> speakers = new ArrayList<Speaker>();
-            while (result.next()){
+            while (result.next()) {
                 Speaker s = new Speaker();
                 s.setId(result.getInt(1));
                 s.setFirstName(result.getString(3));
@@ -433,16 +431,13 @@ public class SpeakerPersistence extends GrowlerPersistence {
                 speakers.add(s);
             }
             return speakers;
-        }
-        catch (Exception e) {
-            
-        }
-        finally {
+        } catch (Exception e) {
+        } finally {
             closeJDBC();
         }
         return new ArrayList<Speaker>();
     }
-    
+
     public int getSpeakersAssignments(int speaker) {
         try {
             initializeJDBC();
@@ -450,16 +445,36 @@ public class SpeakerPersistence extends GrowlerPersistence {
             statement.setInt(1, speaker);
             result = statement.executeQuery();
             int count = 0;
-            while (result.next()){
+            while (result.next()) {
                 count = result.getInt(1);
             }
             return count;
-        } catch(Exception e) {
-            
+        } catch (Exception e) {
         } finally {
             closeJDBC();
         }
         return 0;
     }
-    
+
+    public int getSpeakersRank(int speaker) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select sum(ranking), count(speaker_id) from speaker_ranking where speaker_id = ?");
+            statement.setInt(1, speaker);
+            result = statement.executeQuery();
+            int rank = 0;
+            int count = 0;
+            while (result.next()) {
+                rank = result.getInt(1);
+                count = result.getInt(2);
+            }
+            if (count != 0) {
+                return (rank / count);
+            }
+        } catch (Exception e) {
+        } finally {
+            closeJDBC();
+        }
+        return 0;
+    }
 }

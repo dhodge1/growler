@@ -35,6 +35,9 @@
             .table {
                 margin-bottom: 0px;
             }
+            h1, h3 {
+                font-weight: normal;
+            }
             .pullRight {
                 float:right;
                 font-weight: normal;
@@ -50,6 +53,11 @@
                 display: none;
             }
             .pager li {
+                cursor: pointer;
+            }
+            .showModal, .showModal2, .showModal3 {
+                color:#0067b1;
+                text-decoration: underline;
                 cursor: pointer;
             }
         </style>
@@ -69,7 +77,7 @@
             <div class="row">
                 <ul class="breadcrumb">
                     <li><a href="../../../private/employee/home.jsp">Home</a></li>
-                    <li>Manage Themes</li>
+                    <li class='ieFix'>Manage Themes</li>
                 </ul>
             </div>
             <div class="row mediumBottomMargin">
@@ -77,11 +85,11 @@
             </div>
             <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
             <div class="row largeBottomMargin">
-                <span>Use the table below to add, edit or delete existing themes.</span>
+                <h3>Use the table below to add, edit or delete existing themes.</h3>
             </div>
             <div class="row largeBottomMargin"></div>
             <div class="row mediumBottomMargin">
-                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Theme Details</span><a href="../../../private/employee/themeentry.jsp" class="pullRight button button-primary">Add Theme</a></h2>
+                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Theme Details</span><a href="../../../private/employee/admin/themeentry.jsp" class="pullRight button button-primary">Add Theme</a></h2>
             </div>
             <div class="row">
                 <form>

@@ -28,7 +28,7 @@
                     session.setAttribute("id", u.getCorporateId());
                     if (u.getRole().equals("admin")) {
                         session.setAttribute("role", "admin");
-                        //response.sendRedirect("/private/employee/admin/home.jsp");
+                        //response.sendRedirect("http://snit.scrippsnetworks.com/private/employee/admin/home.jsp");
                     }
                 } else if (!id.equals(null) || !id.equals("null")) {
                     newUser.setId(Integer.parseInt(id));

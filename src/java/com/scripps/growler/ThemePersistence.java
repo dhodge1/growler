@@ -88,6 +88,23 @@ public class ThemePersistence extends GrowlerPersistence {
         } catch (Exception e) {
         }
     }
+    
+     public void addAdminTheme(Theme t) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("insert into theme ("
+                    + "name, description, visible, creator, type) values "
+                    + "(?, ?, ?, ?, ?)");
+            statement.setString(1, t.getName());
+            statement.setString(2, t.getDescription());
+            statement.setBoolean(3, t.getVisible());
+            statement.setInt(4, t.getCreatorId());
+            statement.setString(5, t.getType());
+            success = statement.execute();
+            closeJDBC();
+        } catch (Exception e) {
+        }
+    }
 
     /**
      * Searches for a string within the descriptions

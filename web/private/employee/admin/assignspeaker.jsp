@@ -99,7 +99,7 @@
                     ArrayList<Session> sessions = sessionPersist.getThisYearSessions(2013, " order by session_date");
                 %>
                 <form id="action" action="../../../action/processSessionAssign.jsp" method="post">
-                    <div class="form-group"><% out.print(speaker.getLastName() + ", " + speaker.getFirstName() + "<strong> | Current ranking: </strong>" + speaker.getRank());%>
+                    <div class="form-group"><% out.print(speaker.getLastName() + ", " + speaker.getFirstName() + "<strong> | Current ranking: </strong>" + speakerPersist.getSpeakersRank(speaker.getId()));%>
                     <input type="hidden" name="speaker" value="<%= speaker.getId() %>"/>
                     </div>
                     <div class="form-group">
