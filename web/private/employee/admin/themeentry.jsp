@@ -82,7 +82,7 @@
                 <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Add a Theme</span></h2>
             </div>
             <div class="row mediumBottomMargin">
-                <%@include file="../../includes/messagehandler.jsp" %>
+                <%@include file="../../../includes/messagehandler.jsp" %>
                 <form method="POST" id="action" action="../../../action/processThemeAdd.jsp">
                     <fieldset>
                         <div class="form-group">

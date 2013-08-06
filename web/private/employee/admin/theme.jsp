@@ -182,9 +182,19 @@
                                     }
                                     unActive();
                                     $("#page1").addClass("active");
-                                    $(".modals").dialog({autoOpen: false});
+                                    $(".modals").dialog({autoOpen: false, dialogClass: "no-close",
+                                        buttons: {
+                                            'ok': {
+                                                'class': 'button button-primary',
+                                                click: function() {
+                                                    $(this).dialog('close');
+                                                },
+                                                text: 'Ok'
+                                            }}
+                                    });
                                     $(".modalDelete").dialog({
                                         autoOpen: false,
+                                        dialogClass: "no-close",
                                         buttons: {
                                             'ok': {
                                                 'class': 'button button-primary',

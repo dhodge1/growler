@@ -82,8 +82,8 @@
                 <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Add a Speaker</span></h2>
             </div>
             <div class="row mediumBottomMargin">
-                <%@include file="../../includes/messagehandler.jsp" %>
-                <form method="POST" id="action" action="../../action/processSpeakerAdd.jsp">
+                <%@include file="../../../includes/messagehandler.jsp" %>
+                <form method="POST" id="action" action="../../../action/processSpeakerAdd.jsp">
                     <fieldset>
                         <div class="form-group inline">
                             <label class="required">Speaker First Name</label>

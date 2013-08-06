@@ -3,6 +3,7 @@
     Created on : Jun 10, 2013, 10:52:05 AM
     Author     : 162107
 --%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
 <%@page import="com.scripps.growler.*" %>
@@ -112,6 +113,8 @@
                     <div class="form-group">
                         <ol id="sessions">
                             <%
+                                SimpleDateFormat fmt = new SimpleDateFormat("h:mm a");
+                                SimpleDateFormat dates = new SimpleDateFormat("MM/dd");
                                 //Get a list of all sessions
                                 for (int i = 0; i < sessions.size(); i++) {
                                     out.print("<li>");
@@ -120,7 +123,7 @@
                                     } else {
                                         out.print("<i class='icon16-success'></i>");
                                     }
-                                    out.print(sessions.get(i).getSessionDate() + ", " + sessions.get(i).getStartTime() + ", " + sessions.get(i).getName());
+                                    out.print(dates.format(sessions.get(i).getSessionDate()) + ", " + fmt.format(sessions.get(i).getStartTime()) + ", " + sessions.get(i).getName());
                                     out.print("</li>");
                                 }
                             %>
