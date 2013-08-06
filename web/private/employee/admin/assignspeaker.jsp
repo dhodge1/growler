@@ -23,6 +23,9 @@
         <link rel="shortcut icon" type="image/png" href="http://growler-dev.elasticbeanstalk.com/images/scripps_favicon-32.ico">
         <script src="http://growler-dev.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <style>
+            h1, h3 {
+                font-weight: normal;
+            }
             .no-close .ui-dialog-titlebar-close {
                 display: none;
             }
@@ -40,6 +43,7 @@
                 overflow-y: auto;
                 border: 1px solid #ccc;
                 margin:0;
+                margin-bottom: 24px;
             }
             input[type="radio"] {
                 position:relative;
@@ -51,7 +55,6 @@
     <body id="growler1">
         <%
             int user = 0;
-            int sessionPassed = 0;
             int speakerPassed = 0;
             if (null == session.getAttribute("id")) {
                 response.sendRedirect("../../../index.jsp");
@@ -61,7 +64,6 @@
             try {
                 user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
                 String name = String.valueOf(session.getAttribute("user"));
-                sessionPassed = Integer.parseInt(request.getParameter("sessionId"));
                 speakerPassed = Integer.parseInt(request.getParameter("speakerId"));
             } catch (Exception e) {
             }
@@ -84,6 +86,7 @@
             <div class="row largeBottomMargin">
                 <h3>To assign a speaker to a session, choose an available session from the list and press the <strong>Assign</strong> button.</h3>
             </div>
+            <div class="row largeBottomMargin"></div>
             <div class="row mediumBottomMargin">
                 <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Assign Details</span></h2>
             </div>
@@ -95,7 +98,9 @@
                     ArrayList<Session> sessions = sessionPersist.getThisYearSessions(2013, " order by session_date");
                 %>
                 <form id="action" action="../../../action/processSessionAssign.jsp" method="post">
-                    <div class="form-group"><% out.print(speaker.getLastName() + ", " + speaker.getFirstName() + " | " + speaker.getRank());%></div>
+                    <div class="form-group"><% out.print(speaker.getLastName() + ", " + speaker.getFirstName() + "<strong> | Current ranking: </strong>" + speaker.getRank());%>
+                    <input type="hidden" name="speaker" value="<%= speaker.getId() %>"/>
+                    </div>
                     <div class="form-group">
                         <span class="keywordFilter">
                             <i class="icon16-magnifySmall"></i>
@@ -105,13 +110,16 @@
                             <a class="keywordFilter-clear" onclick="clearFilter();"><i class="icon16-close"></i></a>
                         </span><span class="pullRight"><a>Refresh List</a></span></div>
                     <div class="form-group">
-                        <label class="required">Session Name:</label>
                         <ol id="sessions">
                             <%
                                 //Get a list of all sessions
                                 for (int i = 0; i < sessions.size(); i++) {
                                     out.print("<li>");
-                                    out.print("<input type='radio' name='session' value=\"" + sessions.get(i).getId() + "\">");
+                                    if (speakerPersist.getSpeakersBySession(sessions.get(i).getId()).size() == 0) {
+                                        out.print("<input type='radio' name='session' value=\"" + sessions.get(i).getId() + "\">");
+                                    } else {
+                                        out.print("<i class='icon16-success'></i>");
+                                    }
                                     out.print(sessions.get(i).getSessionDate() + ", " + sessions.get(i).getStartTime() + ", " + sessions.get(i).getName());
                                     out.print("</li>");
                                 }
@@ -120,7 +128,7 @@
                     </div>
                     <div class="form-actions">
                         <input id="send" type="submit" class="button button-primary" value="Assign Speaker"/>
-                        <a id="cancel" href="session.jsp">Cancel</a>
+                        <a id="cancel" href="../../../private/employee/admin/speaker.jsp">Cancel</a>
                     </div>
                 </form>
             </div>

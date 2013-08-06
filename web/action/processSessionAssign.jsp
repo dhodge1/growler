@@ -23,7 +23,7 @@
         <%
 
             int speakerId = Integer.parseInt(request.getParameter("speaker"));
-            int sessionId = Integer.parseInt(request.getParameter("sessionId"));
+            int sessionId = Integer.parseInt(request.getParameter("session"));
             
             
             DataConnection dc = new DataConnection();
@@ -48,5 +48,5 @@
                     connection.close();
                 }
             
-            response.sendRedirect("../private/employee/admin/session.jsp");
+            response.sendRedirect("../private/employee/admin/speaker.jsp");
         %>

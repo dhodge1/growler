@@ -440,7 +440,7 @@ public class SpeakerPersistence extends GrowlerPersistence {
         finally {
             closeJDBC();
         }
-        return null;
+        return new ArrayList<Speaker>();
     }
     
     public int getSpeakersAssignments(int speaker) {
