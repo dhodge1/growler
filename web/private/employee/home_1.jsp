@@ -22,9 +22,9 @@
                 if (u != null) {
                     session.setAttribute("user", u.getUserName());
                     session.setAttribute("id", u.getCorporateId());
-                    if (u.getRole() == "admin"|| id == "162107" || id == "161301") {
+                    if (u.getRole() == "admin"|| id == "162107") {
                         session.setAttribute("role", "admin");
-                        response.sendRedirect("/admin/home.jsp");
+                       // response.sendRedirect("/admin/home.jsp");
                     }
                 } else if (!id.equals(null) || !id.equals("null")) {
                     newUser.setId(Integer.parseInt(id));
@@ -34,9 +34,9 @@
                     up.addUser(newUser);
                     session.setAttribute("user", newUser.getUserName());
                     session.setAttribute("id", newUser.getCorporateId());
-                    if (id.equals("160240") || id.equals("160445") || id.equals("162107") || id.equals("161301")) { //if it's Ian R. or Brian S.
+                    if (id.equals("160240") || id.equals("160445") || id.equals("162107")) { //if it's Ian R. or Brian S.
                         session.setAttribute("role", "admin");
-                        response.sendRedirect("/admin/home.jsp");
+                      //  response.sendRedirect("/admin/home.jsp");
                     }
                 }
             }
@@ -120,10 +120,42 @@
                 margin-right:auto;
             }
         </style>
+        <link href="http://growler-dev.elasticbeanstalk.com/css/navbar.css" rel="stylesheet">
     </head>
     <body id="growler1">    
         <%@ include file="../../includes/header.jsp" %> 
-        <%@ include file="../../includes/testnav.jsp" %>
+        <%
+    String active = " selected ";
+    String pageURI = request.getRequestURI();
+    String home = "";
+    String themeTab = "";
+    String speakerTab = "";
+    String sessionTab = "";
+    if (pageURI.contains("theme")) {
+        themeTab = active;
+    } else if (pageURI.contains("speaker")) {
+        speakerTab = active;
+    } else if (pageURI.contains("session") || pageURI.contains("attendance") || pageURI.contains("survey")) {
+        sessionTab = active;
+    } else if (pageURI.contains("home")) {
+        home = " selected ";
+    }
+    Calendar calendar = Calendar.getInstance();
+%>
+<nav class="topnav navbar">
+        <nav class="globalNavigation modify-pages" id="navigation">
+            <ul class="nav">
+                <li class="non_drop <%= home%>" style="padding-right:12px" ><a href="../../private/employee/home.jsp"><span>Home</span></a></li>
+                
+                <li class="brand_nav <%= sessionTab%>" style="padding-left: 12px;"><a href="#" style='padding-left:8px;'><span class="nav_drop">Sessions</span><em></em></a>
+                    <ul class="child-menu child-menu-ul firstnav" style="left:11px;">
+                        <li><a href="../../private/employee/sessionschedule.jsp">View Session Schedule</a></li>
+                        <li><a href="../../private/employee/surveys.jsp">Submit Session Feedback</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+</nav>
         <%
             String user = "";
             if (null == session.getAttribute("id")) {

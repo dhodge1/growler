@@ -19,6 +19,7 @@
         <title>Assign a Speaker to a Session</title><!-- Title -->
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> 
         <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
         <link rel="shortcut icon" type="image/png" href="http://growler-dev.elasticbeanstalk.com/images/scripps_favicon-32.ico">
@@ -50,6 +51,14 @@
                 position:relative;
                 bottom: 5px;
                 margin-right: 6px;
+            }
+            #additional {
+                color:#0067b1;
+                text-decoration: underline;
+                cursor: pointer;
+            }
+            .modals{
+                display:none;
             }
         </style>
     </head>
@@ -96,11 +105,21 @@
                     SessionPersistence sessionPersist = new SessionPersistence();
                     SpeakerPersistence speakerPersist = new SpeakerPersistence();
                     Speaker speaker = speakerPersist.getSpeakerByID(speakerPassed);
+                    ArrayList<Speaker> speakers = speakerPersist.getAllSpeakers(" order by last_name, first_name");
                     ArrayList<Session> sessions = sessionPersist.getThisYearSessions(2013, " order by session_date");
                 %>
                 <form id="action" action="../../../action/processSessionAssign.jsp" method="post">
-                    <div class="form-group"><% out.print(speaker.getLastName() + ", " + speaker.getFirstName() + "<strong> | Current ranking: </strong>" + speakerPersist.getSpeakersRank(speaker.getId()));%>
-                    <input type="hidden" name="speaker" value="<%= speaker.getId() %>"/>
+                    <div class="form-group"><% out.print("<span id='list'>" + speaker.getLastName() + ", " + speaker.getFirstName() + "<strong> | Current ranking: </strong>" + speakerPersist.getSpeakersRank(speaker.getId()) + "</span>"
+                                + "<span class='pullRight' id='additional'><a>Assign a second speaker</a><div class='modals' title='Assign Additional Speaker'><span id='addhere'>");
+                        out.print("<select multiple=multiple id=extra height=350>");
+                        for (int i = 0; i < speakers.size(); i++) {
+                            if (speakers.get(i).getId() != speakerPassed) {
+                                out.print("<option value=" + speakers.get(i).getId() + ">" + speakers.get(i).getLastName() + ", " + speakers.get(i).getFirstName() + "<strong> | Current ranking: </strong>" + speakerPersist.getSpeakersRank(speakers.get(i).getId()) + "</option>");
+                            }
+                        }
+                        out.print("</select>");
+                        out.print("</span></div></span>");%>
+                        <input type="hidden" name="speaker" value="<%= speaker.getId()%>"/>
                     </div>
                     <div class="form-group">
                         <span class="keywordFilter">
@@ -151,6 +170,23 @@
                                             return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
                                         };
                                     });
+                                    $(".modals").dialog({autoOpen: false, dialogClass: "no-close",height: 400, width: 400,
+                                        buttons: {
+                                            'ok': {
+                                                'class': 'button button-primary',
+                                                click: function() {
+                                                    dealWithAdditional();
+                                                    $(this).dialog('close');
+                                                },
+                                                text: 'Ok'
+                                            },
+                                            'cancel': {
+                                                click: function() {
+                                                    $(this).dialog('close');
+                                                },
+                                                text: "Cancel"
+                                            }}
+                                    });
                                     $("#filter").on("keyup", function() {
                                         var text = $("#filter").val();
                                         if (text !== "") {
@@ -161,7 +197,16 @@
                                             $("#sessions li").show();
                                         }
                                     });
+                                    $('#additional').click(function() {
+                                        $('.modals').dialog('open');
+                                    });
                                 });
+                                function dealWithAdditional() {
+                                    var speaker = $("#extra").val();
+                                    $('#list').append("<br>" + $("#extra option:selected").text());
+                                    $('#list').append("<input type='hidden' name='speaker2' value='" + speaker + "'/>");
+                                    $('#additional').hide();
+                                }
                                 function clearFilter() {
                                     $("#filter").val("");
                                     $("#sessions li").show();

@@ -29,20 +29,21 @@
                 color: red;
                 font-weight: bold;
             }
+            .firstlink {
+                margin-right: 12px;
+            }
         </style>
     </head>
     <body id="growler1">
-            <%      int user = 0;
-                    if (null == session.getAttribute("id")) {
-                        response.sendRedirect(".././../index.jsp");
-                    }
-                    try {
-                        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
-                        String name = String.valueOf(session.getAttribute("user"));                  
-                    }
-                    catch (Exception e) {
-                        
-                    }
+        <%      int user = 0;
+            if (null == session.getAttribute("id")) {
+                response.sendRedirect(".././../index.jsp");
+            }
+            try {
+                user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+                String name = String.valueOf(session.getAttribute("user"));
+            } catch (Exception e) {
+            }
         %>
         <%@ include file="../../../includes/header.jsp" %> 
         <%@ include file="../../../includes/adminnav.jsp" %>
@@ -59,10 +60,10 @@
                 <span>Click <a>here</a> to assign this speaker to a session.</span>
             </div>
             <div class="row largeBottomMargin">
-                <span><% out.print((String)session.getAttribute("speaker")); %></span>
+                <span><% out.print((String) session.getAttribute("speaker"));%></span>
             </div>
             <div class="row">
-                <a href='../../../private/employee/admin/speaker.jsp'>Return to manage speakers</a>
+                <a class="firstlink" href='../../../private/employee/admin/speaker.jsp'>Return to manage speakers</a>
                 <a href='../../../private/employee/admin/speakerentry.jsp'>Add another speaker</a>
             </div>
         </div>

@@ -35,7 +35,7 @@
                 font-family: Arial;
                 font-size: 11px;
                 position: relative;
-                top: 30px;
+                top: 24px;
             }
             .modals{
                 display:none;

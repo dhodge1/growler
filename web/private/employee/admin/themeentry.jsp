@@ -79,7 +79,7 @@
                 <label><span style="color: red;">*</span>Required field</label>
             </div>
             <div class="row mediumBottomMargin">
-                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Add a Theme</span></h2>
+                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Theme Details</span></h2>
             </div>
             <div class="row mediumBottomMargin">
                 <%@include file="../../../includes/messagehandler.jsp" %>
@@ -115,7 +115,7 @@
                             <input type="text" name="creator" <% out.print("value='" + user + "'");%> />
                         </div>
                         <div class="form-group">
-                            <input type="checkbox" name="visible" value="true"/><label class="required checkbox inline">Make theme visible to users?</label>
+                            <input type="checkbox" name="visible" value="true"/><label class="required checkbox inline"> Make theme visible to users?</label>
                         </div>
                         <div class="form-actions">
                             <input class="button button-primary" id="send" type="submit" value="Add Theme" name="Submit" />

@@ -13,7 +13,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="shortcut icon" type="image/png" href="../../images/scripps_favicon-32.ico">
+        <link rel="shortcut icon" type="image/png" href="../../../images/scripps_favicon-32.ico">
         <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
         <script src="http://growler-dev.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
@@ -63,6 +63,9 @@
                 <h1 style="margin-top:0px;font-weight: normal;">Edit Theme</h1>
             </div>
             <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
+            <div class="row largeBottomMargin">
+                <h3>Please use the form below to edit theme details.</h3>
+            </div>
             <div class="row mediumBottomMargin">
                 <label><span style="color: red;">*</span>Required field</label>
             </div>
@@ -96,7 +99,10 @@
                         <input type='checkbox' name='visible' <% if (theme.getVisible()) { out.print(" checked ");} %> />
                         <label class="required checkbox inline">Make theme visible to users?</label>
                     </div>
-                    <input type="submit" value="Submit" class="button button-primary"/>
+                        <div class="form-actions">
+                    <input type="submit" value="Save Changes" class="button button-primary"/>
+                    <a href="../../../private/employee/admin/theme.jsp">Cancel</a>
+                        </div>
                 </form>
             </div>
         </div>
