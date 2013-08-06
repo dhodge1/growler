@@ -32,7 +32,7 @@
     </head>
     <body id="growler1">
         <%@ include file="../../includes/header.jsp" %> 
-        <%@ include file="../../includes/usernav.jsp" %> 
+        <%@ include file="../../includes/testnav.jsp" %> 
         <div class="container-fixed mediumBottomMargin">
             <div class='row mediumBottomMargin'></div>
             <div class="row">
