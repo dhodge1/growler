@@ -102,7 +102,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Why should this presentation be added to this years Techtoberfest?</label>
-                                <textarea name="reason" id="tip3" data-content="Help us understand what this theme suggestion means to you" rows="5" cols="50" maxlength="250"></textarea>
+                                <textarea name="reason" data-content="Help us understand what this theme suggestion means to you" rows="5" cols="50" maxlength="250"></textarea>
                             </div>
                             <div class="form-actions">
                                 <input type="submit" id="send" class="button button-primary" value="Submit Suggestion" />

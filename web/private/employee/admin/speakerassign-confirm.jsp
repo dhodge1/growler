@@ -48,7 +48,7 @@
                         String spkr2 = (String)session.getAttribute("speaker2");
                         speaker2there = true;
                     } catch (Exception e) {
-                        
+                        speaker2there = false;
                     }
         %>
         <%@ include file="../../../includes/header.jsp" %> 
