@@ -45,7 +45,6 @@
                 <ul class="child-menu child-menu-ul">
                     <li><a href="../../../private/employee/admin/speaker.jsp">Manage Speakers</a></li>
                     <li><a href="../../../private/employee/admin/speakerentry.jsp">Suggest a New Speaker</a></li>
-                    <li><a href="../../../private/employee/admin/assignspeaker.jsp">Assign Speaker to a Session</a></li>
                 </ul>
             </li>
             <li class="brand_nav <%= roomTab%>"><a href="#"><span class="nav_drop">Rooms</span><em></em></a>

@@ -13,14 +13,22 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="shortcut icon" type="image/png" href="../../images/scripps_favicon-32.ico">
         <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-        <link rel="stylesheet" href="../../../css/draganddrop.css" /><!--Drag and drop style-->
         <script src="http://growler-dev.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
-        <link rel="stylesheet" type="text/css" href="css/general.css" /><!--General CSS-->
-        <link rel="stylesheet" type="text/css" href="css/help.css" /><!--Help CSS-->
         <title>Edit Theme</title>
+        <style>
+            .message_container {
+                display: none;
+                color: red;
+                font-weight: bold;
+            }
+            h3 {
+                font-weight:normal;
+            }
+        </style>
     </head>
     <body id="growler1">
         <%
@@ -65,24 +73,24 @@
                 <form method="post" action="../../../action/processThemeEdit.jsp">
                     <div class="form-group">
                         <label class="required">Theme name</label>
-                        <input id="name" name="name" type="text" data-content="Enter the name of the Theme" value="<% out.print(theme.getName());%>" maxlength="30"/>
+                        <input id="tip" name="name" type="text" data-content="Enter the name of the Theme" value="<% out.print(theme.getName());%>" maxlength="30"/>
                         <input name="id" type="hidden" value="<% out.print(theme.getId());%>" />
                     </div>
                     <div class="form-group">
                         <label class="required">Theme description</label>
-                        <input name="description" id="description" type="text" data-content="Enter the Description" value="<% out.print(theme.getDescription());%>" maxlength="250"/>
+                        <input name="description" id="tip2" type="text" data-content="Enter the Description" value="<% out.print(theme.getDescription());%>" maxlength="250"/>
                     </div>
                     <div class="form-group">
                         <label class="required">Theme category</label>
-                        <select name="category">
+                        <select name="category" id="tip3">
                             <option value="0"> Select a Type </option>
-                            <option value="Business" <% //if (theme.getType().equals("Business")) {                                out.print("selected"); } %>>Business</option>
-                            <option value="Technical" <% //if (theme.getType().equals("Technical")) {                                out.print("selected"); } %>>Technical</option>
+                            <option value="Business" <% if (theme.getType().equals("Business")) {                                out.print("selected"); } %>>Business</option>
+                            <option value="Technical" <% if (theme.getType().equals("Technical")) {                                out.print("selected"); } %>>Technical</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label class="required">Theme added by</label>
-                        <input name="creator" id="creator" type="text" data-content="Enter a Creator ID for the Theme" value="<% out.print(theme.getCreatorId());%>"/>
+                        <input name="creator" id="tip4" type="text" data-content="Enter a Creator ID for the Theme" value="<% out.print(theme.getCreatorId());%>"/>
                     </div>
                     <div class="form-group">
                         <input type='checkbox' name='visible' <% if (theme.getVisible()) { out.print(" checked ");} %> />
@@ -93,6 +101,7 @@
             </div>
         </div>
         <%@ include file="../../../includes/footer.jsp" %> 
+        <script src="../../../js/libs/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
         <%@ include file="../../../includes/scriptlist.jsp" %>
         <script src="../../../js/themeentry.js"></script>
         <script>

@@ -30,37 +30,37 @@
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
         <script>
             $(document).ready(function() {
-                $('td').filter('.2013-10-17morning').show();
-                $('td').filter('.2013-10-17afternoon').hide();
-                $('td').filter('.2013-10-18morning').hide();
-                $('td').filter('.2013-10-18afternoon').hide();
+                $('td').filter('.2013-10-11morning').show();
+                $('td').filter('.2013-10-11afternoon').hide();
+                $('td').filter('.2013-10-12morning').hide();
+                $('td').filter('.2013-10-12afternoon').hide();
                 $("#survey").hide();
                 $("#code").hide();
                 $("#confirm").hide();
                 $("#date").change(function() {
                     if ($("#date").val() === "1") {
-                        $('td').filter('.2013-10-17morning').show();
-                        $('td').filter('.2013-10-17afternoon').hide();
-                        $('td').filter('.2013-10-18morning').hide();
-                        $('td').filter('.2013-10-18afternoon').hide();
+                        $('td').filter('.2013-10-11morning').show();
+                        $('td').filter('.2013-10-11afternoon').hide();
+                        $('td').filter('.2013-10-12morning').hide();
+                        $('td').filter('.2013-10-12afternoon').hide();
                     }
                     else if ($("#date").val() === "2") {
-                        $('td').filter('.2013-10-17morning').hide();
-                        $('td').filter('.2013-10-17afternoon').show();
-                        $('td').filter('.2013-10-18morning').hide();
-                        $('td').filter('.2013-10-18afternoon').hide();
+                        $('td').filter('.2013-10-11morning').hide();
+                        $('td').filter('.2013-10-11afternoon').show();
+                        $('td').filter('.2013-10-12morning').hide();
+                        $('td').filter('.2013-10-12afternoon').hide();
                     }
                     else if ($("#date").val() === "3") {
-                        $('td').filter('.2013-10-17morning').hide();
-                        $('td').filter('.2013-10-17afternoon').hide();
-                        $('td').filter('.2013-10-18morning').show();
-                        $('td').filter('.2013-10-18afternoon').hide();
+                        $('td').filter('.2013-10-11morning').hide();
+                        $('td').filter('.2013-10-11afternoon').hide();
+                        $('td').filter('.2013-10-12morning').show();
+                        $('td').filter('.2013-10-12afternoon').hide();
                     }
                     else if ($("#date").val() === "4") {
-                        $('td').filter('.2013-10-17morning').hide();
-                        $('td').filter('.2013-10-17afternoon').hide();
-                        $('td').filter('.2013-10-18morning').hide();
-                        $('td').filter('.2013-10-18afternoon').show();
+                        $('td').filter('.2013-10-11morning').hide();
+                        $('td').filter('.2013-10-11afternoon').hide();
+                        $('td').filter('.2013-10-12morning').hide();
+                        $('td').filter('.2013-10-12afternoon').show();
                     }
                 });
                 $("#progress1").click(function() {
@@ -303,10 +303,10 @@
             <div id="dateselector" class="smallBottomMargin row">
                 <span><strong>Session Dates:</strong></span>
                 <select name="date" id="date" class="input-large">
-                    <option value="1">10/17 Morning Sessions</option>
-                    <option value="2">10/17 Afternoon Sessions</option>
-                    <option value="3">10/18 Morning Sessions</option>
-                    <option value="4">10/18 Afternoon Sessions</option>
+                    <option value="1">10/11 Morning Sessions</option>
+                    <option value="2">10/11 Afternoon Sessions</option>
+                    <option value="3">10/12 Morning Sessions</option>
+                    <option value="4">10/12 Afternoon Sessions</option>
                 </select>
             </div>
             <div id='errors' class='errors feedbackMessage-error mediumBottomMargin row'>

@@ -78,10 +78,10 @@
                                 <span>Use the table below to add, edit or delete existing speakers.</span>
                             </div>
                             <div class="row mediumBottomMargin">
-                                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Speaker Details</span><a href="../../../private/employee/speakerentry.jsp" class="pullRight button button-primary">Add Speaker</a></h2>
+                                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Speaker Details</span><a href="../../../private/employee/admin/speakerentry.jsp" class="pullRight button button-primary">Add Speaker</a></h2>
                             </div>
                             <div class="row">
-                                <form action="../../../action/admintheme.jsp" >
+                                <form>
                                     <input type='hidden' id='current_page' value="1" />
                                     <input type='hidden' id='show_per_page' value='20' />
                                     <input type='hidden' id='total' value='<%= speakers.size()%>'/>
@@ -130,7 +130,7 @@
                                                     <div class="actionMenu">
                                                         <a class="actionMenu-toggle" data-toggle="dropdown" href="#">Actions<b class="caret"></b></a>
                                                         <ul class="actionMenu-menu" role="menu">
-                                                            <li><a <% out.print("href='../../../private/employee/admin/assignspeaker.jsp?sessionId=" + speakers.get(i).getId() + "'");%>><i class="icon16-userAdd"></i>Assign</a></li>
+                                                            <li><a <% out.print("href='../../../private/employee/admin/assignspeaker.jsp?speakerId=" + speakers.get(i).getId() + "'");%>><i class="icon16-userAdd"></i>Assign</a></li>
                                                             <li><a <% out.print("href='../../../private/employee/admin/editspeaker.jsp?id=" + speakers.get(i).getId() + "'");%>><i class="icon16-approve"></i>Edit</a></li>
                                                             <li><a class="showModal3"><% out.print("<input type='hidden' name='delete' value='" + speakers.get(i).getId() + "' />");%>
                                                                     <% out.print("<div class='modalDelete' id='modaldelete" + speakers.get(i).getId() + "' title='Delete Confirmation'>");

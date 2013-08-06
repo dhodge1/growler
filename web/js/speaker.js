@@ -25,7 +25,7 @@ $("#send").click(function(event) {
         $("#error_last").show();
         event.preventDefault();
     }
-    if (str3 === "null"){
+    if (str3 == "0"){
         $("#tip3").css("border", "1px solid red");
         $("#error_type").show();
         event.preventDefault();

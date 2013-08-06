@@ -13,14 +13,22 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="shortcut icon" type="image/png" href="../../images/scripps_favicon-32.ico">
         <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-        <link rel="stylesheet" href="../../../css/draganddrop.css" /><!--Drag and drop style-->
         <script src="http://growler-dev.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
-        <link rel="stylesheet" type="text/css" href="css/general.css" /><!--General CSS-->
-        <link rel="stylesheet" type="text/css" href="css/help.css" /><!--Help CSS-->
         <title>Edit Speaker</title>
+        <style>
+            .message_container {
+                display: none;
+                color: red;
+                font-weight: bold;
+            }
+            h3 {
+                font-weight:normal;
+            }
+        </style>
     </head>
     <body id="growler1">
         <%
@@ -64,6 +72,7 @@
             <div class="row largeBottomMargin">
                 <form method="post" action="../../../action/processSpeakerEdit.jsp">
                     <div class="form-group inline">
+                        <input name="id" type="hidden" value="<% out.print(speaker.getId());%>" />
                                 <label class="required">Speaker First Name</label>
                                 <input required="required" name="first_name" class="input-xlarge" type="text" id="tip" data-content="Please enter no more than 30 characters" maxlength="30" <% out.print("value='" + speaker.getFirstName() + "'"); %> />
                                 <br/><span id="error_first" class="message_container">
@@ -106,6 +115,7 @@
             </div>
         </div>
         <%@ include file="../../../includes/footer.jsp" %> 
+        <script src="../../../js/libs/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
         <%@ include file="../../../includes/scriptlist.jsp" %>
         <script src="../../../js/speaker.js"></script>
         <script>

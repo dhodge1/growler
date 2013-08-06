@@ -20,13 +20,39 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-        <link rel="stylesheet" href="../../../css/draganddrop.css" /><!--Drag and drop style-->
+        <link rel="shortcut icon" type="image/png" href="http://growler-dev.elasticbeanstalk.com/images/scripps_favicon-32.ico">
         <script src="http://growler-dev.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
+        <style>
+            .no-close .ui-dialog-titlebar-close {
+                display: none;
+            }
+            .keywordFilter-clear {
+                cursor: pointer;
+            }
+            .pullRight {
+                float: right;
+                top:10px;
+                position:relative;
+            }
+            #sessions {
+                list-style-type: none;
+                height: 345px;
+                overflow-y: auto;
+                border: 1px solid #ccc;
+                margin:0;
+            }
+            input[type="radio"] {
+                position:relative;
+                bottom: 5px;
+                margin-right: 6px;
+            }
+        </style>
     </head>
     <body id="growler1">
         <%
             int user = 0;
             int sessionPassed = 0;
+            int speakerPassed = 0;
             if (null == session.getAttribute("id")) {
                 response.sendRedirect("../../../index.jsp");
             } else if (!session.getAttribute("role").equals("admin")) {
@@ -36,6 +62,7 @@
                 user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
                 String name = String.valueOf(session.getAttribute("user"));
                 sessionPassed = Integer.parseInt(request.getParameter("sessionId"));
+                speakerPassed = Integer.parseInt(request.getParameter("speakerId"));
             } catch (Exception e) {
             }
         %>
@@ -43,80 +70,89 @@
         <%@ include file="../../../includes/adminheader.jsp" %> 
         <%@ include file="../../../includes/adminnav.jsp" %>
         <div class="container-fixed">
-            <br/><br/><br/>
+            <div class="row mediumBottomMargin"></div>
             <div class="row">
-                
-                    <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Assign Speaker to Session</span></h2>
-                
+                <ul class="breadcrumb">
+                    <li><a href="../../../private/employee/admin/home.jsp">Home</a></li>
+                    <li class='ieFix'>Assign A Speaker</li>
+                </ul>
             </div>
-            <br/>
-            <div class="row">
-                
-                    <%
-                        SessionPersistence sessionPersist = new SessionPersistence();
-                        SpeakerPersistence speakerPersist = new SpeakerPersistence();
-                        ArrayList<Session> sessions = sessionPersist.getThisYearSessions(2013);
-                        ArrayList<Speaker> speakers = speakerPersist.getNonDefaultSpeakers();
-                    %>
-                    <form id="action" action="../../../action/processSessionAssign.jsp" method="post" onsubmit="return validateForm();">
-                        <div class="form-group">
-                            <label class="required">Session Name:</label>
-                            <select class="session" name="sessionId">
-                                <option value="0"> - Please Pick a Session - </option>
-                                <%
-                                    //Get a list of all sessions
-                                    for (int i = 0; i < sessions.size(); i++) {
-                                        out.print("<option value=\"" + sessions.get(i).getId() + "\"");
-                                        if (sessions.get(i).getId() == sessionPassed) {
-                                            out.print(" selected ");
-                                        }
-                                        out.print(">" + sessions.get(i).getName());
-
-                                        out.print("</option>");
-                                    }
-                                %>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="required">Suggested Speakers:</label>
-                            <select class="speaker" name="speaker">
-                                <option value="0"> - Please Pick a Speaker - </option>
-                                <%
-                                    //Get a list of suggested speakers
-                                    for (int i = 0; i < speakers.size(); i++) {
-                                        out.print("<option value=\"" + speakers.get(i).getId() + "\">" + speakers.get(i).getLastName() + ", " + speakers.get(i).getFirstName() + "</option>");
-                                    }
-                                %>
-                            </select>
-                        </div>
-                        <a href="speakerentry.jsp">Add a New Speaker</a><br/>
-                        <div class="form-actions">
-                            <input id="send" type="submit" class="button button-primary" value="Submit"/>
-                            <a id="cancel" class="button" href="session.jsp">Cancel</a>
-                        </div>
-                    </form>
-                
+            <div class="row mediumBottomMargin">
+                <h1 style="margin-top:0px;font-weight: normal;">Assign A Speaker</h1>
+            </div>
+            <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
+            <div class="row largeBottomMargin">
+                <h3>To assign a speaker to a session, choose an available session from the list and press the <strong>Assign</strong> button.</h3>
+            </div>
+            <div class="row mediumBottomMargin">
+                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Assign Details</span></h2>
+            </div>
+            <div class="row largeBottomMargin">
+                <%
+                    SessionPersistence sessionPersist = new SessionPersistence();
+                    SpeakerPersistence speakerPersist = new SpeakerPersistence();
+                    Speaker speaker = speakerPersist.getSpeakerByID(speakerPassed);
+                    ArrayList<Session> sessions = sessionPersist.getThisYearSessions(2013, " order by session_date");
+                %>
+                <form id="action" action="../../../action/processSessionAssign.jsp" method="post">
+                    <div class="form-group"><% out.print(speaker.getLastName() + ", " + speaker.getFirstName() + " | " + speaker.getRank());%></div>
+                    <div class="form-group">
+                        <span class="keywordFilter">
+                            <i class="icon16-magnifySmall"></i>
+                            <span class="keywordFilter-wrapper">
+                                <input type="search" id="filter" value="Filter..." />
+                            </span>
+                            <a class="keywordFilter-clear" onclick="clearFilter();"><i class="icon16-close"></i></a>
+                        </span><span class="pullRight"><a>Refresh List</a></span></div>
+                    <div class="form-group">
+                        <label class="required">Session Name:</label>
+                        <ol id="sessions">
+                            <%
+                                //Get a list of all sessions
+                                for (int i = 0; i < sessions.size(); i++) {
+                                    out.print("<li>");
+                                    out.print("<input type='radio' name='session' value=\"" + sessions.get(i).getId() + "\">");
+                                    out.print(sessions.get(i).getSessionDate() + ", " + sessions.get(i).getStartTime() + ", " + sessions.get(i).getName());
+                                    out.print("</li>");
+                                }
+                            %>
+                        </ol>
+                    </div>
+                    <div class="form-actions">
+                        <input id="send" type="submit" class="button button-primary" value="Assign Speaker"/>
+                        <a id="cancel" href="session.jsp">Cancel</a>
+                    </div>
+                </form>
             </div>
         </div>
 
         <%@ include file="../../../includes/footer.jsp" %> 
-        <%@ include file="../../../includes/scriptlist.jsp" %>
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
+        <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+        <script src="../../../js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>
+        <script src="../../../js/libs/sniui.user-inline-help.1.2.0.min.js" type="text/javascript"></script>
         <script>
-                                $(document).ready(function() {
-                                    $("#send").click(function(event) {
-                                        if ($(".session").val() == 0) {
-                                            alert("Please enter a session!");
-                                            event.preventDefault();
+                                $().ready(function() {
+                                    jQuery.expr[":"].icontains = jQuery.expr.createPseudo(function(arg) {
+                                        return function(elem) {
+                                            return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+                                        };
+                                    });
+                                    $("#filter").on("keyup", function() {
+                                        var text = $("#filter").val();
+                                        if (text !== "") {
+                                            $("ol li").filter(":icontains('" + text + "')").show();
+                                            $("ol li").filter(":not(:icontains('" + text + "'))").hide();
                                         }
-                                        else if ($(".speaker").val() == 0) {
-                                            alert("Please enter a speaker!");
-                                            event.preventDefault();
-                                        }
-                                        else {
-                                            $("#action").attr("action", "../../../action/processSessionAssign.jsp");
+                                        else if (text === "") {
+                                            $("ol li").show();
                                         }
                                     });
                                 });
+                                function clearFilter() {
+                                    $("#filter").val("");
+                                    $("#speakers li").show();
+                                }
         </script>
     </body>
 </html>

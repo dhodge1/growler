@@ -374,16 +374,14 @@ public class SpeakerPersistence extends GrowlerPersistence {
                     + "last_name = ?, "
                     + "suggested_by = ?, "
                     + "visible = ?, "
-                    + "type = ?, "
-                    + "reason = ? "
+                    + "type = ? "
                     + "where id = ?");
             statement.setString(1, s.getFirstName());
             statement.setString(2, s.getLastName());
             statement.setInt(3, s.getSuggestedBy());
             statement.setBoolean(4, s.getVisible());
             statement.setString(5, s.getType());
-            statement.setString(6, s.getReason());
-            statement.setInt(7, s.getId());
+            statement.setInt(6, s.getId());
             success = statement.execute();
             closeJDBC();
         } catch (Exception e) {

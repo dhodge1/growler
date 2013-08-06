@@ -19,14 +19,12 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+        <link rel="shortcut icon" type="image/png" href="../../images/scripps_favicon-32.ico">
         <title>Add a Presentation Theme</title>
 
         <link rel="stylesheet" href="../../../css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
         <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-        <link rel="stylesheet" href="../../../css/prettify/prettify.css" /> 
-        <link rel="stylesheet" type="text/css" href="../../../css/general.css" /><!--General CSS-->
         <style>
             .message_container {
                 display: none;
@@ -52,7 +50,7 @@
             } else if (!session.getAttribute("role").equals("admin")) {
                 response.sendRedirect("../../../index.jsp");
             }
-            
+
             try {
                 user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
                 String name = String.valueOf(session.getAttribute("user"));
@@ -81,50 +79,50 @@
                 <label><span style="color: red;">*</span>Required field</label>
             </div>
             <div class="row mediumBottomMargin">
-                    <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Add a Theme</span></h2>
+                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Add a Theme</span></h2>
             </div>
             <div class="row mediumBottomMargin">
                 <%@include file="../../includes/messagehandler.jsp" %>
-                    <form method="POST" id="action" action="../../../action/processThemeAdd.jsp">
-                        <fieldset>
-                            <div class="form-group">
-                                <label class="required">Theme name</label>
-                                <input required="required" name="name" class="input-xlarge" type="text" id="tip" data-content="30 characters or less please" maxlength="30"/>
-                                <br/><span id="error_theme_name" class="message_container">
-                                    <span>Please enter a theme name</span>
-                                </span>
-                            </div>
-                            <div class="form-group">
-                                <label class="required">Theme description</label>
-                                <input required="required" name="description" class="input-xlarge" type="text" id="tip3" data-content="250 characters or less please" maxlength="250"/>
-                                <br/><span id="error_theme_description" class="message_container">
-                                    <span>Please enter a theme description</span>
-                                </span>
-                            </div>
-                            <div class="form-group">
-                                <label class="required">Theme category</label>
-                                <select name="type" id="tip2">
-                                    <option value="0"> Select a Category </option>
-                                    <option value="Business">Business</option>
-                                    <option value="Technical">Technical</option>
-                                </select>
-                                <br/><span id="error_theme_type" class="message_container">
-                                    <span>Please select a presentation theme type</span>
-                                </span>
-                            </div>
-                            <div class="form-group">
-                                <label class="required">Theme added by</label>
-                                <input type="text" name="creator" <% out.print("value='" + user + "'"); %> />
-                            </div>
-                            <div class="form-group">
-                                <input type="checkbox" name="visible" value="true"/><label class="required checkbox inline">Make theme visible to users?</label>
-                            </div>
-                            <div class="form-actions">
-                                <input class="button button-primary" id="send" type="submit" value="Add Theme" name="Submit" />
-                                <a id="cancel" href="../../../private/employee/admin/theme.jsp">Cancel</a>
-                            </div>
-                        </fieldset>
-                    </form>		
+                <form method="POST" id="action" action="../../../action/processThemeAdd.jsp">
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="required">Theme name</label>
+                            <input required="required" name="name" class="input-xlarge" type="text" id="tip" data-content="30 characters or less please" maxlength="30"/>
+                            <br/><span id="error_theme_name" class="message_container">
+                                <span>Please enter a theme name</span>
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label class="required">Theme description</label>
+                            <input required="required" name="description" class="input-xlarge" type="text" id="tip3" data-content="250 characters or less please" maxlength="250"/>
+                            <br/><span id="error_theme_description" class="message_container">
+                                <span>Please enter a theme description</span>
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label class="required">Theme category</label>
+                            <select name="type" id="tip2">
+                                <option value="0"> Select a Category </option>
+                                <option value="Business">Business</option>
+                                <option value="Technical">Technical</option>
+                            </select>
+                            <br/><span id="error_theme_type" class="message_container">
+                                <span>Please select a presentation theme type</span>
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label class="required">Theme added by</label>
+                            <input type="text" name="creator" <% out.print("value='" + user + "'");%> />
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" name="visible" value="true"/><label class="required checkbox inline">Make theme visible to users?</label>
+                        </div>
+                        <div class="form-actions">
+                            <input class="button button-primary" id="send" type="submit" value="Add Theme" name="Submit" />
+                            <a id="cancel" href="../../../private/employee/admin/theme.jsp">Cancel</a>
+                        </div>
+                    </fieldset>
+                </form>		
             </div>
         </div>
         <%@ include file="../../../includes/footer.jsp" %> 
