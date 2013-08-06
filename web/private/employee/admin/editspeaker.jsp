@@ -59,9 +59,9 @@
                 <label><span style="color: red;">*</span>Required field</label>
             </div>
             <div class="row mediumBottomMargin">
-                    <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Theme Details</span></h2>
+                    <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Speaker Details</span></h2>
             </div>
-            <div class="row">
+            <div class="row largeBottomMargin">
                 <form method="post" action="../../../action/processSpeakerEdit.jsp">
                     <div class="form-group inline">
                                 <label class="required">Speaker First Name</label>
@@ -79,19 +79,27 @@
                             </div>
                     <div class="form-group">
                         <label class="required">Speaker type</label>
-                        <select name="category">
+                        <select name="category" id="tip3">
                             <option value="0"> Select a Type </option>
-                            <option value="Business" <% if (speaker.getType().equals("Business")) { out.print("selected"); } %>>Business</option>
-                            <option value="Technical" <% if (speaker.getType().equals("Technical")) { out.print("selected"); } %>>Technical</option>
+                            <option value="Business" <% if (speaker.getType().equals("Business")) {
+                                out.print("selected"); } %>>Business</option>
+                            <option value="Technical" <% if (speaker.getType().equals("Technical")) {
+                                out.print("selected"); } %>>Technical</option>
                         </select>
+                        <br/><span id="error_type" class="message_container">
+                                    <span>Please select a speaker type</span>
+                                </span>
                     </div>
                     <div class="form-group">
                         <label class="required">Speaker added by</label>
-                        <input name="creator" id="creator" type="text" data-content="Enter a Creator ID for the speaker" value="<% out.print(speaker.getSuggestedBy());%>"/>
+                        <input name="creator" id="tip4" type="text" data-content="Enter a Creator ID for the speaker" value="<% out.print(speaker.getSuggestedBy());%>"/>
+                        <br/><span id="error_creator" class="message_container">
+                                    <span>Please enter who added the speaker</span>
+                                </span>
                     </div>
                     <div class="form-group">
                         <input type='checkbox' name='visible' <% if (speaker.getVisible()) { out.print(" checked ");} %> />
-                        <label class="required">Make speaker visible to users?</label>
+                        <label class="required checkbox inline">Make speaker visible to users?</label>
                     </div>
                     <input type="submit" value="Submit" class="button button-primary"/>
                 </form>
@@ -99,6 +107,7 @@
         </div>
         <%@ include file="../../../includes/footer.jsp" %> 
         <%@ include file="../../../includes/scriptlist.jsp" %>
+        <script src="../../../js/speaker.js"></script>
         <script>
                     $(function() {
                         $("input").autoinline();

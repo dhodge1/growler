@@ -75,13 +75,14 @@ public class ThemePersistence extends GrowlerPersistence {
         try {
             initializeJDBC();
             statement = connection.prepareStatement("insert into theme ("
-                    + "name, description, reason, visible, creator) values "
+                    + "name, description, reason, visible, creator, type) values "
                     + "(?, ?, ?, ?, ?)");
             statement.setString(1, t.getName());
             statement.setString(2, t.getDescription());
             statement.setString(3, t.getReason());
             statement.setBoolean(4, false);
             statement.setInt(5, t.getCreatorId());
+            statement.setString(6, t.getType());
             success = statement.execute();
             closeJDBC();
         } catch (Exception e) {
@@ -128,7 +129,7 @@ public class ThemePersistence extends GrowlerPersistence {
         try {
             initializeJDBC();
             statement = connection.prepareStatement("select id, name, description, "
-                    + "creator, visible from theme where id = ?");
+                    + "creator, visible, type from theme where id = ?");
             statement.setInt(1, id);
             result = statement.executeQuery();
             if (result.next()) {
@@ -138,6 +139,7 @@ public class ThemePersistence extends GrowlerPersistence {
                 t.setDescription(result.getString("description"));
                 t.setCreatorId(result.getInt("creator"));
                 t.setVisible(result.getBoolean("visible"));
+                t.setType(result.getString("type"));
                 closeJDBC();
                 return (t);
             }

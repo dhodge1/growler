@@ -37,22 +37,20 @@
             <li class="non_drop <%= home%>" style="padding-right:12px" ><a href="home.jsp"><span>Home</span></a></li>
             <li class="brand_nav <%= themeTab%>" style="padding-left:12px"><a href="#"><span>Themes</span><em></em></a>
                 <ul class="child-menu child-menu-ul firstnav" style="left:11px;">
-                    <li><a href="../../../private/employee/admin/theme.jsp">Edit Themes</a></li>
+                    <li><a href="../../../private/employee/admin/theme.jsp">Manage Themes</a></li>
                     <li><a href="../../../private/employee/admin/themeentry.jsp">Suggest a New Theme</a></li>
                 </ul>
             </li>
             <li class="brand_nav <%= speakerTab%>"><a href="#"><span class="nav_drop">Speakers</span><em></em></a>
                 <ul class="child-menu child-menu-ul">
-                    <li><a href="../../../private/employee/admin/speaker.jsp">Edit Speakers</a></li>
+                    <li><a href="../../../private/employee/admin/speaker.jsp">Manage Speakers</a></li>
                     <li><a href="../../../private/employee/admin/speakerentry.jsp">Suggest a New Speaker</a></li>
                     <li><a href="../../../private/employee/admin/assignspeaker.jsp">Assign Speaker to a Session</a></li>
                 </ul>
             </li>
             <li class="brand_nav <%= roomTab%>"><a href="#"><span class="nav_drop">Rooms</span><em></em></a>
                 <ul class="child-menu child-menu-ul">
-                    <li><a href="../../../private/employee/admin/addroom.jsp">Add a Room</a></li>
-                    <li><a href="../../../private/employee/admin/room.jsp">View Rooms</a></li>
-                    <li><a href="../../../private/employee/admin/assignroom.jsp">Assign Room to a Session</a></li>
+                    <li><a href="../../../private/employee/admin/room.jsp">Manage Room</a></li>
                 </ul>
             </li>
             <li class="brand_nav <%= sessionTab%>"><a href="#"><span class="nav_drop">Sessions</span><em></em></a>

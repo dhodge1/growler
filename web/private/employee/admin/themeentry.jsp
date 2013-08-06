@@ -33,6 +33,14 @@
                 color: red;
                 font-weight: bold;
             }
+            input[type="checkbox"] {
+                position:relative;
+                bottom: 5px;
+                margin-right: 6px;
+            }
+            h1, h3 {
+                font-weight: normal;
+            }
         </style>
         <script src="http://growler-dev.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
     </head>
@@ -41,10 +49,10 @@
             int user = 0;
             if (null == session.getAttribute("id")) {
                 response.sendRedirect("../../../index.jsp");
-          //  } else if (!session.getAttribute("role").equals("admin")) {
-           //     response.sendRedirect("../../../index.jsp");
-           // }
+            } else if (!session.getAttribute("role").equals("admin")) {
+                response.sendRedirect("../../../index.jsp");
             }
+            
             try {
                 user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
                 String name = String.valueOf(session.getAttribute("user"));
@@ -54,7 +62,7 @@
 
         <%@ include file="../../../includes/adminheader.jsp" %> 
         <%@ include file="../../../includes/adminnav.jsp" %>  
-        <div class="container-fixed largeBottomMargin">
+        <div class="container-fixed">
             <div class="mediumBottomMargin row"></div>
             <div class="row">
                 <ul class="breadcrumb">
@@ -72,10 +80,11 @@
             <div class="row mediumBottomMargin">
                 <label><span style="color: red;">*</span>Required field</label>
             </div>
-            <div class="row">
+            <div class="row mediumBottomMargin">
                     <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Add a Theme</span></h2>
             </div>
-            <div class="row">
+            <div class="row mediumBottomMargin">
+                <%@include file="../../includes/messagehandler.jsp" %>
                     <form method="POST" id="action" action="../../../action/processThemeAdd.jsp">
                         <fieldset>
                             <div class="form-group">
@@ -87,18 +96,21 @@
                             </div>
                             <div class="form-group">
                                 <label class="required">Theme description</label>
-                                <input required="required" name="description" class="input-xlarge" type="text" id="tip2" data-content="250 characters or less please" maxlength="250"/>
+                                <input required="required" name="description" class="input-xlarge" type="text" id="tip3" data-content="250 characters or less please" maxlength="250"/>
                                 <br/><span id="error_theme_description" class="message_container">
                                     <span>Please enter a theme description</span>
                                 </span>
                             </div>
                             <div class="form-group">
                                 <label class="required">Theme category</label>
-                                <select name="type">
+                                <select name="type" id="tip2">
                                     <option value="0"> Select a Category </option>
                                     <option value="Business">Business</option>
                                     <option value="Technical">Technical</option>
                                 </select>
+                                <br/><span id="error_theme_type" class="message_container">
+                                    <span>Please select a presentation theme type</span>
+                                </span>
                             </div>
                             <div class="form-group">
                                 <label class="required">Theme added by</label>

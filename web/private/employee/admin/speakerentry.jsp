@@ -33,6 +33,14 @@
                 color: red;
                 font-weight: bold;
             }
+            h1, h3 {
+                font-weight: normal;
+            }
+            input[type="checkbox"] {
+                position:relative;
+                bottom: 5px;
+                margin-right: 6px;
+            }
         </style>
         <script src="http://growler-dev.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
     </head>
@@ -54,7 +62,7 @@
 
         <%@ include file="../../../includes/adminheader.jsp" %> 
         <%@ include file="../../../includes/adminnav.jsp" %>  
-        <div class="container-fixed largeBottomMargin">
+        <div class="container-fixed">
             <div class="mediumBottomMargin row"></div>
             <div class="row">
                 <ul class="breadcrumb">
@@ -72,10 +80,11 @@
             <div class="row mediumBottomMargin">
                 <label><span style="color: red;">*</span>Required field</label>
             </div>
-            <div class="row">
+            <div class="row mediumBottomMargin">
                     <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Add a Speaker</span></h2>
             </div>
-            <div class="row">
+            <div class="row mediumBottomMargin">
+                <%@include file="../../includes/messagehandler.jsp" %>
                     <form method="POST" id="action" action="../../action/processSpeakerAdd.jsp">
                         <fieldset>
                             <div class="form-group inline">
@@ -105,7 +114,10 @@
                             </div>
                             <div class="form-group">
                                 <label class="required">Speaker added by</label>
-                                <input type="text" name="creator" <% out.print("value='" + user + "'"); %> />
+                                <input type="text" name="creator" id="tip4" <% out.print("value='" + user + "'"); %> />
+                                <br/><span id="error_creator" class="message_container">
+                                    <span>Please enter who added the speaker</span>
+                                </span>
                             </div>
                             <div class="form-group">
                                 <input type="checkbox" name="visible" value="true"/><label class="required checkbox inline">Make speaker visible to users?</label>
@@ -127,7 +139,7 @@
         <script src="js/libs/sniui.auto-inline-help.1.0.0.min.js" type="text/javascript"></script>
 
         <!--Additional Script-->
-        <script src="../../../js/themeentry.js"></script>
+        <script src="../../../js/speaker.js"></script>
         <script>$(function() {
                 $("input").autoinline();
             });</script>

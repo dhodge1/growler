@@ -130,6 +130,7 @@
                                                     <div class="actionMenu">
                                                         <a class="actionMenu-toggle" data-toggle="dropdown" href="#">Actions<b class="caret"></b></a>
                                                         <ul class="actionMenu-menu" role="menu">
+                                                            <li><a <% out.print("href='../../../private/employee/admin/assignspeaker.jsp?sessionId=" + speakers.get(i).getId() + "'");%>><i class="icon16-userAdd"></i>Assign</a></li>
                                                             <li><a <% out.print("href='../../../private/employee/admin/editspeaker.jsp?id=" + speakers.get(i).getId() + "'");%>><i class="icon16-approve"></i>Edit</a></li>
                                                             <li><a class="showModal3"><% out.print("<input type='hidden' name='delete' value='" + speakers.get(i).getId() + "' />");%>
                                                                     <% out.print("<div class='modalDelete' id='modaldelete" + speakers.get(i).getId() + "' title='Delete Confirmation'>");

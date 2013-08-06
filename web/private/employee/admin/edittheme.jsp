@@ -27,9 +27,8 @@
             int user = 0;
             if (null == session.getAttribute("id")) {
                 response.sendRedirect("../../../index.jsp");
-           // } else if (!session.getAttribute("role").equals("admin")) {
-           //     response.sendRedirect("../../../index.jsp");
-          //  }
+            } else if (!session.getAttribute("role").equals("admin")) {
+                response.sendRedirect("../../../index.jsp");
             }
             try {
                 user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
@@ -62,7 +61,7 @@
             <div class="row mediumBottomMargin">
                     <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Theme Details</span></h2>
             </div>
-            <div class="row">
+            <div class="row largeBottomMargin">
                 <form method="post" action="../../../action/processThemeEdit.jsp">
                     <div class="form-group">
                         <label class="required">Theme name</label>
@@ -76,9 +75,9 @@
                     <div class="form-group">
                         <label class="required">Theme category</label>
                         <select name="category">
-                            <option value="0"> Select a Category </option>
-                            <option value="Business" <% //if (theme.getType().equals("Business")) { out.print("selected"); } %>>Business</option>
-                            <option value="Technical" <% //if (theme.getType().equals("Technical")) { out.print("selected"); } %>>Technical</option>
+                            <option value="0"> Select a Type </option>
+                            <option value="Business" <% //if (theme.getType().equals("Business")) {                                out.print("selected"); } %>>Business</option>
+                            <option value="Technical" <% //if (theme.getType().equals("Technical")) {                                out.print("selected"); } %>>Technical</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -87,7 +86,7 @@
                     </div>
                     <div class="form-group">
                         <input type='checkbox' name='visible' <% if (theme.getVisible()) { out.print(" checked ");} %> />
-                        <label class="required">Make theme visible to users?</label>
+                        <label class="required checkbox inline">Make theme visible to users?</label>
                     </div>
                     <input type="submit" value="Submit" class="button button-primary"/>
                 </form>
@@ -95,31 +94,11 @@
         </div>
         <%@ include file="../../../includes/footer.jsp" %> 
         <%@ include file="../../../includes/scriptlist.jsp" %>
+        <script src="../../../js/themeentry.js"></script>
         <script>
                     $(function() {
                         $("input").autoinline();
                     });
-                    function validateValues() {
-                        var myname = document.getElementById("name");
-                        if (!myname.value) {
-                            alert('Please enter a Session Name');
-                            myname.focus();
-                            return false;
-                        }
-                        var mydate = document.getElementById("description");
-                        if (!mydate.value) {
-                            alert('Please enter a description');
-                            mydate.focus();
-                            return false;
-                        }
-                        var mylocation = document.getElementById("reason");
-                        if (!mylocation.value) {
-                            alert('Please enter a reason');
-                            mylocation.focus();
-                            return false;
-                        }
-                        return true;
-                    }
         </script>
     </body>
 </html>

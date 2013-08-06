@@ -80,7 +80,7 @@
                 <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Theme Details</span><a href="../../../private/employee/themeentry.jsp" class="pullRight button button-primary">Add Theme</a></h2>
             </div>
             <div class="row">
-                <form action="../../../action/admintheme.jsp" >
+                <form>
                     <input type='hidden' id='current_page' value="1" />
                     <input type='hidden' id='show_per_page' value='20' />
                     <input type='hidden' id='total' value='<%= themes.size()%>'/>

@@ -26,20 +26,14 @@
         int id = Integer.parseInt(request.getParameter("id"));
         String first_name = request.getParameter("first_name");
         String last_name = request.getParameter("last_name");
-        String type = request.getParameter("type");
+        String type = request.getParameter("category");
         String creator = request.getParameter("creator");
-        String visible;
         SpeakerPersistence sp = new SpeakerPersistence();
-        Speaker speaker = sp.getSpeakerByID(id);
-        try {
-            visible = request.getParameter("visible");
-            if (visible.equals("true")) {
-                speaker.setVisible(true);
-            }
-            else {
-                speaker.setVisible(false);
-            }
-        }catch (Exception e) {
+        Speaker speaker = new Speaker();
+        speaker.setId(id);
+        if (request.getParameter("visible") != null) {
+            speaker.setVisible(true);
+        } else {
             speaker.setVisible(false);
         }
         speaker.setFirstName(first_name);
