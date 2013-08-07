@@ -90,18 +90,19 @@
                                 </span>
                             </div>
                             <div class="form-group">
-                                <label class="required">What type of presentation is this?</label>
+                                <label class="required">What would be your preferred presentation type?</label>
                                 <select name="type" id="tip2" class="input-xlarge" data-content="Choose a type: Business or Technical">
-                                    <option value="null">Please Select a Type</option>
+                                    <option value="0">Please Select a Type</option>
                                     <option value="Business">Business</option>
                                     <option value="Technical">Technical</option>
-                                </select><i class='icon12-info' id='showTips' data-content="Business Theme - Any theme providing technical information in a non-technical way, appealing to both IT and non-IT users.<br/><br/>Technical Themes - Themes with a technical background providing mid to high level technical information, appealing to mainly IT users with technical backgrounds." title="Theme Types"></i>
+                                </select><i class='icon12-info' style="margin-left: 3px;" id='showTips' data-content="Business Presentations - Any presentation providing technical information in a non-technical way, appealing to both IT and non-IT users.<br/><br/>Technical Presentations - Presentations with a technical background providing mid to high level technical information, appealing to mainly IT users with technical backgrounds." title="Presentation Types"></i>
                                 <br/><span id="error_theme_type" class="message_container">
                                     <span>Please select a presentation theme type</span>
                                 </span>
                             </div>
                             <div class="form-group">
-                                <label>Why should this presentation be added to this years Techtoberfest?</label>
+                                <label>Any additional comments?</label>
+                                <p>Please let us know why this presentation should be added to this year's Tectoberfest.  Who do you think would be a good speaker for this presentation?</p>
                                 <textarea name="reason" data-content="Help us understand what this theme suggestion means to you" rows="5" cols="50" maxlength="250"></textarea>
                             </div>
                             <div class="form-actions">

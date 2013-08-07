@@ -105,7 +105,7 @@
                                 </span>
                             </div>
                             <div class="form-group">
-                                <label>What theme would best represent your presentation topic?</label>
+                                <label class="required">What theme would best represent your presentation topic?</label>
                                 <select name='theme' id='tip4' class='input x-large'>
                                     <option value='0'> Please select a theme </option>
                                     <% ThemePersistence tp = new ThemePersistence();
