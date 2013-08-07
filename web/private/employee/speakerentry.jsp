@@ -96,7 +96,7 @@
                                     <option value="null">Please Select a Type</option>
                                     <option value="Business">Business</option>
                                     <option value="Technical">Technical</option>
-                                </select>
+                                </select><i id="spkrtypeHelp" class="icon12-info" data-content="Business Speakers - Any speaker providing technical information in a non-technical way, appealing to both IT and non-IT users.<br/><br/>Technical Speakers - Speakers with a technical background providing mid to high level technical information, appealing to mainly IT users with technical backgrounds." title="Speaker Types"></i>
                                 <br/><span id="error_type" class="message_container">
                                     <span>Please select a speaker type</span>
                                 </span>
@@ -120,8 +120,14 @@
         <script src="../../js/libs/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
         <script src="http://growler-dev.elasticbeanstalk.com/js/libs/sniui.auto-inline-help.min.js" type="text/javascript"></script>
         <script src="http://growler-dev.elasticbeanstalk.com/js/libs/sniui.auto-inline-help.1.0.0.min.js" type="text/javascript"></script>
+        <script src="../../js/libs/sniui.user-inline-help.1.2.0.min.js" type="text/javascript"></script>
 
         <!--additional script-->
         <script src="../../js/speaker.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('#spkrtypeHelp').userInlineHelp();
+            });
+        </script>
     </body>
 </html>

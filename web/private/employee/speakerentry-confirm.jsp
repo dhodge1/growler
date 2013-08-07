@@ -30,6 +30,9 @@
                 color: red;
                 font-weight: bold;
             }
+            .firstlink {
+                margin-right: 12px;
+            }
         </style>
     </head>
     <body id="growler1">
@@ -61,6 +64,7 @@
             </div>
             <div style='margin-bottom:17px;'></div>
             <div class="row">
+                <a class='firstlink' href='../../private/employee/speakerentry.jsp'>Suggest another speaker</a>
                 <a href='../../private/employee/home.jsp'>Return to homepage</a>
             </div>
         </div>

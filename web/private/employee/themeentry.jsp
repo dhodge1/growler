@@ -95,7 +95,7 @@
                                     <option value="null">Please Select a Type</option>
                                     <option value="Business">Business</option>
                                     <option value="Technical">Technical</option>
-                                </select>
+                                </select><i class='icon12-info' id='showTips' data-content="Business Theme - Any theme providing technical information in a non-technical way, appealing to both IT and non-IT users.<br/><br/>Technical Themes - Themes with a technical background providing mid to high level technical information, appealing to mainly IT users with technical backgrounds." title="Theme Types"></i>
                                 <br/><span id="error_theme_type" class="message_container">
                                     <span>Please select a presentation theme type</span>
                                 </span>
@@ -118,10 +118,12 @@
         <script src="../../js/libs/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
         <script src="http://growler-dev.elasticbeanstalk.com/js/libs/sniui.auto-inline-help.min.js" type="text/javascript"></script>
         <script src="http://growler-dev.elasticbeanstalk.com/js/libs/sniui.auto-inline-help.1.0.0.min.js" type="text/javascript"></script>
+        <script src="../../js/libs/sniui.user-inline-help.1.2.0.min.js" type="text/javascript"></script>
         <!--Additional Script-->
         <script src="../../js/themeentry.js"></script>
         <script>$(function() {
                 $("input").autoinline();
+                $('#showTips').userInlineHelp();
             });</script>
     </body>
 </html>

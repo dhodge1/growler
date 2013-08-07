@@ -143,6 +143,32 @@ public class SpeakerPersistence extends GrowlerPersistence {
         }
         return null;
     }
+    
+    public Speaker getSpeakerByName(String first, String last) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select s.id, s.first_name, "
+                    + "s.last_name, s.suggested_by, s.visible, s.type, s.reason from speaker s "
+                    + "where s.first_name = ? and s.last_name = ?");
+            statement.setString(1, first);
+            statement.setString(2, last);
+            result = statement.executeQuery();
+            Speaker s = new Speaker();
+            if (result.next()) {
+                s.setId(result.getInt("id"));
+                s.setFirstName(result.getString("first_name"));
+                s.setLastName(result.getString("last_name"));
+                s.setSuggestedBy(result.getInt("suggested_by"));
+                s.setVisible(result.getBoolean("visible"));
+                s.setType(result.getString("type"));
+                s.setReason(result.getString("reason"));
+            }
+            closeJDBC();
+            return (s);
+        } catch (Exception e) {
+        }
+        return null;
+    }
 
     public Speaker getRanksByID(int id) {
         Speaker s = new Speaker();
@@ -166,32 +192,6 @@ public class SpeakerPersistence extends GrowlerPersistence {
         s.setCount2012(0);
         s.setRank2012(0);
         return s;
-    }
-
-    public Speaker getSpeakerByName(String first, String last) {
-        try {
-            initializeJDBC();
-            statement = connection.prepareStatement("select id, first_name,"
-                    + "last_name, suggested_by, visible, type, reason from speaker "
-                    + "where first_name = ? and last_name = ?");
-            statement.setString(1, first);
-            statement.setString(2, last);
-            result = statement.executeQuery();
-            Speaker s = new Speaker();
-            if (result.next()) {
-                s.setId(result.getInt("id"));
-                s.setFirstName(result.getString("first_name"));
-                s.setLastName(result.getString("last_name"));
-                s.setSuggestedBy(result.getInt("suggested_by"));
-                s.setVisible(result.getBoolean("visible"));
-                s.setType(result.getString("type"));
-                s.setReason(result.getString("reason"));
-            }
-            closeJDBC();
-            return (s);
-        } catch (Exception e) {
-        }
-        return null;
     }
 
     /**
