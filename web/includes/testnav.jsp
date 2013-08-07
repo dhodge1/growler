@@ -34,6 +34,7 @@
                     <ul class="child-menu child-menu-ul">
                         <li><a href="../../private/employee/speaker.jsp">Rank Preferred Speakers</a></li>
                         <li><a href="../../private/employee/speakerentry.jsp">Suggest a New Speaker</a></li>
+                        <li><a href="../../private/employee/nominate.jsp">Nominate Yourself As A Speaker</a></li>
                     </ul>
                 </li>
                 <% } //end if %>
@@ -41,7 +42,9 @@
                 <li class="brand_nav <%= sessionTab%>"><a href="#" style='padding-left:8px;'><span class="nav_drop">Sessions</span><em></em></a>
                     <ul class="child-menu child-menu-ul firstnav" style="left:11px;">
                         <li><a href="../../private/employee/sessionschedule.jsp">View Session Schedule</a></li>
+                        <% if (calendar.get(Calendar.MONTH) > 8) { //if it's after September %>
                         <li><a href="../../private/employee/surveys.jsp">Submit Session Feedback</a></li>
+                        <%  } %>
                     </ul>
                 </li>
                 <% } %>

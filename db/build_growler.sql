@@ -434,3 +434,16 @@ create table registration (
 	,reason				varchar(250)
 	,constraint pk_registration primary key (user_id, session_id)
 );
+
+/*
+ * A table for nominating yourself as speaker, with room for adding a topic
+ */
+
+create table nomination (
+id		int		auto_increment primary key
+,topic	varchar(60)
+,description	varchar(250)
+,duration	time
+,theme_id	int references theme(id)
+,speaker_id	int references speaker(id)
+);
