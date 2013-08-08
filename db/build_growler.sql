@@ -2,10 +2,6 @@ drop database if exists growler_db;
 create database growler_db;
 use growler_db;
 /*
-* Ensures the database uses Eastern time
-*/
-SET time_zone = 'America/New_York';
-/*
  * Creates the table for storing theme information
  */
 
@@ -14,7 +10,7 @@ DROP TABLE IF EXISTS theme;
 
 CREATE TABLE theme (
 	 id			int		PRIMARY KEY auto_increment
-	,name			varchar(30)
+	,name			varchar(60)
 	,description		varchar(250)
 	,creator		int		REFERENCES user(id)
 	,year			year(4)
@@ -125,7 +121,7 @@ CREATE TABLE session (
 	,session_date		date
 	,start_time		time
 	,duration		time
-	,location		int		REFERENCES location(id)
+	,location		varchar(10)		REFERENCES location(id)
 	,session_key	varchar(4) unique
 	);
 	
@@ -235,6 +231,10 @@ INSERT INTO theme VALUES (3, "Software Process/Lifecycle", "Waterfall, Agile, Sc
 INSERT INTO theme VALUES (4, "Mobility", "Topics related to mobile computing in the enterprise, including mobile apps, phones, tablets, and other devices", 202300, "2013", true, NULL, 'Technical');
 INSERT INTO theme VALUES (5, "Social and Collaboration", "Tools and Techniques that make the enterprise more social and allow people to better communicate and collaborate when they are not in the same room, floor, building, city, state, or country", 202300, "2013", true, NULL, 'Technical');
 INSERT INTO theme VALUES (6, "Show and Tell", "Show and Tell (Description)", 202300, "2013", true, NULL, 'Business');
+INSERT INTO theme VALUES (7, "Content Distribution", "", 202300, "2013", true, NULL, "Technical");
+INSERT INTO theme VALUES (8, "SNI Emerging Business & Technology", "", 202300, "2013", true, NULL, "Business");
+INSERT INTO theme VALUES (9, "Evolution of TV Experience", "", 202300, "2013", true, NULL, "Business");
+INSERT INTO theme VALUES (10, "", "", 202300, "2013", true, NULL, "Technical");
 
 /*
  * Inserts the speakers from 2012

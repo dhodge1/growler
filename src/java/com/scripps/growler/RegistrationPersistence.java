@@ -19,11 +19,10 @@ public class RegistrationPersistence extends GrowlerPersistence {
         try {
             initializeJDBC();
             statement = connection.prepareStatement("insert into registration "
-                    + "(user_id, session_id, curdate(), curtime(), reason) "
-                    + "values (?, ?, ?)");
+                    + "(user_id, session_id, date_registered, time_registered) "
+                    + "values (?, ?, curdate(), curtime())");
             statement.setInt(1, r.getUserId());
             statement.setInt(2, r.getSessionId());
-            statement.setString(3, r.getReason());
             statement.execute();
         } catch (Exception e) {
         } finally {
@@ -34,8 +33,7 @@ public class RegistrationPersistence extends GrowlerPersistence {
     public void deleteRegistration(Registration r) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("delete from registration"
-                    + " where user_id = ? and session_id = ?");
+            statement = connection.prepareStatement("delete from registration where user_id = ? and session_id = ?");
             statement.setInt(1, r.getUserId());
             statement.setInt(2, r.getSessionId());
             statement.execute();
@@ -219,5 +217,28 @@ public class RegistrationPersistence extends GrowlerPersistence {
             closeJDBC();
         }
         return null;
+    }
+    
+    public boolean isUserRegisteredForSession(int session, int user) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select count(user_id) from registration where user_id = ? and session_id = ?");
+            statement.setInt(1, user);
+            statement.setInt(2, session);
+            result = statement.executeQuery();
+            while (result.next()){
+                if (result.getInt(1) == 0) {
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
+        } catch(Exception e) {
+            
+        } finally {
+            closeJDBC();
+        }
+        return false;
     }
 }

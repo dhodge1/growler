@@ -81,7 +81,7 @@
                         <fieldset>
                             <div class="form-group">
                                 <label class="required">Presentation topic</label>
-                                <input required="required" name="topic" class="input-xlarge" type="text" id="tip" data-content="Please enter no more than 60 characters" maxlength="30"/>
+                                <input required="required" name="topic" class="input-xlarge" type="text" id="tip" data-content="Please enter no more than 60 characters" maxlength="60"/>
                                 <br/><span id="error_topic" class="message_container">
                                     <span>Please enter a presentation topic</span>
                                 </span>

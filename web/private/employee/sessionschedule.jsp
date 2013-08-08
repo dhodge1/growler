@@ -48,12 +48,12 @@
             h1 {
                 font-weight: normal;
             }
-            .showModal {
+            .showModal, .like, .unlike  {
                 color:#0067b1;
                 text-decoration: underline;
                 cursor: pointer;
             }
-            .pager li {
+            .pager li{
                 cursor: pointer;
             }
             .no-close .ui-dialog-titlebar-close {
@@ -81,6 +81,10 @@
             } catch (Exception e) {
             }
             SessionPersistence sp = new SessionPersistence();
+            RegistrationPersistence rp = new RegistrationPersistence();
+
+            LocationPersistence lp = new LocationPersistence();
+            ArrayList<Session> sessions = sp.getThisYearSessions(year, " order by session_date, start_time, name ");
         %>
         <%@ include file="../../includes/header.jsp" %> 
         <%@ include file="../../includes/testnav.jsp" %>
@@ -97,20 +101,15 @@
             </div>
             <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
             <div class="row largeBottomMargin">
-                <span>Below is the latest session schedule for this years Techtoberfest event.  
-                    <% Calendar today = Calendar.getInstance();
-                        if (today.get(Calendar.MONTH) != 9) { //if it's not October %>
-                    <strong>Think you may be interested in attending a session?</strong>  <a href="../../private/employee/sessioninterest.jsp">Let us know which ones.</a>
-                    <%  } //end if %>
-                </span>
+                <span>Below is the latest session schedule for this years Techtoberfest event.</span>
             </div>
             <div class="row mediumBottomMargin">
-                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Schedule Details</span><span class="pullRight"><a href='#'>View as PDF</a></span></h2>
+                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Schedule Details</span><span class="pullRight"><a href='#'>View as PDF</a><a href="#" style="padding-left: 6px;">Email PDF Schedule</a></span></h2>
             </div>
             <div class="row largeBottomMargin">
                 <input type='hidden' id='current_page' value="1" />
                 <input type='hidden' id='show_per_page' value='15' />
-                <input type='hidden' id='total' value='<%= sp.getThisYearSessionCount(year)%>'/>
+                <input type='hidden' id='total' value='<%= sessions.size()%>'/>
                 <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder" id="sessionTable">
                     <thead>
                         <tr>
@@ -121,14 +120,11 @@
                             <th>Speaker(s)</th>
                             <th>Session Duration</th>
                             <th>Location</th>
-                            <th>Capacity</th>
+                            <th>Like Session?</th>
                         </tr>
                     </thead>
                     <tbody id='tablebody'>
                         <%
-
-                            LocationPersistence lp = new LocationPersistence();
-                            ArrayList<Session> sessions = sp.getThisYearSessions(year, " order by session_date, start_time, name ");
                             for (int i = 0; i < sessions.size(); i++) {
                                 out.print("<tr id='row" + (i + 1) + "'>");
                                 out.print("<td>");
@@ -170,7 +166,14 @@
                                 out.print(lp.getLocationById(sessions.get(i).getLocation()).getDescription() + "<br/>" + lp.getLocationById(sessions.get(i).getLocation()).getBuilding());
                                 out.print("</td>");
                                 out.print("<td>");
-                                out.print(lp.getLocationById(sessions.get(i).getLocation()).getCapacity());
+                                if (rp.isUserRegistered(user, sessions.get(i).getId())) {
+                                    out.print("<div class='unlike' id='unlike" + sessions.get(i).getId() + "'><a>Undo</a></div>");
+                                    out.print("<div style='display:none' class='like' id='like" + sessions.get(i).getId() + "'><a><i class='icon16-approve' style='margin-right: 3px;'></i>Like</a></div>");
+                                } else {
+                                    out.print("<div style='display:none' class='unlike' id='unlike" + sessions.get(i).getId() + "'><a>Undo</a></div>");
+                                    out.print("<div class='like' id='like" + sessions.get(i).getId() + "'><a><i class='icon16-approve' style='margin-right: 3px;'></i>Like</a></div>");
+                                }
+
                                 out.print("</td>");
                                 out.print("</tr>");
                             }
@@ -206,6 +209,28 @@
         <script src="../../js/libs/sniui.dialog.1.2.0.js"></script>
         <script src="../../js/pagination.js"></script>
         <script>
+
+                            $(".like").click(function() {
+                                var session = this.id;
+                                console.log(session);
+                                session = session.substring(4);
+                                console.log(session);
+                                $.post("../../action/likeSession.jsp", {sid: session}, function(data, success) {
+                                    $("#like" + session).hide();
+                                    $("#unlike" + session).show();
+                                });
+                            });
+
+                            $(".unlike").click(function() {
+                                var session = this.id;
+                                console.log(session);
+                                session = session.substring(6);
+                                console.log(session);
+                                $.post("../../action/unlikeSession.jsp", {sid: session}, function(data, success) {
+                                    $("#unlike" + session).hide();
+                                    $("#like" + session).show();
+                                });
+                            });
                             $(document).ready(function() {
                                 var page = 1;
                                 $("#current_page").val(page);
@@ -232,6 +257,7 @@
                                     var speaker = $(this).children().val();
                                     $("#modalspk" + speaker).dialog("open");
                                 });
+
 
                             });
         </script>

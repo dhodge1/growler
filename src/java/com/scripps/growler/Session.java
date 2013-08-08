@@ -47,6 +47,8 @@ public class Session {
      */
     private String key;
     
+    private int userRegistered;
+    
     private boolean survey;
 
     public Session() {
@@ -211,6 +213,15 @@ public class Session {
     public void setSurvey(boolean survey) {
         this.survey = survey;
     }
+
+    public int getUserRegistered() {
+        return userRegistered;
+    }
+
+    public void setUserRegistered(int userRegistered) {
+        this.userRegistered = userRegistered;
+    }
+    
     
     
 }

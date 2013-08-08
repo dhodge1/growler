@@ -1,0 +1,25 @@
+id,description,capacity,building
+A203,"Board Room",16,KXTC
+A205,"2B Conf Room",6,KXTC
+A314,"3F Conference Room",8,KXTC
+B262,"2C Conf Room",10,KXTC
+B359,"3E Conf Room",10,KXTC
+B365,"3C Conf Room",6,KXTC
+B367,"3D Conf Room",8,KXTC
+C281,Cinetel,12,KXTC
+C379,"3A Conf Room",10,KXTC
+D304,"KXTech Training Room",50,KXTC
+D310,"KXTech Training Room Kitchen",52,KXTC
+E119,"E1-White Conf Rm",10,KXOFFICE
+E130,"KXOffice Training Center",28,KXOFFICE
+E246,"E2-Green Conf Rm",10,KXOFFICE
+E345,"E3-Red Conf Rm",10,KXOFFICE
+E346,"E3-Orange Conf Rm",10,KXOFFICE
+E428,"E4-Blue Conf Rm",10,KXOFFICE
+SCRUM2,"Scrum 2",5,KXTC
+sdfdsf,sdfsdf,4,KXTC
+TBD,"To Be Determined",1,TBD
+W153,"W1-Green Conf Rm",8,KXOFFICE
+W268,"W2-Orange Conf Rm",12,KXOFFICE
+W269,"W2-Red Conf Rm",8,KXOFFICE
+W369,"W3-Green Conf Rm",8,KXOFFICE

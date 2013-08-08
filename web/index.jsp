@@ -28,7 +28,7 @@
                     session.setAttribute("id", u.getCorporateId());
                     if (u.getRole().equals("admin")) {
                         session.setAttribute("role", "admin");
-                        //response.sendRedirect("http://snit.scrippsnetworks.com/private/employee/admin/home.jsp");
+                        //response.sendRedirect("http://sni-techtoberfest.scrippsnetworks.com/private/employee/admin/home.jsp");
                     }
                 } else if (!id.equals(null) || !id.equals("null")) {
                     newUser.setId(Integer.parseInt(id));
@@ -98,12 +98,12 @@
                 <p id="error_global" class="message_container feedbackMessage-error">
                     <span style="color: #000">An Employee ID and Password are required.</span>
                 </p>
-                <!--<form action="action/login.jsp" method="post" id="form">-->
-                <form action="https://sniforms-qa.scrippsnetworks.com/siteminderagent/portal/login.fcc" method="post" id="form"><!---->
+                <form action="action/login.jsp" method="post" id="form">
+                <!--<form action="https://sniforms-qa.scrippsnetworks.com/siteminderagent/portal/login.fcc" method="post" id="form"><!---->
                     <div class="form-group">
                         <label>Employee ID</label>
                         <input type="text" name="USER" id="tip" data-content="Enter your Employee ID"/><br/>
-                        <input type="hidden" value="http://snit.scrippsnetworks.com/private/employee/home.jsp" name="target" id="smtarget">
+                        <input type="hidden" value="http://sni-techtoberfest.scrippsnetworks.com/private/employee/home.jsp" name="target" id="smtarget">
                         <input type="hidden" value=0 name=smauthreason>
                         <input type="hidden" name="SMAGENTNAME" value='-SM-qqTTNRp8HuVz4vfjuz8PpwRSGfFdF8v5ee9waRpRop7zciV2VtF46AXySxgHy%2bZO' />
                         <span id="error_userid" class="message_container">
