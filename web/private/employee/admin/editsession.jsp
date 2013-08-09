@@ -25,7 +25,7 @@
         <script>
             $(function() {
                 $("#datepicker").datepicker({
-                    dateFormat: 'yyyy-mm-dd',
+                    dateFormat: 'yy-mm-dd',
                     minDate: new Date(2013, 9, 1),
                     maxDate: new Date(2013, 9, 31)
                 });

@@ -1,23 +1,5 @@
 $("#send").click(function(event) {
-    var sessionId = $("#sessionId");
-    $.ajax(
-            {url: "../../../action/checkSession.jsp",
-                data: {id: sessionId},
-                type: "POST",
-                success: function(data) {
-                    $('#modalWarning').html(data);
-                    $('#modalWarning').dialog({
-                        autoOpen: true,
-                        dialogClass: "no-close",
-                        buttons: {
-                            Ok: function() {
-                                $(this).dialog("close");
-                            }
-                        }
-                    });
-                },
-                error: errorFunction
-            });
+    
     $("#tip").css("border", "1px solid #CCC");
     $("#tip2").css("border", "1px solid #CCC");
     $("#tip3").css("border", "1px solid #CCC");

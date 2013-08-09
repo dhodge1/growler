@@ -265,7 +265,7 @@
                                                     session = session.substring(11);
                                                     $.post("../../../action/removeSession.jsp", {id: session}, function(data, success) {
                                                     });
-                                                    $("#rowfor" + session).parent().parent().remove();
+                                                    $("#rowfor" + session).remove();
                                                     $(this).dialog('close');
                                                 },
                                                 text: 'Yes'
