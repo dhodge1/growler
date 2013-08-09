@@ -104,7 +104,7 @@
                 <span>Below is the latest session schedule for this years Techtoberfest event.</span>
             </div>
             <div class="row mediumBottomMargin">
-                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Schedule Details</span><span class="pullRight"><a href='#'>View as PDF</a><a href="#" style="padding-left: 6px;">Email PDF Schedule</a></span></h2>
+                <h2 class="bordered nowrap"><img style="padding-bottom:0;padding-left:0;" class="nowrap" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan nowrap">Schedule Details</span><span class="pullRight nowrap"><a href='#'>View as PDF</a><a href="#" style="padding-left: 6px;">Email PDF Schedule</a></span></h2>
             </div>
             <div class="row largeBottomMargin">
                 <input type='hidden' id='current_page' value="1" />
