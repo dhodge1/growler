@@ -79,6 +79,7 @@
             <div class="row largeBottomMargin">
                 <h1 style="margin-top:0px;font-weight: normal;">Welcome to the Tecthoberfest Information System!</h1>
             </div>
+            <div class="row largeBottomMargin"></div>
             <div class="row mediumBottomMargin">
                 <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Admin Details</span></h2>
             </div>
@@ -95,7 +96,7 @@
                 <h3>Rooms Menu</h3>
                 <p>This section allows you to manage room assignments for each session.</p>
 
-                <h3>Reports menu</h3>
+                <h3>Reports Menu</h3>
                 <p>This section allows you to view real-time Techtoberfest reports.</p>
             </div>
         </div>

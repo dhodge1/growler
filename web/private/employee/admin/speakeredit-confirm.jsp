@@ -29,6 +29,9 @@
                 color: red;
                 font-weight: bold;
             }
+            .firstlink {
+                margin-right: 12px;
+            }
         </style>
     </head>
     <body id="growler1">
@@ -62,7 +65,7 @@
                 <span><% out.print((String)session.getAttribute("speaker")); %></span>
             </div>
             <div class="row">
-                <a href='../../../private/employee/admin/speaker.jsp'>Return to manage speakers</a>
+                <a class="firstlink" href='../../../private/employee/admin/speaker.jsp'>Return to manage speakers</a>
                 <a href='../../../private/employee/admin/speakerentry.jsp'>Add another speaker</a>
             </div>
         </div>

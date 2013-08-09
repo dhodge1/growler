@@ -29,6 +29,9 @@
                 color: red;
                 font-weight: bold;
             }
+            .firstlink {
+                margin-right: 12px;
+            }
         </style>
     </head>
     <body id="growler1">
@@ -59,7 +62,7 @@
                 <span><% out.print((String)session.getAttribute("theme")); %></span>
             </div>
             <div class="row">
-                <a href='../../../private/employee/admin/theme.jsp'>Return to manage themes</a>
+                <a class="firstlink" href='../../../private/employee/admin/theme.jsp'>Return to manage themes</a>
                 <a href='../../../private/employee/admin/themeentry.jsp'>Add another theme</a>
             </div>
         </div>

@@ -77,7 +77,7 @@
                 <h1 style="margin-top:0px;font-weight: normal;">Edit A Room</h1>
             </div>
             <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
-            <div class="row mediumBottomMargin">
+            <div class="row largeBottomMargin">
                 <h3>Please use form below to edit room details.</h3>
             </div>
             <div class="row mediumBottomMargin">
