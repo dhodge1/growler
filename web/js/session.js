@@ -1,4 +1,23 @@
 $("#send").click(function(event) {
+    var sessionId = $("#sessionId");
+    $.ajax(
+            {url: "../../../action/checkSession.jsp",
+                data: {id: sessionId},
+                type: "POST",
+                success: function(data) {
+                    $('#modalWarning').html(data);
+                    $('#modalWarning').dialog({
+                        autoOpen: true,
+                        dialogClass: "no-close",
+                        buttons: {
+                            Ok: function() {
+                                $(this).dialog("close");
+                            }
+                        }
+                    });
+                },
+                error: errorFunction
+            });
     $("#tip").css("border", "1px solid #CCC");
     $("#tip2").css("border", "1px solid #CCC");
     $("#tip3").css("border", "1px solid #CCC");
@@ -24,10 +43,15 @@ $("#send").click(function(event) {
         $("#error_description").show();
         event.preventDefault();
     }
-    if (str3 === null){
+    if (str3 === null) {
         $("#datepicker").css("border", "1px solid red");
         $("#error_date").show();
         event.preventDefault();
     }
 });
+function successFunction(data) {
 
+}
+function errorFunction() {
+
+}

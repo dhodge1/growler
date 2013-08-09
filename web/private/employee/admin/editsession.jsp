@@ -17,7 +17,20 @@
         <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
         <script src="http://growler-dev.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+        <script src="http://growler-dev.elasticbeanstalk.com/js/libs/sniui.dialog.1.2.0.js"></script>
+        <script src="../../../js/session.js"></script>
+        <script>
+            $(function() {
+                $("#datepicker").datepicker({
+                    dateFormat: 'yyyy-mm-dd',
+                    minDate: new Date(2013, 9, 1),
+                    maxDate: new Date(2013, 9, 31)
+                });
+            });
+        </script>
         <title>Edit Session</title>
         <style>
             .message_container {
@@ -27,6 +40,12 @@
             }
             h3 {
                 font-weight:normal;
+            }
+            .modals{
+                display:none;
+            }
+            .no-close .ui-dialog-titlebar-close {
+                display: none;
             }
         </style>
     </head>
@@ -77,7 +96,7 @@
             <div class="row largeBottomMargin">
                 <form method="post" action="../../../action/processSessionEdit.jsp">
                     <div class="form-group">
-                        <input name="id" type="hidden" value="<% out.print(s.getId());%>" />
+                        <input name="id" id="sessionId" type="hidden" value="<% out.print(s.getId());%>" />
                         <label class="required">Session Name</label>
                         <input required="required" name="name" class="input-xlarge" type="text" id="tip" data-content="Please enter no more than 30 characters" maxlength="30" <% out.print("value='" + s.getName() + "'");%> />
                         <br/><span id="error_name" class="message_container">
@@ -92,14 +111,18 @@
                         </span>
                     </div>
                     <div class="form-group">
-                        <label class="required">Speaker speaker</label>
+                        <label class="required">Session speaker</label>
                         <select name="speaker" id="tip3">
                             <option value="0"> No Speaker Available </option>
-                            <% for (int i = 0; i < speakers.size(); i++){
-                                out.print("<option value ='" + speakers.get(i).getId() + "'>");
-                                out.print(speakers.get(i).getFullName());
-                                out.print("</option>");
-                            }
+                            <% for (int i = 0; i < speakers.size(); i++) {
+                                    out.print("<option value ='" + speakers.get(i).getId() + "'");
+                                    if (sp.isSpeakerInSession(speakers.get(i).getId(), s.getId())){
+                                        out.print(" selected ");
+                                    }
+                                    out.print(">");
+                                    out.print(speakers.get(i).getFullName());
+                                    out.print("</option>");
+                                }
                             %>
                         </select>
                         <br/><span id="error_speaker" class="message_container">
@@ -108,7 +131,7 @@
                     </div>
                     <div class="form-group">
                         <label class="required">Select a session date</label>
-                        <input name="date" id="datepicker" type="text" data-content="Enter a date for the Session"/>
+                        <input name="date" id="datepicker" type="text"/>
                         <br/><span id="error_date" class="message_container">
                             <span>Please enter a date</span>
                         </span>
@@ -116,18 +139,38 @@
                     <div class="form-group" style="margin-bottom: 24px;">
                         <label class="required">Select a session time range</label>
                         <select id="time" name="time">
-                                <option value="00:00:00"> - No Time - </option>
-                                <option value="08:00:00">8:00 AM - 9:00 AM</option>
-                                <option value="09:00:00">9:00 AM - 10:00 AM</option>
-                                <option value="10:00:00">10:00 AM - 11:00 AM</option>
-                                <option value="11:00:00">11:00 AM - 12:00 PM</option>
-                                <option value="12:00:00">12:00 PM - 01:00 PM</option>
-                                <option value="13:00:00">1:00 PM - 2:00 PM</option>
-                                <option value="14:00:00">2:00 PM - 3:00 PM</option>
-                                <option value="15:00:00">3:00 PM - 4:00 PM</option>
-                                <option value="16:00:00">4:00 PM - 5:00 PM</option>
-                                <option value="17:00:00">5:00 PM - 6:00 PM</option>
-                            </select>
+                            <option value="00:00:00"> - No Time - </option>
+                                    <option value="08:00:00"  <% if (String.valueOf(s.getStartTime()).equals("08:00:00")) {
+                                    out.print("selected");
+                                }%>>8:00 AM - 9:00 AM</option>
+                                    <option value="09:00:00"  <% if (String.valueOf(s.getStartTime()).equals("09:00:00")) {
+                                    out.print("selected");
+                                }%>>9:00 AM - 10:00 AM</option>
+                                    <option value="10:00:00"  <% if (String.valueOf(s.getStartTime()).equals("10:00:00")) {
+                                    out.print("selected");
+                                }%>>10:00 AM - 11:00 AM</option>
+                                    <option value="11:00:00"  <% if (String.valueOf(s.getStartTime()).equals("11:00:00")) {
+                                    out.print("selected");
+                                }%>>11:00 AM - 12:00 PM</option>
+                                    <option value="12:00:00"  <% if (String.valueOf(s.getStartTime()).equals("12:00:00")) {
+                                    out.print("selected");
+                                }%>>12:00 PM - 01:00 PM</option>
+                                    <option value="13:00:00"  <% if (String.valueOf(s.getStartTime()).equals("13:00:00")) {
+                                    out.print("selected");
+                                }%>>1:00 PM - 2:00 PM</option>
+                                    <option value="14:00:00"  <% if (String.valueOf(s.getStartTime()).equals("14:00:00")) {
+                                    out.print("selected");
+                                }%>>2:00 PM - 3:00 PM</option>
+                                    <option value="15:00:00"  <% if (String.valueOf(s.getStartTime()).equals("15:00:00")) {
+                                    out.print("selected");
+                                }%>>3:00 PM - 4:00 PM</option>
+                                    <option value="16:00:00"  <% if (String.valueOf(s.getStartTime()).equals("16:00:00")) {
+                                    out.print("selected");
+                                }%>>4:00 PM - 5:00 PM</option>
+                                    <option value="17:00:00"  <% if (String.valueOf(s.getStartTime()).equals("17:00:00")) {
+                                    out.print("selected");
+                                }%>>5:00 PM - 6:00 PM</option>
+                        </select>
                         <br/><span id="error_time" class="message_container">
                             <span>Please enter a time range</span>
                         </span>
@@ -139,17 +182,7 @@
                 </form>
             </div>
         </div>
+                        <div id="modalWarning" title="Duplicate Session Alert" class="modals"></div>
         <%@ include file="../../../includes/footer.jsp" %> 
-        <script src="../../../js/libs/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
-        <%@ include file="../../../includes/scriptlist.jsp" %>
-        <script src="../../../js/session.js"></script>
-        <script>
-            $(function() {
-                $("input").autoinline();
-                $("#datepicker").datepicker({minDate: new Date(2013, 10 - 1, 1), maxDate: new Date(2013, 10 - 1, 31)}).change(function() {
-                    $("#datepicker").datepicker("option", "dateFormat", "yy-mm-dd");
-                });
-            });
-        </script>
     </body>
 </html>

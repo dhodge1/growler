@@ -477,4 +477,23 @@ public class SpeakerPersistence extends GrowlerPersistence {
         }
         return 0;
     }
+    
+    public boolean isSpeakerInSession(int speaker, int session){
+        try {
+            statement = connection.prepareStatement("select count(speaker_id) from speaker_team where speaker_id = ? and session_id = ?");
+            statement.setInt(1, speaker);
+            statement.setInt(2, session);
+            result = statement.executeQuery();
+            while (result.next()){
+                if (result.getInt(1) != 0) {
+                    return true;
+                }
+            }
+        } catch (Exception e){
+            
+        } finally {
+            
+        }
+        return false;
+    }
 }

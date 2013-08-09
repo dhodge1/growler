@@ -754,4 +754,56 @@ public class SessionPersistence extends GrowlerPersistence {
             closeJDBC();
         }
     }
+    
+    public boolean validateSlotNoLocation(int id){
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select count(id), name, start_time, addtime(start_time, duration), session_date, location from session where addtime(start_time, duration) >= (select start_time from session where id = ?) and session_date = (select session_date from session where id = ?) and start_time <= (select addtime(start_time, duration) from session where id = ?)");
+            statement.setInt(1, id);
+            statement.setInt(2, id);
+            statement.setInt(3, id);
+            result = statement.executeQuery();
+            while (result.next()) {
+                if (result.getInt(1) > 1) {
+                    return false;
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            closeJDBC();
+        }
+        return true;
+    }
+    
+    public ArrayList<Session> getSessionsByDateAndTime(java.sql.Date date, java.sql.Time time) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select id, name, description, "
+                    + "session_date, start_time, duration, location, track from session "
+                    + "where session_date = ? and start_time = ? ?");
+            statement.setDate(1, date);
+            statement.setTime(2, time);            
+            result = statement.executeQuery();
+            while (result.next()) {
+                //Create a new Session and add all data about the session to it
+                Session s = new Session();
+                s.setId(result.getInt("id"));
+                s.setName(result.getString("name"));
+                s.setDescription(result.getString("description"));
+                s.setSessionDate(result.getDate("session_date"));
+                s.setStartTime(result.getTime("start_time"));
+                s.setLocation(result.getString("location"));
+                s.setTrack(result.getString("track"));
+                s.setDuration(result.getTime("duration"));
+                //Add the session to the list
+                sessions.add(s);
+            }
+            closeJDBC();
+        } catch (Exception e) {
+        }
+        finally {
+            closeJDBC();
+        }
+        return new ArrayList<Session>();
+    }
 }

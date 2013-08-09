@@ -41,4 +41,3 @@
     sp.assignSpeaker(speaker, id);
     response.sendRedirect("../private/employee/admin/session.jsp");
 %>
-</html>
