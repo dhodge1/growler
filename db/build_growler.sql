@@ -4,10 +4,7 @@ use growler_db;
 /*
  * Creates the table for storing theme information
  */
-
-/*dropping tables before we create them*/
 DROP TABLE IF EXISTS theme; 
-
 CREATE TABLE theme (
 	 id			int		PRIMARY KEY auto_increment
 	,name			varchar(60)
@@ -219,12 +216,16 @@ CREATE TABLE speaker_team (
 
 /*
  * Inserts the default user.  This user is typically associated with last year's data.
+ * Note: with SSO enabled, these users are unusable.  The ROLES table gives people admin role.
+ * There is no "user" role -- the system only looks for the role of "admin" and nothing else.
  */
 insert into user values (202300, "Default User", sha1('password'), NULL, NULL);
 insert into user values (808300, "Administrator", sha1('password'), NULL, NULL);
 
 
-/*Theme inserts*/
+/*Theme inserts
+remember: id, name, description, creator, year, visible, reason, type are the values
+*/
 INSERT INTO theme VALUES (1, "Cloud Computing", "All things Cloud, from IaaS, PaaS, DaaS, SaaS, to hosting providers, brokers, and cloud-enabling appliances", 202300, "2013", true, NULL, 'Technical');
 INSERT INTO theme VALUES (2, "Development Frameworks", "Any type of development framework, regardless of language", 202300, "2013", true, NULL, 'Technical');
 INSERT INTO theme VALUES (3, "Software Process/Lifecycle", "Waterfall, Agile, Scrum, Kanban, process improvements, new techniques", 202300, "2013", true, NULL, 'Technical');
@@ -234,7 +235,7 @@ INSERT INTO theme VALUES (6, "Show and Tell", "Show and Tell (Description)", 202
 INSERT INTO theme VALUES (7, "Content Distribution", "", 202300, "2013", true, NULL, "Technical");
 INSERT INTO theme VALUES (8, "SNI Emerging Business & Technology", "", 202300, "2013", true, NULL, "Business");
 INSERT INTO theme VALUES (9, "Evolution of TV Experience", "", 202300, "2013", true, NULL, "Business");
-INSERT INTO theme VALUES (10, "", "", 202300, "2013", true, NULL, "Technical");
+INSERT INTO theme VALUES (10, "Fueling Audience Engagement with Technology", "", 202300, "2013", true, NULL, "Technical");
 
 /*
  * Inserts the speakers from 2012
@@ -288,10 +289,8 @@ insert into speaker (id, first_name, last_name, suggested_by, visible, type) val
 insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (47,"Allen", "Shacklock", 202300, TRUE, "Technical");
 
 /*
- * Loads a raw data file of session data from last year
- * into the sessions table so we can analyze last year's data
- * Session has the following fields: ID,Topic,Summary,Track,Date,Time,Duration,Location
- * Without the LOCAL, access may be denied to your statement.
+ * Loads sessions into the session table from 2012.
+ * Not 100% necessary, but pretty neat for historical purposes.
  */
 INSERT INTO `growler_db`.`session` (`id`, `name`, `description`, `track`, `session_date`, `start_time`, `duration`, `location`, `session_key`) VALUES ('1', 'Leveraging Technology for Better Deployment Collaboration', 'The ServiceNow team is planning to implement new features that provide improvements in communication,collaboration and knowledge retention around and during deployments.', 'Business Friendly', '2012-10-17', '13:00:00', '0:25:00', '1', '356a');
 INSERT INTO `growler_db`.`session` (`id`, `name`, `description`, `track`, `session_date`, `start_time`, `duration`, `location`, `session_key`) VALUES ('2', 'Cheap and Free Test Tools', 'This presentation will provide an overview and demonstration of open source or inexpensive tools for test design,test management,defect tracking,test data creation,test automation,test evaluation and web-based load testing.', 'Technical', '2012-10-17', '13:30:00', '0:25:00', '1', '5a3b');
@@ -360,7 +359,7 @@ insert into speaker_team values (7 , 5);
 insert into speaker_team values (7 , 6);
 insert into speaker_team values (7 , 7);
 insert into speaker_team values (10 , 19);
-insert into speaker_team values (8 , 2);
+/*insert into speaker_team values (8 , 2); JEFFEREY ALLEN IS NO LONG WITH SNI*/
 insert into speaker_team values (30 , 20);
 insert into speaker_team values (30 , 21);
 insert into speaker_team values (1 , 8);
@@ -407,6 +406,9 @@ insert into speaker_team values (33 , 43);
 /* 
  * This file creates the table based on last year's data
  * which can be modified by the administrator later 
+ * NOTE: As of the new changes, this table is irrelevant.  We won't be changing the previous year
+ * ranks anymore.  I'm leaving it in until I go through and ensure all code that tries to access this table
+ * has been removed.
  */
 DROP TABLE IF EXISTS ranks_2012;
 CREATE TABLE ranks_2012 (
@@ -447,3 +449,112 @@ id		int		auto_increment primary key
 ,theme_id	int references theme(id)
 ,speaker_id	int references speaker(id)
 );
+
+/*
+ * Locations pulled straight from the Scripps Locator App.  I'm sure not all of these are needed, but they're there just in case.
+ */
+
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('C379', '3A Conf Room', 'KXTC', 10);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('C298', '2A Conf Room', 'KXTC', 10);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('C281', 'Cinetel', 'KXTC', 12);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('A203', 'Board Room', 'KXTC', 16);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('D202', 'LA Conf Room A', 'LA', 12);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('342', 'Hudson Room', 'CHELSEA', 10);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('393', 'Broadway Room', 'CHELSEA', 8);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('3100', '3rd Floor Boardroom', 'CHELSEA', 20);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('394', 'Greenwich Room', 'CHELSEA', 8);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('234', 'Soho Room', 'CHELSEA', 10);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('424', 'Australia Conf Rm', 'TRAVEL', 16);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('308', 'GAC Board Rm', 'GAC', 16);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('1214', 'Stuyvesant Room', '1180', 14);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('E119', 'E1-White Conf Rm', 'KXOFFICE', 10);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('911', 'Flat Iron Conf Rm', '1180', 10);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('B365', '3C Conf Room', 'KXTC', 6);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('B367', '3D Conf Room', 'KXTC', 8);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('B359', '3E Conf Room', 'KXTC', 10);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('200', 'Gramercy Room', 'CHELSEA', 8);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('309', 'GAC Small Conf Rm', 'GAC', 8);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('318', 'GAC Third Floor Conf Rm', 'GAC', 6);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('209', 'GAC Break/Conf Rm', 'GAC', 12);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('B213', 'LA Conf Room B', 'LA', 6);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('A314', '3F Conference Room', 'KXTC', 8);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('A205', '2B Conf Room', 'KXTC', 6);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('1411', 'Tudor City Room', '1180', 10);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('280', 'Tribeca Room', 'CHELSEA', 8);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('208', 'GAC Break Room', 'GAC', 6);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('1514', 'West Village Conf Rm', '1180', 28);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('E130', 'KXOffice Training Center', 'KXOFFICE', 28);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('W153', 'W1-Green Conf Rm', 'KXOFFICE', 8);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('E246', 'E2-Green Conf Rm', 'KXOFFICE', 10);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('E245', 'E2-Blue Conf Rm', 'KXOFFICE', 10);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('W268', 'W2-Orange Conf Rm', 'KXOFFICE', 12);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('E345', 'E3-Red Conf Rm', 'KXOFFICE', 10);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('D310', 'KXTech Training Room Kitchen', 'KXTC', 52);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('W369', 'W3-Green Conf Rm', 'KXOFFICE', 8);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('W269', 'W2-Red Conf Rm', 'KXOFFICE', 8);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('E346', 'E3-Orange Conf Rm', 'KXOFFICE', 10);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('E428', 'E4-Blue Conf Rm', 'KXOFFICE', 10);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('D112', '1A Conf Room', 'KXTC', 12);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('B262', '2C Conf Room', 'KXTC', 10);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('511', 'South America Conf Rm', 'TRAVEL', 25);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('512', 'North America Conf Rm', 'TRAVEL', 25);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('513', 'Africa Conf Rm', 'TRAVEL', 12);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('515', 'Asia Conf Rm', 'TRAVEL', 12);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('1225', 'Yorkville Room', '1180', 10);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('509', 'Europe Conf Rm', 'TRAVEL', 16);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('D304', 'KXTech Training Room', 'KXTC', 50);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('922', 'Sutton Place Conf Rm', '1180', 6);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('1547', 'Murray Hill Room', '1180', 8);
+INSERT INTO location (id, description, building, capacity) 
+	VALUES ('1842', 'Board Room', 'SNI', 0);

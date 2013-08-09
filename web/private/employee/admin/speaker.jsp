@@ -60,6 +60,12 @@
             .pager li {
                 cursor: pointer;
             }
+            .deleteModalLink {
+                margin-left: 6px;
+                color:#0067b1;
+                text-decoration: underline;
+                cursor: pointer;
+            }
         </style>
     </head>
     <body id="growler1">
@@ -142,10 +148,10 @@
                                                         <a class="actionMenu-toggle" data-toggle="dropdown" href="#">Actions<b class="caret"></b></a>
                                                         <ul class="actionMenu-menu" role="menu">
                                                             <li><a <% out.print("href='../../../private/employee/admin/assignspeaker.jsp?speakerId=" + speakers.get(i).getId() + "'");%>><i class="icon16-userAdd"></i>Assign</a></li>
-                                                            <li><a <% out.print("href='../../../private/employee/admin/editspeaker.jsp?id=" + speakers.get(i).getId() + "'");%>><i class="icon16-approve"></i>Edit</a></li>
+                                                            <li><a <% out.print("href='../../../private/employee/admin/editspeaker.jsp?id=" + speakers.get(i).getId() + "'");%>><i class="icon16-edit"></i>Edit</a></li>
                                                             <li><a class="showModal3"><% out.print("<input type='hidden' name='delete' value='" + speakers.get(i).getId() + "' />");%>
                                                                     <% out.print("<div class='modalDelete' id='modaldelete" + speakers.get(i).getId() + "' title='Delete Confirmation'>");
-                                                                        out.print("Is it ok to delete this speaker?<br/><br/>");
+                                                                        out.print("Are you sure you want do delete the following speaker?<br/><br/>");
                                                                         out.print(speakers.get(i).getFullName());
                                                                         out.print("</div>");
                                                                     %>
@@ -224,6 +230,7 @@
                                                                 text: 'Yes'
                                                             },
                                                             'cancel': {
+                                                                'class': 'deleteModalLink',
                                                                 click: function() {
 
                                                                     $(this).dialog('close');

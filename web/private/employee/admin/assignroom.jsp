@@ -99,17 +99,17 @@
                     ArrayList<Session> sessions = sessionPersist.getThisYearSessions(2013, " order by session_date");
                 %>
                 <form id="action" action="../../../action/processRoomAssign.jsp" method="post">
-                    <div class="form-group"><% out.print(location.getId() + ", " + location.getDescription() + ", " + location.getBuilding());%>
+                    <div class="form-group"><strong><% out.print(location.getId() + ", " + location.getDescription() + ", " + location.getBuilding());%></strong>
                     <input type="hidden" name="location" value="<%= location.getId() %>"/>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" style="margin-bottom: 6px;">
                         <span class="keywordFilter">
                             <i class="icon16-magnifySmall"></i>
                             <span class="keywordFilter-wrapper">
                                 <input type="search" id="filter" value="Filter..." />
                             </span>
                             <a class="keywordFilter-clear" onclick="clearFilter();"><i class="icon16-close"></i></a>
-                        </span><span class="pullRight"><a>Refresh List</a></span></div>
+                        </span><span class="pullRight"><a href="#">Refresh List</a></span></div>
                     <div class="form-group">
                         <ol id="sessions">
                             <%

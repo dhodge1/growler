@@ -29,6 +29,9 @@
                 color: red;
                 font-weight: bold;
             }
+            .h3 {
+                font-weight: normal;
+            }
         </style>
         <script src="http://growler-dev.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
     </head>
@@ -67,13 +70,16 @@
             <div class="row">
                 <ul class="breadcrumb">
                     <li><a href="../../../private/employee/admin/home.jsp">Home</a></li>
-                    <li class='ieFix'>Edit Room</li>
+                    <li class='ieFix'>Edit A Room</li>
                 </ul>
             </div>
             <div class="row mediumBottomMargin">
-                <h1 style="margin-top:0px;font-weight: normal;">Edit Room</h1>
+                <h1 style="margin-top:0px;font-weight: normal;">Edit A Room</h1>
             </div>
             <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
+            <div class="row mediumBottomMargin">
+                <h3>Please use form below to edit room details.</h3>
+            </div>
             <div class="row mediumBottomMargin">
                 <label><span style="color: red;">*</span>Required field</label>
             </div>
@@ -83,28 +89,28 @@
             <div class="row largeBottomMargin">
                 <form id="action" method="post" action="../../../action/processroom.jsp">
                     <div class="form-group">
-                        <label class="required">Room ID:</label>
+                        <label class="required">Room Number</label>
                         <input type="text" maxlength="10" id="tip" name="id" class="input-xlarge" value="<% out.print(location.getId());%>" data-content="Room ID, 10 Characters or Less"/>
                         <br/><span id="error_id" class="message_container">
-                            <span>Please Enter a Room ID</span>
+                            <span>Please Enter a Room Number</span>
                         </span>
                     </div>
                     <div class="form-group">
-                        <label class="required">Room Name:</label>
+                        <label class="required">Room name</label>
                         <input type="text" maxlength="20" id="tip1" name="name"  class="input-xlarge" value="<% out.print(location.getDescription());%>" data-content="Room Name, 20 Characters or Less"/>
                         <br/><span id="error_name" class="message_container">
-                            <span>Please Enter a Room Name</span>
+                            <span>Please enter a room name</span>
                         </span>
                     </div>
                     <div class="form-group">
-                        <label class="required">Capacity:</label>
+                        <label class="required">Capacity</label>
                         <% out.print("<input value=\"" + location.getCapacity() + "\" type=\"number\" min=\"0\" max=\"999\" step=\"1\" id=\"tip2\" name=\"capacity\"  data-content=\"Maximum Capacity, 0 to 999\"/>");%>
                         <br/><span id="error_capacity" class="message_container">
-                            <span>Please Enter a Capacity</span>
+                            <span>Please enter a capacity</span>
                         </span>
                     </div>
-                    <div class="form-group">
-                        <label class="required">Building Name:</label>
+                    <div class="form-group" style="margin-bottom:24px">
+                        <label class="required">Building name</label>
                         <select id="building" name="building">
                             <% String building = "";
                                 try {
@@ -125,7 +131,7 @@
                                 }%>>TBD</option>
                         </select>
                         <br/><span id="error_building" class="message_container">
-                            <span>Please Select a Building</span>
+                            <span>Please select a building</span>
                         </span>
                     </div>
                     <div class='form-actions'>

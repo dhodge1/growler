@@ -64,6 +64,9 @@
             </div>
             <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
             <div class="row mediumBottomMargin">
+                <h3>Please use form below to edit speaker details.</h3>
+            </div>
+            <div class="row mediumBottomMargin">
                 <label><span style="color: red;">*</span>Required field</label>
             </div>
             <div class="row mediumBottomMargin">
@@ -110,7 +113,7 @@
                         <input type='checkbox' name='visible' <% if (speaker.getVisible()) { out.print(" checked ");} %> />
                         <label class="required checkbox inline">Make speaker visible to users?</label>
                     </div>
-                    <input type="submit" value="Submit" class="button button-primary"/>
+                    <input type="submit" value="Save Changes" class="button button-primary"/>
                 </form>
             </div>
         </div>

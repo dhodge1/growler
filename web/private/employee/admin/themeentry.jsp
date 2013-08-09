@@ -33,7 +33,6 @@
             }
             input[type="checkbox"] {
                 position:relative;
-                bottom: 5px;
                 margin-right: 6px;
             }
             h1, h3 {
@@ -114,7 +113,7 @@
                             <label class="required">Theme added by</label>
                             <input type="text" name="creator" <% out.print("value='" + user + "'");%> />
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="margin-bottom: 15px;">
                             <input type="checkbox" name="visible" value="true"/><label class="required checkbox inline"> Make theme visible to users?</label>
                         </div>
                         <div class="form-actions">

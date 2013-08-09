@@ -95,7 +95,7 @@
                         <label class="required">Theme added by</label>
                         <input name="creator" id="tip4" type="text" data-content="Enter a Creator ID for the Theme" value="<% out.print(theme.getCreatorId());%>"/>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" style="margin-bottom: 15px;">
                         <input type='checkbox' name='visible' <% if (theme.getVisible()) { out.print(" checked ");} %> />
                         <label class="required checkbox inline">Make theme visible to users?</label>
                     </div>

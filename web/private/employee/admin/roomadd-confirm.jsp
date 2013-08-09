@@ -28,6 +28,9 @@
                 color: red;
                 font-weight: bold;
             }
+            .firstlink {
+                margin-right: 12px;
+            }
         </style>
     </head>
     <body id="growler1">
@@ -61,7 +64,7 @@
                 <span><% out.print((String)session.getAttribute("room")); %></span>
             </div>
             <div class="row">
-                <a href='../../../private/employee/admin/room.jsp'>Return to manage rooms</a>
+                <a class="firstlink" href='../../../private/employee/admin/room.jsp'>Return to manage rooms</a>
                 <a href='../../../private/employee/admin/addroom.jsp'>Add another room</a>
             </div>
         </div>

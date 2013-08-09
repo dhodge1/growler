@@ -60,6 +60,12 @@
                 text-decoration: underline;
                 cursor: pointer;
             }
+            .deleteModalLink {
+                margin-left: 6px;
+                color:#0067b1;
+                text-decoration: underline;
+                cursor: pointer;
+            }
         </style>
     </head>
     <body id="growler1">
@@ -139,10 +145,10 @@
                                     <div class="actionMenu">
                                         <a class="actionMenu-toggle" data-toggle="dropdown" href="#">Actions<b class="caret"></b></a>
                                         <ul class="actionMenu-menu" role="menu">
-                                            <li><a <% out.print("href='../../../private/employee/admin/edittheme.jsp?id=" + themes.get(i).getId() + "'");%>><i class="icon16-approve"></i>Edit</a></li>
+                                            <li><a <% out.print("href='../../../private/employee/admin/edittheme.jsp?id=" + themes.get(i).getId() + "'");%>><i class="icon16-edit"></i>Edit</a></li>
                                             <li><a class="showModal3"><% out.print("<input type='hidden' name='delete' value='" + themes.get(i).getId() + "' />");%>
                                                     <% out.print("<div class='modalDelete' id='modaldelete" + themes.get(i).getId() + "' title='Delete Confirmation'>");
-                                                        out.print("Is it ok to delete this theme?<br/><br/>");
+                                                        out.print("Are you sure you want do delete the following theme?<br/><br/>");
                                                         out.print(themes.get(i).getName());
                                                         out.print("</div>");
                                                     %>
@@ -221,6 +227,7 @@
                                                 text: 'Yes'
                                             },
                                             'cancel': {
+                                                'class': 'deleteModalLink',
                                                 click: function() {
 
                                                     $(this).dialog('close');

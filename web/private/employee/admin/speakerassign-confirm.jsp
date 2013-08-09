@@ -32,24 +32,26 @@
         </style>
     </head>
     <body id="growler1">
-            <%      int user = 0;
-                    if (null == session.getAttribute("id")) {
-                        response.sendRedirect(".././../index.jsp");
-                    }
-                    try {
-                        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
-                        String name = String.valueOf(session.getAttribute("user"));                  
-                    }
-                    catch (Exception e) {
-                        
-                    }
-                    boolean speaker2there = false;
-                    try {
-                        String spkr2 = (String)session.getAttribute("speaker2");
-                        speaker2there = true;
-                    } catch (Exception e) {
-                        speaker2there = false;
-                    }
+        <%      int user = 0;
+            if (null == session.getAttribute("id")) {
+                response.sendRedirect(".././../index.jsp");
+            }
+            try {
+                user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+                String name = String.valueOf(session.getAttribute("user"));
+            } catch (Exception e) {
+            }
+            boolean speaker2there = false;
+            try {
+                String spkr2 = (String) session.getAttribute("speaker2");
+                if (spkr2.equals(null) || spkr2.equals("null")) {
+                    speaker2there = false;
+                } else {
+                    speaker2there = true;
+                }
+            } catch (Exception e) {
+                speaker2there = false;
+            }
         %>
         <%@ include file="../../../includes/header.jsp" %> 
         <%@ include file="../../../includes/adminnav.jsp" %>
@@ -63,13 +65,13 @@
             </div>
             <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
             <div class="row largeBottomMargin">
-                <span><strong>Speaker 1:</strong> <% out.print((String)session.getAttribute("speaker")); %></span><br/>
-                <% 
-                if (speaker2there) {
-                    out.print("<span><strong>Speaker 2:</strong> " + (String)session.getAttribute("speaker2") + "</span><br/>");
-                }
+                <span><strong>Speaker 1:</strong> <% out.print((String) session.getAttribute("speaker"));%></span><br/>
+                <%
+                    if (speaker2there) {
+                        out.print("<span><strong>Speaker 2:</strong> " + (String) session.getAttribute("speaker2") + "</span><br/>");
+                    }
                 %>
-                <span><strong>Session:</strong> <% out.print((String)session.getAttribute("sessionInfo")); %></span>
+                <span><strong>Session:</strong> <% out.print((String) session.getAttribute("sessionInfo"));%></span>
             </div>
             <div class="row">
                 <a href='../../../private/employee/admin/speaker.jsp'>Return to manage speakers</a>
