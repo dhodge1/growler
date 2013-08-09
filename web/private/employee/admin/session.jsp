@@ -56,6 +56,15 @@
             .pager li {
                 cursor: pointer;
             }
+            .button-primary {
+                margin-right: 12px;
+            }
+            .modalCloser {
+                margin-left: 12px;
+                color:#0067b1;
+                text-decoration: underline;
+                cursor: pointer;
+            }
         </style>
     </head>
     <body id="growler1">
@@ -97,7 +106,7 @@
                 <h3>Use the table below to add, edit or delete existing sessions.</h3>
             </div>
             <div class="row largeBottomMargin"></div>
-            <div class="row mediumBottomMargin">
+            <div class="row smallBottomMargin">
                 <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Schedule Details</span><a href="../../../private/employee/admin/sessionScheduler.jsp" class="pullRight button button-primary">Schedule Sessions</a></h2>
             </div>
             <div class='row smallBottomMargin'>
@@ -254,6 +263,9 @@
                                                 text: 'Ok'
                                             }}
                                     });
+                                    $(".deleteModalLink").click(function() {
+                                        $(this).parent().close();
+                                    });
                                     $(".modalDelete").dialog({
                                         autoOpen: false,
                                         dialogClass: "no-close",
@@ -269,16 +281,9 @@
                                                     $(this).dialog('close');
                                                 },
                                                 text: 'Yes'
-                                            },
-                                            'cancel': {
-                                                click: function() {
-
-                                                    $(this).dialog('close');
-                                                },
-                                                text: 'No, return to manage sessions table'
                                             }
-                                        },
-                                    });
+                                        }
+                                    }).parent().find('.ui-dialog-buttonset').append('<a href="#" id="modalCloser">No, return to manage sessions table</a>');
                                     $("#year").change(function(){
                                         var year = (parseInt($("#year").val()));
                                         window.location.href = "http://snit.scrippsnetworks.com/private/employee/admin/session.jsp?year=" + year;

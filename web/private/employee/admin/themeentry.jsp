@@ -114,7 +114,7 @@
                             <input type="text" name="creator" <% out.print("value='" + user + "'");%> />
                         </div>
                         <div class="form-group" style="margin-bottom: 15px;">
-                            <input type="checkbox" name="visible" value="true"/><label class="required checkbox inline"> Make theme visible to users?</label>
+                            <input type="checkbox" name="visible" value="true"/><label class="checkbox inline"> Make theme visible to users?</label>
                         </div>
                         <div class="form-actions">
                             <input class="button button-primary" id="send" type="submit" value="Add Theme" name="Submit" />

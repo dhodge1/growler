@@ -97,7 +97,7 @@
                     </div>
                     <div class="form-group" style="margin-bottom: 15px;">
                         <input type='checkbox' name='visible' <% if (theme.getVisible()) { out.print(" checked ");} %> />
-                        <label class="required checkbox inline">Make theme visible to users?</label>
+                        <label class="checkbox inline">Make theme visible to users?</label>
                     </div>
                         <div class="form-actions">
                     <input type="submit" value="Save Changes" class="button button-primary"/>

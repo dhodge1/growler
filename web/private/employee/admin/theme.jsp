@@ -60,8 +60,11 @@
                 text-decoration: underline;
                 cursor: pointer;
             }
-            .deleteModalLink {
-                margin-left: 6px;
+            .button-primary {
+                margin-right: 12px;
+            }
+            .modalCloser {
+                margin-left: 12px;
                 color:#0067b1;
                 text-decoration: underline;
                 cursor: pointer;
@@ -94,7 +97,7 @@
                 <h3>Use the table below to add, edit or delete existing themes.</h3>
             </div>
             <div class="row largeBottomMargin"></div>
-            <div class="row mediumBottomMargin">
+            <div class="row smallBottomMargin">
                 <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Theme Details</span><a href="../../../private/employee/admin/themeentry.jsp" class="pullRight button button-primary">Add Theme</a></h2>
             </div>
             <div class="row">
@@ -210,6 +213,9 @@
                                                 text: 'Ok'
                                             }}
                                     });
+                                    $(".deleteModalLink").click(function() {
+                                        $(this).parent().close();
+                                    });
                                     $(".modalDelete").dialog({
                                         autoOpen: false,
                                         dialogClass: "no-close",
@@ -225,16 +231,11 @@
                                                     $(this).dialog('close');
                                                 },
                                                 text: 'Yes'
-                                            },
-                                            'cancel': {
-                                                'class': 'deleteModalLink',
-                                                click: function() {
-
-                                                    $(this).dialog('close');
-                                                },
-                                                text: 'No, return to manage themes table'
                                             }
                                         },
+                                    }).parent().find('.ui-dialog-buttonset').append('<a href="#" id="modalCloser">No, return to manage themes table</a>');
+                                    $("#modalCloser").click(function(){
+                                        $(".modalDelete").dialog("close");
                                     });
                                     $(".showModal").click(function() {
                                         var theme = $(this).children().val();

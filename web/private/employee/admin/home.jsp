@@ -77,11 +77,11 @@
         <div class="container-fixed mediumBottomMargin">
             <div class="row mediumBottomMargin"></div>
             <div class="row largeBottomMargin">
-                <h1 style="margin-top:0px;font-weight: normal;">Welcome to the Tecthoberfest Information System!</h1>
+                <h1 style="margin-top:0px;font-weight: normal;">Welcome to the Techtoberfest Information System!</h1>
             </div>
             <div class="row largeBottomMargin"></div>
             <div class="row mediumBottomMargin">
-                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Admin Details</span></h2>
+                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Administration Details</span></h2>
             </div>
             <div class="row">
                 <h3>Themes Menu</h3>

@@ -41,6 +41,7 @@ user_id	int references user(id)
 );
 /*
  * Give Ian and Brian the roles they need.
+ 161301 is AH in case she needs to be given admin role for testing
  */
 insert into roles (user_id, role) values (160240, 'admin');
 insert into roles (user_id, role) values (160445, 'admin');
@@ -558,3 +559,49 @@ INSERT INTO location (id, description, building, capacity)
 	VALUES ('1547', 'Murray Hill Room', '1180', 8);
 INSERT INTO location (id, description, building, capacity) 
 	VALUES ('1842', 'Board Room', 'SNI', 0);
+
+/* Insert ranks from last year, which aren't as relevant as they were when the project started */
+insert into ranks_2012 (speaker_id, rating, count) values 
+(49,4.5,2),
+(1,4.8,22),
+(2,4.4,15),
+(3,4.36,6),
+(4,4.58,8),
+(7,4.58,8),
+(9,4.34,7),
+(10,4.58,7),
+(11,4.58,7),
+(12,4.54,4),
+(13,4.94,5),
+(14,4.71,4),
+(15,4.92,4),
+(16,4.46,12),
+(17,4.38,4),
+(18,4.76,6),
+(19,4.38,6),
+(20,4.34,8),
+(21,4.34,8),
+(22,4.49,10),
+(23,4.58,6),
+(24,4.48,4),
+(25,4.10,3),
+(26,4.10,3),
+(27,4.2,5),
+(28,4.78,5),
+(29,4.56,4),
+(30,4.75,1),
+(31,4.67,3),
+(32,4.43,4),
+(33,4.75,2),
+(34,2,1),
+(35,4.75,2),
+(36,4.75,2),
+(37,4.63,1),
+(38,4.61,3),
+(39,4.71,3),
+(40,4.65,3),
+(41,4.65,3),
+(42,4.75,3),
+(43,4.75,3),
+(44,4.5,4),
+(45,4.42,2);

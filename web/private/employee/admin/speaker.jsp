@@ -60,8 +60,11 @@
             .pager li {
                 cursor: pointer;
             }
-            .deleteModalLink {
-                margin-left: 6px;
+            .button-primary {
+                margin-right: 12px;
+            }
+            .modalCloser {
+                margin-left: 12px;
                 color:#0067b1;
                 text-decoration: underline;
                 cursor: pointer;
@@ -79,180 +82,175 @@
         <%@ include file="../../../includes/adminheader.jsp" %> 
         <%@ include file="../../../includes/adminnav.jsp" %>
         <div class="container-fixed largeBottomMargin">
-                            <div class="row mediumBottomMargin"></div>
-                            <div class="row">
-                                <ul class="breadcrumb">
-                                    <li><a href="../../../private/employee/home.jsp">Home</a></li>
-                                    <li class='ieFix'>Manage Speakers</li>
-                                </ul>
-                            </div>
-                            <div class="row mediumBottomMargin">
-                                <h1>Manage Speakers</h1>
-                            </div>
-                            <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
-                            <div class="row largeBottomMargin">
-                                <h3>Use the table below to add, edit or delete existing speakers.</h3>
-                            </div>
-                            <div class='row largeBottomMargin'></div>
-                            <div class="row mediumBottomMargin">
-                                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Speaker Details</span><a href="../../../private/employee/admin/speakerentry.jsp" class="pullRight button button-primary">Add Speaker</a></h2>
-                            </div>
-                            <div class="row">
-                                <form>
-                                    <input type='hidden' id='current_page' value="1" />
-                                    <input type='hidden' id='show_per_page' value='20' />
-                                    <input type='hidden' id='total' value='<%= speakers.size()%>'/>
-                                    <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Type</th>
-                                                <th>Added By</th>
-                                                <th>Visible</th>
-                                                <th>Ranking Details</th>
-                                                <th>Assigned to Session?</th>
-                                                <th><!-- Actions --></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <%
-                                                for (int i = 0; i < speakers.size(); i++) {
-                                            %>
-                                            <tr <% out.print("id='row" + i + "'");%>>
-                                                <td><% out.print(speakers.get(i).getFullName()); %>
-                                                    <input type="hidden" <% out.print("id='rowfor" + speakers.get(i).getId() + "'");%> />
-                                                </td>
-                                                <td><% out.print(speakers.get(i).getType());%></td>
-                                                <td><% out.print(speakers.get(i).getSuggestedBy());%></td>
-                                                <td><% if (speakers.get(i).getVisible()) {
-                                                        out.print("<i class='icon16-check'></i>");
-                                                    } else {
-                                                        out.print("");
-                                                    }
-                                                    %></td>
-                                                <td><a class="showModal2"><% out.print("<input type='hidden' value='" + speakers.get(i).getId() + "' />");%>View</a>
-                                                    <% out.print("<div class='modals' id='modalrank" + speakers.get(i).getId() + "' title='" + speakers.get(i).getFullName() + "'>");
-                                                        out.print(speakers.get(i).getRank() + " points out of " + speakers.get(i).getCount() + " votes");
+            <div class="row mediumBottomMargin"></div>
+            <div class="row">
+                <ul class="breadcrumb">
+                    <li><a href="../../../private/employee/home.jsp">Home</a></li>
+                    <li class='ieFix'>Manage Speakers</li>
+                </ul>
+            </div>
+            <div class="row mediumBottomMargin">
+                <h1>Manage Speakers</h1>
+            </div>
+            <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
+            <div class="row largeBottomMargin">
+                <h3>Use the table below to add, edit or delete existing speakers.</h3>
+            </div>
+            <div class='row largeBottomMargin'></div>
+            <div class="row smallBottomMargin">
+                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Speaker Details</span><a href="../../../private/employee/admin/speakerentry.jsp" class="pullRight button button-primary">Add Speaker</a></h2>
+            </div>
+            <div class="row">
+                <form>
+                    <input type='hidden' id='current_page' value="1" />
+                    <input type='hidden' id='show_per_page' value='20' />
+                    <input type='hidden' id='total' value='<%= speakers.size()%>'/>
+                    <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Added By</th>
+                                <th>Visible</th>
+                                <th>Ranking Details</th>
+                                <th>Assigned to Session?</th>
+                                <th><!-- Actions --></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%
+                                for (int i = 0; i < speakers.size(); i++) {
+                            %>
+                            <tr <% out.print("id='row" + i + "'");%>>
+                                <td><% out.print(speakers.get(i).getFullName());%>
+                                    <input type="hidden" <% out.print("id='rowfor" + speakers.get(i).getId() + "'");%> />
+                                </td>
+                                <td><% out.print(speakers.get(i).getType());%></td>
+                                <td><% out.print(speakers.get(i).getSuggestedBy());%></td>
+                                <td><% if (speakers.get(i).getVisible()) {
+                                        out.print("<i class='icon16-check'></i>");
+                                    } else {
+                                        out.print("");
+                                    }
+                                    %></td>
+                                <td><a class="showModal2"><% out.print("<input type='hidden' value='" + speakers.get(i).getId() + "' />");%>View</a>
+                                    <% out.print("<div class='modals' id='modalrank" + speakers.get(i).getId() + "' title='" + speakers.get(i).getFullName() + "'>");
+                                        out.print(speakers.get(i).getRank() + " points out of " + speakers.get(i).getCount() + " votes");
+                                        out.print("</div>");
+                                    %>    
+                                </td>
+                                <td><% if (persist.getSpeakersAssignments(speakers.get(i).getId()) != 0) {
+                                        out.print("<i class='icon16-check'></i>");
+                                    } else {
+                                        out.print("");
+                                    }%>
+
+                                </td>
+                                <td>
+                                    <div class="actionMenu">
+                                        <a class="actionMenu-toggle" data-toggle="dropdown" href="#">Actions<b class="caret"></b></a>
+                                        <ul class="actionMenu-menu" role="menu">
+                                            <li><a <% out.print("href='../../../private/employee/admin/assignspeaker.jsp?speakerId=" + speakers.get(i).getId() + "'");%>><i class="icon16-userAdd"></i>Assign</a></li>
+                                            <li><a <% out.print("href='../../../private/employee/admin/editspeaker.jsp?id=" + speakers.get(i).getId() + "'");%>><i class="icon16-edit"></i>Edit</a></li>
+                                            <li><a class="showModal3"><% out.print("<input type='hidden' name='delete' value='" + speakers.get(i).getId() + "' />");%>
+                                                    <% out.print("<div class='modalDelete' id='modaldelete" + speakers.get(i).getId() + "' title='Delete Confirmation'>");
+                                                        out.print("Are you sure you want do delete the following speaker?<br/><br/>");
+                                                        out.print(speakers.get(i).getFullName());
                                                         out.print("</div>");
-                                                    %>    
-                                                </td>
-                                                <td><% if (persist.getSpeakersAssignments(speakers.get(i).getId()) != 0) {
-                                                        out.print("<i class='icon16-check'></i>");
-                                                    } else {
-                                                        out.print("");
-                                                    }%>
-
-                                                </td>
-                                                <td>
-                                                    <div class="actionMenu">
-                                                        <a class="actionMenu-toggle" data-toggle="dropdown" href="#">Actions<b class="caret"></b></a>
-                                                        <ul class="actionMenu-menu" role="menu">
-                                                            <li><a <% out.print("href='../../../private/employee/admin/assignspeaker.jsp?speakerId=" + speakers.get(i).getId() + "'");%>><i class="icon16-userAdd"></i>Assign</a></li>
-                                                            <li><a <% out.print("href='../../../private/employee/admin/editspeaker.jsp?id=" + speakers.get(i).getId() + "'");%>><i class="icon16-edit"></i>Edit</a></li>
-                                                            <li><a class="showModal3"><% out.print("<input type='hidden' name='delete' value='" + speakers.get(i).getId() + "' />");%>
-                                                                    <% out.print("<div class='modalDelete' id='modaldelete" + speakers.get(i).getId() + "' title='Delete Confirmation'>");
-                                                                        out.print("Are you sure you want do delete the following speaker?<br/><br/>");
-                                                                        out.print(speakers.get(i).getFullName());
-                                                                        out.print("</div>");
-                                                                    %>
-                                                                    <i class="icon16-pageRemove"></i>Delete</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <% } //close the for loop %>
-                                        </tbody>
-                                    </table>
-                                    <div class="pager">
-                                        <ul>
-                                            <li class="pager-arrow"><a onclick="first();"><i class="icon12-first"></i></a></li>
-                                            <li class="pager-arrow"><a onclick="prev();"><i class="icon12-previous"></i></a></li>
-                                                    <% int rows = speakers.size();
-                                                        int pages = 0;
-                                                        if (rows % 20 == 0) {
-                                                            pages = (rows / 20);
-                                                        } else {
-                                                            pages = (rows / 20) + 1;
-                                                        }
-                                                        for (int i = 0; i < pages; i++) {
-                                                            out.print("<li id=\"page" + (i + 1) + "\"><a onclick='page(" + (i + 1) + ");'>" + (i + 1) + "</a></li>");
-                                                        }
                                                     %>
-                                            <li class="pager-arrow"><a onclick="next();"><i class="icon12-next"></i></a></li>
-                                            <li class="pager-arrow"><a onclick="last();"><i class="icon12-last"></i></a></li>
+                                                    <i class="icon16-pageRemove"></i>Delete</a></li>
                                         </ul>
-                                        <div class="pager-pageJump">
-                                            <span>Page <input class="input-mini" onchange="pageJump();" type="text" id="pagejump"/> of <%= pages%></span>
-                                        </div>
                                     </div>
-                                </form>
-                            </div>
+                                </td>
+                            </tr>
+                            <% } //close the for loop %>
+                        </tbody>
+                    </table>
+                    <div class="pager">
+                        <ul>
+                            <li class="pager-arrow"><a onclick="first();"><i class="icon12-first"></i></a></li>
+                            <li class="pager-arrow"><a onclick="prev();"><i class="icon12-previous"></i></a></li>
+                                    <% int rows = speakers.size();
+                                        int pages = 0;
+                                        if (rows % 20 == 0) {
+                                            pages = (rows / 20);
+                                        } else {
+                                            pages = (rows / 20) + 1;
+                                        }
+                                        for (int i = 0; i < pages; i++) {
+                                            out.print("<li id=\"page" + (i + 1) + "\"><a onclick='page(" + (i + 1) + ");'>" + (i + 1) + "</a></li>");
+                                        }
+                                    %>
+                            <li class="pager-arrow"><a onclick="next();"><i class="icon12-next"></i></a></li>
+                            <li class="pager-arrow"><a onclick="last();"><i class="icon12-last"></i></a></li>
+                        </ul>
+                        <div class="pager-pageJump">
+                            <span>Page <input class="input-mini" onchange="pageJump();" type="text" id="pagejump"/> of <%= pages%></span>
                         </div>
-                        <%@ include file="../../../includes/footer.jsp" %>
-                        <script src="http://growler-dev.elasticbeanstalk.com/js/libs/bootstrap-dropdown.2.0.4.min.js"></script>
-                        <script src="http://growler-dev.elasticbeanstalk.com/js/libs/sniui.dialog.1.2.0.js"></script>
-                        <script src="../../../js/pagination.js"></script>
-                        <script>
-                                                $(document).ready(function() {
-                                                    var page = 1;
-                                                    $("#current_page").val(page);
-                                                    var total = parseInt($("#total").val());
-                                                    var pages = Math.floor((total / parseInt($("#show_per_page").val())) + 1);
-                                                    for (var i = 20; i < total + 1; i++) {
-                                                        $("#row" + i).hide();
-                                                    }
-                                                    unActive();
-                                                    $("#page1").addClass("active");
-                                                    $(".modals").dialog({autoOpen: false, dialogClass: "no-close",
-                                                        buttons: {
-                                                            'ok': {
-                                                                'class': 'button button-primary',
-                                                                click: function() {
-                                                                    $(this).dialog('close');
-                                                                },
-                                                                text: 'Ok'
-                                                            }}
+                    </div>
+                </form>
+            </div>
+        </div>
+        <%@ include file="../../../includes/footer.jsp" %>
+        <script src="http://growler-dev.elasticbeanstalk.com/js/libs/bootstrap-dropdown.2.0.4.min.js"></script>
+        <script src="http://growler-dev.elasticbeanstalk.com/js/libs/sniui.dialog.1.2.0.js"></script>
+        <script src="../../../js/pagination.js"></script>
+        <script>
+                                $(document).ready(function() {
+                                    var page = 1;
+                                    $("#current_page").val(page);
+                                    var total = parseInt($("#total").val());
+                                    var pages = Math.floor((total / parseInt($("#show_per_page").val())) + 1);
+                                    for (var i = 20; i < total + 1; i++) {
+                                        $("#row" + i).hide();
+                                    }
+                                    unActive();
+                                    $("#page1").addClass("active");
+                                    $(".modals").dialog({autoOpen: false, dialogClass: "no-close",
+                                        buttons: {
+                                            'ok': {
+                                                'class': 'button button-primary',
+                                                click: function() {
+                                                    $(this).dialog('close');
+                                                },
+                                                text: 'Ok'
+                                            }}
+                                    });
+                                    $(".modalDelete").dialog({
+                                        autoOpen: false,
+                                        dialogClass: "no-close",
+                                        buttons: {
+                                            'ok': {
+                                                'class': 'button button-primary',
+                                                click: function() {
+                                                    var speaker = $(this).prop("id");
+                                                    speaker = speaker.substring(11);
+                                                    $.post("../../../action/removeSpeaker.jsp", {id: speaker}, function(data, success) {
                                                     });
-                                                    $(".modalDelete").dialog({
-                                                        autoOpen: false,
-                                                        dialogClass: "no-close",
-                                                        buttons: {
-                                                            'ok': {
-                                                                'class': 'button button-primary',
-                                                                click: function() {
-                                                                    var speaker = $(this).prop("id");
-                                                                    speaker = speaker.substring(11);
-                                                                    $.post("../../../action/removeSpeaker.jsp", {id: speaker}, function(data, success) {
-                                                                    });
-                                                                    $("#rowfor" + speaker).parent().parent().remove();
-                                                                    $(this).dialog('close');
-                                                                },
-                                                                text: 'Yes'
-                                                            },
-                                                            'cancel': {
-                                                                'class': 'deleteModalLink',
-                                                                click: function() {
+                                                    $("#rowfor" + speaker).parent().parent().remove();
+                                                    $(this).dialog('close');
+                                                },
+                                                text: 'Yes'
+                                            }
+                                        }
+                                    }).parent().find('.ui-dialog-buttonset').append('<a href="#" id="modalCloser">No, return to manage speakers table</a>');
+                                    $(".showModal").click(function() {
+                                        var speaker = $(this).children().val();
+                                        $("#modal" + speaker).dialog("open");
+                                    });
+                                    $(".showModal2").click(function() {
+                                        var rank = $(this).children().val();
+                                        $("#modalrank" + rank).dialog("open");
+                                    });
+                                    $(".showModal3").click(function() {
+                                        var speaker = $(this).children().val();
+                                        $("#modaldelete" + speaker).dialog("open");
+                                    });
+                                    $(".deleteModalLink").click(function() {
+                                        $(this).parent().close();
+                                    });
 
-                                                                    $(this).dialog('close');
-                                                                },
-                                                                text: 'No, return to manage speakers table'
-                                                            }
-                                                        },
-                                                    });
-                                                    $(".showModal").click(function() {
-                                                        var speaker = $(this).children().val();
-                                                        $("#modal" + speaker).dialog("open");
-                                                    });
-                                                    $(".showModal2").click(function() {
-                                                        var rank = $(this).children().val();
-                                                        $("#modalrank" + rank).dialog("open");
-                                                    });
-                                                    $(".showModal3").click(function() {
-                                                        var speaker = $(this).children().val();
-                                                        $("#modaldelete" + speaker).dialog("open");
-                                                    });
-
-                                                });
-                        </script>
-        </body>
-    </html>
+                                });
+        </script>
+    </body>
+</html>
