@@ -7,43 +7,38 @@
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
 <%@page import="com.scripps.growler.*" %>
-        <%
-                    int user = 0;
-                    if (null == session.getAttribute("id")) {
-                        response.sendRedirect("../index.jsp");
-                    }
-                    try {
-                        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
-                        String name = String.valueOf(session.getAttribute("user"));                  
-                    }
-                    catch (Exception e) {
-                        
-                    }
-                %>
-        <%
-            int id = Integer.parseInt(request.getParameter("id"));
-            String name = request.getParameter("name");
-            String description = request.getParameter("description");
-            
-            DataConnection dc = new DataConnection();
-            Connection connection = dc.sendConnection();
-            PreparedStatement statement = connection.prepareStatement("update session set name = ?, description = ? where id = ?");
-            statement.setString(1, name);
-            statement.setString(2, description);
-            statement.setInt(3, id);
-            SessionPersistence sp = new SessionPersistence();
-            Session s = sp.getSessionByID(id);
-            try {
-                statement.execute();
-                session.setAttribute("message", "Success: Session " + s.getName() + " has been changed.");
-            }
-            catch (Exception e) {
-                session.setAttribute("message", "Error: Trouble processing update for " + s.getName());
-            }
-            finally {
-                statement.close();
-                connection.close();
-            }
-            response.sendRedirect("../private/employee/admin/session.jsp");
-        %>
+<%
+    int user = 0;
+    if (null == session.getAttribute("id")) {
+        response.sendRedirect("../index.jsp");
+    }
+    try {
+        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+        String name = String.valueOf(session.getAttribute("user"));
+    } catch (Exception e) {
+    }
+
+    int id = Integer.parseInt(request.getParameter("id"));
+    String name = request.getParameter("name");
+    String description = request.getParameter("description");
+    int speaker = Integer.parseInt(request.getParameter("speaker"));
+    java.sql.Date date;
+    try {
+        date = java.sql.Date.valueOf(request.getParameter("date"));
+    } catch (Exception e) {
+        date = null;
+    }
+    java.sql.Time time = java.sql.Time.valueOf(request.getParameter("time"));
+
+    SessionPersistence sp = new SessionPersistence();
+    Session s = new Session();
+    s.setId(id);
+    s.setName(name);
+    s.setDescription(description);
+    s.setSessionDate(date);
+    s.setStartTime(time);
+    sp.updateSession(s);
+    sp.assignSpeaker(speaker, id);
+    response.sendRedirect("../private/employee/admin/session.jsp");
+%>
 </html>

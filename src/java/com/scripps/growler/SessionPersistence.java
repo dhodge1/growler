@@ -726,4 +726,32 @@ public class SessionPersistence extends GrowlerPersistence {
         }
         
     }
+    
+    public void assignSpeaker(int speaker, int session){
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("insert into speaker_team (speaker_id, session_id) values (?, ?)");
+            statement.setInt(1, speaker);
+            statement.setInt(2, session);
+            statement.execute();
+        } catch (Exception e) {
+            
+        } finally {
+            closeJDBC();
+        }
+    }
+    
+    public void undoAssignSpeaker(int speaker, int session){
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("delete from speaker_team where speaker_id = ? and session_id = ?");
+            statement.setInt(1, speaker);
+            statement.setInt(2, session);
+            statement.execute();
+        } catch (Exception e) {
+            
+        } finally {
+            closeJDBC();
+        }
+    }
 }

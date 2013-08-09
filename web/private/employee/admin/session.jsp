@@ -188,7 +188,7 @@
                                     out.print("<td>");
                                     out.print("<div class='actionMenu'><a class='actionMenu-toggle' data-toggle='dropdown' href='#'>Actions<b class='caret'></b></a>");
                                     out.print("<ul class='actionMenu-menu' role='menu'>");
-                                    out.print("<li><a href='../../../private/employee/admin/editsession.jsp?id=" + sessions.get(i).getId() + "'><i class='icon16-approve'></i>Edit</a></li>");
+                                    out.print("<li><a href='../../../private/employee/admin/editsession.jsp?id=" + sessions.get(i).getId() + "'><i class='icon16-edit'></i>Edit</a></li>");
                                     out.print("<li><a class='showModal3'><input type='hidden' name='delete' value='" + sessions.get(i).getId() + "' />");
                                     out.print("<div class='modalDelete' id='modaldelete" + sessions.get(i).getId() + "' title='Delete Confirmation'>");
                                     out.print("Is it ok to delete this session?<br/><br/>");
