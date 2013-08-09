@@ -17,7 +17,7 @@
         String name = String.valueOf(session.getAttribute("user"));
     } catch (Exception e) {
     }
-
+    
     int id = Integer.parseInt(request.getParameter("id"));
     String name = request.getParameter("name");
     String description = request.getParameter("description");
@@ -31,7 +31,7 @@
     java.sql.Time time = java.sql.Time.valueOf(request.getParameter("time"));
 
     SessionPersistence sp = new SessionPersistence();
-    Session s = new Session();
+    Session s = sp.getSessionByID(id);
     s.setId(id);
     s.setName(name);
     s.setDescription(description);
