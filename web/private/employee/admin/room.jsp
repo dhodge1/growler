@@ -40,6 +40,11 @@
             .modals{
                 display:none;
             }
+            .showModal, .showModal2, .showModal3 {
+                color:#0067b1;
+                text-decoration: underline;
+                cursor: pointer;
+            }
             .no-close .ui-dialog-titlebar-close {
                 display: none;
             }
@@ -48,9 +53,6 @@
             }
             .pager li {
                 cursor: pointer;
-            }
-            .button-primary {
-                margin-right: 12px;
             }
             .modalCloser {
                 margin-left: 12px;
@@ -223,7 +225,7 @@
                                                 text: 'Yes'
                                             }
                                         }
-                                    }).parent().find('.ui-dialog-buttonset').append('<a href="#" id="modalCloser">No, return to manage rooms table</a>');
+                                    }).parent().find('.ui-dialog-buttonset').append('<span  id="modalCloser"><a>No, return to manage rooms table</a></span>');
                                     $(".showModal").click(function() {
                                         var speaker = $(this).children().val();
                                         $("#modal" + speaker).dialog("open");

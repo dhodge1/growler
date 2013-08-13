@@ -117,7 +117,7 @@
                             </span>
                         </div>
                         <div class="form-group">
-                            <input type="checkbox" name="visible" value="true"/><label class="required checkbox inline">Make speaker visible to users?</label>
+                            <input type="checkbox" name="visible" value="true"/><label class="checkbox inline">Make speaker visible to users?</label>
                         </div>
                         <div class="form-actions">
                             <input class="button button-primary" id="send" type="submit" value="Add Speaker" name="Submit" />

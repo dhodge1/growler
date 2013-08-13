@@ -143,7 +143,6 @@
                                     if (speakerPersist.getSpeakersBySession(sessions.get(i).getId()).size() == 0) {
                                         out.print("<input type='radio' name='session' value=\"" + sessions.get(i).getId() + "\">");
                                     } else {
-                                        out.print("<input type='radio' name='session' value=\"" + sessions.get(i).getId() + "\">");
                                         out.print("<i class='icon16-success'></i>");
                                     }
                                     out.print(dates.format(sessions.get(i).getSessionDate()) + ", " + fmt.format(sessions.get(i).getStartTime()) + ", " + sessions.get(i).getName());

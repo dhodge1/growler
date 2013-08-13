@@ -88,6 +88,9 @@
                                 <br/><span id="error_theme_name" class="message_container">
                                     <span>Please enter a presentation theme name</span>
                                 </span>
+                                <span id="error_too_long" class="message_container">
+                                    <span>Please enter no more than 30 characters</span>
+                                </span>
                             </div>
                             <div class="form-group">
                                 <label class="required">What would be your preferred presentation type?</label>

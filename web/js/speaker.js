@@ -11,8 +11,8 @@ $("#send").click(function(event) {
     $("#error_type").hide();
     $("#error_creator").hide();
     var emptyString = "";
-    var str1 = $("#tip").val();
-    var str2 = $("#tip2").val();
+    var str1 = $.trim($("#tip").val());
+    var str2 = $.trim($("#tip2").val());
     var str3 = $("#tip3").val();
     var str4 = $("#tip4").val();
     if ($.trim(str1) === emptyString) {

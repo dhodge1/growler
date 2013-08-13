@@ -18,6 +18,8 @@
         <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
         <script src="http://growler-dev.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
+        <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
         <title>Edit Theme</title>
         <style>
             .message_container {
@@ -78,22 +80,37 @@
                         <label class="required">Theme name</label>
                         <input id="tip" name="name" type="text" data-content="Enter the name of the Theme" value="<% out.print(theme.getName());%>" maxlength="30"/>
                         <input name="id" type="hidden" value="<% out.print(theme.getId());%>" />
+                        <br/><span id="error_theme_name" class="message_container">
+                                    <span>Please enter a presentation theme name</span>
+                                </span>
+                                <span id="error_too_long" class="message_container">
+                                    <span>Please enter no more than 30 characters</span>
+                                </span>
                     </div>
                     <div class="form-group">
                         <label class="required">Theme description</label>
-                        <input name="description" id="tip2" type="text" data-content="Enter the Description" value="<% out.print(theme.getDescription());%>" maxlength="250"/>
+                        <input name="description" id="tip3" type="text" data-content="Enter the Description" value="<% out.print(theme.getDescription());%>" maxlength="250"/>
                     </div>
                     <div class="form-group">
                         <label class="required">Theme category</label>
-                        <select name="category" id="tip3">
+                        <select name="category" id="tip2">
                             <option value="0"> Select a Type </option>
                             <option value="Business" <% if (theme.getType().equals("Business")) {                                out.print("selected"); } %>>Business</option>
                             <option value="Technical" <% if (theme.getType().equals("Technical")) {                                out.print("selected"); } %>>Technical</option>
                         </select>
+                        <br/><span id="error_theme_type" class="message_container">
+                                    <span>Please select a presentation theme type</span>
+                                </span>
                     </div>
                     <div class="form-group">
                         <label class="required">Theme added by</label>
-                        <input name="creator" id="tip4" type="text" data-content="Enter a Creator ID for the Theme" value="<% out.print(theme.getCreatorId());%>"/>
+                        <input name="creator" id="tip4" type="text" data-content="Enter a Creator ID for the Theme, no more than 6 characters" value="<% out.print(theme.getCreatorId());%>"/>
+                        <br/><span id="error_creator" class="message_container">
+                                    <span>Please enter who suggested the theme</span>
+                                </span>
+                        <span id="error_creator_length" class="message_container">
+                            <span>Please enter no more than 6 characters</span>
+                        </span>
                     </div>
                     <div class="form-group" style="margin-bottom: 15px;">
                         <input type='checkbox' name='visible' <% if (theme.getVisible()) { out.print(" checked ");} %> />

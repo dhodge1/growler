@@ -56,9 +56,6 @@
             .pager li {
                 cursor: pointer;
             }
-            .button-primary {
-                margin-right: 12px;
-            }
             .modalCloser {
                 margin-left: 12px;
                 color:#0067b1;
@@ -173,7 +170,7 @@
                                     ArrayList<Speaker> speakers = sp.getSpeakersForSession(sessions.get(i).getId());
                                     if (speakers.size() != 0) {
                                     for (int j = 0; j < speakers.size(); j++) {
-                                        out.print("<a class='showModal'>");
+                                        out.print("<a class='showModal2'>");
                                         out.print(speakers.get(j).getFullName() + "<input type='hidden' value='" + speakers.get(j).getId() + "' /></a><br/>");
                                         out.print("<div class='modals' id='modalspkr" + speakers.get(j).getId() + "' title='" + speakers.get(j).getFullName() + "'>");
                                         out.print(""); //The Bio information goes here?
@@ -283,10 +280,10 @@
                                                 text: 'Yes'
                                             }
                                         }
-                                    }).parent().find('.ui-dialog-buttonset').append('<a href="#" id="modalCloser">No, return to manage sessions table</a>');
+                                    }).parent().find('.ui-dialog-buttonset').append('<span id="modalCloser"><a>No, return to manage sessions table</a></span>');
                                     $("#year").change(function(){
                                         var year = (parseInt($("#year").val()));
-                                        window.location.href = "http://snit.scrippsnetworks.com/private/employee/admin/session.jsp?year=" + year;
+                                        window.location.href = "http://sni-techtoberfest.scrippsnetworks.com/private/employee/admin/session.jsp?year=" + year;
                                     });
                                     $(".showModal").click(function() {
                                         var session = $(this).children().val();

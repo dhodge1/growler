@@ -60,9 +60,6 @@
             .pager li {
                 cursor: pointer;
             }
-            .button-primary {
-                margin-right: 12px;
-            }
             .modalCloser {
                 margin-left: 12px;
                 color:#0067b1;
@@ -233,7 +230,7 @@
                                                 text: 'Yes'
                                             }
                                         }
-                                    }).parent().find('.ui-dialog-buttonset').append('<a href="#" id="modalCloser">No, return to manage speakers table</a>');
+                                    }).parent().find('.ui-dialog-buttonset').append('<span id="modalCloser"><a>No, return to manage speakers table</a></span>');
                                     $(".showModal").click(function() {
                                         var speaker = $(this).children().val();
                                         $("#modal" + speaker).dialog("open");

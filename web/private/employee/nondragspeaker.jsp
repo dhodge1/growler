@@ -69,6 +69,13 @@
                     $("#speakers").find(":hidden").prop("name", "none");
                     $("#ranked").find(":hidden").prop("name", "list");
                 });
+                var clicks = 0;
+                $("#filter").click(function() {
+                    clicks++;
+                    if (clicks === 1){
+                        $("#filter").val("");
+                    }
+                });
                 $("#filter").on("keyup", function() {
                     var text = $("#filter").val();
                     if (text !== "") {
@@ -228,7 +235,9 @@
                                 <span class="keywordFilter" style="width:100%; margin-top: 6px;">
                                     <i class="icon16-magnifySmall"></i>
                                     <span class="keywordFilter-wrapper">
+                                        <form>
                                         <input type="search" id="filter" value="Filter..." />
+                                        </form>
                                     </span>
                                     <a class="keywordFilter-clear" onclick="clearFilter();"><i class="icon16-close"></i></a>
                                 </span>
