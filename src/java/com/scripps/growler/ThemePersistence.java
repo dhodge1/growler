@@ -75,7 +75,7 @@ public class ThemePersistence extends GrowlerPersistence {
         try {
             initializeJDBC();
             statement = connection.prepareStatement("insert into theme ("
-                    + "name, description, reason, visible, creator, type, description) values "
+                    + "name, description, reason, visible, creator, type) values "
                     + "(?, ?, ?, ?, ?, ?)");
             statement.setString(1, t.getName());
             statement.setString(2, t.getDescription());
@@ -83,7 +83,6 @@ public class ThemePersistence extends GrowlerPersistence {
             statement.setBoolean(4, false);
             statement.setInt(5, t.getCreatorId());
             statement.setString(6, t.getType());
-            statement.setString(7, "");
             success = statement.execute();
             closeJDBC();
         } catch (Exception e) {

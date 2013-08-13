@@ -37,6 +37,7 @@
     t.setType(type);
     t.setCreatorId(user);
     t.setReason(reason);
+    t.setDescription("");
     persist.addTheme(t);
     session.setAttribute("message", "Success: Your suggestion has been submitted successfully!");
     response.sendRedirect("../private/employee/themeentry-confirm.jsp");

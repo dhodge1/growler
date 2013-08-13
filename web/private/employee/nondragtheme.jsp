@@ -87,6 +87,13 @@
                         $("#themes li").show();
                     }
                 });
+                var clicks = 0;
+                $("#filter").click(function() {
+                    clicks++;
+                    if (clicks === 1){
+                        $("#filter").val("");
+                    }
+                });
                 $("#send").click(function(event) {
                     $("#ranked").find(".placeholder").remove(); //Remove the placeholder
                     if ($("#ranked li").length === 0 && parseInt($("#previously").val()) === 0) {
@@ -231,7 +238,7 @@
                 <span><strong>Note:</strong> The order in which you select the item is the order they will be ranked.</span>
                 <div class='row largeBottomMargin'></div>
 
-                <form action='../../action/processThemeRanking.jsp'>
+                <form action='../../action/processThemeRanking.jsp' onkeypress="return event.keyCode != 13;">
                     <div class='row largeBottomMargin'>
                         <div class='row span10' style='background: #ddd;'>
                             <div class='span6 smallBottomMargin'>

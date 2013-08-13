@@ -117,7 +117,7 @@
                         <label class="checkbox inline">Make theme visible to users?</label>
                     </div>
                         <div class="form-actions">
-                    <input type="submit" value="Save Changes" class="button button-primary"/>
+                    <input type="submit" value="Save Changes" id="send" class="button button-primary"/>
                     <a href="../../../private/employee/admin/theme.jsp">Cancel</a>
                         </div>
                 </form>

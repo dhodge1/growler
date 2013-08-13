@@ -228,16 +228,14 @@
                 <span><strong>Note:</strong> The order in which you select the item is the order they will be ranked.</span>
                 <div class='row largeBottomMargin'></div>
 
-                <form action='../../action/processSpeakerRanking.jsp'>
+                <form action='../../action/processSpeakerRanking.jsp' onkeypress="return event.keyCode != 13;">
                     <div class='row largeBottomMargin'>
                         <div class='row span10' style='background:#ddd;'>
                             <div class='span6 smallBottomMargin'>
                                 <span class="keywordFilter" style="width:100%; margin-top: 6px;">
                                     <i class="icon16-magnifySmall"></i>
-                                    <span class="keywordFilter-wrapper">
-                                        <form>
+                                    <span class="keywordFilter-wrapper">                                        
                                         <input type="search" id="filter" value="Filter..." />
-                                        </form>
                                     </span>
                                     <a class="keywordFilter-clear" onclick="clearFilter();"><i class="icon16-close"></i></a>
                                 </span>
