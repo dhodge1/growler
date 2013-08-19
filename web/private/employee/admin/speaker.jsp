@@ -60,7 +60,7 @@
             .pager li {
                 cursor: pointer;
             }
-            .modalCloser {
+            #modalCloser {
                 margin-left: 12px;
                 color:#0067b1;
                 text-decoration: underline;
@@ -228,9 +228,16 @@
                                                     $(this).dialog('close');
                                                 },
                                                 text: 'Yes'
-                                            }
+                                            },
+                                                'cancel': {
+                                            'class': 'modalCloser',
+                                                    click: function () {
+                                                $(this).dialog('close');
+                                                    },
+                                                            text: 'No, return to manage speakers table'
+                                                }
                                         }
-                                    }).parent().find('.ui-dialog-buttonset').append('<span id="modalCloser"><a>No, return to manage speakers table</a></span>');
+                                    });
                                     $(".showModal").click(function() {
                                         var speaker = $(this).children().val();
                                         $("#modal" + speaker).dialog("open");

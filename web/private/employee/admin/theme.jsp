@@ -60,7 +60,7 @@
                 text-decoration: underline;
                 cursor: pointer;
             }
-            .modalCloser {
+            #modalCloser {
                 margin-left: 12px;
                 color:#0067b1;
                 text-decoration: underline;
@@ -218,7 +218,7 @@
                                         dialogClass: "no-close",
                                         buttons: {
                                             'ok': {
-                                                'class': 'button button-primary',
+                                                'class': 'button-primary',
                                                 click: function() {
                                                     var theme = $(this).prop("id");
                                                     theme = theme.substring(11);
@@ -228,10 +228,15 @@
                                                     $(this).dialog('close');
                                                 },
                                                 text: 'Yes'
+                                            },
+                                            'cancel': {'class': 'modalCloser',
+                                                click: function() {
+                                                    $(this).dialog('close');
+                                                }, text: 'No, return to manage themes table'
                                             }
                                         },
-                                    }).parent().find('.ui-dialog-buttonset').append('<span id="modalCloser"><a>No, return to manage themes table</a></span>');
-                                    $("#modalCloser").click(function(){
+                                    });
+                                    $("#modalCloser").click(function() {
                                         $(".modalDelete").dialog("close");
                                     });
                                     $(".showModal").click(function() {

@@ -32,21 +32,19 @@
     n.setDescription(description);
     n.setDuration(duration);
     n.setTheme(theme);
+    n.setSpeaker(user);
     //Check to see if the person nominating is already a speaker. If they aren't insert them into the 
-    SpeakerPersistence sp = new SpeakerPersistence();
-    Speaker test = sp.getSpeakerByName(request.getHeader("sn_first_name"), request.getHeader("sn_last_name"));
-    if (test == null) {
-        Speaker add = new Speaker();
-        add.setFirstName(request.getHeader("sn_first_name"));
-        add.setLastName(request.getHeader("sn_last_name"));
-        add.setType("Business");
-        sp.addSpeaker(add);
-        add = sp.getSpeakerByName(request.getHeader("sn_first_name"), request.getHeader("sn_last_name"));
-        n.setSpeaker(add.getId());
-    }
-    else {
-        n.setSpeaker(test.getId());
-    }
+  //  SpeakerPersistence sp = new SpeakerPersistence();
+  //  Speaker test = sp.getSpeakerByName(request.getHeader("sn_first_name"), request.getHeader("sn_last_name"));
+   // if (test == null) {
+    //    Speaker add = new Speaker();
+   //     test.setFirstName(request.getHeader("sn_first_name"));
+   //     test.setLastName(request.getHeader("sn_last_name"));
+   //     test.setType("Business");
+   //     sp.addSpeaker(test);
+  //  }
+  //  test = sp.getSpeakerByName(request.getHeader("sn_first_name"), request.getHeader("sn_last_name"));
+  //  n.setSpeaker(test.getId());
     
     np.addNomination(n);
     session.setAttribute("message", "Success: Your nomination has been submitted successfully!");

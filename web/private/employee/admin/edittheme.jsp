@@ -106,7 +106,7 @@
                         <label class="required">Theme added by</label>
                         <input name="creator" id="tip4" type="text" data-content="Enter a Creator ID for the Theme, no more than 6 characters" value="<% out.print(theme.getCreatorId());%>"/>
                         <br/><span id="error_creator" class="message_container">
-                                    <span>Please enter who suggested the theme</span>
+                                    <span>Please enter your User ID</span>
                                 </span>
                         <span id="error_creator_length" class="message_container">
                             <span>Please enter no more than 6 characters</span>
