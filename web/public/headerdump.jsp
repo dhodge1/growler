@@ -91,9 +91,9 @@
             %>
             <h2>Cookies</h2>
             <%
-            Cookie[] cookies = request.getCookies();
-            for (int i = 0; i < cookies.length; i++) {
-                out.print(cookies[i].getName() + ": " + cookies[i].getValue());
+            Cookie[] cookies2 = request.getCookies();
+            for (int i = 0; i < cookies2.length; i++) {
+                out.print(cookies2[i].getName() + ": " + cookies2[i].getValue());
             }
 
             

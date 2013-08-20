@@ -6,7 +6,9 @@ package com.scripps.growler;
 
 import java.sql.*;
 import javax.servlet.http.Cookie;
+
 import org.apache.log4j.*;
+
 /**
  *
  * @author "Justin Bauguess"
@@ -41,17 +43,18 @@ public class DataConnection {
         Class.forName("com.mysql.jdbc.Driver");
         return (connection = DriverManager.getConnection("jdbc:mysql://" + PRODUCTION + ":3306/" + DBNAME, PRODUSER, PRODPASS));
     }
-    
-     public String getCookieValue(Cookie[] cookies,
-                                      String cookieName,
-                                      String defaultValue) {
-    for(int i=0; i<cookies.length; i++) {
-      Cookie cookie = cookies[i];
-      if (cookieName.equals(cookie.getName()))
-        return(cookie.getValue());
+
+    public String getCookieValue(Cookie[] cookies,
+            String cookieName,
+            String defaultValue) {
+        for (int i = 0; i < cookies.length; i++) {
+            Cookie cookie = cookies[i];
+            if (cookieName.equals(cookie.getName())) {
+                return (cookie.getValue());
+            }
+        }
+        return (defaultValue);
     }
-    return(defaultValue);
-  }
 
     public String bytesToHex(byte[] b) {
         char hexDigit[] = {'0', '1', '2', '3', '4', '5', '6', '7',
@@ -100,5 +103,3 @@ public class DataConnection {
         connection.close();
     }
 }
-
-
