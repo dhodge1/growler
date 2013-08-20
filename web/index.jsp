@@ -13,41 +13,7 @@
 <jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page" />
 <%@page import="com.scripps.growler.*" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%
-    Cookie[] cookies = request.getCookies();
-    
-    if (cookies.length > 5) {
-        String first_name = cookies[7].getValue();
-        String last_name = cookies[8].getValue();
-        String email = cookies[5].getValue();
-        String id = cookies[6].getValue();
-        String name = last_name + ", " + first_name;
-        UserPersistence up = new UserPersistence();
-        User u = up.getUserByEmail(email);
-        User newUser = new User();
-        if (u != null) {
-            session.setAttribute("user", u.getUserName());
-            session.setAttribute("id", u.getCorporateId());
-            if (u.getRole().equals("admin")) {
-                session.setAttribute("role", "admin");
-                //response.sendRedirect("/private/employee/admin/home.jsp");
-            }
-        } else if (!id.equals(null) || !id.equals("null")) {
-            newUser.setId(Integer.parseInt(id));
-            newUser.setCorporateId(id);
-            newUser.setUserName(name);
-            newUser.setEmail(email);
-            up.addUser(newUser);
-            session.setAttribute("user", newUser.getUserName());
-            session.setAttribute("id", newUser.getCorporateId());
-            if (id.equals("160240") || id.equals("160445") || id.equals("162107") || id.equals("161301")) { //if it's Ian R. or Brian S.
-                session.setAttribute("role", "admin");
-                //response.sendRedirect("/private/employee/admin/home.jsp");
-            }
-        }
-        response.sendRedirect("/private/employee/home.jsp");
-    }
-%>
+
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
