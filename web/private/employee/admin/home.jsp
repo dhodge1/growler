@@ -37,11 +37,13 @@
     </head>
     <body id="growler1">
         <%
-            if (request.getHeader("sn_employee_id") != null) {
-                String first_name = request.getHeader("sn_first_name");
-                String last_name = request.getHeader("sn_last_name");
-                String email = request.getHeader("sn_email");
-                String id = request.getHeader("sn_employee_id");
+            Cookie[] cookies = request.getCookies();
+    
+    if (cookies.length > 5) {
+        String first_name = cookies[7].getValue();
+        String last_name = cookies[8].getValue();
+        String email = cookies[5].getValue();
+        String id = cookies[6].getValue();
                 String name = last_name + ", " + first_name;
                 UserPersistence up = new UserPersistence();
                 User u = up.getUserByEmail(email);
