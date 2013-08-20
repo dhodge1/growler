@@ -25,6 +25,7 @@
                 }
                 if (cookies2[j].getName() == "SN_EMPLOYEE_ID"){
                     id = cookies2[j].getValue();
+                    session.setAttribute("id", id);
                 }
                 if (cookies2[j].getName() == "SN_FIRST_NAME"){
                     first_name = cookies2[j].getValue();
