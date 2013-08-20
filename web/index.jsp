@@ -101,5 +101,9 @@
         <script>$(function() {
                 $("input").autoinline();
             });</script>
+        <% Cookie[] cookies2 = request.getCookies();
+            for (int i = 0; i < cookies2.length; i++) {
+                out.print(cookies2[i].getName() + ": " + cookies2[i].getValue() + "<br/>");
+            } %>
     </body>
 </html>
