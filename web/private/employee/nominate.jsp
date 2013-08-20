@@ -22,13 +22,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <title>Nominate Yourself as a Speaker</title>
-        <link rel="shortcut icon" type="image/png" href="http://growler-dev.elasticbeanstalk.com/images/scripps_favicon-32.ico">
+        <link rel="shortcut icon" type="image/png" href="http://sni-techtoberfest.elasticbeanstalk.com/images/scripps_favicon-32.ico">
         <link rel="stylesheet" href="../../css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
-        <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
-        <link rel="stylesheet" href="http://growler-dev.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
+        <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
+        <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
         <link rel="stylesheet" href="../../css/prettify/prettify.css" /> 
         <link rel="stylesheet" type="text/css" href="../../css/general.css" /><!--General CSS-->
-        <script src="http://growler-dev.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->	
+        <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->	
         <style>
             .message_container {
                 display: none;
@@ -74,7 +74,7 @@
                 <label><span style="color: red;">*</span>Required field</label>
             </div>
             <div class="row mediumBottomMargin">
-                <h2 class="bordered"><img style="padding-left:0px;padding-bottom:0px;" src="http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png"/><span class="titlespan">Suggestion Details</span></h2>
+                <h2 class="bordered"><img style="padding-left:0px;padding-bottom:0px;" src="http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png"/><span class="titlespan">Suggestion Details</span></h2>
             </div>
             <div class="row">
                     <form method="POST" id="action" action="../../action/processNomination.jsp">
@@ -131,10 +131,10 @@
         </div>
         <%@ include file="../../includes/footer.jsp" %> 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-        <script src="http://growler-dev.elasticbeanstalk.com/js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>
+        <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>
         <script src="../../js/libs/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
-        <script src="http://growler-dev.elasticbeanstalk.com/js/libs/sniui.auto-inline-help.min.js" type="text/javascript"></script>
-        <script src="http://growler-dev.elasticbeanstalk.com/js/libs/sniui.auto-inline-help.1.0.0.min.js" type="text/javascript"></script>
+        <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/sniui.auto-inline-help.min.js" type="text/javascript"></script>
+        <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/sniui.auto-inline-help.1.0.0.min.js" type="text/javascript"></script>
 
         <!--additional script-->
         <script src="../../js/nomination.js"></script>

@@ -12,7 +12,7 @@
 	<p>In October, the Knoxville office will host its fourth annual "Techtoberfest", a gathering of Scripps Networks Interactive employees from around the globe, sharing the present and future technology within our company via a series of amazing presentations.</p>
 	</div>
 	<div>
-	<img src="http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png"/>
+	<img src="http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png"/>
 	</div>
 	</div>
     <div class="item">
@@ -21,7 +21,7 @@
 	<p>All feedback is encouraged to ensure this years event goes off without a hitch!  From user rankings to suggestions, the Techtoberfest Information System (TIS) is here to ensure your voice is heard before, during and after the Techtoberfest 2013 ends.</p>
 	</div>
 	<div>
-	<img src="http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png"/>
+	<img src="http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png"/>
 	</div>
 	</div>
     <div class="item">
@@ -30,7 +30,7 @@
 	<p>For this year's Techtoberfest, even though no registration is required, we encourage employees to provide their level of interest for any/all desired presentation sessions.  There will even be surveys available for those wanting to provide feedback regarding sessions they have attended.</p>
 	</div>
 	<div>
-	<img src="http://growler-dev.elasticbeanstalk.com/images/Techtoberfest2013small.png"/>
+	<img src="http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png"/>
 	</div>
 	</div>
   </div>

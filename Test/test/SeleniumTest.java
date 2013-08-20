@@ -28,13 +28,13 @@ public class SeleniumTest {
     
     @Test
     public void testThemeSuggestion() throws Exception {
-        driver.get("http://growler-dev.elasticbeanstalk.com");
+        driver.get("http://sni-techtoberfest.elasticbeanstalk.com");
         driver.manage().window().maximize();
         driver.findElement(By.name("username")).sendKeys("202300");
         driver.findElement(By.name("password")).sendKeys("password");
         WebElement button = driver.findElement(By.id("send"));
         button.click();
-        driver.navigate().to("http://growler-dev.elasticbeanstalk.com/view/themeentry.jsp");
+        driver.navigate().to("http://sni-techtoberfest.elasticbeanstalk.com/view/themeentry.jsp");
         driver.findElement(By.name("name")).sendKeys("Selenium Test: " + random.nextDouble());
         driver.findElement(By.id("tip2")).sendKeys("A Description to Test!!");
         driver.findElement(By.name("reason")).sendKeys("There is no good reason.");
@@ -44,13 +44,13 @@ public class SeleniumTest {
     
     @Test
     public void testOpen() throws Exception {
-        driver.get("http://growler-dev.elasticbeanstalk.com");
+        driver.get("http://sni-techtoberfest.elasticbeanstalk.com");
         driver.manage().window().maximize();
         driver.findElement(By.name("username")).sendKeys("202300");
         driver.findElement(By.name("password")).sendKeys("password");
         WebElement button = driver.findElement(By.id("send"));
         button.click();
-        driver.navigate().to("http://growler-dev.elasticbeanstalk.com/view/sessionschedule.jsp");
+        driver.navigate().to("http://sni-techtoberfest.elasticbeanstalk.com/view/sessionschedule.jsp");
         List<WebElement> e = driver.findElements(By.name("interest"));
         for (int i = 0; i < e.size(); i++) {
             e.get(i).click();
@@ -61,13 +61,13 @@ public class SeleniumTest {
     
     @Test
     public void testSpeakerSuggest() throws Exception {
-        driver.get("http://growler-dev.elasticbeanstalk.com");
+        driver.get("http://sni-techtoberfest.elasticbeanstalk.com");
         driver.manage().window().maximize();
         driver.findElement(By.name("username")).sendKeys("202300");
         driver.findElement(By.name("password")).sendKeys("password");
         WebElement button = driver.findElement(By.id("send"));
         button.click();
-        driver.navigate().to("http://growler-dev.elasticbeanstalk.com/view/speakerentry.jsp");
+        driver.navigate().to("http://sni-techtoberfest.elasticbeanstalk.com/view/speakerentry.jsp");
         driver.findElement(By.name("first_name")).sendKeys("Spkr: " + random.nextInt(15));
         driver.findElement(By.name("last_name")).sendKeys("Spkr: " + random.nextInt(16));
         driver.findElement(By.id("send")).click();
