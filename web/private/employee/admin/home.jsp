@@ -56,7 +56,7 @@
                     last_name = cookies2[j].getValue();
                 }
             }
-    if (id != "") {
+    if (!id.equals("")) {
         String name = last_name + ", " + first_name;
                 UserPersistence up = new UserPersistence();
                 User u = up.getUserByEmail(email);
