@@ -5,6 +5,7 @@
 --%>
 
 <%@page import="java.util.Enumeration"%>
+<%@page import="com.scripps.growler.DataConnection" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,6 +14,27 @@
         <title>Header Dump Page</title>
     </head>
     <body>
+        <h2>cookie monster</h2>
+        <%
+            DataConnection dc = new DataConnection();
+            Cookie[] cookies = request.getCookies();
+            if (dc.getCookieValue(cookies, "SN_EMAIL", "") != "") {
+                out.print(dc.getCookieValue(cookies, "SN_EMAIL", ""));
+                out.print("<br/>");
+            }
+            if (dc.getCookieValue(cookies, "SN_LAST_NAME", "") != "") {
+                out.print(dc.getCookieValue(cookies, "SN_LAST_NAME", ""));
+                out.print("<br/>");
+            }
+            if (dc.getCookieValue(cookies, "SN_FIRST_NAME", "") != "") {
+                out.print(dc.getCookieValue(cookies, "SN_FIRST_NAME", ""));
+                out.print("<br/>");
+            }
+            if (dc.getCookieValue(cookies, "SN_EMPLOYEE_ID", "") != "") {
+                out.print(dc.getCookieValue(cookies, "SN_EMPLOYEE_ID", ""));
+                out.print("<br/>");
+            }
+        %>
         <h1>These are the Headers we are receiving</h1>
         <%
             

@@ -14,6 +14,9 @@
 <%@page import="com.scripps.growler.*" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
+    Cookie[] cookies = request.getCookies();
+    DataConnection dc = new DataConnection();
+    dc.getCookieValue(cookies, "SN_EMPLOYEE_ID", "");
     if (request.getHeader("sn_employee_id") != null) {
         String first_name = request.getHeader("sn_first_name");
         String last_name = request.getHeader("sn_last_name");
