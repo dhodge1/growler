@@ -56,6 +56,7 @@
                         session.setAttribute("role", "admin");
                     }
                 }
+                response.sendRedirect("private/employee/home.jsp");
     }
 %>
 <!doctype html>
