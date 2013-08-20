@@ -5,7 +5,6 @@
 package com.scripps.growler;
 
 import java.sql.*;
-import javax.servlet.http.Cookie;
 
 import org.apache.log4j.*;
 
@@ -42,18 +41,6 @@ public class DataConnection {
         logger.info("Getting the Driver, then Returning a connection using the class constants of DBNAME, DBUSER, DBPASSWORD");
         Class.forName("com.mysql.jdbc.Driver");
         return (connection = DriverManager.getConnection("jdbc:mysql://" + PRODUCTION + ":3306/" + DBNAME, PRODUSER, PRODPASS));
-    }
-
-    public String getCookieValue(Cookie[] cookies,
-            String cookieName,
-            String defaultValue) {
-        for (int i = 0; i < cookies.length; i++) {
-            Cookie cookie = cookies[i];
-            if (cookieName.equals(cookie.getName())) {
-                return (cookie.getValue());
-            }
-        }
-        return (defaultValue);
     }
 
     public String bytesToHex(byte[] b) {

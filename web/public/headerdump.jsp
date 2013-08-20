@@ -16,24 +16,7 @@
     <body>
         <h2>cookie monster</h2>
         <%
-            DataConnection dc = new DataConnection();
-            Cookie[] cookies = request.getCookies();
-            if (dc.getCookieValue(cookies, "SN_EMAIL", "") != "") {
-                out.print(dc.getCookieValue(cookies, "SN_EMAIL", ""));
-                out.print("<br/>");
-            }
-            if (dc.getCookieValue(cookies, "SN_LAST_NAME", "") != "") {
-                out.print(dc.getCookieValue(cookies, "SN_LAST_NAME", ""));
-                out.print("<br/>");
-            }
-            if (dc.getCookieValue(cookies, "SN_FIRST_NAME", "") != "") {
-                out.print(dc.getCookieValue(cookies, "SN_FIRST_NAME", ""));
-                out.print("<br/>");
-            }
-            if (dc.getCookieValue(cookies, "SN_EMPLOYEE_ID", "") != "") {
-                out.print(dc.getCookieValue(cookies, "SN_EMPLOYEE_ID", ""));
-                out.print("<br/>");
-            }
+
         %>
         <h1>These are the Headers we are receiving</h1>
         <%
@@ -93,7 +76,7 @@
             <%
             Cookie[] cookies2 = request.getCookies();
             for (int i = 0; i < cookies2.length; i++) {
-                out.print(cookies2[i].getName() + ": " + cookies2[i].getValue());
+                out.print(cookies2[i].getName() + ": " + cookies2[i].getValue() + "<br/>");
             }
 
             
