@@ -145,8 +145,7 @@
         <script src="js/index.js"></script>
         <script>$(function() {
                 $("input").autoinline();
-                alert(getCookie("SN_EMAIL"));
-                alert(getCookie("SN_EMPLOYEE_ID"));
+                alert(document.cookie);
                 
             });
             function getCookie(c_name)
