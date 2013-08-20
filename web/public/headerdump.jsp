@@ -78,7 +78,11 @@
             for (int i = 0; i < cookies2.length; i++) {
                 out.print(cookies2[i].getName() + ": " + cookies2[i].getValue() + "<br/>");
             }
-            
+            for (int j = 0; j < cookies2.length; j++){
+                if (cookies2[j].getName() == "SN_EMAIL"){
+                    
+                }
+            }
 
             
             %>

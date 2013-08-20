@@ -13,7 +13,51 @@
 <jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page" />
 <%@page import="com.scripps.growler.*" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<% 
+    Cookie[] cookies2 = request.getCookies();
+    String email = "";
+    String id = "";
+    String first_name = "";
+    String last_name = "";
+    for (int j = 0; j < cookies2.length; j++){
+                if (cookies2[j].getName() == "SN_EMAIL"){
+                    email = cookies2[j].getValue();
+                }
+                if (cookies2[j].getName() == "SN_EMPLOYEE_ID"){
+                    id = cookies2[j].getValue();
+                }
+                if (cookies2[j].getName() == "SN_FIRST_NAME"){
+                    first_name = cookies2[j].getValue();
+                }
+                if (cookies2[j].getName() == "SN_LAST_NAME"){
+                    last_name = cookies2[j].getValue();
+                }
+            }
+    if (id != "") {
+        String name = last_name + ", " + first_name;
+                UserPersistence up = new UserPersistence();
+                User u = up.getUserByEmail(email);
+                User newUser = new User();
+                if (u != null) {
+                    session.setAttribute("user", u.getUserName());
+                    session.setAttribute("id", u.getCorporateId());
+                    if (u.getRole().equals("admin")) {
+                        session.setAttribute("role", "admin");
+                    }
+                } else if (!id.equals(null) || !id.equals("null")) {
+                    newUser.setId(Integer.parseInt(id));
+                    newUser.setCorporateId(id);
+                    newUser.setUserName(name);
+                    newUser.setEmail(email);
+                    up.addUser(newUser);
+                    session.setAttribute("user", newUser.getUserName());
+                    session.setAttribute("id", newUser.getCorporateId());
+                    if (id.equals("160240") || id.equals("160445") || id.equals("162107") || id.equals("161301")) { //if it's Ian R. or Brian S.
+                        session.setAttribute("role", "admin");
+                    }
+                }
+    }
+%>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
@@ -101,9 +145,5 @@
         <script>$(function() {
                 $("input").autoinline();
             });</script>
-        <% Cookie[] cookies2 = request.getCookies();
-            for (int i = 0; i < cookies2.length; i++) {
-                out.print(cookies2[i].getName() + ": " + cookies2[i].getValue() + "<br/>");
-            } %>
     </body>
 </html>
