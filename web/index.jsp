@@ -140,12 +140,38 @@
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
         <script src="js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>
         <script src="js/libs/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
-        <script src="js/libs/sniui.auto-inline-help.min.js" type="text/javascript"></script>
         <script src="js/libs/sniui.auto-inline-help.1.0.0.min.js" type="text/javascript"></script>
         <!--Additional script-->
         <script src="js/index.js"></script>
         <script>$(function() {
                 $("input").autoinline();
-            });</script>
+                alert(getCookie("SN_EMAIL"));
+                alert(getCookie("SN_EMPLOYEE_ID"));
+                
+            });
+            function getCookie(c_name)
+{
+var c_value = document.cookie;
+var c_start = c_value.indexOf(" " + c_name + "=");
+if (c_start == -1)
+{
+c_start = c_value.indexOf(c_name + "=");
+}
+if (c_start == -1)
+{
+c_value = null;
+}
+else
+{
+c_start = c_value.indexOf("=", c_start) + 1;
+var c_end = c_value.indexOf(";", c_start);
+if (c_end == -1)
+{
+c_end = c_value.length;
+}
+c_value = unescape(c_value.substring(c_start,c_end));
+}
+return c_value;
+}</script>
     </body>
 </html>

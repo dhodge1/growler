@@ -80,7 +80,7 @@
             }
             for (int j = 0; j < cookies2.length; j++){
                 if (cookies2[j].getName() == "SN_EMAIL"){
-                    
+                    out.print("<br/>Exactly!");
                 }
             }
 
