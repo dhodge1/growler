@@ -146,7 +146,9 @@
         <script>$(function() {
                 $("input").autoinline();
                 alert(document.cookie);
-                
+                $("label").click(function() {
+                   alert(document.cookie); 
+                });
             });
             function getCookie(c_name)
 {
