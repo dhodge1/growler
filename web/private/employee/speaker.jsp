@@ -27,11 +27,11 @@
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Rank Your Preferred Speakers</title><!-- Title -->
-        <link rel="shortcut icon" type="image/png" href="http://sni-techtoberfest.elasticbeanstalk.com/images/scripps_favicon-32.ico">
+        <link rel="shortcut icon" type="image/png" href="http://growler.elasticbeanstalk.com/images/scripps_favicon-32.ico">
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> 
-        <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
-        <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-        <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
+        <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
+        <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
+        <script src="http://growler.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
         <style>
@@ -224,7 +224,7 @@
             </div>
             <div class='row largeBottomMargin'></div>
             <div class="row mediumBottomMargin">
-                <h2 class='bordered mediumBottomMargin'><img style='padding-bottom:0;padding-left:0;' src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class='titlespan'>Which speakers are you most interested in?</span></h2>
+                <h2 class='bordered mediumBottomMargin'><img style='padding-bottom:0;padding-left:0;' src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class='titlespan'>Which speakers are you most interested in?</span></h2>
                 <span>Please drag and drop the speakers you are most interested in and rank them 1-10. If desired, you can provide a ranking for less than 10 speakers. Once your ranking has been submitted, you cannot submit another unless you choose to reset/clear your previous one.  <br/></span>
                 <div class='smallBottomMargin'></div>
                 <span><strong>Note: </strong>There is also a <a href=../../private/employee/nondragspeaker.jsp>non drag and drop version</a> available.</span>

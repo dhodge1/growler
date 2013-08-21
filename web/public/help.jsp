@@ -14,7 +14,7 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <title>Help</title><!-- Title -->
-        <link rel="shortcut icon" type="image/png" href="http://sni-techtoberfest.elasticbeanstalk.com/images/scripps_favicon-32.ico">
+        <link rel="shortcut icon" type="image/png" href="http://growler.elasticbeanstalk.com/images/scripps_favicon-32.ico">
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
@@ -51,7 +51,7 @@
                 <span>Click on a topic below to have the help content displayed.</span>
             </div>
             <div class="row">
-                <h2 class="bordered"><img id="logo" style="padding-left:0;padding-bottom:0;" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan nowrap">Help By Topic</span><span class="pullRight"><a href='Techtoberfest_HelpDocumentation_2013.pdf' target="blank">View as PDF</a></span></h2>
+                <h2 class="bordered"><img id="logo" style="padding-left:0;padding-bottom:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan nowrap">Help By Topic</span><span class="pullRight"><a href='Techtoberfest_HelpDocumentation_2013.pdf' target="blank">View as PDF</a></span></h2>
             </div>
             <div class="row">
                 <div class="accordion" id="accordion-parent">
