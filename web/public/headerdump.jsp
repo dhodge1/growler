@@ -80,7 +80,16 @@
             }
             for (int j = 0; j < cookies2.length; j++){
                 if (cookies2[j].getName().equalsIgnoreCase("SN_EMAIL")){
-                    out.print("<br/>Exactly!");
+                    out.print("<br/>Exactly! EMAIL");
+                }
+                if (cookies2[j].getName().equalsIgnoreCase("SN_LAST_NAME")){
+                    out.print("<br/>Exactly! LAST");
+                }
+                if (cookies2[j].getName().equalsIgnoreCase("SN_FIRST_NAME")){
+                    out.print("<br/>Exactly! NAME");
+                }
+                if (cookies2[j].getName().equalsIgnoreCase("SN_EMPLOYEE_ID")){
+                    out.print("<br/>Exactly! ID");
                 }
             }
 
