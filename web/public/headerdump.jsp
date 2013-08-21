@@ -76,7 +76,7 @@
             <%
             Cookie[] cookies2 = request.getCookies();
             for (int i = 0; i < cookies2.length; i++) {
-                out.print(cookies2[i].getName() + ": " + cookies2[i].getValue() + " @ DOMAIN: " + cookies2[i].getDomain() + "<br/>");
+                out.print(cookies2[i].getName() + ": " + cookies2[i].getValue() + " @ DOMAIN: " + cookies2[i].getDomain() + " AND TOSTRING:" + cookies2[i].toString() + " AND PATH: " + cookies2[i].getPath() + "<br/>");
             }
             for (int j = 0; j < cookies2.length; j++){
                 if (cookies2[j].getName().equalsIgnoreCase("SN_EMAIL")){
