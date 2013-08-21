@@ -69,7 +69,7 @@
 			message.setSubject("Your password has been reset");
 			message.setText("Dear " + u.getUserName() + ",\n\n" +
 				"We have received a notification for your password reset.\n" +
-                                "Please visit http://sni-techtoberfest.elasticbeanstalk.com/view/resetpassword.jsp?id=" + u.getId() + "&email=" + u.getEmail() + " \n" +
+                                "Please visit http://growler.elasticbeanstalk.com/view/resetpassword.jsp?id=" + u.getId() + "&email=" + u.getEmail() + " \n" +
                                 "Your verification code is: " + u.getPassword() + " \n" +
                                 "Thanks,\n\n Techtoberfest Admin Staff");
  

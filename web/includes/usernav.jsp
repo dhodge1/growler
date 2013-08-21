@@ -6,8 +6,8 @@
                  the navigation for users.
 --%>
 <%@page import="java.util.Calendar"%>
-<link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
-<link href="http://sni-techtoberfest.elasticbeanstalk.com/css/navbar.css" rel="stylesheet">
+<link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
+<link href="http://growler.elasticbeanstalk.com/css/navbar.css" rel="stylesheet">
 <% 
     Calendar calendar = Calendar.getInstance();
     String active = " selected ";
@@ -26,7 +26,7 @@
         home = " selected ";
     }
 %>
-<link href="http://sni-techtoberfest.elasticbeanstalk.com/css/responsive.1.2.0.css" rel="stylesheet">
+<link href="http://growler.elasticbeanstalk.com/css/responsive.1.2.0.css" rel="stylesheet">
 <nav class="topnav">
 <nav class="globalNavigation modify-pages" id="navigation">
   <ul>

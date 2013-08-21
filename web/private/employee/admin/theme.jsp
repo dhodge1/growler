@@ -24,10 +24,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Manage Themes</title><!-- Title -->
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> 
-        <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
-        <link rel="stylesheet" href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
+        <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
+        <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
         <link rel="shortcut icon" type="image/png" href="../../../images/scripps_favicon-32.ico">
-        <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
+        <script src="http://growler.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
         <style>
@@ -94,7 +94,7 @@
             </div>
             <div class="row largeBottomMargin"></div>
             <div class="row smallBottomMargin">
-                <h2 class="bordered smallBottomMargin"><img style="padding-bottom:0;padding-left:0;" src='http://sni-techtoberfest.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span style="padding-left: 12px;">Theme Details</span><a href="../../../private/employee/admin/themeentry.jsp" class="pullRight button button-primary">Add Theme</a></h2>
+                <h2 class="bordered smallBottomMargin"><img style="padding-bottom:0;padding-left:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span style="padding-left: 12px;">Theme Details</span><a href="../../../private/employee/admin/themeentry.jsp" class="pullRight button button-primary">Add Theme</a></h2>
             </div>
             <div class="row">
                 <form>
@@ -185,8 +185,8 @@
             </div>
         </div>
         <%@ include file="../../../includes/footer.jsp" %>
-        <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/bootstrap-dropdown.2.0.4.min.js"></script>
-        <script src="http://sni-techtoberfest.elasticbeanstalk.com/js/libs/sniui.dialog.1.2.0.js"></script>
+        <script src="http://growler.elasticbeanstalk.com/js/libs/bootstrap-dropdown.2.0.4.min.js"></script>
+        <script src="http://growler.elasticbeanstalk.com/js/libs/sniui.dialog.1.2.0.js"></script>
         <script src="../../../js/pagination.js"></script>
         <script>
                                 $(document).ready(function() {

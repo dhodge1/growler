@@ -79,7 +79,7 @@
         <link rel="stylesheet" href="css/wijmo/jquery.wijmo-complete.all.2.3.2.min.css"/>
         <link rel="stylesheet" type="text/css" href="css/general.css" /><!--General CSS-->
         <script src="js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
-        <link rel="shortcut icon" type="image/png" href="http://sni-techtoberfest.elasticbeanstalk.com/images/scripps_favicon-32.ico">
+        <link rel="shortcut icon" type="image/png" href="http://growler.elasticbeanstalk.com/images/scripps_favicon-32.ico">
         <style>
             .message_container {
                 display: none;

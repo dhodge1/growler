@@ -18,7 +18,7 @@ public class Test {
         
         
         WebDriver driver = new InternetExplorerDriver();
-        driver.get("http://sni-techtoberfest.elasticbeanstalk.com/");
+        driver.get("http://growler.elasticbeanstalk.com/");
         driver.manage().window().maximize();
         System.out.println(driver.getTitle());
         

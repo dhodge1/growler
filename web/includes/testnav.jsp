@@ -1,6 +1,6 @@
 <%@page import="java.util.Calendar"%>
-<link href="http://sni-techtoberfest.elasticbeanstalk.com/css/navbar.css" rel="stylesheet">
-<link href="http://sni-techtoberfest.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" rel="stylesheet">
+<link href="http://growler.elasticbeanstalk.com/css/navbar.css" rel="stylesheet">
+<link href="http://growler.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" rel="stylesheet">
 <%
     String active = " selected ";
     String pageURI = request.getRequestURI();
