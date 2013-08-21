@@ -41,7 +41,7 @@
                     if (u.getRole().equals("admin")) {
                         session.setAttribute("role", "admin");
                     }
-                } else if (!id.equals(null) || !id.equals("null")) {
+                } else  {
                     newUser.setId(Integer.parseInt(id));
                     newUser.setCorporateId(id);
                     newUser.setUserName(name);
