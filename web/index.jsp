@@ -20,17 +20,17 @@
     String first_name = "";
     String last_name = "";
     for (int j = 0; j < cookies2.length; j++){
-                if (cookies2[j].getName() == "SN_EMAIL"){
+                if (cookies2[j].getName().equalsIgnoreCase("SN_EMAIL")){
                     email = cookies2[j].getValue();
                 }
-                if (cookies2[j].getName() == "SN_EMPLOYEE_ID"){
+                if (cookies2[j].getName().equalsIgnoreCase("SN_EMPLOYEE_ID")){
                     id = cookies2[j].getValue();
                     session.setAttribute("id", id);
                 }
-                if (cookies2[j].getName() == "SN_FIRST_NAME"){
+                if (cookies2[j].getName().equalsIgnoreCase("SN_FIRST_NAME")){
                     first_name = cookies2[j].getValue();
                 }
-                if (cookies2[j].getName() == "SN_LAST_NAME"){
+                if (cookies2[j].getName().equalsIgnoreCase("SN_LAST_NAME")){
                     last_name = cookies2[j].getValue();
                 }
             }
