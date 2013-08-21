@@ -141,7 +141,7 @@
         <%
             String user = "";
             if (null == session.getAttribute("id")) {
-                response.sendRedirect("../../index.jsp");
+                //response.sendRedirect("../../index.jsp");
             }
             try {
                 user = String.valueOf(session.getAttribute("id"));
