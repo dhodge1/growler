@@ -37,26 +37,11 @@
     </head>
     <body id="growler1">
 <% 
-    Cookie[] cookies2 = request.getCookies();
-    String email = "";
-    String id = "";
-    String first_name = "";
-    String last_name = "";
-    for (int j = 0; j < cookies2.length; j++){
-                 if (cookies2[j].getName().equalsIgnoreCase("SN_EMAIL")){
-                    email = cookies2[j].getValue();
-                }
-                if (cookies2[j].getName().equalsIgnoreCase("SN_EMPLOYEE_ID")){
-                    id = cookies2[j].getValue();
-                    session.setAttribute("id", id);
-                }
-                if (cookies2[j].getName().equalsIgnoreCase("SN_FIRST_NAME")){
-                    first_name = cookies2[j].getValue();
-                }
-                if (cookies2[j].getName().equalsIgnoreCase("SN_LAST_NAME")){
-                    last_name = cookies2[j].getValue();
-                }
-            }
+    if (request.getHeader("sn_employee_id") != null) {
+        String first_name = request.getHeader("sn_first_name");
+        String last_name = request.getHeader("sn_last_name");
+        String email = request.getHeader("sn_email");
+        String id = request.getHeader("sn_employee_id");
     if (!id.equals("")) {
         String name = last_name + ", " + first_name;
                 UserPersistence up = new UserPersistence();
@@ -80,7 +65,9 @@
                         session.setAttribute("role", "admin");
                     }
                 }
+                
     }
+     }
 %>
         <%
                     
