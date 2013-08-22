@@ -23,6 +23,12 @@ public class DataConnection {
     private final String LOCAL = "localhost";
     private final String AMAZON = "aa1kghi1e8rhlu6.cllctpcw9g9x.us-east-1.rds.amazonaws.com";
     private final String PRODUCTION = "aa1gc4mp7cif9f.c1cdygckt6aw.us-east-1.rds.amazonaws.com";
+    String dbName = System.getProperty("RDS_DB_NAME");
+    String userName = System.getProperty("RDS_USERNAME");
+    String password = System.getProperty("RDS_PASSWORD");
+    String hostname = System.getProperty("RDS_HOSTNAME");
+    String port = System.getProperty("RDS_PORT");
+    String jdbcUrl = "jdbc:mysql://" + hostname + ":" + port + "/" + dbName + "?user=" + userName + "&password=" + password;
     public Connection connection;
 
     public DataConnection() throws SQLException, ClassNotFoundException {
@@ -40,7 +46,7 @@ public class DataConnection {
     public Connection sendConnection() throws SQLException, ClassNotFoundException {
         logger.info("Getting the Driver, then Returning a connection using the class constants of DBNAME, DBUSER, DBPASSWORD");
         Class.forName("com.mysql.jdbc.Driver");
-        return (connection = DriverManager.getConnection("jdbc:mysql://" + PRODUCTION + ":3306/" + DBNAME, PRODUSER, PRODPASS));
+        return (connection = DriverManager.getConnection(jdbcUrl));
     }
 
     public String bytesToHex(byte[] b) {
