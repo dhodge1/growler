@@ -19,7 +19,7 @@
                         }
                     %>
                 </li>
-                <li><a href="../../../action/logout.jsp">Logout</a></li>
+                <li><a href="http://sniforms.scrippsnetworks.com/siteminderagent/sniforms/logout.html">Logout</a></li>
             </ul>
         </nav> 
     </div>
