@@ -23,7 +23,7 @@
         <nav class="globalNavigation modify-pages" id="navigation">
             <ul class="nav">
                 <li class="non_drop <%= home%>" style="padding-right:12px" ><a href="../../private/employee/home.jsp"><span>Home</span></a></li>
-                <% if (calendar.get(Calendar.MONTH) < 8) { // if it's before September%>
+                <% if ((calendar.get(Calendar.MONTH) == 8 && calendar.get(Calendar.DAY_OF_MONTH) < 19)) { // if it's before September 19th%>
                 <li class="brand_nav <%= themeTab%>" style="padding-left:12px"><a href="#"><span>Themes</span><em></em></a>
                     <ul class="child-menu child-menu-ul firstnav" style="left:11px;">
                         <li><a href="../../private/employee/theme.jsp">Rank Preferred Themes</a></li>
@@ -38,7 +38,7 @@
                     </ul>
                 </li>
                 <% } //end if %>
-                <% if (calendar.get(Calendar.MONTH) > 7) { // if it's after August%>
+                <% if ((calendar.get(Calendar.MONTH) == 8 || calendar.get(Calendar.MONTH) == 9 ) && calendar.get(Calendar.DAY_OF_MONTH) > 19) { // if it's after August%>
                 <li class="brand_nav <%= sessionTab%>" style="padding-left:12px"><a href="#" style='padding-left:8px;'><span class="nav_drop">Sessions</span><em></em></a>
                     <ul class="child-menu child-menu-ul firstnav" style="left:11px;">
                         <li><a href="../../private/employee/sessionschedule.jsp">View Session Schedule</a></li>

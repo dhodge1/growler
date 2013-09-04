@@ -173,7 +173,7 @@
                 <%@include file="../../includes/messagehandler.jsp" %>
                 <%
                     Calendar today = Calendar.getInstance();
-                    if (today.get(Calendar.MONTH) <= 7) { //if it's August
+                    if (today.get(Calendar.MONTH) == 8 && today.get(Calendar.DAY_OF_MONTH) < 19) { //if it's before Sept 19th
                 %>
                 <%@include file="../../includes/august_home.jsp" %>
                 <%                        } else {
