@@ -103,14 +103,21 @@
                         <div class="form-group">
                             <label class="required">Session Topic </label>
                             <input id="name" size='50' name="name" type="text" data-content="Enter the name of the Session" maxlength="70"/>
+                            <br/><span id="error_name" class="message_container">
+                            <span>Please enter a session name</span>
+                        </span>
                         </div>
                         <div class="form-group">
                             <label class="required">Session Description </label>
                             <textarea id="description" name="description" maxlength="250" rows="5" cols="50" data-content="Enter the name of the Session" ></textarea>
+                            <br/><span id="error_description" class="message_container">
+                            <span>Please enter a session description</span>
+                        </span>
                         </div>
                         <div class="form-group">
                             <label class="required">Session speaker </label>
                             <select id="speaker" name="speaker">
+                                <option value="0"> Select a Speaker </option>
                                 <% for (int i = 0; i < speakers.size(); i++){
                                    out.print("<option value='" + speakers.get(i).getId() + "'>");
                                    out.print(speakers.get(i).getFullName());
@@ -121,6 +128,9 @@
                         <div class="form-group">
                             <label class="required">Select a session date </label>
                             <input name="date" id="datepicker" type="text" data-content="Enter a date for the Session"/>
+                            <br/><span id="error_date" class="message_container">
+                            <span>Please enter a date</span>
+                        </span>
                         </div>
                         <div class="form-group">
                             <label class="required">Select a session time range </label>
@@ -147,9 +157,12 @@
                                 <option value="17:00:00">5:00 PM</option>
                                 <option value="17:30:00">5:30 PM</option>
                             </select>
+                            <br/><span id="error_time" class="message_container">
+                            <span>Please enter a time range</span>
+                        </span>
                         </div>
                         <div class="form-actions">
-                            <input class="button button-primary" type="submit" value="Add Session"/>
+                            <input class="button button-primary" type="submit" id="send" value="Add Session"/>
                         </div>
                     </form>
             </div>

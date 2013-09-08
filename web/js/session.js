@@ -15,6 +15,7 @@ $("#send").click(function(event) {
     var str2 = $("#tip2").val();
     var str3 = $("#datepicker").val();
     var str4 = $("#time").val();
+    var str5 = $("#speaker").val();
     if ($.trim(str1) === emptyString) {
         $("#tip").css("border", "1px solid red");
         $("#error_name").show();
@@ -28,6 +29,16 @@ $("#send").click(function(event) {
     if (str3 === null) {
         $("#datepicker").css("border", "1px solid red");
         $("#error_date").show();
+        event.preventDefault();
+    }
+    if (str4 === "null") {
+        $("#time").css("border", "1px solid red");
+        $("#error_time").show();
+        event.preventDefault();
+    }
+    if (str5 === "0") {
+        $("#speaker").css("border", "1px solid red");
+        $("#error_speaker").show();
         event.preventDefault();
     }
 });

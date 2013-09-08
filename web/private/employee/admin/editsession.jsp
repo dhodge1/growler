@@ -97,7 +97,7 @@
                 <form method="post" action="../../../action/processSessionEdit.jsp">
                     <div class="form-group">
                         <input name="id" id="sessionId" type="hidden" value="<% out.print(s.getId());%>" />
-                        <label class="required">Session Name</label>
+                        <label class="required">Session topic</label>
                         <input required="required" name="name" class="input-xlarge" type="text" id="tip" data-content="Please enter no more than 30 characters" maxlength="30" <% out.print("value='" + s.getName() + "'");%> />
                         <br/><span id="error_name" class="message_container">
                             <span>Please enter a session name</span>
@@ -114,7 +114,7 @@
                     </div>
                     <div class="form-group">
                         <label class="required">Session speaker</label>
-                        <select name="speaker" id="tip3">
+                        <select name="speaker" id="speaker">
                             <option value="0"> No Speaker Available </option>
                             <% for (int i = 0; i < speakers.size(); i++) {
                                     out.print("<option value ='" + speakers.get(i).getId() + "'");
@@ -141,7 +141,7 @@
                     <div class="form-group" style="margin-bottom: 24px;">
                         <label class="required">Select a session time range</label>
                         <select id="time" name="time">
-                            <option value="00:00:00"> - No Time - </option>
+                            <option value="null"> - No Time - </option>
                                     <option value="08:00:00"  <% if (String.valueOf(s.getStartTime()).equals("08:00:00")) {
                                     out.print("selected");
                                 }%>>8:00 AM - 9:00 AM</option>
