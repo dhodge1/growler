@@ -91,7 +91,7 @@
                 <label><span style="color: red;">*</span>Required field</label>
             </div>
             <div class="row mediumBottomMargin">
-                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Speaker Details</span></h2>
+                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span style="padding-left: 12px;">Speaker Details</span></h2>
             </div>
             <div class="row largeBottomMargin">
                 <form method="post" action="../../../action/processSessionEdit.jsp">
@@ -105,7 +105,9 @@
                     </div>
                     <div class="form-group">
                         <label class="required">Session description</label>
-                        <textarea required="required"  name="description" id="tip2" data-content="Please enter no more than 250 characters" cols="50" rows="5"></textarea>
+                        <textarea required="required" name="description" id="tip2" data-content="Please enter no more than 250 characters" cols="50" rows="5">
+                        <% out.print(s.getDescription()); %>
+                        </textarea>
                         <br/><span id="error_description" class="message_container">
                             <span>Please enter a session description</span>
                         </span>
@@ -131,7 +133,7 @@
                     </div>
                     <div class="form-group">
                         <label class="required">Select a session date</label>
-                        <input name="date" id="datepicker" type="text"/>
+                        <input name="date" id="datepicker" type="text" <% out.print("value='" + s.getSessionDate() + "'"); %>/>
                         <br/><span id="error_date" class="message_container">
                             <span>Please enter a date</span>
                         </span>

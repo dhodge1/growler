@@ -19,11 +19,40 @@
         <title>Add Session</title><!-- Title -->
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="shortcut icon" type="image/png" href="../../../images/scripps_favicon-32.ico">
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-        <link rel="stylesheet" href="../../../css/draganddrop.css" /><!--Drag and drop style-->
         <script src="http://growler.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+        <script src="http://growler.elasticbeanstalk.com/js/libs/sniui.dialog.1.2.0.js"></script>
+        <script src="../../../js/session.js"></script>
+        <script>
+            $(function() {
+                $("#datepicker").datepicker({
+                    dateFormat: 'yy-mm-dd',
+                    minDate: new Date(2013, 9, 1),
+                    maxDate: new Date(2013, 9, 31)
+                });
+            });
+        </script>
+        <style>
+            .message_container {
+                display: none;
+                color: red;
+                font-weight: bold;
+            }
+            h3 {
+                font-weight:normal;
+            }
+            .modals{
+                display:none;
+            }
+            .no-close .ui-dialog-titlebar-close {
+                display: none;
+            }
+        </style>
     </head>
     <body id="growler1">
         <%
@@ -60,10 +89,10 @@
             <div class="row mediumBottomMargin">
                 <label><span style="color: red;">*</span>Required field</label>
             </div>
-            <div class="row">
+            <div class="row smallBottomMargin">
                     <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span style="padding-left: 12px;">Session Details</span></h2>
             </div>
-            <div class="row mediumBottomMargin">
+            <div class="row largeBottomMargin">
                     <%
                         SessionPersistence sp = new SessionPersistence();
                         ArrayList<Session> sessions = sp.getAllSessionsWithKeys(" ");
@@ -126,16 +155,6 @@
             </div>
         </div>
         <%@ include file="../../../includes/footer.jsp" %> 
-        <%@ include file="../../../includes/scriptlist.jsp" %>
-        <script>
-                                            $(function() {
-                                                $("#datepicker").datepicker({minDate: new Date(2013, 10 - 1, 1), maxDate: new Date(2013, 10 - 1, 31)}).change(function() {
-                                                    $("#datepicker").datepicker("option", "dateFormat", "yy-mm-dd");
-                                                });
-                                                
-                                            });
-
-        </script>
         <script>
             $(function() {
                 $("input").autoinline();
