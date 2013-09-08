@@ -55,6 +55,7 @@
             <li class="brand_nav <%= sessionTab%>"><a href="#"><span class="nav_drop">Sessions</span><em></em></a>
                 <ul class="child-menu child-menu-ul">
                     <li><a href="../../../private/employee/admin/session.jsp">Manage Session Schedule</a></li>
+                    <li><a href="../../../private/employee/admin/addsession.jsp">Add a Session</a></li>
                 </ul>
             </li>
             <li class="brand_nav <%= reportTab%>"><a href="#"><span class="nav_drop">Reports</span><em></em></a>
