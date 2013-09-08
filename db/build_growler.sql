@@ -289,6 +289,28 @@ insert into speaker (id, first_name, last_name, suggested_by, visible, type) val
 insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (46, "Phil", "Cornell", 202300, TRUE, "Business");
 insert into speaker (id, first_name, last_name, suggested_by, visible, type) values (47,"Allen", "Shacklock", 202300, TRUE, "Technical");
 
+insert into speaker (first_name, last_name, suggested_by, visible, type) values 
+('Zina', 'Townley', 153342, true, 'Technical')
+,('Lisa', 'McCurry', 153342, true, 'Technical')
+,('Robin', 'Pate', 153342, true, 'Business')
+,('Peter', 'Clem', 153342, true, 'Business')
+,('Tony', 'Perez', 153342, true, 'Technical')
+,('Phil','Usatain',153342, true, 'Business')
+,('Tim','Harty',153342, true, 'Technical')
+,('Gary','Feldman',153342, true, 'Business')
+,('John','Robinson',153342, true, 'Technical')
+,('Matt','Wardian',153342, true, 'Technical')
+,('Renee','Haralson',153342, true, 'Technical')
+,('Helmut','Arnold',153342, true, 'Technical')
+,('Lydia','Van Duuren',153342, true, 'Technical')
+,('Crystal','Martin',153342, true, 'Technical')
+,('Doug','Klein',153342, true, 'Technical')
+,('Fredd','Krimmelbein',153342, true, 'Technical')
+,('Wade','Chandler',153342, true, 'Technical')
+,('Kim','Gottholm',153342, true, 'Technical')
+,('Brant', 'Boehmann', 153342, true, 'Technical')
+,('Scott', 'Cravens', 153342, true, 'Technical');
+
 /*
  * Loads sessions into the session table from 2012.
  * Not 100% necessary, but pretty neat for historical purposes.

@@ -806,4 +806,30 @@ public class SessionPersistence extends GrowlerPersistence {
         }
         return new ArrayList<Session>();
     }
+    
+    public Session getSessionByName(String name) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select * from session where name = ?");
+            statement.setString(1, name);
+            result = statement.executeQuery();
+            while (result.next()){
+                Session s = new Session();
+                s.setId(result.getInt("id"));
+                s.setName(result.getString("name"));
+                s.setDescription(result.getString("description"));
+                s.setSessionDate(result.getDate("session_date"));
+                s.setStartTime(result.getTime("start_time"));
+                s.setLocation(result.getString("location"));
+                s.setTrack(result.getString("track"));
+                s.setDuration(result.getTime("duration"));
+                return s;
+            }
+        } catch(Exception e){
+            
+        }finally  {
+            closeJDBC();
+        }
+        return new Session();
+    }
 }

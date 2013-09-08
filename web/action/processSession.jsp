@@ -18,55 +18,47 @@
                 String name = String.valueOf(session.getAttribute("user"));
             } catch (Exception e) {
             }
-        %>
-        <%
-
+            
             String date = request.getParameter("date");
             String time = request.getParameter("time");
             String description = request.getParameter("description");
-
-            String duration = request.getParameter("duration");
-            String durString = "";
-            try {
-                int dur = Integer.parseInt(duration);
-                int hours = dur / 60;
-                int minutes = dur % 60;
-                durString = hours + ":" + minutes + ":00";
-            } catch (Exception e) {
-                durString = null;
-            }
             String name = request.getParameter("name");
-            String location = request.getParameter("location");
+            String speaker = request.getParameter("speaker");
+            int spkrId = Integer.parseInt(speaker);
             Session s = new Session();
             s.setName(name);
             s.setDescription(description);
             try {
                 s.setSessionDate(java.sql.Date.valueOf(date));
                 s.setStartTime(java.sql.Time.valueOf(time));
-                s.setDuration(java.sql.Time.valueOf(durString));
+                s.setDuration(java.sql.Time.valueOf("00:50:00"));
             } catch (Exception e) {
             }
-            s.setLocation(location);
             SessionPersistence sp = new SessionPersistence();
             try {
-                ArrayList<Session> ses = sp.getSessionsByDateAndTime(java.sql.Date.valueOf(date), java.sql.Time.valueOf(time), " ");
+                //9-8 commented out the location checks, since they are currently not part of the adding session page
+                //ArrayList<Session> ses = sp.getSessionsByDateAndTime(java.sql.Date.valueOf(date), java.sql.Time.valueOf(time));
 
-                boolean ok = true;
-                for (int i = 0; i < ses.size(); i++) {
+                //boolean ok = true;
+                //for (int i = 0; i < ses.size(); i++) {
                     //Gets the session scheduled for that time, then compares them to the location parameter
                     //Excuses TBD, because any number of sessions can have TBD as the location
-                    if (ses.get(i).getLocation().equals(location) && !location.equals("TBD")) {
-                        session.setAttribute("message", "Error: There is already a session scheduled for that room at that time");
-                        ok = false;
-                    }
-                }
-                if (ok) {
+                //    if (ses.get(i).getLocation().equals(location) && !location.equals("TBD")) {
+                //        session.setAttribute("message", "Error: There is already a session scheduled for that room at that time");
+                //        ok = false;
+                //    }
+                //}
+               // if (ok) {
                     sp.addSession(s);
                     session.setAttribute("message", "Success: Session " + s.getName() + " for " + s.getSessionDate() + " added successfully!");
-                }
+                    //Get the newly created Session ID and assign the speaker to it
+                    Session ses = sp.getSessionByName(name);
+                    sp.assignSpeaker(spkrId, ses.getId());
+                    session.setAttribute("sessionName", name);
+               // }
             } catch (Exception e) {
-                sp.addSession(s);
-                session.setAttribute("message", "Success: Session " + s.getName() + " for " + s.getSessionDate() + " added successfully!");
+                //sp.addSession(s);
+                //session.setAttribute("message", "Success: Session " + s.getName() + " for " + s.getSessionDate() + " added successfully!");
             }
-            response.sendRedirect("../private/employee/admin/session.jsp");
+            response.sendRedirect("../private/employee/admin/sessionadd-confirm.jsp");
         %>

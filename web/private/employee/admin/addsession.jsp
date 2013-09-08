@@ -16,7 +16,7 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <title>Add a Session</title><!-- Title -->
+        <title>Add Session</title><!-- Title -->
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
@@ -43,34 +43,58 @@
         <%@ include file="../../../includes/adminheader.jsp" %> 
         <%@ include file="../../../includes/adminnav.jsp" %>
         <div class="container-fixed">
-            <br/><br/><br/>
+            <div class="row mediumBottomMargin"></div>
             <div class="row">
-                
-                    <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Add a Session</span></h2>
-                
+                <ul class="breadcrumb">
+                    <li><a href="../../../private/employee/admin/home.jsp">Home</a></li>
+                    <li class='ieFix'>Add Session</li>
+                </ul>
             </div>
-            <br/>
+            <div class="row mediumBottomMargin">
+                <h1 style="margin-top:0px;font-weight: normal;">Add Session</h1>
+            </div>
+            <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
+            <div class="row largeBottomMargin">
+                <h3>Please use form below to Add session details.</h3>
+            </div>
+            <div class="row mediumBottomMargin">
+                <label><span style="color: red;">*</span>Required field</label>
+            </div>
             <div class="row">
-                
+                    <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span style="padding-left: 12px;">Session Details</span></h2>
+            </div>
+            <div class="row mediumBottomMargin">
                     <%
                         SessionPersistence sp = new SessionPersistence();
                         ArrayList<Session> sessions = sp.getAllSessionsWithKeys(" ");
+                        SpeakerPersistence sk = new SpeakerPersistence();
+                        ArrayList<Speaker> speakers = sk.getAllSpeakers("");
                     %>
                     <form method="post" action="../../../action/processSession.jsp" onSubmit="return validateValues();">
                         <div class="form-group">
-                            <label class="required">Session Name: </label>
+                            <label class="required">Session Topic </label>
                             <input id="name" size='50' name="name" type="text" data-content="Enter the name of the Session" maxlength="70"/>
                         </div>
                         <div class="form-group">
-                            <label class="required">Session Description: </label>
+                            <label class="required">Session Description </label>
                             <textarea id="description" name="description" maxlength="250" rows="5" cols="50" data-content="Enter the name of the Session" ></textarea>
                         </div>
                         <div class="form-group">
-                            <label>Date: </label>
+                            <label class="required">Session speaker </label>
+                            <select id="speaker" name="speaker">
+                                <% for (int i = 0; i < speakers.size(); i++){
+                                   out.print("<option value='" + speakers.get(i).getId() + "'>");
+                                   out.print(speakers.get(i).getFullName());
+                                   out.print("</option>");
+                                }%>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="required">Select a session date </label>
                             <input name="date" id="datepicker" type="text" data-content="Enter a date for the Session"/>
                         </div>
                         <div class="form-group">
-                            <label>Time: </label>
+                            <label class="required">Select a session time range </label>
                             <select id="time" name="time">
                                 <option value="null"> - No Time - </option>
                                 <option value="08:00:00">8:00 AM</option>
@@ -93,33 +117,12 @@
                                 <option value="16:30:00">4:30 PM</option>
                                 <option value="17:00:00">5:00 PM</option>
                                 <option value="17:30:00">5:30 PM</option>
-                                <option value="18:00:00">6:00 PM</option>
-                                <option value="18:30:00">6:30 PM</option>
-                                <option value="19:00:00">7:00 PM</option>
-
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Duration: </label>
-                            <input id="duration" name="duration" type="number" step="1" max="120" min="15" data-content="Enter duration in minutes (Between 15 and 120)" />
-                        </div>
-                        <div class="form-group">
-                            <label class="required">Location: </label>
-                            <select name="location">
-                                <%
-                                    LocationPersistence lp = new LocationPersistence();
-                                    ArrayList<Location> locations = lp.getAllLocations(" ");
-                                    for (int i = 0; i < locations.size(); i++) {
-                                        out.print("<option value=" + locations.get(i).getId() + ">" + locations.get(i).getDescription() + "</option>");
-                                    }
-                                %>
                             </select>
                         </div>
                         <div class="form-actions">
-                            <input class="button button-primary" type="submit" value="Submit"/>
+                            <input class="button button-primary" type="submit" value="Add Session"/>
                         </div>
                     </form>
-                
             </div>
         </div>
         <%@ include file="../../../includes/footer.jsp" %> 
