@@ -21,6 +21,10 @@
             
             String date = request.getParameter("date");
             String time = request.getParameter("time");
+            //Get the 'a' or 'b' from the time string
+            char marker = time.charAt(8);
+            //Chop off the 'a' or 'b'
+            time = time.substring(0, 7);
             String description = request.getParameter("description");
             String name = request.getParameter("name");
             String speaker = request.getParameter("speaker");
@@ -31,7 +35,12 @@
             try {
                 s.setSessionDate(java.sql.Date.valueOf(date));
                 s.setStartTime(java.sql.Time.valueOf(time));
-                s.setDuration(java.sql.Time.valueOf("00:50:00"));
+                if (marker == 'b'){
+                    s.setDuration(java.sql.Time.valueOf("00:50:00"));
+                }
+                else {
+                    s.setDuration(java.sql.Time.valueOf("00:25:00"));
+                }
             } catch (Exception e) {
             }
             SessionPersistence sp = new SessionPersistence();

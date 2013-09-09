@@ -18,26 +18,38 @@
     } catch (Exception e) {
     }
     
-    int id = Integer.parseInt(request.getParameter("id"));
-    String name = request.getParameter("name");
-    String description = request.getParameter("description");
-    int speaker = Integer.parseInt(request.getParameter("speaker"));
-    java.sql.Date date;
-    try {
-        date = java.sql.Date.valueOf(request.getParameter("date"));
-    } catch (Exception e) {
-        date = null;
-    }
-    java.sql.Time time = java.sql.Time.valueOf(request.getParameter("time"));
-
+    int id = Integer.parseInt(request.getParameter("sessionId"));
     SessionPersistence sp = new SessionPersistence();
     Session s = sp.getSessionByID(id);
+    String date = request.getParameter("date");
+            String time = request.getParameter("time");
+            //Get the 'a' or 'b' from the time string
+            char marker = time.charAt(8);
+            //Chop off the 'a' or 'b'
+            time = time.substring(0, 7);
+            String description = request.getParameter("description");
+            String name = request.getParameter("name");
+            String speaker = request.getParameter("speaker");
+            int spkrId = Integer.parseInt(speaker);
+            s.setName(name);
+            s.setDescription(description);
+            try {
+                s.setSessionDate(java.sql.Date.valueOf(date));
+                s.setStartTime(java.sql.Time.valueOf(time));
+                if (marker == 'b'){
+                    s.setDuration(java.sql.Time.valueOf("00:50:00"));
+                }
+                else {
+                    s.setDuration(java.sql.Time.valueOf("00:25:00"));
+                }
+            } catch (Exception e) {
+            }
     s.setId(id);
     s.setName(name);
     s.setDescription(description);
-    s.setSessionDate(date);
-    s.setStartTime(time);
     sp.updateSession(s);
-    sp.assignSpeaker(speaker, id);
-    response.sendRedirect("../private/employee/admin/session.jsp");
+    sp.assignSpeaker(spkrId, id);
+    session.setAttribute("message", "Success: Session " + s.getName() + " for " + s.getSessionDate() + " updated successfully!");
+    session.setAttribute("sessionName", name);
+    response.sendRedirect("../private/employee/admin/sessionedit-confirm.jsp");
 %>

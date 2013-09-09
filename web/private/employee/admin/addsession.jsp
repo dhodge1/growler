@@ -136,26 +136,26 @@
                             <label class="required">Select a session time range </label>
                             <select id="time" name="time">
                                 <option value="null"> - No Time - </option>
-                                <option value="08:00:00">8:00 AM</option>
-                                <option value="08:30:00">8:30 AM</option>
-                                <option value="09:00:00">9:00 AM</option>
-                                <option value="09:30:00">9:30 AM</option>
-                                <option value="10:00:00">10:00 AM</option>
-                                <option value="10:30:00">10:30 AM</option>
-                                <option value="11:00:00">11:00 AM</option>
-                                <option value="11:30:00">11:30 AM</option>
-                                <option value="12:00:00">12:00 PM</option>
-                                <option value="12:30:00">12:30 PM</option>
-                                <option value="13:00:00">1:00 PM</option>
-                                <option value="13:30:00">1:30 PM</option>
-                                <option value="14:00:00">2:00 PM</option>
-                                <option value="14:30:00">2:30 PM</option>
-                                <option value="15:00:00">3:00 PM</option>
-                                <option value="15:30:00">3:30 PM</option>
-                                <option value="16:00:00">4:00 PM</option>
-                                <option value="16:30:00">4:30 PM</option>
-                                <option value="17:00:00">5:00 PM</option>
-                                <option value="17:30:00">5:30 PM</option>
+                                <option value="08:00:00a">08:00 am - 08:25 am</option>
+                                <option value="08:00:00b">08:00 am - 08:50 am</option>
+                                <option value="09:00:00a">09:00 am - 09:25 am</option>
+                                <option value="09:00:00b">09:00 am - 09:50 am</option>
+                                <option value="10:00:00a">10:00 am - 10:25 am</option>
+                                <option value="10:00:00b">10:00 am - 10:50 am</option>
+                                <option value="11:00:00a">11:00 am - 11:25 am</option>
+                                <option value="11:00:00b">11:00 am - 11:50 am</option>
+                                <option value="12:00:00a">12:00 pm - 12:25 pm</option>
+                                <option value="12:00:00b">12:00 pm - 12:50 pm</option>
+                                <option value="13:00:00a">01:00 pm - 01:25 pm</option>
+                                <option value="13:00:00b">01:00 pm - 01:50 pm</option>
+                                <option value="14:00:00a">02:00 pm - 02:25 pm</option>
+                                <option value="14:00:00b">02:00 pm - 02:50 pm</option>
+                                <option value="15:00:00a">03:00 pm - 03:25 pm</option>
+                                <option value="15:00:00b">03:00 pm - 03:50 pm</option>
+                                <option value="16:00:00a">04:00 pm - 04:25 pm</option>
+                                <option value="16:00:00b">04:00 pm - 04:50 pm</option>
+                                <option value="17:00:00a">05:00 pm - 05:25 pm</option>
+                                <option value="17:00:00b">05:00 pm - 05:50 pm</option>
                             </select>
                             <br/><span id="error_time" class="message_container">
                             <span>Please enter a time range</span>

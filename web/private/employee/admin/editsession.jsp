@@ -96,7 +96,7 @@
             <div class="row largeBottomMargin">
                 <form method="post" action="../../../action/processSessionEdit.jsp">
                     <div class="form-group">
-                        <input name="id" id="sessionId" type="hidden" value="<% out.print(s.getId());%>" />
+                        <input name="sessionId" id="sessionId" type="hidden" value="<% out.print(s.getId());%>" />
                         <label class="required">Session topic</label>
                         <input required="required" name="name" class="input-xlarge" type="text" id="tip" data-content="Please enter no more than 30 characters" maxlength="30" <% out.print("value='" + s.getName() + "'");%> />
                         <br/><span id="error_name" class="message_container">
@@ -117,7 +117,7 @@
                         <select name="speaker" id="speaker">
                             <option value="0"> No Speaker Available </option>
                             <% for (int i = 0; i < speakers.size(); i++) {
-                                    out.print("<option value ='" + speakers.get(i).getId() + "'");
+                                    out.print("<option value ='" + speakers.get(i).getId() + "' ");
                                     if (sp.isSpeakerInSession(speakers.get(i).getId(), s.getId())){
                                         out.print(" selected ");
                                     }
@@ -142,36 +142,66 @@
                         <label class="required">Select a session time range</label>
                         <select id="time" name="time">
                             <option value="null"> - No Time - </option>
-                                    <option value="08:00:00"  <% if (String.valueOf(s.getStartTime()).equals("08:00:00")) {
-                                    out.print("selected");
-                                }%>>8:00 AM - 9:00 AM</option>
-                                    <option value="09:00:00"  <% if (String.valueOf(s.getStartTime()).equals("09:00:00")) {
-                                    out.print("selected");
-                                }%>>9:00 AM - 10:00 AM</option>
-                                    <option value="10:00:00"  <% if (String.valueOf(s.getStartTime()).equals("10:00:00")) {
-                                    out.print("selected");
-                                }%>>10:00 AM - 11:00 AM</option>
-                                    <option value="11:00:00"  <% if (String.valueOf(s.getStartTime()).equals("11:00:00")) {
-                                    out.print("selected");
-                                }%>>11:00 AM - 12:00 PM</option>
-                                    <option value="12:00:00"  <% if (String.valueOf(s.getStartTime()).equals("12:00:00")) {
-                                    out.print("selected");
-                                }%>>12:00 PM - 01:00 PM</option>
-                                    <option value="13:00:00"  <% if (String.valueOf(s.getStartTime()).equals("13:00:00")) {
-                                    out.print("selected");
-                                }%>>1:00 PM - 2:00 PM</option>
-                                    <option value="14:00:00"  <% if (String.valueOf(s.getStartTime()).equals("14:00:00")) {
-                                    out.print("selected");
-                                }%>>2:00 PM - 3:00 PM</option>
-                                    <option value="15:00:00"  <% if (String.valueOf(s.getStartTime()).equals("15:00:00")) {
-                                    out.print("selected");
-                                }%>>3:00 PM - 4:00 PM</option>
-                                    <option value="16:00:00"  <% if (String.valueOf(s.getStartTime()).equals("16:00:00")) {
-                                    out.print("selected");
-                                }%>>4:00 PM - 5:00 PM</option>
-                                    <option value="17:00:00"  <% if (String.valueOf(s.getStartTime()).equals("17:00:00")) {
-                                    out.print("selected");
-                                }%>>5:00 PM - 6:00 PM</option>
+                            <option value="08:00:00a" <% if (String.valueOf(s.getStartTime()).equals("08:00:00") && String.valueOf(s.getDuration()).equals("00:25:00")) {
+                                    out.print(" selected ");
+                                }%>>08:00 am - 08:25 am</option>
+                                <option value="08:00:00b" <% if (String.valueOf(s.getStartTime()).equals("08:00:00") && String.valueOf(s.getDuration()).equals("00:50:00")) {
+                                    out.print(" selected ");
+                                }%>>>08:00 am - 08:50 am</option>
+                                <option value="09:00:00a" <% if (String.valueOf(s.getStartTime()).equals("09:00:00") && String.valueOf(s.getDuration()).equals("00:25:00")) {
+                                    out.print(" selected ");
+                                }%>>>09:00 am - 09:25 am</option>
+                                <option value="09:00:00b" <% if (String.valueOf(s.getStartTime()).equals("09:00:00") && String.valueOf(s.getDuration()).equals("00:50:00")) {
+                                    out.print(" selected ");
+                                }%>>>09:00 am - 09:50 am</option>
+                                <option value="10:00:00a" <% if (String.valueOf(s.getStartTime()).equals("10:00:00") && String.valueOf(s.getDuration()).equals("00:25:00")) {
+                                    out.print(" selected ");
+                                }%>>>10:00 am - 10:25 am</option>
+                                <option value="10:00:00b" <% if (String.valueOf(s.getStartTime()).equals("10:00:00") && String.valueOf(s.getDuration()).equals("00:50:00")) {
+                                    out.print(" selected ");
+                                }%>>>10:00 am - 10:50 am</option>
+                                <option value="11:00:00a" <% if (String.valueOf(s.getStartTime()).equals("11:00:00") && String.valueOf(s.getDuration()).equals("00:25:00")) {
+                                    out.print(" selected ");
+                                }%>>>11:00 am - 11:25 am</option>
+                                <option value="11:00:00b" <% if (String.valueOf(s.getStartTime()).equals("11:00:00") && String.valueOf(s.getDuration()).equals("00:50:00")) {
+                                    out.print(" selected ");
+                                }%>>>11:00 am - 11:50 am</option>
+                                <option value="12:00:00a" <% if (String.valueOf(s.getStartTime()).equals("12:00:00") && String.valueOf(s.getDuration()).equals("00:25:00")) {
+                                    out.print(" selected ");
+                                }%>>>12:00 pm - 12:25 pm</option>
+                                <option value="12:00:00b" <% if (String.valueOf(s.getStartTime()).equals("13:00:00") && String.valueOf(s.getDuration()).equals("00:50:00")) {
+                                    out.print(" selected ");
+                                }%>>>12:00 pm - 12:50 pm</option>
+                                <option value="13:00:00a" <% if (String.valueOf(s.getStartTime()).equals("13:00:00") && String.valueOf(s.getDuration()).equals("00:25:00")) {
+                                    out.print(" selected ");
+                                }%>>>01:00 pm - 01:25 pm</option>
+                                <option value="13:00:00b" <% if (String.valueOf(s.getStartTime()).equals("14:00:00") && String.valueOf(s.getDuration()).equals("00:50:00")) {
+                                    out.print(" selected ");
+                                }%>>>01:00 pm - 01:50 pm</option>
+                                <option value="14:00:00a" <% if (String.valueOf(s.getStartTime()).equals("14:00:00") && String.valueOf(s.getDuration()).equals("00:25:00")) {
+                                    out.print(" selected ");
+                                }%>>>02:00 pm - 02:25 pm</option>
+                                <option value="14:00:00b" <% if (String.valueOf(s.getStartTime()).equals("15:00:00") && String.valueOf(s.getDuration()).equals("00:50:00")) {
+                                    out.print(" selected ");
+                                }%>>>02:00 pm - 02:50 pm</option>
+                                <option value="15:00:00a" <% if (String.valueOf(s.getStartTime()).equals("15:00:00") && String.valueOf(s.getDuration()).equals("00:25:00")) {
+                                    out.print(" selected ");
+                                }%>>>03:00 pm - 03:25 pm</option>
+                                <option value="15:00:00b" <% if (String.valueOf(s.getStartTime()).equals("16:00:00") && String.valueOf(s.getDuration()).equals("00:50:00")) {
+                                    out.print(" selected ");
+                                }%>>>03:00 pm - 03:50 pm</option>
+                                <option value="16:00:00a" <% if (String.valueOf(s.getStartTime()).equals("16:00:00") && String.valueOf(s.getDuration()).equals("00:25:00")) {
+                                    out.print(" selected ");
+                                }%>>>04:00 pm - 04:25 pm</option>
+                                <option value="16:00:00b" <% if (String.valueOf(s.getStartTime()).equals("17:00:00") && String.valueOf(s.getDuration()).equals("00:50:00")) {
+                                    out.print(" selected ");
+                                }%>>>04:00 pm - 04:50 pm</option>
+                                <option value="17:00:00a" <% if (String.valueOf(s.getStartTime()).equals("17:00:00") && String.valueOf(s.getDuration()).equals("00:25:00")) {
+                                    out.print(" selected ");
+                                }%>>>05:00 pm - 05:25 pm</option>
+                                <option value="17:00:00b" <% if (String.valueOf(s.getStartTime()).equals("08:00:00") && String.valueOf(s.getDuration()).equals("00:50:00")) {
+                                    out.print(" selected ");
+                                }%>>>05:00 pm - 05:50 pm</option>
                         </select>
                         <br/><span id="error_time" class="message_container">
                             <span>Please enter a time range</span>
