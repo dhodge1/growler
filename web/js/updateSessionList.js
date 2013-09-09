@@ -8,16 +8,16 @@ function updateSessionList(selectBox) {
     var name = select.getAttribute("name");
     var date;
     if (name === "list1") {
-        date = "2013-10-17";
+        date = "2013-10-11";
     }
     else if (name === "list2") {
-        date = "2013-10-17";
+        date = "2013-10-11";
     }
     else if (name === "list3") {
-        date = "2013-10-18";
+        date = "2013-10-12";
     }
     else if (name === "list4") {
-        date = "2013-10-18";
+        date = "2013-10-12";
     }
     var xmlhttp;
     var xmlhttp2;

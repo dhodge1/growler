@@ -186,6 +186,7 @@
                                     out.print(fmt2.format(sessions.get(i).getDuration()));
                                     out.print("</td>");
                                     out.print("<td>");
+                                    
                                     out.print(lp.getLocationById(sessions.get(i).getLocation()).getDescription() + "<br/>" + lp.getLocationById(sessions.get(i).getLocation()).getBuilding());
                                     out.print("</td>");
                                     out.print("<td>");

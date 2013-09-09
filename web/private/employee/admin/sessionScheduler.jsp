@@ -65,7 +65,7 @@
             <br/><br/><br/>
             <div class="row">
                 
-                    <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Session Scheduler Tool</span></h2>
+                    <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span style="padding-left: 12px;">Session Scheduler Tool</span></h2>
                 
             </div>
             <br/>
@@ -104,7 +104,7 @@
                                     out.print("<td>");
                                     out.print("<select name=\"list1\" title=\"" + start + "\" onChange=\"updateSessionList(this)\">");
                                     out.print("<option value=\"0\">NO SESSION</option>");
-                                    Session current = sp.getSessionByDateAndTime(java.sql.Date.valueOf("2013-10-11"), start, " ");
+                                    Session current = sp.getSessionByDateAndTime(java.sql.Date.valueOf("2013-10-11"), start, "");
                                     for (int j = 0; j < sessions.size(); j++) {
                                         out.print("<option  value=\"" + sessions.get(j).getId() + "\"");
                                         if ((sessions.get(j).getId() == current.getId()) && (sessions.get(j).getLocation().equals("E130"))) {
