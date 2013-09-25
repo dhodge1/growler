@@ -31,6 +31,9 @@
             .firstlink {
                 margin-right: 12px;
             }
+            h1 {
+                font-weight: normal;
+            }
         </style>
     </head>
     <body id="growler1">
@@ -58,7 +61,7 @@
             </div>
             <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
             <div class="row mediumBottomMargin">
-                <span>Click <a>here</a> to assign this room to a session.</span>
+                <span>Click <a href="../../../private/employee/admin/assignroom.jsp?roomId=<%= session.getAttribute("roomId") %>">here</a> to assign this room to a session.</span>
             </div>
             <div class="row largeBottomMargin">
                 <span><% out.print((String)session.getAttribute("room")); %></span>

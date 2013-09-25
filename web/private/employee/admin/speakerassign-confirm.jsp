@@ -29,6 +29,9 @@
                 color: red;
                 font-weight: bold;
             }
+            h1 {
+                font-weight: normal;
+            }
         </style>
     </head>
     <body id="growler1">

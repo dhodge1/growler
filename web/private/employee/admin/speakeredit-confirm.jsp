@@ -32,6 +32,9 @@
             .firstlink {
                 margin-right: 12px;
             }
+            h1 {
+                font-weight: normal;
+            }
         </style>
     </head>
     <body id="growler1">

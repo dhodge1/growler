@@ -7,17 +7,22 @@ function updateSessionList(selectBox) {
     var time = select.getAttribute("title");
     var name = select.getAttribute("name");
     var date;
+    var location;
     if (name === "list1") {
-        date = "2013-10-11";
+        date = "2013-10-10";
+        location = "E130";
     }
     else if (name === "list2") {
-        date = "2013-10-11";
+        date = "2013-10-10";
+        location = "D304";
     }
     else if (name === "list3") {
-        date = "2013-10-12";
+        date = "2013-10-11";
+        location = "E130";
     }
     else if (name === "list4") {
-        date = "2013-10-12";
+        date = "2013-10-11";
+        location = "D304";
     }
     var xmlhttp;
     var xmlhttp2;
@@ -47,6 +52,6 @@ function updateSessionList(selectBox) {
                 document.getElementById("unscheduled").innerHTML = xmlhttp2.responseText;
             }  
     };
-    xmlhttp.open("POST", "../../../action/updateSessionLive.jsp?id=" + id + "&date=" + date + "&time=" + time, true);
+    xmlhttp.open("POST", "../../../action/updateSessionLive.jsp?id=" + id + "&date=" + date + "&time=" + time + "&location=" + location, true);
     xmlhttp.send();
 }

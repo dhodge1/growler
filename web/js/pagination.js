@@ -20,7 +20,12 @@
  */
 function next() {
     var page = $("#current_page").val();
-    var pages = Math.floor(($("#total").val() / parseInt($("#show_per_page").val())) + 1);
+    if (parseInt($("#total").val()) % parseInt($("#show_per_page").val()) != 0) {
+        var pages = Math.floor((parseInt($("#total").val()) / parseInt($("#show_per_page").val())) + 1);
+    }
+    else {
+        var pages = Math.floor((parseInt($("#total").val()) / parseInt($("#show_per_page").val())));
+    }
     if (parseInt(page) === parseInt(pages)) {
         //do nothing
     } else {
@@ -43,8 +48,13 @@ function next() {
  * 
  */
 function last() {
-    var pages = Math.floor(($("#total").val() / parseInt($("#show_per_page").val())) + 1);
-    for (var i = 0; i < $("#total").val() + 1; i++) {
+    if (parseInt($("#total").val()) % parseInt($("#show_per_page").val()) != 0) {
+        var pages = Math.floor((parseInt($("#total").val()) / parseInt($("#show_per_page").val())) + 1);
+    }
+    else {
+        var pages = Math.floor((parseInt($("#total").val()) / parseInt($("#show_per_page").val())));
+    }
+    for (var i = 0; i < parseInt($("#total").val()) + 1; i++) {
         $("#row" + i).hide();
     }
     for (var i = (parseInt($("#show_per_page").val()) * (pages - 1)); i < (parseInt($("#show_per_page").val()) * pages); i++) {
@@ -58,13 +68,13 @@ function last() {
  * As long as it's not on the first page, goes to the previous page
  */
 function prev() {
-    var page = $("#current_page").val();
-    var pages = Math.floor(($("#total").val() / parseInt($("#show_per_page").val())) + 1);
+    var page = parseInt($("#current_page").val());
+    var pages = Math.floor((parseInt($("#total").val()) / parseInt($("#show_per_page").val())) + 1);
     if (parseInt(page) === 1) {
         //do nothing
     } else {
         var newPage = parseInt(page) - 1;
-        for (var i = 0; i < $("#total").val() + 1; i++) {
+        for (var i = 0; i < parseInt($("#total").val()) + 1; i++) {
             $("#row" + i).hide();
         }
         var startingPoint = 1 + ((parseInt(newPage) - 1) * parseInt($("#show_per_page").val()));
@@ -80,11 +90,11 @@ function prev() {
  * Goes to the first page
  */
 function first() {
-    var pages = Math.floor(($("#total").val() / parseInt($("#show_per_page").val())) + 1);
-    for (var i = 0; i < $("#total").val() + 1; i++) {
+    var pages = Math.floor((parseInt($("#total").val()) / parseInt($("#show_per_page").val())) + 1);
+    for (var i = 0; i < parseInt($("#total").val()) + 1; i++) {
         $("#row" + i).hide();
     }
-    for (var i = (0); i < parseInt($("#show_per_page").val()) + 1; i++) {
+    for (var i = (0); i < parseInt($("#show_per_page").val()); i++) {
         $("#row" + i).show();
     }
     $("#current_page").val(1);
@@ -96,11 +106,11 @@ function first() {
  * @param {integer} number The page to display
  */
 function page(number) {
-    var pages = Math.floor(($("#total").val() / $("#show_per_page").val()) + 1);
-    for (var i = 0; i < $("#total").val() + 1; i++) {
+    var pages = Math.floor((parseInt($("#total").val()) / $("#show_per_page").val()) + 1);
+    for (var i = 0; i < parseInt($("#total").val()) + 1; i++) {
         $("#row" + i).hide();
     }
-    for (var i = (parseInt($("#show_per_page").val()) * (number - 1)) + 1; i < (parseInt($("#show_per_page").val()) * number) + 1; i++) {
+    for (var i = (parseInt($("#show_per_page").val()) * (number - 1)); i < (parseInt($("#show_per_page").val()) * number); i++) {
         $("#row" + i).show();
     }
     unActive();
@@ -113,7 +123,7 @@ function page(number) {
  * removes the active classes from all pages
  */
 function unActive() {
-    var pages = Math.floor(($("#total").val() / parseInt($("#show_per_page").val())) + 1);
+    var pages = Math.floor((parseInt($("#total").val()) / parseInt($("#show_per_page").val())) + 1);
     for (var i = 1; i < pages + 1; i++) {
         $("#page" + i).removeClass("active");
     }
@@ -126,7 +136,15 @@ function active(page) {
     $("#page" + page).addClass("active");
 }
 
-function pageJump(){
+function pageJump() {
     var p = parseInt($("#pagejump").val(), 10);
-    page(p);
+    var pages = Math.floor((parseInt($("#total").val()) / parseInt($("#show_per_page").val())) + 1);
+    if (p > pages || isNaN(p)) {
+        //do nothing
+    } else if (p <= 0) {
+        page(1);
+    }
+    else {
+        page(p);
+    }
 }

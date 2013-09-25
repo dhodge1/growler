@@ -23,6 +23,7 @@
                 if (u != null) {
                     session.setAttribute("user", u.getUserName());
                     session.setAttribute("id", u.getCorporateId());
+                    session.setAttribute("email", u.getEmail());
                     if (u.getRole().equals("admin")) {
                         session.setAttribute("role", "admin");
                     }
@@ -34,6 +35,7 @@
                     up.addUser(newUser);
                     session.setAttribute("user", newUser.getUserName());
                     session.setAttribute("id", newUser.getCorporateId());
+                    session.setAttribute("email", newUser.getEmail());
                     if (id.equals("160240") || id.equals("160445") || id.equals("162107") || id.equals("161301")) { //if it's Ian R. or Brian S.
                         session.setAttribute("role", "admin");
                     }
@@ -128,7 +130,7 @@
         <%
             String user = "";
             if (null == session.getAttribute("id")) {
-                //response.sendRedirect("../../index.jsp");
+                response.sendRedirect("../../index.jsp");
             }
             try {
                 user = String.valueOf(session.getAttribute("id"));
@@ -173,7 +175,7 @@
                 <%@include file="../../includes/messagehandler.jsp" %>
                 <%
                     Calendar today = Calendar.getInstance();
-                    if (today.get(Calendar.MONTH) == 8 && today.get(Calendar.DAY_OF_MONTH) < 19) { //if it's before Sept 19th
+                    if (today.get(Calendar.MONTH) == 8 && today.get(Calendar.DAY_OF_MONTH) < 15) { //if it's before Sept 19th
                 %>
                 <%@include file="../../includes/august_home.jsp" %>
                 <%                        } else {

@@ -29,6 +29,14 @@
             String name = request.getParameter("name");
             String speaker = request.getParameter("speaker");
             int spkrId = Integer.parseInt(speaker);
+            int spkrId2 = 0;
+            try {
+            String speaker2 = request.getParameter("speaker2");
+            spkrId2 = Integer.parseInt(speaker2);
+            } catch (Exception e){
+                
+            }
+            
             Session s = new Session();
             s.setName(name);
             s.setDescription(description);
@@ -59,11 +67,23 @@
                 //}
                // if (ok) {
                     sp.addSession(s);
-                    session.setAttribute("message", "Success: Session " + s.getName() + " for " + s.getSessionDate() + " added successfully!");
+                    session.setAttribute("message", "Success: The following session has been added successfully!");
                     //Get the newly created Session ID and assign the speaker to it
                     Session ses = sp.getSessionByName(name);
                     sp.assignSpeaker(spkrId, ses.getId());
+                    SpeakerPersistence sk = new SpeakerPersistence();
+                    Speaker sendSpeakerInfo = sk.getSpeakerByID(spkrId);
+                    if (spkrId2 != 0) {
+                        sp.assignSpeaker(spkrId2, ses.getId());
+                        session.setAttribute("sessionSpkr2", sk.getSpeakerByID(spkrId2).getFullName());
+                    }
                     session.setAttribute("sessionName", name);
+                    session.setAttribute("sessionDesc", description);
+                    session.setAttribute("sessionSpkr", sendSpeakerInfo.getFullName());
+                    session.setAttribute("sessionDate", date);
+                    session.setAttribute("sessionTime", time);
+                    session.setAttribute("sessionID", ses.getId());
+
                // }
             } catch (Exception e) {
                 //sp.addSession(s);

@@ -77,6 +77,30 @@ public class SurveyPersistence extends GrowlerPersistence {
         }
         return null;
     }
+    /**
+     * Returns a count of the surveys for a particular day
+     * 
+     * @param day 1 = 10/10/2013, 2 = 10/11/2013
+     * @return A count of the surveys completed on the given day
+     */
+    public int getSurveyCountByDay(int day) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select count(a.session_id) from attendance a, session s where a.session_id = s.id and s.session_date = ?");
+            if (day == 1) {
+                statement.setDate(1, java.sql.Date.valueOf("2013-10-10"));
+            } else {
+                statement.setDate(1, java.sql.Date.valueOf("2013-10-11"));
+            }
+            result = statement.executeQuery();
+            while (result.next()) {
+                return (result.getInt(1));
+            }
+        } catch (Exception e) {
+        } finally { closeJDBC(); }
+        return 0;
+    }
+    
     
     public int getCountBySession(int session) {
         try {

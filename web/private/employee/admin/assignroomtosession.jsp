@@ -16,7 +16,7 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <title>Assign a Room to a Session</title><!-- Title -->
+        <title>Assign Session To A Room</title><!-- Title -->
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
@@ -26,12 +26,6 @@
         <style>
             h1, h3 {
                 font-weight: normal;
-            }
-            #refresh {
-                margin-left: 12px;
-                color:#0067b1;
-                text-decoration: underline;
-                cursor: pointer;
             }
             .no-close .ui-dialog-titlebar-close {
                 display: none;
@@ -58,12 +52,18 @@
                 margin-right: 6px;
                 margin-left: 6px;
             }
+            #refresh {
+                margin-left: 12px;
+                color:#0067b1;
+                text-decoration: underline;
+                cursor: pointer;
+            }
         </style>
     </head>
     <body id="growler1">
         <%
             int user = 0;
-            String roomPassed = "TBD";
+            int sessionPassed = 0;
             if (null == session.getAttribute("id")) {
                 response.sendRedirect("../../../index.jsp");
             } else if (!session.getAttribute("role").equals("admin")) {
@@ -72,7 +72,7 @@
             try {
                 user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
                 String name = String.valueOf(session.getAttribute("user"));
-                roomPassed = (request.getParameter("roomId"));
+                sessionPassed = Integer.parseInt(request.getParameter("session_id"));
             } catch (Exception e) {
             }
         %>
@@ -84,30 +84,30 @@
             <div class="row">
                 <ul class="breadcrumb">
                     <li><a href="../../../private/employee/admin/home.jsp">Home</a></li>
-                    <li class='ieFix'>Assign A Room</li>
+                    <li class='ieFix'>Assign Session To A Room</li>
                 </ul>
             </div>
             <div class="row mediumBottomMargin">
-                <h1 style="margin-top:0px;font-weight: normal;">Assign A Room</h1>
+                <h1 style="margin-top:0px;font-weight: normal;">Assign Session To A Room</h1>
             </div>
             <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
             <div class="row largeBottomMargin">
-                <h3>To assign a room to a session, choose an available session from the list and press the <strong>Assign</strong> button.</h3>
+                <h3>To assign this session to a room, choose an available room from the list and press the <strong>Assign</strong> button.</h3>
             </div>
             <!--<div class='row largeBottomMargin'></div>-->
             <div class="row mediumBottomMargin">
-                <h2 class="bordered" style='padding-bottom:6px;'><img style="padding-bottom:0;padding-left:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span style="padding-left:12px;">Assign Details</span></h2>
+                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span style="padding-left:12px;">Assign Details</span></h2>
             </div>
             <div class="row largeBottomMargin">
                 <%
                     SessionPersistence sessionPersist = new SessionPersistence();
                     LocationPersistence locationPersist = new LocationPersistence();
-                    Location location = locationPersist.getLocationById(roomPassed);
-                    ArrayList<Session> sessions = sessionPersist.getThisYearSessions(2013, " order by session_date, start_time");
+                    ArrayList<Location> locations = locationPersist.getAllLocations("");
+                    Session sessions = sessionPersist.getSessionByID(sessionPassed);
                 %>
-                <form id="action" action="../../../action/processRoomAssign.jsp" method="post">
-                    <div class="form-group"><strong><% out.print(location.getId() + ", " + location.getDescription() + ", " + location.getBuilding());%></strong>
-                    <input type="hidden" name="location" id="room" value="<%= location.getId() %>"/>
+                <form id="action" action="../../../action/processSessionRoomAssign.jsp" method="post">
+                    <div class="form-group"><strong><% out.print(sessions.getSessionDate() + ", " + sessions.getStartTime() + ", " + sessions.getName());%></strong>
+                    <input type="hidden" name="sessionId" id="sessionId" value="<%= sessions.getId() %>"/>
                     </div>
                     <div class="form-group" style="margin-bottom: 6px;">
                         <span class="keywordFilter">
@@ -120,27 +120,27 @@
                     <div class="form-group">
                         <ol id="sessions">
                             <%
-                                SimpleDateFormat fmt = new SimpleDateFormat("h:mm a");
-                                SimpleDateFormat dates = new SimpleDateFormat("MM/dd");
-                                //Get a list of all sessions
-                                for (int i = 0; i < sessions.size(); i++) {
+                                //Get a list of all locations
+                                for (int i = 0; i < locations.size(); i++) {
                                     out.print("<li>");
-                                    if (!sessions.get(i).getLocation().equals(location.getId())) {
-                                        out.print("<input type='radio' name='sessionId' value=\"" + sessions.get(i).getId() + "\"");
+                                    if (!sessions.getLocation().equals(locations.get(i).getId())){
+                                        out.print("<input type='radio' name='location' value=\"" + locations.get(i).getId() + "\"");
                                         out.print(">");
-                                    } else {
+                                    }
+                                    else {
                                         out.print("<i class='icon16-success' style='margin-left: 5px; margin-right: 5px;'></i>");
                                     }
-                                    out.print(dates.format(sessions.get(i).getSessionDate()) + ", " + fmt.format(sessions.get(i).getStartTime()) + ", " + sessions.get(i).getName());
+                                    out.print(locations.get(i).getDescription() + ", " + locations.get(i).getBuilding() + ", " + locations.get(i).getCapacity());
+                                    
                                     out.print("</li>");
                                 }
                             %>
                         </ol>
                     </div>
-                    <div class="largeBottomMargin"><i class='icon16-success'></i> Indicates a session already has been assigned to <%= location.getDescription() %>.</div>
+                    <div class="largeBottomMargin"><i class='icon16-success'></i> Indicates a room has already has been assigned to <%= sessions.getName() %>.</div>
                     <div class="form-actions">
-                        <input id="send" type="submit" class="button button-primary" value="Assign Room"/>
-                        <a id="cancel" href="../../../private/employee/admin/room.jsp">Cancel</a>
+                        <input id="send" type="submit" class="button button-primary" value="Assign Session To Room"/>
+                        <a id="cancel" href="../../../private/employee/admin/session.jsp">Cancel</a>
                     </div>
                 </form>
             </div>
@@ -174,12 +174,12 @@
                                     $("#sessions li").show();
                                 }
                                 $("#refresh").click(function(){
-                                   var room = $("#room").val();
-                                   //console.log(room);
-                                   var checkRooms = $.post("../../../action/refreshAvailableRooms.jsp", {room: room});
+                                   var sessionId = $("#sessionId").val();
+                                   //console.log(sessionId);
+                                   var checkRooms = $.post("../../../action/refreshAvailableSessions.jsp", {sessionId: sessionId});
                                    checkRooms.done(function(data) {
                                        $("#sessions").empty().append(data);
-                                       //console.log(data);
+                                     //console.log(data);
                                    });
                                 });
         </script>

@@ -29,7 +29,7 @@
                 color: red;
                 font-weight: bold;
             }
-            .h3 {
+            h3 {
                 font-weight: normal;
             }
         </style>
@@ -84,7 +84,7 @@
                 <label><span style="color: red;">*</span>Required field</label>
             </div>
             <div class="row mediumBottomMargin">
-                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Room Details</span></h2>
+                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span style="padding-left:12px;">Room Details</span></h2>
             </div>
             <div class="row largeBottomMargin">
                 <form id="action" method="post" action="../../../action/processroom.jsp">

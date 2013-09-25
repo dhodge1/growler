@@ -71,31 +71,31 @@
                 <label><span style="color: red;">*</span>Required field</label>
             </div>
             <div class="row mediumBottomMargin">
-                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Add a Room</span></h2>
+                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span style="padding-left:12px;">Add a Room</span></h2>
             </div>
             <div class="row mediumBottomMargin">
                 <%@include file="../../../includes/messagehandler.jsp" %>
                     <form id="action" method="post" action="../../../action/processaddroom.jsp" >
                         <fieldset>
                             <div class="form-group">
-                                <label class="required">Room ID:</label>
+                                <label class="required">Room Number:</label>
                                 <input type="text" maxlength="10" id="tip" name="id" class="input-xlarge" data-content="Room ID, 10 Characters or Less"/>
                                 <br/><span id="error_id" class="message_container">
-                                    <span>Please Enter a Room ID</span>
+                                    <span>Please enter a room number</span>
                                 </span>
                             </div>
                             <div class="form-group">
                                 <label class="required">Room Name:</label>
                                 <input type="text" maxlength="20" id="tip1" name="name"  class="input-xlarge" data-content="Room Name, 20 Characters or Less"/>
                                 <br/><span id="error_name" class="message_container">
-                                    <span>Please Enter a Room Name</span>
+                                    <span>Please enter a room name</span>
                                 </span>
                             </div>
                             <div class="form-group">
                                 <label class="required">Capacity:</label>
                                 <input type="number" min="0" max="999" step="1" id="tip2" name="capacity"  data-content="Maximum Capacity, 0 to 999"/>
                                 <br/><span id="error_capacity" class="message_container">
-                                    <span>Please Enter a Capacity</span>
+                                    <span>Please enter room capacity</span>
                                 </span>
                             </div>
                             <div class="form-group">
@@ -106,10 +106,10 @@
                                     <option value="KXOFFICE">Knoxville Office</option>
                                 </select>
                                 <br/><span id="error_building" class="message_container">
-                                    <span>Please Select a Building</span>
+                                    <span>Please select building name</span>
                                 </span>
                             </div>
-                            <div class="form-actions">
+                            <div class="form-actions" style="padding-top:12px;">
                                 <input id="send" type="submit" value="Submit" class="button button-primary"/>
                                 <a href='../../../private/employee/admin/room.jsp'>Cancel</a>
                             </div>

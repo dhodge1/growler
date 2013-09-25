@@ -31,6 +31,9 @@
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
         <style>
+            .ie-dialog-button {
+                background-color: #0067B1;
+            }
             .table {
                 margin-bottom: 0px;
             }
@@ -101,12 +104,13 @@
             </div>
             <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
             <div class="row largeBottomMargin">
-                <span>Below is the latest session schedule for this years Techtoberfest event.</span>
+                <span>Below is the latest session schedule for this year's Techtoberfest event.</span>
             </div>
             <div class="row mediumBottomMargin">
-                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Schedule Details</span><span class="pullRight"><a href='#'>View as PDF</a><a href="#" style="padding-left: 6px;">Email PDF Schedule</a></span></h2>
+                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Schedule Details</span><span class="pullRight"><a href='../../public/Techtoberfest_Schedule2013.pdf' target='blank'>View as PDF</a></span></h2>
             </div>
             <div class="row largeBottomMargin">
+                <form onsubmit="return false;">
                 <input type='hidden' id='current_page' value="1" />
                 <input type='hidden' id='show_per_page' value='15' />
                 <input type='hidden' id='total' value='<%= sessions.size()%>'/>
@@ -114,7 +118,7 @@
                     <thead>
                         <tr>
                             <th>Date</th>
-                            <th>Time</th>
+                            <th style="width: 70px;">Time</th>
                             <th>Topic</th>
                             <th>Description</th>
                             <th>Speaker(s)</th>
@@ -126,7 +130,7 @@
                     <tbody id='tablebody'>
                         <%
                             for (int i = 0; i < sessions.size(); i++) {
-                                out.print("<tr id='row" + (i + 1) + "'>");
+                                out.print("<tr id='row" + (i) + "'>");
                                 out.print("<td>");
                                 SimpleDateFormat dates = new SimpleDateFormat("MM/dd/yyyy");
                                 out.print(dates.format(sessions.get(i).getSessionDate()));
@@ -151,15 +155,18 @@
                                 out.print("<td>");
                                 ArrayList<Speaker> speakers = sp.getSpeakersForSession(sessions.get(i).getId());
                                 for (int j = 0; j < speakers.size(); j++) {
-                                    out.print("<a class='showModal'>");
-                                    out.print(speakers.get(j).getFullName() + "<input type='hidden' value='" + speakers.get(j).getId() + "' /></a><br/>");
-                                    out.print("<div class='modals' id='modalspk" + speakers.get(j).getId() + "' title='" + speakers.get(j).getFullName() + "'>");
-                                    out.print(""); //The Bio information goes here?
-                                    out.print("</div>");
+                                    //Commented out the Speaker Dialogs, since we don't have relevant BIO data (9/16/13)
+                                    //out.print("<a class='showModal'>");
+                                    out.print(speakers.get(j).getFullName());
+                                    out.print("<br/>");
+                                    //out.print("<input type='hidden' value='" + speakers.get(j).getId() + "' /></a><br/>");
+                                    //out.print("<div class='modals' id='modalspk" + speakers.get(j).getId() + "' title='" + speakers.get(j).getFullName() + "'>");
+                                    //out.print(""); //The Bio information goes here?
+                                    //out.print("</div>");
                                 }
                                 out.print("</td>");
                                 out.print("<td>");
-                                SimpleDateFormat fmt2 = new SimpleDateFormat("K ' hours, ' mm ' minutes'");
+                                SimpleDateFormat fmt2 = new SimpleDateFormat("mm 'minutes'");
                                 out.print(fmt2.format(sessions.get(i).getDuration()));
                                 out.print("</td>");
                                 out.print("<td>");
@@ -203,18 +210,23 @@
                         <span>Page <input class="input-mini" onchange="pageJump();" type="text" id="pagejump"/> of <%= pages%></span>
                     </div>
                 </div>
+            </form>
             </div>
         </div>
         <%@ include file="../../includes/footer.jsp" %>        
-        <script src="../../js/libs/sniui.dialog.1.2.0.js"></script>
+        <script src="../../js/libs/sniui.dialog.1.2.0.min.js"></script>
         <script src="../../js/pagination.js"></script>
         <script>
+            $('form').submit(function(event) {
+                        pageJump();
+                        return false; // without this you go to google.com
+                    });
 
                             $(".like").click(function() {
                                 var session = this.id;
-                                console.log(session);
+                                
                                 session = session.substring(4);
-                                console.log(session);
+                                
                                 $.post("../../action/likeSession.jsp", {sid: session}, function(data, success) {
                                     $("#like" + session).hide();
                                     $("#unlike" + session).show();
@@ -223,9 +235,9 @@
 
                             $(".unlike").click(function() {
                                 var session = this.id;
-                                console.log(session);
+                                
                                 session = session.substring(6);
-                                console.log(session);
+                                
                                 $.post("../../action/unlikeSession.jsp", {sid: session}, function(data, success) {
                                     $("#unlike" + session).hide();
                                     $("#like" + session).show();
@@ -236,17 +248,21 @@
                                 $("#current_page").val(page);
                                 var total = parseInt($("#total").val());
                                 var pages = Math.floor((total / parseInt($("#show_per_page").val())) + 1);
-                                for (var i = 16; i < total + 1; i++) {
+                                for (var i = 15; i < total + 1; i++) {
                                     $("#row" + i).hide();
                                 }
                                 unActive();
                                 $("#page1").addClass("active");
                                 $(".modals").dialog({
                                     autoOpen: false,
+                                    draggable: false,
+                                    resizable: false,
+                                    height: 300,
+                                    width: 500,
                                     dialogClass: "no-close",
                                     buttons: {
                                         'ok': {
-                                            'class': 'button button-primary',
+                                            'class': 'button button-primary ie-dialog-button',
                                             click: function() {
                                                 $(this).dialog('close');
                                             }, text: "OK"}, modal: true

@@ -99,9 +99,9 @@
             <div class="row largeBottomMargin">
                 <h3>To assign a speaker to a session, choose an available session from the list and press the <strong>Assign</strong> button.</h3>
             </div>
-            <div class="row largeBottomMargin"></div>
+            <!--<div class='row largeBottomMargin'></div>-->
             <div class="row mediumBottomMargin">
-                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Assign Details</span></h2>
+                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span style="padding-left:12px;">Assign Details</span></h2>
             </div>
             <div class="row largeBottomMargin">
                 <%

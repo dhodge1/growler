@@ -95,7 +95,8 @@ public class SessionPersistence extends GrowlerPersistence {
             statement.setString(1, s.getName());
             statement.setDate(2, s.getSessionDate());
             statement.setTime(3, s.getStartTime());
-            statement.setString(4, s.getLocation());
+            //statement.setString(4, s.getLocation());
+            statement.setString(4, "TBD");
             statement.setTime(5, s.getDuration());
             statement.setString(6, s.getDescription());
             statement.execute();
@@ -608,7 +609,7 @@ public class SessionPersistence extends GrowlerPersistence {
     public ArrayList<Session> getUnscheduledSessions() {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select * from session where extract(YEAR FROM session_date) = 2013 and extract(MONTH FROM session_date) = '10' and start_time is null order by session_date, start_time, name");
+            statement = connection.prepareStatement("select * from session where extract(YEAR FROM session_date) = 2013 and extract(MONTH FROM session_date) = '10' and location not in ('E130', 'D304') order by session_date, start_time, name");
             result = statement.executeQuery();
             sessions.clear();
             while (result.next()) {
@@ -778,9 +779,8 @@ public class SessionPersistence extends GrowlerPersistence {
     public ArrayList<Session> getSessionsByDateAndTime(java.sql.Date date, java.sql.Time time) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select id, name, description, "
-                    + "session_date, start_time, duration, location, track from session "
-                    + "where session_date = ? and start_time = ? ?");
+            sessions.clear();
+            statement = connection.prepareStatement("select * from session where session_date = ? and start_time = ?");
             statement.setDate(1, date);
             statement.setTime(2, time);            
             result = statement.executeQuery();
@@ -798,13 +798,13 @@ public class SessionPersistence extends GrowlerPersistence {
                 //Add the session to the list
                 sessions.add(s);
             }
-            closeJDBC();
+            return sessions;
         } catch (Exception e) {
         }
         finally {
             closeJDBC();
         }
-        return new ArrayList<Session>();
+        return sessions;
     }
     
     public Session getSessionByName(String name) {
@@ -831,5 +831,90 @@ public class SessionPersistence extends GrowlerPersistence {
             closeJDBC();
         }
         return new Session();
+    }
+    /**
+     * Gets a list of sessions in the same timeslot as a given session
+     * @param ses
+     * @return 
+     */
+    public ArrayList<Session> sessionsInSlot(Session ses) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select * from session where session_date = ? and start_time = ?");
+            statement.setDate(1, ses.getSessionDate());
+            statement.setTime(2, ses.getStartTime());
+            result = statement.executeQuery();
+            while (result.next()){
+                Session s = new Session();
+                s.setId(result.getInt("id"));
+                s.setName(result.getString("name"));
+                s.setDescription(result.getString("description"));
+                s.setSessionDate(result.getDate("session_date"));
+                s.setStartTime(result.getTime("start_time"));
+                s.setLocation(result.getString("location"));
+                s.setTrack(result.getString("track"));
+                s.setDuration(result.getTime("duration"));
+                sessions.add(s);
+            }
+            return sessions;
+        } catch(Exception e) {
+            
+        } finally {
+            closeJDBC();
+        }
+        return new ArrayList<Session>();
+    }
+            
+    public ArrayList<Session> checkAvailableTimes(java.sql.Date date){
+        try {
+            initializeJDBC();
+            sessions.clear();
+            statement = connection.prepareStatement("select session_date, start_time, duration from session where session_date = ? order by session_date, start_time, duration");
+            statement.setDate(1, date);
+            result = statement.executeQuery();
+            while (result.next()){
+                Session s = new Session();
+                s.setSessionDate(result.getDate("session_date"));
+                s.setStartTime(result.getTime("start_time"));
+                s.setDuration(result.getTime("duration"));
+                sessions.add(s);
+            }
+            return sessions;
+        } catch (Exception e){
+            
+        } finally {
+            closeJDBC();
+        }
+        return new ArrayList<Session>();
+    }
+    
+    public void swapSessionLocations(int id, String location) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select id, name, start_time, addtime(start_time, duration), session_date, location from session where addtime(start_time, duration) >= (select start_time from session where id = ?) and session_date = (select session_date from session where id = ?) and start_time <= (select addtime(start_time, duration) from session where id = ?) and id != ?");
+            statement.setInt(1, id);
+            statement.setInt(2, id);
+            statement.setInt(3, id);
+            statement.setInt(4, id);
+            result = statement.executeQuery();
+            int replacementId = 0;
+            while (result.next()) {
+                 if (result.getString("location").equals(location) && !location.equals("TBD")) {
+                     replacementId = result.getInt("id");
+                }
+            }
+            SessionPersistence sp = new SessionPersistence();
+            if (replacementId != 0) {
+                Session ses = sp.getSessionByID(replacementId);
+                ses.setLocation("TBD");
+                sp.updateSession(ses);
+            }
+            Session updateMe = sp.getSessionByID(id);
+            updateMe.setLocation(location);
+            sp.updateSession(updateMe);
+        } catch (Exception e) {
+        } finally {
+            closeJDBC();
+        }   
     }
 }

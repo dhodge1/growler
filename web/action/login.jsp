@@ -29,6 +29,8 @@
                 //If it's an admin, go to the admin side
                 if (result.getInt(1) == 808300) {
                     session.setAttribute("user", "admin");
+                    session.setAttribute("role", "admin");
+                    session.setAttribute("email", "techtoberfest-help@gmail.com");
                     session.setAttribute("id", new Integer(result.getInt("id")));
                     session.setMaxInactiveInterval(1800); //30 minutes before it kicks you off
                     connection.close();
@@ -40,6 +42,7 @@
 
                     session.setAttribute("user", result.getString("name"));
                     session.setAttribute("id", new Integer(result.getInt("id")));
+                    session.setAttribute("email", "techtoberfest-help@gmail.com");
                     session.setMaxInactiveInterval(600); //10 minutes before it kicks you off
                     connection.close();
                     statement.close();

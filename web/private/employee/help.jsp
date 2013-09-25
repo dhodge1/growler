@@ -52,7 +52,7 @@
                 <h2 class="bordered"><img id="logo" style="padding-left:0;padding-bottom:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Help By Topic</span><span class="pullRight"><a href='http://growler.elasticbeanstalk.com/public/Techtoberfest_HelpDocumentation_2013.pdf' target="blank">View as PDF</a></span></h2>
             </div>
             <div class="row">
-                <div class="accordion" id="accordion-parent">
+                <div class="accordion" id="accordion-parent" style="padding-left: 0px; padding-right:0px;">
                     <div class="accordion-group">
                         <div class="accordion-toggle accordion-selected" data-toggle="collapse" data-parent="#accordion-parent" data-target="#collapse1">
                             <i class="icon12-previous"></i>
@@ -156,7 +156,21 @@
             </div>
         </div>
         <%@ include file="../../includes/footer.jsp" %> 
-        <%@ include file="../../includes/scriptlist.jsp" %>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="../../js/components.js"></script>
+	<script src="../../js/jquery.sortable.js"></script><!--Drag and drop for non-iOS-->
+	<script src="../../js/libs/bootstrap-collapse.2.2.1.min.js" type="text/javascript"></script>
+	<script src="../../js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"> </script>
+	<script src="../../js/libs/jquery-1.8.3.min.js" type="text/javascript"></script>
+	<script src="../../js/libs/jquery.dataTables.1.9.3.min.js" type="text/javascript"></script>
+	<script src="../../js/libs/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
+	<script src="../../js/libs/prettify.js" type="text/javascript"></script>
+	<script src="../../js/libs/sniui.accordion.1.0.0.min.js" type="text/javascript"></script>
+	<script src="../../js/libs/sniui.accordion.1.2.0.min.js" type="text/javascript"> </script>
+	<script src="../../js/libs/sniui.auto-inline-help.min.js" type="text/javascript"> </script>
+	<script src="../../js/libs/sniui.auto-inline-help.1.0.0.min.js" type="text/javascript"></script>
+	<script src="../../js/libs/sniui.dataTables.1.0.0.min.js" type="text/javascript"></script>
+	<script src="../../js/libs/sniui.dialog.1.1.0.min.js" type="text/javascript"></script>
         <script>
             $(document).ready(function() {
                 $(".accordion-toggle").click(function() {

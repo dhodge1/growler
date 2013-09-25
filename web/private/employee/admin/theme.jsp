@@ -81,7 +81,7 @@
             <div class="row mediumBottomMargin"></div>
             <div class="row">
                 <ul class="breadcrumb">
-                    <li><a href="../../../private/employee/home.jsp">Home</a></li>
+                    <li><a href="../../../private/employee/admin/home.jsp">Home</a></li>
                     <li class='ieFix'>Manage Themes</li>
                 </ul>
             </div>
@@ -92,8 +92,8 @@
             <div class="row largeBottomMargin">
                 <h3>Use the table below to add, edit or delete existing themes.</h3>
             </div>
-            <div class="row largeBottomMargin"></div>
-            <div class="row smallBottomMargin">
+            <!--<div class='row largeBottomMargin'></div>-->
+            <div class="row mediumBottomMargin">
                 <h2 class="bordered smallBottomMargin"><img style="padding-bottom:0;padding-left:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span style="padding-left: 12px;">Theme Details</span><a href="../../../private/employee/admin/themeentry.jsp" class="pullRight button button-primary">Add Theme</a></h2>
             </div>
             <div class="row">
@@ -151,7 +151,7 @@
                                                         out.print(themes.get(i).getName());
                                                         out.print("</div>");
                                                     %>
-                                                    <i class="icon16-pageRemove"></i>Delete</a></li>
+                                                    <i class="icon16-trash"></i>Delete</a></li>
                                         </ul>
                                     </div>
                                 </td>
@@ -186,7 +186,7 @@
         </div>
         <%@ include file="../../../includes/footer.jsp" %>
         <script src="http://growler.elasticbeanstalk.com/js/libs/bootstrap-dropdown.2.0.4.min.js"></script>
-        <script src="http://growler.elasticbeanstalk.com/js/libs/sniui.dialog.1.2.0.js"></script>
+        <script src="http://growler.elasticbeanstalk.com/js/libs/sniui.dialog.1.2.0.min.js"></script>
         <script src="../../../js/pagination.js"></script>
         <script>
                                 $(document).ready(function() {

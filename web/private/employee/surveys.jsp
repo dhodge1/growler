@@ -30,37 +30,37 @@
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
         <script>
             $(document).ready(function() {
-                $('td').filter('.2013-10-11morning').show();
+                $('td').filter('.2013-10-10morning').show();
+                $('td').filter('.2013-10-10afternoon').hide();
+                $('td').filter('.2013-10-11morning').hide();
                 $('td').filter('.2013-10-11afternoon').hide();
-                $('td').filter('.2013-10-12morning').hide();
-                $('td').filter('.2013-10-12afternoon').hide();
                 $("#survey").hide();
                 $("#code").hide();
                 $("#confirm").hide();
                 $("#date").change(function() {
                     if ($("#date").val() === "1") {
-                        $('td').filter('.2013-10-11morning').show();
+                        $('td').filter('.2013-10-10morning').show();
+                        $('td').filter('.2013-10-10afternoon').hide();
+                        $('td').filter('.2013-10-11morning').hide();
                         $('td').filter('.2013-10-11afternoon').hide();
-                        $('td').filter('.2013-10-12morning').hide();
-                        $('td').filter('.2013-10-12afternoon').hide();
                     }
                     else if ($("#date").val() === "2") {
+                        $('td').filter('.2013-10-10morning').hide();
+                        $('td').filter('.2013-10-10afternoon').show();
                         $('td').filter('.2013-10-11morning').hide();
-                        $('td').filter('.2013-10-11afternoon').show();
-                        $('td').filter('.2013-10-12morning').hide();
-                        $('td').filter('.2013-10-12afternoon').hide();
+                        $('td').filter('.2013-10-11afternoon').hide();
                     }
                     else if ($("#date").val() === "3") {
-                        $('td').filter('.2013-10-11morning').hide();
+                        $('td').filter('.2013-10-10morning').hide();
+                        $('td').filter('.2013-10-10afternoon').hide();
+                        $('td').filter('.2013-10-11morning').show();
                         $('td').filter('.2013-10-11afternoon').hide();
-                        $('td').filter('.2013-10-12morning').show();
-                        $('td').filter('.2013-10-12afternoon').hide();
                     }
                     else if ($("#date").val() === "4") {
+                        $('td').filter('.2013-10-10morning').hide();
+                        $('td').filter('.2013-10-10afternoon').hide();
                         $('td').filter('.2013-10-11morning').hide();
-                        $('td').filter('.2013-10-11afternoon').hide();
-                        $('td').filter('.2013-10-12morning').hide();
-                        $('td').filter('.2013-10-12afternoon').show();
+                        $('td').filter('.2013-10-11afternoon').show();
                     }
                 });
                 $("#progress1").click(function() {

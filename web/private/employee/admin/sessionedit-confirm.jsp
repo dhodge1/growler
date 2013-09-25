@@ -31,6 +31,9 @@
             .firstlink {
                 margin-right: 12px;
             }
+            h1 {
+                font-weight: normal;
+            }
         </style>
     </head>
     <body id="growler1">
@@ -58,13 +61,31 @@
             </div>
             <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
             <div class="row largeBottomMargin">
-                <span><% out.print((String)session.getAttribute("sessionName")); %></span>
+                <p><span>Session Topic: <% out.print((String)session.getAttribute("sessionName")); %></span></p>
+                <p><span>Session Description: <% out.print((String)session.getAttribute("sessionDesc")); %></span></p>
+                <p><span>Speakers(s): <% out.print((String)session.getAttribute("sessionSpkr")); 
+                    if (session.getAttribute("sessionSpkr2") != null) {
+                        out.print(" | " + session.getAttribute("sessionSpkr2"));
+                    }
+                %></span></p>
+                <p><span>Session Date: <% out.print((String)session.getAttribute("sessionDate")); %></span></p>
+                <p><span>Session Time: <% out.print((String)session.getAttribute("sessionTime")); %>0</span></p>
             </div>
             <div class="row">
                 <a class="firstlink" href='../../../private/employee/admin/session.jsp'>Return to manage sessions</a>
-                <a href='../../../private/employee/admin/addsession.jsp'>Add another session</a>
+                <a class="firstlink" href='../../../private/employee/admin/addsession.jsp'>Add another session</a>
+                <% out.print("<a href='../../../private/employee/admin/assignroomtosession.jsp?session_id=" + session.getAttribute("sessionID") + "' >Assign a room for this session</a>"); %>
             </div>
         </div>
+        <% 
+                session.removeAttribute("sessionName");
+                session.removeAttribute("sessionDesc");
+                session.removeAttribute("sessionSpkr");
+                session.removeAttribute("sessionSpkr2");
+                session.removeAttribute("sessionDate");
+                session.removeAttribute("sessionTime");
+                session.removeAttribute("sessionID");
+        %>
         <%@ include file="../../../includes/footer.jsp" %> 
     </body>
 </html>

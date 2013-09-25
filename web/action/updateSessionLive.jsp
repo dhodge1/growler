@@ -13,17 +13,20 @@
     int sessionId = Integer.parseInt(request.getParameter("id"));
     java.sql.Date date = java.sql.Date.valueOf(request.getParameter("date"));
     java.sql.Time time = java.sql.Time.valueOf(request.getParameter("time"));
+    String location = request.getParameter("location");
     //If it's not 0, we're updating a session
     if (sessionId != 0) {
         Session current = sp.getSessionByID(sessionId);
         current.setSessionDate(date);
         current.setStartTime(time);
+        current.setLocation(location);
         sp.updateSession(current);
     } //If it's 0, someone put NO SESSION in place of an existing session
     else {
         Session removal = sp.getSessionByDateAndTime(date, time, " ");
-        removal.setSessionDate(java.sql.Date.valueOf("2013-10-01"));
+        removal.setSessionDate(java.sql.Date.valueOf("2013-10-10"));
         removal.setStartTime(null);
+        removal.setLocation(null);
         sp.updateSession(removal);
     }
 %>

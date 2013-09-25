@@ -32,5 +32,4 @@
         out.print("<p class=feedbackMessage-info>" + message + "</p>");
         session.removeAttribute("message");
     }
-    session.removeAttribute("sessionName");
 %>

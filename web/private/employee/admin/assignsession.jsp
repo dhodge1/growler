@@ -22,6 +22,46 @@
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
         <link rel="stylesheet" href="../../../css/draganddrop.css" /><!--Drag and drop style-->
         <script src="http://growler.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
+        <style>
+            h1, h3 {
+                font-weight: normal;
+            }
+            .no-close .ui-dialog-titlebar-close {
+                display: none;
+            }
+            .keywordFilter-clear {
+                cursor: pointer;
+            }
+            .pullRight {
+                float: right;
+                top:10px;
+                position:relative;
+            }
+            #sessions {
+                list-style-type: none;
+                height: 345px;
+                overflow-y: auto;
+                border: 1px solid #ccc;
+                margin:0;
+                margin-bottom: 24px;
+            }
+            input[type="radio"] {
+                position:relative;
+                bottom: 5px;
+                margin-right: 6px;
+            }
+            #additional {
+                color:#0067b1;
+                text-decoration: underline;
+                cursor: pointer;
+            }
+            .modals{
+                display:none;
+            }
+            #list {
+                font-weight: bold;
+            }
+        </style>
     </head>
     <body id="growler1">
         <%
@@ -45,10 +85,25 @@
         <%@ include file="../../../includes/adminheader.jsp" %> 
         <%@ include file="../../../includes/adminnav.jsp" %>
         <div class="container-fixed">
-            <div class="row mediumBottomMargin">
-                    <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Assign Speaker to Session</span></h2>
-            </div>
+            <div class="row mediumBottomMargin"></div>
             <div class="row">
+                <ul class="breadcrumb">
+                    <li><a href="../../../private/employee/admin/home.jsp">Home</a></li>
+                    <li class='ieFix'>Assign A Speaker</li>
+                </ul>
+            </div>
+            <div class="row mediumBottomMargin">
+                <h1 style="margin-top:0px;font-weight: normal;">Assign A Speaker</h1>
+            </div>
+            <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
+            <div class="row largeBottomMargin">
+                <h3>To assign a speaker to a session, choose an available session from the list and press the <strong>Assign</strong> button.</h3>
+            </div>
+            <!--<div class='row largeBottomMargin'></div>-->
+            <div class="row mediumBottomMargin">
+                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span style="padding-left:12px;">Assign Details</span></h2>
+            </div>
+            <div class="row largeBottomMargin">
                     <%
                         SessionPersistence sessionPersist = new SessionPersistence();
                         SpeakerPersistence speakerPersist = new SpeakerPersistence();
@@ -82,16 +137,13 @@
                                     //Get a list of suggested speakers
                                     for (int i = 0; i < speakers.size(); i++) {
                                         out.print("<option value=\"" + speakers.get(i).getId() + "\"");
-                                        if (sessions.get(i).getId() == speakerPassed) {
-                                            out.print(" selected ");
-                                        }
                                         out.print(">" + speakers.get(i).getLastName() + ", " + speakers.get(i).getFirstName());
                                         out.print("</option>");
                                     }
                                 %>
                             </select>
                         </div>
-                        <a href="speakerentry.jsp">Add a New Speaker</a><br/>
+                            <p><a href="speakerentry.jsp">Add a New Speaker</a></p>
                         <div class="form-actions">
                             <input id="send" type="submit" class="button button-primary" value="Submit"/>
                             <a id="cancel" href="session.jsp">Cancel</a>

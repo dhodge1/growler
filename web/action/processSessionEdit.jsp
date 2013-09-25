@@ -9,19 +9,16 @@
 <%@page import="com.scripps.growler.*" %>
 <%
     int user = 0;
-    if (null == session.getAttribute("id")) {
-        response.sendRedirect("../index.jsp");
-    }
-    try {
-        user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
-        String name = String.valueOf(session.getAttribute("user"));
-    } catch (Exception e) {
-    }
-    
-    int id = Integer.parseInt(request.getParameter("sessionId"));
-    SessionPersistence sp = new SessionPersistence();
-    Session s = sp.getSessionByID(id);
-    String date = request.getParameter("date");
+            if (null == session.getAttribute("id")) {
+                response.sendRedirect("../index.jsp");
+            }
+            try {
+                user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+                String name = String.valueOf(session.getAttribute("user"));
+            } catch (Exception e) {
+            }
+            int sessionId = Integer.parseInt(request.getParameter("sessionId"));
+            String date = request.getParameter("date");
             String time = request.getParameter("time");
             //Get the 'a' or 'b' from the time string
             char marker = time.charAt(8);
@@ -30,7 +27,11 @@
             String description = request.getParameter("description");
             String name = request.getParameter("name");
             String speaker = request.getParameter("speaker");
+            String speaker2 = request.getParameter("speaker2");
             int spkrId = Integer.parseInt(speaker);
+            int spkrId2 = Integer.parseInt(speaker2);
+            SessionPersistence sp = new SessionPersistence();
+            Session s = sp.getSessionByID(sessionId);
             s.setName(name);
             s.setDescription(description);
             try {
@@ -44,12 +45,43 @@
                 }
             } catch (Exception e) {
             }
-    s.setId(id);
-    s.setName(name);
-    s.setDescription(description);
-    sp.updateSession(s);
-    sp.assignSpeaker(spkrId, id);
-    session.setAttribute("message", "Success: Session " + s.getName() + " for " + s.getSessionDate() + " updated successfully!");
-    session.setAttribute("sessionName", name);
+            
+            try {
+                //9-8 commented out the location checks, since they are currently not part of the adding session page
+                //ArrayList<Session> ses = sp.getSessionsByDateAndTime(java.sql.Date.valueOf(date), java.sql.Time.valueOf(time));
+
+                //boolean ok = true;
+                //for (int i = 0; i < ses.size(); i++) {
+                    //Gets the session scheduled for that time, then compares them to the location parameter
+                    //Excuses TBD, because any number of sessions can have TBD as the location
+                //    if (ses.get(i).getLocation().equals(location) && !location.equals("TBD")) {
+                //        session.setAttribute("message", "Error: There is already a session scheduled for that room at that time");
+                //        ok = false;
+                //    }
+                //}
+               // if (ok) {
+                    sp.updateSession(s);
+                    session.setAttribute("message", "Success: The session was edited successfully!");
+                    //Get the newly created Session ID and assign the speaker to it
+                    Session ses = sp.getSessionByName(name);
+                    sp.assignSpeaker(spkrId, ses.getId());
+                    SpeakerPersistence sk = new SpeakerPersistence();
+                    Speaker sendSpeakerInfo = sk.getSpeakerByID(spkrId);
+                    if (spkrId2 != 0) {
+                        sp.assignSpeaker(spkrId2, ses.getId());
+                        session.setAttribute("sessionSpkr2", sk.getSpeakerByID(spkrId2).getFullName());
+                    }
+                    session.setAttribute("sessionName", name);
+                    session.setAttribute("sessionDesc", description);
+                    session.setAttribute("sessionSpkr", sendSpeakerInfo.getFullName());
+                    session.setAttribute("sessionDate", date);
+                    session.setAttribute("sessionTime", time);
+                    session.setAttribute("sessionID", ses.getId());
+
+               // }
+            } catch (Exception e) {
+                //sp.addSession(s);
+                //session.setAttribute("message", "Success: Session " + s.getName() + " for " + s.getSessionDate() + " added successfully!");
+            }
     response.sendRedirect("../private/employee/admin/sessionedit-confirm.jsp");
 %>

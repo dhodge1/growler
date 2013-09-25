@@ -59,7 +59,6 @@
         } catch (Exception e) {
             // session.setAttribute("message", "Error: Room " + l.getDescription() + " already assigned to Session " + h.getName());
         }
-
     response.sendRedirect("../private/employee/admin/sessionroom-confirm.jsp");
 
 %>

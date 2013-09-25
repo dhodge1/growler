@@ -78,7 +78,7 @@
                 <label><span style="color: red;">*</span>Required field</label>
             </div>
             <div class="row mediumBottomMargin">
-                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Theme Details</span></h2>
+                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span style="padding-left: 12px;">Theme Details</span></h2>
             </div>
             <div class="row mediumBottomMargin">
                 <%@include file="../../../includes/messagehandler.jsp" %>

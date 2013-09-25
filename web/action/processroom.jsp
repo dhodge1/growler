@@ -37,6 +37,7 @@
             session.setAttribute("message", "Error: The following room was not edited successfully.");
         } finally {
             session.setAttribute("room", l.getDescription());
+            session.setAttribute("roomId", l.getId());
             response.sendRedirect("../private/employee/admin/roomedit-confirm.jsp");
         }
     %>

@@ -36,6 +36,7 @@
                 session.setAttribute("message", "Error: The following room was not added successfully.");
             } finally {
             session.setAttribute("room", l.getDescription());
+            session.setAttribute("roomId", id);
             response.sendRedirect("../private/employee/admin/roomadd-confirm.jsp");
         }
     %>

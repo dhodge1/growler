@@ -1,5 +1,5 @@
 <%-- 
-    Document   : surveyReport
+    Document   : interestReport
     Created on : Jun 10, 2013, 2:18:37 PM
     Author     : 162107
 --%>
@@ -17,24 +17,59 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-        <title>Techtoberfest Report</title>
-
+        <title>Session Interest Report</title>
         <link rel="stylesheet" href="../../../css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
         <link rel="stylesheet" href="../../../css/prettify/prettify.css" /> 
-        <link rel="stylesheet" type="text/css" href="../../../css/general.css" /><!--General CSS-->
-
         <script src="http://growler.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
+        <style>
+            .ui-widget-content {
+                background: #FFF;
+            }
+            .table {
+                margin-bottom: 0px;
+            }
+            .pullRight {
+                float:right;
+                font-weight: normal;
+                font-family: Arial;
+                font-size: 11px;
+                position: relative;
+                top: 32px;
+            }
+            .modals{
+                display:none;
+            }
+            .showModal, .showModal2, .showModal3 {
+                color:#0067b1;
+                text-decoration: underline;
+                cursor: pointer;
+            }
+            .no-close .ui-dialog-titlebar-close {
+                display: none;
+            }
+            h1, h3 {
+                font-weight: normal;
+            }
+            .pager li {
+                cursor: pointer;
+            }
+            .modalCloser, #print {
+                margin-left: 12px;
+                color:#0067b1;
+                text-decoration: underline;
+                cursor: pointer;
+            }
+        </style>
     </head>
     <body id="growler1">
         <%
             int user = 0;
             if (null == session.getAttribute("id")) {
-                //response.sendRedirect("../../../index.jsp");
+                response.sendRedirect("../../../index.jsp");
             } else if (!session.getAttribute("role").equals("admin")) {
-                //response.sendRedirect("../../../index.jsp");
+                response.sendRedirect("../../../index.jsp");
             }
             try {
                 user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
@@ -45,52 +80,105 @@
         <%@ include file="../../../includes/adminheader.jsp" %> 
         <%@ include file="../../../includes/adminnav.jsp" %>  
         <div class="container-fixed">
-            <br/><br/><br/>
+            <div class="row mediumBottomMargin"></div>
             <div class="row">
-                
-                    <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Interest in a Session</span></h2>
-                
+                <ul class="breadcrumb">
+                    <li><a href="../../../private/employee/admin/home.jsp">Home</a></li>
+                    <li class='ieFix'>Session Interest Report</li>
+                </ul>
             </div>
-            <br/>
-            <div class="row">
-                
+            <div class="row mediumBottomMargin">
+                <h1>Session Interest Report</h1>
+            </div>
+            <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
+            <div class="row largeBottomMargin">
+                <h3>The table below displays a detailed listing of sessions employees are interested in attending.</h3>
+            </div>
+            <!--<div class='row largeBottomMargin'></div>-->
+            <div class="row mediumBottomMargin">
+                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span style="padding-left: 12px;">Report Details</span><span class='pullRight'><a id='print' onclick='window.print();'>Print</a></span></h2>
+            </div>
+            <div class='row largeBottomMargin'>
+                <form onsubmit="return false;">
+                    <input type='hidden' id='current_page' value="1" />
+                    <input type='hidden' id='show_per_page' value='15' />
                     <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
-                        <tr>                    
-                            <th>Session Name</th>
-                            <th>Description</th>
-                            <th>Speaker(s)</th>
-                            <th># Interested</th>
-                        </tr>
-                        <%  ReportGenerator rg = new ReportGenerator();
-                            ArrayList<InterestReport> interest = rg.generateInterestReport();
-
-
-                            for (int i = 0; i < interest.size(); i++) {
-                                out.print("<tr>");
-                                out.print("<td>");
-                                out.print(interest.get(i).getSessionName());
-                                out.print("</td>");
-                                out.print("<td>");
-                                out.print(interest.get(i).getSessionDescription());
-                                out.print("</td>");
-                                out.print("<td>");
-                                ArrayList<Speaker> speakers = interest.get(i).getSpeakers();
-                                for (int x = 0; x < speakers.size(); x++) {
-                                    out.print(speakers.get(x).getLastName() + ", " + speakers.get(x).getFirstName() + " <br/> ");
+                        <thead>
+                            <tr>
+                                <th># of Interested Employees</th>
+                                <th>Session Topic</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%
+                                ReportGenerator rg = new ReportGenerator();
+                                ArrayList<InterestReport> interest = rg.generateInterestReport();
+                                for (int i = 0; i < interest.size(); i++) {
+                                    out.print("<tr id='row" + i + "'>");
+                                    out.print("<td>");
+                                    out.print(interest.get(i).getInterested());
+                                    out.print("</td>");
+                                    out.print("<td>");
+                                    out.print(interest.get(i).getSessionName());
+                                    out.print("</td>");
+                                    out.print("</tr>");
                                 }
-                                out.print("</td>");
-                                out.print("<td>");
-                                out.print(interest.get(i).getInterested());
-                                out.print("</td>");
-                                out.print("</tr>");
-                            }
-                        %>
+                            %>
+                        </tbody>
                     </table>
-                
+                        <input type='hidden' id='total' value='<%= interest.size()%>'/>
+                    <div class="pager">
+                        <ul>
+                            <li class="pager-arrow"><a onclick="first();"><i class="icon12-first"></i></a></li>
+                            <li class="pager-arrow"><a onclick="prev();"><i class="icon12-previous"></i></a></li>
+                                    <% int rows = interest.size();
+                                        int pages = 0;
+                                        if (rows % 15 == 0) {
+                                            pages = (rows / 15);
+                                        } else {
+                                            pages = (rows / 15) + 1;
+                                        }
+                                        for (int i = 0; i < pages; i++) {
+                                            out.print("<li id=\"page" + (i + 1) + "\"><a onclick='page(" + (i + 1) + ");'>" + (i + 1) + "</a></li>");
+                                        }
+                                    %>
+                            <li class="pager-arrow"><a onclick="next();"><i class="icon12-next"></i></a></li>
+                            <li class="pager-arrow"><a onclick="last();"><i class="icon12-last"></i></a></li>
+                        </ul>
+                        <div class="pager-pageJump">
+                            <span>Page <input class="input-mini" type="text" id="pagejump"/> of <%= pages%></span>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
-
         <%@ include file="../../../includes/footer.jsp" %> 
-        <%@ include file="../../../includes/scriptlist.jsp" %>
+        <script src="../../../js/libs/jquery-1.8.3.min.js"></script>  
+        <script src="../../../js/libs/jquery-ui-1.9.2.custom.min.js"></script>  
+        <script src="../../../js/libs/jquery.wijmo-complete.all.2.3.2.min.js"></script>
+        <script src="../../../js/libs/jquery.wijmo-open.all.2.3.1.min.js"></script>
+        <script src="../../../js/libs/jquery.wijmo-open.all.2.3.2.min.js"></script>
+        <script src="http://growler.elasticbeanstalk.com/js/libs/bootstrap-dropdown.2.0.4.min.js"></script>
+        <script src="http://growler.elasticbeanstalk.com/js/libs/sniui.dialog.1.2.0.min.js"></script>
+        <script src="../../../js/pagination.js"></script>
+        <script>
+
+                    $('form').submit(function(event) {
+                        pageJump();
+                        return false;
+                    });
+
+                    $(document).ready(function() {
+                        var page = 1;
+                        $("#current_page").val(page);
+                        var total = parseInt($("#total").val());
+                        var pages = Math.floor((total / parseInt($("#show_per_page").val())) + 1);
+                        for (var i = 20; i < total + 1; i++) {
+                            $("#row" + i).hide();
+                        }
+                        unActive();
+                        $("#page1").addClass("active");
+                    });
+        </script>
     </body>
 </html>

@@ -17,8 +17,8 @@
         <link rel="shortcut icon" type="image/png" href="http://growler.elasticbeanstalk.com/images/scripps_favicon-32.ico">
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
-        <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
+        <link rel="stylesheet" href="../../../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
+        <script src="../../../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <style>
             .pullRight {
                 float:right;
@@ -31,15 +31,13 @@
         </style>
     </head>
     <body id="growler1">
-        <%@ include file="../includes/indexheader.jsp" %> 
-        <%  if (session.getAttribute("id") != null) {%>
-        <%@ include file="../includes/usernav.jsp" %> 
-        <% } //end if %>
+        <%@ include file="../../../includes/adminheader.jsp" %> 
+        <%@ include file="../../../includes/adminnav.jsp" %> 
         <div class="container-fixed mediumBottomMargin">
             <div class='row mediumBottomMargin'></div>
             <div class="row">
                 <ul class="breadcrumb">
-                    <li><a href="../../private/employee/home.jsp">Home</a></li>
+                    <li><a href="../../../private/employee/admin/home.jsp">Home</a></li>
                     <li class='ieFix'>Techtoberfest Help</li>
                 </ul>
             </div>
@@ -51,7 +49,7 @@
                 <span>Click on a topic below to have the help content displayed.</span>
             </div>
             <div class="row">
-                <h2 class="bordered"><img id="logo" style="padding-left:0;padding-bottom:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan nowrap">Help By Topic</span><span class="pullRight"><a href='Techtoberfest_HelpDocumentation_2013.pdf' target="blank">View as PDF</a></span></h2>
+                <h2 class="bordered"><img id="logo" style="padding-left:0;padding-bottom:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span style="padding-left: 12px;">Help By Topic</span><span class="pullRight"><a href='http://growler.elasticbeanstalk.com/public/Techtoberfest_HelpDocumentation_2013.pdf' target="blank">View as PDF</a></span></h2>
             </div>
             <div class="row">
                 <div class="accordion" id="accordion-parent" style="padding-left: 0px; padding-right:0px;">
@@ -62,7 +60,7 @@
                         </div><!-- /.accordion-toggle-->
                         <div id="collapse1" class="accordion-body collapse in">
                             <div class="accordion-inner">
-                                Step 1: From the log in screen, click on the <a href='../../public/requestreset.jsp'>Forgot Password</a> link. <br/>
+                                Step 1: From the log in screen, click on the <a href='../../../public/requestreset.jsp'>Forgot Password</a> link. <br/>
                                 Step 2: Enter your Scripps Networks Email Address and press the <strong>Submit Request</strong> button.<br/>
                                 Step 3: Given this website utilizes a single sign-on feature, if you cannot log in, there could be a problem with your network password. You should receive the following error message, “As a Scripps employee, you must request a password reset using the procedure outlined by the help desk. Please cancel and contact the Help Desk if you need further assistance.”<br/>
                             </div>
@@ -134,7 +132,7 @@
                             <div class="accordion-inner">
                                 Step 1: Click on the <strong>Sessions</strong> drop down menu and select <em>View Session Schedule</em>. <br/>
                                 Step 2: Review the proposed schedule<br/>
-                                Step 3: Select the <a href='../../private/employee/sessioninterest.jsp'>Interested in a session</a> link, located below the session schedule table.<br/>
+                                Step 3: Select the <a href='../../../private/employee/sessioninterest.jsp'>Interested in a session</a> link, located below the session schedule table.<br/>
                                 Step 4: Select the topic(s) you are interested in attending and press the <strong>Submit Interest</strong> button. <br/><br/>
                                 <strong>- This feature will only be made available for a limited time.</strong>
                             </div>
@@ -157,22 +155,22 @@
                 </div><!--/.accordion-->
             </div>
         </div>
-        <%@ include file="../includes/footer.jsp" %> 
+        <%@ include file="../../../includes/footer.jsp" %> 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-	<script src="../js/components.js"></script>
-	<script src="../js/jquery.sortable.js"></script><!--Drag and drop for non-iOS-->
-	<script src="../js/libs/bootstrap-collapse.2.2.1.min.js" type="text/javascript"></script>
-	<script src="../js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"> </script>
-	<script src="../js/libs/jquery-1.8.3.min.js" type="text/javascript"></script>
-	<script src="../js/libs/jquery.dataTables.1.9.3.min.js" type="text/javascript"></script>
-	<script src="../js/libs/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
-	<script src="../js/libs/prettify.js" type="text/javascript"></script>
-	<script src="../js/libs/sniui.accordion.1.0.0.min.js" type="text/javascript"></script>
-	<script src="../js/libs/sniui.accordion.1.2.0.min.js" type="text/javascript"> </script>
-	<script src="../js/libs/sniui.auto-inline-help.min.js" type="text/javascript"> </script>
-	<script src="../js/libs/sniui.auto-inline-help.1.0.0.min.js" type="text/javascript"></script>
-	<script src="../js/libs/sniui.dataTables.1.0.0.min.js" type="text/javascript"></script>
-	<script src="../js/libs/sniui.dialog.1.1.0.min.js" type="text/javascript"></script>
+	<script src="../../../js/components.js"></script>
+	<script src="../../../js/jquery.sortable.js"></script><!--Drag and drop for non-iOS-->
+	<script src="../../../js/libs/bootstrap-collapse.2.2.1.min.js" type="text/javascript"></script>
+	<script src="../../../js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"> </script>
+	<script src="../../../js/libs/jquery-1.8.3.min.js" type="text/javascript"></script>
+	<script src="../../../js/libs/jquery.dataTables.1.9.3.min.js" type="text/javascript"></script>
+	<script src="../../../js/libs/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
+	<script src="../../../js/libs/prettify.js" type="text/javascript"></script>
+	<script src="../../../js/libs/sniui.accordion.1.0.0.min.js" type="text/javascript"></script>
+	<script src="../../../js/libs/sniui.accordion.1.2.0.min.js" type="text/javascript"> </script>
+	<script src="../../../js/libs/sniui.auto-inline-help.min.js" type="text/javascript"> </script>
+	<script src="../../../js/libs/sniui.auto-inline-help.1.0.0.min.js" type="text/javascript"></script>
+	<script src="../../../js/libs/sniui.dataTables.1.0.0.min.js" type="text/javascript"></script>
+	<script src="../../../js/libs/sniui.dialog.1.1.0.min.js" type="text/javascript"></script>
         <script>
             $(document).ready(function() {
                 $(".accordion-toggle").click(function() {

@@ -91,7 +91,7 @@
             <div class="row mediumBottomMargin"></div>
             <div class="row">
                 <ul class="breadcrumb">
-                    <li><a href="../../../private/employee/home.jsp">Home</a></li>
+                    <li><a href="../../../private/employee/admin/home.jsp">Home</a></li>
                     <li class='ieFix'>Manage Session Schedule</li>
                 </ul>
             </div>
@@ -102,25 +102,12 @@
             <div class="row largeBottomMargin">
                 <h3>Use the table below to add, edit or delete existing sessions.</h3>
             </div>
-            <div class="row largeBottomMargin"></div>
-            <div class="row smallBottomMargin">
-                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span style="padding-left: 12px;">Schedule Details</span><a href="../../../private/employee/admin/sessionScheduler.jsp" class="pullRight button button-primary">Schedule Sessions</a></h2>
-            </div>
-            <div class='row smallBottomMargin'>
-                <label class="inline"><strong>Select Year:</strong></label>
-                    <select name="year" id="year">
-                        <option value="2013" <% if (year == 2013) {
-                                out.print(" selected ");
-                            }
-                                %>>2013</option>
-                                <option value="2012" <% if (year == 2012) {
-                                        out.print(" selected ");
-                                    }%>>2012</option>
-                        <!--Provisioned for future years! -->
-                    </select>
+            <!--<div class='row largeBottomMargin'></div>-->
+            <div class="row mediumBottomMargin">
+                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span style="padding-left: 12px;">Schedule Details</span><a href="../../../private/employee/admin/addsession.jsp" class="pullRight button button-primary">Add A Session</a></h2>
             </div>
             <div class="row largeBottomMargin">
-                <form>
+                <form onsubmit="return false;">
                     <input type='hidden' id='current_page' value="1" />
                     <input type='hidden' id='show_per_page' value='15' />
                     <input type='hidden' id='total' value='<%= sessions.size()%>'/>
@@ -128,7 +115,7 @@
                         <thead>
                             <tr>
                                 <th>Date</th>
-                                <th>Time</th>
+                                <th style="width: 70px;">Time</th>
                                 <th>Topic</th>
                                 <th>Description</th>
                                 <th>Speaker(s)</th>
@@ -143,11 +130,16 @@
 
                                 LocationPersistence lp = new LocationPersistence();
                                 for (int i = 0; i < sessions.size(); i++) {
-                                    out.print("<tr id='row" + (i + 1) + "'>");
+                                    out.print("<tr id='row" + (i) + "'>");
+                                    out.print("<input type='hidden' id='rowfor" + sessions.get(i).getId() + "'/>");
                                     out.print("<td>");
                                     SimpleDateFormat dates = new SimpleDateFormat("MM/dd/yyyy");
                                     SimpleDateFormat dates2 = new SimpleDateFormat("MM/dd");
-                                    out.print(dates.format(sessions.get(i).getSessionDate()));
+                                    try {
+                                        out.print(dates.format(sessions.get(i).getSessionDate()));
+                                    } catch (Exception e) {
+                                        out.print("No Date");
+                                    }
                                     out.print("</td>");
                                     out.print("<td>");
                                     SimpleDateFormat fmt = new SimpleDateFormat("h:mm a");
@@ -169,24 +161,29 @@
                                     out.print("<td>");
                                     ArrayList<Speaker> speakers = sp.getSpeakersForSession(sessions.get(i).getId());
                                     if (speakers.size() != 0) {
-                                    for (int j = 0; j < speakers.size(); j++) {
-                                        out.print("<a class='showModal2'>");
-                                        out.print(speakers.get(j).getFullName() + "<input type='hidden' value='" + speakers.get(j).getId() + "' /></a><br/>");
-                                        out.print("<div class='modals' id='modalspkr" + speakers.get(j).getId() + "' title='" + speakers.get(j).getFullName() + "'>");
-                                        out.print(""); //The Bio information goes here?
-                                        out.print("</div>");
-                                    }
+                                        for (int j = 0; j < speakers.size(); j++) {
+                                            //Commented out speaker BIO modals - 9/16/13
+                                            // out.print("<a class='showModal2'>");
+                                            out.print(speakers.get(j).getFullName());
+                                            out.print("<br/>");
+                                            // out.print("<input type='hidden' value='" + speakers.get(j).getId() + "' /></a><br/>");
+                                            // out.print("<div class='modals' id='modalspkr" + speakers.get(j).getId() + "' title='" + speakers.get(j).getFullName() + "'>");
+                                            // out.print(""); //The Bio information goes here?
+                                            // out.print("</div>");
+                                        }
                                     } else {
                                         out.print("<a href='../../../private/employee/admin/assignsession.jsp?sessionId=" + sessions.get(i).getId() + "'>Assign a Speaker</a>");
                                     }
-                                    
                                     out.print("</td>");
                                     out.print("<td>");
-                                    SimpleDateFormat fmt2 = new SimpleDateFormat("K ' hours, ' mm ' minutes'");
-                                    out.print(fmt2.format(sessions.get(i).getDuration()));
+                                    SimpleDateFormat fmt2 = new SimpleDateFormat("mm 'minutes'");
+                                    try {
+                                        out.print(fmt2.format(sessions.get(i).getDuration()));
+                                    } catch (Exception e) {
+                                        out.print("No Duration");
+                                    }
                                     out.print("</td>");
                                     out.print("<td>");
-                                    
                                     out.print(lp.getLocationById(sessions.get(i).getLocation()).getDescription() + "<br/>" + lp.getLocationById(sessions.get(i).getLocation()).getBuilding());
                                     out.print("</td>");
                                     out.print("<td>");
@@ -195,13 +192,24 @@
                                     out.print("<td>");
                                     out.print("<div class='actionMenu'><a class='actionMenu-toggle' data-toggle='dropdown' href='#'>Actions<b class='caret'></b></a>");
                                     out.print("<ul class='actionMenu-menu' role='menu'>");
+                                    out.print("<li><a href='../../../private/employee/admin/assignroomtosession.jsp?session_id=" + sessions.get(i).getId() + "'><i class='icon16-reconcile'></i>Assign To Room</a></li>");
                                     out.print("<li><a href='../../../private/employee/admin/editsession.jsp?id=" + sessions.get(i).getId() + "'><i class='icon16-edit'></i>Edit</a></li>");
                                     out.print("<li><a class='showModal3'><input type='hidden' name='delete' value='" + sessions.get(i).getId() + "' />");
                                     out.print("<div class='modalDelete' id='modaldelete" + sessions.get(i).getId() + "' title='Delete Confirmation'>");
                                     out.print("Is it ok to delete this session?<br/><br/>");
-                                    out.print(sessions.get(i).getName() + " | " + dates2.format(sessions.get(i).getSessionDate()) + " | " + fmt.format(sessions.get(i).getStartTime()));
+                                    out.print(sessions.get(i).getName() + " | ");
+                                    try {
+                                        out.print(dates2.format(sessions.get(i).getSessionDate()) + " | ");
+                                    } catch (Exception e) {
+                                        out.print("No Date | ");
+                                    }
+                                    try {
+                                        out.print(fmt.format(sessions.get(i).getStartTime()) + " | ");
+                                    } catch (Exception e) {
+                                        out.print("No Time");
+                                    }
                                     out.print("</div>");
-                                    out.print("<i class='icon16-pageRemove'></i>Delete</a></li>");
+                                    out.print("<i class='icon16-trash'></i>Delete</a></li>");
                                     out.print("</ul>");
                                     out.print("</td>");
                                     out.print("</tr>");
@@ -231,75 +239,95 @@
                             <span>Page <input class="input-mini" onchange="pageJump();" type="text" id="pagejump"/> of <%= pages%></span>
                         </div>
                     </div>
-                </form>
+            </form>
             </div>
         </div>
         <%@ include file="../../../includes/footer.jsp" %>
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
         <script src="http://growler.elasticbeanstalk.com/js/libs/bootstrap-dropdown.2.0.4.min.js"></script>
-        <script src="http://growler.elasticbeanstalk.com/js/libs/sniui.dialog.1.2.0.js"></script>
+        <script src="http://growler.elasticbeanstalk.com/js/libs/sniui.dialog.1.2.0.min.js"></script>
         <script src="../../../js/pagination.js"></script>
         <script>
-                                $(document).ready(function() {
-                                    var page = 1;
-                                    $("#current_page").val(page);
-                                    var total = parseInt($("#total").val());
-                                    var pages = Math.floor((total / parseInt($("#show_per_page").val())) + 1);
-                                    for (var i = 15; i < total + 1; i++) {
-                                        $("#row" + i).hide();
-                                    }
-                                    unActive();
-                                    $("#page1").addClass("active");
-                                    $(".modals").dialog({autoOpen: false, dialogClass: "no-close",
-                                        buttons: {
-                                            'ok': {
-                                                'class': 'button button-primary',
-                                                click: function() {
-                                                    $(this).dialog('close');
-                                                },
-                                                text: 'Ok'
-                                            }}
-                                    });
-                                    $(".deleteModalLink").click(function() {
-                                        $(this).parent().close();
-                                    });
-                                    $(".modalDelete").dialog({
-                                        autoOpen: false,
-                                        dialogClass: "no-close",
-                                        buttons: {
-                                            'ok': {
-                                                'class': 'button button-primary',
-                                                click: function() {
-                                                    var session = $(this).prop("id");
-                                                    session = session.substring(11);
-                                                    $.post("../../../action/removeSession.jsp", {id: session}, function(data, success) {
-                                                    });
-                                                    $("#rowfor" + session).remove();
-                                                    $(this).dialog('close');
-                                                },
-                                                text: 'Yes'
-                                            }
-                                        }
-                                    }).parent().find('.ui-dialog-buttonset').append('<span id="modalCloser"><a>No, return to manage sessions table</a></span>');
-                                    $("#year").change(function(){
-                                        var year = (parseInt($("#year").val()));
-                                        window.location.href = "http://sni-techtoberfest.scrippsnetworks.com/private/employee/admin/session.jsp?year=" + year;
-                                    });
-                                    $(".showModal").click(function() {
-                                        var session = $(this).children().val();
-                                        $("#modal" + session).dialog("open");
-                                    });
-                                    $(".showModal2").click(function() {
-                                        var speaker = $(this).children().val();
-                                        $("#modalspkr" + speaker).dialog("open");
-                                    });
-                                    $(".showModal3").click(function() {
-                                        var session = $(this).children().val();
-                                        $("#modaldelete" + session).dialog("open");
-                                    });
+                    $('form').submit(function(event) {
+                        pageJump();
+                        return false; // without this you go to google.com
+                    });
+                    
+                    $(document).ready(function() {
+                        var clicks = 0;
+                        $("#filter").click(function() {
+                            clicks++;
+                            if (clicks === 1) {
+                                $("#filter").val("");
+                            }
+                        });
 
-                                });
+                        var page = 1;
+                        $("#current_page").val(page);
+                        var total = parseInt($("#total").val());
+                        var pages = Math.floor((total / parseInt($("#show_per_page").val())) + 1);
+                        for (var i = 15; i < total + 1; i++) {
+                            $("#row" + i).hide();
+                        }
+                        unActive();
+                        $("#page1").addClass("active");
+                        $(".modals").dialog({autoOpen: false, dialogClass: "no-close",
+                            buttons: {
+                                'ok': {
+                                    'class': 'button button-primary',
+                                    click: function() {
+                                        $(this).dialog('close');
+                                    },
+                                    text: 'Ok'
+                                }}
+                        });
+                        $(".deleteModalLink").click(function() {
+                            $(this).parent().close();
+                        });
+                        $(".modalDelete").dialog({
+                            autoOpen: false,
+                            dialogClass: "no-close",
+                            buttons: {
+                                'ok': {
+                                    'class': 'button button-primary',
+                                    click: function() {
+                                        var session = $(this).prop("id");
+                                        session = session.substring(11);
+                                        $.post("../../../action/removeSession.jsp", {id: session}, function(data, success) {
+                                        });
+                                        $("#rowfor" + session).parent().remove();
+                                        $(this).dialog('close');
+                                    },
+                                    text: 'Yes'
+                                },
+                                'cancel': {
+                                    click: function() {
+                                        $(this).dialog('close');
+                                    },
+                                    text: 'No, return to manage sessions'
+                                }
+                            }
+                        });
+                        $("#year").change(function() {
+                            var year = (parseInt($("#year").val()));
+                            //window.location.href = "http://sni-techtoberfest.scrippsnetworks.com/private/employee/admin/session.jsp?year=" + year;
+                            window.location.href = "http://techtoberfest-dev.elasticbeanstalk.com/private/employee/admin/session.jsp?year=" + year;
+                        });
+                        $(".showModal").click(function() {
+                            var session = $(this).children().val();
+                            $("#modal" + session).dialog("open");
+                        });
+                        $(".showModal2").click(function() {
+                            var speaker = $(this).children().val();
+                            $("#modalspkr" + speaker).dialog("open");
+                        });
+                        $(".showModal3").click(function() {
+                            var session = $(this).children().val();
+                            $("#modaldelete" + session).dialog("open");
+                        });
+
+                    });
         </script>
     </body>
 </html>

@@ -211,13 +211,14 @@ public class AttendancePersistence extends GrowlerPersistence {
     public ArrayList<Attendance> getAttendanceBySubmitTime() {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select user_id, session_id, surveySubmitTime from attendance where isSurveyTaken = true order by surveySubmitTime");
+            statement = connection.prepareStatement("select user_id, session_id, isKeyGiven, surveySubmitTime from attendance where isSurveyTaken = true order by surveySubmitTime");
             result = statement.executeQuery();
             while (result.next()) {
                 Attendance a = new Attendance();
                 a.setUserId(result.getInt("user_id"));
                 a.setSessionId(result.getInt("session_id"));
                 a.setSurveySubmitTime(result.getTimestamp("surveySubmitTime"));
+                a.setIsKeyGiven(result.getBoolean("isKeyGiven"));
                 attendances.add(a);
             }
             return attendances;
