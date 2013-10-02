@@ -108,7 +108,7 @@
                 <span>Below is the latest session schedule for this year's Techtoberfest event.</span>
             </div>
             <div class="row mediumBottomMargin">
-                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Schedule Details</span><span class="pullRight"><a href='../../public/Techtoberfest_Schedule2013.pdf' target='blank'>View as PDF</a></span></h2>
+                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Schedule Details</span><!--<span class="pullRight"><a href='../../public/Techtoberfest_Schedule2013.pdf' target='blank'>View as PDF</a></span>--></h2>
             </div>
             <div class="row largeBottomMargin">
                 <form onsubmit="return false;">
@@ -149,7 +149,8 @@
                                     out.print("</td>");
                                     out.print("<td>");
                                     out.print("<a class='showModal'><input type='hidden' value='" + sessions.get(i).getId() + "' />View</a>");
-                                    out.print("<div class='modals' id='modal" + sessions.get(i).getId() + "' title='" + sessions.get(i).getName() + "'>");
+                                    out.print("<div class='modals' id='modal" + sessions.get(i).getId() + "' title='Topic Description'>");
+                                    out.print("<strong" + sessions.get(i).getName() + "</strong><br/><br/>");
                                     out.print(sessions.get(i).getDescription());
                                     out.print("</div>");
                                     out.print("</td>");
