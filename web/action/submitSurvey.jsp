@@ -51,7 +51,7 @@
             
             String key = request.getParameter("key");
             SessionPersistence sp = new SessionPersistence();
-            boolean keyAccepted = sp.checkKey(key);
+            boolean keyAccepted = sp.checkKey(key, Integer.parseInt(sessionId));
             Attendance addRecord = new Attendance();
             addRecord.setUserId(user);
             addRecord.setSessionId(Integer.parseInt(sessionId));
@@ -70,6 +70,8 @@
                     + "(" + 2 + ", " + sessionId + ", " + question2 + "),"
                     + "(" + 3 + ", " + sessionId + ", " + question3 + "),"
                     + "(" + 4 + ", " + sessionId + ", " + question4 + ")");
+            Statement fixTime = connection.createStatement();
+            fixTime.execute("set time_zone = 'US/Eastern'");
             Statement statement2 = connection.createStatement();
             statement2.execute("update attendance set isSurveyTaken = true, surveySubmitTime = NOW() where user_id = " + user + " and session_id = " + sessionId);
             connection.close();

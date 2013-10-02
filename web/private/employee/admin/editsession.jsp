@@ -45,9 +45,7 @@
     <body id="growler1">
         <%
             int user = 0;
-            if (null == session.getAttribute("id")) {
-                response.sendRedirect("../../../index.jsp");
-            } else if (!session.getAttribute("role").equals("admin")) {
+            if (null == session.getAttribute("id") || null == session.getAttribute("role")) {
                 response.sendRedirect("../../../index.jsp");
             }
             try {
@@ -99,7 +97,7 @@
                     </div>
                     <div class="form-group">
                         <label class="required">Session description</label>
-                        <textarea required="required" name="description" id="description" data-content="Please enter no more than 250 characters" cols="50" rows="5"><% out.print(s.getDescription());%></textarea>
+                        <textarea required="required" name="description" id="description" maxlength="760" cols="50" rows="5"><% out.print(s.getDescription());%></textarea>
                         <br/><span id="error_description" class="message_container">
                             <span>Please enter a session description</span>
                         </span>

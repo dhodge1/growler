@@ -18,6 +18,7 @@
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Session Interest Report</title>
+        <link rel="shortcut icon" type="image/png" href="http://growler.elasticbeanstalk.com/images/scripps_favicon-32.ico">
         <link rel="stylesheet" href="../../../css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
@@ -66,9 +67,7 @@
     <body id="growler1">
         <%
             int user = 0;
-            if (null == session.getAttribute("id")) {
-                response.sendRedirect("../../../index.jsp");
-            } else if (!session.getAttribute("role").equals("admin")) {
+            if (null == session.getAttribute("id") || null == session.getAttribute("role")) {
                 response.sendRedirect("../../../index.jsp");
             }
             try {
@@ -113,6 +112,13 @@
                             <%
                                 ReportGenerator rg = new ReportGenerator();
                                 ArrayList<InterestReport> interest = rg.generateInterestReport();
+                                if (interest.size() == 0) {
+                                    out.print("<tr>");
+                                    out.print("<td>");
+                                    out.print("No data is available at this time.");
+                                    out.print("</td>");
+                                    out.print("</tr>");
+                                }
                                 for (int i = 0; i < interest.size(); i++) {
                                     out.print("<tr id='row" + i + "'>");
                                     out.print("<td>");

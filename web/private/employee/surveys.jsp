@@ -63,6 +63,20 @@
                         $('td').filter('.2013-10-11afternoon').show();
                     }
                 });
+                $("#keyvalidate").click(function() {
+                   var key = $("#key").val();
+                   var session = $("#session").val();
+                   var validateKey = $.post('../../action/validateKey.jsp', {key: key, sessionId: session});
+                   validateKey.done(function(data) {
+                       console.log(data);
+                       
+                       if (data.substring(0,2) === "ok"){
+                           $("#keyError").hide();
+                       } else {
+                           $("#keyError").show();
+                       }
+                   });
+                });
                 $("#progress1").click(function() {
                     changeMouseOnIndicators();
                     if (parseInt($("#step").val()) !== 4) {
@@ -222,7 +236,7 @@
             h1 {
                 font-weight: normal;
             }
-            #continue {
+            #continue, #keyvalidate {
                 cursor: pointer;
             }
             .errors {
@@ -254,7 +268,6 @@
             <div class="row">
                 <ul class="breadcrumb">
                     <li><a href="../../private/employee/home.jsp">Home</a></li>
-                    <li><a href="../../private/employee/sessionschedule.jsp">Session Schedule</a></li>
                     <li class='ieFix'>Techtoberfest: Session Feedback</li>
                 </ul>
             </div>
@@ -300,13 +313,13 @@
             <input type="hidden" id="q4" name="q4"/>
             <input type="hidden" id="comment" name="comment"/>
             <input type="hidden" id="sessionkey" name="sessionkey"/>
-            <div id="dateselector" class="smallBottomMargin row">
+            <div id="dateselector" class="mediumBottomMargin row">
                 <span><strong>Session Dates:</strong></span>
                 <select name="date" id="date" class="input-large">
-                    <option value="1">10/11 Morning Sessions</option>
-                    <option value="2">10/11 Afternoon Sessions</option>
-                    <option value="3">10/12 Morning Sessions</option>
-                    <option value="4">10/12 Afternoon Sessions</option>
+                    <option value="1">10/10 Morning Sessions</option>
+                    <option value="2">10/10 Afternoon Sessions</option>
+                    <option value="3">10/11 Morning Sessions</option>
+                    <option value="4">10/11 Afternoon Sessions</option>
                 </select>
             </div>
             <div id='errors' class='errors feedbackMessage-error mediumBottomMargin row'>
@@ -391,7 +404,10 @@
             <div id="code" class="row mediumBottomMargin">
                 <div class="form-group">
                     <label>Please enter the session code you were provided</label>
-                    <input class="input-xlarge" maxlength="4" name="key" id="key" />
+                    <input class="input-xlarge" maxlength="4" name="key" id="key" /><a style="margin-left: 12px;" id="keyvalidate" class="button button-primary">Check Key Value</a>
+                    <br/><br/><span id="keyError" class="errors">
+                            <span style="color:red">The session code you have provided for this session is incorrect. Please enter a valid code in order to confirm your attendance, or you can opt to leave this field blank and submit your survey without it.</span>
+                        </span>
                 </div>
                 <p style="color:red">Note: Session codes are provided for each session.  This code not only helps the Techtoberfest Committee verify your session attendance, but it also serves as a raffle ticket if provided within 30 minutes of you attending a particular session.  If you do not have the code for this session, you may leave this field blank and continue with the survey.</p>
             </div>
@@ -406,7 +422,7 @@
                 </div>
             </div>
             <div class="form-actions row" id="actions">
-                <a id="continue" class="button button-primary">Continue</a><a href="../../private/employee/sessionschedule.jsp">Cancel</a>
+                <a id="continue" class="button button-primary">Continue</a><a href="../../private/employee/home.jsp">Cancel</a>
             </div>
         </div>
         <%@ include file="../../includes/footer.jsp" %>

@@ -3,6 +3,7 @@
     Created on : Jun 10, 2013, 2:18:37 PM
     Author     : 162107
 --%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
@@ -18,6 +19,7 @@
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Survey Report</title>
+        <link rel="shortcut icon" type="image/png" href="http://growler.elasticbeanstalk.com/images/scripps_favicon-32.ico">
         <link rel="stylesheet" href="../../../css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
@@ -76,8 +78,13 @@
                 String name = String.valueOf(session.getAttribute("user"));
             } catch (Exception e) {
             }
+            java.sql.Date date = java.sql.Date.valueOf("2013-10-10");
+            try {
+                date = java.sql.Date.valueOf(request.getParameter("date"));
+            } catch (Exception e) {
+            }
             ReportGenerator rg = new ReportGenerator();
-            ArrayList<SurveyReport> surveys = rg.generateSurveyReport();
+            ArrayList<SurveyReport> surveys = rg.generateSurveyReport(date);
         %>
         <%@ include file="../../../includes/adminheader.jsp" %> 
         <%@ include file="../../../includes/adminnav.jsp" %>  
@@ -101,16 +108,20 @@
                 <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span style="padding-left: 12px;">Report Details</span><span class='pullRight'><a id='print' onclick='window.print();'>Print</a></span></h2>
             </div>
             <div class='row largeBottomMargin'>
-                <form onsubmit="return false;">
+                <form>
                     <input type='hidden' id='current_page' value="1" />
                     <input type='hidden' id='show_per_page' value='15' />
                     <input type='hidden' id='total' value='<%= surveys.size()%>'/>
-                    <span><strong>Show me surveys completed on:</strong></span>
+                    <span><strong>Show me all session surveys for:</strong></span>
                     <select name='date' id='date' style='margin-bottom: 6px;' onchange='switchDate();'>
-                        <option value='2013-10-10'>10/10/2013</option>
-                        <option value='2013-10-11'>10/11/2013</option>
+                        <option value='2013-10-10' <% if (date.getDate() == 10) {
+                                out.print(" selected ");
+                            }%> >10/10/2013</option>
+                        <option value='2013-10-11' <% if (date.getDate() == 11) {
+                                out.print(" selected ");
+                            }%> >10/11/2013</option>
                     </select>
-                    <span style='float: right; position: relative;'>Total per day: <%= surveys.size() %></span>
+                    <span style='float: right; position: relative;'>Total per day: <%= surveys.size()%></span>
                     <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
                         <thead>
                             <tr>
@@ -122,25 +133,42 @@
                         </thead>
                         <tbody>
                             <%
-
-
+                                SimpleDateFormat fmt = new SimpleDateFormat("h:mm a");
+                                SimpleDateFormat dates = new SimpleDateFormat("MM/dd");
+                                SimpleDateFormat timestamps = new SimpleDateFormat("MM/dd h:mm a");
+                                if (surveys.size() == 0) {
+                                    out.print("<tr>");
+                                    out.print("<td>");
+                                    out.print("No data is available at this time.");
+                                    out.print("</td>");
+                                    out.print("</tr>");
+                                }
                                 for (int i = 0; i < surveys.size(); i++) {
                                     out.print("<tr id='row" + i + "'>");
-                                    out.print("<td>");
-                                    out.print(surveys.get(i).getAttendance().getSurveySubmitTime());
+                                    out.print("<td class='" + surveys.get(i).getSession().getSessionDate() + "'>");
+                                    out.print(timestamps.format(surveys.get(i).getAttendance().getSurveySubmitTime()));
                                     out.print("</td>");
                                     out.print("<td>");
                                     out.print(surveys.get(i).getUser().getId());
                                     out.print("</td>");
                                     out.print("<td>");
                                     out.print(surveys.get(i).getSession().getName() + "<br/>");
-                                    out.print(surveys.get(i).getSession().getStartTime());
+                                    out.print(fmt.format(surveys.get(i).getSession().getStartTime()) + " - ");
+                                    Calendar today = Calendar.getInstance();
+                                    today.set(Calendar.HOUR_OF_DAY, surveys.get(i).getSession().getStartTime().getHours());
+                                    today.set(Calendar.MINUTE, surveys.get(i).getSession().getStartTime().getMinutes());
+                                    today.add(Calendar.MINUTE, surveys.get(i).getSession().getDuration().getMinutes());
+                                    out.print(today.get(Calendar.HOUR) + ":" + today.get(Calendar.MINUTE) + " " );
+                                    if (today.get(Calendar.AM_PM) == 1) {
+                                        out.print("PM");
+                                    } else {
+                                        out.print("AM");
+                                    }
                                     out.print("</td>");
                                     out.print("<td>");
                                     if (surveys.get(i).getAttendance().getIsKeyGiven()) {
                                         out.print("<i class='icon16-check'></i>");
                                     } else {
-                                        
                                     }
                                     out.print("</td>");
                                     out.print("</tr>");
@@ -190,9 +218,9 @@
                     });
                     
                     function switchDate() {
-                        var date = $('#date').val();
-                        
-                    }
+                            var date = $('#date').val();
+                            window.location ='http://sni-techtoberfest.scrippsnetworks.com/private/employee/admin/surveyReport.jsp?date=' + date;
+                        }
 
                     $(document).ready(function() {
                         var page = 1;
@@ -204,6 +232,8 @@
                         }
                         unActive();
                         $("#page1").addClass("active");
+
+                        
                     });
         </script>
     </body>

@@ -70,7 +70,7 @@
     </head>
     <body id="growler1">
         <%
-            if (null == session.getAttribute("id")) {
+            if (null == session.getAttribute("id") || null == session.getAttribute("role")) {
                 response.sendRedirect("../../../index.jsp");
             }
             SpeakerPersistence persist = new SpeakerPersistence();

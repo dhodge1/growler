@@ -64,6 +64,7 @@
                     <li><a href="../../../private/employee/admin/presentationReport.jsp">Best Presentation Skills</a></li>
                     <li><a href="../../../private/employee/admin/expectationReport.jsp">Session Met Expectations</a></li>
                     <li><a href="../../../private/employee/admin/surveyReport.jsp">Surveys</a></li>
+                    <li><a href="../../../private/employee/admin/confirmationReport.jsp">Confirmed Attendance</a></li>
                 </ul>
             </li>
         </ul>

@@ -69,9 +69,7 @@
         <%
             int user = 0;
             int speakerPassed = 0;
-            if (null == session.getAttribute("id")) {
-                response.sendRedirect("../../../index.jsp");
-            } else if (!session.getAttribute("role").equals("admin")) {
+            if (null == session.getAttribute("id") || null == session.getAttribute("role")) {
                 response.sendRedirect("../../../index.jsp");
             }
             try {

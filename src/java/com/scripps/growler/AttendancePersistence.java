@@ -207,6 +207,28 @@ public class AttendancePersistence extends GrowlerPersistence {
         }
         return null;
     }
+    
+    public ArrayList<Attendance> getAttendanceBySubTimeOrderDate() {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select a.user_id, a.session_id, a.isKeyGiven, a.surveySubmitTime from attendance a, session s where a.isSurveyTaken = true and a.session_id = s.id order by a.surveySubmitTime, s.session_date, s.start_time, s.name");
+            result = statement.executeQuery();
+            while (result.next()) {
+                Attendance a = new Attendance();
+                a.setUserId(result.getInt("user_id"));
+                a.setSessionId(result.getInt("session_id"));
+                a.setSurveySubmitTime(result.getTimestamp("surveySubmitTime"));
+                a.setIsKeyGiven(result.getBoolean("isKeyGiven"));
+                attendances.add(a);
+            }
+            return attendances;
+        } catch (Exception e) {
+        } finally {
+            closeJDBC();
+        }
+
+        return null;
+    }
 
     public ArrayList<Attendance> getAttendanceBySubmitTime() {
         try {
@@ -253,4 +275,28 @@ public class AttendancePersistence extends GrowlerPersistence {
         }
         return sessions;
     }
+    
+    public ArrayList<AttendanceReport> getAttendancesWithKeys(java.sql.Date date) {
+        ArrayList<AttendanceReport> report = new ArrayList<AttendanceReport>();
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select count(a.isKeyGiven), a.session_id, s.session_date, s.name from attendance a, session s where s.id = a.session_id and a.isKeyGiven = 1 and s.session_date = ? group by a.session_id");
+            statement.setDate(1, date);
+            result = statement.executeQuery();
+            while (result.next()) {
+                AttendanceReport ap = new AttendanceReport();
+                ap.setAttendee_count(result.getInt(1));
+                ap.setSession_id(result.getInt(2));
+                ap.setSession_date(result.getDate(3));
+                ap.setSession_name(result.getString(4));
+                report.add(ap);
+            }
+            return report;
+        } catch (Exception e) {
+        } finally {
+            closeJDBC();
+        }
+
+        return null;
+    }    
 }

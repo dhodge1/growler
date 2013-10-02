@@ -1,8 +1,10 @@
 <%-- 
-    Document   : expectationReport
-    Created on : Jun 11, 2013, 5:13:35 PM
+    Document   : confirmationReport
+    Created on : Oct 1, 2013, 11:25:34 PM
     Author     : 162107
 --%>
+
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
@@ -17,7 +19,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Expectations Report</title>
+        <title>Confirmed Attendance Report</title>
         <link rel="shortcut icon" type="image/png" href="http://growler.elasticbeanstalk.com/images/scripps_favicon-32.ico">
         <link rel="stylesheet" href="../../../css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
@@ -67,7 +69,9 @@
     <body id="growler1">
         <%
             int user = 0;
-            if (null == session.getAttribute("id") || null == session.getAttribute("role")) {
+            if (null == session.getAttribute("id")) {
+                response.sendRedirect("../../../index.jsp");
+            } else if (!session.getAttribute("role").equals("admin")) {
                 response.sendRedirect("../../../index.jsp");
             }
             try {
@@ -75,6 +79,13 @@
                 String name = String.valueOf(session.getAttribute("user"));
             } catch (Exception e) {
             }
+            java.sql.Date date = java.sql.Date.valueOf("2013-10-10");
+            try {
+                date = java.sql.Date.valueOf(request.getParameter("date"));
+            } catch (Exception e) {
+            }
+            AttendancePersistence ap = new AttendancePersistence();
+            ArrayList<AttendanceReport> report = ap.getAttendancesWithKeys(date);
         %>
         <%@ include file="../../../includes/adminheader.jsp" %> 
         <%@ include file="../../../includes/adminnav.jsp" %>  
@@ -83,67 +94,69 @@
             <div class="row">
                 <ul class="breadcrumb">
                     <li><a href="../../../private/employee/admin/home.jsp">Home</a></li>
-                    <li class='ieFix'>Expectations Report</li>
+                    <li class='ieFix'>Confirmed Attendance Report</li>
                 </ul>
             </div>
             <div class="row mediumBottomMargin">
-                <h1>Expectations Report</h1>
+                <h1>Confirmed Attendance Report</h1>
             </div>
             <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
             <div class="row largeBottomMargin">
-                <h3>The table below displays a detailed listing of the all sessions employees felt met or exceeded expectations.</h3>
+                <h3>The table below displays a detailed listing of all user users who entered a correct session key.</h3>
             </div>
             <!--<div class='row largeBottomMargin'></div>-->
             <div class="row mediumBottomMargin">
                 <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span style="padding-left: 12px;">Report Details</span><span class='pullRight'><a id='print' onclick='window.print();'>Print</a></span></h2>
             </div>
             <div class='row largeBottomMargin'>
-                <form onsubmit="return false;">
+                <form>
                     <input type='hidden' id='current_page' value="1" />
                     <input type='hidden' id='show_per_page' value='15' />
+                    <input type='hidden' id='total' value='<%= report.size() %>'/>
+                    <span><strong>Show me all session surveys for:</strong></span>
+                    <select name='date' id='date' style='margin-bottom: 6px;' onchange='switchDate();'>
+                        <option value='2013-10-10' <% if (date.getDate() == 10) {
+                                out.print(" selected ");
+                            }%> >10/10/2013</option>
+                        <option value='2013-10-11' <% if (date.getDate() == 11) {
+                                out.print(" selected ");
+                            }%> >10/11/2013</option>
+                    </select>
+                    <span style='float: right; position: relative;'>Total per day: <%= report.size() %></span>
                     <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
                         <thead>
                             <tr>
+                                <th># Confirmed Attendees</th>
                                 <th>Session Topic</th>
-                                <th>Speaker(s)</th>
-                                <th>Avg Rating</th>
                             </tr>
                         </thead>
                         <tbody>
                             <%
-                                ReportGenerator rg = new ReportGenerator();
-                                ArrayList<QuestionReport> questions = rg.generateRankingsReport(1);
-                                if (questions.size() == 0) {
+                                if (report.size() == 0) {
                                     out.print("<tr>");
                                     out.print("<td>");
                                     out.print("No data is available at this time.");
                                     out.print("</td>");
                                     out.print("</tr>");
                                 }
-                                for (int i = 0; i < questions.size(); i++) {
+                                for (int i = 0; i < report.size(); i++) {
                                     out.print("<tr id='row" + i + "'>");
-                                    out.print("<td>");
-                                    out.print(questions.get(i).getSession_name());
+                                    out.print("<td class='" + report.get(i).getSession_date() + "'>");
+                                    out.print(report.get(i).getAttendee_count());
                                     out.print("</td>");
                                     out.print("<td>");
-                                    for (int j = 0; j < questions.get(i).getSpeakers().size(); j++){
-                                        out.print(questions.get(i).getSpeakers().get(j).getFullName() + "<br/>");
-                                    }
-                                    out.print("</td>");
-                                    out.print("<td>");
-                                    out.print(questions.get(i).getScore());
+                                    out.print(report.get(i).getSession_name());
                                     out.print("</td>");
                                     out.print("</tr>");
                                 }
                             %>
                         </tbody>
                     </table>
-                        <input type='hidden' id='total' value='<%= questions.size()%>'/>
                     <div class="pager">
                         <ul>
                             <li class="pager-arrow"><a onclick="first();"><i class="icon12-first"></i></a></li>
                             <li class="pager-arrow"><a onclick="prev();"><i class="icon12-previous"></i></a></li>
-                                    <% int rows = questions.size();
+                                    <% int rows = 10;
                                         int pages = 0;
                                         if (rows % 15 == 0) {
                                             pages = (rows / 15);
@@ -179,6 +192,11 @@
                         pageJump();
                         return false;
                     });
+                    
+                    function switchDate() {
+                            var date = $('#date').val();
+                            window.location ='http://sni-techtoberfest.scrippsnetworks.com/private/employee/admin/confirmationReport.jsp?date=' + date;
+                        }
 
                     $(document).ready(function() {
                         var page = 1;
@@ -190,7 +208,10 @@
                         }
                         unActive();
                         $("#page1").addClass("active");
+
+                        
                     });
         </script>
     </body>
 </html>
+
