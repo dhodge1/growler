@@ -150,7 +150,7 @@
                                     out.print("<td>");
                                     out.print("<a class='showModal'><input type='hidden' value='" + sessions.get(i).getId() + "' />View</a>");
                                     out.print("<div class='modals' id='modal" + sessions.get(i).getId() + "' title='Topic Description'>");
-                                    out.print("<strong" + sessions.get(i).getName() + "</strong><br/><br/>");
+                                    out.print("<strong>" + sessions.get(i).getName() + "</strong><br/><br/>");
                                     out.print(sessions.get(i).getDescription());
                                     out.print("</div>");
                                     out.print("</td>");
