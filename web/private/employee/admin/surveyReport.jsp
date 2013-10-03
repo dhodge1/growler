@@ -144,6 +144,22 @@
                                     out.print("</tr>");
                                 }
                                 for (int i = 0; i < surveys.size(); i++) {
+                                    Calendar survey = Calendar.getInstance();
+                                    survey.set(Calendar.HOUR_OF_DAY, surveys.get(i).getAttendance().getSurveySubmitTime().getHours());
+                                    survey.set(Calendar.MINUTE, surveys.get(i).getAttendance().getSurveySubmitTime().getMinutes());
+                                    java.util.Date submitted = survey.getTime();
+                                    
+                                    Calendar durationCal = Calendar.getInstance();
+                                    durationCal.set(Calendar.HOUR_OF_DAY, surveys.get(i).getSession().getStartTime().getHours());
+                                    durationCal.set(Calendar.MINUTE, surveys.get(i).getSession().getStartTime().getMinutes());
+                                    java.util.Date start = durationCal.getTime();
+                                    durationCal.add(Calendar.HOUR_OF_DAY, surveys.get(i).getSession().getDuration().getHours());
+                                    durationCal.add(Calendar.MINUTE, surveys.get(i).getSession().getDuration().getMinutes());
+                                    durationCal.add(Calendar.MINUTE, 30);
+                                    
+                                    java.util.Date duration = durationCal.getTime();
+                                    
+                                    
                                     out.print("<tr id='row" + i + "'>");
                                     out.print("<td class='" + surveys.get(i).getSession().getSessionDate() + "'>");
                                     out.print(timestamps.format(surveys.get(i).getAttendance().getSurveySubmitTime()));
@@ -158,7 +174,7 @@
                                     today.set(Calendar.HOUR_OF_DAY, surveys.get(i).getSession().getStartTime().getHours());
                                     today.set(Calendar.MINUTE, surveys.get(i).getSession().getStartTime().getMinutes());
                                     today.add(Calendar.MINUTE, surveys.get(i).getSession().getDuration().getMinutes());
-                                    out.print(today.get(Calendar.HOUR) + ":" + today.get(Calendar.MINUTE) + " " );
+                                    out.print(today.get(Calendar.HOUR) + ":" + today.get(Calendar.MINUTE) + " ");
                                     if (today.get(Calendar.AM_PM) == 1) {
                                         out.print("PM");
                                     } else {
@@ -166,7 +182,7 @@
                                     }
                                     out.print("</td>");
                                     out.print("<td>");
-                                    if (surveys.get(i).getAttendance().getIsKeyGiven()) {
+                                    if (surveys.get(i).getAttendance().getIsKeyGiven() && (!submitted.after(duration) && !submitted.before(start) )) {
                                         out.print("<i class='icon16-check'></i>");
                                     } else {
                                     }
@@ -216,11 +232,11 @@
                         pageJump();
                         return false;
                     });
-                    
+
                     function switchDate() {
-                            var date = $('#date').val();
-                            window.location ='http://techtoberfest-dev.elasticbeanstalk.com/private/employee/admin/surveyReport.jsp?date=' + date;
-                        }
+                        var date = $('#date').val();
+                        window.location = 'http://techtoberfest-dev.elasticbeanstalk.com/private/employee/admin/surveyReport.jsp?date=' + date;
+                    }
 
                     $(document).ready(function() {
                         var page = 1;
@@ -233,7 +249,7 @@
                         unActive();
                         $("#page1").addClass("active");
 
-                        
+
                     });
         </script>
     </body>
