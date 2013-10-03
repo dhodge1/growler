@@ -235,6 +235,7 @@ public class ReportGenerator extends GrowlerPersistence {
             r.setSession(s);
             report.add(r);
         }
+        closeJDBC();
         return report;
     }
 
@@ -257,6 +258,7 @@ public class ReportGenerator extends GrowlerPersistence {
                 report.add(r);
             }
         }
+        closeJDBC();
         return report;
     }
 
@@ -281,6 +283,7 @@ public class ReportGenerator extends GrowlerPersistence {
             qr.setRaters(sp.getCountBySession(sessionId));
             report.add(qr);
         }
+        closeJDBC();
         return report;
     }
 
@@ -303,13 +306,14 @@ public class ReportGenerator extends GrowlerPersistence {
             qr.setAttendance(ap.getCountBySession(sessionId));
             qr.setSpeakers(skp.getSpeakersBySession(sessionId));
             qr.setRaters(sp.getCountBySession(sessionId));
-            if (question == 1 && ranking < 3) {
+            if ((question == 1 || question == 3) && ranking < 3) {
                 //exclude low rankings
             }
             else {
                 report.add(qr);
             }
         }
+        closeJDBC();
         return report;
     }
 
@@ -334,6 +338,7 @@ public class ReportGenerator extends GrowlerPersistence {
             qr.setRaters(sp.getCountBySession(sessionId));
             report.add(qr);
         }
+        closeJDBC();
         return report;
     }
     

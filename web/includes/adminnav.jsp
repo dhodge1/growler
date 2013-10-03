@@ -59,12 +59,13 @@
             </li>
             <li class="brand_nav <%= reportTab%>"><a href="#"><span class="nav_drop">Reports</span><em></em></a>
                 <ul class="child-menu child-menu-ul">
-                    <li><a href="../../../private/employee/admin/interestReport.jsp">Session Interest</a></li>
                     <li><a href="../../../private/employee/admin/overallReport.jsp">Best Overall Session</a></li>
                     <li><a href="../../../private/employee/admin/presentationReport.jsp">Best Presentation Skills</a></li>
+                    <li><a href="../../../private/employee/admin/confirmationReport.jsp">Confirmed Attendance</a></li>
+                    <li><a href="../../../private/employee/admin/interestReport.jsp">Session Interest</a></li>
                     <li><a href="../../../private/employee/admin/expectationReport.jsp">Session Met Expectations</a></li>
                     <li><a href="../../../private/employee/admin/surveyReport.jsp">Surveys</a></li>
-                    <li><a href="../../../private/employee/admin/confirmationReport.jsp">Confirmed Attendance</a></li>
+                    
                 </ul>
             </li>
         </ul>

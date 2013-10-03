@@ -102,7 +102,7 @@
             </div>
             <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
             <div class="row largeBottomMargin">
-                <h3>The table below displays a detailed listing of all user users who entered a correct session key.</h3>
+                <h3>The table below displays a detailed listing of the total number of confirmed attendees per session/per day.</h3>
             </div>
             <!--<div class='row largeBottomMargin'></div>-->
             <div class="row mediumBottomMargin">
@@ -113,7 +113,7 @@
                     <input type='hidden' id='current_page' value="1" />
                     <input type='hidden' id='show_per_page' value='15' />
                     <input type='hidden' id='total' value='<%= report.size() %>'/>
-                    <span><strong>Show me all session surveys for:</strong></span>
+                    <span><strong>Session Dates:</strong></span>
                     <select name='date' id='date' style='margin-bottom: 6px;' onchange='switchDate();'>
                         <option value='2013-10-10' <% if (date.getDate() == 10) {
                                 out.print(" selected ");
@@ -122,7 +122,7 @@
                                 out.print(" selected ");
                             }%> >10/11/2013</option>
                     </select>
-                    <span style='float: right; position: relative;'>Total per day: <%= report.size() %></span>
+                    
                     <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
                         <thead>
                             <tr>
@@ -195,7 +195,7 @@
                     
                     function switchDate() {
                             var date = $('#date').val();
-                            window.location ='http://sni-techtoberfest.scrippsnetworks.com/private/employee/admin/confirmationReport.jsp?date=' + date;
+                            window.location ='http://techtoberfest-dev.elasticbeanstalk.com/private/employee/admin/confirmationReport.jsp?date=' + date;
                         }
 
                     $(document).ready(function() {

@@ -68,12 +68,14 @@
                    var session = $("#session").val();
                    var validateKey = $.post('../../action/validateKey.jsp', {key: key, sessionId: session});
                    validateKey.done(function(data) {
-                       console.log(data);
+                       //console.log(data);
                        
                        if (data.substring(0,2) === "ok"){
                            $("#keyError").hide();
+                           $("#keySuccess").show();
                        } else {
                            $("#keyError").show();
+                           $("#keySuccess").hide();
                        }
                    });
                 });
@@ -172,7 +174,7 @@
                         changeMouseOnIndicators();
                         $("#errors").hide();
                         $("#progress1").css("cursor", "pointer");
-                        $("#progress2").css("cursor", "pointer");
+                        
                         if ($("input[name='q1']:checked").length && $("input[name='q2']:checked").length && $("input[name='q3']:checked").length && $("input[name='q4']:checked").length) {
                             $("#q1").val($("input[name='q1']:checked").val());
                             $("#q2").val($("input[name='q2']:checked").val());
@@ -182,6 +184,7 @@
                             $("#survey").hide();
                             $("#code").show();
                             $("#step").val(3);
+                            $("#progress2").css("cursor", "pointer");
                             $("#progress2").removeClass("current");
                             $("#progress2").addClass("completed");
                             $("#progress3").addClass("current");
@@ -280,7 +283,7 @@
                 <p><strong>Note:</strong>  As an incentive...if you complete a survey for a session and provide the appropriate session code within 30 minutes of attending, your name will be added to our raffle drawing.</p>
             </div>
             <div class='row mediumBottomMargin'></div>
-            <div class="row mediumBottomMargin">
+            <div class="row">
                 <section class="progressIndicator clearFix">
                     <ul class="progressIndicator-list">
                         <li class="current" id="progress1">
@@ -404,12 +407,15 @@
             <div id="code" class="row mediumBottomMargin">
                 <div class="form-group">
                     <label>Please enter the session code you were provided</label>
-                    <input class="input-xlarge" maxlength="4" name="key" id="key" /><a style="margin-left: 12px;" id="keyvalidate" class="button button-primary">Check Key Value</a>
+                    <input class="input-xlarge" maxlength="4" name="key" id="key" /><a style="margin-left: 12px;" id="keyvalidate" class="button button-primary">Confirm My Attendance</a>
                     <br/><br/><span id="keyError" class="errors">
                             <span style="color:red">The session code you have provided for this session is incorrect. Please enter a valid code in order to confirm your attendance, or you can opt to leave this field blank and submit your survey without it.</span>
                         </span>
+                    <span id="keySuccess" class="errors">
+                            <span style="color:#006325;">Thank you! Your attendance has been confirmed.</span>
+                        </span>
                 </div>
-                <p style="color:red">Note: Session codes are provided for each session.  This code not only helps the Techtoberfest Committee verify your session attendance, but it also serves as a raffle ticket if provided within 30 minutes of you attending a particular session.  If you do not have the code for this session, you may leave this field blank and continue with the survey.</p>
+                <p style="color:red"><strong>Please Note:</strong> Session codes are provided during each session. This code not only helps verify your attendance, but also serves as a raffle ticket if provided anytime during the session or within 30 minutes after a session has ended. If the correct code is entered after 30 minutes of a session ending, or before a session begins, your attendance will still be confirmed, however, it will not serve as a raffle ticket. If, for whatever reason, you do not have the code for this session, you may leave this field blank and continue with the survey.</p>
             </div>
             <div id="confirm" class="row">
                 <p class="feedbackMessage-success">Your survey has been submitted successfully!</p>

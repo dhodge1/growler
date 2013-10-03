@@ -104,9 +104,10 @@
                     <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
                         <thead>
                             <tr>
+                                <th>Avg Rating</th>
                                 <th>Speaker(s)</th>
                                 <th>Session Topic</th>
-                                <th>Avg Rating</th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -123,15 +124,15 @@
                                 for (int i = 0; i < questions.size(); i++) {
                                     out.print("<tr id='row" + i + "'>");
                                     out.print("<td>");
+                                    out.print(questions.get(i).getScore());
+                                    out.print("</td>");
+                                    out.print("<td>");
                                     for (int j = 0; j < questions.get(i).getSpeakers().size(); j++){
                                         out.print(questions.get(i).getSpeakers().get(j).getFullName() + "<br/>");
                                     }
                                     out.print("</td>");
                                     out.print("<td>");
                                     out.print(questions.get(i).getSession_name());
-                                    out.print("</td>");
-                                    out.print("<td>");
-                                    out.print(questions.get(i).getScore());
                                     out.print("</td>");
                                     out.print("</tr>");
                                 }
