@@ -73,7 +73,7 @@
 %>
         <%
                     
-                    if (null == session.getAttribute("id") || null == session.getAttribute("role")) {
+                    if (null == session.getAttribute("id")) {
                         response.sendRedirect("../../../index.jsp");
                     }
         %>
