@@ -235,7 +235,7 @@
 
                     function switchDate() {
                         var date = $('#date').val();
-                        window.location = 'http://techtoberfest-dev.elasticbeanstalk.com/private/employee/admin/surveyReport.jsp?date=' + date;
+                        window.location = 'http://sni-techtoberfest.scrippsnetworks.com/private/employee/admin/surveyReport.jsp?date=' + date;
                     }
 
                     $(document).ready(function() {
