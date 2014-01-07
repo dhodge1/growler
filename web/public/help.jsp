@@ -28,6 +28,11 @@
                 position: relative;
                 top: 30px;
             }
+            #logo {
+                padding-left: 0px;
+                padding-bottom: 0px;
+            }
+            
         </style>
     </head>
     <body id="growler1">
