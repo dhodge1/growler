@@ -14,6 +14,7 @@
   <version>1.0-SNAPSHOT</version>
   <name>growler</name>
   <url>http://maven.apache.org</url>
+  
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -27,6 +28,7 @@
 	  <version>2.0-beta6</version>
     </dependency>
   </dependencies>
+  
   <build>
     <finalName>growler</finalName>
 	<plugins>
