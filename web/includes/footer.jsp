@@ -7,5 +7,5 @@
   <footer class="pageFooter">
     <hr />
     <p>SNI Techtoberfest.<!-- Application name --></p>
-    <p>Copyright &copy; 2013 Scripps Networks.</p>
+    <p>Copyright &copy; 2014 Scripps Networks.</p>
   </footer><!-- /.pageFooter -->
