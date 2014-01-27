@@ -15,6 +15,50 @@
   <name>growler</name>
   <url>http://maven.apache.org</url>
   
+  <developers>
+      <developer>
+          <name>David Hodge</name>
+          <email>dhodge1@gmail.com</email>
+          <roles>
+              <role>Team Leader</role>
+              <role>Developer</role>
+          </roles>
+      </developer>
+      
+      <developer>
+          <name>Shaun Carter</name>
+          <email>why06mail@gmail.com</email>
+          <roles>
+              <role>Client Side Development</role>
+          </roles>
+      </developer>
+      
+      <developer>
+          <name>Thuy To</name>
+          <email>ttto@pstcc.edu</email>
+          <roles>
+              <role>Server-Side Development</role>
+          </roles>
+      </developer>
+      
+      <developer>
+          <name>Chelsea Grindstaff</name>
+          <email>chelseagrindstaff@gmail.com</email>
+          <roles>
+              <role>Database Developer</role>
+              <role>Server-Side Development</role>
+          </roles>
+      </developer>
+      
+      <developer>
+          <name>Johan Cespedes</name>
+          <email>jacespedes@pstcc.edu</email>
+          <roles>
+              <role>Database Developement</role>
+          </roles>
+      </developer>
+  </developers>
+  
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
