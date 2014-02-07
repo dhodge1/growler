@@ -141,7 +141,7 @@
         <div class="container-fixed largeBottomMargin">
             <div class="row mediumBottomMargin"></div>
             <div class="row mediumBottomMargin">
-                <h1>Welcome to the 2013 Techtoberfest Information System!</h1>
+                <h1>Welcome to the 2013 Techtoberfest Information System!!</h1>
             </div>
             <div class="row largeBottomMargin">
                 <div id="this-carousel-id" class="carousel slide">
