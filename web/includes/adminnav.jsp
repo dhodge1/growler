@@ -17,6 +17,7 @@
     String roomTab = "";
     String reportTab = "";
     String home = "";
+    String blogTab = "";
     if (pageURI.contains("theme")) {
         themeTab = active;
     } else if (pageURI.contains("Report") || pageURI.contains("speakerReport")) {
@@ -68,6 +69,8 @@
                     
                 </ul>
             </li>
+            <li class="brand_nav <%= blogTab%>"><a href="http://techtoberfest.scrippsnetworks.com/" style='padding-left:8px;'><span class="nav_drop">Blog</span><em></em></a>
+                </li>    
         </ul>
     </nav>
 </nav>
