@@ -8,6 +8,7 @@
     String themeTab = "";
     String speakerTab = "";
     String sessionTab = "";
+    String blogTab = "";
     if (pageURI.contains("theme")) {
         themeTab = active;
     } else if (pageURI.contains("speaker")) {
@@ -42,8 +43,8 @@
                         <li><a href="../../private/employee/surveys.jsp">Submit Session Feedback</a></li>
                     </ul>
                 </li>
-                                <li class="brand_nav <%= blogTab%>"><a href="http://techtoberfest.scrippsnetworks.com/" style='padding-left:8px;'><span class="nav_drop">Blog</span><em></em></a>
-                </li>
+             <li class="non_drop <%= blogTab%>" style="padding-left:8px;"><a href="http://techtoberfest.scrippsnetworks.com/"><span>Blog</span><em></em></a>
+                </li>    
             </ul>
         </nav>
 </nav>
