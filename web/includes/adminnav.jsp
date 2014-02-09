@@ -69,7 +69,8 @@
                     
                 </ul>
             </li>
-            <li class="non_drop <%= blogTab%>"><a href="http://techtoberfest.scrippsnetworks.com/" style='padding-left:8px;'><span>Blog</span><em></em></a>
+             
+             <li class="non_drop <%= blogTab%>" style="padding-left:8px;"><a href="http://techtoberfest.scrippsnetworks.com/"><span>Blog</span><em></em></a>
                 </li>    
         </ul>
     </nav>
