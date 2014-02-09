@@ -43,7 +43,11 @@
                         <li><a href="../../private/employee/surveys.jsp">Submit Session Feedback</a></li>
                     </ul>
                 </li>
-                <li class="non_drop <%= home%>" style="padding-left:8px;"><a href="http://techtoberfest.scrippsnetworks.com/"><span>Blog</span><em></em></a></li>
+                <li class="brand_nav <%= sessionTab%>"><a href="#" style='padding-left:8px;'><span class="nav_drop">About</span><em></em></a>
+                    <ul class="child-menu child-menu-ul">
+                        <li><a href="http://techtoberfest.scrippsnetworks.com/">Blog</a></li>
+                    </ul>
+                </li>
             </ul>
         </nav>
 </nav>
