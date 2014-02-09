@@ -70,7 +70,7 @@
                 </ul>
             </li>
              
-               <li class="brand_nav <%= blogTab%>"><a href="http://techtoberfest.scrippsnetworks.com/"><span class="nav_drop">Blog</span><em></em></a>
+               <li><a href="http://techtoberfest.scrippsnetworks.com/"><span>Blog</span><em></em></a>
                 </li>    
         </ul>
     </nav>
