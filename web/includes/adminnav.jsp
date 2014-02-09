@@ -69,7 +69,7 @@
                     
                 </ul>
             </li>
-            <li class="non_drop <%= blogTab%>"><a href="http://techtoberfest.scrippsnetworks.com/" style='padding-left:8px;'><span class="nav_drop">Blog</span><em></em></a>
+            <li class="non_drop <%= blogTab%>"><a href="http://techtoberfest.scrippsnetworks.com/" style='padding-left:8px;'><span>Blog</span><em></em></a>
                 </li>    
         </ul>
     </nav>
