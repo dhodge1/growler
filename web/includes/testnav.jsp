@@ -45,7 +45,7 @@
                 </li>
                 <li class="brand_nav <%= sessionTab%>"><a href="#" style='padding-left:8px;'><span class="nav_drop">About</span><em></em></a>
                     <ul class="child-menu child-menu-ul">
-                        <li><a href="http://techtoberfest.scrippsnetworks.com/">Blog</a></li>
+                        <li><a href="http://techtoberfest.scrippsnetworks.com/">SNI Techtoberfest Blog</a></li>
                     </ul>
                 </li>
             </ul>
