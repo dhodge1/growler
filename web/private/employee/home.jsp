@@ -58,6 +58,7 @@
         <link rel="stylesheet" href="../../css/bootstrap.css"/>
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> 
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
+        <link rel="stylesheet" href="../../css/featurette.css" />
         <script src="http://growler.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <style>
             .carousel {
@@ -141,7 +142,7 @@
         <div class="container-fixed largeBottomMargin">
             <div class="row mediumBottomMargin"></div>
             <div class="row mediumBottomMargin">
-                <h1>Welcome to the 2013 Techtoberfest Information System!!</h1>
+                <h1>Welcome to the 2014 Techtoberfest Information System!</h1>
             </div>
             <div class="row largeBottomMargin">
                 <div id="this-carousel-id" class="carousel slide">
@@ -184,6 +185,47 @@
                 <%                            }
                 %>
             </div>
+            <!-- START THE FEATURETTES -->
+
+            <hr class="featurette-divider">
+
+            <div class="row featurette">
+              <div class="span7">
+                <h2 class="featurette-heading">What<span class="text-muted"> is Techtoberfest?</span></h2>
+                <p class="lead">Techtoberfest is a annual internal conference with sessions on various technical topics from across all of Scripps Network Interactive. Attendance is open to all employees who are interested and you can come and go anytime throughout the day.</p>
+              </div>
+              <div class="span5">
+                <a href="#"><img class="featurette-image img-responsive" src="../../images/what.jpg" alt="Generic placeholder image"></a>
+              </div>
+            </div>
+
+            <hr class="featurette-divider">
+
+            <div class="row featurette">
+              <div class="span5">
+                <a href="#"><img class="featurette-image img-responsive" src="../../images/why.jpg" alt="Generic placeholder image"></a>
+              </div>
+              <div class="span7">
+                <h2 class="featurette-heading">Why<span class="text-muted"> should I attend?</span></h2>
+                <p class="lead">Speakers from within the company will gather and conduct sessions on a variety of cutting-edge technologies. It’s a great way to network within the company and learn a few things. </p>
+              </div>
+            </div>
+
+            <hr class="featurette-divider">
+
+            <div class="row featurette">
+              <div class="span7">
+                <h2 class="featurette-heading">Where<span class="text-muted"> is it happening?</span></h2>
+                <p class="lead"> It will be in two primary locations 3rd floor Training Room in the Tech Center and 1st floor Training Center in the HQ Building.  We are also reserving the following rooms for video conferencing: NY: Boardroom, Soho DC: Africa, Australia.</p>
+              </div>
+              <div class="span5">
+                <a href="#"><img class="featurette-image img-responsive" src="../../images/where.jpg" alt="Generic placeholder image"></a>
+              </div>
+            </div>
+
+            <!--<hr class="featurette-divider">-->
+
+            <!-- /END THE FEATURETTES -->
         </div>
         <%@ include file="../../includes/footer.jsp" %>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
