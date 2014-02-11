@@ -57,9 +57,7 @@
                 <ul class="child-menu child-menu-ul">
                     <li><a href="../../../private/employee/admin/session.jsp">Manage Session Schedule</a></li>
                 </ul>
-            </li>
-               <li class="brand_nav <%= blogTab%>"><a href="http://techtoberfest.scrippsnetworks.com/"><span>Blog</span><em></em></a>
-                </li>  
+            </li> 
                 <li class="brand_nav <%= reportTab%>"><a href="#"><span class="nav_drop">Reports</span><em></em></a>
                 <ul class="child-menu child-menu-ul">
                     <li><a href="../../../private/employee/admin/overallReport.jsp">Best Overall Session</a></li>
