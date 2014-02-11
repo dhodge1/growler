@@ -172,19 +172,7 @@
                 </div>
             </div>
             <div class="row largeBottomMargin"></div>
-            <div class="row">
-                <%@include file="../../includes/messagehandler.jsp" %>
-                <%
-                    Calendar today = Calendar.getInstance();
-                    if (today.get(Calendar.MONTH) == 8 && today.get(Calendar.DAY_OF_MONTH) < 15) { //if it's before Sept 19th
-                %>
-                <%@include file="../../includes/august_home.jsp" %>
-                <%                        } else {
-                %>
-                <%@include file="../../includes/september_home.jsp" %>
-                <%                            }
-                %>
-            </div>
+            
             <!-- START THE FEATURETTES -->
 
             <div class="row featurette">
@@ -224,6 +212,19 @@
             <!--<hr class="featurette-divider">-->
 
             <!-- /END THE FEATURETTES -->
+            <div class="row">
+                <%@include file="../../includes/messagehandler.jsp" %>
+                <%
+                    Calendar today = Calendar.getInstance();
+                    if (today.get(Calendar.MONTH) == 8 && today.get(Calendar.DAY_OF_MONTH) < 15) { //if it's before Sept 19th
+                %>
+                <%@include file="../../includes/august_home.jsp" %>
+                <%                        } else {
+                %>
+                <%@include file="../../includes/september_home.jsp" %>
+                <%                            }
+                %>
+            </div>
         </div>
         <%@ include file="../../includes/footer.jsp" %>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
