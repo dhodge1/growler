@@ -21,6 +21,7 @@ and open the template in the editor.
   font-weight: 300;
   line-height: 1;
   letter-spacing: -1px;
+  margin-top: 20px;
 }
 
 @media (min-width: 768px) {
