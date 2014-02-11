@@ -9,7 +9,7 @@ and open the template in the editor.
 */
 
 .featurette-image {
-    margin-top: 75px;
+    margin-top: 5px;
 }
 
 .featurette-divider {
@@ -32,6 +32,7 @@ and open the template in the editor.
 
   .featurette-heading {
     font-size: 50px;
+    color: #999999;
   }
 }
 

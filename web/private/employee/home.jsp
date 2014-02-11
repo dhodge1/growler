@@ -187,8 +187,6 @@
             </div>
             <!-- START THE FEATURETTES -->
 
-            <hr class="featurette-divider">
-
             <div class="row featurette">
               <div class="span7">
                 <h2 class="featurette-heading">What<span class="text-muted"> is Techtoberfest?</span></h2>
