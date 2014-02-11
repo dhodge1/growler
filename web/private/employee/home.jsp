@@ -212,7 +212,7 @@
             <!--<hr class="featurette-divider">-->
 
             <!-- /END THE FEATURETTES -->
-            <div class="row">
+            <div class="row dyno">
                 <%@include file="../../includes/messagehandler.jsp" %>
                 <%
                     Calendar today = Calendar.getInstance();
