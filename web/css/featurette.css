@@ -9,7 +9,7 @@ and open the template in the editor.
 */
 
 .featurette-image {
-    margin-top: 5px;
+    margin-top: 37px;
 }
 
 .featurette-divider {
@@ -38,7 +38,7 @@ and open the template in the editor.
 
 @media (min-width: 992px) {
   .featurette-heading {
-    margin-top: 120px;
+    margin-top: 60px;
   }
 }
 
@@ -63,5 +63,9 @@ and open the template in the editor.
   .lead {
     font-size: 21px;
   }
+}
+
+.last {
+    margin-bottom: 37px;
 }
 

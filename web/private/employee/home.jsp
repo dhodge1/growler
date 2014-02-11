@@ -211,7 +211,7 @@
 
             <hr class="featurette-divider">
 
-            <div class="row featurette">
+            <div class="row featurette last">
               <div class="span7">
                 <h2 class="featurette-heading">Where<span class="text-muted"> is it happening?</span></h2>
                 <p class="lead"> It will be in two primary locations 3rd floor Training Room in the Tech Center and 1st floor Training Center in the HQ Building.  We are also reserving the following rooms for video conferencing: NY: Boardroom, Soho DC: Africa, Australia.</p>
