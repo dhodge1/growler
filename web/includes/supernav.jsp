@@ -75,13 +75,13 @@
             <%--------------------------------------
             THUY: TEST CODE FOR THE COMMUNICATION THEME
             ----------------------------------------%>
-            <li class="brand_nav <%= ""%>"><a href="#"><span class="nav_drop">Emails(testing)</span><em></em></a>
+            <%--<li class="brand_nav <%= ""%>"><a href="#"><span class="nav_drop">Emails(testing)</span><em></em></a>
                 <ul class="child-menu child-menu-ul">
                     <li><a href="#">Option1</a></li>
                     <li><a href="#">Option2</a></li>
                     <li><a href="#">Option3</a></li>  
                 </ul>
-            </li>
+            </li>--%>
             
             <%--------------------------------------------
             END OF TEST CODE
