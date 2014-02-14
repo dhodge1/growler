@@ -80,6 +80,12 @@ and open the template in the editor.
     margin-bottom: 27px;
 }
 
+[class*="span"] {
+    float: left;
+    min-height: 1px;
+    margin-left: 24px;
+ }
+
 .span7 {
     max-height: 294px;
     max-width: 550px;
@@ -91,4 +97,9 @@ and open the template in the editor.
     max-width: 385px;
     overflow: hidden;
 }
+
+.container-fixed {
+    padding: 0 0px;
+}
+
 
