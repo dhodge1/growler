@@ -41,6 +41,7 @@
                 } //Otherwise, go to the user side
                 else {
                     session.setAttribute("user", result.getString("name"));
+                    session.setAttribute("role", "user");
                     session.setAttribute("id", new Integer(result.getInt("id")));
                     session.setAttribute("email", "techtoberfest-help@gmail.com");
                     session.setMaxInactiveInterval(1800); //30 minutes before it kicks you off
