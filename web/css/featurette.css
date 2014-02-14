@@ -46,7 +46,7 @@ and open the template in the editor.
 .img-responsive {
   display: block;
   height: auto;
-  max-width: 85%;
+  max-width: 375px;
 }
 
 .text-muted {
