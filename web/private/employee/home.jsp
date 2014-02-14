@@ -36,7 +36,7 @@
                     session.setAttribute("user", newUser.getUserName());
                     session.setAttribute("id", newUser.getCorporateId());
                     session.setAttribute("email", newUser.getEmail());
-                    if (id.equals("808300") || id.equals("160240") || id.equals("160445") || id.equals("162107") || id.equals("161301")) { //if it's Ian R. or Brian S.
+                    if (id.equals("160240") || id.equals("160445") || id.equals("162107") || id.equals("161301")) { //if it's Ian R. or Brian S.
                         session.setAttribute("role", "admin");
                     }
                 }
@@ -127,12 +127,12 @@
     </head>
     <body id="growler1">    
         <%@ include file="../../includes/header.jsp" %> 
-        <% if (session.getAttribute("role").equals("admin")) { %>
+        <%--<% if (session.getAttribute("role").equals("admin")) { %>
         <jsp:include page="../../includes/supernav.jsp" flush="true"/>
         <% } else {%>
         <jsp:include page="../../includes/testnav.jsp" flush="true"/>
-        <% } %>
-        <%--<%@ include file="../../includes/testnav.jsp" %>--%>
+        <% } %>--%>
+        <%@ include file="../../includes/testnav.jsp" %>
         <%
             String user = "";
             if (null == session.getAttribute("id")) {
