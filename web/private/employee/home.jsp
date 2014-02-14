@@ -185,7 +185,7 @@
                 <h2 class="featurette-heading"><span class="text-muted">What is Techtoberfest?</span></h2>
                 <p class="lead">Techtoberfest is a annual internal conference with sessions on various technical topics from across all of Scripps Network Interactive. Attendance is open to all employees who are interested and you can come and go anytime throughout the day. Find out more at the <a href="http://techtoberfest.scrippsnetworks.com/">SNI Techtoberfest Blog</a>.</p>
               </div>
-              <div class="span5 clearFix">
+              <div class="span5 clearfix">
                 <a href="#"><img class="featurette-image img-responsive" src="../../images/what.jpg" alt="Generic placeholder image"></a>
               </div>
             </div>
@@ -193,7 +193,7 @@
             <hr class="featurette-divider">
 
             <div class="row featurette">
-              <div class="span5 clearFix">
+              <div class="span5 clearfix">
                 <a href="#"><img class="featurette-image img-responsive" src="../../images/why.jpg" alt="Generic placeholder image"></a>
               </div>
               <div class="span7">
@@ -209,7 +209,7 @@
                 <h2 class="featurette-heading"><span class="text-muted">Where is it happening?</span></h2>
                 <p class="lead"> It will be in two primary locations 3rd floor Training Room in the Tech Center and 1st floor Training Center in the HQ Building.  We are also reserving the following rooms for video conferencing: NY: Boardroom, Soho DC: Africa, Australia.</p>
               </div>
-              <div class="span5 clearFix">
+              <div class="span5 clearfix">
                 <a href="#"><img class="featurette-image img-responsive" src="../../images/where.jpg" alt="Generic placeholder image"></a>
               </div>
             </div>
