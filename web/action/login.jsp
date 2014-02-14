@@ -39,7 +39,6 @@
                     response.sendRedirect("../private/employee/admin/home.jsp");
                 } //Otherwise, go to the user side
                 else {
-
                     session.setAttribute("user", result.getString("name"));
                     session.setAttribute("id", new Integer(result.getInt("id")));
                     session.setAttribute("email", "techtoberfest-help@gmail.com");
