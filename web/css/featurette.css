@@ -83,10 +83,12 @@ and open the template in the editor.
 .span7 {
     max-height: 294px;
     max-width: 550px;
+    overflow: hidden;
 }
 
 .span5 {
     max-height: 294px;
     max-width: 385px;
+    overflow: hidden;
 }
 
