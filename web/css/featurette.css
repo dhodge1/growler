@@ -45,7 +45,7 @@ and open the template in the editor.
 
 .img-responsive {
   display: block;
-  height: auto;
+  max-height: 100%;
   max-width: 100%;
 }
 
