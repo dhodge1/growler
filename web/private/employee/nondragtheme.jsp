@@ -206,7 +206,12 @@
             ArrayList<Theme> vthemes = persist.getThemesByVisibility(true);
         %>
         <%@ include file="../../includes/header.jsp" %> 
-        <%@ include file="../../includes/testnav.jsp" %>
+        <% if (String.valueOf(session.getAttribute("role")).equals("admin")) { %>
+            <jsp:include page="../../includes/supernav.jsp" flush="true"/>
+        <% } else {%>
+            <jsp:include page="../../includes/testnav.jsp" flush="true"/>
+        <% } %>
+        <%--<%@ include file="../../includes/testnav.jsp" %>--%>
         <div class="container-fixed mediumBottomMargin">
             <div class="row mediumBottomMargin"></div>
             <div class="row">

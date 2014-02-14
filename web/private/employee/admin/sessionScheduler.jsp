@@ -60,7 +60,12 @@
             }
         %>
         <%@ include file="../../../includes/adminheader.jsp" %> 
-        <%@ include file="../../../includes/adminnav.jsp" %>
+        <% if (String.valueOf(session.getAttribute("role")).equals("admin")) { %>
+            <jsp:include page="../../../includes/supernav.jsp" flush="true"/>
+        <% } else {%>
+            <jsp:include page="../../../includes/adminnav.jsp" flush="true"/>
+        <% } %>
+        <%--<%@ include file="../../../includes/adminnav.jsp" %>--%>
         <div class="container-fixed">
             <br/><br/><br/>
             <div class="row">
