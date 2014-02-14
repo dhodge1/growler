@@ -33,6 +33,7 @@ and open the template in the editor.
 
   .featurette-heading {
     font-size: 30px;
+    max-width: 550px;
     /*color: #999999;*/
   }
 }
@@ -40,6 +41,7 @@ and open the template in the editor.
 @media (min-width: 992px) {
   .featurette-heading {
     margin-top: 70px;
+    max-width: 550px;
   }
 }
 
@@ -59,12 +61,14 @@ and open the template in the editor.
   font-weight: 200;
   line-height: 1.4;
   max-width: 550px;
+  margin: 0px;
 }
 
 @media (min-width: 768px) {
   .lead {
     font-size: 21px;
     max-width: 550px;
+    margin: 0px;
   }
 }
 
