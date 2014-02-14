@@ -127,12 +127,12 @@
     </head>
     <body id="growler1">    
         <%@ include file="../../includes/header.jsp" %> 
-        <%--<% if (session.getAttribute("role").equals("admin")) { %>
-        <jsp:include page="../../includes/supernav.jsp" flush="true"/>
+        <% if (String.valueOf(session.getAttribute("role")).equals("admin")) { %>
+            <jsp:include page="../../includes/supernav.jsp" flush="true"/>
         <% } else {%>
-        <jsp:include page="../../includes/testnav.jsp" flush="true"/>
-        <% } %>--%>
-        <%@ include file="../../includes/testnav.jsp" %>
+            <jsp:include page="../../includes/testnav.jsp" flush="true"/>
+        <% } %>
+        <%--<%@ include file="../../includes/testnav.jsp" %>--%>
         <%
             String user = "";
             if (null == session.getAttribute("id")) {
