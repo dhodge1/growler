@@ -45,7 +45,7 @@ and open the template in the editor.
 
 .img-responsive {
   display: block;
-  max-height: 100%;
+  height: auto;
   max-width: 100%;
 }
 
@@ -78,5 +78,15 @@ and open the template in the editor.
 
 .dyno {
     margin-bottom: 27px;
+}
+
+.span7 {
+    max-height: 294px;
+    max-width: 550px;
+}
+
+.span5 {
+    max-height: 294px;
+    max-width: 385px;
 }
 
