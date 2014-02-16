@@ -168,7 +168,7 @@
                                             //Commented out speaker BIO modals - 9/16/13
                                             // out.print("<a class='showModal2'>");
                                             out.print(speakers.get(j).getFullName());
-                                            out.print("<a href='#' class='removeSpeaker' id='" + sessions.get(i).getId() + "' name='" + speakers.get(j).getId() + "'>&nbsp;&nbsp;Remove</a>");
+                                            out.print("&nbsp;&nbsp;<a href='#' class='removeSpeaker' id='" + sessions.get(i).getId() + "' name='" + speakers.get(j).getId() + "'>Remove</a>");
                                             out.print("<br/>");
                                             // out.print("<input type='hidden' value='" + speakers.get(j).getId() + "' /></a><br/>");
                                             // out.print("<div class='modals' id='modalspkr" + speakers.get(j).getId() + "' title='" + speakers.get(j).getFullName() + "'>");
