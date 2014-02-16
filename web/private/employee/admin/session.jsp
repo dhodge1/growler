@@ -168,6 +168,7 @@
                                             //Commented out speaker BIO modals - 9/16/13
                                             // out.print("<a class='showModal2'>");
                                             out.print(speakers.get(j).getFullName());
+                                            out.print("<a href='#' class='removeSpeaker' id='" + sessions.get(i).getId() + "' name='" + speakers.get(j).getId() + "'>Remove Speaker</a>");
                                             out.print("<br/>");
                                             // out.print("<input type='hidden' value='" + speakers.get(j).getId() + "' /></a><br/>");
                                             // out.print("<div class='modals' id='modalspkr" + speakers.get(j).getId() + "' title='" + speakers.get(j).getFullName() + "'>");
@@ -328,6 +329,22 @@
                         $(".showModal3").click(function() {
                             var session = $(this).children().val();
                             $("#modaldelete" + session).dialog("open");
+                        });
+                        
+                        $(".removeSpeaker").on("click", function(event) {
+                            event.preventDefault();
+                            
+                            var sessionId = $('.removeSpeaker').attr("id");
+                            var speakerId = $('.removeSpeaker').attr("name");
+                            
+                            $.ajax({
+				type: "POST",
+				url: '../../../action/removeSessionSpeaker.jsp',
+				data: {speaker_id: speakerId, session_id: sessionId},
+				success: function(){
+                                    window.location.href = "./session.jsp";
+                                }
+                            });
                         });
 
                     });
