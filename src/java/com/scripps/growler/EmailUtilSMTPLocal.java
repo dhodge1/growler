@@ -28,8 +28,7 @@ import javax.mail.Address;
 public class EmailUtilSMTPLocal
 {
    public static void sendMail(String to, String from, String subject,
-                               String body, boolean bodyIsHTML,
-                               final String userName, final String password ) throws 
+                               String body, boolean bodyIsHTML) throws 
                                AddressException, MessagingException 
                              
    {
@@ -48,26 +47,24 @@ public class EmailUtilSMTPLocal
                 return new PasswordAuthentication(userName, password);
             }
         };
-     
     */
      //Create a message
      Message message = new MimeMessage(session);
      message.setSubject(subject);
      if(bodyIsHTML)
-     {
+     {    
        message.setContent(body,"text/html");
      }
      else
      {
        message.setText(body);
      }
-     
      //Address the message
      Address fromAddress = new InternetAddress(from);
-     Address toAddress = new InternetAddress(to);
+     Address[] mailList = { new InternetAddress(to) };
+     //Address toAddress = new InternetAddress(to);
      message.setFrom(fromAddress);
-     message.setRecipient(Message.RecipientType.TO, toAddress);
-     
+     message.setRecipients(Message.RecipientType.TO, mailList);
      // Send the message
      Transport.send(message);
    } 
