@@ -70,6 +70,7 @@ public class EmailUtilSMTPLocal
      Transport transport = session.getTransport();
      transport.connect("thuytohuynh@gmail.com","phimhay49day");
      transport.sendMessage(message, message.getAllRecipients());
-     Transport.send(message);
+     //Transport.send(message);
+     transport.close();
    } 
 }
