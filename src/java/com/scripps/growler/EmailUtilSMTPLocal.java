@@ -40,15 +40,18 @@ public class EmailUtilSMTPLocal
      props.put("mail.smtp.port", 465);
      props.put("mail.smtp.auth", "true");
      props.put("mail.smtps.quitwait", "false");
-     Session session = Session.getDefaultInstance(props);
-     session.setDebug(true);
+     //Session session = Session.getDefaultInstance(props);
+     //session.setDebug(true);
      /*
+      *Testing
+      */
      Authenticator auth = new Authenticator() {
             public PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(userName, password);
+                return new PasswordAuthentication("scrippsproject2014@gmail.com","capstoneteam2014" );
             }
         };
-    */
+         
+     Session session = Session.getDefaultInstance(props,auth);
      //Create a message
      Message message = new MimeMessage(session);
      message.setSubject(subject);
@@ -62,15 +65,15 @@ public class EmailUtilSMTPLocal
      }
      //Address the message
      Address fromAddress = new InternetAddress(from);
-     Address[] mailList = { new InternetAddress(to) };
-     //Address toAddress = new InternetAddress(to);
+     //Address[] mailList = { new InternetAddress(to) };
+     Address toAddress = new InternetAddress(to);
      message.setFrom(fromAddress);
-     message.setRecipients(Message.RecipientType.TO, mailList);
+     message.setRecipient(Message.RecipientType.TO, toAddress);
      // Send the message
-     Transport transport = session.getTransport();
-     transport.connect("techtoberfesthelp@gmail.com","emailtest");
-     transport.sendMessage(message, message.getAllRecipients());
-     //Transport.send(message);
-     transport.close();
+     //Transport transport = session.getTransport();
+     //transport.connect("thuytohuynh@gmail.com","test");
+     //transport.sendMessage(message, message.getAllRecipients());
+     Transport.send(message);
+     //transport.close();
    } 
 }
