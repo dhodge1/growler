@@ -25,7 +25,7 @@
 
 <%
    //set a default email list
-   String emailList = new String("thuytohuynh@gmail.com, ");
+   String emailList = new String("thuytohuynh@gmail.com");
    String from = new String();
    String subject = new String();
    String content = new String();
@@ -46,7 +46,7 @@
    }
    //Just for testing will get the follow info from a html form instead
    */ 
-   emailList.concat( "Thuy_To@msn.com, ttto@pstcc.edu");
+   //emailList.concat( "Thuy_To@msn.com, ttto@pstcc.edu");
    from ="thuytohuynh@gmail.com";
    subject = "techtoberfest email testing";
    content = "123 Testing!!!";
@@ -61,7 +61,7 @@
    
    catch (MessagingException e)
    {
-     String results = "Failed " + e.getLocalizedMessage();    
+    // System.out.println( "Failed " + e.getLocalizedMessage());    
    }
 %> 
                       
