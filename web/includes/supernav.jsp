@@ -77,7 +77,7 @@
             ----------------------------------------%>
             <li class="brand_nav <%= ""%>"><a href="#"><span class="nav_drop">Emails(testing)</span><em></em></a>
                 <ul class="child-menu child-menu-ul">
-                    <li><a href="#">Call to action</a></li>
+                    <li><a href="${pageContext.request.contextPath}/private/employee/admin/callOutAction.jsp">Call to action</a></li>
                     <li><a href="#">Option2</a></li>
                     <li><a href="#">Option3</a></li>  
                 </ul>
