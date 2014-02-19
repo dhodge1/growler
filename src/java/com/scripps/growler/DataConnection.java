@@ -29,7 +29,8 @@ public class DataConnection {
     String password = System.getProperty("RDS_PASSWORD");
     String hostname = System.getProperty("RDS_HOSTNAME");
     String port = System.getProperty("RDS_PORT");
-    String jdbcUrl = "jdbc:mysql://" + System.getProperty("RDS_HOSTNAME") + ":" + port + "/" + dbName + "?user=" + userName + "&password=" + password;
+    //String jdbcUrl = "jdbc:mysql://" + System.getProperty("RDS_HOSTNAME") + ":" + port + "/" + dbName + "?user=" + userName + "&password=" + password;
+    String jdbcUrl = "jdbc:mysql://" + PRODUCTION + ":" + 3306 + "/" + DBNAME + "?user=" + PRODUSER + "&password=" + PRODPASS;
     public Connection connection;
 
     public DataConnection() throws SQLException, ClassNotFoundException {
@@ -47,7 +48,8 @@ public class DataConnection {
     public Connection sendConnection() throws SQLException, ClassNotFoundException {
         logger.info("Getting the Driver, then Returning a connection using the class constants of DBNAME, DBUSER, DBPASSWORD");
         Class.forName("com.mysql.jdbc.Driver");
-        return (connection = DriverManager.getConnection("jdbc:mysql://" + System.getProperty("RDS_HOSTNAME") + ":3306/" + DBNAME, PRODUSER, PRODPASS));
+        //return (connection = DriverManager.getConnection("jdbc:mysql://" + System.getProperty("RDS_HOSTNAME") + ":3306/" + DBNAME, PRODUSER, PRODPASS));
+        return (connection = DriverManager.getConnection("jdbc:mysql://" + PRODUCTION + ":3306/" + DBNAME, PRODUSER, PRODPASS));
     }
 
     public String bytesToHex(byte[] b) {
