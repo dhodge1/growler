@@ -25,7 +25,7 @@
 
 <%
    //set a default email list
-   String emailList = new String("ttto@pstcc.edu");
+   String emailList = new String("dhodge1@gmail.com");
    String from = new String();
    String subject = new String();
    String content = new String();
@@ -47,7 +47,7 @@
    //Just for testing will get the follow info from a html form instead
    */ 
    //emailList.concat( "Thuy_To@msn.com, ttto@pstcc.edu");
-   from ="thuytohuynh@gmail.com";
+   from ="scrippsproject2014@gmail.com";
    subject = "techtoberfest email testing";
    content = "123 Testing!!!";
    isContentHTML = false;
@@ -56,12 +56,12 @@
    {
       //perform the send email task
       EmailUtilSMTPLocal.sendMail(emailList, from, subject, content, isContentHTML);
-       
+      System.out.println("email sent");
    }
-   
-   catch (MessagingException e)
+   catch (Exception e)
    {
-    // System.out.println( "Failed " + e.getLocalizedMessage());    
+     System.out.println( "Failed ");
+     e.printStackTrace();   
    }
 %> 
                       
