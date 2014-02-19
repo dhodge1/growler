@@ -24,7 +24,8 @@
 <%@ page import="javax.mail.MessagingException"%>
 
 <%
-   String emailList = new String();
+   //set a default email list
+   String emailList = new String("thuytohuynh@gmail.com");
    String from = new String();
    String subject = new String();
    String content = new String();
