@@ -25,13 +25,13 @@
 
 <%
    //set a default email list
-   String emailList = new String("thuytohuynh@gmail.com");
+   String emailList = new String("thuytohuynh@gmail.com, ");
    String from = new String();
    String subject = new String();
    String content = new String();
    boolean isContentHTML;
    //get the email list from all the users
-   UserPersistence uPersistence = new UserPersistence();
+  /* UserPersistence uPersistence = new UserPersistence();
    ArrayList<User> userArrayList = uPersistence.getAllUsers();
    for (int i = 0; i < userArrayList.size(); i++)
    {
@@ -45,6 +45,8 @@
      }    
    }
    //Just for testing will get the follow info from a html form instead
+   */ 
+   emailList.concat( "Thuy_To@msn.com, ttto@pstcc.edu");
    from ="thuytohuynh@gmail.com";
    subject = "techtoberfest email testing";
    content = "123 Testing!!!";
