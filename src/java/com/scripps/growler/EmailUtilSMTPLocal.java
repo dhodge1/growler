@@ -68,7 +68,7 @@ public class EmailUtilSMTPLocal
      message.setRecipients(Message.RecipientType.TO, mailList);
      // Send the message
      Transport transport = session.getTransport();
-     transport.connect("thuytohuynh@gmail.com","phimhay49day");
+     transport.connect("techtoberfesthelp@gmail.com","emailtest");
      transport.sendMessage(message, message.getAllRecipients());
      //Transport.send(message);
      transport.close();
