@@ -25,7 +25,7 @@
 
 <%
    //set a default email list
-   String emailList = new String("thuytohuynh@gmail.com");
+   String emailList = new String("ttto@pstcc.edu");
    String from = new String();
    String subject = new String();
    String content = new String();
