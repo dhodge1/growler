@@ -34,13 +34,14 @@ public class EmailUtilSMTPLocal
    {
      //get a email session for a local SMTP server
      Properties props = new Properties();  
-     props.put("mail.transport.protocol","smtp");  
-     props.put("mail.smtp.host", "localhost");  
-     props.put("mail.smtp.port", 587);
-     //props.put("mail.smtp.auth", "true");
-     
+     props.put("mail.transport.protocol","smtps"); 
+     props.put("mail.smtp.host", "smtp.gmail.com");
+    // props.put("mail.smtp.host", "localhost");  
+     props.put("mail.smtp.port", 465);
+     props.put("mail.smtp.auth", "true");
+     props.put("mail.smtps.quitwait", "false");
      Session session = Session.getDefaultInstance(props);
-      
+     session.setDebug(true);
      /*
      Authenticator auth = new Authenticator() {
             public PasswordAuthentication getPasswordAuthentication() {
@@ -66,6 +67,9 @@ public class EmailUtilSMTPLocal
      message.setFrom(fromAddress);
      message.setRecipients(Message.RecipientType.TO, mailList);
      // Send the message
+     Transport transport = session.getTransport();
+     transport.connect("thuytohuynh@gmail.com","phimhay49day");
+     transport.sendMessage(message, message.getAllRecipients());
      Transport.send(message);
    } 
 }
