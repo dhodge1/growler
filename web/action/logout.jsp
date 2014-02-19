@@ -8,6 +8,7 @@
             String username = (String) session.getAttribute("user");
             if (username != null) {
                 session.removeAttribute("user");
+                session.removeAttribute("role");
                 session.removeAttribute("id");
                 session.removeAttribute("message");
             }
