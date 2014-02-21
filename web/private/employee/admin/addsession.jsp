@@ -33,6 +33,18 @@
             .extra_speaker {
                 display:none;
             }
+            .extra_speaker3 {
+                display: none;
+            }
+            .extra_speaker4 {
+                display: none;
+            }
+            .extra_speaker5 {
+                display: none;
+            }
+            .extra_speaker6 {
+                display: none;
+            }
             h3 {
                 font-weight:normal;
             }
@@ -133,6 +145,7 @@
                                     out.print("</option>");
                                 }%>
                         </select>
+                        <a href="#" id="add_speaker2">Add Another Speaker</a>
                         <br/><span id="error_speaker2" class="message_container">
                             <span>Please select a speaker</span>
                         </span>
@@ -140,6 +153,81 @@
                             <span>Please select a different speaker</span>
                         </span>
                     </div>
+                    <div class="form-group extra_speaker3">
+                        <label class="required">Session speaker </label>
+                        <input type="hidden" value="0" id="thirds"/>
+                        <select id="speaker3" name="speaker3">
+                            <option value="0"> Select a Speaker </option>
+                            <% for (int i = 0; i < speakers.size(); i++) {
+                                    out.print("<option value='" + speakers.get(i).getId() + "'>");
+                                    out.print(speakers.get(i).getFullName());
+                                    out.print("</option>");
+                                }%>
+                        </select>
+                        <a href="#" id="add_speaker3">Add Another Speaker</a>
+                        <br/><span id="error_speaker3" class="message_container">
+                            <span>Please select a speaker</span>
+                        </span>
+                        <span id="error_duplicate3" class="message_container">
+                            <span>Please select a different speaker</span>
+                        </span>
+                    </div>
+                    <div class="form-group extra_speaker4">
+                        <label class="required">Session speaker </label>
+                        <input type="hidden" value="0" id="fourths"/>
+                        <select id="speaker4" name="speaker4">
+                            <option value="0"> Select a Speaker </option>
+                            <% for (int i = 0; i < speakers.size(); i++) {
+                                    out.print("<option value='" + speakers.get(i).getId() + "'>");
+                                    out.print(speakers.get(i).getFullName());
+                                    out.print("</option>");
+                                }%>
+                        </select>
+                        <a href="#" id="add_speaker4">Add Another Speaker</a>
+                        <br/><span id="error_speaker4" class="message_container">
+                            <span>Please select a speaker</span>
+                        </span>
+                        <span id="error_duplicate4" class="message_container">
+                            <span>Please select a different speaker</span>
+                        </span>
+                    </div>
+                    <div class="form-group extra_speaker5">
+                        <label class="required">Session speaker </label>
+                        <input type="hidden" value="0" id="fifths"/>
+                        <select id="speaker5" name="speaker5">
+                            <option value="0"> Select a Speaker </option>
+                            <% for (int i = 0; i < speakers.size(); i++) {
+                                    out.print("<option value='" + speakers.get(i).getId() + "'>");
+                                    out.print(speakers.get(i).getFullName());
+                                    out.print("</option>");
+                                }%>
+                        </select>
+                        <a href="#" id="add_speaker5">Add Another Speaker</a>
+                        <br/><span id="error_speaker5" class="message_container">
+                            <span>Please select a speaker</span>
+                        </span>
+                        <span id="error_duplicate5" class="message_container">
+                            <span>Please select a different speaker</span>
+                        </span>
+                    </div>
+                    <div class="form-group extra_speaker6">
+                        <label class="required">Session speaker </label>
+                        <input type="hidden" value="0" id="sixths"/>
+                        <select id="speaker6" name="speaker6">
+                            <option value="0"> Select a Speaker </option>
+                            <% for (int i = 0; i < speakers.size(); i++) {
+                                    out.print("<option value='" + speakers.get(i).getId() + "'>");
+                                    out.print(speakers.get(i).getFullName());
+                                    out.print("</option>");
+                                }%>
+                        </select>
+                        <br/><span id="error_speaker6" class="message_container">
+                            <span>Please select a speaker</span>
+                        </span>
+                        <span id="error_duplicate6" class="message_container">
+                            <span>Please select a different speaker</span>
+                        </span>
+                    </div>    
                     <div class="form-group">
                         <label class="required">Select a session date </label>
                         <input name="date" id="datepicker" type="text" data-content="Enter a date for the Session"/>
@@ -235,19 +323,51 @@
                 $("#add_speaker").hide();
                 $("#seconds").val("1");
             });
+            $("#add_speaker2").click(function() {
+                $(".extra_speaker3").show();
+                $("#add_speaker2").hide();
+                $("#thirds").val("1");
+            });
+            $("#add_speaker3").click(function() {
+                $(".extra_speaker4").show();
+                $("#add_speaker3").hide();
+                $("#fourths").val("1");
+            });
+            $("#add_speaker4").click(function() {
+                $(".extra_speaker5").show();
+                $("#add_speaker4").hide();
+                $("#fifths").val("1");
+            });
+            $("#add_speaker5").click(function() {
+                $(".extra_speaker6").show();
+                $("#add_speaker5").hide();
+                $("#sixths").val("1");
+            });
             $("#send").click(function(event) {
 
                 $("#name").css("border", "1px solid #CCC");
                 $("#description").css("border", "1px solid #CCC");
                 $("#speaker").css("border", "1px solid #CCC");
                 $("#speaker2").css("border", "1px solid #CCC");
+                $("#speaker3").css("border", "1px solid #CCC");
+                $("#speaker4").css("border", "1px solid #CCC");
+                $("#speaker5").css("border", "1px solid #CCC");
+                $("#speaker6").css("border", "1px solid #CCC");
                 $("#datepicker").css("border", "1px solid #CCC");
                 $("#time").css("border", "1px solid #CCC");
                 $("#error_name").hide();
                 $("#error_description").hide();
                 $("#error_speaker").hide();
                 $("#error_speaker2").hide();
+                $("#error_speaker3").hide();
+                $("#error_speaker4").hide();
+                $("#error_speaker5").hide();
+                $("#error_speaker6").hide();
                 $("#error_duplicate").hide();
+                $("#error_duplicate3").hide();
+                $("#error_duplicate4").hide();
+                $("#error_duplicate5").hide();
+                $("#error_duplicate6").hide();
                 $("#error_date").hide();
                 $("#error_time").hide();
                 var emptyString = "";
@@ -257,6 +377,10 @@
                 var str4 = $("#time").val();
                 var str5 = $("#speaker").val();
                 var str6 = $("#speaker2").val();
+                var str7 = $("#speaker3").val();
+                var str8 = $("#speaker4").val();
+                var str9 = $("#speaker5").val();
+                var str10 = $("#speaker6").val();
                 if ((str1) === emptyString) {
                     $("#name").css("border", "1px solid red");
                     $("#error_name").show();
@@ -292,6 +416,104 @@
                         $("#speaker1").css("border", "1px solid red");
                         $("#speaker2").css("border", "1px solid red");
                         $("#error_duplicate").show();
+                    }
+                }
+                if ($("#thirds").val() !== "0") {
+                    if (str7 === "0") {
+                        $("#speaker3").css("border", "1px solid red");
+                        $("#error_speaker3").show();
+                        event.preventDefault();
+                    }
+                    if (str7 === str5) {
+                        $("#speaker1").css("border", "1px solid red");
+                        $("#speaker3").css("border", "1px solid red");
+                        $("#error_duplicate3").show();
+                    }
+                    if (str7 === str6) {
+                        $("#speaker2").css("border", "1px solid red");
+                        $("#speaker3").css("border", "1px solid red");
+                        $("#error_duplicate3").show();
+                    }
+                }
+                if ($("#fourths").val() !== "0") {
+                    if (str8 === "0") {
+                        $("#speaker4").css("border", "1px solid red");
+                        $("#error_speaker4").show();
+                        event.preventDefault();
+                    }
+                    if (str8 === str5) {
+                        $("#speaker1").css("border", "1px solid red");
+                        $("#speaker4").css("border", "1px solid red");
+                        $("#error_duplicate4").show();
+                    }
+                    if (str8 === str6) {
+                        $("#speaker2").css("border", "1px solid red");
+                        $("#speaker4").css("border", "1px solid red");
+                        $("#error_duplicate4").show();
+                    }
+                    if (str8 === str7) {
+                        $("#speaker3").css("border", "1px solid red");
+                        $("#speaker4").css("border", "1px solid red");
+                        $("#error_duplicate4").show();
+                    }
+                }
+                if ($("#fifths").val() !== "0") {
+                    if (str9 === "0") {
+                        $("#speaker5").css("border", "1px solid red");
+                        $("#error_speaker5").show();
+                        event.preventDefault();
+                    }
+                    if (str9 === str5) {
+                        $("#speaker1").css("border", "1px solid red");
+                        $("#speaker5").css("border", "1px solid red");
+                        $("#error_duplicate5").show();
+                    }
+                    if (str9 === str6) {
+                        $("#speaker2").css("border", "1px solid red");
+                        $("#speaker5").css("border", "1px solid red");
+                        $("#error_duplicate5").show();
+                    }
+                    if (str9 === str7) {
+                        $("#speaker3").css("border", "1px solid red");
+                        $("#speaker5").css("border", "1px solid red");
+                        $("#error_duplicate5").show();
+                    }
+                    if (str9 === str8) {
+                        $("#speaker4").css("border", "1px solid red");
+                        $("#speaker5").css("border", "1px solid red");
+                        $("#error_duplicate5").show();
+                    }
+                }
+                if ($("#sixths").val() !== "0") {
+                    if (str10 === "0") {
+                        $("#speaker6").css("border", "1px solid red");
+                        $("#error_speaker6").show();
+                        event.preventDefault();
+                    }
+                    if (str10 === str5) {
+                        $("#speaker1").css("border", "1px solid red");
+                        $("#speaker6").css("border", "1px solid red");
+                        $("#error_duplicate6").show();
+                    }
+                    if (str10 === str6) {
+                        $("#speaker2").css("border", "1px solid red");
+                        $("#speaker6").css("border", "1px solid red");
+                        $("#error_duplicate6").show();
+                    }
+                    if (str10 === str7) {
+                        $("#speaker3").css("border", "1px solid red");
+                        $("#speaker6").css("border", "1px solid red");
+                        $("#error_duplicate6").show();
+                    }
+                    if (str10 === str8) {
+                        $("#speaker4").css("border", "1px solid red");
+                        $("#speaker6").css("border", "1px solid red");
+                        $("#error_duplicate6").show();
+                    }
+                    if (str10 === str9) {
+                        $("#speaker5").css("border", "1px solid red");
+                        $("#speaker6").css("border", "1px solid red");
+                        $("#error_duplicate6").show();
                     }
                 }
             });

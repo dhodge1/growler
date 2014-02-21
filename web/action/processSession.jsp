@@ -30,9 +30,21 @@
             String speaker = request.getParameter("speaker");
             int spkrId = Integer.parseInt(speaker);
             int spkrId2 = 0;
+            int spkrId3 = 0;
+            int spkrId4 = 0;
+            int spkrId5 = 0;
+            int spkrId6 = 0;
             try {
             String speaker2 = request.getParameter("speaker2");
             spkrId2 = Integer.parseInt(speaker2);
+            String speaker3 = request.getParameter("speaker3");
+            spkrId3 = Integer.parseInt(speaker3);
+            String speaker4 = request.getParameter("speaker4");
+            spkrId4 = Integer.parseInt(speaker4);
+            String speaker5 = request.getParameter("speaker5");
+            spkrId5 = Integer.parseInt(speaker5);
+            String speaker6 = request.getParameter("speaker6");
+            spkrId6 = Integer.parseInt(speaker6);
             } catch (Exception e){
                 
             }
@@ -76,6 +88,22 @@
                     if (spkrId2 != 0) {
                         sp.assignSpeaker(spkrId2, ses.getId());
                         session.setAttribute("sessionSpkr2", sk.getSpeakerByID(spkrId2).getFullName());
+                    }
+                    if (spkrId3 != 0) {
+                        sp.assignSpeaker(spkrId3, ses.getId());
+                        session.setAttribute("sessionSpkr3", sk.getSpeakerByID(spkrId3).getFullName());
+                    }
+                    if (spkrId4 != 0) {
+                        sp.assignSpeaker(spkrId4, ses.getId());
+                        session.setAttribute("sessionSpkr4", sk.getSpeakerByID(spkrId4).getFullName());
+                    }
+                    if (spkrId5 != 0) {
+                        sp.assignSpeaker(spkrId5, ses.getId());
+                        session.setAttribute("sessionSpkr5", sk.getSpeakerByID(spkrId5).getFullName());
+                    }
+                    if (spkrId6 != 0) {
+                        sp.assignSpeaker(spkrId6, ses.getId());
+                        session.setAttribute("sessionSpkr6", sk.getSpeakerByID(spkrId6).getFullName());
                     }
                     session.setAttribute("sessionName", name);
                     session.setAttribute("sessionDesc", description);
