@@ -98,7 +98,49 @@ public class UserPersistence extends GrowlerPersistence {
         }
         return null;
     }
-
+    
+/***********************ADDED CODE START HERE*******************************
+ *   Thuy: Added a method to get all the users from the USER TABLE only    *
+****************************************************************************/
+    
+    /**
+     * This method re-uses most of the code from the getAllUsers() method. 
+     * However, these user objects do not contain any volunteer information.
+     *
+     * @return The list of all users without the volunteer information.
+     */
+    public ArrayList<User> getAllUsersNoVolInfo()
+    {
+       try 
+       {
+           initializeJDBC();
+           statement = connection.prepareStatement("select * from user");
+           result = statement.executeQuery();
+           while (result.next()) 
+           {
+               User u = new User();
+               u.setId(result.getInt("id"));
+               u.setUserName(result.getString("name"));
+               u.setEmail(result.getString("email"));
+               u.setCorporateId(result.getString("corporate_id"));   
+               users.add(u);
+           }
+           return users;
+       } 
+       catch (Exception e) {
+       }
+       finally 
+       {
+           closeJDBC();
+       }
+       return null;
+    }
+   
+    
+/************************ADDED CODE END HERE*********************************/ 
+    
+    
+    
     /**
      * Adds a user to the database
      *
@@ -188,5 +230,6 @@ public class UserPersistence extends GrowlerPersistence {
         }
         return users;
     }
+    
     
 }

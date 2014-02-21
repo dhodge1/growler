@@ -18,7 +18,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.Address;
 
 /**
- * A helper class for sending e-mail messages with a local SMTP(Simple
+ * A helper class for sending e-mail messages with SMTP(Simple
  * Mail Transfer Protocol). 
  * 
  * @author Thuy To
@@ -32,29 +32,27 @@ public class EmailUtilSMTPLocal
                                AddressException, MessagingException 
                              
    {
-     //get a email session for a local SMTP server
-     Properties props = new Properties();  
-     //props.put("mail.transport.protocol","smtps"); 
-     props.put("mail.smtp.host", "smtp.gmail.com");
-    // props.put("mail.smtp.host", "localhost");  
+     //sets environment properties
+     Properties props = new Properties();   
+     //The default mail server is
+     //smtp.gmail.com
+     props.put("mail.smtp.host", "smtp.gmail.com");  
      props.put("mail.smtp.port",587 );
      props.put("mail.smtp.auth", "true");
+     //use of the STARTTLS command is prefered in case where the 
+     //server supports both SSL and none SSL connection
      props.put("mail.smtp.starttls.enable", "true");
-     //props.put("mail.smtps.quitwait", "false");
+    
      
-     //Session session = Session.getDefaultInstance(props);
-     //session.setDebug(true);
-     /*
-      *Testing
-      */
+     //creates new session with authenticator
      Authenticator auth = new Authenticator() {
+            @Override
             public PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication("scrippsproject2014@gmail.com","capstoneteam2014" );
             }
-        };
-         
+        };     
      Session session = Session.getInstance(props,auth);
-     //Create a message
+     //Creates a message info
      Message message = new MimeMessage(session);
      message.setSubject(subject);
      if(bodyIsHTML)
@@ -67,15 +65,10 @@ public class EmailUtilSMTPLocal
      }
      //Address the message
      Address fromAddress = new InternetAddress(from);
-     //Address[] mailList = { new InternetAddress(to) };
-     Address toAddress = new InternetAddress(to);
+     Address[] emailList = InternetAddress.parse(to);
      message.setFrom(fromAddress);
-     message.setRecipient(Message.RecipientType.TO, toAddress);
+     message.setRecipients(Message.RecipientType.TO, emailList);
      // Send the message
-     //Transport transport = session.getTransport();
-     //transport.connect("thuytohuynh@gmail.com","test");
-     //transport.sendMessage(message, message.getAllRecipients());
      Transport.send(message);
-     //transport.close();
    } 
 }
