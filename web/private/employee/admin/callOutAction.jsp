@@ -48,10 +48,14 @@
        emailList.append(userArrayList.get(i).getEmail());
      }    
    }
+   
+        
+   subject = request.getParameter("emailSubject");
+   content = request.getParameter("emailContent");
    //Just for testing will get the follow info from a html form instead
    from ="scrippsproject2014@gmail.com";
-   subject = "techtoberfest email testing";
-   content = " 123 Testing!!!";
+   //subject = "techtoberfest email testing";
+   //content = " 123 Testing!!!";
    isContentHTML = false;
    //End testing code
    try
