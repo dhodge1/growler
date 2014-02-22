@@ -73,7 +73,7 @@
             </div>
             <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
             <div class="row largeBottomMargin">
-                <h3>Are you interested in speaking at this years Techtoberfest?  Fill out the form below and share your presentation details with us!</h3>
+                <h3>Are you interested in speaking at this year's Techtoberfest?  Fill out the form below and share your presentation details with us!</h3>
             </div>
             <div class="row mediumBottomMargin">
                 <label><span style="color: red;">*</span>Required field</label>
