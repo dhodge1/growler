@@ -156,7 +156,7 @@
                                             <li><a <% out.print("href='../../../private/employee/admin/editspeaker.jsp?id=" + speakers.get(i).getId() + "'");%>><i class="icon16-edit"></i>Edit</a></li>
                                             <li><a class="showModal3"><% out.print("<input type='hidden' name='delete' value='" + speakers.get(i).getId() + "' />");%>
                                                     <% out.print("<div class='modalDelete' id='modaldelete" + speakers.get(i).getId() + "' title='Delete Confirmation'>");
-                                                        out.print("Are you sure you want do delete the following speaker?<br/><br/>");
+                                                        out.print("Are you sure you want to delete the following speaker?<br/><br/>");
                                                         out.print(speakers.get(i).getFullName());
                                                         out.print("</div>");
                                                     %>
