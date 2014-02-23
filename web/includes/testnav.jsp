@@ -43,6 +43,18 @@
                         <li><a href="../../private/employee/surveys.jsp">Submit Session Feedback</a></li>
                     </ul>
                 </li>
+                
+                <%--------------------------------------
+                Chelsea:  CODE FOR THE Blog Tab
+                ----------------------------------------%>
+                <li class="brand_nav <%= blogTab%>"><a target="_blank" href="http://techtoberfest.scrippsnetworks.com/"><span>Blog</span><em></em></a>
+                </li>
+                <%--------------------------------------------
+                END OF ADDED CODE
+                ---------------------------------------------%>   
+                
+                
+                
             </ul>
         </nav>
 </nav>

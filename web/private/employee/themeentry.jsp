@@ -75,7 +75,7 @@
             </div>
             <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
             <div class="row largeBottomMargin">
-                <h3>Is there a new presentation theme you would like to suggest for this years Techtoberfest?  We would LOVE to know more about it.</h3>
+                <h3>Is there a new presentation theme you would like to suggest for this year's Techtoberfest?  We would LOVE to know more about it.</h3>
             </div>
             <div class="row mediumBottomMargin">
                 <label><span style="color: red;">*</span>Required field</label>
