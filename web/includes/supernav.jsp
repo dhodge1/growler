@@ -37,8 +37,8 @@
 <nav class="topnav">
     <nav class="globalNavigation modify-pages" id="navigation">
         <ul>
-            <%--<li class="non_drop <%= home%>" style="padding-right:12px" ><a href="${pageContext.request.contextPath}/private/employee/home.jsp"><span>Home</span></a></li>--%>
-            <%@ include file="${pageContext.request.contextPath}/includes/superHome.jsp" %> 
+            <li class="non_drop <%= home%>" style="padding-right:12px" ><a href="${pageContext.request.contextPath}/private/employee/home.jsp"><span>Home</span></a></li>
+            <%--<%@ include file="${pageContext.request.contextPath}/includes/superHome.jsp" %>--%>
             <li class="brand_nav <%= themeTab%>" style="padding-left:12px"><a href="#"><span>Themes</span><em></em></a>
                 <ul class="child-menu child-menu-ul firstnav" style="left:11px;">
                     <li><a href="${pageContext.request.contextPath}/private/employee/theme.jsp">Rank Preferred Themes</a></li>
