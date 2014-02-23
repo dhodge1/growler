@@ -4,6 +4,10 @@
     Author     : David
 --%>
 
+<%@page import="java.util.*"%>
+<%@page import="java.sql.*"%>
+<%@page import="com.scripps.growler.*" %>
+
 <link href="http://growler.elasticbeanstalk.com/css/navbar.css" rel="stylesheet">
 <link href="../../../css/bootstrap-responsive.css" rel="stylesheet">
 <%
@@ -33,25 +37,35 @@
     } else if (pageURI.contains("home")) {
         home = active;
     }
+    
+    FeaturePersistence fp = new FeaturePersistence();
+    Feature rankThemes = fp.getFeatureState(6); 
 %>
 <nav class="topnav">
     <nav class="globalNavigation modify-pages" id="navigation">
         <ul>
             <li class="non_drop <%= home%>" style="padding-right:12px" ><a href="${pageContext.request.contextPath}/private/employee/home.jsp"><span>Home</span></a></li>
-            <%--<%@ include file="${pageContext.request.contextPath}/includes/superTheme.jsp" %>--%>
+            <%--<%@ include file="../../includes/superTheme.jsp" %>--%>
             <li class="brand_nav <%= themeTab%>" style="padding-left:12px"><a href="#"><span>Themes</span><em></em></a>
                 <ul class="child-menu child-menu-ul firstnav" style="left:11px;">
-                    <li><a href="${pageContext.request.contextPath}/private/employee/theme.jsp">Rank Preferred Themes</a></li>
+                    <%--<li><a href="${pageContext.request.contextPath}/private/employee/theme.jsp">Rank Preferred Themes</a></li>--%>
+                    <% if (rankThemes.getFeatureState()) { %>
+                        <%@ include file="../../includes/superRankTheme.jsp" %>
+                    <% } %>
                     <li><a href="${pageContext.request.contextPath}/private/employee/admin/theme.jsp">Manage Themes</a></li>
-                    <li><a href="${pageContext.request.contextPath}/private/employee/admin/themeentry.jsp">Suggest a New Theme</a></li>
+                    <%--<li><a href="${pageContext.request.contextPath}/private/employee/admin/themeentry.jsp">Suggest a New Theme</a></li>--%>
+                    <%@ include file="../../includes/superSuggestTheme.jsp" %>
                 </ul>
             </li>
             <li class="brand_nav <%= speakerTab%>"><a href="#"><span class="nav_drop">Speakers</span><em></em></a>
                 <ul class="child-menu child-menu-ul">
-                    <li><a href="${pageContext.request.contextPath}/private/employee/speaker.jsp">Rank Preferred Speakers</a></li>
-                    <li><a href="${pageContext.request.contextPath}/private/employee/nominate.jsp">Nominate Yourself As A Speaker</a></li>
+                    <%--<li><a href="${pageContext.request.contextPath}/private/employee/speaker.jsp">Rank Preferred Speakers</a></li>--%>
+                    <%@ include file="../../includes/superRankSpeaker.jsp" %>
+                    <%--<li><a href="${pageContext.request.contextPath}/private/employee/nominate.jsp">Nominate Yourself As A Speaker</a></li>--%>
+                    <%@ include file="../../includes/superNominateSpeaker.jsp" %>
                     <li><a href="${pageContext.request.contextPath}/private/employee/admin/speaker.jsp">Manage Speakers</a></li>
-                    <li><a href="${pageContext.request.contextPath}/private/employee/admin/speakerentry.jsp">Suggest a New Speaker</a></li>
+                    <%--<li><a href="${pageContext.request.contextPath}/private/employee/admin/speakerentry.jsp">Suggest a New Speaker</a></li>--%>
+                    <%@ include file="../../includes/superSuggestSpeaker.jsp" %>
                 </ul>
             </li>
             <li class="brand_nav <%= roomTab%>"><a href="#"><span class="nav_drop">Rooms</span><em></em></a>
@@ -61,7 +75,10 @@
             </li>
             <li class="brand_nav <%= sessionTab%>"><a href="#"><span class="nav_drop">Sessions</span><em></em></a>
                 <ul class="child-menu child-menu-ul">
-                    <li><a href="${pageContext.request.contextPath}/private/employee/sessionschedule.jsp">View Session Schedule</a></li>
+                    <%--<li><a href="${pageContext.request.contextPath}/private/employee/sessionschedule.jsp">View Session Schedule</a></li>--%>
+                    <%@ include file="../../includes/superSessionSchedule.jsp" %>
+                    <%--<li><a href="${pageContext.request.contextPath}/private/employee/surveys.jsp">Submit Session Feedback</a></li>--%>
+                    <%@ include file="../../includes/superSurvey.jsp" %>
                     <li><a href="${pageContext.request.contextPath}/private/employee/admin/session.jsp">Manage Session Schedule</a></li>
                 </ul>
             </li> 
