@@ -37,4 +37,30 @@ public class FeaturePersistence extends GrowlerPersistence {
         return null;
     }
     
+    public void enableFeatureState(int id) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("update feature set featureState = 1 where featureID = ?");
+            statement.setInt(1, id);
+            result = statement.executeQuery();
+        } catch (Exception e) {
+        }
+        finally {
+            closeJDBC();
+        }
+    }
+    
+    public void disableFeatureState(int id) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("update feature set featureState = 0 where featureID = ?");
+            statement.setInt(1, id);
+            result = statement.executeQuery();
+        } catch (Exception e) {
+        }
+        finally {
+            closeJDBC();
+        }
+    }
+    
 }
