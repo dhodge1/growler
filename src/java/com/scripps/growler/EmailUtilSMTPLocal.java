@@ -23,15 +23,20 @@ import javax.mail.Address;
  * 
  * @author Thuy To
  * Resources: Murach's Java servlets and JSP and www.codejava.net
- * Version: 1
+ * Version: 2
  */
 public class EmailUtilSMTPLocal
 {
-   public static void sendMail(String to, String from, String subject,
+   
+   
+   public static void sendMail(String to, String subject,
                                String body, boolean bodyIsHTML) throws 
                                AddressException, MessagingException 
                              
    {
+     
+     final String username = "scrippsproject2014@gmail.com";
+     final String password = "capstoneteam2014";   
      //sets environment properties
      Properties props = new Properties();   
      //The default mail server is
@@ -48,7 +53,7 @@ public class EmailUtilSMTPLocal
      Authenticator auth = new Authenticator() {
             @Override
             public PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("scrippsproject2014@gmail.com","capstoneteam2014" );
+                return new PasswordAuthentication(username,password );
             }
         };     
      Session session = Session.getInstance(props,auth);
@@ -64,7 +69,7 @@ public class EmailUtilSMTPLocal
        message.setText(body);
      }
      //Address the message
-     Address fromAddress = new InternetAddress(from);
+     Address fromAddress = new InternetAddress(username);
      Address[] emailList = InternetAddress.parse(to);
      message.setFrom(fromAddress);
      message.setRecipients(Message.RecipientType.TO, emailList);

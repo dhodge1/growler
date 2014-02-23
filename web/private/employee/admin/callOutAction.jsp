@@ -1,6 +1,6 @@
 <%-- 
     Document   : callOutAction
-                 This JSP takes email message content from the ??form. Then it
+                 This JSP takes email message content from the emailForm.jsp. Then it
                  instantiates a UserPersistence object and uses the getAllUserNoVolInfo()
                  method of that UserPesistence object to get an array list of 
                  all the Users objects. Then, this JSP concatenates all of the 
@@ -25,49 +25,48 @@
 
 
  <%
-  // set a default email list
-   StringBuffer emailList = new StringBuffer("ttto@pstcc.edu");
-   String from = new String();
+  
+   StringBuffer emailList = new StringBuffer();
    String subject = new String();
    String content = new String();
-   boolean isContentHTML;
+   boolean isContentHTML = false;
+
+   
+     //get info from the emailform.jsp     
+   subject = request.getParameter("emailSubject");
+   content = request.getParameter("emailContent");
    //get the email list from all the users
-  UserPersistence uPersistence = new UserPersistence();
+   UserPersistence uPersistence = new UserPersistence();
    ArrayList<User> userArrayList = uPersistence.getAllUsersNoVolInfo();
+   int arraySize = userArrayList.size();
    //*******************************************
    //The first 5 users on the list are real users
    //and we don't want to send tesing email to them
    //therefore we start the arraylist at index 5. 
    //NEED TO CHANGE THAT LATER TO 0****************
    //***********************************************
-   for (int i = 5; i < userArrayList.size(); i++)
+   for (int i = 5; i < arraySize; i++)
    {  
      if(userArrayList.get(i).getEmail() != null)  
      {
-       emailList.append(", ");
        emailList.append(userArrayList.get(i).getEmail());
+       if(i < (arraySize-1))
+       {
+          emailList.append(", ");
+       }       
      }    
    }
    
-        
-   subject = request.getParameter("emailSubject");
-   content = request.getParameter("emailContent");
-   //Just for testing will get the follow info from a html form instead
-   from ="scrippsproject2014@gmail.com";
-   //subject = "techtoberfest email testing";
-   //content = " 123 Testing!!!";
-   isContentHTML = false;
-   //End testing code
    try
    {
       //perform the send email task
-      EmailUtilSMTPLocal.sendMail((emailList.toString()), from, subject, content, isContentHTML);
+      EmailUtilSMTPLocal.sendMail((emailList.toString()), subject, content, isContentHTML);
    }
    catch (Exception e)
    {
     // e.printStackTrace();   
    }
-
+   response.sendRedirect("../../../private/employee/home.jsp");
 %>                      
     
 
