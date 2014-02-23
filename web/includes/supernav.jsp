@@ -40,6 +40,12 @@
     
     FeaturePersistence fp = new FeaturePersistence();
     Feature rankThemes = fp.getFeatureState(6); 
+    Feature suggestTheme = fp.getFeatureState(3);
+    Feature rankSpeaker = fp.getFeatureState(7);
+    Feature nominateSpeaker = fp.getFeatureState(2);
+    Feature suggestSpeaker = fp.getFeatureState(4);
+    Feature surveySession = fp.getFeatureState(1);
+    Feature scheduleSession = fp.getFeatureState(5);
 %>
 <nav class="topnav">
     <nav class="globalNavigation modify-pages" id="navigation">
@@ -54,18 +60,26 @@
                     <% } %>
                     <li><a href="${pageContext.request.contextPath}/private/employee/admin/theme.jsp">Manage Themes</a></li>
                     <%--<li><a href="${pageContext.request.contextPath}/private/employee/admin/themeentry.jsp">Suggest a New Theme</a></li>--%>
-                    <%@ include file="../../includes/superSuggestTheme.jsp" %>
+                    <% if (suggestTheme.getFeatureState()) { %>
+                        <%@ include file="../../includes/superSuggestTheme.jsp" %>
+                    <% } %>
                 </ul>
             </li>
             <li class="brand_nav <%= speakerTab%>"><a href="#"><span class="nav_drop">Speakers</span><em></em></a>
                 <ul class="child-menu child-menu-ul">
                     <%--<li><a href="${pageContext.request.contextPath}/private/employee/speaker.jsp">Rank Preferred Speakers</a></li>--%>
-                    <%@ include file="../../includes/superRankSpeaker.jsp" %>
+                    <% if (rankSpeaker.getFeatureState()) { %>
+                        <%@ include file="../../includes/superRankSpeaker.jsp" %>
+                    <% } %>
                     <%--<li><a href="${pageContext.request.contextPath}/private/employee/nominate.jsp">Nominate Yourself As A Speaker</a></li>--%>
-                    <%@ include file="../../includes/superNominateSpeaker.jsp" %>
+                    <% if (nominateSpeaker.getFeatureState()) { %>
+                        <%@ include file="../../includes/superNominateSpeaker.jsp" %>
+                    <% } %>
                     <li><a href="${pageContext.request.contextPath}/private/employee/admin/speaker.jsp">Manage Speakers</a></li>
                     <%--<li><a href="${pageContext.request.contextPath}/private/employee/admin/speakerentry.jsp">Suggest a New Speaker</a></li>--%>
-                    <%@ include file="../../includes/superSuggestSpeaker.jsp" %>
+                    <% if (suggestSpeaker.getFeatureState()) { %>
+                        <%@ include file="../../includes/superSuggestSpeaker.jsp" %>
+                    <% } %>
                 </ul>
             </li>
             <li class="brand_nav <%= roomTab%>"><a href="#"><span class="nav_drop">Rooms</span><em></em></a>
@@ -76,9 +90,13 @@
             <li class="brand_nav <%= sessionTab%>"><a href="#"><span class="nav_drop">Sessions</span><em></em></a>
                 <ul class="child-menu child-menu-ul">
                     <%--<li><a href="${pageContext.request.contextPath}/private/employee/sessionschedule.jsp">View Session Schedule</a></li>--%>
-                    <%@ include file="../../includes/superSessionSchedule.jsp" %>
+                    <% if (scheduleSession.getFeatureState()) { %>
+                        <%@ include file="../../includes/superSessionSchedule.jsp" %>
+                    <% } %>
                     <%--<li><a href="${pageContext.request.contextPath}/private/employee/surveys.jsp">Submit Session Feedback</a></li>--%>
-                    <%@ include file="../../includes/superSurvey.jsp" %>
+                    <% if (surveySession.getFeatureState()) { %>
+                        <%@ include file="../../includes/superSurvey.jsp" %>
+                    <% } %>
                     <li><a href="${pageContext.request.contextPath}/private/employee/admin/session.jsp">Manage Session Schedule</a></li>
                 </ul>
             </li> 
