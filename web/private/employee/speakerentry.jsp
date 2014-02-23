@@ -70,7 +70,7 @@
             </div>
             <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
             <div class="row largeBottomMargin">
-                <h3>Is there a new speaker you would like to suggest for this years Techtoberfest?  We would LOVE to know more about them.</h3>
+                <h3>Is there a new speaker you would like to suggest for this year's Techtoberfest?  We would LOVE to know more about them.</h3>
             </div>
             <div class="row mediumBottomMargin">
                 <label><span style="color: red;">*</span>Required field</label>
@@ -107,7 +107,7 @@
                                 </span>
                             </div>
                             <div class="form-group">
-                                <label>Why should this speaker be added to this years Techtoberfest?</label>
+                                <label>Why should this speaker be added to this year's Techtoberfest?</label>
                                 <textarea name="reason" id="tip4" data-content="Please enter no more than 250 characters" rows="5" cols="50" maxlength="250">
                                 </textarea>
                             </div>
