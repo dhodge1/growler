@@ -16,6 +16,8 @@
     String reportTab = "";
     String home = "";
     String blogTab = "";
+    String emailTab =""; //Thuy: added code for the email tab
+    
     if (pageURI.contains("theme")) {
         themeTab = active;
     } else if (pageURI.contains("Report") || pageURI.contains("speakerReport")) {
@@ -26,6 +28,8 @@
         sessionTab = active;
     } else if (pageURI.contains("room")) {
         roomTab = active;
+    }else if (pageURI.contains("email")){
+        emailTab = active;
     } else if (pageURI.contains("home")) {
         home = active;
     }
@@ -73,18 +77,16 @@
             </li>
             
             <%--------------------------------------
-            THUY: TEST CODE FOR THE COMMUNICATION THEME
+            THUY: ADDED CODE FOR THE COMMUNICATION THEME
             ----------------------------------------%>
-            <li class="brand_nav <%= ""%>"><a href="#"><span class="nav_drop">Emails(testing)</span><em></em></a>
+            <li class="brand_nav <%= emailTab%>"><a href="#"><span class="nav_drop">Emails</span><em></em></a>
                 <ul class="child-menu child-menu-ul">
-                    <li><a href="${pageContext.request.contextPath}/private/employee/admin/emailForm.jsp">Call to action</a></li>
-                    <li><a href="#">Option2</a></li>
-                    <li><a href="#">Option3</a></li>  
+                    <li><a href="${pageContext.request.contextPath}/private/employee/admin/emailForm.jsp">Call To Action</a></li>
                 </ul>
             </li>
             
             <%--------------------------------------------
-            END OF TEST CODE
+            END OF ADDED CODE
             ---------------------------------------------%>
         </ul>
     </nav>
