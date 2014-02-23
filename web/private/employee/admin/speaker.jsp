@@ -31,6 +31,12 @@
         <script src="http://growler.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+        
+        
+        <!-- Makes table filterable -->
+        <script language="javascript" type="text/javascript" src="../../../js/tablefilter.js"></script>
+
+
         <style>
             .table {
                 margin-bottom: 0px;
@@ -107,7 +113,7 @@
                     <input type='hidden' id='current_page' value="1" />
                     <input type='hidden' id='show_per_page' value='20' />
                     <input type='hidden' id='total' value='<%= speakers.size()%>'/>
-                    <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
+                    <table id="speakerTable" class="table table-alternatingRow table-border table-columnBorder table-rowBorder filterable">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -261,5 +267,21 @@
 
                                 });
         </script>
+        
+        <!-- Makes table filterable -->
+        <script language="javascript" type="text/javascript">
+            var speakerTable_Props = {
+                col_1: "select", //Choose business or technical
+                col_2: "select", //Choose who added it               
+                display_all_text: " [ Show all ] ", //Default choice for col_1,2 is show all
+                col_3: "none", // No filter/options on Visibility column
+                col_4: "none", // No filter/options on Ranking Details column
+                col_5: "none", // No filter/options on Assigned to Session column
+                col_6: "none", // No filter/options on Actions column
+                sort_select: true 
+            };
+            var tf1 = setFilterGrid("speakerTable", speakerTable_Props);
+        </script> 
+        
     </body>
 </html>
