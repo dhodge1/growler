@@ -118,7 +118,7 @@
             [class*="span"] {
                 float: left;
                 min-height: 1px;
-                margin-left: 24px;
+                margin-left: 1.25%;
              }
 
             .span7 {
@@ -144,7 +144,7 @@
             }
             
             .block {
-                margin-top: 75px;
+                
             }
             
             .title {
@@ -218,40 +218,23 @@
             <!-- START THE FEATURETTES -->
 
             <div class="row largeBottomMargin">
-              <div class="span7">
-                <h1 class="block"><span class="text-muted">What is Techtoberfest?</span></h1><br />
-                <p>Techtoberfest is a annual internal conference with sessions on various technical topics from across all of Scripps Network Interactive. Attendance is open to all employees who are interested and you can come and go anytime throughout the day. The two day conference ends with a panel discussion with some of the technical leaders within the company. If you are interested in attending or presenting on a technical topic, see the  <a href="http://techtoberfest.scrippsnetworks.com/">SNI Techtoberfest Blog</a>.</p>
+              <div class="span3">
+                <h2 class="block"><span class="text-muted">What is Techtoberfest?</span></h2>
+                <p>Techtoberfest is a annual internal conference with sessions on various technical topics from across all of Scripps Network Interactive. Attendance is open to all employees who are interested and you can come and go anytime throughout the day. The two day conference ends with a panel discussion with some of the technical leaders within the company.</p>
               </div>
-              <div class="span5">
-                <a href="#"><img src="../../images/what.jpg" alt="Generic placeholder image"></a>
+              <div class="span3">
+                <h2 class="block"><span class="text-muted">Why should I attend?</span></h2>
+                <p>Speakers from within the company will gather and conduct sessions on a variety of cutting-edge technologies. It’s a great way to network within the company and learn about the technologies, techniques, and tools different groups are researching and levering at Scripps. </p>
               </div>
-            </div>
-
-            <hr class="title">
-
-            <div class="row largeBottomMargin">
-              <div class="span5">
-                <a href="#"><img src="../../images/why.jpg" alt="Generic placeholder image"></a>
-              </div>
-              <div class="span7">
-                <h1 class="block"><span class="text-muted">Why should I attend?</span></h1><br />
-                <p>Our field is constantly changing and new technologies emerge every day. There is no better way to stay abreast of these changes than by placing oneself on the cutting-edge, working with these technologies as they appear and exchanging information with those in the know. As such, speakers from within the company will gather and conduct sessions on a variety of cutting-edge technologies. It’s a great way to network within the company and learn about the technologies, techniques, and tools different groups are researching and levering at Scripps. </p>
-              </div>
-            </div>
-
-            <hr class="title">
-
-            <div class="row largeBottomMargin">
-              <div class="span7">
-                <h1 class="block"><span class="text-muted">Where is it happening?</span></h1><br />
+              <div class="span3">
+                <h2 class="block"><span class="text-muted">Where is it happening?</span></h2>
                 <p> It will be in two primary locations 3rd floor Training Room in the Tech Center and 1st floor Training Center in the HQ Building.  We are also reserving the following rooms for video conferencing: NY: Boardroom, Soho DC: Africa, Australia.</p>
               </div>
-              <div class="span5">
-                <a href="#"><img src="../../images/where.jpg" alt="Generic placeholder image"></a>
+              <div class="span3">
+                <h2 class="block"><span class="text-muted">Blog it up!</span></h2>
+                <p>Stay up to date on the latest Techtoberfest news from sessions to speakers, times and locations at the blog. If you are interested in attending or presenting on a technical topic, see the  <a href="http://techtoberfest.scrippsnetworks.com/">SNI Techtoberfest Blog</a>.</p>
               </div>
             </div>
-
-            <!--<hr class="featurette-divider">-->
 
             <!-- /END THE FEATURETTES -->
             <!--<div class="row largeBottomMargin">
