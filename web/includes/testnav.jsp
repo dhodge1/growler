@@ -40,11 +40,11 @@
                     <ul class="child-menu child-menu-ul firstnav" style="left:11px;">
                         <!--<li><a href="../../private/employee/theme.jsp">Rank Preferred Themes</a></li>-->
                         <% if (rankThemes.getFeatureState()) { %>
-                            <%@ include file="../../includes/superRankTheme.jsp" %>
+                            <%@ include file="../../includes/regRankTheme.jsp" %>
                         <% } %>
                         <!--<li><a href="../../private/employee/themeentry.jsp">Suggest a New Theme</a></li>-->
                         <% if (suggestTheme.getFeatureState()) { %>
-                            <%@ include file="../../includes/superSuggestTheme.jsp" %>
+                            <%@ include file="../../includes/regSuggestTheme.jsp" %>
                         <% } %>
                     </ul>
                 </li>
@@ -52,15 +52,15 @@
                     <ul class="child-menu child-menu-ul">
                         <!--<li><a href="../../private/employee/speaker.jsp">Rank Preferred Speakers</a></li>-->
                         <% if (rankSpeaker.getFeatureState()) { %>
-                            <%@ include file="../../includes/superRankSpeaker.jsp" %>
+                            <%@ include file="../../includes/regRankSpeaker.jsp" %>
                         <% } %>
                         <!--<li><a href="../../private/employee/speakerentry.jsp">Suggest a New Speaker</a></li>-->
                         <% if (suggestSpeaker.getFeatureState()) { %>
-                            <%@ include file="../../includes/superSuggestSpeaker.jsp" %>
+                            <%@ include file="../../includes/regSuggestSpeaker.jsp" %>
                         <% } %>
                         <!--<li><a href="../../private/employee/nominate.jsp">Nominate Yourself As A Speaker</a></li>-->
                         <% if (nominateSpeaker.getFeatureState()) { %>
-                            <%@ include file="../../includes/superNominateSpeaker.jsp" %>
+                            <%@ include file="../../includes/regNominateSpeaker.jsp" %>
                         <% } %>
                     </ul>
                 </li>
@@ -68,11 +68,11 @@
                     <ul class="child-menu child-menu-ul">
                         <!--<li><a href="../../private/employee/sessionschedule.jsp">View Session Schedule</a></li>-->
                         <% if (scheduleSession.getFeatureState()) { %>
-                            <%@ include file="../../includes/superSessionSchedule.jsp" %>
+                            <%@ include file="../../includes/regSessionSchedule.jsp" %>
                         <% } %>
                         <!--<li><a href="../../private/employee/surveys.jsp">Submit Session Feedback</a></li>-->
                         <% if (surveySession.getFeatureState()) { %>
-                            <%@ include file="../../includes/superSurvey.jsp" %>
+                            <%@ include file="../../includes/regSurvey.jsp" %>
                         <% } %>
                     </ul>
                 </li>             
