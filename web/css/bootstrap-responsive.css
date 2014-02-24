@@ -125,8 +125,8 @@
   [class*="span"] {
     float: left;
     min-height: 1px;
-    margin-left: 24px;
-    /*margin-left was 30px*/
+    margin-left: 1.25%;
+    /*margin-left was 24px*/
   }
   .container,
   .navbar-static-top .container,
@@ -162,7 +162,7 @@
     width: 370px;
   }
   .span3 {
-    width: 270px;
+    /*width: 270px;*/
   }
   .span2 {
     width: 170px;
