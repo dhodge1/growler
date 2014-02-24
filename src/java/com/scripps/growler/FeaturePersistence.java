@@ -37,12 +37,35 @@ public class FeaturePersistence extends GrowlerPersistence {
         return null;
     }
     
+    public ArrayList<Feature> getFeatureSet() {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select * from feature");
+            result = statement.executeQuery();
+            ArrayList<Feature> features = new ArrayList<Feature>();
+            while (result.next()) {
+                Feature f = new Feature();
+                f.setId(result.getInt("featureID"));
+                f.setFeatureName(result.getString("featureName"));
+                f.setFeatureState(result.getBoolean("featureState"));
+                features.add(f);
+            }
+            closeJDBC();
+            return features;
+        } catch (Exception e) {
+        }
+        finally {
+            closeJDBC();
+        }
+        return null;
+    }
+    
     public void enableFeatureState(int id) {
         try {
             initializeJDBC();
             statement = connection.prepareStatement("update feature set featureState = 1 where featureID = ?");
             statement.setInt(1, id);
-            result = statement.executeQuery();
+            statement.execute();
         } catch (Exception e) {
         }
         finally {
@@ -55,7 +78,7 @@ public class FeaturePersistence extends GrowlerPersistence {
             initializeJDBC();
             statement = connection.prepareStatement("update feature set featureState = 0 where featureID = ?");
             statement.setInt(1, id);
-            result = statement.executeQuery();
+            statement.execute();
         } catch (Exception e) {
         }
         finally {

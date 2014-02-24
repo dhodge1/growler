@@ -21,6 +21,7 @@
     String home = "";
     String blogTab = "";
     String emailTab =""; //Thuy: added code for the email tab
+    String adminTab = "";
     
     if (pageURI.contains("theme")) {
         themeTab = active;
@@ -32,8 +33,10 @@
         sessionTab = active;
     } else if (pageURI.contains("room")) {
         roomTab = active;
-    }else if (pageURI.contains("email")){
+    } else if (pageURI.contains("email")){
         emailTab = active;
+    } else if (pageURI.contains("admin")) {
+        adminTab = active;
     } else if (pageURI.contains("home")) {
         home = active;
     }
@@ -124,6 +127,12 @@
             <%--------------------------------------------
             END OF ADDED CODE
             ---------------------------------------------%>  
+            
+            <li class="brand_nav <%= adminTab%>"><a href="#"><span class="nav_drop">System Admin</span><em></em></a>
+                <ul class="child-menu child-menu-ul">
+                    <li><a href="${pageContext.request.contextPath}/private/employee/admin/systemFeatures.jsp">System Features</a></li>
+                </ul>
+            </li>
             
         </ul>
     </nav>
