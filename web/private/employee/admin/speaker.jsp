@@ -273,7 +273,7 @@
             var speakerTable_Props = {
                 col_1: "select", //Choose business or technical
                 col_2: "select", //Choose who added it               
-                display_all_text: " [ Show all ] ", //Default choice for col_1,2 is show all
+                display_all_text: "Show all", //Default choice for col_1,2 is show all
                 col_3: "none", // No filter/options on Visibility column
                 col_4: "none", // No filter/options on Ranking Details column
                 col_5: "none", // No filter/options on Assigned to Session column
