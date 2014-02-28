@@ -48,7 +48,8 @@
                     connection.close();
                     statement.close();
                     result.close();
-                    response.sendRedirect("../private/employee/home.jsp");
+                    //response.sendRedirect("../private/employee/home.jsp");
+                    response.sendRedirect("home");
                 }
             } else {
                 connection.close();
