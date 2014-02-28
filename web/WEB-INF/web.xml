@@ -10,7 +10,7 @@
   </servlet-mapping> 
   <servlet>
     <servlet-name>home</servlet-name>
-    <jsp-file>web/private/employee/home.jsp</jsp-file>
+    <jsp-file>/home.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>home</servlet-name>
