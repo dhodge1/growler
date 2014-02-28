@@ -4,4 +4,4 @@
     Author     : David
 --%>
 
-<li><a href="${pageContext.request.contextPath}/private/employee/theme.jsp">Rank Preferred Themes</a></li>
+<li><a href="${pageContext.request.contextPath}/theme">Rank Preferred Themes</a></li>
