@@ -46,7 +46,7 @@ Test comment - Chelsea 22 Jan 2014 1234567 test17 ThuyTest
                     }
                 }
                 //response.sendRedirect("private/employee/home.jsp");
-                response.sendRedirect("/home");
+                response.sendRedirect("home");
     }
      }
 %>
