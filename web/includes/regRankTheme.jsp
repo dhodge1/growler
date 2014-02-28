@@ -4,4 +4,4 @@
     Author     : David
 --%>
 
-<li><a href="../../private/employee/theme.jsp">Rank Preferred Themes</a></li>
+<li><a href="../../theme">Rank Preferred Themes</a></li>
