@@ -49,7 +49,7 @@
                     statement.close();
                     result.close();
                     //response.sendRedirect("../private/employee/home.jsp");
-                    response.sendRedirect("home");
+                    response.sendRedirect("../home");
                 }
             } else {
                 connection.close();
