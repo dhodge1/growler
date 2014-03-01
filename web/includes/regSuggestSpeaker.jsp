@@ -4,4 +4,4 @@
     Author     : David
 --%>
 
-<li><a href="../../private/employee/speakerentry.jsp">Suggest a New Speaker</a></li>
+<li><a href="../../suggestSpeaker">Suggest a New Speaker</a></li>

@@ -40,4 +40,12 @@
     <servlet-name>speaker</servlet-name>
     <url-pattern>/speaker</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>suggestSpeaker</servlet-name>
+    <jsp-file>/private/employee/speakerentry.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>suggestSpeaker</servlet-name>
+    <url-pattern>/suggestSpeaker</url-pattern>
+  </servlet-mapping>
 </web-app>
