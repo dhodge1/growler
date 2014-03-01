@@ -68,8 +68,8 @@
             if (null == session.getAttribute("id") || null == session.getAttribute("role")) {
                 response.sendRedirect("../../../index.jsp");
             }
-            FeaturePersistence fp = new FeaturePersistence();
-            ArrayList<Feature> features = fp.getFeatureSet();
+            FeaturePersistence fp1 = new FeaturePersistence();
+            ArrayList<Feature> features = fp1.getFeatureSet();
         %>
         <%@ include file="../../../includes/adminheader.jsp" %> 
         <% if (String.valueOf(session.getAttribute("role")).equals("admin")) { %>
