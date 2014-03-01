@@ -32,4 +32,12 @@
     <servlet-name>suggesttheme</servlet-name>
     <url-pattern>/suggestTheme</url-pattern>
   </servlet-mapping> 
+  <servlet>
+    <servlet-name>speaker</servlet-name>
+    <jsp-file>/private/employee/speaker.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>speaker</servlet-name>
+    <url-pattern>/speaker</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -4,4 +4,4 @@
     Author     : David
 --%>
 
-<li><a href="${pageContext.request.contextPath}/private/employee/speaker.jsp">Rank Preferred Speakers</a></li>
+<li><a href="${pageContext.request.contextPath}/speaker">Rank Preferred Speakers</a></li>
