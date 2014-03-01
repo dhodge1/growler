@@ -4,4 +4,4 @@
     Author     : David
 --%>
 
-<li><a href="${pageContext.request.contextPath}/private/employee/surveys.jsp">Submit Session Feedback</a></li>
+<li><a href="${pageContext.request.contextPath}/surveys">Submit Session Feedback</a></li>

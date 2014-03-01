@@ -4,4 +4,4 @@
     Author     : David
 --%>
 
-<li><a href="../../private/employee/surveys.jsp">Submit Session Feedback</a></li>
+<li><a href="../../surveys">Submit Session Feedback</a></li>
