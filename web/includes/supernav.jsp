@@ -61,7 +61,7 @@
                     <% if (rankThemes.getFeatureState()) { %>
                         <%@ include file="../../includes/superRankTheme.jsp" %>
                     <% } %>
-                    <li><a href="${pageContext.request.contextPath}/private/employee/admin/theme.jsp">Manage Themes</a></li>
+                    <li><a href="${pageContext.request.contextPath}/manageThemes">Manage Themes</a></li>
                     <%--<li><a href="${pageContext.request.contextPath}/private/employee/admin/themeentry.jsp">Suggest a New Theme</a></li>--%>
                     <% if (suggestTheme.getFeatureState()) { %>
                         <%@ include file="../../includes/superSuggestTheme.jsp" %>
@@ -78,7 +78,7 @@
                     <% if (nominateSpeaker.getFeatureState()) { %>
                         <%@ include file="../../includes/superNominateSpeaker.jsp" %>
                     <% } %>
-                    <li><a href="${pageContext.request.contextPath}/private/employee/admin/speaker.jsp">Manage Speakers</a></li>
+                    <li><a href="${pageContext.request.contextPath}/manageSpeakers">Manage Speakers</a></li>
                     <%--<li><a href="${pageContext.request.contextPath}/private/employee/admin/speakerentry.jsp">Suggest a New Speaker</a></li>--%>
                     <% if (suggestSpeaker.getFeatureState()) { %>
                         <%@ include file="../../includes/superSuggestSpeaker.jsp" %>

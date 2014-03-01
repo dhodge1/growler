@@ -72,4 +72,20 @@
     <servlet-name>surveys</servlet-name>
     <url-pattern>/surveys</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>manageThemes</servlet-name>
+    <jsp-file>/private/employee/admin/theme.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>manageThemes</servlet-name>
+    <url-pattern>/manageThemes</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>manageSpeakers</servlet-name>
+    <jsp-file>/private/employee/admin/speaker.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>manageSpeakers</servlet-name>
+    <url-pattern>/manageSpeakers</url-pattern>
+  </servlet-mapping>
 </web-app>
