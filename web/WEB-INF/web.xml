@@ -96,4 +96,12 @@
     <servlet-name>room</servlet-name>
     <url-pattern>/room</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>manageSessions</servlet-name>
+    <jsp-file>/private/employee/admin/session.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>manageSessions</servlet-name>
+    <url-pattern>/manageSessions</url-pattern>
+  </servlet-mapping>
 </web-app>
