@@ -152,4 +152,12 @@
     <servlet-name>surveyReport</servlet-name>
     <url-pattern>/surveyReport</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>email</servlet-name>
+    <jsp-file>/private/employee/admin/emailForm.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>email</servlet-name>
+    <url-pattern>/email</url-pattern>
+  </servlet-mapping>
 </web-app>
