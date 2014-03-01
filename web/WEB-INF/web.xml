@@ -56,4 +56,12 @@
     <servlet-name>nominateSpeaker</servlet-name>
     <url-pattern>/nominateSpeaker</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>schedule</servlet-name>
+    <jsp-file>/private/employee/sessionschedule.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>schedule</servlet-name>
+    <url-pattern>/schedule</url-pattern>
+  </servlet-mapping>
 </web-app>
