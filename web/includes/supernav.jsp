@@ -87,7 +87,7 @@
             </li>
             <li class="brand_nav <%= roomTab%>"><a href="#"><span class="nav_drop">Rooms</span><em></em></a>
                 <ul class="child-menu child-menu-ul">
-                    <li><a href="${pageContext.request.contextPath}/private/employee/admin/room.jsp">Manage Rooms</a></li>
+                    <li><a href="${pageContext.request.contextPath}/room">Manage Rooms</a></li>
                 </ul>
             </li>
             <li class="brand_nav <%= sessionTab%>"><a href="#"><span class="nav_drop">Sessions</span><em></em></a>
