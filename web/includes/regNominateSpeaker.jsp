@@ -4,4 +4,4 @@
     Author     : David
 --%>
 
-<li><a href="../../private/employee/nominate.jsp">Nominate Yourself As A Speaker</a></li>
+<li><a href="../../nominateSpeaker">Nominate Yourself As A Speaker</a></li>

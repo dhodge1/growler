@@ -48,4 +48,12 @@
     <servlet-name>suggestSpeaker</servlet-name>
     <url-pattern>/suggestSpeaker</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>nominateSpeaker</servlet-name>
+    <jsp-file>/private/employee/nominate.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>nominateSpeaker</servlet-name>
+    <url-pattern>/nominateSpeaker</url-pattern>
+  </servlet-mapping>
 </web-app>
