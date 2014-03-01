@@ -23,5 +23,13 @@
   <servlet-mapping>
     <servlet-name>theme</servlet-name>
     <url-pattern>/theme</url-pattern>
-  </servlet-mapping>  
+  </servlet-mapping> 
+  <servlet>
+    <servlet-name>suggesttheme</servlet-name>
+    <jsp-file>/private/employee/themeentry.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>suggesttheme</servlet-name>
+    <url-pattern>/suggestTheme</url-pattern>
+  </servlet-mapping> 
 </web-app>
