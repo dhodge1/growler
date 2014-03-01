@@ -160,4 +160,12 @@
     <servlet-name>email</servlet-name>
     <url-pattern>/email</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>features</servlet-name>
+    <jsp-file>/private/employee/admin/systemFeatures.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>features</servlet-name>
+    <url-pattern>/features</url-pattern>
+  </servlet-mapping>
 </web-app>

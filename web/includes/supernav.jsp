@@ -130,7 +130,7 @@
             
             <li class="brand_nav <%= adminTab%>"><a href="#"><span class="nav_drop">System Admin</span><em></em></a>
                 <ul class="child-menu child-menu-ul">
-                    <li><a href="${pageContext.request.contextPath}/private/employee/admin/systemFeatures.jsp">System Features</a></li>
+                    <li><a href="${pageContext.request.contextPath}/features">System Features</a></li>
                 </ul>
             </li>
             
