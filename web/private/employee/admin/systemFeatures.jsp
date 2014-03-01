@@ -260,7 +260,7 @@
                                             url: '../../../action/disablefeature.jsp',
                                             data: {feature_ID: featureId},
                                             success: function(){
-                                                window.location.href = "./systemFeatures";
+                                                window.location.href = "./features";
                                             }
                                         });
                                     });
