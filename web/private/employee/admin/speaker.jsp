@@ -36,7 +36,6 @@
         <!-- Makes table filterable -->
         <script language="javascript" type="text/javascript" src="../../../js/tablefilter.js"></script>
 
-
         <style>
             .table {
                 margin-bottom: 0px;
@@ -72,6 +71,14 @@
                 text-decoration: underline;
                 cursor: pointer;
             }
+            
+            .flt {
+                border: 1px solid #ccc;
+                height: 25px;
+                line-height: normal;
+                padding: 3px
+            }
+            
         </style>
     </head>
     <body id="growler1">
@@ -270,7 +277,7 @@
         
         <!-- Makes table filterable -->
         <script language="javascript" type="text/javascript">
-            var speakerTable_Props = {
+            var tfConfig = {
                 col_1: "select", //Choose business or technical
                 col_2: "select", //Choose who added it               
                 display_all_text: "Show all", //Default choice for col_1,2 is show all
@@ -278,9 +285,10 @@
                 col_4: "none", // No filter/options on Ranking Details column
                 col_5: "none", // No filter/options on Assigned to Session column
                 col_6: "none", // No filter/options on Actions column
-                sort_select: true 
+                sort_select: true,
+                alternate_rows: true
             };
-            var tf1 = setFilterGrid("speakerTable", speakerTable_Props);
+            var tf1 = setFilterGrid("speakerTable", tfConfig);
         </script> 
         
     </body>
