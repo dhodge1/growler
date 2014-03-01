@@ -46,6 +46,7 @@ Test comment - Chelsea 22 Jan 2014 1234567 test17 ThuyTest
                     }
                 }
                 response.sendRedirect("private/employee/home.jsp");
+                //response.sendRedirect("home");
     }
      }
 %>
@@ -120,7 +121,6 @@ Test comment - Chelsea 22 Jan 2014 1234567 test17 ThuyTest
                     </div>
                     <div class="form-actions">
                         <button class="button button-primary" id="send" type="submit" style="margin-right:4px;">Login</button>
-                        <a href="public/requestreset.jsp">Forgot Password?</a>
                     </div>
                 </form>
             </div>

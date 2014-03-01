@@ -48,9 +48,11 @@
         %>
         <%@ include file="../../../includes/adminheader.jsp" %>
         <% if (String.valueOf(session.getAttribute("role")).equals("admin")) { %>
-            <jsp:include page="../../../includes/supernav.jsp" flush="true"/>
+            <%--<jsp:include page="../../includes/supernav.jsp" flush="true"/>--%>
+            <%@ include file="../../../includes/supernav.jsp" %>
         <% } else {%>
-            <jsp:include page="../../../includes/adminnav.jsp" flush="true"/>
+            <%--<jsp:include page="../../includes/adminnav.jsp" flush="true"/>--%>
+            <%@ include file="../../../includes/adminnav.jsp" %>
         <% } %>
         <%--<%@ include file="../../../includes/adminnav.jsp" %>--%>
         
@@ -58,7 +60,7 @@
            <div class="row mediumBottomMargin"></div>
            <div class="row">         
              <ul class="breadcrumb">
-               <li><a href="../../../private/employee/admin/home.jsp">Home</a></li>
+               <li><a href="../../../private/employee/home.jsp">Home</a></li>
                <li class='ieFix'>Call To Action</li>
              </ul>
            </div>
@@ -85,6 +87,20 @@
            //*********The code for the email form start here****************
            //***************************************************************
             --%>
+              
+               <%
+                  if(request.getAttribute("isSuccess")!= null)
+                  {
+               %>
+                    
+                    <div class="feedbackMessage-success row">
+                        <p style="text-align: center"><%=request.getAttribute("isSuccess")%></p>
+                    </div>   
+               <%
+                  request.removeAttribute("isSuccess");    
+                  }
+               %> 
+                           
            <div class="row">
               <form  id="action" action="callOutAction.jsp" method="POST" >
                  <fieldset>
@@ -103,17 +119,18 @@
                  </fieldset> 
               </form>	  
            </div> <%--END THE FORM'S div tag--%>
+           <%--  
+           <div class="feedbackMessage-success">
+               <%=request.getAttribute("isSuccess")%>;
+           </div>
+           --%>
            <%--
            //***************************************************************
            //*******************The code for the email form end here********
            //***************************************************************
            --%>
         </div> <%--END THE CONTAINER-FIXED div tag--%>
-      <%--
-         <div class="feedbackMessage-success">
-            emails successfully sent!
-         </div>
-      --%> 
+      
        <%@ include file="../../../includes/footer.jsp" %> 
        <%@ include file="../../../includes/scriptlist.jsp" %>
     </body>

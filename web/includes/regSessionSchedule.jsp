@@ -4,4 +4,4 @@
     Author     : David
 --%>
 
-<li><a href="../../private/employee/sessionschedule.jsp">View Session Schedule</a></li>
+<li><a href="../../schedule">View Session Schedule</a></li>

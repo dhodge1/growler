@@ -68,14 +68,16 @@
             if (null == session.getAttribute("id") || null == session.getAttribute("role")) {
                 response.sendRedirect("../../../index.jsp");
             }
-            FeaturePersistence fp = new FeaturePersistence();
-            ArrayList<Feature> features = fp.getFeatureSet();
+            FeaturePersistence fp1 = new FeaturePersistence();
+            ArrayList<Feature> features = fp1.getFeatureSet();
         %>
         <%@ include file="../../../includes/adminheader.jsp" %> 
         <% if (String.valueOf(session.getAttribute("role")).equals("admin")) { %>
-            <jsp:include page="../../../includes/supernav.jsp" flush="true"/>
+            <%--<jsp:include page="../../includes/supernav.jsp" flush="true"/>--%>
+            <%@ include file="../../../includes/supernav.jsp" %>
         <% } else {%>
-            <jsp:include page="../../../includes/adminnav.jsp" flush="true"/>
+            <%--<jsp:include page="../../includes/adminnav.jsp" flush="true"/>--%>
+            <%@ include file="../../../includes/adminnav.jsp" %>
         <% } %>
         <%--<%@ include file="../../../includes/adminnav.jsp" %>--%>
         <div class="container-fixed largeBottomMargin">
@@ -243,7 +245,7 @@
                                             url: '../../../action/enablefeature.jsp',
                                             data: {feature_ID: featureId},
                                             success: function(){
-                                                window.location.href = "./systemFeatures.jsp";
+                                                window.location.href = "./features";
                                             }
                                         });
                                     });
@@ -258,7 +260,7 @@
                                             url: '../../../action/disablefeature.jsp',
                                             data: {feature_ID: featureId},
                                             success: function(){
-                                                window.location.href = "./systemFeatures.jsp";
+                                                window.location.href = "./features";
                                             }
                                         });
                                     });

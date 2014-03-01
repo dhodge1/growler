@@ -53,7 +53,7 @@
 <nav class="topnav">
     <nav class="globalNavigation modify-pages" id="navigation">
         <ul>
-            <li class="non_drop <%= home%>" style="padding-right:12px" ><a href="${pageContext.request.contextPath}/private/employee/home.jsp"><span>Home</span></a></li>
+            <li class="non_drop <%= home%>" style="padding-right:12px" ><a href="${pageContext.request.contextPath}/home"><span>Home</span></a></li>
             <%--<%@ include file="../../includes/superTheme.jsp" %>--%>
             <li class="brand_nav <%= themeTab%>" style="padding-left:12px"><a href="#"><span>Themes</span><em></em></a>
                 <ul class="child-menu child-menu-ul firstnav" style="left:11px;">
@@ -61,7 +61,7 @@
                     <% if (rankThemes.getFeatureState()) { %>
                         <%@ include file="../../includes/superRankTheme.jsp" %>
                     <% } %>
-                    <li><a href="${pageContext.request.contextPath}/private/employee/admin/theme.jsp">Manage Themes</a></li>
+                    <li><a href="${pageContext.request.contextPath}/manageThemes">Manage Themes</a></li>
                     <%--<li><a href="${pageContext.request.contextPath}/private/employee/admin/themeentry.jsp">Suggest a New Theme</a></li>--%>
                     <% if (suggestTheme.getFeatureState()) { %>
                         <%@ include file="../../includes/superSuggestTheme.jsp" %>
@@ -78,7 +78,7 @@
                     <% if (nominateSpeaker.getFeatureState()) { %>
                         <%@ include file="../../includes/superNominateSpeaker.jsp" %>
                     <% } %>
-                    <li><a href="${pageContext.request.contextPath}/private/employee/admin/speaker.jsp">Manage Speakers</a></li>
+                    <li><a href="${pageContext.request.contextPath}/manageSpeakers">Manage Speakers</a></li>
                     <%--<li><a href="${pageContext.request.contextPath}/private/employee/admin/speakerentry.jsp">Suggest a New Speaker</a></li>--%>
                     <% if (suggestSpeaker.getFeatureState()) { %>
                         <%@ include file="../../includes/superSuggestSpeaker.jsp" %>
@@ -87,7 +87,7 @@
             </li>
             <li class="brand_nav <%= roomTab%>"><a href="#"><span class="nav_drop">Rooms</span><em></em></a>
                 <ul class="child-menu child-menu-ul">
-                    <li><a href="${pageContext.request.contextPath}/private/employee/admin/room.jsp">Manage Rooms</a></li>
+                    <li><a href="${pageContext.request.contextPath}/room">Manage Rooms</a></li>
                 </ul>
             </li>
             <li class="brand_nav <%= sessionTab%>"><a href="#"><span class="nav_drop">Sessions</span><em></em></a>
@@ -100,17 +100,17 @@
                     <% if (surveySession.getFeatureState()) { %>
                         <%@ include file="../../includes/superSurvey.jsp" %>
                     <% } %>
-                    <li><a href="${pageContext.request.contextPath}/private/employee/admin/session.jsp">Manage Session Schedule</a></li>
+                    <li><a href="${pageContext.request.contextPath}/manageSessions">Manage Session Schedule</a></li>
                 </ul>
             </li> 
             <li class="brand_nav <%= reportTab%>"><a href="#"><span class="nav_drop">Reports</span><em></em></a>
                 <ul class="child-menu child-menu-ul">
-                    <li><a href="${pageContext.request.contextPath}/private/employee/admin/overallReport.jsp">Best Overall Session</a></li>
-                    <li><a href="${pageContext.request.contextPath}/private/employee/admin/presentationReport.jsp">Best Presentation Skills</a></li>
-                    <li><a href="${pageContext.request.contextPath}/private/employee/admin/confirmationReport.jsp">Confirmed Attendance</a></li>
-                    <li><a href="${pageContext.request.contextPath}/private/employee/admin/interestReport.jsp">Session Interest</a></li>
-                    <li><a href="${pageContext.request.contextPath}/private/employee/admin/expectationReport.jsp">Session Met Expectations</a></li>
-                    <li><a href="${pageContext.request.contextPath}/private/employee/admin/surveyReport.jsp">Surveys</a></li>
+                    <li><a href="${pageContext.request.contextPath}/overallReport">Best Overall Session</a></li>
+                    <li><a href="${pageContext.request.contextPath}/presentationReport">Best Presentation Skills</a></li>
+                    <li><a href="${pageContext.request.contextPath}/confirmationReport">Confirmed Attendance</a></li>
+                    <li><a href="${pageContext.request.contextPath}/interestReport">Session Interest</a></li>
+                    <li><a href="${pageContext.request.contextPath}/expectationReport">Session Met Expectations</a></li>
+                    <li><a href="${pageContext.request.contextPath}/surveyReport">Surveys</a></li>
                     
                 </ul>
             </li>
@@ -120,7 +120,7 @@
             ----------------------------------------%>
             <li class="brand_nav <%= emailTab%>"><a href="#"><span class="nav_drop">Emails</span><em></em></a>
                 <ul class="child-menu child-menu-ul">
-                    <li><a href="${pageContext.request.contextPath}/private/employee/admin/emailForm.jsp">Call To Action</a></li>
+                    <li><a href="${pageContext.request.contextPath}/email">Call To Action</a></li>
                 </ul>
             </li>
             
@@ -130,7 +130,7 @@
             
             <li class="brand_nav <%= adminTab%>"><a href="#"><span class="nav_drop">System Admin</span><em></em></a>
                 <ul class="child-menu child-menu-ul">
-                    <li><a href="${pageContext.request.contextPath}/private/employee/admin/systemFeatures.jsp">System Features</a></li>
+                    <li><a href="${pageContext.request.contextPath}/features">System Features</a></li>
                 </ul>
             </li>
             

@@ -4,4 +4,4 @@
     Author     : David
 --%>
 
-<li><a href="${pageContext.request.contextPath}/private/employee/admin/themeentry.jsp">Suggest a New Theme</a></li>
+<li><a href="${pageContext.request.contextPath}/suggestTheme">Suggest a New Theme</a></li>

@@ -4,4 +4,4 @@
     Author     : David
 --%>
 
-<li><a href="../../private/employee/speaker.jsp">Rank Preferred Speakers</a></li>
+<li><a href="../../speaker">Rank Preferred Speakers</a></li>

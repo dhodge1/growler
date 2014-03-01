@@ -4,4 +4,4 @@
     Author     : David
 --%>
 
-<li><a href="../../private/employee/themeentry.jsp">Suggest a New Theme</a></li>
+<li><a href="../../suggestTheme">Suggest a New Theme</a></li>

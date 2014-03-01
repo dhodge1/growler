@@ -165,9 +165,11 @@
     <body id="growler1">    
         <%@ include file="../../includes/header.jsp" %> 
         <% if (String.valueOf(session.getAttribute("role")).equals("admin")) { %>
-            <jsp:include page="../../includes/supernav.jsp" flush="true"/>
+            <%--<jsp:include page="../../includes/supernav.jsp" flush="true"/>--%>
+            <%@ include file="../../includes/supernav.jsp" %>
         <% } else {%>
-            <jsp:include page="../../includes/testnav.jsp" flush="true"/>
+            <%--<jsp:include page="../../includes/testnav.jsp" flush="true"/>--%>
+            <%@ include file="../../includes/testnav.jsp" %>
         <% } %>
         <%--<%@ include file="../../includes/testnav.jsp" %>--%>
         <%
@@ -196,11 +198,11 @@
                     <div class="carousel-inner">
                         <div class="item active">
                             <img class='c_img' src="../../images/Techtoberfest2013large.png"/>
-                            <div class="carousel-caption"><h3 class="carousel-text">In October, the Knoxville office will host its fourth annual "Techtoberfest", a gathering of Scripps Networks Interactive employees from around the globe, sharing the present and future technology within our company via a series of amazing presentations.</h3></div>
+                            <div class="carousel-caption"><h3 class="carousel-text">In October, the Knoxville office will host its fifth annual "Techtoberfest", a gathering of Scripps Networks Interactive employees from around the globe, sharing the present and future technology within our company via a series of amazing presentations.</h3></div>
                         </div>
                         <div class="item">
                             <img  class='c_img' src="../../images/slider_image1.png"/>
-                            <div class="carousel-caption"><h3 class="carousel-text">All feedback is encouraged to ensure this years event goes off without a hitch!  From user rankings to suggestions, the Techtoberfest Information System (TIS) is here to ensure your voice is heard before, during and after the Techtoberfest 2013 ends.</h3></div>                            
+                            <div class="carousel-caption"><h3 class="carousel-text">All feedback is encouraged to ensure this years event goes off without a hitch!  From user rankings to suggestions, the Techtoberfest Information System (TIS) is here to ensure your voice is heard before, during and after the Techtoberfest 2014 ends.</h3></div>                            
                         </div>
                         <div class="item">
                             <img class='c_img' src="../../images/slider_image2.png"/>

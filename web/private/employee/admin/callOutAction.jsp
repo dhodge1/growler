@@ -30,7 +30,8 @@
    String subject = new String();
    String content = new String();
    boolean isContentHTML = false;
-
+   
+   String isSuccess = new String(); //for error checking purpose
    
      //get info from the emailform.jsp     
    subject = request.getParameter("emailSubject");
@@ -61,12 +62,24 @@
    {
       //perform the send email task
       EmailUtilSMTPLocal.sendMail((emailList.toString()), subject, content, isContentHTML);
+      isSuccess = "Your message has been sent!";
    }
    catch (Exception e)
    {
-    // e.printStackTrace();   
+    // e.printStackTrace();
+     isSuccess ="Your message can't be sending at this time";
    }
-   response.sendRedirect("../../../private/employee/home.jsp");
+   
+   finally 
+   {
+     request.setAttribute("isSuccess", isSuccess);
+     RequestDispatcher dispatcher = request.getRequestDispatcher("emailForm.jsp");      
+     if (dispatcher != null)
+     {
+       dispatcher.forward(request, response);
+     } 
+   }
+   //response.sendRedirect("../../../private/employee/home.jsp");
 %>                      
     
 
