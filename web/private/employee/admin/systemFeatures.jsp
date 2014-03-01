@@ -245,7 +245,7 @@
                                             url: '../../../action/enablefeature.jsp',
                                             data: {feature_ID: featureId},
                                             success: function(){
-                                                window.location.href = "./systemFeatures.jsp";
+                                                window.location.href = "./features";
                                             }
                                         });
                                     });
