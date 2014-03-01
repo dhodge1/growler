@@ -105,12 +105,12 @@
             </li> 
             <li class="brand_nav <%= reportTab%>"><a href="#"><span class="nav_drop">Reports</span><em></em></a>
                 <ul class="child-menu child-menu-ul">
-                    <li><a href="${pageContext.request.contextPath}/private/employee/admin/overallReport.jsp">Best Overall Session</a></li>
-                    <li><a href="${pageContext.request.contextPath}/private/employee/admin/presentationReport.jsp">Best Presentation Skills</a></li>
-                    <li><a href="${pageContext.request.contextPath}/private/employee/admin/confirmationReport.jsp">Confirmed Attendance</a></li>
-                    <li><a href="${pageContext.request.contextPath}/private/employee/admin/interestReport.jsp">Session Interest</a></li>
-                    <li><a href="${pageContext.request.contextPath}/private/employee/admin/expectationReport.jsp">Session Met Expectations</a></li>
-                    <li><a href="${pageContext.request.contextPath}/private/employee/admin/surveyReport.jsp">Surveys</a></li>
+                    <li><a href="${pageContext.request.contextPath}/overallReport">Best Overall Session</a></li>
+                    <li><a href="${pageContext.request.contextPath}/presentationReport">Best Presentation Skills</a></li>
+                    <li><a href="${pageContext.request.contextPath}/confirmationReport">Confirmed Attendance</a></li>
+                    <li><a href="${pageContext.request.contextPath}/interestReport">Session Interest</a></li>
+                    <li><a href="${pageContext.request.contextPath}/expectationReport">Session Met Expectations</a></li>
+                    <li><a href="${pageContext.request.contextPath}/surveyReport">Surveys</a></li>
                     
                 </ul>
             </li>

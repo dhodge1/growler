@@ -104,4 +104,52 @@
     <servlet-name>manageSessions</servlet-name>
     <url-pattern>/manageSessions</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>overallReport</servlet-name>
+    <jsp-file>/private/employee/admin/overallReport.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>overallReport</servlet-name>
+    <url-pattern>/overallReport</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>presentationReport</servlet-name>
+    <jsp-file>/private/employee/admin/presentationReport.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>presentationReport</servlet-name>
+    <url-pattern>/presentationReport</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>confirmationReport</servlet-name>
+    <jsp-file>/private/employee/admin/confirmationReport.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>confirmationReport</servlet-name>
+    <url-pattern>/confirmationReport</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>interestReport</servlet-name>
+    <jsp-file>/private/employee/admin/interestReport.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>interestReport</servlet-name>
+    <url-pattern>/interestReport</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>expectationReport</servlet-name>
+    <jsp-file>/private/employee/admin/expectationReport.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>expectationReport</servlet-name>
+    <url-pattern>/expectationReport</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>surveyReport</servlet-name>
+    <jsp-file>/private/employee/admin/surveyReport.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>surveyReport</servlet-name>
+    <url-pattern>/surveyReport</url-pattern>
+  </servlet-mapping>
 </web-app>

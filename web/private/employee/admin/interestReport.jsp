@@ -78,11 +78,13 @@
         %>
         <%@ include file="../../../includes/adminheader.jsp" %> 
         <% if (String.valueOf(session.getAttribute("role")).equals("admin")) { %>
-            <jsp:include page="../../../includes/supernav.jsp" flush="true"/>
+            <%--<jsp:include page="../../includes/supernav.jsp" flush="true"/>--%>
+            <%@ include file="../../includes/supernav.jsp" %>
         <% } else {%>
-            <jsp:include page="../../../includes/adminnav.jsp" flush="true"/>
+            <%--<jsp:include page="../../includes/adminnav.jsp" flush="true"/>--%>
+            <%@ include file="../../includes/adminnav.jsp" %>
         <% } %>
-        <%--<%@ include file="../../../includes/adminnav.jsp" %>--%>  
+        <%--<%@ include file="../../includes/adminnav.jsp" %>--%>   
         <div class="container-fixed">
             <div class="row mediumBottomMargin"></div>
             <div class="row">
