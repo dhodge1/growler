@@ -242,7 +242,9 @@
 
                     function switchDate() {
                         var date = $('#date').val();
-                        window.location = 'http://sni-techtoberfest.scrippsnetworks.com/private/employee/admin/surveyReport.jsp?date=' + date;
+                        //window.location = 'http://sni-techtoberfest.scrippsnetworks.com/private/employee/admin/surveyReport.jsp?date=' + date;
+                        //window.location = '${pageContext.request.contextPath}?date=' + date;
+                        window.location = '../admin/surveyReport.jsp?date=' + date;
                     }
 
                     $(document).ready(function() {
