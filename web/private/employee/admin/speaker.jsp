@@ -34,7 +34,7 @@
         
         
         <!-- Makes table filterable -->
-        <script language="javascript" type="text/javascript" src="../../../js/tablefilter.js"></script>
+        <!-- <script language="javascript" type="text/javascript" src="../../../js/tablefilter.js"></script> -->
 
         <style>
             .table {
@@ -72,14 +72,30 @@
                 cursor: pointer;
             }
             
-            .flt {
-                border: 1px solid #ccc;
-                height: 25px;
-                line-height: normal;
-                padding: 3px
-            }
+
             
         </style>
+        
+        <script>
+        function filter (term, _id, cellNr){
+                var termLC = term.value.toLowerCase();
+                var table = document.getElementById(_id);
+                var ele;
+                for (var r = 1; r < table.rows.length; r++){
+                        ele = table.rows[r].cells[cellNr].innerHTML.replace(/<[^>]+>/g,"");
+                        if (ele.toLowerCase().indexOf(termLC)>=0 )
+			table.rows[r].style.display = '';
+                        else table.rows[r].style.display = 'none';
+	}
+}
+            
+            
+        </script>
+            
+        
+        
+        
+        
     </head>
     <body id="growler1">
         <%
@@ -115,7 +131,21 @@
             </div>
             <!--<div class='row largeBottomMargin'></div>-->
             <div class="row mediumBottomMargin">
-                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span style="padding-left: 12px;">Speaker Details</span><a href="../../../private/employee/admin/speakerentry.jsp" class="pullRight button button-primary">Add Speaker</a></h2>
+                <h2 class="bordered">
+                    <img style="padding-bottom:0;padding-left:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/>
+                    <span style="padding-left: 12px;">Speaker Details</span>
+                    <span class="keywordFilter" style="margin-bottom:8px;">
+                        <i class="icon16-magnifySmall"></i>
+                        <span class="keywordFilter-wrapper">
+                            <input type="search" name="speakerFilter" value="Filter..." id="speakerFilter" 
+                                   onkeyup="filter(this, 'speakerTable', 0)" onclick="this.value='';" 
+                                   onfocus="this.select()" onblur="this.value=!this.value?'Filter...' :this.value;" 
+                                   style="font-family:Verdana,Tahoma,sans-serif; font-size:11px;"/>
+                        </span>
+                        <a class="keywordFilter-clear" onclick="speakerFilter.value='';" ><i class="icon16-close"></i></a>
+                        </span>
+                    <a href="../../../private/employee/admin/speakerentry.jsp" class="pullRight button button-primary">Add Speaker</a>
+                </h2>
             </div>
             <div class="row">
                 <form>
@@ -277,21 +307,6 @@
                                 });
         </script>
         
-        <!-- Makes table filterable -->
-        <script language="javascript" type="text/javascript">
-            var tfConfig = {
-                col_1: "select", //Choose business or technical
-                col_2: "select", //Choose who added it               
-                display_all_text: "Show all", //Default choice for col_1,2 is show all
-                col_3: "none", // No filter/options on Visibility column
-                col_4: "none", // No filter/options on Ranking Details column
-                col_5: "none", // No filter/options on Assigned to Session column
-                col_6: "none", // No filter/options on Actions column
-                sort_select: true,
-                alternate_rows: true
-            };
-            var tf1 = setFilterGrid("speakerTable", tfConfig);
-        </script> 
-        
+
     </body>
 </html>
