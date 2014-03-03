@@ -222,19 +222,19 @@
             <div class="row largeBottomMargin">
               <div class="span3">
                 <h2 class="block"><span class="text-muted">What is Techtoberfest?</span></h2>
-                <p>Techtoberfest is a annual internal conference with sessions on various technical topics from across all of Scripps Network Interactive. Attendance is open to all employees who are interested and you can come and go anytime throughout the day. The two day conference ends with a panel discussion with some of the technical leaders within the company.</p>
+                <p>It is an annual conference with sessions on various technical topics from across all of SNI. Attendance is open to all employees, and you can come and go throughout the day. The two day conference ends with a panel discussion with some of the technical leaders from within the company.</p>
               </div>
               <div class="span3">
                 <h2 class="block"><span class="text-muted">Why should I attend?</span></h2>
-                <p>Speakers from within the company will gather and conduct sessions on a variety of cutting-edge technologies. It’s a great way to network within the company and learn about the technologies, techniques, and tools different groups are researching and levering at Scripps. </p>
+                <p>Speakers from within the company will gather and conduct sessions on a variety of cutting-edge technologies. It’s a great way to network within the company and learn about the latest technologies, techniques, and tools different groups are researching and leveraging at Scripps.</p>
               </div>
               <div class="span3">
                 <h2 class="block"><span class="text-muted">Where is it happening?</span></h2>
-                <p> It will be in two primary locations 3rd floor Training Room in the Tech Center and 1st floor Training Center in the HQ Building.  We are also reserving the following rooms for video conferencing: NY: Boardroom, Soho DC: Africa, Australia.</p>
+                <p>It takes place in Knoxville, New York, and Chevy Chase. In Knoxville, we are in the 3rd floor Training Room in the Tech Center and the 1st floor Training Center in the HQ Building. In New York, we are in the Boardroom and SoHo. In Chevy Chase, we are in the Africa and Australia rooms.</p>
               </div>
               <div class="span3">
                 <h2 class="block"><span class="text-muted">Blog it up!</span></h2>
-                <p>Stay up to date on the latest Techtoberfest news from sessions to speakers, times and locations at the blog. If you are interested in attending or presenting on a technical topic, see the  <a href="http://techtoberfest.scrippsnetworks.com/">SNI Techtoberfest Blog</a>.</p>
+                <p>Stay up-to-date on the latest Techtoberfest news including information about the sessions to the speakers, times and locations. If you are interested in attending or presenting on a technical topic, see the <a href="http://techtoberfest.scrippsnetworks.com/">SNI Techtoberfest Blog</a>.</p>
               </div>
             </div>
 
