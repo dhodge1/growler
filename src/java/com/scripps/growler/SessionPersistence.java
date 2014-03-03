@@ -574,6 +574,63 @@ public class SessionPersistence extends GrowlerPersistence {
         return sessions;
     }
 
+    //***********************************************************************
+    //***********************ADDED CODE START HERE***************************
+    //***********************************************************************
+    
+    /************************************************************************
+     * author: Thuy
+     * This method retrieves only sessions that receives at least 1 like from 
+     * the Techtoberfest event participant in a particular given year.
+     * 
+     * @param year: session year
+     *               
+     * @return: An array list of session in a particular given year
+     ************************************************************************/
+        public ArrayList<Session> getSessionsWithAtLeast1Like(int year) {
+        try {
+            //***********************************
+            //The following query selects all the given
+            //year sessions that has at least on liked
+            //***********************************
+            String preparedQuery = ("SELECT s.* "
+                                  + "FROM session s "
+                                  + "WHERE EXTRACT(YEAR FROM session_date) = ? "
+                                  + "AND EXTRACT(MONTH FROM session_date) = '10' "
+                                  + "AND EXISTS(SELECT NULL "
+                                                + "FROM registration r "
+                                                + "WHERE s.id = r.session_id) "
+                                                + "ORDER BY s.id ASC"); 
+            //********************************************************************                                                          
+            initializeJDBC();
+            statement = connection.prepareStatement(preparedQuery);             
+            statement.setInt(1, year);
+            result = statement.executeQuery();
+            sessions = new ArrayList<Session>();
+            while (result.next()) {
+                Session s = new Session();
+                s.setId(result.getInt("id"));
+                s.setName(result.getString("name"));
+                s.setDescription(result.getString("description"));
+                s.setSessionDate(result.getDate("session_date"));
+                s.setStartTime(result.getTime("start_time"));
+                s.setLocation(result.getString("location"));
+                s.setTrack(result.getString("track"));
+                s.setDuration(result.getTime("duration"));
+                s.setKey(result.getString("session_key"));
+                sessions.add(s);
+            }
+            return sessions;
+        } catch (Exception e) {
+        } finally {
+            closeJDBC();
+        }
+        return sessions;
+    }
+
+    //*********************ADDED CODE END HERE*********************************
+    
+    
     /**
      * Checks to see if there is a session already scheduled in a room at a certain time. Multiple locations can have "TBD" as the value.
      * 
@@ -647,6 +704,7 @@ public class SessionPersistence extends GrowlerPersistence {
         } catch(Exception e) {
             
         } finally {
+ 
             closeJDBC();
         }
         return rows;

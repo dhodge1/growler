@@ -136,6 +136,53 @@ public class UserPersistence extends GrowlerPersistence {
        return null;
     }
    
+   		
+    /**
+     * This method re-uses most of the code from the getAllUsersNoVolInfo()  
+     * method. However, the query of this method selects only users that 
+     * liked a particular given 
+     *
+     * @return The list of all users without the volunteer information.
+     */
+    public ArrayList<User> getUsersLikedASession(int sessionId)
+    {
+       try 
+       {
+           //*****************************************
+            //The following query selects all users  
+            //that liked a particular given sessions 
+            //****************************************
+           String preparedQuery = "SELECT u.* "
+                                + "FROM user u "
+                                + "INNER JOIN registration r "
+                                + "ON u.id = r.user_id "
+                                + "WHERE r.session_id = ? "
+                                + "ORDER BY u.email";
+           
+           //***********************************************
+           initializeJDBC();
+           statement = connection.prepareStatement(preparedQuery);
+           statement.setInt(1, sessionId);
+           result = statement.executeQuery();
+           while (result.next()) 
+           {
+               User u = new User();
+               u.setId(result.getInt("id"));
+               u.setUserName(result.getString("name"));
+               u.setEmail(result.getString("email"));
+               u.setCorporateId(result.getString("corporate_id"));   
+               users.add(u);
+           }//END the while loop
+           return users;
+       }//END the try stmt 
+       catch (Exception e) {
+       }
+       finally 
+       {
+           closeJDBC();
+       }
+       return null;
+    }
     
 /************************ADDED CODE END HERE*********************************/ 
     
