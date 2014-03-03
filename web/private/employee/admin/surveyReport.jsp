@@ -244,7 +244,7 @@
                         var date = $('#date').val();
                         //window.location = 'http://sni-techtoberfest.scrippsnetworks.com/private/employee/admin/surveyReport.jsp?date=' + date;
                         //window.location = '${pageContext.request.contextPath}?date=' + date;
-                        window.location = 'surveyReport.jsp?date=' + date;
+                        window.location = 'surveyReport?date=' + date;
                     }
 
                     $(document).ready(function() {
