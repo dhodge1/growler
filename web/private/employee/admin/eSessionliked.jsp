@@ -69,11 +69,12 @@
    subject = request.getParameter("emailSubject");
    content = request.getParameter("emailContent");
    
+   selectedSession = Integer.parseInt(thuyStr);
 
 
    //get the email list from all the users
    UserPersistence uPersistence = new UserPersistence();
-   ArrayList<User> userArrayList = uPersistence.getUsersLikedASession(46);
+   ArrayList<User> userArrayList = uPersistence.getUsersLikedASession(selectedSession);
    int arraySize = userArrayList.size();
    //*******************************************
    //The first 5 users on the list are real users
