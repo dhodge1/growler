@@ -120,7 +120,7 @@
             ----------------------------------------%>
             <li class="brand_nav <%= emailTab%>"><a href="#"><span class="nav_drop">Emails</span><em></em></a>
                 <ul class="child-menu child-menu-ul">
-                    <li><a href="${pageContext.request.contextPath}/email">Call To Action</a></li>
+                    <li><a href="${pageContext.request.contextPath}/emailForm">Call To Action</a></li>
                     <li><a href="${pageContext.request.contextPath}/emailFormOfParticipants">Send to participants</a></li>
                 </ul>
             </li>
