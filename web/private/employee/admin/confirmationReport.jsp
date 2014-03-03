@@ -202,7 +202,8 @@
                     
                     function switchDate() {
                             var date = $('#date').val();
-                            window.location ='http://techtoberfest-dev.elasticbeanstalk.com/private/employee/admin/confirmationReport.jsp?date=' + date;
+                            //window.location ='http://techtoberfest-dev.elasticbeanstalk.com/private/employee/admin/confirmationReport.jsp?date=' + date;
+                            window.location = 'confirmationReport?date=' + date;
                         }
 
                     $(document).ready(function() {
