@@ -101,7 +101,7 @@
                            
            <div class="row">
                    
-              <form  id="action" action="./eSessionliked.jsp" method="POST" >
+              <form  id="action" action="eSessionliked" method="POST" >
                  <fieldset>
                     <div class="form-group">
                         <label class="required">Email Options</label>

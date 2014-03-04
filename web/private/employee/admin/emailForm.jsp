@@ -102,7 +102,7 @@
                %> 
                            
            <div class="row">
-              <form  id="action" action="./callOutAction.jsp" method="POST" >
+              <form  id="action" action="callOutAction" method="POST" >
                  <fieldset>
                     <div class="form-group">
                         <label class="required">Subject</label>

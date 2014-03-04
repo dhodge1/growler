@@ -168,6 +168,25 @@
     <servlet-name>features</servlet-name>
     <url-pattern>/features</url-pattern>
   </servlet-mapping>
+ 
+  <servlet>
+    <servlet-name>callOutAction</servlet-name>
+    <jsp-file>/private/employee/admin/callOutAction.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>callOutAction</servlet-name>
+    <url-pattern>/callOutAction</url-pattern>
+  </servlet-mapping> 
+  
+  <servlet>
+    <servlet-name>eSessionliked</servlet-name>
+    <jsp-file>/private/employee/admin/eSessionliked.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>eSessionliked</servlet-name>
+    <url-pattern>/eSessionliked</url-pattern>
+  </servlet-mapping> 
+  
   <servlet>
     <servlet-name>emailFormOfParticipants</servlet-name>
     <jsp-file>/private/employee/admin/emailFormOfParticipants.jsp</jsp-file>
