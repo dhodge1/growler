@@ -1,8 +1,9 @@
 <%-- 
-    Document   : emailFormOfParticipants
-    Created on : Feb 27, 2014, 10:05:31 PM
+    Document   : emailBySurvey
+    Created on : Feb 21, 2014, 12:49:14 PM
     Author     : Thuy
 --%>
+
 
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.*"%>
@@ -20,7 +21,7 @@
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <title>Email To Participants</title><!-- Title -->
+        <title>Email By Survey</title><!-- Title -->
 
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> 
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
@@ -69,7 +70,8 @@
            <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
            <div class="row largeBottomMargin">
              <h3 style="font-weight:normal;">
-                    Send out an email to the participants that liked a particular session in 2014 Techtoberfest event. 
+                    Send out email to the participants of the 2014 Techtoberfest event 
+                    that submitted surveys.
              </h3>
            </div>
            <div class="row mediumBottomMargin">
@@ -90,7 +92,7 @@
                   if(request.getAttribute("isSuccess")!= null)
                   {
                %>
-           
+                    
                     <div class="feedbackMessage-success row">
                         <p style="text-align: center"><%=request.getAttribute("isSuccess")%></p>
                     </div>   
@@ -100,35 +102,8 @@
                %> 
                            
            <div class="row">
-                   
-              <form  id="action" action="eSessionliked" method="POST" >
+              <form  id="action" action="eBySurvey" method="POST" >
                  <fieldset>
-                    <div class="form-group">
-                        <label class="required">Session Choices </label>
-                        <select name="sessionNum" required="required">
-                            
-                            <%
-                  
-                            SessionPersistence sPersistence = new SessionPersistence();
-                            ArrayList<Session> sessionArrayList = sPersistence.getSessionsWithAtLeast1Like(2014);
-                            for(int i = 0; i<sessionArrayList.size(); i++)
-                            {
-                            String infoStr = sessionArrayList.get(i).getId() +
-                                             " -- " + sessionArrayList.get(i).getName() +
-                                             " -- " + sessionArrayList.get(i).getSessionDate() +
-                                             " " + sessionArrayList.get(i).getStartTime(); 
-                            String sessionStr = sessionArrayList.get(i).getId().toString();
-                           
-                                   
-                            %>
-                            
-                            <option value = "46"><%=infoStr%></option>
-                                
-                            <% 
-                            }
-                           %> 
-                        </select>  
-                    </div> 
                     <div class="form-group">
                         <label class="required">Subject</label>
                         <input type="text" required="required" name="emailSubject" class="input-xlarge" />        
@@ -144,7 +119,6 @@
                  </fieldset> 
               </form>	  
            </div> <%--END THE FORM'S div tag--%>
-           
            <%--  
            <div class="feedbackMessage-success">
                <%=request.getAttribute("isSuccess")%>;
@@ -161,3 +135,4 @@
        <%@ include file="../../../includes/scriptlist.jsp" %>
     </body>
 </html>
+

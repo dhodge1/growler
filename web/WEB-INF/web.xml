@@ -179,6 +179,47 @@
   </servlet-mapping> 
   
   <servlet>
+    <servlet-name>emailToAllParticipants</servlet-name>
+    <jsp-file>/private/employee/admin/emailToAllParticipants.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>emailToAllParticipants</servlet-name>
+    <url-pattern>/emailToAllParticipants</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>eAllParticipants</servlet-name>
+    <jsp-file>/private/employee/admin/eAllParticipants.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>eAllParticipants</servlet-name>
+    <url-pattern>/eAllParticipants</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+  <servlet>
+    <servlet-name>emailBySurvey</servlet-name>
+    <jsp-file>/private/employee/admin/emailBySurvey.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>emailBySurvey</servlet-name>
+    <url-pattern>/emailBySurvey</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>eBySurvey</servlet-name>
+    <jsp-file>/private/employee/admin/eBySurvey.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>eBySurvey</servlet-name>
+    <url-pattern>/eBySurvey</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+  
+  <servlet>
     <servlet-name>eSessionliked</servlet-name>
     <jsp-file>/private/employee/admin/eSessionliked.jsp</jsp-file>
   </servlet>

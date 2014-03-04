@@ -120,8 +120,10 @@
             ----------------------------------------%>
             <li class="brand_nav <%= emailTab%>"><a href="#"><span class="nav_drop">Emails</span><em></em></a>
                 <ul class="child-menu child-menu-ul">
-                    <li><a href="${pageContext.request.contextPath}/email">Call To Action</a></li>
-                    <li><a href="${pageContext.request.contextPath}/emailFormOfParticipants">Send to participants</a></li>
+                    <li><a href="${pageContext.request.contextPath}/email">"Call To Action"</a></li>
+                    <li><a href="${pageContext.request.contextPath}/emailFormOfParticipants">Participants "Liked" a Session</a></li>
+                    <li><a href="${pageContext.request.contextPath}/emailBySurvey">Participants "Submitted" Survey</a></li>
+                    <li><a href="${pageContext.request.contextPath}/emailToAllParticipants">Participants of the Current Year</a></li>
                 </ul>
             </li>
             
