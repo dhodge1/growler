@@ -59,7 +59,7 @@
            <div class="row mediumBottomMargin"></div>
            <div class="row">         
              <ul class="breadcrumb">
-               <li><a href="../../../private/employee/home.jsp">Home</a></li>
+               <li><a href="../../../home">Home</a></li>
                <li class='ieFix'>Call To Action</li>
              </ul>
            </div>
@@ -101,7 +101,7 @@
                            
            <div class="row">
                    
-              <form  id="action" action="eSessionliked.jsp" method="POST" >
+              <form  id="action" action="./eSessionliked.jsp" method="POST" >
                  <fieldset>
                     <div class="form-group">
                         <label class="required">Email Options</label>
@@ -139,7 +139,7 @@
                      </div>
                      <div class="form-actions">
                         <input type="submit" id="send" class="button button-primary" value="Send"/>
-                        <a id="cancel" href="../../../private/employee/home.jsp">Cancel</a>
+                        <a id="cancel" href="../../../home">Cancel</a>
                      </div>  
                  </fieldset> 
               </form>	  

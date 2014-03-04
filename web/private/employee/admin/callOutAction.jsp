@@ -73,7 +73,7 @@
    finally 
    {
      request.setAttribute("isSuccess", isSuccess);
-     RequestDispatcher dispatcher = request.getRequestDispatcher("emailForm.jsp");      
+     RequestDispatcher dispatcher = request.getRequestDispatcher("./email");      
      if (dispatcher != null)
      {
        dispatcher.forward(request, response);
