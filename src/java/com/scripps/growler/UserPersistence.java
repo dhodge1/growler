@@ -208,7 +208,9 @@ public class UserPersistence extends GrowlerPersistence {
                                 + "WHERE EXISTS(SELECT NULL "
                                                 + "FROM attendance a "
                                                 + "WHERE u.id = a.user_id "
-                                                + "AND a.isSurveyTaken = true)";
+                                                + "AND a.isSurveyTaken = true "
+                                                + "AND EXTRACT(YEAR FROM a.surveySubmitTime) = '2014')"
+                                                + "ORDER BY u.email";
                                 
            //***********************************************
            initializeJDBC();

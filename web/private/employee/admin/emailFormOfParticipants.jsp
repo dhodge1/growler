@@ -113,16 +113,13 @@
                             ArrayList<Session> sessionArrayList = sPersistence.getSessionsWithAtLeast1Like(2014);
                             for(int i = 0; i<sessionArrayList.size(); i++)
                             {
-                            String infoStr = sessionArrayList.get(i).getId() +
-                                             " -- " + sessionArrayList.get(i).getName() +
-                                             " -- " + sessionArrayList.get(i).getSessionDate() +
-                                             " " + sessionArrayList.get(i).getStartTime(); 
+                            String infoStr = sessionArrayList.get(i).getName(); 
                             String sessionStr = sessionArrayList.get(i).getId().toString();
                            
                                    
                             %>
                             
-                            <option value = "46"><%=infoStr%></option>
+                            <option value = <%=sessionStr%>><b><%=infoStr%></b></option>
                                 
                             <% 
                             }

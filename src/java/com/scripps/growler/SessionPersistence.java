@@ -600,7 +600,7 @@ public class SessionPersistence extends GrowlerPersistence {
                                   + "AND EXISTS(SELECT NULL "
                                                 + "FROM registration r "
                                                 + "WHERE s.id = r.session_id) "
-                                                + "ORDER BY s.id ASC"); 
+                                                + "ORDER BY s.name ASC"); 
             //********************************************************************                                                          
             initializeJDBC();
             statement = connection.prepareStatement(preparedQuery);             
