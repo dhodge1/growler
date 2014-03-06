@@ -5,6 +5,7 @@
 --%>
 
 <%@page import="java.util.*"%>
+<%@page import="java.util.Calendar"%>
 <%@page import="java.sql.*"%>
 <%@page import="com.scripps.growler.*" %>
 
@@ -118,14 +119,35 @@
             <%--------------------------------------
             THUY: ADDED CODE FOR THE COMMUNICATION THEME
             ----------------------------------------%>
+            
             <li class="brand_nav <%= emailTab%>"><a href="#"><span class="nav_drop">Emails</span><em></em></a>
                 <ul class="child-menu child-menu-ul">
-                    <li><a href="${pageContext.request.contextPath}/email">"Call To Action"</a></li>
+                    
+                    <%  
+                       Calendar today = Calendar.getInstance();
+                       if(today.get(Calendar.MONTH)==10)
+                       {
+                    %>
+                         <li><a href="${pageContext.request.contextPath}/emailBySurvey">Participants "Submitted" Survey</a></li>
+                         <li><a href="${pageContext.request.contextPath}/emailToAllParticipants">Participants of the Current Year</a></li>
+                    <%
+                       }
+                       else
+                       {  
+                    %>
+                         <li><a href="${pageContext.request.contextPath}/email">Call To Action</a></li>
+                         <li><a href="${pageContext.request.contextPath}/emailFormOfParticipants">Participants "Liked" a Session</a></li>  
+                     <%
+                        } 
+                     %>     
+                    <!------------------------------commenting out for future testing--------------     
+                    <li><a href="${pageContext.request.contextPath}/email">Call To Action</a></li>
                     <li><a href="${pageContext.request.contextPath}/emailFormOfParticipants">Participants "Liked" a Session</a></li>
                     <li><a href="${pageContext.request.contextPath}/emailBySurvey">Participants "Submitted" Survey</a></li>
                     <li><a href="${pageContext.request.contextPath}/emailToAllParticipants">Participants of the Current Year</a></li>
-                </ul>
-            </li>
+                    ------------------------------------------------------------------------------->
+                 </ul> <!--END OF THE child-menu child-menu-ul div -->
+            </li> <!--END OF THE email tab li -->
             
             <%--------------------------------------------
             END OF ADDED CODE
