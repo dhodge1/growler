@@ -414,12 +414,12 @@
             <div id="code" class="row mediumBottomMargin">
                 <div class="form-group">
                     <label>Please enter the session code you were provided</label>
-                    <input class="input-xlarge" maxlength="4" name="key" id="key" /><a style="margin-left: 12px;" id="keyvalidate" class="button button-primary">Confirm My Attendance</a>
+                    <input class="input-xlarge" maxlength="4" name="key" id="key" /><a style="margin-left: 12px;" id="keyvalidate" class="button button-primary">Validate Session Key</a>
                     <br/><br/><span id="keyError" class="errors">
-                            <span style="color:red"><strong>The session code you have provided for this session is incorrect. Please enter a valid code in order to confirm your attendance, or you can opt to leave this field blank and submit your survey without it.</strong></span>
+                            <span style="color:red"><strong>The session code you have provided for this session is incorrect. Please enter a valid code in order to validate your session key, or you can opt to leave this field blank and submit your survey without it.</strong></span>
                         </span>
                     <span id="keySuccess" class="errors">
-                            <span style="color:#006325;"><strong>Thank you! Your attendance has been confirmed.</strong></span>
+                            <span style="color:#006325;"><strong>Thank you! Your session key has been validated.</strong></span>
                         </span>
                 </div>
                 <p style="color:red"><strong>Please Note:</strong> Session codes are provided during each session. This code not only helps verify your attendance, but also serves as a raffle ticket if provided anytime during the session or within 30 minutes after a session has ended. If the correct code is entered after 30 minutes of a session ending, or before a session begins, your attendance will still be confirmed, however, it will not serve as a raffle ticket. If, for whatever reason, you do not have the code for this session, you may leave this field blank and continue with the survey.</p>
