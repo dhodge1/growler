@@ -101,7 +101,7 @@
             </div>
             <!--<div class='row largeBottomMargin'></div>-->
             <div class="row mediumBottomMargin">
-                <h2 class="bordered smallBottomMargin"><img style="padding-bottom:0;padding-left:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span style="padding-left: 12px;">Theme Details</span><a href="../../../private/employee/admin/themeentry.jsp" class="pullRight button button-primary">Add Theme</a></h2>
+                <h2 class="bordered smallBottomMargin"><img style="padding-bottom:0;padding-left:0;" src='${pageContext.request.contextPath}/images/Techtoberfest2013small.png'/><span style="padding-left: 12px;">Theme Details</span><a href="../../../private/employee/admin/themeentry.jsp" class="pullRight button button-primary">Add Theme</a></h2>
             </div>
             <div class="row">
                 <form>

@@ -237,7 +237,7 @@
             <div class='row largeBottomMargin'></div>
 
             <div class="row mediumBottomMargin">
-                <h2 class="bordered mediumBottomMargin"><img style="padding-bottom:0;padding-left:0;" id="logo" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Which presentations are you most interested in?</span></h2>
+                <h2 class="bordered mediumBottomMargin"><img style="padding-bottom:0;padding-left:0;" id="logo" src='${pageContext.request.contextPath}/images/Techtoberfest2013small.png'/><span class="titlespan">Which presentations are you most interested in?</span></h2>
                 <span>Select the presentation themes you are most interested in. If desired, you can provide a ranking for less than 10 presentation themes. Once your ranking has been submitted, you can not submit another unless you choose to reset/clear your previous one.  There is also a <a href='../../private/employee/theme.jsp'>drag and drop version</a> available.</span><br/>
                 <div class='smallBottomMargin'></div>
                 <span><strong>Note:</strong> The order in which you select the item is the order they will be ranked.</span>

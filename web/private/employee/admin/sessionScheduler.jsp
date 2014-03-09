@@ -70,7 +70,7 @@
             <br/><br/><br/>
             <div class="row">
                 
-                    <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span style="padding-left: 12px;">Session Scheduler Tool</span></h2>
+                    <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='${pageContext.request.contextPath}/images/Techtoberfest2013small.png'/><span style="padding-left: 12px;">Session Scheduler Tool</span></h2>
                 
             </div>
             <br/>

@@ -231,7 +231,7 @@
             </div>
             <div class='row largeBottomMargin'></div>
             <div class="row mediumBottomMargin">
-                <h2 class='bordered mediumBottomMargin'><img style='padding-bottom:0;padding-left:0;' src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class='titlespan'>Which speakers are you most interested in?</span></h2>
+                <h2 class='bordered mediumBottomMargin'><img style='padding-bottom:0;padding-left:0;' src='${pageContext.request.contextPath}/images/Techtoberfest2013small.png'/><span class='titlespan'>Which speakers are you most interested in?</span></h2>
                 <span>Please drag and drop the speakers you are most interested in and rank them 1-10. If desired, you can provide a ranking for fewer than 10 speakers. Once your ranking has been submitted, you cannot submit another unless you choose to reset/clear your previous one.  <br/></span>
                 <div class='smallBottomMargin'></div>
                 <span><strong>Note: </strong>There is also a <a href=../../private/employee/nondragspeaker.jsp>non drag and drop version</a> available.</span>

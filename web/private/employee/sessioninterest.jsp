@@ -96,7 +96,7 @@
                 <span>Did a particular topic pique your interest?  Let us know.<br/>Simply check on the checkbox next to the session topics(s) you're interested in and press <strong>Submit Interest</strong>.</span>
             </div>
             <div class="row mediumBottomMargin">
-                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='http://growler.elasticbeanstalk.com/images/Techtoberfest2013small.png'/><span class="titlespan">Session Topics</span></h2>
+                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='${pageContext.request.contextPath}/images/Techtoberfest2013small.png'/><span class="titlespan">Session Topics</span></h2>
             </div>
             <form id="form" method="post" action="../../action/registerinterest.jsp">
                 <div class="form-group row">
