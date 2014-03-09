@@ -197,7 +197,7 @@
                     </ol>
                     <div class="carousel-inner">
                         <div class="item active">
-                            <img class='c_img' src="${pageContext.request.contextPath}/images/tech1.png"/>
+                            <img class='c_img' src="${pageContext.request.contextPath}/images/Techtoberfest2013large.png"/>
                             <div class="carousel-caption"><h3 class="carousel-text">In October, the Knoxville office will host its fifth annual "Techtoberfest", a gathering of Scripps Networks Interactive employees from around the globe, sharing the present and future technology within our company via a series of amazing presentations.</h3></div>
                         </div>
                         <div class="item">
@@ -205,7 +205,7 @@
                             <div class="carousel-caption"><h3 class="carousel-text">All feedback is encouraged to ensure this years event goes off without a hitch!  From user rankings to suggestions, the Techtoberfest Information System (TIS) is here to ensure your voice is heard before, during and after the Techtoberfest 2014 ends.</h3></div>                            
                         </div>
                         <div class="item">
-                            <img class='c_img' src="${pageContext.request.contextPath}/images/slider_image2.png"/>
+                            <img class='c_img' src="${pageContext.request.contextPath}/images/tech1.png"/>
                             <div class="carousel-caption"><h3 class="carousel-text">For this year's Techtoberfest, even though no registration is required, we encourage employees to provide their level of interest for any/all desired presentation sessions.  There will even be surveys available for those wanting to provide feedback regarding sessions they have attended.</h3></div>
                         </div>
                     </div><!-- .carousel-inner -->
