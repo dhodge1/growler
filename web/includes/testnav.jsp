@@ -35,14 +35,14 @@
 <nav class="topnav navbar">
         <nav class="globalNavigation modify-pages" id="navigation">
             <ul class="nav">
-                <li class="non_drop <%= home%>" style="padding-right:12px" ><a href="../../home"><span>Home</span></a></li>
+                <li class="non_drop <%= home%>" style="padding-right:12px" ><a href="${pageContext.request.contextPath}/home"><span>Home</span></a></li>
                 <li class="brand_nav <%= themeTab%>" style="padding-left:12px"><a href="#"><span>Themes</span><em></em></a>
                     <ul class="child-menu child-menu-ul firstnav" style="left:11px;">
-                        <!--<li><a href="../../private/employee/theme.jsp">Rank Preferred Themes</a></li>-->
+                        <!--<li><a href="${pageContext.request.contextPath}/private/employee/theme.jsp">Rank Preferred Themes</a></li>-->
                         <% if (rankThemes.getFeatureState()) { %>
                             <%@ include file="../../includes/regRankTheme.jsp" %>
                         <% } %>
-                        <!--<li><a href="../../private/employee/themeentry.jsp">Suggest a New Theme</a></li>-->
+                        <!--<li><a href="${pageContext.request.contextPath}/private/employee/themeentry.jsp">Suggest a New Theme</a></li>-->
                         <% if (suggestTheme.getFeatureState()) { %>
                             <%@ include file="../../includes/regSuggestTheme.jsp" %>
                         <% } %>
@@ -50,15 +50,15 @@
                 </li>
                 <li class="brand_nav <%= speakerTab%>"><a href="#" style='padding-left:8px;'><span class="nav_drop">Speakers</span><em></em></a>
                     <ul class="child-menu child-menu-ul">
-                        <!--<li><a href="../../private/employee/speaker.jsp">Rank Preferred Speakers</a></li>-->
+                        <!--<li><a href="${pageContext.request.contextPath}/private/employee/speaker.jsp">Rank Preferred Speakers</a></li>-->
                         <% if (rankSpeaker.getFeatureState()) { %>
                             <%@ include file="../../includes/regRankSpeaker.jsp" %>
                         <% } %>
-                        <!--<li><a href="../../private/employee/speakerentry.jsp">Suggest a New Speaker</a></li>-->
+                        <!--<li><a href="${pageContext.request.contextPath}/private/employee/speakerentry.jsp">Suggest a New Speaker</a></li>-->
                         <% if (suggestSpeaker.getFeatureState()) { %>
                             <%@ include file="../../includes/regSuggestSpeaker.jsp" %>
                         <% } %>
-                        <!--<li><a href="../../private/employee/nominate.jsp">Nominate Yourself As A Speaker</a></li>-->
+                        <!--<li><a href="${pageContext.request.contextPath}/private/employee/nominate.jsp">Nominate Yourself As A Speaker</a></li>-->
                         <% if (nominateSpeaker.getFeatureState()) { %>
                             <%@ include file="../../includes/regNominateSpeaker.jsp" %>
                         <% } %>
@@ -66,11 +66,11 @@
                 </li>
                 <li class="brand_nav <%= sessionTab%>"><a href="#" style='padding-left:8px;'><span class="nav_drop">Sessions</span><em></em></a>
                     <ul class="child-menu child-menu-ul">
-                        <!--<li><a href="../../private/employee/sessionschedule.jsp">View Session Schedule</a></li>-->
+                        <!--<li><a href="${pageContext.request.contextPath}/private/employee/sessionschedule.jsp">View Session Schedule</a></li>-->
                         <% if (scheduleSession.getFeatureState()) { %>
                             <%@ include file="../../includes/regSessionSchedule.jsp" %>
                         <% } %>
-                        <!--<li><a href="../../private/employee/surveys.jsp">Submit Session Feedback</a></li>-->
+                        <!--<li><a href="${pageContext.request.contextPath}/private/employee/surveys.jsp">Submit Session Feedback</a></li>-->
                         <% if (surveySession.getFeatureState()) { %>
                             <%@ include file="../../includes/regSurvey.jsp" %>
                         <% } %>

@@ -211,7 +211,7 @@
             <div class="row mediumBottomMargin"></div>
             <div class="row">
                 <ul class="breadcrumb">
-                    <li><a href="../../private/employee/home.jsp">Home</a></li>
+                    <li><a href="${pageContext.request.contextPath}/private/employee/home.jsp">Home</a></li>
                     <li class='ieFix'>Rank Your Preferred Themes</li>
                 </ul>
             </div>
@@ -233,7 +233,7 @@
                 <h2 class="bordered mediumBottomMargin"><img style="padding-bottom:0;padding-left:0;" id="logo" src='${pageContext.request.contextPath}/images/Techtoberfest2013small.png'/><span class="titlespan">Which presentations are you most interested in?</span></h2>
                 <span>Please drag and drop the presentation themes you are most interested in and rank them 1-10. If desired, you can provide a ranking for fewer than 10 themes. Once your ranking has been submitted, you can not submit another unless you choose to reset/clear your previous one.<br/></span>
                 <div class='smallBottomMargin'></div>
-                <span><strong>Note:</strong>  There is also a <a href="../../private/employee/nondragtheme.jsp">non drag and drop version</a> available.</span>
+                <span><strong>Note:</strong>  There is also a <a href="${pageContext.request.contextPath}/private/employee/nondragtheme.jsp">non drag and drop version</a> available.</span>
                 <div class='row largeBottomMargin'></div>
 
                 <form action='../../action/processThemeRanking.jsp'>
@@ -272,7 +272,7 @@
                     </div>
                     <div class='form-actions smallBottomMargin'>
                         <input id="send" type="submit" value="Submit My Ranking" class="button button-primary"/>
-                        <a href="../../private/employee/home.jsp">Cancel</a>
+                        <a href="${pageContext.request.contextPath}/private/employee/home.jsp">Cancel</a>
                         <input id='previously' name='previously' type='hidden' value=<%= themes.size()%>/>
                     </div>
                     <strong>Presentation not listed? </strong><a href='../../private/employee/themeentry.jsp'>Click here to suggest a new theme</a>

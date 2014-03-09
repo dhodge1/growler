@@ -84,7 +84,7 @@
             <div class="row">
                 <ul class="breadcrumb">
                     <li><a href="home.jsp">Home</a></li>
-                    <li><a href="../../private/employee/sessionschedule.jsp">Session Schedule</a></li>
+                    <li><a href="${pageContext.request.contextPath}/private/employee/sessionschedule.jsp">Session Schedule</a></li>
                     <li class='ieFix'>Provide Session Interest</li>
                 </ul>
             </div>
@@ -98,7 +98,7 @@
             <div class="row mediumBottomMargin">
                 <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='${pageContext.request.contextPath}/images/Techtoberfest2013small.png'/><span class="titlespan">Session Topics</span></h2>
             </div>
-            <form id="form" method="post" action="../../action/registerinterest.jsp">
+            <form id="form" method="post" action="${pageContext.request.contextPath}/action/registerinterest.jsp">
                 <div class="form-group row">
                     <table class="table table-alternatingRow">
                         <%
@@ -120,7 +120,7 @@
                 </div>
                 <div class="form-actions row" style='padding-top:12px;'>
                     <input type="submit" class="button button-primary" value="Submit Interest"/>
-                    <a href="../../private/employee/sessionschedule.jsp">Cancel</a>
+                    <a href="${pageContext.request.contextPath}/private/employee/sessionschedule.jsp">Cancel</a>
                 </div>
             </form>
     </div>

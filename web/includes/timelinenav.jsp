@@ -4,7 +4,7 @@
     Author     : 162107
 --%>
 
-<link href="../css/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="${pageContext.request.contextPath}/css/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 <nav class="globalNavigation">
 <div class="navbar navbar-static">
               <div class="navbar-inner">
@@ -26,7 +26,7 @@
               </div>
 </div>
 </nav>
-<script src="../css/bootstrap/js/dropdown.js"></script>
+<script src="${pageContext.request.contextPath}/css/bootstrap/js/dropdown.js"></script>
 <script>$(document).ready(function () {
     $('.dropdown').dropdown();
 });

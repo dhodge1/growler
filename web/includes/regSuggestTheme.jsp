@@ -4,4 +4,4 @@
     Author     : David
 --%>
 
-<li><a href="../../suggestTheme">Suggest a New Theme</a></li>
+<li><a href="${pageContext.request.contextPath}/suggestTheme">Suggest a New Theme</a></li>

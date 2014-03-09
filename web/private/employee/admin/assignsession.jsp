@@ -20,7 +20,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-        <link rel="stylesheet" href="../../../css/draganddrop.css" /><!--Drag and drop style-->
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/draganddrop.css" /><!--Drag and drop style-->
         <script src="http://growler.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <style>
             h1, h3 {
@@ -91,7 +91,7 @@
             <div class="row mediumBottomMargin"></div>
             <div class="row">
                 <ul class="breadcrumb">
-                    <li><a href="../../../private/employee/admin/home.jsp">Home</a></li>
+                    <li><a href="${pageContext.request.contextPath}/private/employee/admin/home.jsp">Home</a></li>
                     <li class='ieFix'>Assign A Speaker</li>
                 </ul>
             </div>
@@ -113,7 +113,7 @@
                         ArrayList<Session> sessions = sessionPersist.getThisYearSessions(2013, " order by session_date");
                         ArrayList<Speaker> speakers = speakerPersist.getNonDefaultSpeakers();
                     %>
-                    <form id="action" action="../../../action/processSessionAssign.jsp" method="post" onsubmit="return validateForm();">
+                    <form id="action" action="${pageContext.request.contextPath}/action/processSessionAssign.jsp" method="post" onsubmit="return validateForm();">
                         <div class="form-group">
                             <label class="required">Session Name:</label>
                             <select class="session" name="sessionId">

@@ -86,7 +86,7 @@
             <div class="row mediumBottomMargin"></div>
             <div class="row">
                 <ul class="breadcrumb">
-                    <li><a href="../../../private/employee/admin/home.jsp">Home</a></li>
+                    <li><a href="${pageContext.request.contextPath}/private/employee/admin/home.jsp">Home</a></li>
                     <li class='ieFix'>Assign Session To A Room</li>
                 </ul>
             </div>
@@ -108,7 +108,7 @@
                     ArrayList<Location> locations = locationPersist.getAllLocations("");
                     Session sessions = sessionPersist.getSessionByID(sessionPassed);
                 %>
-                <form id="action" action="../../../action/processSessionRoomAssign.jsp" method="post">
+                <form id="action" action="${pageContext.request.contextPath}/action/processSessionRoomAssign.jsp" method="post">
                     <div class="form-group"><strong><% out.print(sessions.getSessionDate() + ", " + sessions.getStartTime() + ", " + sessions.getName());%></strong>
                     <input type="hidden" name="sessionId" id="sessionId" value="<%= sessions.getId() %>"/>
                     </div>
@@ -143,7 +143,7 @@
                     <div class="largeBottomMargin"><i class='icon16-success'></i> Indicates a room has already has been assigned to <%= sessions.getName() %>.</div>
                     <div class="form-actions">
                         <input id="send" type="submit" class="button button-primary" value="Assign Session To Room"/>
-                        <a id="cancel" href="../../../private/employee/admin/session.jsp">Cancel</a>
+                        <a id="cancel" href="${pageContext.request.contextPath}/private/employee/admin/session.jsp">Cancel</a>
                     </div>
                 </form>
             </div>
@@ -152,8 +152,8 @@
         <%@ include file="../../../includes/footer.jsp" %> 
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
-        <script src="../../../js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>
-        <script src="../../../js/libs/sniui.user-inline-help.1.2.0.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/js/libs/sniui.user-inline-help.1.2.0.min.js" type="text/javascript"></script>
         <script>
                                 $().ready(function() {
                                     jQuery.expr[":"].icontains = jQuery.expr.createPseudo(function(arg) {

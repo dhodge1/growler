@@ -17,7 +17,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Edit Room Confirmation</title>
         <link rel="shortcut icon" type="image/png" href="http://growler.elasticbeanstalk.com/images/scripps_favicon-32.ico">
-        <link rel="stylesheet" href="../../../css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
         <script src="http://growler.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
@@ -66,7 +66,7 @@
             </div>
             <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
             <div class="row mediumBottomMargin">
-                <span>Click <a href="../../../private/employee/admin/assignroom.jsp?roomId=<%= session.getAttribute("roomId") %>">here</a> to assign this room to a session.</span>
+                <span>Click <a href="${pageContext.request.contextPath}/private/employee/admin/assignroom.jsp?roomId=<%= session.getAttribute("roomId") %>">here</a> to assign this room to a session.</span>
             </div>
             <div class="row largeBottomMargin">
                 <span><% out.print((String)session.getAttribute("room")); %></span>

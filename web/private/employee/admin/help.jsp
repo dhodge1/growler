@@ -17,8 +17,8 @@
         <link rel="shortcut icon" type="image/png" href="http://growler.elasticbeanstalk.com/images/scripps_favicon-32.ico">
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="../../../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
-        <script src="../../../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
+        <script src="${pageContext.request.contextPath}/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <style>
             .pullRight {
                 float:right;
@@ -42,7 +42,7 @@
             <div class='row mediumBottomMargin'></div>
             <div class="row">
                 <ul class="breadcrumb">
-                    <li><a href="../../../private/employee/admin/home.jsp">Home</a></li>
+                    <li><a href="${pageContext.request.contextPath}/private/employee/admin/home.jsp">Home</a></li>
                     <li class='ieFix'>Techtoberfest Help</li>
                 </ul>
             </div>
@@ -162,20 +162,20 @@
         </div>
         <%@ include file="../../../includes/footer.jsp" %> 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-	<script src="../../../js/components.js"></script>
-	<script src="../../../js/jquery.sortable.js"></script><!--Drag and drop for non-iOS-->
-	<script src="../../../js/libs/bootstrap-collapse.2.2.1.min.js" type="text/javascript"></script>
-	<script src="../../../js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"> </script>
-	<script src="../../../js/libs/jquery-1.8.3.min.js" type="text/javascript"></script>
-	<script src="../../../js/libs/jquery.dataTables.1.9.3.min.js" type="text/javascript"></script>
-	<script src="../../../js/libs/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
-	<script src="../../../js/libs/prettify.js" type="text/javascript"></script>
-	<script src="../../../js/libs/sniui.accordion.1.0.0.min.js" type="text/javascript"></script>
-	<script src="../../../js/libs/sniui.accordion.1.2.0.min.js" type="text/javascript"> </script>
-	<script src="../../../js/libs/sniui.auto-inline-help.min.js" type="text/javascript"> </script>
-	<script src="../../../js/libs/sniui.auto-inline-help.1.0.0.min.js" type="text/javascript"></script>
-	<script src="../../../js/libs/sniui.dataTables.1.0.0.min.js" type="text/javascript"></script>
-	<script src="../../../js/libs/sniui.dialog.1.1.0.min.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/components.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.sortable.js"></script><!--Drag and drop for non-iOS-->
+	<script src="${pageContext.request.contextPath}/js/libs/bootstrap-collapse.2.2.1.min.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"> </script>
+	<script src="${pageContext.request.contextPath}/js/libs/jquery-1.8.3.min.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/libs/jquery.dataTables.1.9.3.min.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/libs/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/libs/prettify.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/libs/sniui.accordion.1.0.0.min.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/libs/sniui.accordion.1.2.0.min.js" type="text/javascript"> </script>
+	<script src="${pageContext.request.contextPath}/js/libs/sniui.auto-inline-help.min.js" type="text/javascript"> </script>
+	<script src="${pageContext.request.contextPath}/js/libs/sniui.auto-inline-help.1.0.0.min.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/libs/sniui.dataTables.1.0.0.min.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/libs/sniui.dialog.1.1.0.min.js" type="text/javascript"></script>
         <script>
             $(document).ready(function() {
                 $(".accordion-toggle").click(function() {

@@ -19,7 +19,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <title>Add a Room</title><!-- Title -->
-        <link rel="shortcut icon" type="image/png" href="../../../images/scripps_favicon-32.ico">
+        <link rel="shortcut icon" type="image/png" href="${pageContext.request.contextPath}/images/scripps_favicon-32.ico">
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> 
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
@@ -59,7 +59,7 @@
             <div class="mediumBottomMargin row"></div>
             <div class="row">
                 <ul class="breadcrumb">
-                    <li><a href="../../../private/employee/admin/home.jsp">Home</a></li>
+                    <li><a href="${pageContext.request.contextPath}/private/employee/admin/home.jsp">Home</a></li>
                     <li class='ieFix'>Add a Room</li>
                 </ul>
             </div>
@@ -78,7 +78,7 @@
             </div>
             <div class="row mediumBottomMargin">
                 <%@include file="../../../includes/messagehandler.jsp" %>
-                    <form id="action" method="post" action="../../../action/processaddroom.jsp" >
+                    <form id="action" method="post" action="${pageContext.request.contextPath}/action/processaddroom.jsp" >
                         <fieldset>
                             <div class="form-group">
                                 <label class="required">Room Number:</label>
@@ -124,7 +124,7 @@
     <%@ include file="../../../includes/scriptlist.jsp" %>
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
     <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>           
-    <script src="../../../js/addroom.js"></script>
+    <script src="${pageContext.request.contextPath}/js/addroom.js"></script>
 </body>
 
 </html>

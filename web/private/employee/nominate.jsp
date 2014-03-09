@@ -23,11 +23,11 @@
 
         <title>Nominate Yourself as a Speaker</title>
         <link rel="shortcut icon" type="image/png" href="http://growler.elasticbeanstalk.com/images/scripps_favicon-32.ico">
-        <link rel="stylesheet" href="../../css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-        <link rel="stylesheet" href="../../css/prettify/prettify.css" /> 
-        <link rel="stylesheet" type="text/css" href="../../css/general.css" /><!--General CSS-->
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/prettify/prettify.css" /> 
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/general.css" /><!--General CSS-->
         <script src="http://growler.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->	
         <style>
             .message_container {
@@ -66,7 +66,7 @@
             <div class="row mediumBottomMargin"></div>
             <div class="row">
                 <ul class="breadcrumb">
-                    <li><a href="../../private/employee/home.jsp">Home</a></li>
+                    <li><a href="${pageContext.request.contextPath}/private/employee/home.jsp">Home</a></li>
                     <li>Nominate Yourself As A Speaker</li>
                 </ul>
             </div>
@@ -84,7 +84,7 @@
                 <h2 class="bordered"><img style="padding-left:0px;padding-bottom:0px;" src="${pageContext.request.contextPath}/images/Techtoberfest2013small.png"/><span class="titlespan">Suggestion Details</span></h2>
             </div>
             <div class="row">
-                    <form method="POST" id="action" action="../../action/processNomination.jsp">
+                    <form method="POST" id="action" action="${pageContext.request.contextPath}/action/processNomination.jsp">
                         <fieldset>
                             <div class="form-group">
                                 <label class="required">Presentation topic</label>
@@ -130,7 +130,7 @@
                             </div>
                             <div class="form-actions">
                                 <input type="submit" id="send" class="button button-primary" value="Submit Nomination"/>
-                                <a id="cancel" href="../../private/employee/home.jsp">Cancel</a>
+                                <a id="cancel" href="${pageContext.request.contextPath}/private/employee/home.jsp">Cancel</a>
                             </div>
                         </fieldset> 
                 </form>	  
@@ -139,11 +139,11 @@
         <%@ include file="../../includes/footer.jsp" %> 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
         <script src="http://growler.elasticbeanstalk.com/js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>
-        <script src="../../js/libs/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/js/libs/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
         <script src="http://growler.elasticbeanstalk.com/js/libs/sniui.auto-inline-help.min.js" type="text/javascript"></script>
         <script src="http://growler.elasticbeanstalk.com/js/libs/sniui.auto-inline-help.1.0.0.min.js" type="text/javascript"></script>
 
         <!--additional script-->
-        <script src="../../js/nomination.js"></script>
+        <script src="${pageContext.request.contextPath}/js/nomination.js"></script>
     </body>
 </html>

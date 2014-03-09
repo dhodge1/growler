@@ -4,4 +4,4 @@
     Author     : David
 --%>
 
-<li><a href="../../schedule">View Session Schedule</a></li>
+<li><a href="${pageContext.request.contextPath}/schedule">View Session Schedule</a></li>

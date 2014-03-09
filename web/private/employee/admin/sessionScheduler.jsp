@@ -87,7 +87,7 @@
                         ArrayList<Session> day2 = sp.getSessionsByDate(2, "");
                         ArrayList<Session> noDay = sp.getSessionsWithoutADate();
                     %>
-                    <form id="myform" action="../../../action/processScheduler.jsp" method="post">
+                    <form id="myform" action="${pageContext.request.contextPath}/action/processScheduler.jsp" method="post">
                         <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
                             <tr>
                                 <th>Time</th>
@@ -200,7 +200,7 @@
 
         <%@ include file="../../../includes/footer.jsp" %> 
         <%@ include file="../../../includes/scriptlist.jsp" %>
-        <script src="../../../js/updateSessionList.js"></script>
+        <script src="${pageContext.request.contextPath}/js/updateSessionList.js"></script>
 
 
     </body>

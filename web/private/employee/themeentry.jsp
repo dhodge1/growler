@@ -22,14 +22,14 @@
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Suggest a New Theme</title>
-        <link rel="stylesheet" href="../../css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-        <link rel="stylesheet" type="text/css" href="../../css/general.css" /><!--General CSS-->
-        <link rel="stylesheet" href="../../css/prettify/prettify.css" /> 
-        <link rel="stylesheet" href="../../css/wijmo/jquery.wijmo-complete.all.2.3.2.min.css"/>
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/general.css" /><!--General CSS-->
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/prettify/prettify.css" /> 
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/wijmo/jquery.wijmo-complete.all.2.3.2.min.css"/>
         <script src="http://growler.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
-        <link rel="shortcut icon" type="image/png" href="../../images/scripps_favicon-32.ico">
+        <link rel="shortcut icon" type="image/png" href="${pageContext.request.contextPath}/images/scripps_favicon-32.ico">
         <style>
             .message_container {
                 display: none;
@@ -68,7 +68,7 @@
             <div class="row mediumBottomMargin"></div>
             <div class="row">
                 <ul class="breadcrumb">
-                    <li><a href="../../private/employee/home.jsp">Home</a></li>
+                    <li><a href="${pageContext.request.contextPath}/private/employee/home.jsp">Home</a></li>
                     <li>Suggest a New Theme</li>
                 </ul>
             </div>
@@ -87,7 +87,7 @@
             </div>
             <div class="row">
                 <%@include file="../../includes/messagehandler.jsp" %>
-                    <form method="POST" id="action" action="../../action/processThemeSuggestion.jsp">
+                    <form method="POST" id="action" action="${pageContext.request.contextPath}/action/processThemeSuggestion.jsp">
                         <fieldset>
                             <div class="form-group">
                                 <label class="required">Presentation Theme Name</label>
@@ -117,7 +117,7 @@
                             </div>
                             <div class="form-actions">
                                 <input type="submit" id="send" class="button button-primary" value="Submit Suggestion" />
-                                <a id="cancel" href="../../private/employee/theme.jsp">Cancel</a>
+                                <a id="cancel" href="${pageContext.request.contextPath}/private/employee/theme.jsp">Cancel</a>
                             </div>
                         </fieldset>
                 </form>
@@ -126,12 +126,12 @@
         <%@ include file="../../includes/footer.jsp" %> 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
         <script src="http://growler.elasticbeanstalk.com/js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>
-        <script src="../../js/libs/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/js/libs/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
         <script src="http://growler.elasticbeanstalk.com/js/libs/sniui.auto-inline-help.min.js" type="text/javascript"></script>
         <script src="http://growler.elasticbeanstalk.com/js/libs/sniui.auto-inline-help.1.0.0.min.js" type="text/javascript"></script>
-        <script src="../../js/libs/sniui.user-inline-help.1.2.0.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/js/libs/sniui.user-inline-help.1.2.0.min.js" type="text/javascript"></script>
         <!--Additional Script-->
-        <script src="../../js/themeentry.js"></script>
+        <script src="${pageContext.request.contextPath}/js/themeentry.js"></script>
         <script>$(function() {
                 $("input").autoinline();
                 $('#showTips').userInlineHelp();

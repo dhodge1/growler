@@ -20,10 +20,10 @@
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Manage Rooms</title><!-- Title -->
-        <link rel="shortcut icon" type="image/png" href="../../../images/scripps_favicon-32.ico">
-        <link rel="stylesheet" href="../../../css/jquery-ui/jquery-ui-1.9.2.custom.min.css"/>
-        <link rel="stylesheet" href="../../../css/wijmo/jquery.wijmo-complete.2.3.2.min.css"/>
-        <link rel="stylesheet" href="../../../css/wijmo/jquery.wijmo-complete.all.2.3.2.min.css"/>
+        <link rel="shortcut icon" type="image/png" href="${pageContext.request.contextPath}/images/scripps_favicon-32.ico">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery-ui/jquery-ui-1.9.2.custom.min.css"/>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/wijmo/jquery.wijmo-complete.2.3.2.min.css"/>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/wijmo/jquery.wijmo-complete.all.2.3.2.min.css"/>
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
         <script src="http://growler.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
@@ -96,7 +96,7 @@
             <div class="row mediumBottomMargin"></div>
             <div class="row">
                 <ul class="breadcrumb">
-                    <li><a href="../../../private/employee/admin/home.jsp">Home</a></li>
+                    <li><a href="${pageContext.request.contextPath}/private/employee/admin/home.jsp">Home</a></li>
                     <li class='ieFix'>Manage Rooms</li>
                 </ul>
             </div>
@@ -109,7 +109,7 @@
             </div>
             <!--<div class='row largeBottomMargin'></div>-->
             <div class="row mediumBottomMargin">
-                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='${pageContext.request.contextPath}/images/Techtoberfest2013small.png'/><span style="padding-left: 12px;">Room Details</span><a href="../../../private/employee/admin/addroom.jsp" class="pullRight button button-primary">Add Room</a></h2>
+                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='${pageContext.request.contextPath}/images/Techtoberfest2013small.png'/><span style="padding-left: 12px;">Room Details</span><a href="${pageContext.request.contextPath}/private/employee/admin/addroom.jsp" class="pullRight button button-primary">Add Room</a></h2>
             </div>
             <div class="row largeBottomMargin">
                 <form onsubmit="return false;">
@@ -191,14 +191,14 @@
             </div>
         </div>
         <%@ include file="../../../includes/footer.jsp" %>
-        <script src="../../../js/libs/jquery-1.8.3.min.js"></script>  
-        <script src="../../../js/libs/jquery-ui-1.9.2.custom.min.js"></script>  
-        <script src="../../../js/libs/jquery.wijmo-complete.all.2.3.2.min.js"></script>
-        <script src="../../../js/libs/jquery.wijmo-open.all.2.3.1.min.js"></script>
-        <script src="../../../js/libs/jquery.wijmo-open.all.2.3.2.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/libs/jquery-1.8.3.min.js"></script>  
+        <script src="${pageContext.request.contextPath}/js/libs/jquery-ui-1.9.2.custom.min.js"></script>  
+        <script src="${pageContext.request.contextPath}/js/libs/jquery.wijmo-complete.all.2.3.2.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/libs/jquery.wijmo-open.all.2.3.1.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/libs/jquery.wijmo-open.all.2.3.2.min.js"></script>
         <script src="http://growler.elasticbeanstalk.com/js/libs/bootstrap-dropdown.2.0.4.min.js"></script>
         <script src="http://growler.elasticbeanstalk.com/js/libs/sniui.dialog.1.2.0.min.js"></script>
-        <script src="../../../js/pagination.js"></script>
+        <script src="${pageContext.request.contextPath}/js/pagination.js"></script>
         <script>
 
                     $('form').submit(function(event) {

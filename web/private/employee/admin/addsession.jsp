@@ -19,7 +19,7 @@
         <title>Add A Session</title><!-- Title -->
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="shortcut icon" type="image/png" href="../../../images/scripps_favicon-32.ico">
+        <link rel="shortcut icon" type="image/png" href="${pageContext.request.contextPath}/images/scripps_favicon-32.ico">
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
         <script src="http://growler.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
@@ -80,7 +80,7 @@
             <div class="row mediumBottomMargin"></div>
             <div class="row">
                 <ul class="breadcrumb">
-                    <li><a href="../../../private/employee/admin/home.jsp">Home</a></li>
+                    <li><a href="${pageContext.request.contextPath}/private/employee/admin/home.jsp">Home</a></li>
                     <li class='ieFix'>Add A Session</li>
                 </ul>
             </div>
@@ -104,7 +104,7 @@
                     SpeakerPersistence sk = new SpeakerPersistence();
                     ArrayList<Speaker> speakers = sk.getAllSpeakers("");
                 %>
-                <form method="post" action="../../../action/processSession.jsp">
+                <form method="post" action="${pageContext.request.contextPath}/action/processSession.jsp">
                     <div class="form-group">
                         <label class="required">Session Topic </label>
                         <input id="name" size='50' name="name" type="text" data-content="Enter the name of the Session" maxlength="70"/>

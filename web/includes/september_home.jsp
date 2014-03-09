@@ -8,4 +8,4 @@
 <p class="largeBottomMargin">The Techtoberfest Committee has compiled all of your rankings and suggestions and we want you to know...we have LISTENED!  The 2013 Techtoberfest Themes and Speakers are now available.  View the full listing/schedule below.
 </p>
 <div class="mediumBottomMargin"></div>
-<a class="button button-primary" href="../../private/employee/sessionschedule.jsp">Techtoberfest Schedule</a>
+<a class="button button-primary" href="${pageContext.request.contextPath}/private/employee/sessionschedule.jsp">Techtoberfest Schedule</a>

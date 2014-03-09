@@ -20,7 +20,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-        <link rel="stylesheet" href="../../../css/draganddrop.css" /><!--Drag and drop style-->
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/draganddrop.css" /><!--Drag and drop style-->
         <script src="http://growler.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
     </head>
     <body id="growler1">
@@ -61,7 +61,7 @@
 
 
                     %>
-                    <form id="action" action="../../../action/processSpeakerRemove.jsp" method="post" onsubmit="return validateForm();">
+                    <form id="action" action="${pageContext.request.contextPath}/action/processSpeakerRemove.jsp" method="post" onsubmit="return validateForm();">
                         <div class="form-group">
                             <label>Session Name:</label>
                             <label><% out.print(sessionPersist.getSessionByID(sessionId).getName());%></label>

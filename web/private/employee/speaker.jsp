@@ -212,7 +212,7 @@
             <div class="row mediumBottomMargin"></div>
             <div class="row">
                 <ul class="breadcrumb">
-                    <li><a href="../../private/employee/home.jsp">Home</a></li>
+                    <li><a href="${pageContext.request.contextPath}/private/employee/home.jsp">Home</a></li>
                     <li class='ieFix'>Rank Your Preferred Speakers</li>
                 </ul>
             </div>
@@ -293,8 +293,8 @@
         <%@ include file="../../includes/footer.jsp" %>
         <div id='resetModal' title='Error'>You must reset the previous ranking you’ve submitted before submitting another.</div>
         <div id='rankModal' title='Error'>Please rank at least one speaker before submitting.</div>
-        <script src="../../js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>
-        <script src="../../js/libs/sniui.user-inline-help.1.2.0.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/js/libs/sniui.user-inline-help.1.2.0.min.js" type="text/javascript"></script>
         <script>
             $(document).ready(function() {
                 $('#spkrtypeHelp').userInlineHelp();

@@ -29,11 +29,11 @@
 
         <title>Password Reset</title>
 
-        <link rel="stylesheet" href="../css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
-        <link rel="stylesheet" href="../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
-        <link rel="stylesheet" href="../css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-        <link rel="stylesheet" href="../css/prettify/prettify.css" /> 
-        <link rel="stylesheet" type="text/css" href="../css/general.css" /><!--General CSS-->
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/prettify/prettify.css" /> 
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/general.css" /><!--General CSS-->
         <style>
             .message_container {
                 display: none;
@@ -41,7 +41,7 @@
                 font-weight: bold;
             }
         </style>
-        <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->	
+        <script src="${pageContext.request.contextPath}/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->	
     </head>
     <body id="growler1">
         <%@ include file="../includes/indexheader.jsp" %> 
@@ -60,7 +60,7 @@
             </div>
             <br/>
             <div class="row">
-                    <form method="POST" id="action" action="../action/reset.jsp">
+                    <form method="POST" id="action" action="${pageContext.request.contextPath}/action/reset.jsp">
                         <fieldset>
                             <div class="form-group">
                                 <label class="required">Verification</label>
@@ -87,7 +87,7 @@
                             <input type="hidden" name="email" value="<% out.print(request.getParameter("email")); %>"/>
                             <div class="form-actions">
                                 <input class="button button-primary" id="send" value="Submit" type="submit">
-                                <a class="button" id="cancel" href="../index.jsp">Cancel</a>
+                                <a class="button" id="cancel" href="${pageContext.request.contextPath}/index.jsp">Cancel</a>
                             </div>
                         </fieldset>
                 </form>	
@@ -97,13 +97,13 @@
     <%@ include file="../includes/scriptlist.jsp" %>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="../js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>
-    <script src=".../js/libs/jquery-1.8.3.min.js" type="text/javascript"></script>
-    <script src="../js/libs/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
-    <script src="../js/libs/sniui.auto-inline-help.min.js" type="text/javascript"></script>
-    <script src="../js/libs/sniui.auto-inline-help.1.0.0.min.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}./js/libs/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/js/libs/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/js/libs/sniui.auto-inline-help.min.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/js/libs/sniui.auto-inline-help.1.0.0.min.js" type="text/javascript"></script>
 
     <!--Additional Script-->
-    <script src="../js/resetpassword.js"></script>
+    <script src="${pageContext.request.contextPath}/js/resetpassword.js"></script>
 </body>
 </html>

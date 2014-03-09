@@ -103,7 +103,7 @@
             <div class="row mediumBottomMargin"></div>
             <div class="row">
                 <ul class="breadcrumb">
-                    <li><a href="../../private/employee/home.jsp">Home</a></li>
+                    <li><a href="${pageContext.request.contextPath}/private/employee/home.jsp">Home</a></li>
                     <li class='ieFix'>Session Schedule</li>
                 </ul>
             </div>
@@ -225,8 +225,8 @@
             </div>
         </div>
         <%@ include file="../../includes/footer.jsp" %>        
-        <script src="../../js/libs/sniui.dialog.1.2.0.min.js"></script>
-        <script src="../../js/pagination.js"></script>
+        <script src="${pageContext.request.contextPath}/js/libs/sniui.dialog.1.2.0.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/pagination.js"></script>
         <script>
                     $('form').submit(function(event) {
                         pageJump();

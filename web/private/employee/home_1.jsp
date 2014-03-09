@@ -52,7 +52,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Welcome to Techtoberfest!</title><!-- Title -->
         <link rel="shortcut icon" type="image/png" href="http://growler.elasticbeanstalk.com/images/scripps_favicon-32.ico">
-        <link rel="stylesheet" href="../../css/bootstrap.css"/>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css"/>
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> 
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <script src="http://growler.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
@@ -145,12 +145,12 @@
 <nav class="topnav navbar">
         <nav class="globalNavigation modify-pages" id="navigation">
             <ul class="nav">
-                <li class="non_drop <%= home%>" style="padding-right:12px" ><a href="../../private/employee/home.jsp"><span>Home</span></a></li>
+                <li class="non_drop <%= home%>" style="padding-right:12px" ><a href="${pageContext.request.contextPath}/private/employee/home.jsp"><span>Home</span></a></li>
                 
                 <li class="brand_nav <%= sessionTab%>" style="padding-left: 12px;"><a href="#" style='padding-left:8px;'><span class="nav_drop">Sessions</span><em></em></a>
                     <ul class="child-menu child-menu-ul firstnav" style="left:11px;">
-                        <li><a href="../../private/employee/sessionschedule.jsp">View Session Schedule</a></li>
-                        <li><a href="../../private/employee/surveys.jsp">Submit Session Feedback</a></li>
+                        <li><a href="${pageContext.request.contextPath}/private/employee/sessionschedule.jsp">View Session Schedule</a></li>
+                        <li><a href="${pageContext.request.contextPath}/private/employee/surveys.jsp">Submit Session Feedback</a></li>
                     </ul>
                 </li>
             </ul>
@@ -181,15 +181,15 @@
                     </ol>
                     <div class="carousel-inner">
                         <div class="item active">
-                            <img class='c_img' src="../../images/Techtoberfest2013large.png"/>
+                            <img class='c_img' src="${pageContext.request.contextPath}/images/Techtoberfest2013large.png"/>
                             <div class="carousel-caption"><h3 class="carousel-text">In October, the Knoxville office will host its fourth annual "Techtoberfest", a gathering of Scripps Networks Interactive employees from around the globe, sharing the present and future technology within our company via a series of amazing presentations.</h3></div>
                         </div>
                         <div class="item">
-                            <img  class='c_img' src="../../images/slider_image1.png"/>
+                            <img  class='c_img' src="${pageContext.request.contextPath}/images/slider_image1.png"/>
                             <div class="carousel-caption"><h3 class="carousel-text">All feedback is encouraged to ensure this years event goes off without a hitch!  From user rankings to suggestions, the Techtoberfest Information System (TIS) is here to ensure your voice is heard before, during and after the Techtoberfest 2013 ends.</h3></div>                            
                         </div>
                         <div class="item">
-                            <img class='c_img' src="../../images/slider_image2.png"/>
+                            <img class='c_img' src="${pageContext.request.contextPath}/images/slider_image2.png"/>
                             <div class="carousel-caption"><h3 class="carousel-text">For this year's Techtoberfest, even though no registration is required, we encourage employees to provide their level of interest for any/all desired presentation sessions.  There will even be surveys available for those wanting to provide feedback regarding sessions they have attended.</h3></div>
                         </div>
                     </div><!-- .carousel-inner -->
@@ -211,10 +211,10 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/jquery-1.7.2.min.js"><\/script>')</script>
         <!-- Bootstrap jQuery plugins compiled and minified -->
-        <script src="../../js/bootstrap.min.js"></script>
-        <script src="../../js/collapse.min.js"></script>
-        <script src="../../js/bootstrap-carousel.js"></script>
-        <script src="../../js/bootstrap-transition.js"></script>
+        <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/collapse.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/bootstrap-carousel.js"></script>
+        <script src="${pageContext.request.contextPath}/js/bootstrap-transition.js"></script>
         <script>
             $(document).ready(function() {
                 $('.carousel').carousel({

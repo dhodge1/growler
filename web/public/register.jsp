@@ -19,11 +19,11 @@
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Register for the Techtoberfest Application</title>
-        <link rel="stylesheet" href="../css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
-        <link rel="stylesheet" href="../css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
-        <link rel="stylesheet" href="../css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-        <link rel="stylesheet" href="../css/prettify/prettify.css" /> 
-        <link rel="stylesheet" type="text/css" href="../css/general.css" /><!--General CSS-->
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/prettify/prettify.css" /> 
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/general.css" /><!--General CSS-->
         <link rel="stylesheet" href="draganddrop.css" /><!--Drag and drop style-->
         <style>
             .message_container {
@@ -32,7 +32,7 @@
                 font-weight: bold;
             }
         </style>
-        <script src="../js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->	
+        <script src="${pageContext.request.contextPath}/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->	
     </head>
     <body id="growler1">
         <%@ include file="../includes/indexheader.jsp" %> 
@@ -55,7 +55,7 @@
             <br/>
             <div class="row">
 
-                <form method="POST" id="action" action="../action/adduser.jsp">
+                <form method="POST" id="action" action="${pageContext.request.contextPath}/action/adduser.jsp">
 
                     <fieldset>
 
@@ -96,7 +96,7 @@
                         </div>
                         <div class="form-actions">
                             <input id="send" class="button button-primary" value="Submit" type="submit">
-                            <a class="button" id="cancel" href="../index.jsp">Cancel</a>
+                            <a class="button" id="cancel" href="${pageContext.request.contextPath}/index.jsp">Cancel</a>
                         </div>
                     </fieldset>
 
@@ -111,12 +111,12 @@
         <%@ include file="../includes/scriptlist.jsp" %>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-        <script src="../js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>
-        <script src="../js/libs/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
-        <script src="../js/libs/sniui.auto-inline-help.min.js" type="text/javascript"></script>
-        <script src="../js/libs/sniui.auto-inline-help.1.0.0.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/js/libs/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/js/libs/sniui.auto-inline-help.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/js/libs/sniui.auto-inline-help.1.0.0.min.js" type="text/javascript"></script>
 
         <!--Additional Script-->
-        <script src="../js/register.js"></script>
+        <script src="${pageContext.request.contextPath}/js/register.js"></script>
     </body>
 </html>

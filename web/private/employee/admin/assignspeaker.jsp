@@ -91,7 +91,7 @@
             <div class="row mediumBottomMargin"></div>
             <div class="row">
                 <ul class="breadcrumb">
-                    <li><a href="../../../private/employee/admin/home.jsp">Home</a></li>
+                    <li><a href="${pageContext.request.contextPath}/private/employee/admin/home.jsp">Home</a></li>
                     <li class='ieFix'>Assign A Speaker</li>
                 </ul>
             </div>
@@ -114,7 +114,7 @@
                     ArrayList<Speaker> speakers = speakerPersist.getAllSpeakers(" order by last_name, first_name");
                     ArrayList<Session> sessions = sessionPersist.getThisYearSessions(2013, " order by session_date");
                 %>
-                <form id="action" action="../../../action/processSessionAssign.jsp" method="post">
+                <form id="action" action="${pageContext.request.contextPath}/action/processSessionAssign.jsp" method="post">
                     <div class="form-group"><% out.print("<span id='list'>" + speaker.getLastName() + ", " + speaker.getFirstName() + "<strong> | Current ranking: </strong>" + speakerPersist.getSpeakersRank(speaker.getId()) + "</span>"
                                 + "<span class='pullRight' id='additional'><a>Assign a second speaker</a><div class='modals' title='Assign Additional Speaker'><span id='addhere'>");
                         out.print("<select multiple=multiple id=extra height=350>");
@@ -157,7 +157,7 @@
                     <div class="largeBottomMargin"><i class='icon16-success'></i> Indicates a session already has a speaker</div>
                     <div class="form-actions">
                         <input id="send" type="submit" class="button button-primary" value="Assign Speaker"/>
-                        <a id="cancel" href="../../../private/employee/admin/speaker.jsp">Cancel</a>
+                        <a id="cancel" href="${pageContext.request.contextPath}/private/employee/admin/speaker.jsp">Cancel</a>
                     </div>
                 </form>
             </div>
@@ -166,8 +166,8 @@
         <%@ include file="../../../includes/footer.jsp" %> 
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
-        <script src="../../../js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>
-        <script src="../../../js/libs/sniui.user-inline-help.1.2.0.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/js/libs/sniui.user-inline-help.1.2.0.min.js" type="text/javascript"></script>
         <script>
                                 $().ready(function() {
                                     jQuery.expr[":"].icontains = jQuery.expr.createPseudo(function(arg) {

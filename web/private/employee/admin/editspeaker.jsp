@@ -13,7 +13,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="shortcut icon" type="image/png" href="../../../images/scripps_favicon-32.ico">
+        <link rel="shortcut icon" type="image/png" href="${pageContext.request.contextPath}/images/scripps_favicon-32.ico">
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
         <script src="http://growler.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
@@ -58,7 +58,7 @@
             <div class="row mediumBottomMargin"></div>
             <div class="row">
                 <ul class="breadcrumb">
-                    <li><a href="../../../private/employee/admin/home.jsp">Home</a></li>
+                    <li><a href="${pageContext.request.contextPath}/private/employee/admin/home.jsp">Home</a></li>
                     <li class='ieFix'>Edit Speaker</li>
                 </ul>
             </div>
@@ -76,7 +76,7 @@
                     <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='${pageContext.request.contextPath}/images/Techtoberfest2013small.png'/><span style="padding-left:12px;">Speaker Details</span></h2>
             </div>
             <div class="row largeBottomMargin">
-                <form method="post" action="../../../action/processSpeakerEdit.jsp">
+                <form method="post" action="${pageContext.request.contextPath}/action/processSpeakerEdit.jsp">
                     <div class="form-group inline">
                         <input name="id" type="hidden" value="<% out.print(speaker.getId());%>" />
                                 <label class="required">Speaker First Name</label>
@@ -121,9 +121,9 @@
             </div>
         </div>
         <%@ include file="../../../includes/footer.jsp" %> 
-        <script src="../../../js/libs/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/js/libs/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
         <%@ include file="../../../includes/scriptlist.jsp" %>
-        <script src="../../../js/speaker.js"></script>
+        <script src="${pageContext.request.contextPath}/js/speaker.js"></script>
         <script>
                     $(function() {
                         $("input").autoinline();

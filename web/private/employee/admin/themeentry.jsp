@@ -19,10 +19,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="shortcut icon" type="image/png" href="../../../images/scripps_favicon-32.ico">
+        <link rel="shortcut icon" type="image/png" href="${pageContext.request.contextPath}/images/scripps_favicon-32.ico">
         <title>Add a Presentation Theme</title>
 
-        <link rel="stylesheet" href="../../../css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
         <style>
@@ -66,7 +66,7 @@
             <div class="mediumBottomMargin row"></div>
             <div class="row">
                 <ul class="breadcrumb">
-                    <li><a href="../../../private/employee/admin/home.jsp">Home</a></li>
+                    <li><a href="${pageContext.request.contextPath}/private/employee/admin/home.jsp">Home</a></li>
                     <li class='ieFix'>Add a Presentation Theme</li>
                 </ul>
             </div>
@@ -85,7 +85,7 @@
             </div>
             <div class="row mediumBottomMargin">
                 <%@include file="../../../includes/messagehandler.jsp" %>
-                <form method="POST" id="action" action="../../../action/processThemeAdd.jsp">
+                <form method="POST" id="action" action="${pageContext.request.contextPath}/action/processThemeAdd.jsp">
                     <fieldset>
                         <div class="form-group">
                             <label class="required">Theme name</label>
@@ -121,7 +121,7 @@
                         </div>
                         <div class="form-actions">
                             <input class="button button-primary" id="send" type="submit" value="Add Theme" name="Submit" />
-                            <a id="cancel" href="../../../private/employee/admin/theme.jsp">Cancel</a>
+                            <a id="cancel" href="${pageContext.request.contextPath}/private/employee/admin/theme.jsp">Cancel</a>
                         </div>
                     </fieldset>
                 </form>		
@@ -136,7 +136,7 @@
         <script src="js/libs/sniui.auto-inline-help.1.0.0.min.js" type="text/javascript"></script>
 
         <!--Additional Script-->
-        <script src="../../../js/themeentry.js"></script>
+        <script src="${pageContext.request.contextPath}/js/themeentry.js"></script>
         <script>$(function() {
                 $("input").autoinline();
             });</script>

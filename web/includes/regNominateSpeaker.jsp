@@ -4,4 +4,4 @@
     Author     : David
 --%>
 
-<li><a href="../../nominateSpeaker">Nominate Yourself As A Speaker</a></li>
+<li><a href="${pageContext.request.contextPath}/nominateSpeaker">Nominate Yourself As A Speaker</a></li>

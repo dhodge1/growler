@@ -22,7 +22,7 @@
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Manage Session Schedule</title><!-- Title -->
-        <link rel="shortcut icon" type="image/png" href="../../../images/scripps_favicon-32.ico">
+        <link rel="shortcut icon" type="image/png" href="${pageContext.request.contextPath}/images/scripps_favicon-32.ico">
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> 
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
@@ -96,7 +96,7 @@
             <div class="row mediumBottomMargin"></div>
             <div class="row">
                 <ul class="breadcrumb">
-                    <li><a href="../../../private/employee/admin/home.jsp">Home</a></li>
+                    <li><a href="${pageContext.request.contextPath}/private/employee/admin/home.jsp">Home</a></li>
                     <li class='ieFix'>Manage Session Schedule</li>
                 </ul>
             </div>
@@ -109,7 +109,7 @@
             </div>
             <!--<div class='row largeBottomMargin'></div>-->
             <div class="row mediumBottomMargin">
-                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='${pageContext.request.contextPath}/images/Techtoberfest2013small.png'/><span style="padding-left: 12px;">Schedule Details</span><a href="../../../private/employee/admin/addsession.jsp" class="pullRight button button-primary">Add A Session</a></h2>
+                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='${pageContext.request.contextPath}/images/Techtoberfest2013small.png'/><span style="padding-left: 12px;">Schedule Details</span><a href="${pageContext.request.contextPath}/private/employee/admin/addsession.jsp" class="pullRight button button-primary">Add A Session</a></h2>
             </div>
             <div class="row largeBottomMargin">
                 <form onsubmit="return false;">
@@ -253,7 +253,7 @@
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
         <script src="http://growler.elasticbeanstalk.com/js/libs/bootstrap-dropdown.2.0.4.min.js"></script>
         <script src="http://growler.elasticbeanstalk.com/js/libs/sniui.dialog.1.2.0.min.js"></script>
-        <script src="../../../js/pagination.js"></script>
+        <script src="${pageContext.request.contextPath}/js/pagination.js"></script>
         <script>
                     $('form').submit(function(event) {
                         pageJump();
