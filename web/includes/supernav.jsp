@@ -124,8 +124,8 @@
                 <ul class="child-menu child-menu-ul">
                     
                     <%  
-                       Calendar today = Calendar.getInstance();
-                       if(today.get(Calendar.MONTH)==10)
+                       Calendar today1 = Calendar.getInstance();
+                       if(today1.get(Calendar.MONTH)==10)
                        {
                     %>
                          <li><a href="${pageContext.request.contextPath}/emailBySurvey">Participants "Submitted" Survey</a></li>
