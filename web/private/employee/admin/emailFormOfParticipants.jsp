@@ -85,59 +85,94 @@
            //*********The code for the email form start here****************
            //***************************************************************
             --%>
-              
-               <%
-                  if(request.getAttribute("isSuccess")!= null)
-                  {
-               %>
+          
+           <%      
+              //BEGIN**************************************************
+              //**strStatus is the disable status *********************
+              //**only set to true when the sessionArrayList is empty**
+              //*******************************************************
+              String strStatus = new String("");
+              SessionPersistence sPersistence = new SessionPersistence();
+              ArrayList<Session> sessionArrayList = sPersistence.getSessionsWithAtLeast1Like(2014);
+              //*********************************************
+              //**Error checking for empty sessionArraylist**
+              //*********************************************
+              if(sessionArrayList.size() == 0)
+              {
+                strStatus = "disabled";
+             //END                
+           %>           
            
+                <div class="feedbackMessage-success row">
+                     <p style="text-align: center">No participants have liked any session in 2014.</p>
+                </div>
+           
+           <%
+              }//END IF STMT
+              else
+              {
+                if(request.getAttribute("isSuccess")!= null)
+                {
+           %>   
                     <div class="feedbackMessage-success row">
                         <p style="text-align: center"><%=request.getAttribute("isSuccess")%></p>
-                    </div>   
-               <%
-                  request.removeAttribute("isSuccess");    
-                  }
-               %> 
-                           
+                    </div>
+                    
+            <%
+                   //clear the attribute
+                   request.removeAttribute("isSuccess");    
+                 }//END IF STMT
+               }//END ELSE STMT
+            %>
+                              
            <div class="row">
                    
-              <form  id="action" action="eSessionliked" method="POST" >
+              <form  id="action" action="eSessionliked" method="POST">
                  <fieldset>
                     <div class="form-group">
                         <label class="required">Session Choices </label>
-                        <select name="sessionNum" required="required">
+                        <select name="sessionNum" required="required" class=<%=strStatus%>>
                             
-                            <%
-                  
-                            SessionPersistence sPersistence = new SessionPersistence();
-                            ArrayList<Session> sessionArrayList = sPersistence.getSessionsWithAtLeast1Like(2014);
-                            for(int i = 0; i<sessionArrayList.size(); i++)
-                            {
-                            String infoStr = sessionArrayList.get(i).getName(); 
-                            String sessionStr = sessionArrayList.get(i).getId().toString();
-                           
-                                   
-                            %>
+                           <%
+                               if(strStatus.compareTo("disabled")!= 0)
+                               {
+                                  for(int i = 0; i<sessionArrayList.size(); i++)
+                                  {
+                                    String infoStr = sessionArrayList.get(i).getName(); 
+                                    String sessionStr = sessionArrayList.get(i).getId().toString();
+                           %>
+                                    <option value = <%=sessionStr%>><b><%=infoStr%></b></option>
                             
-                            <option value = <%=sessionStr%>><b><%=infoStr%></b></option>
-                                
                             <% 
-                            }
-                           %> 
+                                  }//END FOR LOOP
+                                } //END IF COMPARE STMT
+                                else                 
+                                { 
+                            %> 
+                                  <option value = "46">No Section is available at this time</option>
+                                
+                            <%  
+                                } //END ELSE STMT
+                            %>
+                                      
                         </select>  
                     </div> 
                     <div class="form-group">
                         <label class="required">Subject</label>
-                        <input type="text" required="required" name="emailSubject" class="input-xlarge" />        
+                        <input type="text" required="required" name="emailSubject" 
+                               class="input-xlarge <%=strStatus%>" />        
                     </div>
                     <div class="form-group">
                         <label class="required">Email Content</label>
-                        <textarea cols='75' rows='20' required="required" name="emailContent"  ></textarea>        
-                     </div>
-                     <div class="form-actions">
-                        <input type="submit" id="send" class="button button-primary" value="Send"/>
-                        <a id="cancel" href="${pageContext.request.contextPath}/home">Cancel</a>
-                     </div>  
+                        <textarea cols='75' rows='20' required="required" 
+                                  name="emailContent" classs=<%=strStatus%>>
+                        </textarea>        
+                    </div>
+                    <div class="form-actions">
+                         <input type="submit" id="send" class="button button-primary"
+                                value="Send" class=<%=strStatus%>/>
+                         <a id="cancel" href="${pageContext.request.contextPath}/home">Cancel</a>
+                    </div>  
                  </fieldset> 
               </form>	  
            </div> <%--END THE FORM'S div tag--%>
