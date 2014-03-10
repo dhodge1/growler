@@ -46,6 +46,21 @@ public class LocationPersistence extends GrowlerPersistence {
         }
     }
     
+    public void deleteMappings(String localID) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("delete from mapped_rooms where id = ?");
+            statement.setString(1, localID);
+            statement.execute();
+        } catch (Exception e) {
+            
+        } finally {
+            closeJDBC();
+        }
+    }
+    
+    
+    
     public ArrayList<RemoteRoom> getRemoteRoomForLocation(String localID) {
         try {
             initializeJDBC();
