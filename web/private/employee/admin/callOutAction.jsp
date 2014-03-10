@@ -48,7 +48,8 @@
    //***********************************************
    for (int i = 5; i < arraySize; i++)
    {  
-     if(userArrayList.get(i).getEmail() != null)  
+     if((userArrayList.get(i).getEmail() != null) &&
+        (userArrayList.get(i).getEmail().indexOf("@")!= -1))
      {
        emailList.append(userArrayList.get(i).getEmail());
        if(i < (arraySize-1))
@@ -56,34 +57,61 @@
           emailList.append(", ");
        }       
      }    
-   }
+   } //END for loop
    
-   try
+   //****************************************
+   //error checking for no user in the system
+   //****************************************
+   if(userArrayList.size()==0)
    {
-      //perform the send email task
-      EmailUtilSMTPLocal.sendMail((emailList.toString()), subject, content, isContentHTML);
-      isSuccess = "Your message has been sent!";
-   }
-   catch (Exception e)
-   {
-    // e.printStackTrace();
-     isSuccess ="Your message can't be sending at this time";
-   }
-   
-   finally 
-   {
-     request.setAttribute("isSuccess", isSuccess);
-     RequestDispatcher dispatcher = request.getRequestDispatcher("email");      
-     if (dispatcher != null)
+     isSuccess =   "No participants have used the system in 2014.";
      {
-       dispatcher.forward(request, response);
-     } 
+       request.setAttribute("isSuccess", isSuccess);
+       RequestDispatcher dispatcher = request.getRequestDispatcher("email");      
+       if (dispatcher != null)
+       {
+         dispatcher.forward(request, response);
+       } 
+     }
    }
-   //response.sendRedirect("../../../private/employee/home.jsp");
+   //*******************************************************
+   //error checking for no valid email listed in the system
+   //*******************************************************
+   else if(emailList.length()==0)
+   {
+     isSuccess =   "No participants have valid email address info listed in the system.";
+     {
+       request.setAttribute("isSuccess", isSuccess);
+       RequestDispatcher dispatcher = request.getRequestDispatcher("email");      
+       if (dispatcher != null)
+       {
+         dispatcher.forward(request, response);
+       } 
+     }
+   }
+   else
+   {    
+     try
+     {
+       //perform the send email task
+       EmailUtilSMTPLocal.sendMail((emailList.toString()), subject, content, isContentHTML);
+       isSuccess = "Your message has been sent!";
+     }
+     catch (Exception e)
+     {
+       // e.printStackTrace();
+       isSuccess ="Your message can't be sending at this time" + emailList.toString();
+     }
+   
+     finally 
+     {
+       request.setAttribute("isSuccess", isSuccess);
+       RequestDispatcher dispatcher = request.getRequestDispatcher("email");      
+       if (dispatcher != null)
+       {
+         dispatcher.forward(request, response);
+       } 
+     }
+   } 
 %>                      
-    
-
-
-
-
-            
+             
