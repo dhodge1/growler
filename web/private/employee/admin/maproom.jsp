@@ -252,6 +252,21 @@
                 $("#add_room2").hide();
                 $("#thirds").val("1");
             });
+            $("#add_room3").click(function() {
+                $(".extra_room4").show();
+                $("#add_room3").hide();
+                $("#fourths").val("1");
+            });
+            $("#add_room4").click(function() {
+                $(".extra_room5").show();
+                $("#add_room4").hide();
+                $("#fifths").val("1");
+            });
+            $("#add_room5").click(function() {
+                $(".extra_room6").show();
+                $("#add_room5").hide();
+                $("#sixths").val("1");
+            });
             
             $("#send").click(function(event) {
 
