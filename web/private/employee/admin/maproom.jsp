@@ -28,39 +28,34 @@
         <link rel="shortcut icon" type="image/png" href="http://growler.elasticbeanstalk.com/images/scripps_favicon-32.ico">
         <script src="http://growler.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <style>
-            h1, h3 {
-                font-weight: normal;
+            .message_container {
+                display: none;
+                color: red;
+                font-weight: bold;
             }
-            #refresh {
-                margin-left: 12px;
-                color:#0067b1;
-                text-decoration: underline;
-                cursor: pointer;
+            .extra_room {
+                display:none;
+            }
+            .extra_room3 {
+                display: none;
+            }
+            .extra_room4 {
+                display: none;
+            }
+            .extra_room5 {
+                display: none;
+            }
+            .extra_room6 {
+                display: none;
+            }
+            h3 {
+                font-weight:normal;
+            }
+            .modals{
+                display:none;
             }
             .no-close .ui-dialog-titlebar-close {
                 display: none;
-            }
-            .keywordFilter-clear {
-                cursor: pointer;
-            }
-            .pullRight {
-                float: right;
-                top:10px;
-                position:relative;
-            }
-            #sessions {
-                list-style-type: none;
-                height: 345px;
-                overflow-y: auto;
-                border: 1px solid #ccc;
-                margin:0;
-                margin-bottom: 24px;
-            }
-            input[type="radio"] {
-                position:relative;
-                bottom: 5px;
-                margin-right: 6px;
-                margin-left: 6px;
             }
         </style>
     </head>
