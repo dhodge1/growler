@@ -62,6 +62,9 @@
             .no-close .ui-dialog-titlebar-close {
                 display: none;
             }
+            a.disabled{
+                color: grey;
+            }
         </style>
     </head>
     <body id="growler1">  
@@ -78,7 +81,7 @@
         %>
         <%
             //Get the year
-            int year = 2013;
+            int year = 2013; //!will need to be changed to 2014
             try {
                 year = Integer.parseInt(request.getParameter("year"));
             } catch (Exception e) {
@@ -108,7 +111,7 @@
                 </ul>
             </div>
             <div class="row mediumBottomMargin">
-                <h1>2013 Session Schedule</h1>
+                <h1>2013 Session Schedule</h1> <!-- change to 2014-->
             </div>
             <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
             <div class="row largeBottomMargin">
@@ -132,7 +135,8 @@
                                 <th>Speaker(s)</th>
                                 <th>Session Duration</th>
                                 <th>Location</th>
-                                <% if (today.get(Calendar.MONTH) != 8) {%><th>Like Session?</th><% }%>
+                                <% if (today.get(Calendar.MONTH) != 8) {%><th>Like Session?</th><% }%> <!-- is this supposed to prevent liking a session after October?-->
+                                <th>Submit Feedback</th>
                             </tr>
                         </thead>
                         <tbody id='tablebody'>
@@ -193,6 +197,36 @@
 
                                         out.print("</td>");
                                     }
+                                    //Survey Page Link
+                                    out.print("<td>");
+                                    Calendar event = Calendar.getInstance();
+                                    Calendar now = Calendar.getInstance();
+                                    Calendar then = Calendar.getInstance();
+                                    Calendar duration = Calendar.getInstance();
+                                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                    try{
+                                        event.setTime(sdf.parse(sessions.get(i).getSessionDate().toString() + " " + sessions.get(i).getStartTime().toString()));
+                                        
+                                        //get duration NOTE: get Duration only allows 0-60min durations, this needs to be fixed
+                                        duration.setTimeInMillis(sessions.get(i).getDuration().getTime());
+                                        int durMins = duration.get(Calendar.MINUTE);
+                                        
+                                        //Adding 30 min to current time
+                                        long t = now.getTimeInMillis() + 60000*30 + durMins*60000;
+                                        java.util.Date nowPlus30Min = new java.util.Date(t);
+                                        then.setTime(nowPlus30Min);
+                                        
+                                        
+                                        if(event.compareTo(now)>0 && event.compareTo(then)<0) //returns 1 if event is in future
+                                        {
+                                            out.print("<a href='" +  request.getContextPath() + "/private/employee/surveys.jsp'>Submit Feedback</a>");
+                                        }else{
+                                            out.print("<span style='color:grey'>Feedback Closed</span>");
+                                        }
+                                    }catch(Exception e){
+                                    }
+                                    out.print("</td>");
+                                    
                                     out.print("</tr>");
                                 }
                             %>
