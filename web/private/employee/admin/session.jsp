@@ -210,7 +210,7 @@
                                             // out.print("</div>");
                                         }
                                     } else {
-                                        out.print("<a href='../../../private/employee/admin/maproom.jsp?roomId=" + lp.getLocationById(sessions.get(i).getLocation()) + "'>Assign a Remote Room</a>");
+                                        out.print("To Be Assigned");
                                     }
                                     out.print("</td>");
                                     out.print("<td>");

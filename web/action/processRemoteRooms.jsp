@@ -21,17 +21,17 @@
             
             String localRoom = String.valueOf(session.getAttribute("localID"));
             String room = request.getParameter("room");
-            String room2 = request.getParameter("room2");
-            String room3 = request.getParameter("room3");
-            String room4 = request.getParameter("room4");
-            String room5 = request.getParameter("room5");
-            String room6 = request.getParameter("room6");
+            String room2 = "blorg";
+            String room3 = "blorg";
+            String room4 = "blorg";
+            String room5 = "blorg";
+            String room6 = "blorg";
             try {
-            //String room2 = request.getParameter("room2");
-            //String room3 = request.getParameter("room3");
-            //String room4 = request.getParameter("room4");
-            //String room5 = request.getParameter("room5");
-            //String room6 = request.getParameter("room6");
+                room2 = request.getParameter("room2");
+                room3 = request.getParameter("room3");
+                room4 = request.getParameter("room4");
+                room5 = request.getParameter("room5");
+                room6 = request.getParameter("room6");
             } catch (Exception e){
                 
             }
@@ -52,19 +52,19 @@
                 //}
                // if (ok) {
                     lp.assignRemoteRoom(room, localRoom);
-                    if(room2 != null && !room2.isEmpty()) {
+                    if(room2 != null && !room2.isEmpty() && room2 != "blorg") {
                         lp.assignRemoteRoom(room2, localRoom);
                     }
-                    if(room3 != null && !room3.isEmpty()) {
+                    if(room3 != null && !room3.isEmpty() && room3 != "blorg") {
                         lp.assignRemoteRoom(room3, localRoom);
                     }
-                    if(room4 != null && !room4.isEmpty()) {
+                    if(room4 != null && !room4.isEmpty() && room4 != "blorg") {
                         lp.assignRemoteRoom(room4, localRoom);
                     }
-                    if(room5 != null && !room5.isEmpty()) {
+                    if(room5 != null && !room5.isEmpty() && room5 != "blorg") {
                         lp.assignRemoteRoom(room5, localRoom);
                     }
-                    if(room6 != null && !room6.isEmpty()) {
+                    if(room6 != null && !room6.isEmpty() && room6 != "blorg") {
                         lp.assignRemoteRoom(room6, localRoom);
                     }
                     
