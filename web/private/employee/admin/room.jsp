@@ -150,6 +150,7 @@
                                         <a class="actionMenu-toggle" data-toggle="dropdown" href="#">Actions<b class="caret"></b></a>
                                         <ul class="actionMenu-menu" role="menu">
                                             <li><a <% out.print("href='../../../private/employee/admin/assignroom.jsp?roomId=" + locations.get(i).getId() + "'");%>><i class="icon16-reconcile"></i>Assign</a></li>
+                                            <li><a <% out.print("href='../../../private/employee/admin/maproom.jsp?roomId=" + locations.get(i).getId() + "'");%>><i class="icon16-reconcile"></i>Map</a></li>
                                             <li><a <% out.print("href='../../../private/employee/admin/editroom.jsp?id=" + locations.get(i).getId() + "'");%>><i class="icon16-edit"></i>Edit</a></li>
                                             <li><a class="showModal3"><% out.print("<input type='hidden' name='delete' value='" + locations.get(i).getId() + "' />");%>
                                                     <% out.print("<div class='modalDelete' id='modaldelete" + locations.get(i).getId() + "' title='Delete Confirmation'>");
