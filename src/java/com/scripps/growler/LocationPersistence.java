@@ -31,6 +31,58 @@ public class LocationPersistence extends GrowlerPersistence {
             closeJDBC();
         }
     }
+    
+    public void assignRemoteRoom(String remoteRoomId, String localRoomId) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("insert into mapped_rooms (localID, remoteID) values (?, ?)");
+            statement.setString(1, localRoomId);
+            statement.setString(2, remoteRoomId);
+            statement.execute();
+        } catch (Exception e) {
+            
+        } finally {
+            closeJDBC();
+        }
+    }
+    
+    public void deleteMappings(String localID) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("delete from mapped_rooms where localID = ?");
+            statement.setString(1, localID);
+            statement.execute();
+        } catch (Exception e) {
+            
+        } finally {
+            closeJDBC();
+        }
+    }
+    
+    
+    
+    public ArrayList<RemoteRoom> getRemoteRoomForLocation(String localID) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select remoteID from mapped_rooms where localID = ?");
+            statement.setString(1, localID);
+            result = statement.executeQuery();
+            ArrayList<RemoteRoom> rrs = new ArrayList<RemoteRoom>();
+            while (result.next()){
+                RemoteRoom rr = new RemoteRoom();
+                rr.setLocalID(localID);
+                rr.setRemoteID(result.getString("remoteID"));
+                rrs.add(rr);
+            }
+            closeJDBC();
+            return rrs;
+        } catch (Exception e) {
+        }
+        finally {
+            closeJDBC();
+        }
+        return null;
+    }
 
     /**
      * Deletes a location

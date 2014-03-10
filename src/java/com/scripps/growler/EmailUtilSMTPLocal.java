@@ -34,7 +34,6 @@ public class EmailUtilSMTPLocal
                                AddressException, MessagingException 
                              
    {
-     
      final String username = "scrippsproject2014@gmail.com";
      final String password = "capstoneteam2014";   
      //sets environment properties

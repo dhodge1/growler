@@ -127,6 +127,7 @@
                                 <th>Session Duration</th>
                                 <th>Location</th>
                                 <th>Capacity</th>
+                                <th>Remote Locations</th>
                                 <th><!-- Actions --></th>
                             </tr>
                         </thead>
@@ -194,6 +195,23 @@
                                     out.print("</td>");
                                     out.print("<td>");
                                     out.print(lp.getLocationById(sessions.get(i).getLocation()).getCapacity());
+                                    out.print("</td>");
+                                    out.print("<td>");
+                                    ArrayList<RemoteRoom> remotes = lp.getRemoteRoomForLocation(sessions.get(i).getLocation());
+                                    if (remotes.size() != 0) {
+                                        for (int k = 1; k < remotes.size(); k++) {
+                                            //Commented out speaker BIO modals - 9/16/13
+                                            // out.print("<a class='showModal2'>");
+                                            out.print(lp.getLocationById(remotes.get(k).getRemoteID()).getDescription() + ", " + lp.getLocationById(remotes.get(k).getRemoteID()).getBuilding());
+                                            out.print("<br/>");
+                                            // out.print("<input type='hidden' value='" + speakers.get(j).getId() + "' /></a><br/>");
+                                            // out.print("<div class='modals' id='modalspkr" + speakers.get(j).getId() + "' title='" + speakers.get(j).getFullName() + "'>");
+                                            // out.print(""); //The Bio information goes here?
+                                            // out.print("</div>");
+                                        }
+                                    } else {
+                                        out.print("To Be Assigned");
+                                    }
                                     out.print("</td>");
                                     out.print("<td>");
                                     out.print("<div class='actionMenu'><a class='actionMenu-toggle' data-toggle='dropdown' href='#'>Actions<b class='caret'></b></a>");
