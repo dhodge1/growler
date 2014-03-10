@@ -199,7 +199,7 @@
                                     out.print("<td>");
                                     ArrayList<RemoteRoom> remotes = lp.getRemoteRoomForLocation(sessions.get(i).getLocation());
                                     if (remotes.size() != 0) {
-                                        for (int k = 0; k < remotes.size(); k++) {
+                                        for (int k = 1; k < remotes.size(); k++) {
                                             //Commented out speaker BIO modals - 9/16/13
                                             // out.print("<a class='showModal2'>");
                                             out.print(lp.getLocationById(remotes.get(k).getRemoteID()).getDescription() + ", " + lp.getLocationById(remotes.get(k).getRemoteID()).getBuilding());
