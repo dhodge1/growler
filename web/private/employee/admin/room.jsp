@@ -124,6 +124,7 @@
                                 <th>Capacity</th>
                                 <th>Building</th>
                                 <th>Assigned to Session?</th>
+                                <th>Mapped to Remote Room?</th>
                                 <th><!-- Actions --></th>
                             </tr>
                         </thead>
@@ -140,6 +141,12 @@
                                 <td><% out.print(locations.get(i).getCapacity());%></td>
                                 <td><% out.print(locations.get(i).getBuilding());%></td>
                                 <td><% if (locationPersist.getRoomAssignments(locations.get(i).getId()).size() != 0) {
+                                        out.print("<i class='icon16-check'></i>");
+                                    } else {
+                                        out.print("");
+                                    }%>
+                                </td>
+                                <td><% if (locationPersist.getRemoteRoomForLocation(locations.get(i).getId()).size() != 0) {
                                         out.print("<i class='icon16-check'></i>");
                                     } else {
                                         out.print("");
