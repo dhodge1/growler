@@ -49,7 +49,7 @@ public class LocationPersistence extends GrowlerPersistence {
     public void deleteMappings(String localID) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("delete from mapped_rooms where id = ?");
+            statement = connection.prepareStatement("delete from mapped_rooms where localID = ?");
             statement.setString(1, localID);
             statement.execute();
         } catch (Exception e) {
