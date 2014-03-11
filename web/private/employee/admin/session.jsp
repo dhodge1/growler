@@ -210,7 +210,7 @@
                                             // out.print("</div>");
                                         }
                                     } else {
-                                        out.print("To Be Assigned");
+                                        out.print("To Be Determined");
                                     }
                                     out.print("</td>");
                                     out.print("<td>");
