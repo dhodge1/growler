@@ -135,6 +135,7 @@
                                 <th>Speaker(s)</th>
                                 <th>Session Duration</th>
                                 <th>Location</th>
+                                <th>Remote Room(s)</th>
                                 <% if (today.get(Calendar.MONTH) != 8) {%><th>Like Session?</th><% }%> <!-- is this supposed to prevent liking a session after October?-->
                                 <th>Submit Feedback</th>
                             </tr>
