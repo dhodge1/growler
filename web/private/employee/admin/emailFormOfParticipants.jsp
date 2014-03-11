@@ -91,7 +91,7 @@
               //**strStatus is the disable status *********************
               //**only set to true when the sessionArrayList is empty**
               //*******************************************************
-              String strStatus = new String("");
+              String strStatus = "";
               SessionPersistence sPersistence = new SessionPersistence();
               ArrayList<Session> sessionArrayList = sPersistence.getSessionsWithAtLeast1Like(2014);
               //*********************************************
@@ -131,46 +131,139 @@
                  <fieldset>
                     <div class="form-group">
                         <label class="required">Session Choices </label>
-                        <select name="sessionNum" required="required" class=<%=strStatus%>>
-                            
-                           <%
+                        <%
+                           //*************************************************
+                           //** inefficient way of toggling between disabled**
+                           //** disabled and enabled but it works*************
+                           if(strStatus.compareTo("disabled") == 0)
+                           {
+                        %>   
+                             <select name="sessionNum" required="required" disabled>
+                        <%   
+                           }
+                           else
+                           {
+                        %> 
+                             <select name="sessionNum" required="required" >
+                                                
+                        <%
+                             }//END OF ELSE STMT
+                              //END OF TOGGLING CODE
+                              //********************************************** 
+                              //**BEGINNING OF poplating the combo box with 
+                              //**sessions that has at least 1 liked**********
+                              //**********************************************
                                if(strStatus.compareTo("disabled")!= 0)
                                {
                                   for(int i = 0; i<sessionArrayList.size(); i++)
                                   {
                                     String infoStr = sessionArrayList.get(i).getName(); 
                                     String sessionStr = sessionArrayList.get(i).getId().toString();
-                           %>
+                        %>
                                     <option value = <%=sessionStr%>><b><%=infoStr%></b></option>
                             
-                            <% 
+                         <% 
                                   }//END FOR LOOP
-                                } //END IF COMPARE STMT
+                               } //END IF COMPARE STMT--end of populating combo box
                                 else                 
                                 { 
-                            %> 
+                         %> 
                                   <option value = "46">No Section is available at this time</option>
                                 
-                            <%  
-                                } //END ELSE STMT
-                            %>
+                         <%  
+                                } //END ELSE STMT--end of populating disable combo box with a info message 
+                         %>
                                       
                         </select>  
                     </div> 
                     <div class="form-group">
                         <label class="required">Subject</label>
+                      
+                        
+                        <%
+                           //*************************************************
+                           //** inefficient way of toggling between disabled**
+                           //** disabled and enabled but it works*************
+                           if(strStatus.compareTo("disabled") == 0)
+                           {
+                        %>   
+                               <input type="text" required="required" name="emailSubject" 
+                                      class="input-xlarge" disabled />        
+                        <%   
+                           }//END OF IF
+                           else
+                           {
+                        %> 
                         <input type="text" required="required" name="emailSubject" 
-                               class="input-xlarge <%=strStatus%>" />        
+                               class="input-xlarge"/>        
+                        
+                        <%
+                            }//END OF ELSE
+                             //*********************************************
+                             //END OF TOGGLING CODE
+                             //**********************************************                
+                        %>       
                     </div>
+                    
                     <div class="form-group">
                         <label class="required">Email Content</label>
-                        <textarea cols='75' rows='20' required="required" 
-                                  name="emailContent" classs=<%=strStatus%>>
-                        </textarea>        
+                        
+                          <%
+                           //*************************************************
+                           //** inefficient way of toggling between disabled**
+                           //** disabled and enabled but it works*************
+                           if(strStatus.compareTo("disabled") == 0)
+                           {
+                         %>   
+                       
+                              <textarea cols='75' rows='20' required="required" 
+                                        name="emailContent" disabled>  
+                              </textarea>  
+                         <%   
+                           }//END OF IF
+                           else
+                           {
+                         %> 
+                         
+                              <textarea cols='75' rows='20' required="required" 
+                                        name="emailContent">   
+                              </textarea>  
+                        <%
+                            }//END OF ELSE
+                             //*********************************************
+                             //END OF TOGGLING CODE
+                             //**********************************************                
+                        %>                        
+                                               
+                                   
                     </div>
                     <div class="form-actions">
-                         <input type="submit" id="send" class="button button-primary"
-                                value="Send" class=<%=strStatus%>/>
+                        
+                          <%
+                           //*************************************************
+                           //** inefficient way of toggling between disabled**
+                           //** disabled and enabled but it works*************
+                           if(strStatus.compareTo("disabled") == 0)
+                           {
+                         %>   
+                       
+                              <input type="submit" id="send" class="button button-primary"
+                                     value="Send" disabled/>
+                         <%   
+                           }//END OF IF
+                           else
+                           {
+                         %> 
+                         
+                              <input type="submit" id="send" class="button button-primary"
+                                     value="Send" />
+                        <%
+                            }//END OF ELSE
+                             //*********************************************
+                             //END OF TOGGLING CODE
+                             //**********************************************                
+                        %>                                   
+                        
                          <a id="cancel" href="${pageContext.request.contextPath}/home">Cancel</a>
                     </div>  
                  </fieldset> 
