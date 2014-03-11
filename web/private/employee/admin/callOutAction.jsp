@@ -65,14 +65,12 @@
    if(userArrayList.size()==0)
    {
      isSuccess =   "No participants have used the system in 2014.";
+     request.setAttribute("isSuccess", isSuccess);
+     RequestDispatcher dispatcher = request.getRequestDispatcher("email");      
+     if (dispatcher != null)
      {
-       request.setAttribute("isSuccess", isSuccess);
-       RequestDispatcher dispatcher = request.getRequestDispatcher("email");      
-       if (dispatcher != null)
-       {
-         dispatcher.forward(request, response);
-       } 
-     }
+       dispatcher.forward(request, response);
+     } 
    }
    //*******************************************************
    //error checking for no valid email listed in the system
@@ -80,14 +78,12 @@
    else if(emailList.length()==0)
    {
      isSuccess =   "No participants have valid email address info listed in the system.";
+     request.setAttribute("isSuccess", isSuccess);
+     RequestDispatcher dispatcher = request.getRequestDispatcher("email");      
+     if (dispatcher != null)
      {
-       request.setAttribute("isSuccess", isSuccess);
-       RequestDispatcher dispatcher = request.getRequestDispatcher("email");      
-       if (dispatcher != null)
-       {
-         dispatcher.forward(request, response);
-       } 
-     }
+       dispatcher.forward(request, response);
+     } 
    }
    else
    {    
