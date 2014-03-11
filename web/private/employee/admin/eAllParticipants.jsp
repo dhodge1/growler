@@ -38,17 +38,14 @@
    content = request.getParameter("emailContent");
    //get the email list from all the users
    UserPersistence uPersistence = new UserPersistence();
-   ArrayList<User> userArrayList = uPersistence.getAllUsersNoVolInfo();
+   ArrayList<User> userArrayList = uPersistence.getUsersLikedASessionORSubmittedSurveys();
    int arraySize = userArrayList.size();
-   //*******************************************
-   //The first 5 users on the list are real users
-   //and we don't want to send tesing email to them
-   //therefore we start the arraylist at index 5. 
-   //NEED TO CHANGE THAT LATER TO 0****************
-   //***********************************************
-   for (int i = 5; i < arraySize; i++)
+   
+   
+   for (int i = 0; i < arraySize; i++)
    {  
-     if(userArrayList.get(i).getEmail() != null)  
+     if((userArrayList.get(i).getEmail() != null) &&
+        (userArrayList.get(i).getEmail().indexOf("@")!= -1))
      {
        emailList.append(userArrayList.get(i).getEmail());
        if(i < (arraySize-1))
@@ -58,20 +55,13 @@
      }    
    }
    
-   try
-   {
-      //perform the send email task
-      EmailUtilSMTPLocal.sendMail((emailList.toString()), subject, content, isContentHTML);
-      isSuccess = "Your message has been sent!";
-   }
-   catch (Exception e)
-   {
-    // e.printStackTrace();
-     isSuccess ="Your message can't be sending at this time";
-   }
    
-   finally 
+   //****************************************
+   //error checking for no user in the system
+   //****************************************
+   if(userArrayList.size()==0)
    {
+     isSuccess =   "No participants have liked any session or filled out any survey in 2014";  
      request.setAttribute("isSuccess", isSuccess);
      RequestDispatcher dispatcher = request.getRequestDispatcher("emailToAllParticipants");      
      if (dispatcher != null)
@@ -79,7 +69,44 @@
        dispatcher.forward(request, response);
      } 
    }
-   //response.sendRedirect("../../../private/employee/home.jsp");
+   //*******************************************************
+   //error checking for no valid email listed in the system
+   //*******************************************************
+   else if(emailList.length()==0)
+   {
+     isSuccess =   "No participants have valid email address info listed in the system.";
+     request.setAttribute("isSuccess", isSuccess);
+     RequestDispatcher dispatcher = request.getRequestDispatcher("emailToAllParticipants");      
+     if (dispatcher != null)
+     {
+       dispatcher.forward(request, response);
+     } 
+   }
+   else
+   {    
+     try
+     {
+       //perform the send email task
+       EmailUtilSMTPLocal.sendMail((emailList.toString()), subject, content, isContentHTML);
+       isSuccess = "Your message has been sent!";
+     }
+     catch (Exception e)
+     {
+       // e.printStackTrace();
+       isSuccess ="Your message can't be sending at this time" + emailList.toString();
+     }
+   
+     finally 
+     {
+       request.setAttribute("isSuccess", isSuccess);
+       RequestDispatcher dispatcher = request.getRequestDispatcher("emailToAllParticipants");      
+       if (dispatcher != null)
+       {
+         dispatcher.forward(request, response);
+       } 
+     }
+   }    
+   
 %>                      
     
 

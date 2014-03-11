@@ -211,7 +211,7 @@ public class UserPersistence extends GrowlerPersistence {
                                                 + "AND a.isSurveyTaken = true "
                                                 + "AND EXTRACT(YEAR FROM a.surveySubmitTime) = '2014')"
                                                 + "ORDER BY u.email";
-                                
+                                 
            //***********************************************
            initializeJDBC();
            statement = connection.prepareStatement(preparedQuery);
@@ -236,6 +236,63 @@ public class UserPersistence extends GrowlerPersistence {
        return null;
     }
     
+    
+    
+     /**
+     * This method re-uses most of the code from the getAllUsersNoVolInfo()  
+     * method. However, the query of this method selects only users that 
+     * submitted surveys
+     *
+     * @return The list of all users without the volunteer information.
+     * 
+     * 
+     */
+    public ArrayList<User> getUsersLikedASessionORSubmittedSurveys()
+    {
+       try 
+       {
+           //*****************************************
+            //The following query selects all users  
+            //that liked a particular given sessions                                          
+            //****************************************
+           String preparedQuery = "SELECT u.* "
+                                + "FROM user u "
+                                + "WHERE EXISTS(SELECT NULL "
+                                                + "FROM attendance a "
+                                                + "WHERE u.id = a.user_id "
+                                                + "AND a.isSurveyTaken = true "
+                                                + "AND EXTRACT(YEAR FROM a.surveySubmitTime) = '2014')"
+                                + "OR EXISTS(SELECT NULL " 
+                                             + "FROM registration r , session s "
+                                             + "WHERE u.id = r.user_id "
+                                             + "AND r.session_id = s.id "
+                                             + "AND EXTRACT(YEAR FROM s.session_date) = '2014' "
+                                             + "AND EXTRACT(MONTH FROM s.session_date) = '10') "
+                                             + "ORDER BY u.email";
+                                 
+           //***********************************************
+           initializeJDBC();
+           statement = connection.prepareStatement(preparedQuery);
+           result = statement.executeQuery();
+           while (result.next()) 
+           {
+               User u = new User();
+               u.setId(result.getInt("id"));
+               u.setUserName(result.getString("name"));
+               u.setEmail(result.getString("email"));
+               u.setCorporateId(result.getString("corporate_id"));   
+               users.add(u);
+           }//END the while loop
+           return users;
+       }//END the try stmt 
+       catch (Exception e) {
+       }
+       finally 
+       {
+           closeJDBC();
+       }
+       return null;
+    }
 /************************ADDED CODE END HERE*********************************/ 
     
     
