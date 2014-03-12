@@ -39,6 +39,11 @@
             h3 {
                 font-weight:normal;
             }
+            #speakerImg {
+                height: 95%;
+                width: 95%;
+                border-radius: 50px;
+            }
         </style>
     </head>
     <body id="growler1">
@@ -87,40 +92,45 @@
             </div>
             <div class="row">
                 <%@include file="../../includes/messagehandler.jsp" %>
-                    <form method="POST" id="action" action="${pageContext.request.contextPath}/action/processThemeSuggestion.jsp">
-                        <fieldset>
-                            <div class="form-group">
-                                <label class="required">Presentation Theme Name</label>
-                                <input required="required" name="name" class="input-xlarge" type="text" id="tip" data-content="Please enter no more than 30 characters" maxlength="30"/>
-                                <br/><span id="error_theme_name" class="message_container">
-                                    <span>Please enter a presentation theme name</span>
-                                </span>
-                                <span id="error_too_long" class="message_container">
-                                    <span>Please enter no more than 30 characters</span>
-                                </span>
-                            </div>
-                            <div class="form-group">
-                                <label class="required">What would be your preferred presentation type?</label>
-                                <select name="type" id="tip2" class="input-xlarge" data-content="Choose a type: Business or Technical">
-                                    <option value="0">Please Select a Type</option>
-                                    <option value="Business">Business</option>
-                                    <option value="Technical">Technical</option>
-                                </select><i class='icon12-info' style="margin-left: 3px;" id='showTips' data-content="Business Presentations - Any presentation providing technical information in a non-technical way, appealing to both IT and non-IT users.<br/><br/>Technical Presentations - Presentations with a technical background providing mid to high level technical information, appealing to mainly IT users with technical backgrounds." title="Presentation Types"></i>
-                                <br/><span id="error_theme_type" class="message_container">
-                                    <span>Please select a presentation theme type</span>
-                                </span>
-                            </div>
-                            <div class="form-group">
-                                <label>Any additional comments?</label>
-                                <p>Please let us know why this presentation should be added to this year's Tectoberfest.  Who do you think would be a good speaker for this presentation?</p>
-                                <textarea name="reason" data-content="Help us understand what this theme suggestion means to you" rows="5" cols="50" maxlength="250"></textarea>
-                            </div>
-                            <div class="form-actions">
-                                <input type="submit" id="send" class="button button-primary" value="Submit Suggestion" />
-                                <a id="cancel" href="${pageContext.request.contextPath}/private/employee/theme.jsp">Cancel</a>
-                            </div>
-                        </fieldset>
-                </form>
+                    <div class="span6">
+                        <form method="POST" id="action" action="${pageContext.request.contextPath}/action/processThemeSuggestion.jsp">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="required">Presentation Theme Name</label>
+                                    <input required="required" name="name" class="input-xlarge" type="text" id="tip" data-content="Please enter no more than 30 characters" maxlength="30"/>
+                                    <br/><span id="error_theme_name" class="message_container">
+                                        <span>Please enter a presentation theme name</span>
+                                    </span>
+                                    <span id="error_too_long" class="message_container">
+                                        <span>Please enter no more than 30 characters</span>
+                                    </span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="required">What would be your preferred presentation type?</label>
+                                    <select name="type" id="tip2" class="input-xlarge" data-content="Choose a type: Business or Technical">
+                                        <option value="0">Please Select a Type</option>
+                                        <option value="Business">Business</option>
+                                        <option value="Technical">Technical</option>
+                                    </select><i class='icon12-info' style="margin-left: 3px;" id='showTips' data-content="Business Presentations - Any presentation providing technical information in a non-technical way, appealing to both IT and non-IT users.<br/><br/>Technical Presentations - Presentations with a technical background providing mid to high level technical information, appealing to mainly IT users with technical backgrounds." title="Presentation Types"></i>
+                                    <br/><span id="error_theme_type" class="message_container">
+                                        <span>Please select a presentation theme type</span>
+                                    </span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Any additional comments?</label>
+                                    <p>Please let us know why this presentation should be added to this year's Tectoberfest.  Who do you think would be a good speaker for this presentation?</p>
+                                    <textarea name="reason" data-content="Help us understand what this theme suggestion means to you" rows="5" cols="50" maxlength="250"></textarea>
+                                </div>
+                                <div class="form-actions">
+                                    <input type="submit" id="send" class="button button-primary" value="Submit Suggestion" />
+                                    <a id="cancel" href="${pageContext.request.contextPath}/private/employee/theme.jsp">Cancel</a>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="span6">
+                        <img id="speakerImg" src="${pageContext.request.contextPath}/images/speaker.jpg" />
+                    </div>
             </div>
         </div>
         <%@ include file="../../includes/footer.jsp" %> 

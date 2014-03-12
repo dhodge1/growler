@@ -38,6 +38,11 @@
             h3 {
                 font-weight:normal;
             }
+            #speaker2Img {
+                height: 95%;
+                width: 95%;
+                border-radius: 50px;
+            }
         </style>
     </head>
     <body id="growler1">
@@ -84,56 +89,61 @@
                 <h2 class="bordered"><img style="padding-left:0px;padding-bottom:0px;" src="${pageContext.request.contextPath}/images/Techtoberfest2013small.png"/><span class="titlespan">Suggestion Details</span></h2>
             </div>
             <div class="row">
-                    <form method="POST" id="action" action="${pageContext.request.contextPath}/action/processNomination.jsp">
-                        <fieldset>
-                            <div class="form-group">
-                                <label class="required">Presentation topic</label>
-                                <input required="required" name="topic" class="input-xlarge" type="text" id="tip" data-content="Please enter no more than 60 characters" maxlength="60"/>
-                                <br/><span id="error_topic" class="message_container">
-                                    <span>Please enter a presentation topic</span>
-                                </span>
-                            </div>
-                            <div class="form-group">
-                                <label class="required">Presentation description</label>
-                                <textarea cols='50' rows='5' required="required" name="description" id="tip2" data-content="Please enter no more than 250 characters" ></textarea>
-                                <br/><span id="error_description" class="message_container">
-                                    <span>Please enter a presentation description</span>
-                                </span>
-                            </div>
-                            <div class='form-group'>
-                                <label class='required'>Presentation duration?</label>
-                                <select name="duration" id="tip3" class="input-xlarge" data-content="Choose a duration">
-                                    <option value="0">Please Select a Duration</option>
-                                    <option value="00:25:00">25 minutes</option>
-                                    <option value="00:50:00">50 minutes</option>
-                                </select>
-                                <br/><span id="error_duration" class="message_container">
-                                    <span>Please select a duration</span>
-                                </span>
-                            </div>
-                            <div class="form-group">
-                                <label class="required">What theme would best represent your presentation topic?</label>
-                                <select name='theme' id='tip4' class='input x-large'>
-                                    <option value='0'> Please select a theme </option>
-                                    <% ThemePersistence tp = new ThemePersistence();
-                                    ArrayList<Theme> themes = tp.getThemesByVisibility(true);
-                                    for (int i = 0; i < themes.size(); i++){
-                                        out.print("<option value='" + themes.get(i).getId() + "'>");
-                                        out.print(themes.get(i).getName());
-                                        out.print("</option>");
-                                    }
-                                    %>
-                                </select>
-                                <br/><span id='error_theme' class='message_container'>
-                                    <span>Please select a theme</span>
-                                </span>
-                            </div>
-                            <div class="form-actions">
-                                <input type="submit" id="send" class="button button-primary" value="Submit Nomination"/>
-                                <a id="cancel" href="${pageContext.request.contextPath}/private/employee/home.jsp">Cancel</a>
-                            </div>
-                        </fieldset> 
-                </form>	  
+                    <div class="span6">
+                        <form method="POST" id="action" action="${pageContext.request.contextPath}/action/processNomination.jsp">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="required">Presentation topic</label>
+                                    <input required="required" name="topic" class="input-xlarge" type="text" id="tip" data-content="Please enter no more than 60 characters" maxlength="60"/>
+                                    <br/><span id="error_topic" class="message_container">
+                                        <span>Please enter a presentation topic</span>
+                                    </span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="required">Presentation description</label>
+                                    <textarea cols='50' rows='5' required="required" name="description" id="tip2" data-content="Please enter no more than 250 characters" ></textarea>
+                                    <br/><span id="error_description" class="message_container">
+                                        <span>Please enter a presentation description</span>
+                                    </span>
+                                </div>
+                                <div class='form-group'>
+                                    <label class='required'>Presentation duration?</label>
+                                    <select name="duration" id="tip3" class="input-xlarge" data-content="Choose a duration">
+                                        <option value="0">Please Select a Duration</option>
+                                        <option value="00:25:00">25 minutes</option>
+                                        <option value="00:50:00">50 minutes</option>
+                                    </select>
+                                    <br/><span id="error_duration" class="message_container">
+                                        <span>Please select a duration</span>
+                                    </span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="required">What theme would best represent your presentation topic?</label>
+                                    <select name='theme' id='tip4' class='input x-large'>
+                                        <option value='0'> Please select a theme </option>
+                                        <% ThemePersistence tp = new ThemePersistence();
+                                        ArrayList<Theme> themes = tp.getThemesByVisibility(true);
+                                        for (int i = 0; i < themes.size(); i++){
+                                            out.print("<option value='" + themes.get(i).getId() + "'>");
+                                            out.print(themes.get(i).getName());
+                                            out.print("</option>");
+                                        }
+                                        %>
+                                    </select>
+                                    <br/><span id='error_theme' class='message_container'>
+                                        <span>Please select a theme</span>
+                                    </span>
+                                </div>
+                                <div class="form-actions">
+                                    <input type="submit" id="send" class="button button-primary" value="Submit Nomination"/>
+                                    <a id="cancel" href="${pageContext.request.contextPath}/private/employee/home.jsp">Cancel</a>
+                                </div>
+                            </fieldset> 
+                    </form>	 
+                </div>
+                <div class="span6">
+                    <img id="speaker2Img" src="${pageContext.request.contextPath}/images/theme2.jpg" />
+                </div>
             </div>
         </div>
         <%@ include file="../../includes/footer.jsp" %> 

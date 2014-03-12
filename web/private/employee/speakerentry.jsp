@@ -35,6 +35,11 @@
             h3 {
                 font-weight:normal;
             }
+            #themeImg {
+                height: 95%;
+                width: 95%;
+                border-radius: 50px;
+            }
         </style>
     </head>
     <body id="growler1">
@@ -81,44 +86,49 @@
                 <h2 class="bordered"><img style="padding-left:0px;padding-bottom:0px;" src="${pageContext.request.contextPath}/images/Techtoberfest2013small.png"/><span class="titlespan">Suggestion Details</span></h2>
             </div>
             <div class="row">
-                    <form method="POST" id="action" action="${pageContext.request.contextPath}/action/processSpeakerSuggestion.jsp">
-                        <fieldset>
-                            <div class="form-group inline">
-                                <label class="required">Speaker First Name</label>
-                                <input required="required" name="first_name" class="input-xlarge" type="text" id="tip" data-content="Please enter no more than 30 characters" maxlength="30"/>
-                                <br/><span id="error_first" class="message_container">
-                                    <span>Please enter a first name</span>
-                                </span>
-                            </div>
-                            <div class="form-group inline">
-                                <label class="required">Speaker Last Name</label>
-                                <input required="required" name="last_name" class="input-xlarge" type="text" id="tip2" data-content="Please enter no more than 30 characters" maxlength="30"/>
-                                <br/><span id="error_last" class="message_container">
-                                    <span>Please enter a last name</span>
-                                </span>
-                            </div>
-                            <div class='form-group'>
-                                <label class='required'>What type of speaker is this?</label>
-                                <select name="type" id="tip3" class="input-xlarge" data-content="Choose a type: Business or Technical">
-                                    <option value="0">Please Select a Type</option>
-                                    <option value="Business">Business</option>
-                                    <option value="Technical">Technical</option>
-                                </select><i style="margin-left: 3px;" id="spkrtypeHelp" class="icon12-info" data-content="Business Speakers - Any speaker providing technical information in a non-technical way, appealing to both IT and non-IT users.<br/><br/>Technical Speakers - Speakers with a technical background providing mid to high level technical information, appealing to mainly IT users with technical backgrounds." title="Speaker Types"></i>
-                                <br/><span id="error_type" class="message_container">
-                                    <span>Please select a speaker type</span>
-                                </span>
-                            </div>
-                            <div class="form-group">
-                                <label>Why should this speaker be added to this year's Techtoberfest?</label>
-                                <textarea name="reason" id="tip4" data-content="Please enter no more than 250 characters" rows="5" cols="50" maxlength="250">
-                                </textarea>
-                            </div>
-                            <div class="form-actions">
-                                <input type="submit" id="send" class="button button-primary" value="Submit Suggestion"/>
-                                <a id="cancel" href="${pageContext.request.contextPath}/private/employee/home.jsp">Cancel</a>
-                            </div>
-                        </fieldset> 
-                </form>	  
+                    <div class="span6">
+                        <form method="POST" id="action" action="${pageContext.request.contextPath}/action/processSpeakerSuggestion.jsp">
+                            <fieldset>
+                                <div class="form-group inline">
+                                    <label class="required">Speaker First Name</label>
+                                    <input required="required" name="first_name" class="input-xlarge" type="text" id="tip" data-content="Please enter no more than 30 characters" maxlength="30"/>
+                                    <br/><span id="error_first" class="message_container">
+                                        <span>Please enter a first name</span>
+                                    </span>
+                                </div>
+                                <div class="form-group inline">
+                                    <label class="required">Speaker Last Name</label>
+                                    <input required="required" name="last_name" class="input-xlarge" type="text" id="tip2" data-content="Please enter no more than 30 characters" maxlength="30"/>
+                                    <br/><span id="error_last" class="message_container">
+                                        <span>Please enter a last name</span>
+                                    </span>
+                                </div>
+                                <div class='form-group'>
+                                    <label class='required'>What type of speaker is this?</label>
+                                    <select name="type" id="tip3" class="input-xlarge" data-content="Choose a type: Business or Technical">
+                                        <option value="0">Please Select a Type</option>
+                                        <option value="Business">Business</option>
+                                        <option value="Technical">Technical</option>
+                                    </select><i style="margin-left: 3px;" id="spkrtypeHelp" class="icon12-info" data-content="Business Speakers - Any speaker providing technical information in a non-technical way, appealing to both IT and non-IT users.<br/><br/>Technical Speakers - Speakers with a technical background providing mid to high level technical information, appealing to mainly IT users with technical backgrounds." title="Speaker Types"></i>
+                                    <br/><span id="error_type" class="message_container">
+                                        <span>Please select a speaker type</span>
+                                    </span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Why should this speaker be added to this year's Techtoberfest?</label>
+                                    <textarea name="reason" id="tip4" data-content="Please enter no more than 250 characters" rows="5" cols="50" maxlength="250">
+                                    </textarea>
+                                </div>
+                                <div class="form-actions">
+                                    <input type="submit" id="send" class="button button-primary" value="Submit Suggestion"/>
+                                    <a id="cancel" href="${pageContext.request.contextPath}/private/employee/home.jsp">Cancel</a>
+                                </div>
+                            </fieldset> 
+                    </form>	  
+                </div>
+                <div class="span6">
+                    <img id="themeImg" src="${pageContext.request.contextPath}/images/theme.jpg" />
+                </div>
             </div>
         </div>
         <%@ include file="../../includes/footer.jsp" %> 
