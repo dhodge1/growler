@@ -102,7 +102,7 @@
                     SessionPersistence sp = new SessionPersistence();
                     ArrayList<Session> sessions = sp.getAllSessionsWithKeys(" ");
                     SpeakerPersistence sk = new SpeakerPersistence();
-                    ArrayList<Speaker> speakers = sk.getAllSpeakers("");
+                    ArrayList<Speaker> speakers = sk.getAllSpeakers(" order by last_name");
                 %>
                 <form method="post" action="${pageContext.request.contextPath}/action/processSession.jsp">
                     <div class="form-group">
