@@ -124,11 +124,14 @@ public class ThemePersistence extends GrowlerPersistence {
              statement = connection.prepareStatement("select themeID from themeOfSession where sessionID = ?");
              statement.setInt(1, sessionID);
              result = statement.executeQuery();
-             int themeID = result.getInt("themeID");
-             closeJDBC();
-             return themeID;
+             while (result.next()) {
+                int themeID = result.getInt("themeID");
+                closeJDBC();
+                return themeID;
+             }
          } catch (Exception e) {
          }
+         closeJDBC();
          return 0;
      }
 
