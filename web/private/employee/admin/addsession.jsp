@@ -103,6 +103,8 @@
                     ArrayList<Session> sessions = sp.getAllSessionsWithKeys(" ");
                     SpeakerPersistence sk = new SpeakerPersistence();
                     ArrayList<Speaker> speakers = sk.getAllSpeakers(" order by last_name");
+                    ThemePersistence tp = new ThemePersistence();
+                    ArrayList<Theme> themes = tp.getThemesByVisibility(true);
                 %>
                 <form method="post" action="${pageContext.request.contextPath}/action/processSession.jsp">
                     <div class="form-group">
@@ -111,6 +113,17 @@
                         <br/><span id="error_name" class="message_container">
                             <span>Please enter a session name</span>
                         </span>
+                    </div>
+                    <div class="form-group">
+                        <label class="required">Session Theme </label>
+                        <select id="speaker" name="theme">
+                            <option value="0"> Select a Theme </option>
+                            <% for (int g = 0; g < themes.size(); g++) {
+                                    out.print("<option value='" + themes.get(g).getId() + "'>");
+                                    out.print(themes.get(g).getName());
+                                    out.print("</option>");
+                                }%>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label class="required">Session Description </label>

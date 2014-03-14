@@ -80,6 +80,7 @@
                 year = Integer.parseInt(request.getParameter("year"));
             } catch (Exception e) {
             }
+            ThemePersistence tp = new ThemePersistence();
             SessionPersistence sp = new SessionPersistence();
             ArrayList<Session> sessions = sp.getThisYearSessions(year, " order by session_date, start_time, name ");
         %>
@@ -123,6 +124,7 @@
                                 <th style="width: 70px;">Time</th>
                                 <th>Topic</th>
                                 <th>Description</th>
+                                <th>Theme</th>
                                 <th>Speaker(s)</th>
                                 <th>Session Duration</th>
                                 <th>Location</th>
@@ -163,6 +165,11 @@
                                     out.print("<div class='modals' id='modal" + sessions.get(i).getId() + "' title='" + sessions.get(i).getName() + "'>");
                                     out.print(sessions.get(i).getDescription());
                                     out.print("</div>");
+                                    out.print("</td>");
+                                    out.print("<td>");
+                                    int themeId = tp.getMappedTheme(sessions.get(i).getId());
+                                    Theme currentTheme = tp.getThemeByID(themeId);
+                                    out.print(currentTheme.getName());
                                     out.print("</td>");
                                     out.print("<td>");
                                     ArrayList<Speaker> speakers = sp.getSpeakersForSession(sessions.get(i).getId());

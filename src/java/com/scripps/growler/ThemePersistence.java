@@ -89,6 +89,18 @@ public class ThemePersistence extends GrowlerPersistence {
         }
     }
     
+    public void mapThemeToSession(int themeID, int sessionID) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("insert into themeOfSession (themeID, sessionID) values (?, ?)");
+            statement.setInt(1, themeID);
+            statement.setInt(2, sessionID);
+            success = statement.execute();
+            closeJDBC();
+        } catch (Exception e) {
+        }
+    }
+    
      public void addAdminTheme(Theme t) {
         try {
             initializeJDBC();
@@ -105,6 +117,20 @@ public class ThemePersistence extends GrowlerPersistence {
         } catch (Exception e) {
         }
     }
+     
+     public int getMappedTheme(int sessionID) {
+         try {
+             initializeJDBC();
+             statement = connection.prepareStatement("select themeID from themeOfSession where sessionID = ?");
+             statement.setInt(1, sessionID);
+             result = statement.executeQuery();
+             int themeID = result.getInt("themeID");
+             closeJDBC();
+             return themeID;
+         } catch (Exception e) {
+         }
+         return 0;
+     }
 
     /**
      * Searches for a string within the descriptions

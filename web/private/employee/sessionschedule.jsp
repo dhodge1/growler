@@ -92,6 +92,7 @@
             LocationPersistence lp = new LocationPersistence();
             ArrayList<Session> sessions = sp.getThisYearSessions(year, " order by session_date, start_time, name ");
             Calendar today = Calendar.getInstance();
+            ThemePersistence tp = new ThemePersistence();
         %>
         <%@ include file="../../includes/header.jsp" %> 
         <% if (String.valueOf(session.getAttribute("role")).equals("admin")) { %>
@@ -129,9 +130,10 @@
                         <thead>
                             <tr>
                                 <th>Date</th>
-                                <th style="width: 70px;">Time</th>
+                                <th style="width: 70px;">Time</th>      
                                 <th>Topic</th>
                                 <th>Description</th>
+                                <th>Theme</th>
                                 <th>Speaker(s)</th>
                                 <th>Session Duration</th>
                                 <th>Location</th>
@@ -165,6 +167,11 @@
                                     out.print("<strong>" + sessions.get(i).getName() + "</strong><br/><br/>");
                                     out.print(sessions.get(i).getDescription());
                                     out.print("</div>");
+                                    out.print("</td>");
+                                    out.print("<td>");
+                                    int themeId = tp.getMappedTheme(sessions.get(i).getId());
+                                    Theme currentTheme = tp.getThemeByID(themeId);
+                                    out.print(currentTheme.getName());
                                     out.print("</td>");
                                     out.print("<td>");
                                     ArrayList<Speaker> speakers = sp.getSpeakersForSession(sessions.get(i).getId());

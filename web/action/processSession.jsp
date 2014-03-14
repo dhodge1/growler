@@ -28,6 +28,8 @@
             String description = request.getParameter("description");
             String name = request.getParameter("name");
             String speaker = request.getParameter("speaker");
+            String theme = request.getParameter("theme");
+            int themeID = Integer.parseInt(theme);
             int spkrId = Integer.parseInt(speaker);
             int spkrId2 = 0;
             int spkrId3 = 0;
@@ -64,6 +66,7 @@
             } catch (Exception e) {
             }
             SessionPersistence sp = new SessionPersistence();
+            ThemePersistence tp = new ThemePersistence();
             try {
                 //9-8 commented out the location checks, since they are currently not part of the adding session page
                 //ArrayList<Session> ses = sp.getSessionsByDateAndTime(java.sql.Date.valueOf(date), java.sql.Time.valueOf(time));
@@ -82,6 +85,7 @@
                     session.setAttribute("message", "Success: The following session has been added successfully!");
                     //Get the newly created Session ID and assign the speaker to it
                     Session ses = sp.getSessionByName(name);
+                    tp.mapThemeToSession(themeID, ses.getId());
                     sp.assignSpeaker(spkrId, ses.getId());
                     SpeakerPersistence sk = new SpeakerPersistence();
                     Speaker sendSpeakerInfo = sk.getSpeakerByID(spkrId);
