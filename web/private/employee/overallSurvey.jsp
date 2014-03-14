@@ -56,7 +56,7 @@
             SurveyPersistence survP = new SurveyPersistence();
             int surveyCheck = survP.overallSurveyCheck(Integer.parseInt(String.valueOf(session.getAttribute("id"))));
             if (surveyCheck == 1) {
-                response.sendRedirect("./surveyTaken.jsp");
+                response.sendRedirect("surveyTaken");
             }
         %>
         <%@ include file="../../../includes/adminheader.jsp" %> 
