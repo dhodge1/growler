@@ -28,6 +28,91 @@ public class SurveyPersistence extends GrowlerPersistence {
         }
         return null;
     }
+    
+    public int overallSurveyCheck(int id) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select overall_taken from overallSurveyCheck where user_id=?");
+            statement.setInt(1, id);
+            result = statement.executeQuery();
+            if (result.next()) {
+                closeJDBC();
+                return 1;
+            }
+            closeJDBC();
+            return 0;
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+    
+    public void insertSurveyCheck(int id, int taken) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("insert into overallSurveyCheck (user_id, overall_taken) values (?, ?)");
+            statement.setInt(1, id);
+            statement.setInt(2, taken);
+            statement.execute();
+            closeJDBC();
+        } catch (Exception e) {
+        }
+    }
+    
+    public void submitOverallSurvey(int q1, int q2, int q3) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("insert into overallSurvey (overallQuality, topics, rooms) values (?, ?, ?)");
+            statement.setInt(1, q1);
+            statement.setInt(2, q2);
+            statement.setInt(3, q3);
+            statement.execute();
+            closeJDBC();
+        } catch (Exception e) {
+        }
+    }
+    
+    public void submitOverallSurvey(int q1, int q2, int q3, int q4, String comms) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("insert into overallSurvey (overallQuality, topics, rooms, webEx, comments) values (?, ?, ?, ?, ?)");
+            statement.setInt(1, q1);
+            statement.setInt(2, q2);
+            statement.setInt(3, q3);
+            statement.setInt(4, q4);
+            statement.setString(5, comms);
+            statement.execute();
+            closeJDBC();
+        } catch (Exception e) {
+        }
+    }
+    
+    public void submitOverallSurvey(int q1, int q2, int q3, String comms) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("insert into overallSurvey (overallQuality, topics, rooms, comments) values (?, ?, ?, ?)");
+            statement.setInt(1, q1);
+            statement.setInt(2, q2);
+            statement.setInt(3, q3);
+            statement.setString(5, comms);
+            statement.execute();
+            closeJDBC();
+        } catch (Exception e) {
+        }
+    }
+    
+    public void submitOverallSurvey(int q1, int q2, int q3, int q4) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("insert into overallSurvey (overallQuality, topics, rooms, webEx) values (?, ?, ?, ?)");
+            statement.setInt(1, q1);
+            statement.setInt(2, q2);
+            statement.setInt(3, q3);
+            statement.setInt(4, q4);
+            statement.execute();
+            closeJDBC();
+        } catch (Exception e) {
+        }
+    }
 
     public ArrayList<Survey> getAllSurveys() {
         try {

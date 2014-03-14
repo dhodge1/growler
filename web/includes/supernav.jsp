@@ -50,6 +50,7 @@
     Feature suggestSpeaker = fp.getFeatureState(4);
     Feature surveySession = fp.getFeatureState(1);
     Feature scheduleSession = fp.getFeatureState(5);
+    Feature overallSurvey = fp.getFeatureState(8);
 %>
 <nav class="topnav">
     <nav class="globalNavigation modify-pages" id="navigation">
@@ -100,6 +101,9 @@
                     <%--<li><a href="${pageContext.request.contextPath}/private/employee/surveys.jsp">Submit Session Feedback</a></li>--%>
                     <% if (surveySession.getFeatureState()) { %>
                         <%@ include file="../../includes/superSurvey.jsp" %>
+                    <% } %>
+                    <% if (overallSurvey.getFeatureState()) { %>
+                        <%@ include file="../../includes/superOverallSurvey.jsp" %>
                     <% } %>
                     <li><a href="${pageContext.request.contextPath}/manageSessions">Manage Session Schedule</a></li>
                 </ul>

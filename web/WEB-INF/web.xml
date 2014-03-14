@@ -160,6 +160,14 @@
     <servlet-name>features</servlet-name>
     <url-pattern>/features</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>overallSurvey</servlet-name>
+    <jsp-file>/private/employee/overallSurvey.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>overallSurvey</servlet-name>
+    <url-pattern>/overallSurvey</url-pattern>
+  </servlet-mapping>
  
   <servlet>
     <servlet-name>callOutAction</servlet-name>
