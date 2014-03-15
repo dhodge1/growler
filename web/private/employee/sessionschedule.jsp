@@ -332,7 +332,7 @@
                           width: 710
                         };
                         
-                        pdf.text(20, 20, 'Techtoberfest Session Schedule');
+                        pdf.text(40, 30, 'Techtoberfest Session Schedule');
                         // all coords and widths are in jsPDF instance's declared units
                         // 'inches' in this case
                         pdf.fromHTML(
