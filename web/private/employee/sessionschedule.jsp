@@ -30,6 +30,7 @@
         <script src="http://growler.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/js/FileSaver.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/js/jspdf.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jspdf.plugin.standard_fonts_metrics.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jspdf.plugin.split_text_to_size.js"></script>
@@ -133,137 +134,147 @@
                     <input type='hidden' id='current_page' value="1" />
                     <input type='hidden' id='show_per_page' value='15' />
                     <input type='hidden' id='total' value='<%= sessions.size()%>'/>
-                    <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder" id="sessionTable">
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th style="width: 70px;">Time</th>      
-                                <th>Topic</th>
-                                <th>Description</th>
-                                <th>Theme</th>
-                                <th>Speaker(s)</th>
-                                <th>Session Duration</th>
-                                <th>Location</th>
-                                <th>Remote Room(s)</th>
-                                <% if (today.get(Calendar.MONTH) != 8) {%><th>Like Session?</th><% }%> <!-- is this supposed to prevent liking a session after October?-->
-                                <th>Submit Feedback</th>
-                            </tr>
-                        </thead>
-                        <tbody id='tablebody'>
-                            <%
-                                for (int i = 0; i < sessions.size(); i++) {
-                                    out.print("<tr id='row" + (i) + "'>");
-                                    out.print("<td>");
-                                    SimpleDateFormat dates = new SimpleDateFormat("MM/dd/yyyy");
-                                    out.print(dates.format(sessions.get(i).getSessionDate()));
-                                    out.print("</td>");
-                                    out.print("<td>");
-                                    SimpleDateFormat fmt = new SimpleDateFormat("h:mm a");
-                                    try {
-                                        out.print(fmt.format(sessions.get(i).getStartTime()));
-                                    } catch (Exception e) {
-                                        out.print("No Time");
-                                    }
-                                    out.print("</td>");
-                                    out.print("<td>");
-                                    out.print(sessions.get(i).getName());
-                                    out.print("</td>");
-                                    out.print("<td>");
-                                    out.print("<a class='showModal'><input type='hidden' value='" + sessions.get(i).getId() + "' />View</a>");
-                                    out.print("<div class='modals' id='modal" + sessions.get(i).getId() + "' title='Topic Description'>");
-                                    out.print("<strong>" + sessions.get(i).getName() + "</strong><br/><br/>");
-                                    out.print(sessions.get(i).getDescription());
-                                    out.print("</div>");
-                                    out.print("</td>");
-                                    out.print("<td>");
-                                    int themeId = tp.getMappedTheme(sessions.get(i).getId());
-                                    Theme currentTheme = tp.getThemeByID(themeId);
-                                    out.print(currentTheme.getName());
-                                    out.print("</td>");
-                                    out.print("<td>");
-                                    ArrayList<Speaker> speakers = sp.getSpeakersForSession(sessions.get(i).getId());
-                                    for (int j = 0; j < speakers.size(); j++) {
-                                        //Commented out the Speaker Dialogs, since we don't have relevant BIO data (9/16/13)
-                                        //out.print("<a class='showModal'>");
-                                        out.print(speakers.get(j).getFullName());
-                                        out.print("<br/>");
-                                        //out.print("<input type='hidden' value='" + speakers.get(j).getId() + "' /></a><br/>");
-                                        //out.print("<div class='modals' id='modalspk" + speakers.get(j).getId() + "' title='" + speakers.get(j).getFullName() + "'>");
-                                        //out.print(""); //The Bio information goes here?
-                                        //out.print("</div>");
-                                    }
-                                    out.print("</td>");
-                                    out.print("<td>");
-                                    SimpleDateFormat fmt2 = new SimpleDateFormat("mm 'minutes'");
-                                    out.print(fmt2.format(sessions.get(i).getDuration()));
-                                    out.print("</td>");
-                                    out.print("<td>");
-                                    out.print(lp.getLocationById(sessions.get(i).getLocation()).getDescription() + "<br/>" + lp.getLocationById(sessions.get(i).getLocation()).getBuilding());
-                                    out.print("</td>");
-                                    out.print("<td>");
-                                    ArrayList<RemoteRoom> remotes = lp.getRemoteRoomForLocation(sessions.get(i).getLocation());
-                                    if (remotes.size() != 0) {
-                                        for (int k = 1; k < remotes.size(); k++) {
-                                            //Commented out speaker BIO modals - 9/16/13
-                                            // out.print("<a class='showModal2'>");
-                                            out.print(lp.getLocationById(remotes.get(k).getRemoteID()).getDescription() + ", " + lp.getLocationById(remotes.get(k).getRemoteID()).getBuilding());
-                                            out.print("<br/>");
-                                            // out.print("<input type='hidden' value='" + speakers.get(j).getId() + "' /></a><br/>");
-                                            // out.print("<div class='modals' id='modalspkr" + speakers.get(j).getId() + "' title='" + speakers.get(j).getFullName() + "'>");
-                                            // out.print(""); //The Bio information goes here?
-                                            // out.print("</div>");
-                                        }
-                                    } else {
-                                        out.print("To Be Determined");
-                                    }
-                                    out.print("</td>");
-                                    if (today.get(Calendar.MONTH) != 8) {
+                        <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder" id="sessionTable">
+                            <colgroup>
+                                <col width="11%">
+                                <col width="6%">
+                                <col width="12%">
+                                <col width="13%">
+                                <col width="11%">
+                                <col width="17%">
+                                <col width="14%">
+                                <col width="19%">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th style="width: 70px;">Time</th>      
+                                    <th>Topic</th>
+                                    <th>Description</th>
+                                    <th>Theme</th>
+                                    <th>Speaker(s)</th>
+                                    <th>Session Duration</th>
+                                    <th>Location</th>
+                                    <th>Remote Room(s)</th>
+                                    <% if (today.get(Calendar.MONTH) != 8) {%><th>Like Session?</th><% }%> <!-- is this supposed to prevent liking a session after October?-->
+                                    <th>Submit Feedback</th>
+                                </tr>
+                            </thead>
+                            <tbody id='tablebody'>
+                                <%
+                                    for (int i = 0; i < sessions.size(); i++) {
+                                        out.print("<tr id='row" + (i) + "'>");
                                         out.print("<td>");
-                                        if (rp.isUserRegistered(user, sessions.get(i).getId())) {
-                                            out.print("<div class='unlike' id='unlike" + sessions.get(i).getId() + "'><a>Undo</a></div>");
-                                            out.print("<div style='display:none' class='like' id='like" + sessions.get(i).getId() + "'><a><i class='icon16-approve' style='margin-right: 3px;'></i>Like</a></div>");
-                                        } else {
-                                            out.print("<div style='display:none' class='unlike' id='unlike" + sessions.get(i).getId() + "'><a>Undo</a></div>");
-                                            out.print("<div class='like' id='like" + sessions.get(i).getId() + "'><a><i class='icon16-approve' style='margin-right: 3px;'></i>Like</a></div>");
-                                        }
-
+                                        SimpleDateFormat dates = new SimpleDateFormat("MM/dd/yyyy");
+                                        out.print(dates.format(sessions.get(i).getSessionDate()));
                                         out.print("</td>");
-                                    }
-                                    //Survey Page Link
-                                    out.print("<td>");
-                                    Calendar event = Calendar.getInstance();
-                                    Calendar now = Calendar.getInstance();
-                                    Calendar then = Calendar.getInstance();
-                                    Calendar duration = Calendar.getInstance();
-                                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                                    try{
-                                        event.setTime(sdf.parse(sessions.get(i).getSessionDate().toString() + " " + sessions.get(i).getStartTime().toString()));
-                                        
-                                        //get duration NOTE: get Duration only allows 0-60min durations, this needs to be fixed
-                                        duration.setTimeInMillis(sessions.get(i).getDuration().getTime());
-                                        int durMins = duration.get(Calendar.MINUTE);
-                                        
-                                        //Adding 30 min to current time
-                                        long t = now.getTimeInMillis() + 60000*30 + durMins*60000;
-                                        java.util.Date nowPlus30Min = new java.util.Date(t);
-                                        then.setTime(nowPlus30Min);
-                                        
-                                        
-                                        if(event.compareTo(now)>0 && event.compareTo(then)<0) //returns 1 if event is in future
-                                        {
-                                            out.print("<a href='" +  request.getContextPath() + "/private/employee/surveys.jsp'>Submit Feedback</a>");
-                                        }else{
-                                            out.print("<span style='color:grey'>Feedback Closed</span>");
+                                        out.print("<td>");
+                                        SimpleDateFormat fmt = new SimpleDateFormat("h:mm a");
+                                        try {
+                                            out.print(fmt.format(sessions.get(i).getStartTime()));
+                                        } catch (Exception e) {
+                                            out.print("No Time");
                                         }
-                                    }catch(Exception e){
+                                        out.print("</td>");
+                                        out.print("<td>");
+                                        out.print(sessions.get(i).getName());
+                                        out.print("</td>");
+                                        out.print("<td class='change'>");
+                                        out.print("<a class='showModal'><input type='hidden' value='" + sessions.get(i).getId() + "' />View</a>");
+                                        out.print("<div class='modals' id='modal" + sessions.get(i).getId() + "' title='Topic Description'>");
+                                        out.print("<strong>" + sessions.get(i).getName() + "</strong><br/><br/>");
+                                        out.print(sessions.get(i).getDescription());
+                                        out.print("</div>");
+                                        out.print("</td>");
+                                        out.print("<td>");
+                                        int themeId = tp.getMappedTheme(sessions.get(i).getId());
+                                        Theme currentTheme = tp.getThemeByID(themeId);
+                                        out.print(currentTheme.getName());
+                                        out.print("</td>");
+                                        out.print("<td>");
+                                        ArrayList<Speaker> speakers = sp.getSpeakersForSession(sessions.get(i).getId());
+                                        for (int j = 0; j < speakers.size(); j++) {
+                                            //Commented out the Speaker Dialogs, since we don't have relevant BIO data (9/16/13)
+                                            //out.print("<a class='showModal'>");
+                                            out.print(speakers.get(j).getFullName());
+                                            out.print("<br/>");
+                                            //out.print("<input type='hidden' value='" + speakers.get(j).getId() + "' /></a><br/>");
+                                            //out.print("<div class='modals' id='modalspk" + speakers.get(j).getId() + "' title='" + speakers.get(j).getFullName() + "'>");
+                                            //out.print(""); //The Bio information goes here?
+                                            //out.print("</div>");
+                                        }
+                                        out.print("</td>");
+                                        out.print("<td>");
+                                        SimpleDateFormat fmt2 = new SimpleDateFormat("mm 'minutes'");
+                                        out.print(fmt2.format(sessions.get(i).getDuration()));
+                                        out.print("</td>");
+                                        out.print("<td>");
+                                        out.print(lp.getLocationById(sessions.get(i).getLocation()).getDescription() + "<br/>" + lp.getLocationById(sessions.get(i).getLocation()).getBuilding());
+                                        out.print("</td>");
+                                        out.print("<td>");
+                                        ArrayList<RemoteRoom> remotes = lp.getRemoteRoomForLocation(sessions.get(i).getLocation());
+                                        if (remotes.size() != 0) {
+                                            for (int k = 1; k < remotes.size(); k++) {
+                                                //Commented out speaker BIO modals - 9/16/13
+                                                // out.print("<a class='showModal2'>");
+                                                out.print(lp.getLocationById(remotes.get(k).getRemoteID()).getDescription() + ", " + lp.getLocationById(remotes.get(k).getRemoteID()).getBuilding());
+                                                out.print("<br/>");
+                                                // out.print("<input type='hidden' value='" + speakers.get(j).getId() + "' /></a><br/>");
+                                                // out.print("<div class='modals' id='modalspkr" + speakers.get(j).getId() + "' title='" + speakers.get(j).getFullName() + "'>");
+                                                // out.print(""); //The Bio information goes here?
+                                                // out.print("</div>");
+                                            }
+                                        } else {
+                                            out.print("To Be Determined");
+                                        }
+                                        out.print("</td>");
+                                        if (today.get(Calendar.MONTH) != 8) {
+                                            out.print("<td class='change'>");
+                                            if (rp.isUserRegistered(user, sessions.get(i).getId())) {
+                                                out.print("<div class='unlike' id='unlike" + sessions.get(i).getId() + "'><a>Undo</a></div>");
+                                                out.print("<div style='display:none' class='like' id='like" + sessions.get(i).getId() + "'><a><i class='icon16-approve' style='margin-right: 3px;'></i>Like</a></div>");
+                                            } else {
+                                                out.print("<div style='display:none' class='unlike' id='unlike" + sessions.get(i).getId() + "'><a>Undo</a></div>");
+                                                out.print("<div class='like' id='like" + sessions.get(i).getId() + "'><a><i class='icon16-approve' style='margin-right: 3px;'></i>Like</a></div>");
+                                            }
+
+                                            out.print("</td>");
+                                        }
+                                        //Survey Page Link
+                                        out.print("<td class='change'>");
+                                        Calendar event = Calendar.getInstance();
+                                        Calendar now = Calendar.getInstance();
+                                        Calendar then = Calendar.getInstance();
+                                        Calendar duration = Calendar.getInstance();
+                                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                        try{
+                                            event.setTime(sdf.parse(sessions.get(i).getSessionDate().toString() + " " + sessions.get(i).getStartTime().toString()));
+
+                                            //get duration NOTE: get Duration only allows 0-60min durations, this needs to be fixed
+                                            duration.setTimeInMillis(sessions.get(i).getDuration().getTime());
+                                            int durMins = duration.get(Calendar.MINUTE);
+
+                                            //Adding 30 min to current time
+                                            long t = now.getTimeInMillis() + 60000*30 + durMins*60000;
+                                            java.util.Date nowPlus30Min = new java.util.Date(t);
+                                            then.setTime(nowPlus30Min);
+
+
+                                            if(event.compareTo(now)>0 && event.compareTo(then)<0) //returns 1 if event is in future
+                                            {
+                                                out.print("<a href='" +  request.getContextPath() + "/private/employee/surveys.jsp'>Submit Feedback</a>");
+                                            }else{
+                                                out.print("<span style='color:grey'>Feedback Closed</span>");
+                                            }
+                                        }catch(Exception e){
+                                        }
+                                        out.print("</td>");
+
+                                        out.print("</tr>");
                                     }
-                                    out.print("</td>");
-                                    
-                                    out.print("</tr>");
-                                }
-                            %>
-                        </tbody>
-                    </table>
+                                %>
+                            </tbody>
+                        </table>
                     <div class="pager">
                         <ul>
 
@@ -295,42 +306,59 @@
         <script src="${pageContext.request.contextPath}/js/pagination.js"></script>
         <script>             
                     function demoFromHTML() {
-                        var pdf = new jsPDF('p','in','letter')
+                            var pdf = new jsPDF('l', 'pt', 'letter')
 
-                        // source can be HTML-formatted string, or a reference
-                        // to an actual DOM element from which the text will be scraped.
-                        , source = $('#sessionTable')[0]
+                            // source can be HTML-formatted string, or a reference
+                            // to an actual DOM element from which the text will be scraped.
+                            , source = $('#schedule')[0]
 
-                        // we support special element handlers. Register them with jQuery-style 
-                        // ID selector for either ID or node name. ("#iAmID", "div", "span" etc.)
-                        // There is no support for any other type of selectors 
-                        // (class, of compound) at this time.
-                        , specialElementHandlers = {
-                                // element with id of "bypass" - jQuery style selector
-                                '#bypassme': function(element, renderer){
-                                        // true = "handled elsewhere, bypass text extraction"
-                                        return true;
-                                }
+                            // we support special element handlers. Register them with jQuery-style 
+                            // ID selector for either ID or node name. ("#iAmID", "div", "span" etc.)
+                            // There is no support for any other type of selectors 
+                            // (class, of compound) at this time.
+                            , specialElementHandlers = {
+                                    // element with id of "bypass" - jQuery style selector
+                                    '#bypassme': function(element, renderer){
+                                            // true = "handled elsewhere, bypass text extraction"
+                                            return true
+                                    }
+                            }
+
+                            margins = {
+                          top: 40,
+                          bottom: 20,
+                          left: 40,
+                          width: 710
                         };
-
                         // all coords and widths are in jsPDF instance's declared units
                         // 'inches' in this case
                         pdf.fromHTML(
-                                source // HTML string or DOM elem ref.
-                                , 0.5 // x coord
-                                , 0.5 // y coord
-                                , {
-                                        'width':7.5 // max width of content on PDF
-                                        , 'elementHandlers': specialElementHandlers
-                                }
-                        );*/
-
-                        pdf.output('dataurl');
+                            source // HTML string or DOM elem ref.
+                            , margins.left // x coord
+                            , margins.top // y coord
+                            , {
+                                    'width': margins.width // max width of content on PDF
+                                    , 'elementHandlers': specialElementHandlers
+                            },
+                            function (dispose) {
+                              // dispose: object with X, Y of the last line add to the PDF 
+                              //          this allow the insertion of new lines after html
+                              //pdf.save('Test.pdf');
+                              
+                              pdf.output('dataurlnewwindow');
+                            },
+                            margins
+                        )
                     }   
                     
                     $('#makePDF').on("click", function(event) {
                         event.preventDefault();
+                        //$('.change').html(' ');
+                        $('table tr').find('td:eq(3),th:eq(3)').remove();
+                        $('table tr').find('td:eq(8),th:eq(8)').remove();
+                        $('table tr').find('td:eq(8),th:eq(8)').remove();
                         demoFromHTML();
+                        location.reload();
                     });
                     
                     $('form').submit(function(event) {
