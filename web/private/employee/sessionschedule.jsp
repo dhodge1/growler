@@ -308,7 +308,6 @@
         <script>             
                     function demoFromHTML() {
                             var pdf = new jsPDF('l', 'pt', 'letter')
-                            pdf.text(20, 20, 'Techtoberfest Session Schedule');
 
                             // source can be HTML-formatted string, or a reference
                             // to an actual DOM element from which the text will be scraped.
@@ -332,6 +331,8 @@
                           left: 40,
                           width: 710
                         };
+                        
+                        pdf.text(20, 20, 'Techtoberfest Session Schedule');
                         // all coords and widths are in jsPDF instance's declared units
                         // 'inches' in this case
                         pdf.fromHTML(
