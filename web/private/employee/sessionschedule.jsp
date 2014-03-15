@@ -292,7 +292,7 @@
         <script src="${pageContext.request.contextPath}/js/pagination.js"></script>
         <script>
                     function demoFromHTML() {
-                        var pdf = new jsPDF('l','in','letter')
+                        var pdf = new jsPDF('p','in','letter')
 
                         // source can be HTML-formatted string, or a reference
                         // to an actual DOM element from which the text will be scraped.
