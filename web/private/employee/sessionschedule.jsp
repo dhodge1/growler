@@ -139,11 +139,11 @@
                             <colgroup>
                                 <col width="11%">
                                 <col width="6%">
-                                <col width="16%">
+                                <col width="15%">
                                 <col width="15%">
                                 <col width="11%">
                                 <col width="11%">
-                                <col width="14%">
+                                <col width="15%">
                                 <col width="19%">
                             </colgroup>
                             <thead>
@@ -355,7 +355,7 @@
                     $('#makePDF').on("click", function(event) {
                         event.preventDefault();
                         //$('.change').html(' ');
-                        $('br').replaceWith(',');
+                        $('br').replaceWith('\n');
                         $('table tr').find('td:eq(3),th:eq(3)').remove();
                         $('table tr').find('td:eq(8),th:eq(8)').remove();
                         $('table tr').find('td:eq(8),th:eq(8)').remove();
