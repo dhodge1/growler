@@ -355,6 +355,7 @@
                     $('#makePDF').on("click", function(event) {
                         event.preventDefault();
                         //$('.change').html(' ');
+                        $('br').replaceWith(',');
                         $('table tr').find('td:eq(3),th:eq(3)').remove();
                         $('table tr').find('td:eq(8),th:eq(8)').remove();
                         $('table tr').find('td:eq(8),th:eq(8)').remove();
