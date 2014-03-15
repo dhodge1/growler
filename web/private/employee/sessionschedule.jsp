@@ -30,6 +30,12 @@
         <script src="http://growler.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/js/jspdf.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jspdf.plugin.standard_fonts_metrics.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jspdf.plugin.split_text_to_size.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jspdf.plugin.from_html.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/js/jspdf.plugin.cell.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/js/jspdf.plugin.javascript.js"></script>
         <style>
             .ie-dialog-button {
                 background-color: #0067B1;
@@ -286,12 +292,6 @@
         <%@ include file="../../includes/footer.jsp" %>        
         <script src="${pageContext.request.contextPath}/js/libs/sniui.dialog.1.2.0.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/pagination.js"></script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/js/jspdf.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jspdf.plugin.standard_fonts_metrics.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jspdf.plugin.split_text_to_size.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jspdf.plugin.from_html.js"></script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/js/jspdf.plugin.cell.js"></script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/js/jspdf.plugin.javascript.js"></script>
         <script>
                     function tableToJson(table) {
                         var data = [];
@@ -321,7 +321,7 @@
                     }
                     
                     function demoFromHTML() {
-                        var table = tableToJson($('#schedule').get(0))
+                        var table = tableToJson($('#sessionTable').get(0))
                         var doc = new jsPDF('p', 'pt', 'a4', true);
                         doc.cellInitialize();
                         $.each(table, function (i, row){
