@@ -90,7 +90,7 @@
             RegistrationPersistence rp = new RegistrationPersistence();
 
             LocationPersistence lp = new LocationPersistence();
-            ArrayList<Session> sessions = sp.getThisYearSessions(year, " order by session_date, start_time, name ");
+            ArrayList<Session> sessions = sp.getThisYearActiveSessions(year, " order by session_date, start_time, name ", true);
             Calendar today = Calendar.getInstance();
             ThemePersistence tp = new ThemePersistence();
         %>

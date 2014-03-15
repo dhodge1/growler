@@ -47,6 +47,8 @@ public class Session {
      */
     private String key;
     
+    private boolean active;
+    
     private int userRegistered;
     
     private boolean survey;
@@ -70,6 +72,14 @@ public class Session {
      */
     public void setId(Integer id) {
         this.id = id;
+    }
+    
+    public Boolean getActive() {
+        return active;
+    }
+    
+    public void setActive(Boolean state) {
+        this.active = state;
     }
 
     /**

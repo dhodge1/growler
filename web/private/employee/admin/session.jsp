@@ -130,6 +130,7 @@
                                 <th>Location</th>
                                 <th>Capacity</th>
                                 <th>Remote Locations</th>
+                                <th>Active</th>
                                 <th><!-- Actions --></th>
                             </tr>
                         </thead>
@@ -221,6 +222,13 @@
                                     }
                                     out.print("</td>");
                                     out.print("<td>");
+                                    if (session.get(i).getActive()) {
+                                        out.print("<i class='icon16-flag-green'></i>");
+                                    } else {
+                                        out.print("<i class='icon16-flag-green'></i>");
+                                    }
+                                    out.pring("</td>");
+                                    out.print("<td>");
                                     out.print("<div class='actionMenu'><a class='actionMenu-toggle' data-toggle='dropdown' href='#'>Actions<b class='caret'></b></a>");
                                     out.print("<ul class='actionMenu-menu' role='menu'>");
                                     out.print("<li><a href='../../../private/employee/admin/assignroomtosession.jsp?session_id=" + sessions.get(i).getId() + "'><i class='icon16-reconcile'></i>Assign To Room</a></li>");
@@ -241,6 +249,11 @@
                                     }
                                     out.print("</div>");
                                     out.print("<i class='icon16-trash'></i>Delete</a></li>");
+                                    if (sessions.get(i).getActive()) {
+                                         out.print("<li><a href='../../../action/deactivateSession.jsp?session_id=" + sessions.get(i).getId() + "'><i class='icon16-flag-red'></i>Deactivate Session</a></li>");
+                                    } else {
+                                        out.print("<li><a href='../../../action/activateSession.jsp?session_id=" + sessions.get(i).getId() + "'><i class='icon16-flag-green'></i>Deactivate Session</a></li>");
+                                    }
                                     out.print("</ul>");
                                     out.print("</td>");
                                     out.print("</tr>");
