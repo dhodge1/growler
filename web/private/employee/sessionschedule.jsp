@@ -210,7 +210,7 @@
                                         out.print(fmt2.format(sessions.get(i).getDuration()));
                                         out.print("</td>");
                                         out.print("<td>");
-                                        out.print(lp.getLocationById(sessions.get(i).getLocation()).getDescription() + brr + lp.getLocationById(sessions.get(i).getLocation()).getBuilding());
+                                        out.print(lp.getLocationById(sessions.get(i).getLocation()).getDescription() + ", " + lp.getLocationById(sessions.get(i).getLocation()).getBuilding());
                                         out.print("</td>");
                                         out.print("<td>");
                                         ArrayList<RemoteRoom> remotes = lp.getRemoteRoomForLocation(sessions.get(i).getLocation());
@@ -308,6 +308,7 @@
         <script>             
                     function demoFromHTML() {
                             var pdf = new jsPDF('l', 'pt', 'letter')
+                            pdf.text(20, 20, 'Techtoberfest Session Schedule');
 
                             // source can be HTML-formatted string, or a reference
                             // to an actual DOM element from which the text will be scraped.
