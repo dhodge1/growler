@@ -101,6 +101,7 @@
             ArrayList<Session> sessions = sp.getThisYearActiveSessions(year, " order by session_date, start_time, name ", true);
             Calendar today = Calendar.getInstance();
             ThemePersistence tp = new ThemePersistence();
+            String brr = "<br/>";
         %>
         <%@ include file="../../includes/header.jsp" %> 
         <% if (String.valueOf(session.getAttribute("role")).equals("admin")) { %>
@@ -197,7 +198,7 @@
                                             //Commented out the Speaker Dialogs, since we don't have relevant BIO data (9/16/13)
                                             //out.print("<a class='showModal'>");
                                             out.print(speakers.get(j).getFullName());
-                                            out.print("<br/>");
+                                            out.print(brr);
                                             //out.print("<input type='hidden' value='" + speakers.get(j).getId() + "' /></a><br/>");
                                             //out.print("<div class='modals' id='modalspk" + speakers.get(j).getId() + "' title='" + speakers.get(j).getFullName() + "'>");
                                             //out.print(""); //The Bio information goes here?
@@ -209,7 +210,7 @@
                                         out.print(fmt2.format(sessions.get(i).getDuration()));
                                         out.print("</td>");
                                         out.print("<td>");
-                                        out.print(lp.getLocationById(sessions.get(i).getLocation()).getDescription() + "<br/>" + lp.getLocationById(sessions.get(i).getLocation()).getBuilding());
+                                        out.print(lp.getLocationById(sessions.get(i).getLocation()).getDescription() + brr + lp.getLocationById(sessions.get(i).getLocation()).getBuilding());
                                         out.print("</td>");
                                         out.print("<td>");
                                         ArrayList<RemoteRoom> remotes = lp.getRemoteRoomForLocation(sessions.get(i).getLocation());
@@ -218,7 +219,7 @@
                                                 //Commented out speaker BIO modals - 9/16/13
                                                 // out.print("<a class='showModal2'>");
                                                 out.print(lp.getLocationById(remotes.get(k).getRemoteID()).getDescription() + ", " + lp.getLocationById(remotes.get(k).getRemoteID()).getBuilding());
-                                                out.print("<br/>");
+                                                out.print(brr);
                                                 // out.print("<input type='hidden' value='" + speakers.get(j).getId() + "' /></a><br/>");
                                                 // out.print("<div class='modals' id='modalspkr" + speakers.get(j).getId() + "' title='" + speakers.get(j).getFullName() + "'>");
                                                 // out.print(""); //The Bio information goes here?
