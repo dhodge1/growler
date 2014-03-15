@@ -252,7 +252,7 @@
                                     if (sessions.get(i).getActive()) {
                                          out.print("<li><a href='../../../action/deactivateSession.jsp?session_id=" + sessions.get(i).getId() + "'><i class='icon16-flag-red'></i>Deactivate Session</a></li>");
                                     } else {
-                                        out.print("<li><a href='../../../action/activateSession.jsp?session_id=" + sessions.get(i).getId() + "'><i class='icon16-flag-green'></i>Deactivate Session</a></li>");
+                                        out.print("<li><a href='../../../action/activateSession.jsp?session_id=" + sessions.get(i).getId() + "'><i class='icon16-flag-green'></i>Activate Session</a></li>");
                                     }
                                     out.print("</ul>");
                                     out.print("</td>");
