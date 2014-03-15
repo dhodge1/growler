@@ -222,12 +222,12 @@
                                     }
                                     out.print("</td>");
                                     out.print("<td>");
-                                    if (session.get(i).getActive()) {
+                                    if (sessions.get(i).getActive()) {
                                         out.print("<i class='icon16-flag-green'></i>");
                                     } else {
                                         out.print("<i class='icon16-flag-green'></i>");
                                     }
-                                    out.pring("</td>");
+                                    out.print("</td>");
                                     out.print("<td>");
                                     out.print("<div class='actionMenu'><a class='actionMenu-toggle' data-toggle='dropdown' href='#'>Actions<b class='caret'></b></a>");
                                     out.print("<ul class='actionMenu-menu' role='menu'>");
