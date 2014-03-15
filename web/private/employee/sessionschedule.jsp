@@ -317,7 +317,7 @@
                                 , 0.5 // x coord
                                 , 0.5 // y coord
                                 , {
-                                        'width':10.0 // max width of content on PDF
+                                        'width':7.5 // max width of content on PDF
                                         , 'elementHandlers': specialElementHandlers
                                 }
                         );
