@@ -20,14 +20,16 @@ import javax.mail.Address;
 /**
  * A helper class for sending e-mail messages with SMTP(Simple
  * Mail Transfer Protocol). 
- * The Default mail server for FROM @gmail
- * email address is "smtp.gmail.com" 
+ * The Default mail server for FROM @scrippsnetworks 
+ * email address is "mail.office365.com" 
+ *
+ * 
  * 
  * @author Thuy To
  * Resources: Murach's Java servlets and JSP and www.codejava.net
  * Version: 2
  */
-public class EmailUtilSMTPLocal
+public class EmailUtilSMTPScripps
 {
    
    
@@ -36,13 +38,13 @@ public class EmailUtilSMTPLocal
                                AddressException, MessagingException 
                              
    {
-     final String username = "scrippsproject2014@gmail.com";
-     final String password = "capstoneteam2014";   
+     final String username = "Thuy.To@scrippsnetworks.com";
+     final String password = "xotujevA2";   
      //sets environment properties
      Properties props = new Properties();   
      //The default mail server is
-     //smtp.gmail.com
-     props.put("mail.smtp.host", "smtp.gmail.com");  
+     //mail.office365.com
+     props.put("mail.smtp.host", "mail.office365.com");  
      props.put("mail.smtp.port",587 );
      props.put("mail.smtp.auth", "true");
      //use of the STARTTLS command is prefered in case where the 
@@ -70,7 +72,7 @@ public class EmailUtilSMTPLocal
        message.setText(body);
      }
      //Address the message
-     Address fromAddress = new InternetAddress(username);
+     Address fromAddress = new InternetAddress("sni-techtoberfest-help@scrippsnetworks.com");
      Address[] emailList = InternetAddress.parse(to);
      message.setFrom(fromAddress);
      message.setRecipients(Message.RecipientType.TO, emailList);

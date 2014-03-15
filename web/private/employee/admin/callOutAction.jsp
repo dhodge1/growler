@@ -90,13 +90,14 @@
      try
      {
        //perform the send email task
-       EmailUtilSMTPLocal.sendMail((emailList.toString()), subject, content, isContentHTML);
+       EmailUtilSMTPScripps.sendMail((emailList.toString()), subject, content, isContentHTML);
+       //EmailUtilSMTPLocal.sendMail((emailList.toString()), subject, content, isContentHTML);
        isSuccess = "Your message has been sent!";
      }
      catch (Exception e)
      {
        // e.printStackTrace();
-       isSuccess ="Your message can't be sending at this time" + emailList.toString();
+       isSuccess ="Your message can't be sending at this time";
      }
    
      finally 
