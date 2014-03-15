@@ -138,10 +138,10 @@
                             <colgroup>
                                 <col width="11%">
                                 <col width="6%">
-                                <col width="12%">
-                                <col width="13%">
+                                <col width="16%">
+                                <col width="15%">
                                 <col width="11%">
-                                <col width="17%">
+                                <col width="11%">
                                 <col width="14%">
                                 <col width="19%">
                             </colgroup>
@@ -153,7 +153,7 @@
                                     <th>Description</th>
                                     <th>Theme</th>
                                     <th>Speaker(s)</th>
-                                    <th>Session Duration</th>
+                                    <th>Duration</th>
                                     <th>Location</th>
                                     <th>Remote Room(s)</th>
                                     <% if (today.get(Calendar.MONTH) != 8) {%><th>Like Session?</th><% }%> <!-- is this supposed to prevent liking a session after October?-->
