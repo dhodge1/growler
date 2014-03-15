@@ -36,6 +36,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jspdf.plugin.from_html.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/js/jspdf.plugin.cell.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/js/jspdf.plugin.javascript.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/js/libs/deflate.js"></script>
         <style>
             .ie-dialog-button {
                 background-color: #0067B1;
