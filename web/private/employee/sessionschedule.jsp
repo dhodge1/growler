@@ -30,10 +30,6 @@
         <script src="http://growler.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/js/jspdf.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jspdf.plugin.standard_fonts_metrics.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jspdf.plugin.split_text_to_size.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jspdf.plugin.from_html.js"></script>
         <style>
             .ie-dialog-button {
                 background-color: #0067B1;
@@ -107,7 +103,7 @@
             <%@ include file="../../includes/testnav.jsp" %>
         <% } %>
         <%--<%@ include file="../../includes/testnav.jsp" %>--%>
-        <div id="schedule" class="container-fixed">
+        <div class="container-fixed">
             <div class="row mediumBottomMargin"></div>
             <div class="row">
                 <ul class="breadcrumb">
@@ -125,7 +121,7 @@
             <div class="row mediumBottomMargin">
                 <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='${pageContext.request.contextPath}/images/Techtoberfest2013small.png'/><span class="titlespan">Schedule Details</span><span class="pullRight"><a id="makePDF" href='../../public/Techtoberfest_Schedule2013.pdf' target='blank'>View as PDF</a></span></h2>
             </div>
-            <div class="row largeBottomMargin">
+            <div id="schedule" class="row largeBottomMargin">
                 <form onsubmit="return false;">
                     <input type='hidden' id='current_page' value="1" />
                     <input type='hidden' id='show_per_page' value='15' />
@@ -290,9 +286,51 @@
         <%@ include file="../../includes/footer.jsp" %>        
         <script src="${pageContext.request.contextPath}/js/libs/sniui.dialog.1.2.0.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/pagination.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/js/jspdf.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jspdf.plugin.standard_fonts_metrics.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jspdf.plugin.split_text_to_size.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jspdf.plugin.from_html.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/js/jspdf.plugin.cell.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/js/jspdf.plugin.javascript.js"></script>
         <script>
+                    function tableToJson(table) {
+                        var data = [];
+
+                        // first row needs to be headers
+                        var headers = [];
+                        for (var i=0; i<table.rows[0].cells.length; i++) {
+                            headers[i] = table.rows[0].cells[i].innerHTML.toLowerCase().replace(/ /gi,'');
+                        }
+
+                        // go through cells
+                        for (var i=1; i<table.rows.length; i++) {
+
+                            var tableRow = table.rows[i];
+                            var rowData = {};
+
+                            for (var j=0; j<tableRow.cells.length; j++) {
+
+                                rowData[ headers[j] ] = tableRow.cells[j].innerHTML;
+
+                            }
+
+                            data.push(rowData);
+                        }       
+
+                        return data;
+                    }
+                    
                     function demoFromHTML() {
-                        var pdf = new jsPDF('p','in','letter')
+                        var table = tableToJson($('#schedule').get(0))
+                        var doc = new jsPDF('p', 'pt', 'a4', true);
+                        doc.cellInitialize();
+                        $.each(table, function (i, row){
+                          $.each(row, function (j, cell){
+                            doc.cell(10, 200, 100, 20, cell, i);
+                          })
+                        })
+                        doc.save()
+                        /*var pdf = new jsPDF('p','in','letter')
 
                         // source can be HTML-formatted string, or a reference
                         // to an actual DOM element from which the text will be scraped.
@@ -320,9 +358,10 @@
                                         'width':7.5 // max width of content on PDF
                                         , 'elementHandlers': specialElementHandlers
                                 }
-                        );
+                        );*/
 
-                        pdf.output('dataurl');
+                        //pdf.output('dataurl');
+                        doc.output('dataurl');
                     }   
                     
                     $('#makePDF').on("click", function(event) {
