@@ -30,6 +30,10 @@
         <script src="http://growler.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/js/jspdf.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jspdf.plugin.standard_fonts_metrics.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jspdf.plugin.split_text_to_size.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jspdf.plugin.from_html.js"></script>
         <style>
             .ie-dialog-button {
                 background-color: #0067B1;
@@ -103,7 +107,7 @@
             <%@ include file="../../includes/testnav.jsp" %>
         <% } %>
         <%--<%@ include file="../../includes/testnav.jsp" %>--%>
-        <div class="container-fixed">
+        <div id="schedule" class="container-fixed">
             <div class="row mediumBottomMargin"></div>
             <div class="row">
                 <ul class="breadcrumb">
@@ -119,7 +123,7 @@
                 <span>Below is the latest session schedule for this year's Techtoberfest event.</span>
             </div>
             <div class="row mediumBottomMargin">
-                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='${pageContext.request.contextPath}/images/Techtoberfest2013small.png'/><span class="titlespan">Schedule Details</span><span class="pullRight"><a href='../../public/Techtoberfest_Schedule2013.pdf' target='blank'>View as PDF</a></span></h2>
+                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='${pageContext.request.contextPath}/images/Techtoberfest2013small.png'/><span class="titlespan">Schedule Details</span><span class="pullRight"><a id="makePDF" href='../../public/Techtoberfest_Schedule2013.pdf' target='blank'>View as PDF</a></span></h2>
             </div>
             <div class="row largeBottomMargin">
                 <form onsubmit="return false;">
@@ -287,6 +291,45 @@
         <script src="${pageContext.request.contextPath}/js/libs/sniui.dialog.1.2.0.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/pagination.js"></script>
         <script>
+                    function demoFromHTML() {
+                        var pdf = new jsPDF('l','in','letter')
+
+                        // source can be HTML-formatted string, or a reference
+                        // to an actual DOM element from which the text will be scraped.
+                        , source = $('#schedule')[0]
+
+                        // we support special element handlers. Register them with jQuery-style 
+                        // ID selector for either ID or node name. ("#iAmID", "div", "span" etc.)
+                        // There is no support for any other type of selectors 
+                        // (class, of compound) at this time.
+                        , specialElementHandlers = {
+                                // element with id of "bypass" - jQuery style selector
+                                '#bypassme': function(element, renderer){
+                                        // true = "handled elsewhere, bypass text extraction"
+                                        return true;
+                                }
+                        };
+
+                        // all coords and widths are in jsPDF instance's declared units
+                        // 'inches' in this case
+                        pdf.fromHTML(
+                                source // HTML string or DOM elem ref.
+                                , 0.5 // x coord
+                                , 0.5 // y coord
+                                , {
+                                        'width':10.0 // max width of content on PDF
+                                        , 'elementHandlers': specialElementHandlers
+                                }
+                        );
+
+                        pdf.output('dataurl');
+                    }   
+                    
+                    $('#makePDF').on("click", function(event) {
+                        event.preventDefault();
+                        demoFromHTML();
+                    });
+                    
                     $('form').submit(function(event) {
                         pageJump();
                         return false; // without this you go to google.com
