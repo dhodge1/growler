@@ -87,50 +87,159 @@
            //*********The code for the email form start here****************
            //***************************************************************
             --%>
-              
-               <%
-                  if(request.getAttribute("isSuccess")!= null)
-                  {
-               %>
-                    
-                    <div class="feedbackMessage-success row">
-                        <p style="text-align: center"><%=request.getAttribute("isSuccess")%></p>
-                    </div>   
-               <%
-                  request.removeAttribute("isSuccess");    
-                  }
-               %> 
-                           
+           <%      
+              //BEGIN**************************************************
+              //**strStatus is the disable status *********************
+              //**only set to true when the userArrayList is empty**
+              //*******************************************************
+              String strStatus = "";
+              UserPersistence uPersistence = new UserPersistence();
+              ArrayList<User> userArrayList = uPersistence.getUsersSubmittedSurveys();
+              //*********************************************
+              //**Error checking for empty sessionArraylist**
+              //*********************************************
+              if(userArrayList.size() == 0)
+              {
+                strStatus = "disabled";
+             //END                
+           %>                       
+
+           
+                <div class="feedbackMessage-warning row">
+                     <p style="text-align: center">No participants have submitted surveys.</p>
+                </div>
+           
+           <%
+              }//END IF STMT
+              else
+              {
+                 if(request.getAttribute("infoMessage")!= null)
+                 {
+                    if(request.getAttribute("isSuccess")!= null)
+                    {
+           %>     
+                       <div class="feedbackMessage-success row">
+                          <p style="text-align: center"><%=request.getAttribute("infoMessage")%></p>
+                       </div>
+           <%
+                    }
+                    else
+                    {  
+           %>
+           
+                       <div class="feedbackMessage-warning row">
+                          <p style="text-align: center"><%=request.getAttribute("infoMessage")%></p>
+                       </div>                  
+           
+            <%
+                     }//END ELSE isSuccess STMT
+                     //**************************
+                     //** clear the attributes **
+                     //**************************  
+                     request.removeAttribute("infoMessage");
+                     request.removeAttribute("isSuccess");    
+                 }//END IF (infoMessage!=null) STMT
+               }//END ELSE STMT
+           %>
+            
+                                       
            <div class="row">
-              <form  id="action" action="eBySurvey" method="POST" >
+                   
+              <form  id="action" action="eBySurvey" method="POST">
                  <fieldset>
                     <div class="form-group">
                         <label class="required">Subject</label>
-                        <input type="text" required="required" name="emailSubject" class="input-xlarge" />        
+                      
+                        <%
+                           //*************************************************
+                           //** inefficient way of toggling between disabled**
+                           //** disabled and enabled but it works*************
+                           if(strStatus.compareTo("disabled") == 0)
+                           {
+                        %>   
+                               <input type="text" required="required" name="emailSubject" 
+                                      class="input-xlarge" disabled />        
+                        <%   
+                           }//END OF IF
+                           else
+                           {
+                        %> 
+                        <input type="text" required="required" name="emailSubject" 
+                               class="input-xlarge"/>        
+                        
+                        <%
+                            }//END OF ELSE
+                             //*********************************************
+                             //END OF TOGGLING CODE
+                             //**********************************************                
+                        %>       
                     </div>
+                    
                     <div class="form-group">
                         <label class="required">Email Content</label>
-                        <textarea cols='75' rows='20' required="required" name="emailContent"  ></textarea>        
-                     </div>
-                     <div class="form-actions">
-                        <input type="submit" id="send" class="button button-primary" value="Send"/>
-                        <a id="cancel" href="${pageContext.request.contextPath}/home">Cancel</a>
-                     </div>  
+                        
+                          <%
+                           //*************************************************
+                           //** inefficient way of toggling between disabled**
+                           //** disabled and enabled but it works*************
+                           if(strStatus.compareTo("disabled") == 0)
+                           {
+                         %>   
+                       
+                              <textarea cols='75' rows='20' required="required" 
+                                        name="emailContent" disabled>  
+                              </textarea>  
+                         <%   
+                           }//END OF IF
+                           else
+                           {
+                         %> 
+                         
+                              <textarea cols='75' rows='20' required="required" 
+                                        name="emailContent">   
+                              </textarea>  
+                        <%
+                            }//END OF ELSE
+                             //*********************************************
+                             //END OF TOGGLING CODE
+                             //**********************************************                
+                        %>                        
+                                               
+                                   
+                    </div>
+                    <div class="form-actions">
+                        
+                          <%
+                           //*************************************************
+                           //** inefficient way of toggling between disabled**
+                           //** disabled and enabled but it works*************
+                           if(strStatus.compareTo("disabled") == 0)
+                           {
+                         %>   
+                       
+                              <input type="submit" id="send" class="button button-primary"
+                                     value="Send" disabled/>
+                         <%   
+                           }//END OF IF
+                           else
+                           {
+                         %> 
+                         
+                              <input type="submit" id="send" class="button button-primary"
+                                     value="Send" />
+                        <%
+                            }//END OF ELSE
+                             //*********************************************
+                             //END OF TOGGLING CODE
+                             //**********************************************                
+                        %>                                   
+                        
+                         <a id="cancel" href="${pageContext.request.contextPath}/home">Cancel</a>
+                    </div>  
                  </fieldset> 
               </form>	  
-           </div> <%--END THE FORM'S div tag--%>
-           <%--  
-           <div class="feedbackMessage-success">
-               <%=request.getAttribute("isSuccess")%>;
-           </div>
-           --%>
-           <%--
-           //***************************************************************
-           //*******************The code for the email form end here********
-           //***************************************************************
-           --%>
-        </div> <%--END THE CONTAINER-FIXED div tag--%>
-      
+           </div> <%--END THE FORM'S div tag--%>   
+           
        <%@ include file="../../../includes/footer.jsp" %> 
        <%@ include file="../../../includes/scriptlist.jsp" %>
     </body>

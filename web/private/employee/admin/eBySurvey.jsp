@@ -31,6 +31,7 @@
    String content = new String();
    boolean isContentHTML = false;
    
+   String infoMessage = new String();//for email sending status info message
    String isSuccess = new String(); //for error checking purpose
    
      //get info from the emailform.jsp     
@@ -40,12 +41,7 @@
    UserPersistence uPersistence = new UserPersistence();
    ArrayList<User> userArrayList = uPersistence.getUsersSubmittedSurveys();
    int arraySize = userArrayList.size();
-   //*******************************************
-   //The first 5 users on the list are real users
-   //and we don't want to send tesing email to them
-   //therefore we start the arraylist at index 5. 
-   //NEED TO CHANGE THAT LATER TO 0****************
-   //***********************************************
+
    for (int i = 0; i < arraySize; i++)
    {  
      if((userArrayList.get(i).getEmail() != null) &&
@@ -59,26 +55,13 @@
      }    
    }
    
-   //****************************************
-   //error checking for no user in the system
-   //****************************************
-   if(userArrayList.size()==0)
-   {
-     isSuccess =   "No participants have submitted surveys.";
-     request.setAttribute("isSuccess", isSuccess);
-     RequestDispatcher dispatcher = request.getRequestDispatcher("emailBySurvey");      
-     if (dispatcher != null)
-     {
-       dispatcher.forward(request, response);
-     } 
-   }
    //*******************************************************
    //error checking for no valid email listed in the system
    //*******************************************************
-   else if(emailList.length()==0)
+   if(emailList.length()==0)
    {
-     isSuccess =   "No participants have valid email address info listed in the system.";
-     request.setAttribute("isSuccess", isSuccess);
+     infoMessage =   "No participants have valid email address info listed in the system.";
+     request.setAttribute("infoMessage", infoMessage);
      RequestDispatcher dispatcher = request.getRequestDispatcher("emailBySurvey");      
      if (dispatcher != null)
      {
@@ -90,18 +73,19 @@
      try
      {
        //perform the send email task
-       EmailUtilSMTPLocal.sendMail((emailList.toString()), subject, content, isContentHTML);
-       isSuccess = "Your message has been sent!";
+       EmailUtilSMTPScripps.sendMail((emailList.toString()), subject, content, isContentHTML);
+       infoMessage = "Your message has been sent!";
+       isSuccess =   "true";
+       request.setAttribute("isSuccess", isSuccess);
      }
      catch (Exception e)
      {
-       // e.printStackTrace();
-       isSuccess ="Your message can't be sending at this time" + emailList.toString();
+       infoMessage ="Your message can't be sending at this time";
      }
    
      finally 
      {
-       request.setAttribute("isSuccess", isSuccess);
+       request.setAttribute("infoMessage", infoMessage);
        RequestDispatcher dispatcher = request.getRequestDispatcher("emailBySurvey");      
        if (dispatcher != null)
        {
