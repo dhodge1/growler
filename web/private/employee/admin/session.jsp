@@ -170,7 +170,11 @@
                                     out.print("<td>");
                                     int themeId = tp.getMappedTheme(sessions.get(i).getId());
                                     Theme currentTheme = tp.getThemeByID(themeId);
-                                    out.print(currentTheme.getName());
+                                    //Throwing a NullPointer Exception
+                                    try{
+                                        out.print(currentTheme.getName());
+                                    }catch (Exception e){
+                                    }
                                     out.print("</td>");
                                     out.print("<td>");
                                     ArrayList<Speaker> speakers = sp.getSpeakersForSession(sessions.get(i).getId());
