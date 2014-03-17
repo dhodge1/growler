@@ -241,50 +241,6 @@
               </form>	  
            </div> <%--END THE FORM'S div tag--%>                   
             
-            
-            
-            
-            
-            
-            
-            
-            
- <!--           
-            
-            
-            
-            
-            
-           <div class="row">
-              <form  id="action" action="callOutAction" method="POST" >
-                 <fieldset>
-                    <div class="form-group">
-                        <label class="required">Subject</label>
-                        <input type="text" required="required" name="emailSubject" class="input-xlarge" />        
-                    </div>
-                    <div class="form-group">
-                        <label class="required">Email Content</label>
-                        <textarea cols='75' rows='20' required="required" name="emailContent"  ></textarea>        
-                     </div>
-                     <div class="form-actions">
-                        <input type="submit" id="send" class="button button-primary" value="Send"/>
-                        <a id="cancel" href="${pageContext.request.contextPath}/home">Cancel</a>
-                     </div>  
-                 </fieldset> 
-              </form>	  
-           </div> <%--END THE FORM'S div tag--%>
-           <%--  
-           <div class="feedbackMessage-success">
-               <%=request.getAttribute("isSuccess")%>;
-           </div>
-           --%>
-           <%--
-           //***************************************************************
-           //*******************The code for the email form end here********
-           //***************************************************************
-           --%>
-        </div> <%--END THE CONTAINER-FIXED div tag--%>
-   -->   
        <%@ include file="../../../includes/footer.jsp" %> 
        <%@ include file="../../../includes/scriptlist.jsp" %>
     </body>

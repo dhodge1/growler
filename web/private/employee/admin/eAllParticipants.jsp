@@ -31,7 +31,7 @@
    String content = new String();
    boolean isContentHTML = false;
    
-   String infoMessage = new String();//for email info message
+   String infoMessage = new String();//for email sending status info message
    String isSuccess = new String(); //for error checking purpose
    
    
@@ -57,27 +57,13 @@
      }    
    }
    
-   
-   //****************************************
-   //error checking for no user in the system
-   //****************************************
-   if(userArrayList.size()==0)
-   {
-     isSuccess =   "No participants have liked any session or filled out any survey in 2014";  
-     request.setAttribute("isSuccess", isSuccess);
-     RequestDispatcher dispatcher = request.getRequestDispatcher("emailToAllParticipants");      
-     if (dispatcher != null)
-     {
-       dispatcher.forward(request, response);
-     } 
-   }
    //*******************************************************
    //error checking for no valid email listed in the system
    //*******************************************************
-   else if(emailList.length()==0)
+   if(emailList.length()==0)
    {
-     isSuccess =   "No participants have valid email address info listed in the system.";
-     request.setAttribute("isSuccess", isSuccess);
+     infoMessage =   "No participants have valid email address info listed in the system.";
+     request.setAttribute("infoMessage", infoMessage);
      RequestDispatcher dispatcher = request.getRequestDispatcher("emailToAllParticipants");      
      if (dispatcher != null)
      {
@@ -89,18 +75,18 @@
      try
      {
        //perform the send email task
-       EmailUtilSMTPLocal.sendMail((emailList.toString()), subject, content, isContentHTML);
-       isSuccess = "Your message has been sent!";
+       EmailUtilSMTPScripps.sendMail((emailList.toString()), subject, content, isContentHTML);
+       infoMessage = "Your message has been sent!";
+       isSuccess =   "true";
+       request.setAttribute("isSuccess", isSuccess);
      }
      catch (Exception e)
      {
-       // e.printStackTrace();
-       isSuccess ="Your message can't be sending at this time" + emailList.toString();
+       infoMessage ="Your message can't be sending at this time";
      }
-   
      finally 
      {
-       request.setAttribute("isSuccess", isSuccess);
+       request.setAttribute("infoMessage", infoMessage); 
        RequestDispatcher dispatcher = request.getRequestDispatcher("emailToAllParticipants");      
        if (dispatcher != null)
        {
