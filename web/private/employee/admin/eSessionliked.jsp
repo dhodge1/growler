@@ -37,8 +37,9 @@
    boolean isContentHTML = false;
   int selectedSession;
    
+   String infoMessage = new String();//for email sending status info message
    String isSuccess = new String(); //for error checking purpose
-   
+    
      //get info from the emailform.jsp 
    thuyStr = request.getParameter("sessionNum");
    subject = request.getParameter("emailSubject");
@@ -77,8 +78,10 @@
    //*******************************************************
    if(emailList.length()==0)
    {
-     isSuccess =   "No participants have valid email address info listed in the system.";
-     request.setAttribute("isSuccess", isSuccess);
+     infoMessage =   "No participants have valid email address info listed in the system.";
+     request.setAttribute("infoMessage", infoMessage);  
+     //isSuccess =   "false";
+     //request.setAttribute("isSuccess", isSuccess);
      RequestDispatcher dispatcher = request.getRequestDispatcher("emailFormOfParticipants");      
      if (dispatcher != null)
      {
@@ -90,18 +93,22 @@
      try
      {
        //perform the send email task
-       EmailUtilSMTPLocal.sendMail((emailList.toString()), subject, content, isContentHTML);
-       isSuccess = "Your message has been sent!";
+       EmailUtilSMTPScripps.sendMail((emailList.toString()), subject, content, isContentHTML);
+       infoMessage = "Your message has been sent!";
+       isSuccess =   "true";
+       request.setAttribute("isSuccess", isSuccess);
      }
      catch (Exception e)
      {
        // e.printStackTrace();
-       isSuccess ="Your message can't be sending at this time" + emailList.toString();
+       infoMessage ="Your message can't be sending at this time";
+       //isSuccess =   "false";
      }
    
      finally 
      {
-       request.setAttribute("isSuccess", isSuccess);
+             
+       request.setAttribute("infoMessage", infoMessage); 
        RequestDispatcher dispatcher = request.getRequestDispatcher("emailFormOfParticipants");      
        if (dispatcher != null)
        {

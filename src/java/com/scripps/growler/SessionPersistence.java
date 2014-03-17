@@ -654,17 +654,17 @@ public class SessionPersistence extends GrowlerPersistence {
             result = statement.executeQuery();
             sessions = new ArrayList<Session>();
             while (result.next()) {
-               // Session s = new Session();
-               // s.setId(result.getInt("id"));
-               // s.setName(result.getString("name"));
-               // s.setDescription(result.getString("description"));
-               // s.setSessionDate(result.getDate("session_date"));
-               // s.setStartTime(result.getTime("start_time"));
-                //s.setLocation(result.getString("location"));
-                //s.setTrack(result.getString("track"));
-                //s.setDuration(result.getTime("duration"));
-                //s.setKey(result.getString("session_key"));
-                //sessions.add(s);
+               Session s = new Session();
+               s.setId(result.getInt("id"));
+               s.setName(result.getString("name"));
+               s.setDescription(result.getString("description"));
+               s.setSessionDate(result.getDate("session_date"));
+               s.setStartTime(result.getTime("start_time"));
+               s.setLocation(result.getString("location"));
+               s.setTrack(result.getString("track"));
+               s.setDuration(result.getTime("duration"));
+               s.setKey(result.getString("session_key"));
+               sessions.add(s);
             }
             return sessions;
         } catch (Exception e) {

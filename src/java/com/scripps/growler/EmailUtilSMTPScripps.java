@@ -20,26 +20,32 @@ import javax.mail.Address;
 /**
  * A helper class for sending e-mail messages with SMTP(Simple
  * Mail Transfer Protocol). 
- * The Default mail server for FROM @scrippsnetworks 
- * email address is "mail.office365.com" 
+ * This class uses the @scrippsnetworks as a FROM address, therefore the 
+ * default mail server for this class is "mail.office365.com"
  *
  * 
  * 
  * @author Thuy To
  * Resources: Murach's Java servlets and JSP and www.codejava.net
  * Version: 2
- */
+ **/
 public class EmailUtilSMTPScripps
 {
-   
-   
    public static void sendMail(String to, String subject,
                                String body, boolean bodyIsHTML) throws 
                                AddressException, MessagingException 
                              
    {
+     //***************************************************
+     //**Since we have a share Scripps Networks mail box,**
+     //**we use the usernam and password below to creates**
+     //**new session with authenticator. Then we use the **
+     //**sni-techtoberfest-help@scrippsnetworks.com email** 
+     //** address as a FROM address for this class.      **
+     //****************************************************
      final String username = "Thuy.To@scrippsnetworks.com";
-     final String password = "xotujevA2";   
+     final String password = "xotujevA2";
+     final String from = "sni-techtoberfest-help@scrippsnetworks.com";
      //sets environment properties
      Properties props = new Properties();   
      //The default mail server is
@@ -50,15 +56,15 @@ public class EmailUtilSMTPScripps
      //use of the STARTTLS command is prefered in case where the 
      //server supports both SSL and none SSL connection
      props.put("mail.smtp.starttls.enable", "true");
-    
-     
-     //creates new session with authenticator
+      
+     //creates new Autheticatior
      Authenticator auth = new Authenticator() {
             @Override
             public PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(username,password );
             }
         };     
+     //creates new session with authenticator
      Session session = Session.getInstance(props,auth);
      //Creates a message info
      Message message = new MimeMessage(session);
@@ -72,7 +78,7 @@ public class EmailUtilSMTPScripps
        message.setText(body);
      }
      //Address the message
-     Address fromAddress = new InternetAddress("sni-techtoberfest-help@scrippsnetworks.com");
+     Address fromAddress = new InternetAddress(from);
      Address[] emailList = InternetAddress.parse(to);
      message.setFrom(fromAddress);
      message.setRecipients(Message.RecipientType.TO, emailList);

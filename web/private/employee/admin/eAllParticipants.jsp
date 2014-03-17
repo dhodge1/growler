@@ -31,7 +31,9 @@
    String content = new String();
    boolean isContentHTML = false;
    
+   String infoMessage = new String();//for email info message
    String isSuccess = new String(); //for error checking purpose
+   
    
      //get info from the emailform.jsp     
    subject = request.getParameter("emailSubject");

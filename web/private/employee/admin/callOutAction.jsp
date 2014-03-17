@@ -40,13 +40,8 @@
    UserPersistence uPersistence = new UserPersistence();
    ArrayList<User> userArrayList = uPersistence.getAllUsersNoVolInfo();
    int arraySize = userArrayList.size();
-   //*******************************************
-   //The first 5 users on the list are real users
-   //and we don't want to send tesing email to them
-   //therefore we start the arraylist at index 5. 
-   //NEED TO CHANGE THAT LATER TO 0****************
-   //***********************************************
-   for (int i = 5; i < arraySize; i++)
+   
+   for (int i = 0; i < arraySize; i++)
    {  
      if((userArrayList.get(i).getEmail() != null) &&
         (userArrayList.get(i).getEmail().indexOf("@")!= -1))

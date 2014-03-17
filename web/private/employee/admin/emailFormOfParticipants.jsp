@@ -103,7 +103,7 @@
              //END                
            %>           
            
-                <div class="feedbackMessage-success row">
+                <div class="feedbackMessage-warning row">
                      <p style="text-align: center">No participants have liked any session in 2014.</p>
                 </div>
            
@@ -111,17 +111,32 @@
               }//END IF STMT
               else
               {
-                if(request.getAttribute("isSuccess")!= null)
-                {
-           %>   
-                    <div class="feedbackMessage-success row">
-                        <p style="text-align: center"><%=request.getAttribute("isSuccess")%></p>
-                    </div>
-                    
+                 if(request.getAttribute("infoMessage")!= null)
+                 {
+                    if(request.getAttribute("isSuccess")!= null)
+                    {
+           %>     
+                       <div class="feedbackMessage-success row">
+                          <p style="text-align: center"><%=request.getAttribute("infoMessage")%></p>
+                       </div>
+           <%
+                    }
+                    else
+                    {  
+           %>
+           
+                       <div class="feedbackMessage-warning row">
+                          <p style="text-align: center"><%=request.getAttribute("infoMessage")%></p>
+                       </div>                  
+           
             <%
-                   //clear the attribute
-                   request.removeAttribute("isSuccess");    
-                 }//END IF STMT
+                     }//END ELSE isSuccess STMT
+                     //**************************
+                     //** clear the attributes **
+                     //**************************  
+                     request.removeAttribute("infoMessage");
+                     request.removeAttribute("isSuccess");    
+                 }//END IF (infoMessage!=null) STMT
                }//END ELSE STMT
             %>
                               
