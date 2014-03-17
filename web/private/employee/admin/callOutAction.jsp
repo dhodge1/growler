@@ -31,6 +31,7 @@
    String content = new String();
    boolean isContentHTML = false;
    
+   String infoMessage = new String();//for email sending status info message
    String isSuccess = new String(); //for error checking purpose
    
      //get info from the emailform.jsp     
@@ -54,26 +55,13 @@
      }    
    } //END for loop
    
-   //****************************************
-   //error checking for no user in the system
-   //****************************************
-   if(userArrayList.size()==0)
-   {
-     isSuccess =   "No participants have used the system in 2014.";
-     request.setAttribute("isSuccess", isSuccess);
-     RequestDispatcher dispatcher = request.getRequestDispatcher("email");      
-     if (dispatcher != null)
-     {
-       dispatcher.forward(request, response);
-     } 
-   }
    //*******************************************************
    //error checking for no valid email listed in the system
    //*******************************************************
-   else if(emailList.length()==0)
+   if(emailList.length()==0)
    {
-     isSuccess =   "No participants have valid email address info listed in the system.";
-     request.setAttribute("isSuccess", isSuccess);
+     infoMessage =   "No participants have valid email address info listed in the system.";
+     request.setAttribute("infoMessage", infoMessage);
      RequestDispatcher dispatcher = request.getRequestDispatcher("email");      
      if (dispatcher != null)
      {
@@ -86,18 +74,18 @@
      {
        //perform the send email task
        EmailUtilSMTPScripps.sendMail((emailList.toString()), subject, content, isContentHTML);
-       //EmailUtilSMTPLocal.sendMail((emailList.toString()), subject, content, isContentHTML);
-       isSuccess = "Your message has been sent!";
+       infoMessage = "Your message has been sent!";
+       isSuccess =   "true";
+       request.setAttribute("isSuccess", isSuccess);
      }
      catch (Exception e)
      {
-       // e.printStackTrace();
-       isSuccess ="Your message can't be sending at this time";
+       infoMessage ="Your message can't be sending at this time";
      }
    
      finally 
      {
-       request.setAttribute("isSuccess", isSuccess);
+       request.setAttribute("infoMessage", infoMessage); 
        RequestDispatcher dispatcher = request.getRequestDispatcher("email");      
        if (dispatcher != null)
        {
