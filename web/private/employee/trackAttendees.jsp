@@ -109,7 +109,7 @@
                                     <select name='session' id='session' class='input x-large'>
                                         <option value='0'> Please select a session </option>
                                         <% SessionPersistence sp = new SessionPersistence();
-                                        ArrayList<Session> sessions = sp.getSessionsForSpeaker(9);
+                                        ArrayList<Session> sessions = sp.getSessionsForSpeaker(user);
                                         for (int i = 0; i < sessions.size(); i++){
                                             out.print("<option value='" + sessions.get(i).getId() + "'>");
                                             out.print(sessions.get(i).getName());
