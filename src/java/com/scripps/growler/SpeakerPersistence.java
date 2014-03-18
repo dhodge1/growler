@@ -76,20 +76,25 @@ public class SpeakerPersistence extends GrowlerPersistence {
 
     /**
      * Adds a speaker to the database
-     *
+     * 3/17/2014 Thuy added an email field and ? for the value
      * @param s The speaker to add
      */
     public void addSpeaker(Speaker s) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("insert into speaker "
-                    + "(first_name, last_name, suggested_by, visible, type, reason) values "
-                    + "(?, ?, ?, false, ?, ?)");
+            String preparedQuery = "INSERT INTO speaker "
+                                    + "(first_name, last_name, suggested_by, visible, type, reason, email) "
+                                    + "VALUES (?, ?, ?, false, ?, ?, ?)";
+            statement = connection.prepareStatement(preparedQuery);
             statement.setString(1, s.getFirstName());
             statement.setString(2, s.getLastName());
             statement.setInt(3, s.getSuggestedBy());
             statement.setString(4, s.getType());
             statement.setString(5, s.getReason());
+            //*******************************************
+            //added the email value to the db email field
+            statement.setString(6, s.getEmail());
+            //*******************************************
             success = statement.execute();
             closeJDBC();
         } catch (Exception e) {
@@ -361,7 +366,7 @@ public class SpeakerPersistence extends GrowlerPersistence {
 
     /**
      * Updates a speaker in the database
-     *
+     * 3/17/2014 Thuy updated the email field 
      * @param s The speaker to be updated
      */
     public void updateSpeaker(Speaker s) {
@@ -372,7 +377,8 @@ public class SpeakerPersistence extends GrowlerPersistence {
                     + "last_name = ?, "
                     + "suggested_by = ?, "
                     + "visible = ?, "
-                    + "type = ? "
+                    + "type = ?, "
+                    + "email = ? "
                     + "where id = ?");
             statement.setString(1, s.getFirstName());
             statement.setString(2, s.getLastName());
@@ -380,6 +386,7 @@ public class SpeakerPersistence extends GrowlerPersistence {
             statement.setBoolean(4, s.getVisible());
             statement.setString(5, s.getType());
             statement.setInt(6, s.getId());
+            statement.setString(7, s.getEmail());
             success = statement.execute();
             closeJDBC();
         } catch (Exception e) {
@@ -495,5 +502,47 @@ public class SpeakerPersistence extends GrowlerPersistence {
         } finally {
         }
         return false;
+    }
+
+
+    //*****************************************************************************
+    //*********************Thuy: Added Code for email feature**********************
+    //*****************************************************************************
+
+    /**
+     * Gets a list of speaker objects for email the email feature
+     *
+     * @param v the visibility to search for
+     * @param sort the criteria with which to sort the results
+     * @return A list of speakers that have been suggested by a user
+     */
+    public ArrayList<Speaker> getAllSpeakerForEmailList(boolean v, String sort)
+    {
+        try 
+        {
+              initializeJDBC();
+              String preparedSQL = "SELECT * FROM speaker ";
+              statement = connection.prepareStatement(preparedSQL);
+              result = statement.executeQuery();
+              ArrayList<Speaker> speakers = new ArrayList<Speaker>();
+              while (result.next()) 
+              {
+                Speaker s = new Speaker();
+                s.setId(result.getInt("id"));
+                s.setFirstName(result.getString("first_name"));
+                s.setLastName(result.getString("last_name"));
+                s.setSuggestedBy(result.getInt("suggested_by"));
+                s.setVisible(result.getBoolean("visible"));
+                s.setType(result.getString("type"));
+                s.setReason(result.getString("reason"));
+                s.setEmail(result.getString("email"));
+                speakers.add(s);
+              }
+            closeJDBC();
+            return speakers;
+        }
+        catch (Exception e) {
+        }
+        return null;
     }
 }

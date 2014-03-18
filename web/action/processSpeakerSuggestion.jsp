@@ -29,13 +29,17 @@
     String last_name = request.getParameter("last_name");
     String type = request.getParameter("type");
     String reason = request.getParameter("reason");
-
+    //****************************************************
+    //*************Code added*******************************
+    String email = request.getParameter("email");
+    //****************************************************
     Speaker s = new Speaker();
     s.setFirstName(first_name);
     s.setLastName(last_name);
     s.setType(type);
     s.setSuggestedBy(user);
     s.setReason(reason);
+    s.setEmail(email);
     s.setVisible(false);
 
     persist.addSpeaker(s);
