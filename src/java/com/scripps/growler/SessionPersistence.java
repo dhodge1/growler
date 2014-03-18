@@ -483,7 +483,10 @@ public class SessionPersistence extends GrowlerPersistence {
     
     public ArrayList<Session> getThisYearSessionsWithRegistration(int user, String sort) {
         try {
-            statement = connection.prepareStatement("select s.id, s.name, s.description, s.session_date, s.start_time, s.location, s.duration, s.session_key, r.user_id from session s left join registration r on s.id = r.session_id and r.user_id = ? " + sort);
+            statement = connection.prepareStatement("select s.id, s.name, s.description, "
+                    + "s.session_date, s.start_time, s.location, s.duration, s.session_key, "
+                    + "r.user_id from session s left join registration r on s.id = r.session_id "
+                    + "and r.user_id = ? " + sort);
             statement.setInt(1, user);
             result = statement.executeQuery();
             while (result.next()){
@@ -677,6 +680,9 @@ public class SessionPersistence extends GrowlerPersistence {
     //*********************ADDED CODE END HERE*********************************
     
     
+  
+        
+        
     /**
      * Checks to see if there is a session already scheduled in a room at a certain time. Multiple locations can have "TBD" as the value.
      * 
@@ -785,6 +791,47 @@ public class SessionPersistence extends GrowlerPersistence {
         }
         return speakers;
     }
+    
+    
+    
+    
+    /**
+     * Added by Chelsea Grindstaff
+     * 
+     * Used on trackAttendees.jsp
+     * 
+     * Returns sessions for a speaker
+     * 
+     * Useful because there are times where one speaker hosts multiple sessions
+     * 
+     * @param user the current logged-in user aka the speaker
+     * @return A list of sessions for a speaker
+     */
+    public ArrayList<Session> getSessionsforSpeaker(int user){
+        ArrayList<Session> session = new ArrayList<Session>();
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select s.id, t.session_id, t.speaker_id, u.id, u.name"
+                    + "from speaker s, session u, "
+                    + "inner join speaker_team t "
+                    + "where t.speaker_id = s.id = ?");
+            
+            //statement.setInt(1, session);
+            result = statement.executeQuery();    
+            while (result.next()){
+                Session s = new Session();
+                s.setId(result.getInt("id"));
+                s.setName(result.getString("name"));
+                sessions.add(s);
+            }
+        } catch(Exception e) {
+            
+        } finally {
+            closeJDBC();
+        }
+        return session;
+    }
+    
     
     /**
      * Validates that a key is correct for a session

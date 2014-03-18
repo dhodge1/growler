@@ -244,4 +244,5 @@
     <servlet-name>emailFormOfParticipants</servlet-name>
     <url-pattern>/emailFormOfParticipants</url-pattern>
   </servlet-mapping>
+
 </web-app>

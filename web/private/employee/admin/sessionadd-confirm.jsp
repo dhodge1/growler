@@ -79,7 +79,7 @@
             <div class="row">
                 <a class="firstlink" href='../../../private/employee/admin/session.jsp'>Return to manage sessions</a>
                 <a class="firstlink" href='../../../private/employee/admin/addsession.jsp'>Add another session</a>
-                <% out.print("<a href='../../../private/employee/admin/assignroomtosession.jsp?session_id=" + session.getAttribute("sessionID") + "' >Assign a room for this session</a>"); %>
+                <% out.print("<a href='" +  request.getContextPath() + "/../private/employee/admin/assignroomtosession.jsp?session_id=" + session.getAttribute("sessionID") + "' >Assign a room for this session</a>"); %>
             </div>
         </div>
         <% 

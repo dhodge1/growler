@@ -170,7 +170,11 @@
                                     out.print("<td>");
                                     int themeId = tp.getMappedTheme(sessions.get(i).getId());
                                     Theme currentTheme = tp.getThemeByID(themeId);
-                                    out.print(currentTheme.getName());
+                                    //Throwing a NullPointer Exception
+                                    try{
+                                        out.print(currentTheme.getName());
+                                    }catch (Exception e){
+                                    }
                                     out.print("</td>");
                                     out.print("<td>");
                                     ArrayList<Speaker> speakers = sp.getSpeakersForSession(sessions.get(i).getId());
@@ -187,7 +191,7 @@
                                             // out.print("</div>");
                                         }
                                     } else {
-                                        out.print("<a href='../../../private/employee/admin/assignsession.jsp?sessionId=" + sessions.get(i).getId() + "'>Assign a Speaker</a>");
+                                        out.print("<a href='" +  request.getContextPath() + "/../private/employee/admin/assignsession.jsp?sessionId=" + sessions.get(i).getId() + "'>Assign a Speaker</a>");
                                     }
                                     out.print("</td>");
                                     out.print("<td>");
