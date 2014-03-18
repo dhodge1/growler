@@ -73,9 +73,9 @@
             a.disabled{
                 color: grey;
             }
-            /*#schedule2 {
+            #schedule2 {
                 display: none;
-            }*/
+            }
         </style>
     </head>
     <body id="growler1">  
@@ -302,7 +302,7 @@
                     </div>
                 </form>
             </div>
-            <div id="schedule2" class="row largeBottomMargin" style="visibility:hidden">
+            <div id="schedule2" class="row largeBottomMargin">
                 <form onsubmit="return false;">
                         <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder" id="sessionTable2">
                             <colgroup>
@@ -450,14 +450,14 @@
                     
                     $('#makePDF').on("click", function(event) {
                         event.preventDefault();
-                        //$('#schedule2').show();
+                        $('#schedule2').show();
                         //$('.change').html(' ');
                         $('br').replaceWith('  ');
                         //$('table tr').find('td:eq(3),th:eq(3)').remove();
                         //$('table tr').find('td:eq(8),th:eq(8)').remove();
                         //$('table tr').find('td:eq(8),th:eq(8)').remove();
                         demoFromHTML();
-                        //$('#schedule2').hide();
+                        $('#schedule2').hide();
                         location.reload();
                     });
                     
