@@ -258,5 +258,14 @@
     <servlet-name>emailToAllSpeakers</servlet-name>
     <url-pattern>/emailToAllSpeakers</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>sessionKeys</servlet-name>
+    <jsp-file>/private/employee/admin/sessionkeys.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>sessionKeys</servlet-name>
+    <url-pattern>/sessionKeys</url-pattern>
+  </servlet-mapping>
 
 </web-app>
