@@ -32,6 +32,7 @@
     Feature surveySession = fp.getFeatureState(1);
     Feature scheduleSession = fp.getFeatureState(5);
     Feature overallSurvey = fp.getFeatureState(8);
+    Feature trackAttendees = fp.getFeatureState(9);
 %>
 <nav class="topnav navbar">
         <nav class="globalNavigation modify-pages" id="navigation">
@@ -78,6 +79,9 @@
                         <% if (overallSurvey.getFeatureState()) { %>
                             <%@ include file="../../includes/regOverallSurvey.jsp" %>
                         <% } %>
+                        <!--<% if (trackAttendees.getFeatureState()) { %>
+                            <%@ include file="../../includes/regTrackAttendees.jsp" %>
+                        <% } %>-->
                     </ul>
                 </li>             
                 

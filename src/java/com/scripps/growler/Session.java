@@ -52,6 +52,12 @@ public class Session {
     private int userRegistered;
     
     private boolean survey;
+    
+    private String localAttendees;
+    
+    private String remoteAttendees;
+    
+    private String speakerId;
 
     public Session() {
     }
@@ -232,6 +238,52 @@ public class Session {
         this.userRegistered = userRegistered;
     }
     
+/*  --------------------------------------------------------------------------------
+    Added by Chelsea Grindstaff
+    18 March 2014
+    Used with processTrackAttendees
+    */    
+    
+    /**
+     * Gets the # of local attendees
+     */
+    public String getLocalAttendees() {
+        return localAttendees;
+    }
+
+    /**
+     * Sets the # of local attendees
+     */
+    public void setLocalAttendees(String localAttendees) {
+        this.localAttendees = localAttendees;
+    }    
     
     
+     /**
+     * Gets the # of remote attendees
+     */
+    public String getRemoteAttendees() {
+        return remoteAttendees;
+    }
+
+    /**
+     * Sets the # of remote attendees
+     */
+    public void setRemoteAttendees(String remoteAttendees) {
+        this.remoteAttendees = remoteAttendees;
+    }    
+    
+     /**
+     * Gets the # of remote attendees
+     */
+    public String getSpeakerId() {
+        return speakerId;
+    }
+
+    /**
+     * Sets the # of remote attendees
+     */
+    public void setSpeakerId(String speakerId) {
+        this.speakerId = speakerId;
+    }       
 }

@@ -48,7 +48,12 @@ public class Speaker {
     private String type;
     
     private String reason;
-
+    
+//***********THUY: added an email instant variable***************
+    private String email;
+//***************END HERE****************************************
+    
+    
     /**
      * Default constructor
      */
@@ -233,8 +238,17 @@ public class Speaker {
         this.reason = reason;
     }
     
-    
-    
+    //***************Thuy:ADDED get and set email method HERE*******************
+     public String getEmail()
+     {
+        return this.email;
+     }
+     public void setEmail(String email)
+     {
+       this.email = email;
+     }        
+      
+    //******************************END HERE************************************
     public String getFullName() {
         return (this.lastName + ", " + this.firstName);
     }

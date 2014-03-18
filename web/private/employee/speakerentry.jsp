@@ -103,6 +103,22 @@
                                         <span>Please enter a last name</span>
                                     </span>
                                 </div>
+                                <!--
+                                *****************************************************************
+                                ***********Thuy:add an input field for email address*************
+                                *****************************************************************
+                                -->
+                                <div class="form-group inline">
+                                    <label class="required">Speaker Email Address</label>
+                                    <input required="required" name="email" class="input-xlarge" type="text"/>  
+                                    <span id="error_last" class="message_container">
+                                          <span>Please enter a email address</span>
+                                    </span>
+                                </div>                      
+                                <!--
+                                //**************End of added code**********************************
+                                //*****************************************************************
+                                -->
                                 <div class='form-group'>
                                     <label class='required'>What type of speaker is this?</label>
                                     <select name="type" id="tip3" class="input-xlarge" data-content="Choose a type: Business or Technical">

@@ -807,29 +807,34 @@ public class SessionPersistence extends GrowlerPersistence {
      * @param user the current logged-in user aka the speaker
      * @return A list of sessions for a speaker
      */
-    public ArrayList<Session> getSessionsforSpeaker(int user){
-        ArrayList<Session> session = new ArrayList<Session>();
+    public ArrayList<Session> getSessionsForSpeaker(int user){
+        ArrayList<Session> sessionList = new ArrayList<Session>();
         try {
             initializeJDBC();
+            /*
             statement = connection.prepareStatement("select s.id, t.session_id, t.speaker_id, u.id, u.name"
                     + "from speaker s, session u, "
                     + "inner join speaker_team t "
                     + "where t.speaker_id = s.id = ?");
+            */
+            
+            statement = connection.prepareStatement("select s.id, t.session_id, t.speaker_id, u.id, u.name from speaker s, session u, speaker_team t where t.speaker_id = s.id = ?");
             
             //statement.setInt(1, session);
             result = statement.executeQuery();    
             while (result.next()){
+                //Create a new Session and add all data about the session to it
                 Session s = new Session();
                 s.setId(result.getInt("id"));
                 s.setName(result.getString("name"));
-                sessions.add(s);
+                sessionList.add(s);
             }
         } catch(Exception e) {
             
         } finally {
             closeJDBC();
         }
-        return session;
+        return sessionList;
     }
     
     
@@ -1069,4 +1074,34 @@ public class SessionPersistence extends GrowlerPersistence {
             closeJDBC();
         }   
     }
+    
+    
+    /**
+     * Added by Chelsea Grindstaff
+     * 18 March 2014
+     * Adds # of attendees to attendee table
+     */
+    public void addAttendees(Session s) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("insert into attendees "
+                    + " (session_id, user_id, local_attendees, remote_attendees) "
+                    + " values (?, ?, ?, ?)");
+            statement.setString(1, String.valueOf(s.getId()));
+            statement.setString(2, s.getSpeakerId());
+            statement.setString(3, s.getLocalAttendees());
+            statement.setString(4, s.getRemoteAttendees());
+            statement.execute();
+            closeJDBC();
+        } catch (Exception e) {
+        }
+        finally {
+            closeJDBC();
+        }
+    }
+    
+    
+    
+    
+    
 }
