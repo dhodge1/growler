@@ -131,7 +131,7 @@
                     <li><a href="${pageContext.request.contextPath}/emailFormOfParticipants">Participants "Liked" a Session</a></li>
                     <li><a href="${pageContext.request.contextPath}/emailBySurvey">Participants "Submitted" Survey</a></li>
                     <li><a href="${pageContext.request.contextPath}/emailToAllParticipants">Participants of the Current Year</a></li>
-                    
+                    <li><a href="${pageContext.request.contextPath}/emailToAllSpeakers">Speakers of the Current Year</a></li>
                  </ul> <!--END OF THE child-menu child-menu-ul div -->
             </li> <!--END OF THE email tab li -->
             

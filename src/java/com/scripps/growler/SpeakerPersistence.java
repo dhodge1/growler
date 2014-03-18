@@ -516,7 +516,7 @@ public class SpeakerPersistence extends GrowlerPersistence {
      * @param sort the criteria with which to sort the results
      * @return A list of speakers that have been suggested by a user
      */
-    public ArrayList<Speaker> getAllSpeakerForEmailList(boolean v, String sort)
+    public ArrayList<Speaker> getAllSpeakersForEmailList()
     {
         try 
         {

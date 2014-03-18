@@ -204,8 +204,6 @@
     <url-pattern>/eAllParticipants</url-pattern>
   </servlet-mapping>
   
-  
-  
   <servlet>
     <servlet-name>emailBySurvey</servlet-name>
     <jsp-file>/private/employee/admin/emailBySurvey.jsp</jsp-file>
@@ -224,9 +222,6 @@
     <url-pattern>/eBySurvey</url-pattern>
   </servlet-mapping>
   
-  
-  
-  
   <servlet>
     <servlet-name>eSessionliked</servlet-name>
     <jsp-file>/private/employee/admin/eSessionliked.jsp</jsp-file>
@@ -243,6 +238,25 @@
   <servlet-mapping>
     <servlet-name>emailFormOfParticipants</servlet-name>
     <url-pattern>/emailFormOfParticipants</url-pattern>
+  </servlet-mapping>
+
+
+  <servlet>
+    <servlet-name>sendingEmailToAllSpeakers</servlet-name>
+    <jsp-file>/action/sendingEmailToAllSpeakers.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>sendingEmailToAllSpeakers</servlet-name>
+    <url-pattern>/sendingEmailToAllSpeakers</url-pattern>
+  </servlet-mapping> 
+  
+  <servlet>
+    <servlet-name>emailToAllSpeakers</servlet-name>
+    <jsp-file>/private/employee/admin/emailToAllSpeakers.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>emailToAllSpeakers</servlet-name>
+    <url-pattern>/emailToAllSpeakers</url-pattern>
   </servlet-mapping>
 
 </web-app>
