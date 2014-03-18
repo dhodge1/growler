@@ -32,43 +32,24 @@
     String speaker = request.getParameter("speaker");
     String localAttendees = request.getParameter("localAttendees");
     String remoteAttendees = request.getParameter("remoteAttendees");
+    int sessionSelected = Integer.parseInt(String.valueOf(request.getParameter("session")));
     
-    Session t = new Session();
-    t.setSpeaker(speaker);
-    t.setLocalAttendees(localAttendees);
-    t.setRemoteAttendees(remoteAttendees);
+    SessionPersistence sp = new SessionPersistence();
     
-    persist.addAttendees(t)
+    Session s = new Session();   
+    
+    sp.addAttendees(s);
+
+    s.setId(sessionSelected);
+    s.setSpeakerId(speaker);
+    s.setLocalAttendees(localAttendees);
+    s.setRemoteAttendees(remoteAttendees);
+    
+    //persist.addAttendees(s);
     
     session.setAttribute("message", "Success: The number of attendees has been submitted successfully!");
     response.sendRedirect("../private/employee/attendeeEntry-confirm.jsp");
     
     %>
     
-    
-    <%--
-    
-    String first_name = request.getParameter("first_name");
-    String last_name = request.getParameter("last_name");
-    String type = request.getParameter("type");
-    String reason = request.getParameter("reason");
-    //****************************************************
-    //*************Code added*******************************
-    String email = request.getParameter("email");
-    //****************************************************
-    Speaker s = new Speaker();
-    s.setFirstName(first_name);
-    s.setLastName(last_name);
-    s.setType(type);
-    s.setSuggestedBy(user);
-    s.setReason(reason);
-    s.setEmail(email);
-    s.setVisible(false);
 
-    persist.addSpeaker(s);
-
-    session.setAttribute("message", "Success: Your suggestion has been submitted successfully!");
-    response.sendRedirect("../private/employee/speakerentry-confirm.jsp");
-
-    
---%>
