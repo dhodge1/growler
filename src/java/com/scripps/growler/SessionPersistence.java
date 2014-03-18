@@ -1074,4 +1074,35 @@ public class SessionPersistence extends GrowlerPersistence {
             closeJDBC();
         }   
     }
+    
+    
+    /**
+     * Added by Chelsea Grindstaff
+     * 18 March 2014
+     * Adds # of attendees to attendee table
+     */
+    public void addAttendees(Session s) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("insert into attendees "
+                    + " (session_id, user_id, local_attendees, remote_attendees) "
+                    + " values (?, ?, ?, ?)");
+            statement.setString(1, String.valueOf(s.getId()));
+            statement.setString(2, s.getSpeakerId());
+            statement.setString(3, s.getLocalAttendees());
+            statement.setString(4, s.getRemoteAttendees());
+            statement.execute();
+            generateKey(s.getName());
+            closeJDBC();
+        } catch (Exception e) {
+        }
+        finally {
+            closeJDBC();
+        }
+    }
+    
+    
+    
+    
+    
 }
