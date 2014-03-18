@@ -139,16 +139,6 @@
                     <input type='hidden' id='show_per_page' value='15' />
                     <input type='hidden' id='total' value='<%= sessions.size()%>'/>
                         <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder" id="sessionTable">
-                            <colgroup>
-                                <col width="11%">
-                                <col width="6%">
-                                <col width="15%">
-                                <col width="15%">
-                                <col width="11%">
-                                <col width="11%">
-                                <col width="15%">
-                                <col width="19%">
-                            </colgroup>
                             <thead>
                                 <tr>
                                     <th>Date</th>
