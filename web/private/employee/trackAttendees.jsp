@@ -89,14 +89,14 @@
                         <fieldset>
                             <div class="form-group">
                                 <label class="required">Local Attendees</label>
-                                <input required="required" name="last_name" class="input-xlarge" type="text" id="localAttendees" data-content="" maxlength="3"/>
+                                <input required="required" name="localAttendees" class="input-xlarge" type="text" id="localAttendees" data-content="" maxlength="3"/>
                                 <br/><span id="error_last" class="message_container">
                                     <span>Please enter the number of local attendees</span>
                                 </span>
                             </div>
                             <div class="form-group">
                                 <label class="required">Remote Attendees</label>
-                                <input required="required" name="last_name" class="input-xlarge" type="text" id="remoteAttendees" data-content="" maxlength="3"/>
+                                <input required="required" name="remoteAttendees" class="input-xlarge" type="text" id="remoteAttendees" data-content="" maxlength="3"/>
                                 <br/><span id="error_last" class="message_container">
                                     <span>Please enter the number of remote attendees</span>
                                 </span>
