@@ -217,6 +217,34 @@ public class ReportGenerator extends GrowlerPersistence {
         }
         return null;
     }
+    
+    //Uses: SessionKeyReport.java
+    public ArrayList<SessionKeyReport> generateSessionKeyReport() {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select s.id, s.name, s.session_date, s.start_time, s.session_key from session s order by s.session_date desc, s.start_time, s.name");
+            result = statement.executeQuery();
+            SpeakerPersistence sp = new SpeakerPersistence();
+            ArrayList<SessionKeyReport> keys = new ArrayList<SessionKeyReport>();
+            while (result.next()) {
+                SessionKeyReport k = new SessionKeyReport();
+                k.setSessionName(result.getString(2));
+                k.setSessionKey(result.getString(5));
+
+                ArrayList<Speaker> speakers = sp.getSpeakersBySession(result.getInt(1));
+                k.setSpeakers(speakers);
+                keys.add(k);
+            }
+            return keys;
+
+
+        } catch (Exception e) {
+        } finally {
+            closeJDBC();
+        }
+        return null;
+    }
+    
 
     public ArrayList<SurveyReport> generateSurveyReport() {
         AttendancePersistence ap = new AttendancePersistence();
