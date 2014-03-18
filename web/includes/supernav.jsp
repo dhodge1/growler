@@ -114,6 +114,7 @@
                     <li><a href="${pageContext.request.contextPath}/presentationReport">Best Presentation Skills</a></li>
                     <li><a href="${pageContext.request.contextPath}/confirmationReport">Confirmed Attendance</a></li>
                     <li><a href="${pageContext.request.contextPath}/interestReport">Session Interest</a></li>
+                    <li><a href="${pageContext.request.contextPath}/sessionKeys">Session Keys</a></li>
                     <li><a href="${pageContext.request.contextPath}/expectationReport">Session Met Expectations</a></li>
                     <li><a href="${pageContext.request.contextPath}/surveyReport">Surveys</a></li>
                     
