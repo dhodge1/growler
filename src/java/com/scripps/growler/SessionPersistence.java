@@ -807,7 +807,7 @@ public class SessionPersistence extends GrowlerPersistence {
      * @param user the current logged-in user aka the speaker
      * @return A list of sessions for a speaker
      */
-    public ArrayList<Session> getSessionsforSpeaker(int user){
+    public ArrayList<Session> getSessionsForSpeaker(int user){
         ArrayList<Session> sessionList = new ArrayList<Session>();
         try {
             initializeJDBC();
