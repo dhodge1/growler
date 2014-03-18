@@ -1092,7 +1092,6 @@ public class SessionPersistence extends GrowlerPersistence {
             statement.setString(3, s.getLocalAttendees());
             statement.setString(4, s.getRemoteAttendees());
             statement.execute();
-            generateKey(s.getName());
             closeJDBC();
         } catch (Exception e) {
         }
