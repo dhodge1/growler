@@ -808,28 +808,33 @@ public class SessionPersistence extends GrowlerPersistence {
      * @return A list of sessions for a speaker
      */
     public ArrayList<Session> getSessionsforSpeaker(int user){
-        ArrayList<Session> session = new ArrayList<Session>();
+        ArrayList<Session> sessionList = new ArrayList<Session>();
         try {
             initializeJDBC();
+            /*
             statement = connection.prepareStatement("select s.id, t.session_id, t.speaker_id, u.id, u.name"
                     + "from speaker s, session u, "
                     + "inner join speaker_team t "
                     + "where t.speaker_id = s.id = ?");
+            */
+            
+            statement = connection.prepareStatement("select s.id, t.session_id, t.speaker_id, u.id, u.name from speaker s, session u, speaker_team t where t.speaker_id = s.id = ?");
             
             //statement.setInt(1, session);
             result = statement.executeQuery();    
             while (result.next()){
+                //Create a new Session and add all data about the session to it
                 Session s = new Session();
                 s.setId(result.getInt("id"));
                 s.setName(result.getString("name"));
-                sessions.add(s);
+                sessionList.add(s);
             }
         } catch(Exception e) {
             
         } finally {
             closeJDBC();
         }
-        return session;
+        return sessionList;
     }
     
     
