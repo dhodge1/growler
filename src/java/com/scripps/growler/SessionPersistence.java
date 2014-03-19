@@ -1101,7 +1101,27 @@ public class SessionPersistence extends GrowlerPersistence {
     }
     
     
-    
+    /**
+     * Added by Chelsea Grindstaff
+     * 19 March 2014
+     * Adds host_id and session_id to host table
+     */
+    public void addHost(Session s) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("insert into host "
+                    + " (session_id, user_id) "
+                    + " values (?, ?)");
+            statement.setString(1, String.valueOf(s.getId()));
+            statement.setString(2, s.getSpeakerId());
+            statement.execute();
+            closeJDBC();
+        } catch (Exception e) {
+        }
+        finally {
+            closeJDBC();
+        }
+    }    
     
     
 }
