@@ -16,7 +16,7 @@
         themeTab = active;
     } else if (pageURI.contains("speaker")) {
         speakerTab = active;
-    } else if (pageURI.contains("session") || pageURI.contains("attendance") || pageURI.contains("survey")) {
+    } else if (pageURI.contains("session") || pageURI.contains("attendance") || pageURI.contains("survey") || page.URI.contains("track")) {
         sessionTab = active;
     } else if (pageURI.contains("home")) {
         home = " selected ";
@@ -32,7 +32,11 @@
     Feature surveySession = fp.getFeatureState(1);
     Feature scheduleSession = fp.getFeatureState(5);
     Feature overallSurvey = fp.getFeatureState(8);
-    Feature trackAttendees = fp.getFeatureState(9);
+    Feature trackParticipants = fp.trackParticipants(9);   
+
+    //See if user is a host 1=true, 0=false
+    int host = Integer.parseInt(String.valueOf(session.getAttribute("host")));
+ 
 %>
 <nav class="topnav navbar">
         <nav class="globalNavigation modify-pages" id="navigation">
@@ -79,7 +83,11 @@
                         <% if (overallSurvey.getFeatureState()) { %>
                             <%@ include file="../../includes/regOverallSurvey.jsp" %>
                         <% } %>
-
+                        <% if (host=1) { %>
+                            <% if (trackParticipants.getFeatureState()) { %>
+                                <%@ include file="../../includes/regTrackAttendees.jsp" %>
+                                <% } %>
+                        <% } %>
                     </ul>
                 </li>             
                 
