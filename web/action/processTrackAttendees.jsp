@@ -11,7 +11,7 @@
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
 <%@page import="com.scripps.growler.*" %>
-<jsp:useBean id="persist" class="com.scripps.growler.SpeakerPersistence" scope="page" />
+<jsp:useBean id="persist" class="com.scripps.growler.SessionPersistence" scope="page" />
 <jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="page" />
 <jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page" />
 <%
