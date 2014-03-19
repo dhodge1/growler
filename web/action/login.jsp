@@ -26,6 +26,21 @@
                     + "' and password = '" + pw + "'");
             //Redirect, and set the user's identity in the header
             if (result.next()) {
+                
+                //Added by Chelsea Grindstaff
+                //19 March 2014
+                //Check if the user is a host
+                ResultSet resultHost = statement.executeQuery("select u.id, h.user_id from user u, host h, where h.user_id = '" + username + "'");
+                if(resultHost.next()){
+                    session.setAttribute("host", true);
+                    resultHost.close();
+                }
+                else{
+                    session.setAttribute("host", false);
+                    resultHost.close();
+                }
+                //End part added by Chelsea
+
                 //If it's an admin, go to the admin side
                 if (result.getInt(1) == 808300) {
                     session.setAttribute("user", "admin");
@@ -52,6 +67,7 @@
                     //response.sendRedirect("../private/employee/home.jsp");
                     response.sendRedirect("../home");
                 }
+
             } else {
                 connection.close();
                 statement.close();
@@ -60,4 +76,8 @@
                 response.sendRedirect("../index.jsp");
 
             }
+            
+            
+            
+            
         %>
