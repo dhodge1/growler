@@ -5,4 +5,4 @@
 --%>
 
 
-<li><a href="${pageContext.request.contextPath}/addHost">Add Host</a></li>
+<li><a href="${pageContext.request.contextPath}/addSessionHost">Add Session Host</a></li>
