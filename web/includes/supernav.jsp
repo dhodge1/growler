@@ -106,6 +106,7 @@
                         <%@ include file="../../includes/superOverallSurvey.jsp" %>
                     <% } %>
                     <li><a href="${pageContext.request.contextPath}/manageSessions">Manage Session Schedule</a></li>
+                    <li><a href="${pageContext.request.contextPath}/addSessionHost">Add Session Host</a></li>
                 </ul>
             </li> 
             <li class="brand_nav <%= reportTab%>"><a href="#"><span class="nav_drop">Reports</span><em></em></a>
