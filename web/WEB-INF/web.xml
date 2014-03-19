@@ -267,5 +267,14 @@
     <servlet-name>sessionKeys</servlet-name>
     <url-pattern>/sessionKeys</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>commentsReport</servlet-name>
+    <jsp-file>/private/employee/admin/commentsreport.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>commentsReport</servlet-name>
+    <url-pattern>/commentsReport</url-pattern>
+  </servlet-mapping>
 
 </web-app>
