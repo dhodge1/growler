@@ -58,6 +58,8 @@ public class Session {
     private String remoteAttendees;
     
     private String speakerId;
+    
+    private String sessionId;
 
     public Session() {
     }
@@ -286,4 +288,21 @@ public class Session {
     public void setSpeakerId(String speakerId) {
         this.speakerId = speakerId;
     }       
+
+     /**
+     * Gets the # of remote attendees
+     */
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    /**
+     * Sets the # of remote attendees
+     */
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }   
+
+
+
 }
