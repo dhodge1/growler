@@ -245,6 +245,33 @@ public class ReportGenerator extends GrowlerPersistence {
         return null;
     }
     
+    //Uses: CommentsReport.java
+    public ArrayList<CommentsReport> generateCommentsReport() {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select s.id, s.name, c.session_id, c.comment from session s left join comments c on s.id = c.session_id order by s.name asc");
+            result = statement.executeQuery();
+            SpeakerPersistence sp = new SpeakerPersistence();
+            ArrayList<CommentsReport> commentsrep = new ArrayList<CommentsReport>();
+            while (result.next()) {
+                CommentsReport c = new CommentsReport();
+                c.setSessionName(result.getString(2));
+                c.setComment(result.getString(4));
+
+                ArrayList<Speaker> speakers = sp.getSpeakersBySession(result.getInt(1));
+                c.setSpeakers(speakers);
+                commentsrep.add(c);
+            }
+            return commentsrep;
+
+        } catch (Exception e) {
+        } finally {
+            closeJDBC();
+        }
+        return null;
+    }
+
+    
 
     public ArrayList<SurveyReport> generateSurveyReport() {
         AttendancePersistence ap = new AttendancePersistence();
