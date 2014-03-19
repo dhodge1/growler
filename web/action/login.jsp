@@ -30,13 +30,14 @@
                 //Added by Chelsea Grindstaff
                 //19 March 2014
                 //Check if the user is a host
+                //1=true, 0=false
                 ResultSet resultHost = statement.executeQuery("select u.id, h.user_id from user u, host h, where h.user_id = '" + username + "'");
                 if(resultHost.next()){
-                    session.setAttribute("host", true);
+                    session.setAttribute("host", 1);
                     resultHost.close();
                 }
                 else{
-                    session.setAttribute("host", false);
+                    session.setAttribute("host", 0);
                     resultHost.close();
                 }
                 //End part added by Chelsea
