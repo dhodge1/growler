@@ -20,27 +20,42 @@
             sha.update(password.getBytes());
             byte pwd[] = sha.digest();
             String pw = dataConnection.bytesToHex(pwd);
-            Connection connection = dataConnection.sendConnection();
-            Statement statement = connection.createStatement();
-            ResultSet result = statement.executeQuery("select id, name, password from user where id = '" + username
-                    + "' and password = '" + pw + "'");
-            //Redirect, and set the user's identity in the header
-            if (result.next()) {
-                
-                //Added by Chelsea Grindstaff
+            
+                 //Added by Chelsea Grindstaff
                 //19 March 2014
                 //Check if the user is a host
                 //1=true, 0=false
-                ResultSet resultHost = statement.executeQuery("select u.id, h.user_id from user u, host h, where h.user_id = '" + username + "'");
+                Connection connectionForHost = dataConnection.sendConnection();
+                Statement statementForHost = connectionForHost.createStatement();
+                ResultSet resultHost = statementForHost.executeQuery("select user_id from host where user_id = '" + username + "'");
                 if(resultHost.next()){
                     session.setAttribute("host", 1);
+                    connectionForHost.close();
+                    statementForHost.close();
                     resultHost.close();
                 }
                 else{
                     session.setAttribute("host", 0);
+                    connectionForHost.close();
+                    statementForHost.close();
                     resultHost.close();
                 }
-                //End part added by Chelsea
+                //End part added by Chelsea           
+            
+            
+            
+            
+            
+            Connection connection = dataConnection.sendConnection();
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery("select id, name, password from user where id = '" + username
+                    + "' and password = '" + pw + "'");
+            
+
+//Redirect, and set the user's identity in the header
+            if (result.next()) {
+                
+
 
                 //If it's an admin, go to the admin side
                 if (result.getInt(1) == 808300) {
