@@ -79,9 +79,7 @@
                         <% if (overallSurvey.getFeatureState()) { %>
                             <%@ include file="../../includes/regOverallSurvey.jsp" %>
                         <% } %>
-                        <!--<% if (trackAttendees.getFeatureState()) { %>
-                            <%@ include file="../../includes/regTrackAttendees.jsp" %>
-                        <% } %>-->
+
                     </ul>
                 </li>             
                 
