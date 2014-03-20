@@ -35,7 +35,7 @@
  
 
     //See if user is a host 1=true, 0=false
-    int host = Integer.parseInt(String.valueOf(session.getAttribute("host")));
+    //int host = Integer.parseInt(String.valueOf(session.getAttribute("host")));
  
 %>
 <nav class="topnav navbar">
@@ -83,9 +83,9 @@
                         <% if (overallSurvey.getFeatureState()) { %>
                             <%@ include file="../../includes/regOverallSurvey.jsp" %>
                         <% } %>
-                        <% if (host==1) { %>
+                        
                             <li><a href="${pageContext.request.contextPath}/trackAttendees">Track Attendees</a></li>
-                        <% } %>
+                        
                     </ul>
                 </li>             
                 
