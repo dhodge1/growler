@@ -25,7 +25,7 @@
                 //19 March 2014
                 //Check if the user is a host
                 //1=true, 0=false
-                Connection connectionForHost = dataConnection.sendConnection();
+                /*Connection connectionForHost = dataConnection.sendConnection();
                 Statement statementForHost = connectionForHost.createStatement();
                 ResultSet resultHost = statementForHost.executeQuery("select user_id from host where user_id = '" + username + "'");
                 if(resultHost.next()){
@@ -41,7 +41,7 @@
                     resultHost.close();
                 }
                 //End part added by Chelsea           
-            
+            */
             
             
             
