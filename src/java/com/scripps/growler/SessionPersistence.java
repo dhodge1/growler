@@ -1058,16 +1058,19 @@ public class SessionPersistence extends GrowlerPersistence {
                     + "where t.speaker_id = s.id = ?");
             */
             
-            statement = connection.prepareStatement("select s.id, t.session_id, t.speaker_id, u.id, u.name from speaker s, session u, speaker_team t where t.speaker_id = s.id = ?");
+            //The below statement won't work because the speaker_id != user_id
+            //statement = connection.prepareStatement("select s.id, t.session_id, t.speaker_id, u.id, u.name from speaker s, session u, speaker_team t where t.speaker_id = s.id = ?");
+            statement = connection.prepareStatement("select s.id, s.first_name, s.last_name, t.session_id, t.speaker_id, u.id, u.name from speaker s, speaker_team t, session u where t.speaker_id = s.id");
             
             //statement.setInt(1, session);
             result = statement.executeQuery();    
             while (result.next()){
                 //Create a new Session and add all data about the session to it
-                Session s = new Session();
-                s.setId(result.getInt("id"));
-                s.setName(result.getString("name"));
-                sessionList.add(s);
+                Session a = new Session();
+                a.setId(result.getInt("u.id"));         //u=session
+                a.setName(result.getString("u.name"));
+                sessionList.add(a);
+
             }
         } catch(Exception e) {
             
@@ -1100,7 +1103,7 @@ public class SessionPersistence extends GrowlerPersistence {
                     + "where t.speaker_id = s.id = ?");
             */
             
-            statement = connection.prepareStatement("select s.id, s.name, h.user_id, h.session_id from session s, host h, where (h.session_id = s.id AND h.user_id = ?)");
+            statement = connection.prepareStatement("select s.id, s.name, h.user_id, h.session_id from session s, host h where (h.session_id = s.id AND h.user_id = ?)");
             
             //statement.setInt(1, session);
             result = statement.executeQuery();    
