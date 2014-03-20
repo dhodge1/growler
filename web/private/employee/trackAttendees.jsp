@@ -109,17 +109,17 @@
                                     <label class="required">What session are you entering attendees for?</label>
                                     <select name='session' id='session' class='input x-large'>
                                         <option value='0'> Please select a session </option>
-                                        <% SessionPersistence sp = new SessionPersistence();
-                                        ArrayList<Session> sessions = sp.getSessionsForHost(user);
-                                        for (int i = 0; i < sessions.size(); i++){
-                                            out.print("<option value='" + sessions.get(i).getId() + "'>");
-                                            out.print(sessions.get(i).getName());
+                                        <% HostPersistence hp = new HostPersistence();
+                                        ArrayList<Host> host = hp.getSessionsForHost('user');
+                                        for (int i = 0; i < host.size(); i++){
+                                            out.print("<option value='" + host.get(i).getSessionId() + "'>");
+                                            out.print(host.get(i).getSessionName());
                                             out.print("</option>");
                                         }
                                         %>
                                     </select>
-                                    <br/><span id='error_theme' class='message_container'>
-                                        <span>Please select a theme</span>
+                                    <br/><span id='error_session' class='message_container'>
+                                        <span>Please select a session</span>
                                     </span>
                                 </div>
 
