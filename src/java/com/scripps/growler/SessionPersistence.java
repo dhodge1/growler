@@ -795,48 +795,7 @@ public class SessionPersistence extends GrowlerPersistence {
     
     
     
-    /**
-     * Added by Chelsea Grindstaff
-     * 
-     * Used on trackAttendees.jsp
-     * 
-     * Returns sessions for a speaker
-     * 
-     * Useful because there are times where one speaker hosts multiple sessions
-     * 
-     * @param user the current logged-in user aka the speaker
-     * @return A list of sessions for a speaker
-     */
-    public ArrayList<Session> getSessionsForSpeaker(int user){
-        ArrayList<Session> sessionList = new ArrayList<Session>();
-        try {
-            initializeJDBC();
-            /*
-            statement = connection.prepareStatement("select s.id, t.session_id, t.speaker_id, u.id, u.name"
-                    + "from speaker s, session u, "
-                    + "inner join speaker_team t "
-                    + "where t.speaker_id = s.id = ?");
-            */
-            
-            statement = connection.prepareStatement("select s.id, t.session_id, t.speaker_id, u.id, u.name from speaker s, session u, speaker_team t where t.speaker_id = s.id = ?");
-            
-            //statement.setInt(1, session);
-            result = statement.executeQuery();    
-            while (result.next()){
-                //Create a new Session and add all data about the session to it
-                Session s = new Session();
-                s.setId(result.getInt("id"));
-                s.setName(result.getString("name"));
-                sessionList.add(s);
-            }
-        } catch(Exception e) {
-            
-        } finally {
-            closeJDBC();
-        }
-        return sessionList;
-    }
-    
+
     
     /**
      * Validates that a key is correct for a session
@@ -1075,6 +1034,90 @@ public class SessionPersistence extends GrowlerPersistence {
         }   
     }
     
+    
+    /**
+     * Added by Chelsea Grindstaff
+     * 
+     * Used on trackAttendees.jsp
+     * 
+     * Returns sessions for a speaker
+     * 
+     * Useful because there are times where one speaker hosts multiple sessions
+     * 
+     * @param user the current logged-in user aka the speaker
+     * @return A list of sessions for a speaker
+     */
+    public ArrayList<Session> getSessionsForSpeaker(int user){
+        ArrayList<Session> sessionList = new ArrayList<Session>();
+        try {
+            initializeJDBC();
+            /*
+            statement = connection.prepareStatement("select s.id, t.session_id, t.speaker_id, u.id, u.name"
+                    + "from speaker s, session u, "
+                    + "inner join speaker_team t "
+                    + "where t.speaker_id = s.id = ?");
+            */
+            
+            statement = connection.prepareStatement("select s.id, t.session_id, t.speaker_id, u.id, u.name from speaker s, session u, speaker_team t where t.speaker_id = s.id = ?");
+            
+            //statement.setInt(1, session);
+            result = statement.executeQuery();    
+            while (result.next()){
+                //Create a new Session and add all data about the session to it
+                Session s = new Session();
+                s.setId(result.getInt("id"));
+                s.setName(result.getString("name"));
+                sessionList.add(s);
+            }
+        } catch(Exception e) {
+            
+        } finally {
+            closeJDBC();
+        }
+        return sessionList;
+    }
+    
+   /**
+     * Added by Chelsea Grindstaff
+     * 
+     * Used on trackAttendees.jsp
+     * 
+     * Returns sessions for a speaker
+     * 
+     * Useful because there are times where one speaker hosts multiple sessions
+     * 
+     * @param user the current logged-in user aka the speaker
+     * @return A list of sessions for a speaker
+     */
+    public ArrayList<Session> getSessionsForHost(int user){
+        ArrayList<Session> sessionList = new ArrayList<Session>();
+        try {
+            initializeJDBC();
+            /*
+            statement = connection.prepareStatement("select s.id, t.session_id, t.speaker_id, u.id, u.name"
+                    + "from speaker s, session u, "
+                    + "inner join speaker_team t "
+                    + "where t.speaker_id = s.id = ?");
+            */
+            
+            statement = connection.prepareStatement("select s.id, s.name, h.user_id, h.session_id from session s, host h, where (h.session_id = s.id AND h.user_id = ?)");
+            
+            //statement.setInt(1, session);
+            result = statement.executeQuery();    
+            while (result.next()){
+                //Create a new Session and add all data about the session to it
+                Session s = new Session();
+                s.setId(result.getInt("id"));
+                s.setName(result.getString("name"));
+                sessionList.add(s);
+            }
+        } catch(Exception e) {
+            
+        } finally {
+            closeJDBC();
+        }
+        return sessionList;
+    }    
     
     /**
      * Added by Chelsea Grindstaff
