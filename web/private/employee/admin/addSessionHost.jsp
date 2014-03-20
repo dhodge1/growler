@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : addSessionHost
     Created on : Mar 19, 2014, 4:03:40 PM
     Author     : Chelsea Grindstaff
@@ -10,6 +10,7 @@
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
 <%@page import="com.scripps.growler.*" %>
+<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
@@ -26,9 +27,9 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/prettify/prettify.css" /> 
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/prettify/prettify.css" />
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/general.css" /><!--General CSS-->
-        <script src="http://growler.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->	
+        <script src="http://growler.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <style>
             .message_container {
                 display: none;
@@ -52,19 +53,19 @@
                     }
                     try {
                         user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
-                        String name = String.valueOf(session.getAttribute("user"));                  
+                        String name = String.valueOf(session.getAttribute("user"));
                     }
                     catch (Exception e) {
-                        
+
                     }
         %>
-        <%@ include file="../../includes/header.jsp" %>
+        <%@ include file="../../../includes/adminheader.jsp" %>
         <% if (String.valueOf(session.getAttribute("role")).equals("admin")) { %>
             <%--<jsp:include page="../../includes/supernav.jsp" flush="true"/>--%>
-            <%@ include file="../../includes/supernav.jsp" %>
+            <%@ include file="../../../includes/supernav.jsp" %>
         <% } else {%>
             <%--<jsp:include page="../../includes/testnav.jsp" flush="true"/>--%>
-            <%@ include file="../../includes/testnav.jsp" %>
+            <%@ include file="../../../includes/testnav.jsp" %>
         <% } %>
         <%--<%@ include file="../../includes/testnav.jsp" %>--%>
         <div class="container-fixed mediumBottomMargin">
@@ -76,7 +77,7 @@
                 </ul>
             </div>
             <div class="row mediumBottomMargin">
-                <h1 style="font-weight:normal;">Nominate Yourself As A Speaker</h1>
+                <h1 style="font-weight:normal;">Add a Host to a Session</h1>
             </div>
             <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
             <div class="row largeBottomMargin">
@@ -95,14 +96,15 @@
                                 <!-- Select User -->
                                 <div class="form-group">
                                     <label class="required">What user do you want to make a host?</label>
-                                    <select name='sessionForHost' id='sessionForHost' class='input x-large'>
+                                    <select name='host' id='host' class='input x-large'>
                                         <option value='0'> Please select a user </option>
-                                        <% 
-                                        SpeakerPersistence speakerPersist = new SpeakerPersistence();
-                                        ArrayList<Speaker> speakers = speakerPersist.getAllSpeakers(" order by last_name, first_name");
-                                        for (int i = 0; i < speakers.size(); i++){
-                                            out.print("<option value='" + speakers.get(i).getId() + "'>");
-                                            out.print(speakers.get(i).getLastName() + ", " + speakers.get(i).getFirstName() );
+                                        <%
+                                        UserPersistence up = new UserPersistence();
+                                        ArrayList<User> userList = up.getAllUsers();
+                                        for (int i=0; i<userList.size(); i++){
+
+                                            out.print("<option value='" + userList.get(i).getId() + "'>");
+                                            out.print(userList.get(i).getUserName() );
                                             out.print("</option>");
                                         }
                                         %>
@@ -116,12 +118,12 @@
                                     <label class="required">To what session do you want to assign this host?</label>
                                     <select name='session' id='session' class='input x-large'>
                                         <option value='0'> Please select a session </option>
-                                        <% 
+                                        <%
                                         SessionPersistence sessionPersist = new SessionPersistence();
                                         ArrayList<Session> sessions = sessionPersist.getAllSessions(" order by session.name asc");
-                                        for (int i = 0; i < sessions.size(); i++){
-                                            out.print("<option value='" + sessions.get(i).getId() + "'>");
-                                            out.print(sessions.get(i).getName() );
+                                        for (int j = 0; j < sessions.size(); j++){
+                                            out.print("<option value='" + sessions.get(j).getId() + "'>");
+                                            out.print(sessions.get(j).getName() );
                                             out.print("</option>");
                                         }
                                         %>
@@ -129,24 +131,24 @@
                                     <br/><span id='error_theme' class='message_container'>
                                         <span>Please select a session</span>
                                     </span>
-                                </div>                                
-                                
-                                
-                                
-                                
+                                </div>
+
+
+
+
                                 <div class="form-actions">
                                     <input type="submit" id="send" class="button button-primary" value="Submit Host"/>
                                     <a id="cancel" href="${pageContext.request.contextPath}/private/employee/home.jsp">Cancel</a>
                                 </div>
-                            </fieldset> 
-                    </form>	 
+                            </fieldset>
+                    </form>
                 </div>
                 <div class="span6">
                     <img id="speaker2Img" src="${pageContext.request.contextPath}/images/theme2.jpg" />
                 </div>
             </div>
         </div>
-        <%@ include file="../../includes/footer.jsp" %> 
+        <%@ include file="../../../includes/footer.jsp" %>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
         <script src="http://growler.elasticbeanstalk.com/js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/js/libs/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
