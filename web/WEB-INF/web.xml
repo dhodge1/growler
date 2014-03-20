@@ -277,4 +277,22 @@
     <url-pattern>/commentsReport</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>addSessionHost</servlet-name>
+    <jsp-file>/private/employee/admin/addSessionHost.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>addSessionHost</servlet-name>
+    <url-pattern>/addSessionHost</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>trackAttendees</servlet-name>
+    <jsp-file>/private/employee/trackAttendees.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>trackAttendees</servlet-name>
+    <url-pattern>/trackAttendees</url-pattern>
+  </servlet-mapping>
+
 </web-app>
