@@ -276,28 +276,28 @@ public class Session {
     }    
     
      /**
-     * Gets the # of remote attendees
+     * Gets the speakerId as string
      */
     public String getSpeakerId() {
         return speakerId;
     }
 
     /**
-     * Sets the # of remote attendees
+     * Sets the speakerId as string
      */
     public void setSpeakerId(String speakerId) {
         this.speakerId = speakerId;
     }       
 
      /**
-     * Gets the # of remote attendees
+     * Gets the sessionId as string
      */
     public String getSessionId() {
         return sessionId;
     }
 
     /**
-     * Sets the # of remote attendees
+     * Sets the sessionId as string
      */
     public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
