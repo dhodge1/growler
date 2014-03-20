@@ -8,6 +8,7 @@
 <%@page import="java.sql.*"%>
 <%@page import="com.scripps.growler.*" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
@@ -109,7 +110,7 @@
                                     <select name='session' id='session' class='input x-large'>
                                         <option value='0'> Please select a session </option>
                                         <% SessionPersistence sp = new SessionPersistence();
-                                        ArrayList<Session> sessions = sp.getSessionsForSpeaker(user);
+                                        ArrayList<Session> sessions = sp.getSessionsForHost(user);
                                         for (int i = 0; i < sessions.size(); i++){
                                             out.print("<option value='" + sessions.get(i).getId() + "'>");
                                             out.print(sessions.get(i).getName());
