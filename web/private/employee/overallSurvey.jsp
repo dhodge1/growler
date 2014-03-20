@@ -59,14 +59,15 @@
                 response.sendRedirect("surveyTaken");
             }
         %>
-        <%@ include file="../../../includes/adminheader.jsp" %> 
+        <%@ include file="../../includes/header.jsp" %> 
         <% if (String.valueOf(session.getAttribute("role")).equals("admin")) { %>
             <%--<jsp:include page="../../includes/supernav.jsp" flush="true"/>--%>
-            <%@ include file="../../../includes/supernav.jsp" %>
+            <%@ include file="../../includes/supernav.jsp" %>
         <% } else {%>
-            <%--<jsp:include page="../../includes/adminnav.jsp" flush="true"/>--%>
-            <%@ include file="../../../includes/adminnav.jsp" %>
+            <%--<jsp:include page="../../includes/testnav.jsp" flush="true"/>--%>
+            <%@ include file="../../includes/testnav.jsp" %>
         <% } %>
+        <%--<%@ include file="../../includes/testnav.jsp" %>--%>
         <div class="container-fixed">
             <div class="row mediumBottomMargin"></div>
             <div class="row">
