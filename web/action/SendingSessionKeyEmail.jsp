@@ -8,6 +8,9 @@
 <%@ page import="javax.mail.internet.*,javax.activation.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ page import="com.scripps.growler.*, java.sql.*" %>
+
+
+
 <%
 StringBuffer speakerIList = new StringBuffer();
 StringBuffer speakerVList = new StringBuffer();
@@ -45,20 +48,20 @@ while(speakerRS.next())
      (strSpeakerEmail.indexOf("@")!= -1))
   {
     subject = "The " + strSessionName + " Session Key";
-	content = "Dear " + strFirstName + " " + strLastName + ", \n\n"
-	                 + "Here is the session key for your presentation, "
-					 + strSessionName +": "+ strSessionKey + ". \n\n"
-					 + "Please give this only to the people in your room, "
-              	     + "and only during your scheduled session. \n\n"
-					 + "Thanks\n"
-					 + "Techtoberfest Adminstration\n";	 
+    content = "Dear " + strFirstName + " " + strLastName + ", \n\n"
+	      + "Here is the session key for your presentation, "
+	      + strSessionName +": "+ strSessionKey + ". \n\n"
+	      + "Please give this only to the people in your room, "
+              + "and only during your scheduled session. \n\n"
+	      + "Thanks\n"
+	      + "Techtoberfest Adminstration\n";	 
 	//*************************************************************************				 
 	 try
      {
        //perform the send email task
         EmailUtilSMTPScripps.sendMail(strSpeakerEmail, subject, content, isContentHTML);
-	   speakerVList.append(strSessionId +   ": " + strSessionName + ": " + strSessionKey + ": " 
-	                   + strSpeakerId + ": " + strFirstName + ", " + strLastName + "\n");
+	speakerVList.append(strSessionId +   ": " + strSessionName + ": " + strSessionKey + ": " 
+	                    + strSpeakerId + ": " + strFirstName + ", " + strLastName + "\n");
 					   
        //infoMessage = "Your message has been sent!";
        //isSuccess =   "true";
@@ -69,9 +72,9 @@ while(speakerRS.next())
      catch (Exception e)
      {
        infoMessage ="Your message can't be sending at this time";
-	   request.setAttribute("infoMessage", infoMessage); 
+       request.setAttribute("infoMessage", infoMessage); 
 	   
-	   RequestDispatcher dispatcher = request.getRequestDispatcher("email");      
+       RequestDispatcher dispatcher = request.getRequestDispatcher("email");      
        if (dispatcher != null)
        {
          dispatcher.forward(request, response);
@@ -83,8 +86,8 @@ while(speakerRS.next())
   else
   {
     //invalid email address
-	speakerIList.append(strSessionId +   ": " + strSessionName + ": " + strSessionKey + ": " 
-	                   + strSpeakerId + ": " + strFirstName + ", " + strLastName + "\n");  
+    speakerIList.append(strSessionId +   ": " + strSessionName + ": " + strSessionKey + ": " 
+	                + strSpeakerId + ": " + strFirstName + ", " + strLastName + "\n");  
 
     invalidEmailNum ++;
 	//**********************************
@@ -113,7 +116,7 @@ while(speakerRS.next())
    {
      infoMessage ="No presenters have valid email address info listed in the system.";
      request.setAttribute("infoMessage", infoMessage);
-	 request.setAttribute("speakerIList", speakerIList);
+     request.setAttribute("speakerIList", speakerIList);
 	 //also return the list of presenters don't have valid email addresses
 	 
 	 //********************************************************************
@@ -127,7 +130,7 @@ while(speakerRS.next())
    {
      infoMessage ="Your message has been sent!";
      request.setAttribute("infoMessage", infoMessage);
-	 request.setAttribute("speakerVList", speakerVList);
+     request.setAttribute("speakerVList", speakerVList);
 	 //also return the list of presenters don't have valid email addresses
 	 
 	 //********************************************************************
@@ -144,8 +147,8 @@ while(speakerRS.next())
    
      infoMessage ="There are some able to send out and some are not able to";
      request.setAttribute("infoMessage", infoMessage);
-	 request.setAttribute("speakerVList", speakerVList);
-	 request.setAttribute("speakerIList", speakerIList);
+     request.setAttribute("speakerVList", speakerVList);
+     request.setAttribute("speakerIList", speakerIList);
 	 //also return the list of presenters don't have valid email addresses
 	 
 	 //********************************************************************
@@ -154,10 +157,7 @@ while(speakerRS.next())
      {
        dispatcher.forward(request, response);
      } 
-   
-     //************************************************************************
-   
-   
+     //***********************************************************************
    }
    
    
