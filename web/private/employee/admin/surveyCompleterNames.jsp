@@ -128,7 +128,6 @@
                             </thead>
                             <tbody>
                                 <%
-                                    try {
                                         ReportGenerator rg = new ReportGenerator();
                                         ArrayList<SurveyCompleterReport> questions = rg.generateSurveyCompleterReport();
                                         if (questions.size() == 0) {
@@ -148,8 +147,6 @@
                                             out.print("</td>");
                                             out.print("</tr>");
                                         }
-                                    } catch (Exception e) {
-                                    }
                                 %>
                             </tbody>
                         </table>
