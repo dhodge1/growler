@@ -111,7 +111,7 @@
                         ReportGenerator rg = new ReportGenerator();
                         ArrayList<SurveyCompleterReport> names = rg.generateSurveyCompleterReport();
                         for (int i = 0; i < names.size(); i++) {
-                            out.print("<li>" + i + "</li>");
+                            out.print("<li>" + names.get(i).getUserName() + "</li>");
                         }
                     %>
                 </ol>
