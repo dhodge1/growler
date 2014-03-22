@@ -146,14 +146,14 @@
                                     <th>Date</th>
                                     <th style="width: 70px;">Time</th>      
                                     <th>Topic</th>
-                                    <th>Description</th>
+                                    <th>Desc.</th>
                                     <th>Theme</th>
-                                    <th>Speaker(s)</th>
-                                    <th>Duration</th>
+                                    <th>Speaker</th>
+                                    <th>Length</th>
                                     <th>Location</th>
                                     <th>Remote Room(s)</th>
-                                    <% if (today.get(Calendar.MONTH) != 8) {%><th>Like Session?</th><% }%> <!-- is this supposed to prevent liking a session after October?-->
-                                    <th>Submit Feedback</th>
+                                    <% if (today.get(Calendar.MONTH) != 8) {%><th>Like Session</th><% }%> <!-- is this supposed to prevent liking a session after October?-->
+                                    <th>Submit Survey</th>
                                 </tr>
                             </thead>
                             <tbody id='tablebody'>
