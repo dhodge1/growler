@@ -177,6 +177,26 @@
     <url-pattern>/surveyTaken</url-pattern>
   </servlet-mapping>
  
+ 
+   <servlet>
+    <servlet-name>sendingSessionKeyEmails</servlet-name>
+    <jsp-file>/action/sendingSessionKeyEmails.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>sendingSessionKeyEmails</servlet-name>
+    <url-pattern>/sendingSessionKeyEmails</url-pattern>
+  </servlet-mapping> 
+ 
+  <servlet>
+    <servlet-name>sessionKeyEmail-confirm</servlet-name>
+    <jsp-file>/private/employee/admin/sessionKeyEmail-confirm.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>sessionKeyEmail-confirm</servlet-name>
+    <url-pattern>/sessionKeyEmail-confirm</url-pattern>
+  </servlet-mapping>
+ 
+ 
   <servlet>
     <servlet-name>callOutAction</servlet-name>
     <jsp-file>/private/employee/admin/callOutAction.jsp</jsp-file>

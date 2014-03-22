@@ -107,6 +107,7 @@
                     <% } %>
                     <li><a href="${pageContext.request.contextPath}/manageSessions">Manage Session Schedule</a></li>
                     <li><a href="${pageContext.request.contextPath}/addSessionHost">Add Session Host</a></li>
+                    <li><a href="${pageContext.request.contextPath}/sendingSessionKeyEmails">Email Session Key</a></li>                    
                 </ul>
             </li> 
             <li class="brand_nav <%= reportTab%>"><a href="#"><span class="nav_drop">Reports</span><em></em></a>
