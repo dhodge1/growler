@@ -128,24 +128,27 @@
                             </thead>
                             <tbody>
                                 <%
-                                    ReportGenerator rg = new ReportGenerator();
-                                    ArrayList<SurveyCompleterReport> questions = rg.generateSurveyCompleterReport2();
-                                    if (questions.size() == 0) {
-                                        out.print("<tr>");
-                                        out.print("<td>");
-                                        out.print("No data is available at this time.");
-                                        out.print("</td>");
-                                        out.print("</tr>");
-                                    }
-                                    for (int i = 0; i < questions.size(); i++) {
-                                        out.print("<tr id='row" + i + "'>");
-                                        out.print("<td>");
-                                        out.print(questions.get(i).getNumber());
-                                        out.print("</td>");
-                                        out.print("<td>");
-                                        out.print(questions.get(i).getUserName());
-                                        out.print("</td>");
-                                        out.print("</tr>");
+                                    try {
+                                        ReportGenerator rg = new ReportGenerator();
+                                        ArrayList<SurveyCompleterReport> questions = rg.generateSurveyCompleterReport();
+                                        if (questions.size() == 0) {
+                                            out.print("<tr>");
+                                            out.print("<td>");
+                                            out.print("No data is available at this time.");
+                                            out.print("</td>");
+                                            out.print("</tr>");
+                                        }
+                                        for (int i = 0; i < questions.size(); i++) {
+                                            out.print("<tr id='row" + i + "'>");
+                                            out.print("<td>");
+                                            out.print(i);
+                                            out.print("</td>");
+                                            out.print("<td>");
+                                            out.print(questions.get(i).getUserName());
+                                            out.print("</td>");
+                                            out.print("</tr>");
+                                        }
+                                    } catch (Exception e) {
                                     }
                                 %>
                             </tbody>
