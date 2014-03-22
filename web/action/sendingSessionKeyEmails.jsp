@@ -60,8 +60,8 @@ while(speakerRS.next())
      {
        //perform the send email task
         EmailUtilSMTPScripps.sendMail(strSpeakerEmail, subject, content, isContentHTML);
-	speakerVList.append(strSessionId +   ": " + strSessionName + ": " + strSessionKey + ": " 
-	                    + strSpeakerId + ": " + strFirstName + ", " + strLastName + "\n");
+	speakerVList.append(strFirstName + ", " + strLastName + " " +
+                            strSessionName + ": " + strSessionKey + "<br>");
 					   
        //infoMessage = "Your message has been sent!";
        //isSuccess =   "true";
@@ -74,7 +74,7 @@ while(speakerRS.next())
        infoMessage ="Your message can't be sending at this time";
        request.setAttribute("infoMessage", infoMessage); 
 	   
-       RequestDispatcher dispatcher = request.getRequestDispatcher("email");      
+       RequestDispatcher dispatcher = request.getRequestDispatcher("sessionKeyEmail-confirm");      
        if (dispatcher != null)
        {
          dispatcher.forward(request, response);
@@ -86,8 +86,9 @@ while(speakerRS.next())
   else
   {
     //invalid email address
-    speakerIList.append(strSessionId +   ": " + strSessionName + ": " + strSessionKey + ": " 
-	                + strSpeakerId + ": " + strFirstName + ", " + strLastName + "\n");  
+    speakerIList.append(strFirstName + ", " + strLastName + " " +
+                        strSessionName + ": " + strSessionKey + "<br>");
+	                  
 
     invalidEmailNum ++;
 	//**********************************
@@ -106,7 +107,7 @@ while(speakerRS.next())
 	 //also return the list of presenters don't have valid email addresses
 	 
 	 //********************************************************************
-     RequestDispatcher dispatcher = request.getRequestDispatcher("email");      
+     RequestDispatcher dispatcher = request.getRequestDispatcher("sessionKeyEmail-confirm");      
      if (dispatcher != null)
      {
        dispatcher.forward(request, response);
@@ -120,7 +121,7 @@ while(speakerRS.next())
 	 //also return the list of presenters don't have valid email addresses
 	 
 	 //********************************************************************
-     RequestDispatcher dispatcher = request.getRequestDispatcher("email");      
+     RequestDispatcher dispatcher = request.getRequestDispatcher("sessionKeyEmail-confirm");      
      if (dispatcher != null)
      {
        dispatcher.forward(request, response);
@@ -131,10 +132,9 @@ while(speakerRS.next())
      infoMessage ="Your message has been sent!";
      request.setAttribute("infoMessage", infoMessage);
      request.setAttribute("speakerVList", speakerVList);
-	 //also return the list of presenters don't have valid email addresses
-	 
-	 //********************************************************************
-     RequestDispatcher dispatcher = request.getRequestDispatcher("email");      
+     isSuccess =   "true";
+     request.setAttribute("isSuccess", isSuccess);
+     RequestDispatcher dispatcher = request.getRequestDispatcher("sessionKeyEmail-confirm");      
      if (dispatcher != null)
      {
        dispatcher.forward(request, response);
@@ -145,20 +145,17 @@ while(speakerRS.next())
    else
    {
    
-     infoMessage ="There are some able to send out and some are not able to";
+     infoMessage ="Some are able to send out while others are not";
      request.setAttribute("infoMessage", infoMessage);
      request.setAttribute("speakerVList", speakerVList);
      request.setAttribute("speakerIList", speakerIList);
-	 //also return the list of presenters don't have valid email addresses
-	 
-	 //********************************************************************
-     RequestDispatcher dispatcher = request.getRequestDispatcher("email");      
+     RequestDispatcher dispatcher = request.getRequestDispatcher("sessionKeyEmail-confirm");      
      if (dispatcher != null)
      {
        dispatcher.forward(request, response);
      } 
      //***********************************************************************
    }
-   
+ 
    
    %>
