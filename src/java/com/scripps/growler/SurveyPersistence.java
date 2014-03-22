@@ -46,10 +46,39 @@ public class SurveyPersistence extends GrowlerPersistence {
         return 0;
     }
     
+    public int mealSurveyCheck(int id) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select meal_taken from mealSurveyCheck where user_id=?");
+            statement.setInt(1, id);
+            result = statement.executeQuery();
+            if (result.next()) {
+                closeJDBC();
+                return 1;
+            }
+            closeJDBC();
+            return 0;
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+    
     public void insertSurveyCheck(int id, int taken) {
         try {
             initializeJDBC();
             statement = connection.prepareStatement("insert into overallSurveyCheck (user_id, overall_taken) values (?, ?)");
+            statement.setInt(1, id);
+            statement.setInt(2, taken);
+            statement.execute();
+            closeJDBC();
+        } catch (Exception e) {
+        }
+    }
+    
+    public void insertMealSurveyCheck(int id, int taken) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("insert into mealSurveyCheck (user_id, meal_taken) values (?, ?)");
             statement.setInt(1, id);
             statement.setInt(2, taken);
             statement.execute();
@@ -93,7 +122,21 @@ public class SurveyPersistence extends GrowlerPersistence {
             statement.setInt(1, q1);
             statement.setInt(2, q2);
             statement.setInt(3, q3);
-            statement.setString(5, comms);
+            statement.setString(4, comms);
+            statement.execute();
+            closeJDBC();
+        } catch (Exception e) {
+        }
+    }
+    
+    public void submitMealSurvey(int q1, int q2, int q3, String comms) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("insert into mealSurvey (quality, selection, room, comments) values (?, ?, ?, ?)");
+            statement.setInt(1, q1);
+            statement.setInt(2, q2);
+            statement.setInt(3, q3);
+            statement.setString(4, comms);
             statement.execute();
             closeJDBC();
         } catch (Exception e) {

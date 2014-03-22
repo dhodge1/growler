@@ -176,6 +176,22 @@
     <servlet-name>surveyTaken</servlet-name>
     <url-pattern>/surveyTaken</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>mealTaken</servlet-name>
+    <jsp-file>/private/employee/mealSurveyTaken.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>mealTaken</servlet-name>
+    <url-pattern>/mealTaken</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>mealSurvey</servlet-name>
+    <jsp-file>/private/employee/mealSurvey.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>mealSurvey</servlet-name>
+    <url-pattern>/mealSurvey</url-pattern>
+  </servlet-mapping>
  
  
    <servlet>
