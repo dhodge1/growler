@@ -138,9 +138,9 @@
                                             out.print("</tr>");
                                         }
                                         for (int i = 0; i < questions.size(); i++) {
-                                            out.print("<tr id='row" + (i+1) + "'>");
+                                            out.print("<tr id='row" + i + "'>");
                                             out.print("<td>");
-                                            out.print(i);
+                                            out.print(i+1);
                                             out.print("</td>");
                                             out.print("<td>");
                                             out.print(questions.get(i).getUserName());
