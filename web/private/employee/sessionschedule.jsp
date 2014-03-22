@@ -303,109 +303,109 @@
                 </form>
             </div>
             <div id="schedule2" class="row largeBottomMargin">
- -                <form onsubmit="return false;">
- -                        <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder" id="sessionTable2">
- -                            <colgroup>
- -                                <col width="11%">
- -                                <col width="6%">
- -                                <col width="15%">
- -                                <col width="15%">
- -                                <col width="11%">
- -                                <col width="11%">
- -                                <col width="15%">
- -                                <col width="19%">
- -                            </colgroup>
- -                            <thead>
- -                                <tr>
- -                                    <th>Date</th>
- -                                    <th style="width: 70px;">Time</th>      
- -                                    <th>Topic</th>
- -                                    <th>Theme</th>
- -                                    <th>Speaker(s)</th>
- -                                    <th>Duration</th>
- -                                    <th>Location</th>
- -                                    <th>Remote Room(s)</th>
- -                                </tr>
- -                            </thead>
- -                            <tbody id='tablebody'>
- -                                <%
- -                                    for (int i = 0; i < sessions.size(); i++) {
- -                                        out.print("<tr id='row" + (i) + "'>");
- -                                        out.print("<td>");
- -                                        SimpleDateFormat dates = new SimpleDateFormat("MM/dd/yyyy");
- -                                        out.print(dates.format(sessions.get(i).getSessionDate()));
- -                                        out.print("</td>");
- -                                        out.print("<td>");
- -                                        SimpleDateFormat fmt = new SimpleDateFormat("h:mm a");
- -                                        try {
- -                                            out.print(fmt.format(sessions.get(i).getStartTime()));
- -                                        } catch (Exception e) {
- -                                            out.print("No Time");
- -                                        }
- -                                        out.print("</td>");
- -                                        out.print("<td>");
- -                                        out.print(sessions.get(i).getName());
- -                                        out.print("</td>");
- -                                        out.print("<td>");
- -                                        int themeId = tp.getMappedTheme(sessions.get(i).getId());
- -                                        Theme currentTheme = tp.getThemeByID(themeId);
- -                                        out.print(currentTheme.getName());
- -                                        out.print("</td>");
- -                                        out.print("<td>");
- -                                        ArrayList<Speaker> speakers = sp.getSpeakersForSession(sessions.get(i).getId());
- -                                        for (int j = 0; j < speakers.size(); j++) {
- -                                            //Commented out the Speaker Dialogs, since we don't have relevant BIO data (9/16/13)
- -                                            //out.print("<a class='showModal'>");
- -                                            out.print(speakers.get(j).getFullName());
- -                                            out.print(brr);
- -                                            //out.print("<input type='hidden' value='" + speakers.get(j).getId() + "' /></a><br/>");
- -                                            //out.print("<div class='modals' id='modalspk" + speakers.get(j).getId() + "' title='" + speakers.get(j).getFullName() + "'>");
- -                                            //out.print(""); //The Bio information goes here?
- -                                            //out.print("</div>");
- -                                        }
- -                                        out.print("</td>");
- -                                        out.print("<td>");
- -                                        SimpleDateFormat fmt2 = new SimpleDateFormat("mm 'minutes'");
- -                                        out.print(fmt2.format(sessions.get(i).getDuration()));
- -                                        out.print("</td>");
- -                                        out.print("<td>");
- -                                        out.print(lp.getLocationById(sessions.get(i).getLocation()).getDescription() + ", " + lp.getLocationById(sessions.get(i).getLocation()).getBuilding());
- -                                        out.print("</td>");
- -                                        out.print("<td>");
- -                                        ArrayList<RemoteRoom> remotes = lp.getRemoteRoomForLocation(sessions.get(i).getLocation());
- -                                        if (remotes.size() != 0) {
- -                                            for (int k = 1; k < remotes.size(); k++) {
- -                                                //Commented out speaker BIO modals - 9/16/13
- -                                                // out.print("<a class='showModal2'>");
- -                                                out.print(lp.getLocationById(remotes.get(k).getRemoteID()).getDescription() + ", " + lp.getLocationById(remotes.get(k).getRemoteID()).getBuilding());
- -                                                out.print(brr);
- -                                                // out.print("<input type='hidden' value='" + speakers.get(j).getId() + "' /></a><br/>");
- -                                                // out.print("<div class='modals' id='modalspkr" + speakers.get(j).getId() + "' title='" + speakers.get(j).getFullName() + "'>");
- -                                                // out.print(""); //The Bio information goes here?
- -                                                // out.print("</div>");
- -                                            }
- -                                        } else {
- -                                            out.print("To Be Determined");
- -                                        }
- -                                        out.print("</td>");
- -                                        out.print("</tr>");
- -                                    }
- -                                %>
- -                            </tbody>
- -                        </table>
- -                </form>
- -            </div>
+                 <form onsubmit="return false;">
+                         <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder" id="sessionTable2">
+                             <colgroup>
+                                 <col width="11%">
+                                 <col width="6%">
+                                 <col width="15%">
+                                 <col width="15%">
+                                 <col width="11%">
+                                 <col width="11%">
+                                 <col width="15%">
+                                 <col width="19%">
+                             </colgroup>
+                             <thead>
+                                 <tr>
+                                     <th>Date</th>
+                                     <th style="width: 70px;">Time</th>      
+                                     <th>Topic</th>
+                                     <th>Theme</th>
+                                     <th>Speaker(s)</th>
+                                     <th>Duration</th>
+                                     <th>Location</th>
+                                     <th>Remote Room(s)</th>
+                                 </tr>
+                             </thead>
+                             <tbody id='tablebody2'>
+                                 <%
+                                     for (int i = 0; i < sessions.size(); i++) {
+                                         out.print("<tr id='row" + (i) + "'>");
+                                         out.print("<td>");
+                                         SimpleDateFormat dates = new SimpleDateFormat("MM/dd/yyyy");
+                                         out.print(dates.format(sessions.get(i).getSessionDate()));
+                                         out.print("</td>");
+                                         out.print("<td>");
+                                         SimpleDateFormat fmt = new SimpleDateFormat("h:mm a");
+                                         try {
+                                             out.print(fmt.format(sessions.get(i).getStartTime()));
+                                         } catch (Exception e) {
+                                             out.print("No Time");
+                                         }
+                                         out.print("</td>");
+                                         out.print("<td>");
+                                         out.print(sessions.get(i).getName());
+                                         out.print("</td>");
+                                         out.print("<td>");
+                                         int themeId = tp.getMappedTheme(sessions.get(i).getId());
+                                         Theme currentTheme = tp.getThemeByID(themeId);
+                                         out.print(currentTheme.getName());
+                                         out.print("</td>");
+                                         out.print("<td>");
+                                         ArrayList<Speaker> speakers = sp.getSpeakersForSession(sessions.get(i).getId());
+                                         for (int j = 0; j < speakers.size(); j++) {
+                                             //Commented out the Speaker Dialogs, since we don't have relevant BIO data (9/16/13)
+                                             //out.print("<a class='showModal'>");
+                                             out.print(speakers.get(j).getFullName());
+                                             out.print(brr);
+                                             //out.print("<input type='hidden' value='" + speakers.get(j).getId() + "' /></a><br/>");
+                                             //out.print("<div class='modals' id='modalspk" + speakers.get(j).getId() + "' title='" + speakers.get(j).getFullName() + "'>");
+                                             //out.print(""); //The Bio information goes here?
+                                             //out.print("</div>");
+                                         }
+                                         out.print("</td>");
+                                         out.print("<td>");
+                                         SimpleDateFormat fmt2 = new SimpleDateFormat("mm 'minutes'");
+                                         out.print(fmt2.format(sessions.get(i).getDuration()));
+                                         out.print("</td>");
+                                         out.print("<td>");
+                                         out.print(lp.getLocationById(sessions.get(i).getLocation()).getDescription() + ", " + lp.getLocationById(sessions.get(i).getLocation()).getBuilding());
+                                         out.print("</td>");
+                                         out.print("<td>");
+                                         ArrayList<RemoteRoom> remotes = lp.getRemoteRoomForLocation(sessions.get(i).getLocation());
+                                         if (remotes.size() != 0) {
+                                             for (int k = 1; k < remotes.size(); k++) {
+                                                 //Commented out speaker BIO modals - 9/16/13
+                                                 // out.print("<a class='showModal2'>");
+                                                 out.print(lp.getLocationById(remotes.get(k).getRemoteID()).getDescription() + ", " + lp.getLocationById(remotes.get(k).getRemoteID()).getBuilding());
+                                                 out.print(brr);
+                                                 // out.print("<input type='hidden' value='" + speakers.get(j).getId() + "' /></a><br/>");
+                                                 // out.print("<div class='modals' id='modalspkr" + speakers.get(j).getId() + "' title='" + speakers.get(j).getFullName() + "'>");
+                                                 // out.print(""); //The Bio information goes here?
+                                                 // out.print("</div>");
+                                             }
+                                         } else {
+                                             out.print("To Be Determined");
+                                         }
+                                         out.print("</td>");
+                                         out.print("</tr>");
+                                     }
+                                 %>
+                             </tbody>
+                         </table>
+                 </form>
+             </div>
         </div>
         <%@ include file="../../includes/footer.jsp" %>        
         <script src="${pageContext.request.contextPath}/js/libs/sniui.dialog.1.2.0.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/pagination.js"></script>
-        <!--<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.tablesorter.js"></script> -->
+        <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.tablesorter.js"></script> 
         <script>             
-                    /*$(document).ready(function() 
+                    $(document).ready(function() 
                         { 
-                            $("#myTable").tablesorter(); 
+                            $("#schedule").tablesorter(); 
                         } 
-                    ); */
+                    ); 
             
                     function demoFromHTML() {
                             var pdf = new jsPDF('l', 'pt', 'letter')
