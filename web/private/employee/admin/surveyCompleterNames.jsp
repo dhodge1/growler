@@ -62,6 +62,15 @@
                 color:#0067b1;
                 text-decoration: underline;
                 cursor: pointer;
+            }   
+            .names {
+                display: none;
+            }
+            @media print
+            {
+            body * { visibility: hidden; }
+            .list * { visibility: visible; }
+            .list { position: absolute; top: 40px; left: 30px; }
             }
         </style>
     </head>
@@ -94,27 +103,88 @@
                     <li class='ieFix'>Survey Completer Report</li>
                 </ul>
             </div>
-            <div class="row mediumBottomMargin">
-                <h1>List of users who have completed a survey:</h1>
-            </div>
-            <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
-            <div class="row largeBottomMargin">
-                <h3>The table below displays a listing of individuals who have submitted a session survey.</h3>
-            </div>
-            <!--<div class='row largeBottomMargin'></div>-->
-            <div class="row mediumBottomMargin">
-                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='${pageContext.request.contextPath}/images/Techtoberfest2013small.png'/><span style="padding-left: 12px;">Report Details</span><span class='pullRight'></span></h2>
-            </div>
-            <div class='row largeBottomMargin'>
-                <ol id="nameList">
-                    <%
-                        ReportGenerator rg = new ReportGenerator();
-                        ArrayList<SurveyCompleterReport> names = rg.generateSurveyCompleterReport();
-                        for (int i = 0; i < names.size(); i++) {
-                            out.print("<li>" + names.get(i).getUserName() + "</li>");
-                        }
-                    %>
-                </ol>
+            <div class="list">
+                <div class="row mediumBottomMargin">
+                    <h1>Survey Completions by Name</h1>
+                </div>
+                <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
+                <div class="row largeBottomMargin">
+                    <h3>The table below displays a listing of individuals who have submitted a session survey.</h3>
+                </div>
+                <!--<div class='row largeBottomMargin'></div>-->
+                <div class="row mediumBottomMargin">
+                    <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='${pageContext.request.contextPath}/images/Techtoberfest2013small.png'/><span style="padding-left: 12px;">Report Details</span><span class='pullRight'><a href='#' id='print'>Print</a></span></h2>
+                </div>
+                <div class='row largeBottomMargin table'>
+                    <form onsubmit="return false;">
+                        <input type='hidden' id='current_page' value="1" />
+                        <input type='hidden' id='show_per_page' value='15' />
+                        <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
+                            <thead>
+                                <tr>
+                                    <th>Number</th>
+                                    <th>Attendee Name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%
+                                    ReportGenerator rg = new ReportGenerator();
+                                    ArrayList<SurveyCompleterReport> questions = rg.generateSurveyCompleterReport2();
+                                    if (questions.size() == 0) {
+                                        out.print("<tr>");
+                                        out.print("<td>");
+                                        out.print("No data is available at this time.");
+                                        out.print("</td>");
+                                        out.print("</tr>");
+                                    }
+                                    for (int i = 0; i < questions.size(); i++) {
+                                        out.print("<tr id='row" + i + "'>");
+                                        out.print("<td>");
+                                        out.print(questions.get(i).getNumber());
+                                        out.print("</td>");
+                                        out.print("<td>");
+                                        out.print(questions.get(i).getUserName());
+                                        out.print("</td>");
+                                        out.print("</tr>");
+                                    }
+                                %>
+                            </tbody>
+                        </table>
+                            <input type='hidden' id='total' value='<%= questions.size()%>'/>
+                        <div class="pager">
+                            <ul>
+                                <li class="pager-arrow"><a onclick="first();"><i class="icon12-first"></i></a></li>
+                                <li class="pager-arrow"><a onclick="prev();"><i class="icon12-previous"></i></a></li>
+                                        <% int rows = questions.size();
+                                            int pages = 0;
+                                            if (rows % 15 == 0) {
+                                                pages = (rows / 15);
+                                            } else {
+                                                pages = (rows / 15) + 1;
+                                            }
+                                            for (int i = 0; i < pages; i++) {
+                                                out.print("<li id=\"page" + (i + 1) + "\"><a onclick='page(" + (i + 1) + ");'>" + (i + 1) + "</a></li>");
+                                            }
+                                        %>
+                                <li class="pager-arrow"><a onclick="next();"><i class="icon12-next"></i></a></li>
+                                <li class="pager-arrow"><a onclick="last();"><i class="icon12-last"></i></a></li>
+                            </ul>
+                            <div class="pager-pageJump">
+                                <span>Page <input class="input-mini" type="text" id="pagejump"/> of <%= pages%></span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class='row largeBottomMargin names'>
+                    <ol id="nameList">
+                        <%
+                            ArrayList<SurveyCompleterReport> names = rg.generateSurveyCompleterReport();
+                            for (int i = 0; i < names.size(); i++) {
+                                out.print("<li>" + names.get(i).getUserName() + "</li>");
+                            }
+                        %>
+                    </ol>
+                </div>
             </div>
         </div>
         <%@ include file="../../../includes/footer.jsp" %> 
@@ -127,13 +197,30 @@
         <script src="http://growler.elasticbeanstalk.com/js/libs/sniui.dialog.1.2.0.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/pagination.js"></script>
         <script>
-            $(document).ready(function() {
-                $('ol#nameList').prepend('<li class="print"><a href="#print">Click me to print</a></li>');
-                $('ol#nameList li.print a').click(function() {
-                 window.print();
-                 return false;
-                });
-            }); 
+            $('form').submit(function(event) {
+                        pageJump();
+                        return false;
+                    });
+
+                    $(document).ready(function() {
+                        $('#print').on("click", function(event) {
+                           event.preventDefault();
+                           $('.table').hide();
+                           $('.names').show();
+                           window.print();
+                           $('.names').hide();
+                           $('.table').show();
+                        });
+                        var page = 1;
+                        $("#current_page").val(page);
+                        var total = parseInt($("#total").val());
+                        var pages = Math.floor((total / parseInt($("#show_per_page").val())) + 1);
+                        for (var i = 20; i < total + 1; i++) {
+                            $("#row" + i).hide();
+                        }
+                        unActive();
+                        $("#page1").addClass("active");
+                    });
         </script>
     </body>
 </html>

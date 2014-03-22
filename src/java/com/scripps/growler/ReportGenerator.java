@@ -237,6 +237,26 @@ public class ReportGenerator extends GrowlerPersistence {
         return null;
     }
     
+    public ArrayList<SurveyCompleterReport> generateSurveyCompleterReport2() {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("SET @serial=0; select @serial := @serial+1 AS `Number`, name from user u, attendance a where a.user_id = u.id;");
+            result = statement.executeQuery();
+            ArrayList<SurveyCompleterReport> completers = new ArrayList<SurveyCompleterReport>();
+            while (result.next()) {
+                SurveyCompleterReport s = new SurveyCompleterReport();
+                s.setUserName(result.getString("name"));
+                s.setNumber(result.getInt("Number"));
+                completers.add(s);
+            }
+            return completers;
+        } catch (Exception e) {
+        } finally {
+            closeJDBC();
+        }
+        return null;
+    }
+    
     //Uses: SessionKeyReport.java
     public ArrayList<SessionKeyReport> generateSessionKeyReport() {
         try {

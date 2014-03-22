@@ -14,6 +14,7 @@ public class SurveyCompleterReport {
     
     private String userName;
     private String sessionName;
+    private int number;
     
     public String getUserName() {
         return userName;
@@ -29,6 +30,14 @@ public class SurveyCompleterReport {
     
     public void setSessionName(String session) {
         this.sessionName = session;
+    }
+    
+    public int getNumber() {
+        return number;
+    }
+    
+    public void setNumber(int num) {
+        this.number = num;
     }
     
 }
