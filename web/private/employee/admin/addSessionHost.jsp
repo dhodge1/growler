@@ -72,7 +72,7 @@
             <div class="row mediumBottomMargin"></div>
             <div class="row">
                 <ul class="breadcrumb">
-                    <li><a href="${pageContext.request.contextPath}/private/employee/home.jsp">Home</a></li>
+                    <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
                     <li>Assign Host to Session</li>
                 </ul>
             </div>
@@ -138,7 +138,7 @@
 
                                 <div class="form-actions">
                                     <input type="submit" id="send" class="button button-primary" value="Submit Host"/>
-                                    <a id="cancel" href="${pageContext.request.contextPath}/private/employee/home.jsp">Cancel</a>
+                                    <a id="cancel" href="${pageContext.request.contextPath}/home">Cancel</a>
                                 </div>
                             </fieldset>
                     </form>

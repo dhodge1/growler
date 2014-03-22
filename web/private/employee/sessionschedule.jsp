@@ -121,7 +121,7 @@
             <div class="row mediumBottomMargin"></div>
             <div class="row">
                 <ul class="breadcrumb">
-                    <li><a href="${pageContext.request.contextPath}/private/employee/home.jsp">Home</a></li>
+                    <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
                     <li class='ieFix'>Session Schedule</li>
                 </ul>
             </div>

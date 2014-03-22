@@ -216,7 +216,7 @@
             <div class="row mediumBottomMargin"></div>
             <div class="row">
                 <ul class="breadcrumb">
-                    <li><a href="${pageContext.request.contextPath}/private/employee/home.jsp">Home</a></li>
+                    <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
                     <li class='ieFix'>Rank Your Preferred Themes</li>
                 </ul>
             </div>
@@ -277,7 +277,7 @@
                     </div>
                     <div class='form-actions smallBottomMargin'>
                         <input id="send" type="submit" value="Submit My Ranking" class="button button-primary"/>
-                        <a href="${pageContext.request.contextPath}/private/employee/home.jsp">Cancel</a>
+                        <a href="${pageContext.request.contextPath}/home">Cancel</a>
                         <input id='previously' name='previously' type='hidden' value=<%= themes.size()%>/>
                     </div>
                     <strong>Presentation not listed? </strong><a href='../../private/employee/themeentry.jsp'>Click here to suggest a new theme</a>

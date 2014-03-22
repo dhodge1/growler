@@ -89,7 +89,7 @@
                     out.print("</tbody></table>");
                     out.print("</div>");
                     out.print("<div class='row'>");
-                    out.print("<a class='firstLink' href=\"../../private/employee/home.jsp\">Return to homepage</a>");
+                    out.print("<a class='firstLink' href=\"../../home\">Return to homepage</a>");
                     out.print("<a class='firstLink' href=\"../../private/employee/speakerentry.jsp\">Suggest a new speaker</a>");
                     out.print("</div>");
                 }

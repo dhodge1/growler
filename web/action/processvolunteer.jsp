@@ -23,5 +23,5 @@
         up.setVolunteer(id, task);
         session.setAttribute("message", "Success: Your interest in volunteering for " + task + " has been recorded!  Thanks!");
     }
-    response.sendRedirect("../private/employee/home.jsp");
+    response.sendRedirect("../home");
 %>

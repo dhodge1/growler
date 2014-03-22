@@ -67,8 +67,8 @@
                     connection.close();
                     statement.close();
                     result.close();
-                    //response.sendRedirect("../private/employee/admin/home.jsp");
-                    //response.sendRedirect("../private/employee/home.jsp");
+                    //response.sendRedirect("../home");
+                    //response.sendRedirect("../home");
                     response.sendRedirect("../home");
                 } //Otherwise, go to the user side
                 else {
@@ -80,7 +80,7 @@
                     connection.close();
                     statement.close();
                     result.close();
-                    //response.sendRedirect("../private/employee/home.jsp");
+                    //response.sendRedirect("../home");
                     response.sendRedirect("../home");
                 }
 

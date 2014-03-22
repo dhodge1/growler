@@ -43,5 +43,5 @@
             }
             
             
-            response.sendRedirect("../private/employee/home.jsp");
+            response.sendRedirect("../home");
         %>

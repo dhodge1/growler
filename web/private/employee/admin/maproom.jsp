@@ -86,7 +86,7 @@
             <div class="row mediumBottomMargin"></div>
             <div class="row">
                 <ul class="breadcrumb">
-                    <li><a href="${pageContext.request.contextPath}/private/employee/admin/home.jsp">Home</a></li>
+                    <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
                     <li class='ieFix'>Map A Room</li>
                 </ul>
             </div>

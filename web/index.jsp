@@ -44,7 +44,7 @@
                         session.setAttribute("role", "admin");
                     }
                 }
-                response.sendRedirect("private/employee/home.jsp");
+                response.sendRedirect("home");
                 //response.sendRedirect("home");
     }
      }
@@ -106,7 +106,7 @@
                     <div class="form-group">
                         <label>Employee ID</label>
                         <input type="text" name="USER" id="tip" data-content="Enter your Employee ID"/><br/>
-                        <input type="hidden" value="http://techtoberfest-dev.scrippsnetworks.com/private/employee/home.jsp" name="target" id="smtarget">
+                        <input type="hidden" value="http://techtoberfest-dev.scrippsnetworks.com/home" name="target" id="smtarget">
                         <input type="hidden" value=0 name=smauthreason>
                         <input type="hidden" name="SMAGENTNAME" value='-SM-qqTTNRp8HuVz4vfjuz8PpwRSGfFdF8v5ee9waRpRop7zciV2VtF46AXySxgHy%2bZO' />
                         <span id="error_userid" class="message_container">

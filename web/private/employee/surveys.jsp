@@ -277,7 +277,7 @@
             <div class="row mediumBottomMargin"></div>
             <div class="row">
                 <ul class="breadcrumb">
-                    <li><a href="${pageContext.request.contextPath}/private/employee/home.jsp">Home</a></li>
+                    <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
                     <li class='ieFix'>Techtoberfest: Session Feedback</li>
                 </ul>
             </div>
@@ -431,11 +431,11 @@
                 </div>
                 <div class="form-actions">
                     <a href="${pageContext.request.contextPath}/private/employee/surveys.jsp">Submit another survey</a>
-                    <a href="${pageContext.request.contextPath}/private/employee/home.jsp">Return to homepage</a>
+                    <a href="${pageContext.request.contextPath}/home">Return to homepage</a>
                 </div>
             </div>
             <div class="form-actions row" id="actions">
-                <a id="continue" class="button button-primary">Continue</a><a href="${pageContext.request.contextPath}/private/employee/home.jsp">Cancel</a>
+                <a id="continue" class="button button-primary">Continue</a><a href="${pageContext.request.contextPath}/home">Cancel</a>
             </div>
         </div>
         <%@ include file="../../includes/footer.jsp" %>

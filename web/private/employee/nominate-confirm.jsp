@@ -70,7 +70,7 @@
             <div style='margin-bottom:17px;'></div>
             <div class="row">
                 <a class='firstlink' href='../../private/employee/nominate.jsp'>Nominate yourself for an additional presentation</a>
-                <a href='../../private/employee/home.jsp'>Return to homepage</a>
+                <a href='../../home'>Return to homepage</a>
             </div>
         </div>
         <%@ include file="../../includes/footer.jsp" %> 

@@ -207,7 +207,7 @@
             <div class="row mediumBottomMargin"></div>
             <div class="row">
                 <ul class="breadcrumb">
-                    <li><a href="${pageContext.request.contextPath}/private/employee/home.jsp">Home</a></li>
+                    <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
                     <li class='ieFix'>Rank Your Preferred Speakers</li>
                 </ul>
             </div>
@@ -280,7 +280,7 @@
                         </div>
                     </div>
 
-                    <div class="form-actions smallBottomMargin"><input id="send" type="submit" value="Submit My Ranking" class="button button-primary"/><a href="${pageContext.request.contextPath}/private/employee/home.jsp">Cancel</a></div>
+                    <div class="form-actions smallBottomMargin"><input id="send" type="submit" value="Submit My Ranking" class="button button-primary"/><a href="${pageContext.request.contextPath}/home">Cancel</a></div>
                     <input id='previously' name='previously' type='hidden' value=<%= speakers.size()%>/>
                     <strong>Speaker not listed? </strong><a href='../../private/employee/speakerentry.jsp'>Click here to suggest a new speaker</a>                    
 

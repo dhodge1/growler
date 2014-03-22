@@ -145,7 +145,7 @@
 <nav class="topnav navbar">
         <nav class="globalNavigation modify-pages" id="navigation">
             <ul class="nav">
-                <li class="non_drop <%= home%>" style="padding-right:12px" ><a href="${pageContext.request.contextPath}/private/employee/home.jsp"><span>Home</span></a></li>
+                <li class="non_drop <%= home%>" style="padding-right:12px" ><a href="${pageContext.request.contextPath}/home"><span>Home</span></a></li>
                 
                 <li class="brand_nav <%= sessionTab%>" style="padding-left: 12px;"><a href="#" style='padding-left:8px;'><span class="nav_drop">Sessions</span><em></em></a>
                     <ul class="child-menu child-menu-ul firstnav" style="left:11px;">
