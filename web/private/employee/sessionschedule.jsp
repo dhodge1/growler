@@ -400,13 +400,7 @@
         <%@ include file="../../includes/footer.jsp" %>        
         <script src="${pageContext.request.contextPath}/js/libs/sniui.dialog.1.2.0.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/pagination.js"></script>
-        <script>             
-                    $(document).ready(function() 
-                        { 
-                            $("#schedule").tablesorter(); 
-                        } 
-                    ); 
-            
+        <script>                  
                     function demoFromHTML() {
                             var pdf = new jsPDF('l', 'pt', 'letter')
 
@@ -495,6 +489,8 @@
                         });
                     });
                     $(document).ready(function() {
+                        $("#sessionTable").tablesorter(); 
+                        
                         var page = 1;
                         $("#current_page").val(page);
                         var total = parseInt($("#total").val());
