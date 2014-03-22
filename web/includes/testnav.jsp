@@ -32,6 +32,7 @@
     Feature surveySession = fp.getFeatureState(1);
     Feature scheduleSession = fp.getFeatureState(5);
     Feature overallSurvey = fp.getFeatureState(8);
+    Feature mealSurvey = fp.getFeatureState(9);
  
 
     //See if user is a host 1=true, 0=false
@@ -82,6 +83,9 @@
                         <% } %>
                         <% if (overallSurvey.getFeatureState()) { %>
                             <%@ include file="../../includes/regOverallSurvey.jsp" %>
+                        <% } %>
+                        <% if (mealSurvey.getFeatureState()) { %>
+                            <%@ include file="../../includes/regMealSurvey.jsp" %>
                         <% } %>
                         
                             <li><a href="${pageContext.request.contextPath}/trackAttendees">Track Attendees</a></li>

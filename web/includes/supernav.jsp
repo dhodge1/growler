@@ -51,6 +51,7 @@
     Feature surveySession = fp.getFeatureState(1);
     Feature scheduleSession = fp.getFeatureState(5);
     Feature overallSurvey = fp.getFeatureState(8);
+    Feature mealSurvey = fp.getFeatureState(9);
 %>
 <nav class="topnav">
     <nav class="globalNavigation modify-pages" id="navigation">
@@ -104,6 +105,9 @@
                     <% } %>
                     <% if (overallSurvey.getFeatureState()) { %>
                         <%@ include file="../../includes/superOverallSurvey.jsp" %>
+                    <% } %>
+                    <% if (mealSurvey.getFeatureState()) { %>
+                            <%@ include file="../../includes/superMealSurvey.jsp" %>
                     <% } %>
                     <li><a href="${pageContext.request.contextPath}/manageSessions">Manage Session Schedule</a></li>
                     <li><a href="${pageContext.request.contextPath}/addSessionHost">Add Session Host</a></li>
