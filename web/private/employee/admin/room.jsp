@@ -142,13 +142,13 @@
                                 <td><% out.print(locations.get(i).getCapacity());%></td>
                                 <td><% out.print(locations.get(i).getBuilding());%></td>
                                 <td><% if (locationPersist.getRoomAssignments(locations.get(i).getId()).size() != 0) {
-                                        out.print("<i class='icon16-check'></i>");
+                                        out.print("     Yes     <i class='icon16-check'></i>");
                                     } else {
                                         out.print("");
                                     }%>
                                 </td>
                                 <td><% if (locationPersist.getRemoteRoomForLocation(locations.get(i).getId()).size() != 0) {
-                                        out.print("<i class='icon16-check'></i>");
+                                        out.print("     Yes     <i class='icon16-check'></i>");
                                     } else {
                                         out.print("");
                                     }%>
