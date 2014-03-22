@@ -25,6 +25,7 @@
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/prettify/prettify.css" /> 
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/tableStyle.css" />
         <script src="http://growler.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <style>
             .ui-widget-content {
@@ -130,7 +131,7 @@
                             }%> >10/11/2013</option>
                     </select>
                     
-                    <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
+                    <table class="tablesorter table table-alternatingRow table-border table-columnBorder table-rowBorder" id="reportTable">
                         <thead>
                             <tr>
                                 <th># Confirmed Attendees</th>
@@ -193,6 +194,7 @@
         <script src="http://growler.elasticbeanstalk.com/js/libs/bootstrap-dropdown.2.0.4.min.js"></script>
         <script src="http://growler.elasticbeanstalk.com/js/libs/sniui.dialog.1.2.0.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/pagination.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.tablesorter.js"></script>
         <script>
 
                     $('form').submit(function(event) {
@@ -207,6 +209,7 @@
                         }
 
                     $(document).ready(function() {
+                        $("#reportTable").tablesorter();
                         var page = 1;
                         $("#current_page").val(page);
                         var total = parseInt($("#total").val());
