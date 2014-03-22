@@ -399,13 +399,13 @@
         <%@ include file="../../includes/footer.jsp" %>        
         <script src="${pageContext.request.contextPath}/js/libs/sniui.dialog.1.2.0.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/pagination.js"></script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.tablesorter.js"></script> 
+        <!--<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.tablesorter.js"></script> -->
         <script>             
-                    $(document).ready(function() 
+                    /*$(document).ready(function() 
                         { 
                             $("#myTable").tablesorter(); 
                         } 
-                    ); 
+                    ); */
             
                     function demoFromHTML() {
                             var pdf = new jsPDF('l', 'pt', 'letter')
