@@ -26,6 +26,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/wijmo/jquery.wijmo-complete.all.2.3.2.min.css"/>
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/tableStyle.css" />
         <script src="http://growler.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <style>
             .ui-widget-content {
@@ -116,7 +117,7 @@
                     <input type='hidden' id='current_page' value="1" />
                     <input type='hidden' id='show_per_page' value='20' />
                     <input type='hidden' id='total' value='<%= locations.size()%>'/>
-                    <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
+                    <table class="tablesorter table table-alternatingRow table-border table-columnBorder table-rowBorder" id="roomTable">
                         <thead>
                             <tr>
                                 <th>No.</th>
@@ -208,6 +209,7 @@
         <script src="http://growler.elasticbeanstalk.com/js/libs/bootstrap-dropdown.2.0.4.min.js"></script>
         <script src="http://growler.elasticbeanstalk.com/js/libs/sniui.dialog.1.2.0.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/pagination.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.tablesorter.js"></script> 
         <script>
 
                     $('form').submit(function(event) {
@@ -216,6 +218,7 @@
                     });
 
                     $(document).ready(function() {
+                        $("#roomTable").tablesorter(); 
                         var clicks = 0;
                         $("#filter").click(function() {
                             clicks++;
