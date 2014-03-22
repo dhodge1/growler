@@ -226,7 +226,7 @@ public class ReportGenerator extends GrowlerPersistence {
             ArrayList<SurveyCompleterReport> completers = new ArrayList<SurveyCompleterReport>();
             while (result.next()) {
                 SurveyCompleterReport s = new SurveyCompleterReport();
-                s.setUserName(result.getString(1));
+                s.setUserName(result.getString("name"));
                 completers.add(s);
             }
             return completers;
