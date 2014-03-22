@@ -192,6 +192,14 @@
     <servlet-name>mealSurvey</servlet-name>
     <url-pattern>/mealSurvey</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>surveyCompleters</servlet-name>
+    <jsp-file>/private/employee/admin/surveyCompleterNames.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>surveyCompleters</servlet-name>
+    <url-pattern>/surveyCompleters</url-pattern>
+  </servlet-mapping>
  
  
    <servlet>

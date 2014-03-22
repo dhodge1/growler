@@ -124,6 +124,7 @@
                     <li><a href="${pageContext.request.contextPath}/sessionKeys">Session Keys</a></li>
                     <li><a href="${pageContext.request.contextPath}/expectationReport">Session Met Expectations</a></li>
                     <li><a href="${pageContext.request.contextPath}/surveyReport">Surveys</a></li>
+                    <li><a href="${pageContext.request.contextPath}/surveyCompleters">Completed Survey Names</a></li>
                     
                 </ul>
             </li>
