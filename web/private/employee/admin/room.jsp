@@ -76,7 +76,7 @@
             int user = 0;
             String sort = "";
             if (null == session.getAttribute("id") || null == session.getAttribute("role")) {
-                response.sendRedirect("../../../index.jsp");
+                response.sendRedirect("http://sniforms.scrippsnetworks.com/siteminderagent/sniforms/logout.html");
             }
             try {
                 sort = request.getParameter("sort");
