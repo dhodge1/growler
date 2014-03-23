@@ -184,7 +184,7 @@
         <%
             String user = "";
             if (null == session.getAttribute("id")) {
-                response.sendRedirect("../../index.jsp");
+                response.sendRedirect("http://sniforms.scrippsnetworks.com/siteminderagent/sniforms/logout.html");
             }
             try {
                 user = String.valueOf(session.getAttribute("id"));
