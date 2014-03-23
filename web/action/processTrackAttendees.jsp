@@ -29,19 +29,25 @@
 
 
 <% 
-    //String speaker = request.getParameter("speaker");
-    String localAttendees = request.getParameter("localAttendees");
-    String remoteAttendees = request.getParameter("remoteAttendees");
-    int sessionSelected = Integer.parseInt(String.valueOf(request.getParameter("session")));
+    Integer localAttendees = Integer.parseInt(String.valueOf(request.getParameter("localAttendees")));
+    Integer remoteAttendees = Integer.parseInt(String.valueOf(request.getParameter("remoteAttendees")));
+    String sessionName = request.getParameter("session");
     
     SessionPersistence sp = new SessionPersistence();
+    
+ 
     
     Session s = new Session();   
     
     sp.addAttendees(s);
+    
+    Session ses = sp.getSessionByName(sessionName);
 
-    s.setId(sessionSelected);
-    //s.setSpeakerId(speaker);
+    //session.setAttribute("session_id", ses.getId());
+    //session.setAttribute("local_Attendees", localAttendees);
+    //session.setAttribute("remote_Attendees", remoteAttendees);
+ 
+    s.setId(ses.getId());
     s.setLocalAttendees(localAttendees);
     s.setRemoteAttendees(remoteAttendees);
     
