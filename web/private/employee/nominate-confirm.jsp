@@ -47,7 +47,7 @@
     <body id="growler1">
             <%      int user = 0;
                     if (null == session.getAttribute("id")) {
-                        response.sendRedirect("../../index.jsp");
+                        response.sendRedirect("http://sniforms.scrippsnetworks.com/siteminderagent/sniforms/logout.html");
                     }
                     try {
                         user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
