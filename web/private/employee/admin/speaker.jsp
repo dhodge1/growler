@@ -100,7 +100,7 @@
     <body id="growler1">
         <%
             if (null == session.getAttribute("id") || null == session.getAttribute("role")) {
-                response.sendRedirect("../../../index.jsp");
+                response.sendRedirect("http://sniforms.scrippsnetworks.com/siteminderagent/sniforms/logout.html");
             }
             SpeakerPersistence persist = new SpeakerPersistence();
             ArrayList<Speaker> speakers = persist.getAllSpeakers(" order by last_name");
