@@ -147,13 +147,13 @@
                                 <td><% if (locationPersist.getRoomAssignments(locations.get(i).getId()).size() != 0) {
                                         out.print("Yes<i class='icon16-check'></i>");
                                     } else {
-                                        out.print("No<i class='icon16-stop'></i>");
+                                        out.print("No");
                                     }%>
                                 </td>
                                 <td><% if (locationPersist.getRemoteRoomForLocation(locations.get(i).getId()).size() != 0) {
-                                        out.print("<i class='icon16-check'></i>");
+                                        out.print("Yes<i class='icon16-check'></i>");
                                     } else {
-                                        out.print("<i class='icon16-stop'></i>");
+                                        out.print("No");
                                     }%>
                                 </td>
                                 <td>
@@ -179,10 +179,10 @@
                         </tbody>
                     </table>
                     <div class="pager">
-                        <ul>
+                        <!--<ul>
                             <li class="pager-arrow"><a onclick="first();"><i class="icon12-first"></i></a></li>
                             <li class="pager-arrow"><a onclick="prev();"><i class="icon12-previous"></i></a></li>
-                                    <% int rows = locations.size();
+                                    <%-- int rows = locations.size();
                                         int pages = 0;
                                         if (rows % 20 == 0) {
                                             pages = (rows / 20);
@@ -192,13 +192,13 @@
                                         for (int i = 0; i < pages; i++) {
                                             out.print("<li id=\"page" + (i + 1) + "\"><a onclick='page(" + (i + 1) + ");'>" + (i + 1) + "</a></li>");
                                         }
-                                    %>
+                                    --%>
                             <li class="pager-arrow"><a onclick="next();"><i class="icon12-next"></i></a></li>
                             <li class="pager-arrow"><a onclick="last();"><i class="icon12-last"></i></a></li>
-                        </ul>
+                        </ul>-->
                         <div class="toolbar">
-                            <a class="button" id="filterButton" href="#" title="Filter Assigned" data-content="Filters out assigned rooms from the list."><i class="icon16-findReplace"></i></a>
-                            <a class="button" id="filterButton2" href="#" title="Filter Unassigned" data-content="Filters out unassigned rooms from the list."><i class="icon16-findReplace disabled"></i></a>
+                            <a class="button" id="filterButton" href="#" title="Filter Assigned" data-content="Filters out assigned rooms from the list."><i class="icon16-filter"></i></a>
+                            <a class="button" id="filterButton2" href="#" title="Filter Unassigned" data-content="Filters out unassigned rooms from the list."><i class="icon16-view"></i></a>
                         </div>
                         <div class="pager-pageJump">
                             <span>Page <input class="input-mini" type="text" id="pagejump"/> of <%= pages%></span>
