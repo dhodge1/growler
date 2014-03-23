@@ -200,9 +200,9 @@
                             <li class="pager-arrow"><a onclick="next();"><i class="icon12-next"></i></a></li>
                             <li class="pager-arrow"><a onclick="last();"><i class="icon12-last"></i></a></li>
                         </ul>-->
-                        <!--<div class="pager-pageJump">
+                        <%--<div class="pager-pageJump">
                             <span>Page <input class="input-mini" type="text" id="pagejump"/> of <%= pages%></span>
-                        </div>-->
+                        </div>--%>
                     </div>
                 </form>
             </div>
