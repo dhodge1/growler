@@ -4,4 +4,4 @@
     Author     : Chelsea Grindstaff
 --%>
 
-<li><a href="${pageContext.request.contextPath}/trackSessionAttendees">Track Session Attendees</a></li>
+<li><a href="${pageContext.request.contextPath}/trackAttendees">Track Session Attendees</a></li>
