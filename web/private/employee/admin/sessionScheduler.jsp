@@ -49,7 +49,7 @@
         <%
             int user = 0;
             if (null == session.getAttribute("id")) {
-                response.sendRedirect("../../../index.jsp");
+                response.sendRedirect("http://sniforms.scrippsnetworks.com/siteminderagent/sniforms/logout.html");
             } else if (!session.getAttribute("role").equals("admin")) {
                 response.sendRedirect("../../../index.jsp");
             }
