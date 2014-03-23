@@ -200,6 +200,14 @@
     <servlet-name>surveyCompleters</servlet-name>
     <url-pattern>/surveyCompleters</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>facilitiesReport</servlet-name>
+    <jsp-file>/private/employee/admin/facilitiesReport.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>facilitiesReport</servlet-name>
+    <url-pattern>/facilitiesReport</url-pattern>
+  </servlet-mapping>
  
  
    <servlet>
