@@ -110,7 +110,7 @@
                             <%@ include file="../../includes/superMealSurvey.jsp" %>
                     <% } %>
                     <li><a href="${pageContext.request.contextPath}/manageSessions">Manage Session Schedule</a></li>
-                    <li><a href="${pageContext.request.contextPath}/trackSessionAttendees">Track Attendees for a Session</a></li>
+                    <li><a href="${pageContext.request.contextPath}/trackAttendees">Track Attendees for a Session</a></li>
                     <li><a href="${pageContext.request.contextPath}/sendingSessionKeyEmails">Email Session Key</a></li>                    
                 </ul>
             </li> 
