@@ -74,7 +74,7 @@
         <%
                     
                     if (null == session.getAttribute("id")) {
-                        response.sendRedirect("../../../index.jsp");
+                        response.sendRedirect("http://sniforms.scrippsnetworks.com/siteminderagent/sniforms/logout.html");
                     }
         %>
         <%@ include file="../../../includes/adminheader.jsp" %> 
