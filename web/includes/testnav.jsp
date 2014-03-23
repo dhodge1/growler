@@ -16,7 +16,7 @@
         themeTab = active;
     } else if (pageURI.contains("speaker")) {
         speakerTab = active;
-    } else if (pageURI.contains("session") || pageURI.contains("attendance") || pageURI.contains("survey") || pageURI.contains("track")) {
+    } else if (pageURI.contains("session") || pageURI.contains("attendance") || pageURI.contains("survey") {
         sessionTab = active;
     } else if (pageURI.contains("home")) {
         home = " selected ";
@@ -35,8 +35,7 @@
     Feature mealSurvey = fp.getFeatureState(9);
  
 
-    //See if user is a host 1=true, 0=false
-    //int host = Integer.parseInt(String.valueOf(session.getAttribute("host")));
+
  
 %>
 <nav class="topnav navbar">
@@ -88,7 +87,7 @@
                             <%@ include file="../../includes/regMealSurvey.jsp" %>
                         <% } %>
                         
-                            <li><a href="${pageContext.request.contextPath}/trackAttendees">Track Attendees</a></li>
+
                         
                     </ul>
                 </li>             
