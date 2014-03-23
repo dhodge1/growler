@@ -237,6 +237,28 @@ public class ReportGenerator extends GrowlerPersistence {
         return null;
     }
     
+    public ArrayList<FacilityReport> generateFacilityReport() {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select distinct location.description as room, (select round(avg(local_Attendees + remote_Attendees), 2) from attendees, session, location l where attendees.session_id = session.id and session.location = l.id and l.description = room) as avg_att, (select sum(local_Attendees + remote_Attendees) from attendees, session, location lo where attendees.session_id = session.id and session.location = lo.id and lo.description = room) as tot_att, (select round(avg(ranking), 2) from attendees, session, location loc, session_ranking where session_ranking.session_id = attendees.session_id and attendees.session_id = session.id and session.location = loc.id and loc.description = room) as avg_rat from location, session, attendees where location.id = session.location and session.id = attendees.session_id order by avg_rat desc;");
+            result = statement.executeQuery();
+            ArrayList<FacilityReport> fac = new ArrayList<FacilityReport>();
+            while (result.next()) {
+                FacilityReport f = new FacilityReport();
+                f.setRoom(result.getString("room"));
+                f.setAvgAttendance(result.getFloat("avg_att"));
+                f.setTotalAttendance(result.getInt("tot_att"));
+                f.setAvgRating(result.getFloat("avg_rat"));
+                fac.add(f);
+            }
+            return fac;
+        } catch (Exception e) {
+        } finally {
+            closeJDBC();
+        }
+        return null;
+    }
+    
     public ArrayList<SurveyCompleterReport> generateSurveyCompleterReport2() {
         try {
             initializeJDBC();
