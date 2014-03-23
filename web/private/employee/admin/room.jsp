@@ -229,7 +229,8 @@
                         }); 
                         $('#filterButton2').click(function(event) {
                             event.preventDefault();
-                            $('tr:not(:contains("Yes"))').toggle();
+                            //$('tr:not(:contains("Yes"))').toggle();
+                            $('td:contains("")').parent().toggle();
                         }); 
                         var clicks = 0;
                         $("#filter").click(function() {
