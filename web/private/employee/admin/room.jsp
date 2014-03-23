@@ -243,6 +243,7 @@
                                 $("#filter").val("");
                             }
                         });
+                        //test
                         var page = 1;
                         $("#current_page").val(page);
                         var total = parseInt($("#total").val());
