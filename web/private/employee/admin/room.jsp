@@ -66,9 +66,9 @@
                 text-decoration: underline;
                 cursor: pointer;
             }
-            .toolbar {
+            /*.toolbar {
                 padding-left: 10px;
-            }
+            }*/
         </style>
     </head>
     <body id="growler1">
@@ -120,6 +120,10 @@
                     <input type='hidden' id='current_page' value="1" />
                     <input type='hidden' id='show_per_page' value='20' />
                     <input type='hidden' id='total' value='<%= locations.size()%>'/>
+                    <div class="toolbar">
+                        <a class="button" id="filterButton" href="#" title="Filter Assigned" data-content="Filters out assigned rooms from the list."><i class="icon16-filter"></i></a>
+                        <a class="button" id="filterButton2" href="#" title="Filter Unassigned" data-content="Filters out unassigned rooms from the list."><i class="icon16-view"></i></a>
+                    </div>
                     <table class="tablesorter table table-alternatingRow table-border table-columnBorder table-rowBorder" id="roomTable">
                         <thead>
                             <tr>
@@ -196,13 +200,9 @@
                             <li class="pager-arrow"><a onclick="next();"><i class="icon12-next"></i></a></li>
                             <li class="pager-arrow"><a onclick="last();"><i class="icon12-last"></i></a></li>
                         </ul>-->
-                        <div class="toolbar">
-                            <a class="button" id="filterButton" href="#" title="Filter Assigned" data-content="Filters out assigned rooms from the list."><i class="icon16-filter"></i></a>
-                            <a class="button" id="filterButton2" href="#" title="Filter Unassigned" data-content="Filters out unassigned rooms from the list."><i class="icon16-view"></i></a>
-                        </div>
-                        <div class="pager-pageJump">
+                        <!--<div class="pager-pageJump">
                             <span>Page <input class="input-mini" type="text" id="pagejump"/> of <%= pages%></span>
-                        </div>
+                        </div>-->
                     </div>
                 </form>
             </div>
