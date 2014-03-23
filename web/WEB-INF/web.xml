@@ -332,12 +332,12 @@
 
 
   <servlet>
-    <servlet-name>trackAttendees</servlet-name>
+    <servlet-name>trackSessionAttendees</servlet-name>
     <jsp-file>/private/employee/admin/trackAttendees.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
-    <servlet-name>trackAttendees</servlet-name>
-    <url-pattern>/trackAttendees</url-pattern>
+    <servlet-name>trackSessionAttendees</servlet-name>
+    <url-pattern>/trackSessionAttendees</url-pattern>
   </servlet-mapping>
 
 </web-app>
