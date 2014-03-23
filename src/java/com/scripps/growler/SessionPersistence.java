@@ -1131,11 +1131,11 @@ public class SessionPersistence extends GrowlerPersistence {
         try {
             initializeJDBC();
             statement = connection.prepareStatement("insert into attendees "
-                    + " (session_id, local_attendees, remote_attendees) "
-                    + " values (?, ?, ?)");
-            statement.setString(1, String.valueOf(s.getId()));
-            statement.setString(2, s.getLocalAttendees());
-            statement.setString(3, s.getRemoteAttendees());
+                    + "(session_id, local_attendees, remote_attendees) "
+                    + "values (?, ?, ?)");
+            statement.setInt(1, s.getId());
+            statement.setInt(2, s.getLocalAttendees());
+            statement.setInt(3, s.getRemoteAttendees());
             statement.execute();
             closeJDBC();
         } catch (Exception e) {

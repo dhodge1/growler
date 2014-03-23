@@ -53,9 +53,9 @@ public class Session {
     
     private boolean survey;
     
-    private String localAttendees;
+    private Integer localAttendees;
     
-    private String remoteAttendees;
+    private Integer remoteAttendees;
     
     private String speakerId;
     
@@ -249,14 +249,14 @@ public class Session {
     /**
      * Gets the # of local attendees
      */
-    public String getLocalAttendees() {
+    public Integer getLocalAttendees() {
         return localAttendees;
     }
 
     /**
      * Sets the # of local attendees
      */
-    public void setLocalAttendees(String localAttendees) {
+    public void setLocalAttendees(Integer localAttendees) {
         this.localAttendees = localAttendees;
     }    
     
@@ -264,14 +264,14 @@ public class Session {
      /**
      * Gets the # of remote attendees
      */
-    public String getRemoteAttendees() {
+    public Integer getRemoteAttendees() {
         return remoteAttendees;
     }
 
     /**
      * Sets the # of remote attendees
      */
-    public void setRemoteAttendees(String remoteAttendees) {
+    public void setRemoteAttendees(Integer remoteAttendees) {
         this.remoteAttendees = remoteAttendees;
     }    
     
