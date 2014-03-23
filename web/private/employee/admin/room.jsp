@@ -243,7 +243,7 @@
                                 $("#filter").val("");
                             }
                         });
-                        var page = 1;
+                        /*var page = 1;
                         $("#current_page").val(page);
                         var total = parseInt($("#total").val());
                         var pages = Math.floor((total / parseInt($("#show_per_page").val())) + 1);
@@ -251,7 +251,7 @@
                             $("#row" + i).hide();
                         }
                         unActive();
-                        $("#page1").addClass("active");
+                        $("#page1").addClass("active");*/
                         $(".modals").dialog({autoOpen: false, dialogClass: "no-close",
                             buttons: {
                                 'ok': {
