@@ -193,6 +193,10 @@
                             <li class="pager-arrow"><a onclick="next();"><i class="icon12-next"></i></a></li>
                             <li class="pager-arrow"><a onclick="last();"><i class="icon12-last"></i></a></li>
                         </ul>
+                        <div class="toolbar">
+                            <a class="button" id="filterButton" href="#"><i class="icon16-filter"></i></a>
+                            <a class="button" id="filterButton2" href="#"><i class="icon16-view"></i></a>
+                        </div>
                         <div class="pager-pageJump">
                             <span>Page <input class="input-mini" type="text" id="pagejump"/> of <%= pages%></span>
                         </div>
@@ -219,6 +223,14 @@
 
                     $(document).ready(function() {
                         $("#roomTable").tablesorter(); 
+                        $('#filterButton').click(function(event) {
+                            event.preventDefault();
+                            $('td:contains("Yes")').parent().toggle();
+                        }); 
+                        $('#filterButton2').click(function(event) {
+                            event.preventDefault();
+                            $('tr:not(:contains("Yes"))').toggle();
+                        }); 
                         var clicks = 0;
                         $("#filter").click(function() {
                             clicks++;
