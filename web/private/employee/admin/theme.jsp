@@ -70,7 +70,7 @@
     <body id="growler1">
         <%
             if (null == session.getAttribute("id") || null == session.getAttribute("role")) {
-                response.sendRedirect("../../../index.jsp");
+                response.sendRedirect("http://sniforms.scrippsnetworks.com/siteminderagent/sniforms/logout.html");
             }
             ThemePersistence persist = new ThemePersistence();
             ArrayList<Theme> themes = persist.getAllThemes(" order by name asc ");
