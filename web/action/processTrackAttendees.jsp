@@ -29,7 +29,7 @@
 
 
 <% 
-    String speaker = request.getParameter("speaker");
+    //String speaker = request.getParameter("speaker");
     String localAttendees = request.getParameter("localAttendees");
     String remoteAttendees = request.getParameter("remoteAttendees");
     int sessionSelected = Integer.parseInt(String.valueOf(request.getParameter("session")));
@@ -41,14 +41,14 @@
     sp.addAttendees(s);
 
     s.setId(sessionSelected);
-    s.setSpeakerId(speaker);
+    //s.setSpeakerId(speaker);
     s.setLocalAttendees(localAttendees);
     s.setRemoteAttendees(remoteAttendees);
     
     //persist.addAttendees(s);
     
     session.setAttribute("message", "Success: The number of attendees has been submitted successfully!");
-    response.sendRedirect("../private/employee/attendeeEntry-confirm.jsp");
+    response.sendRedirect("../private/employee/admin/attendeeEntry-confirm.jsp");
     
     %>
     
