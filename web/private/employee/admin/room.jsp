@@ -66,6 +66,9 @@
                 text-decoration: underline;
                 cursor: pointer;
             }
+            .toolbar {
+                padding-left: 10px;
+            }
         </style>
     </head>
     <body id="growler1">
@@ -142,15 +145,15 @@
                                 <td><% out.print(locations.get(i).getCapacity());%></td>
                                 <td><% out.print(locations.get(i).getBuilding());%></td>
                                 <td><% if (locationPersist.getRoomAssignments(locations.get(i).getId()).size() != 0) {
-                                        out.print("     Yes     <i class='icon16-check'></i>");
+                                        out.print("Yes<i class='icon16-check'></i>");
                                     } else {
-                                        out.print("");
+                                        out.print("No<i class='icon16-stop'></i>");
                                     }%>
                                 </td>
                                 <td><% if (locationPersist.getRemoteRoomForLocation(locations.get(i).getId()).size() != 0) {
-                                        out.print("     Yes     <i class='icon16-check'></i>");
+                                        out.print("<i class='icon16-check'></i>");
                                     } else {
-                                        out.print("");
+                                        out.print("<i class='icon16-stop'></i>");
                                     }%>
                                 </td>
                                 <td>
@@ -194,8 +197,8 @@
                             <li class="pager-arrow"><a onclick="last();"><i class="icon12-last"></i></a></li>
                         </ul>
                         <div class="toolbar">
-                            <a class="button" id="filterButton" href="#"><i class="icon16-filter"></i></a>
-                            <a class="button" id="filterButton2" href="#"><i class="icon16-view"></i></a>
+                            <a class="button" id="filterButton" href="#" title="Filter Assigned" data-content="Filters out assigned rooms from the list."><i class="icon16-findReplace"></i></a>
+                            <a class="button" id="filterButton2" href="#" title="Filter Unassigned" data-content="Filters out unassigned rooms from the list."><i class="icon16-findReplace disabled"></i></a>
                         </div>
                         <div class="pager-pageJump">
                             <span>Page <input class="input-mini" type="text" id="pagejump"/> of <%= pages%></span>
@@ -212,6 +215,8 @@
         <script src="${pageContext.request.contextPath}/js/libs/jquery.wijmo-open.all.2.3.2.min.js"></script>
         <script src="http://growler.elasticbeanstalk.com/js/libs/bootstrap-dropdown.2.0.4.min.js"></script>
         <script src="http://growler.elasticbeanstalk.com/js/libs/sniui.dialog.1.2.0.min.js"></script>
+        <script src="http://growler.elasticbeanstalk.com/js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"> </script>
+        <script src="http://growler.elasticbeanstalk.com/js/libs/sniui.tool-tip.3.0.0.min.js" type="text/javascript"> </script>
         <script src="${pageContext.request.contextPath}/js/pagination.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.tablesorter.js"></script> 
         <script>
@@ -229,8 +234,7 @@
                         }); 
                         $('#filterButton2').click(function(event) {
                             event.preventDefault();
-                            //$('tr:not(:contains("Yes"))').toggle();
-                            $('td:contains("")').parent().toggle();
+                            $('td:contains("No")').parent().toggle();
                         }); 
                         var clicks = 0;
                         $("#filter").click(function() {
