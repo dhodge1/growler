@@ -16,7 +16,7 @@
         themeTab = active;
     } else if (pageURI.contains("speaker")) {
         speakerTab = active;
-    } else if (pageURI.contains("session") || pageURI.contains("attendance") || pageURI.contains("survey") {
+    } else if (pageURI.contains("session") || pageURI.contains("attendance") || pageURI.contains("survey")) {
         sessionTab = active;
     } else if (pageURI.contains("home")) {
         home = " selected ";
