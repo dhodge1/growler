@@ -149,15 +149,15 @@
                                 <td><% out.print(locations.get(i).getCapacity());%></td>
                                 <td><% out.print(locations.get(i).getBuilding());%></td>
                                 <td><% if (locationPersist.getRoomAssignments(locations.get(i).getId()).size() != 0) {
-                                        out.print("Yes&nbsp;&nbsp;<i class='icon16-check'></i>");
+                                        out.print("Yes&nbsp;&nbsp;<i class='icon16-success'></i>");
                                     } else {
-                                        out.print("No");
+                                        out.print("No&nbsp;&nbsp;<i class='icon16-error'></i>");
                                     }%>
                                 </td>
                                 <td><% if (locationPersist.getRemoteRoomForLocation(locations.get(i).getId()).size() != 0) {
-                                        out.print("<i class='icon16-check'></i>");
+                                        out.print("<i class='icon16-success'></i>");
                                     } else {
-                                        out.print("");
+                                        out.print("<i class='icon16-error'></i>");
                                     }%>
                                 </td>
                                 <td>
