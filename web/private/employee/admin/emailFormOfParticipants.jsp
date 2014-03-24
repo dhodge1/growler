@@ -60,7 +60,7 @@
            <div class="row">         
              <ul class="breadcrumb">
                <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
-               <li class='ieFix'>Call To Action</li>
+               <li class='ieFix'>Participants "Liked" a Session</li>
              </ul>
            </div>
            <div class="row mediumBottomMargin">

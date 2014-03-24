@@ -61,7 +61,7 @@
            <div class="row">         
              <ul class="breadcrumb">
                <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
-               <li class='ieFix'>Call To Action</li>
+               <li class='ieFix'>Speakers of the Current Year</li>
              </ul>
            </div>
            <div class="row mediumBottomMargin">
@@ -239,7 +239,7 @@
                  </fieldset> 
               </form>	  
            </div> <%--END THE FORM'S div tag--%>                   
-            
+       </div> <%--END THE CONTAINER-FIXED div tag--%>     
        <%@ include file="../../../includes/footer.jsp" %> 
        <%@ include file="../../../includes/scriptlist.jsp" %>
     </body>

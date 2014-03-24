@@ -240,7 +240,7 @@
                  </fieldset> 
               </form>	  
            </div> <%--END THE FORM'S div tag--%>                   
-            
+       </div> <%--END THE CONTAINER-FIXED div tag--%>     
        <%@ include file="../../../includes/footer.jsp" %> 
        <%@ include file="../../../includes/scriptlist.jsp" %>
     </body>
