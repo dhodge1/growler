@@ -60,6 +60,7 @@
             }
             .toolbar {
                 padding-left: 10px;
+                margin-bottom: -9px;
             }
         </style>
     </head>
