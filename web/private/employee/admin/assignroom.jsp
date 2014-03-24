@@ -108,6 +108,9 @@
                     Location location = locationPersist.getLocationById(roomPassed);
                     ArrayList<Session> sessions = sessionPersist.getThisYearSessions(2013, " order by session_date, start_time");
                 %>
+                <div class="toolbar">
+                    <a class="button" id="filterButton" href="#" title="Filter Assigned" data-content="Filters out assigned rooms from the list."><i class="icon16-filter"></i></a>
+                </div>
                 <form id="action" action="${pageContext.request.contextPath}/action/processRoomAssign.jsp" method="post">
                     <div class="form-group"><strong><% out.print(location.getId() + ", " + location.getDescription() + ", " + location.getBuilding());%></strong>
                     <input type="hidden" name="location" id="room" value="<%= location.getId() %>"/>
@@ -132,7 +135,7 @@
                                         out.print("<input type='radio' name='sessionId' value=\"" + sessions.get(i).getId() + "\"");
                                         out.print(">");
                                     } else {
-                                        out.print("<i class='icon16-success' style='margin-left: 5px; margin-right: 5px;'></i>");
+                                        out.print("<i id='assigned' class='icon16-success' style='margin-left: 5px; margin-right: 5px;'></i>");
                                     }
                                     out.print(dates.format(sessions.get(i).getSessionDate()) + ", " + fmt.format(sessions.get(i).getStartTime()) + ", " + sessions.get(i).getName());
                                     out.print("</li>");
@@ -154,6 +157,7 @@
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
         <script src="${pageContext.request.contextPath}/js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/js/libs/sniui.user-inline-help.1.2.0.min.js" type="text/javascript"></script>
+        <script src="http://growler.elasticbeanstalk.com/js/libs/sniui.tool-tip.3.0.0.min.js" type="text/javascript"> </script>
         <script>
                                 $().ready(function() {
                                     jQuery.expr[":"].icontains = jQuery.expr.createPseudo(function(arg) {
@@ -171,6 +175,10 @@
                                             $("#sessions li").show();
                                         }
                                     });
+                                    $('#filterButton').click(function(event) {
+                                        event.preventDefault();
+                                        $('#assigned').parent().toggle();
+                                    }); 
                                 });
                                 function clearFilter() {
                                     $("#filter").val("");
