@@ -26,7 +26,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/wijmo/jquery.wijmo-complete.all.2.3.2.min.css"/>
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/tableStyle.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/tableStyle2.css" />
         <script src="http://growler.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
         <style>
             .ui-widget-content {
@@ -149,15 +149,15 @@
                                 <td><% out.print(locations.get(i).getCapacity());%></td>
                                 <td><% out.print(locations.get(i).getBuilding());%></td>
                                 <td><% if (locationPersist.getRoomAssignments(locations.get(i).getId()).size() != 0) {
-                                        out.print("Yes<i class='icon16-check'></i>");
+                                        out.print("Yes&nbsp;&nbsp;<i class='icon16-check'></i>");
                                     } else {
                                         out.print("No");
                                     }%>
                                 </td>
                                 <td><% if (locationPersist.getRemoteRoomForLocation(locations.get(i).getId()).size() != 0) {
-                                        out.print("Yes<i class='icon16-check'></i>");
+                                        out.print("<i class='icon16-check'></i>");
                                     } else {
-                                        out.print("No");
+                                        out.print("");
                                     }%>
                                 </td>
                                 <td>
