@@ -149,9 +149,9 @@
                                 <td><% out.print(locations.get(i).getCapacity());%></td>
                                 <td><% out.print(locations.get(i).getBuilding());%></td>
                                 <td><% if (locationPersist.getRoomAssignments(locations.get(i).getId()).size() != 0) {
-                                        out.print("<i id='assigned' class='icon16-success'></i>");
+                                        out.print("<i class='icon16-success assigned'></i>");
                                     } else {
-                                        out.print("<i id='unassigned' class='icon16-error'></i>");
+                                        out.print("<i class='icon16-error unassigned'></i>");
                                     }%>
                                 </td>
                                 <td><% if (locationPersist.getRemoteRoomForLocation(locations.get(i).getId()).size() != 0) {
@@ -231,12 +231,12 @@
                         $('#filterButton').click(function(event) {
                             event.preventDefault();
                             //$('td:contains("Yes")').parent().toggle();
-                            $('#assigned').closest('tr').toggle();
+                            $('.assigned').closest('tr').toggle();
                         }); 
                         $('#filterButton2').click(function(event) {
                             event.preventDefault();
                             //$('td:contains("No")').parent().toggle();
-                            $('#unassigned').closest('tr').toggle();
+                            $('.unassigned').closest('tr').toggle();
                         }); 
                         var clicks = 0;
                         $("#filter").click(function() {

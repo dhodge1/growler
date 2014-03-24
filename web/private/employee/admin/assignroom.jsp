@@ -135,7 +135,7 @@
                                         out.print("<input type='radio' name='sessionId' value=\"" + sessions.get(i).getId() + "\"");
                                         out.print(">");
                                     } else {
-                                        out.print("<i id='assigned' class='icon16-success' style='margin-left: 5px; margin-right: 5px;'></i>");
+                                        out.print("<i class='icon16-success assigned' style='margin-left: 5px; margin-right: 5px;'></i>");
                                     }
                                     out.print(dates.format(sessions.get(i).getSessionDate()) + ", " + fmt.format(sessions.get(i).getStartTime()) + ", " + sessions.get(i).getName());
                                     out.print("</li>");
@@ -177,7 +177,7 @@
                                     });
                                     $('#filterButton').click(function(event) {
                                         event.preventDefault();
-                                        $('#assigned').parent().toggle();
+                                        $('.assigned').parent().toggle();
                                     }); 
                                 });
                                 function clearFilter() {
