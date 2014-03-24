@@ -231,12 +231,12 @@
                         $('#filterButton').click(function(event) {
                             event.preventDefault();
                             //$('td:contains("Yes")').parent().toggle();
-                            $('#assigned').parent().parent().toggle();
+                            $('#assigned').closest('tr').toggle();
                         }); 
                         $('#filterButton2').click(function(event) {
                             event.preventDefault();
                             //$('td:contains("No")').parent().toggle();
-                            $('#unassigned').parent().parent().toggle();
+                            $('#unassigned').closest('tr').toggle();
                         }); 
                         var clicks = 0;
                         $("#filter").click(function() {
