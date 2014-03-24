@@ -58,6 +58,9 @@
                 margin-right: 6px;
                 margin-left: 6px;
             }
+            .toolbar {
+                padding-left: 10px;
+            }
         </style>
     </head>
     <body id="growler1">
@@ -108,9 +111,6 @@
                     Location location = locationPersist.getLocationById(roomPassed);
                     ArrayList<Session> sessions = sessionPersist.getThisYearSessions(2013, " order by session_date, start_time");
                 %>
-                <div class="toolbar">
-                    <a class="button" id="filterButton" href="#" title="Filter Assigned" data-content="Filters out assigned rooms from the list."><i class="icon16-filter"></i></a>
-                </div>
                 <form id="action" action="${pageContext.request.contextPath}/action/processRoomAssign.jsp" method="post">
                     <div class="form-group"><strong><% out.print(location.getId() + ", " + location.getDescription() + ", " + location.getBuilding());%></strong>
                     <input type="hidden" name="location" id="room" value="<%= location.getId() %>"/>
@@ -122,7 +122,11 @@
                                 <input type="search" id="filter" value="Filter..." />
                             </span>
                             <a class="keywordFilter-clear" onclick="clearFilter();"><i class="icon16-close"></i></a>
-                        </span><span class="pullRight"><a id="refresh">Refresh List</a></span></div>
+                        </span>
+                        <div class="toolbar">
+                            <a class="button" id="filterButton" href="#" title="Filter Assigned" data-content="Filters out assigned rooms from the list."><i class="icon16-filter"></i></a>
+                        </div>
+                        <span class="pullRight"><a id="refresh">Refresh List</a></span></div>
                     <div class="form-group">
                         <ol id="sessions">
                             <%
