@@ -135,7 +135,7 @@
                 </ul>
             </div>
             <div class="row mediumBottomMargin">
-                <h1>2013 Session Schedule</h1> <!-- change to 2014-->
+                <h1>2014 Session Schedule</h1> <!-- change to 2014-->
             </div>
             <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
             <div class="row largeBottomMargin">
