@@ -10,7 +10,8 @@
 <%@page import="com.scripps.growler.*" %>
 
 <link href="http://growler.elasticbeanstalk.com/css/navbar.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/bootstrap-responsive.css" rel="stylesheet">
+<link href="http://growler.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" rel="stylesheet">
+<!--<link href="${pageContext.request.contextPath}/css/bootstrap-responsive.css" rel="stylesheet">-->
 <%
     String pageURI = request.getRequestURI();
     String active = " selected ";
