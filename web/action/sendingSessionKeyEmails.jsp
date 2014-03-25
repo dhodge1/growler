@@ -21,7 +21,7 @@ int validEmailNum = 0;
 int invalidEmailNum = 0;
    
 String infoMessage = new String();//for email sending status info message
-String isSuccess = new String(); //for error checking purpose
+//String isSuccess = new String(); //for error checking purpose
    
 DataConnection data = new DataConnection();
 Connection connection = data.sendConnection();
@@ -31,6 +31,7 @@ ResultSet speakerRS = statement.executeQuery("SELECT s.id, s.name, s.session_key
 	                                   + "FROM session s, speaker_team k, speaker r "
 					   + "WHERE s.id = k.session_id "
                                            + "AND r.id = k.speaker_id "
+                                           + "AND r.visible = 1 "
                                            + "AND EXTRACT(YEAR FROM s.session_date)='2014'");
 											 
 while(speakerRS.next())
@@ -71,7 +72,7 @@ while(speakerRS.next())
      }
      catch (Exception e)
      {
-       infoMessage ="Your message can't be sending at this time";
+       infoMessage ="Your message can't be sent at this time";
        request.setAttribute("infoMessage", infoMessage); 
 	   
        RequestDispatcher dispatcher = request.getRequestDispatcher("sessionKeyEmail-confirm");      
@@ -102,7 +103,7 @@ while(speakerRS.next())
    
    if((validEmailNum == 0) && (invalidEmailNum == 0))
    {
-     infoMessage =   "No presenters have assigned to any session of 2014.";
+     infoMessage =   "No presenters have been assigned to any session in 2014.";
      request.setAttribute("infoMessage", infoMessage);
 	 //also return the list of presenters don't have valid email addresses
 	 
@@ -115,8 +116,8 @@ while(speakerRS.next())
    }
    else if(validEmailNum == 0)
    {
-     infoMessage ="No presenters have valid email address info listed in the system.";
-     request.setAttribute("infoMessage", infoMessage);
+     //infoMessage ="No presenters have valid email address info listed in the system.";
+     //request.setAttribute("infoMessage", infoMessage);
      request.setAttribute("speakerIList", speakerIList);
 	 //also return the list of presenters don't have valid email addresses
 	 
@@ -129,11 +130,11 @@ while(speakerRS.next())
    }
    else if(invalidEmailNum == 0)
    {
-     infoMessage ="Your message has been sent!";
-     request.setAttribute("infoMessage", infoMessage);
+     //infoMessage ="Your message has been sent!";
+     //request.setAttribute("infoMessage", infoMessage);
      request.setAttribute("speakerVList", speakerVList);
-     isSuccess =   "true";
-     request.setAttribute("isSuccess", isSuccess);
+     //isSuccess =   "true";
+    // request.setAttribute("isSuccess", isSuccess);
      RequestDispatcher dispatcher = request.getRequestDispatcher("sessionKeyEmail-confirm");      
      if (dispatcher != null)
      {
@@ -145,8 +146,8 @@ while(speakerRS.next())
    else
    {
    
-     infoMessage ="Some are able to send out while others are not";
-     request.setAttribute("infoMessage", infoMessage);
+     //infoMessage ="Some are able to send out while others are not";
+     //request.setAttribute("infoMessage", infoMessage);
      request.setAttribute("speakerVList", speakerVList);
      request.setAttribute("speakerIList", speakerIList);
      RequestDispatcher dispatcher = request.getRequestDispatcher("sessionKeyEmail-confirm");      

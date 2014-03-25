@@ -1,6 +1,6 @@
 <%-- 
-    Document   : emailFormOfParticipants
-    Created on : Feb 27, 2014, 10:05:31 PM
+    Document   : sessionKeyEmail-confirm.jsp
+    Created on : March 21, 2014, 10:05:31 PM
     Author     : Thuy
 --%>
 
@@ -60,7 +60,7 @@
            <div class="row">         
              <ul class="breadcrumb">
                <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
-               <li class='ieFix'>Call To Action</li>
+               <li class='ieFix'>Email Confirm</li>
              </ul>
            </div>
            <div class="row mediumBottomMargin">
@@ -73,19 +73,20 @@
                  {
                      
            %>
-           
+
               <div class="feedbackMessage-success row">
                  <p style="text-align: center"><%=request.getAttribute("infoMessage")%></p>
               </div>
+              
            <%
                  }
                  if(request.getAttribute("speakerVList")!= null)
                  {
            %>         
           
-           <div class="row largeBottomMargin">
+           <div class="feedbackMessage-success">
              <h3 style="font-weight:normal;">
-                 <p style ="text-align: center"> <b>session key has been sent to the list of presenters below</b><p>
+                 <p style ="text-align: center"> <b>session key has been sent to the list of presenter(s) below</b><p>
                  <p style="text-align: center" ><%=request.getAttribute("speakerVList")%></p>
              </h3>
            </div>
@@ -95,9 +96,9 @@
                 if(request.getAttribute("speakerIList")!= null)
                  {
           %>
-            <div class="row largeBottomMargin">
+            <div class="feedbackMessage-warning">
              <h3 style="font-weight:normal;">
-                 <p style ="text-align: center"><b> session key could not be sent to the list of presenters below<br>
+                 <p style ="text-align: center"><b> session key could not be sent to the list of presenter(s) below<br>
                                                  due to invalid email address information</b><br>
                  <p>
                  <p style="text-align: center" ><%=request.getAttribute("speakerIList")%></p>

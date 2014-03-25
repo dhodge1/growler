@@ -1,12 +1,6 @@
 <%-- 
-    Document   : callOutAction
-                 This JSP takes email message content from the emailForm.jsp. Then it
-                 instantiates a UserPersistence object and uses the getAllUserNoVolInfo()
-                 method of that UserPesistence object to get an array list of 
-                 all the Users objects. Then, this JSP concatenates all of the 
-                 User's email address into a long string called emailList. 
-                 Lastly, it calls the sendmail()method of the EmailUtilSMTPLocal
-                 class to perform the emailing task. 
+    Document   : sendinEmailToAllSpeaker.jsp
+                 
     
     Resources  : Murach's Java Servlets and JSP 
                  www.codejava.net
