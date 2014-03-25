@@ -101,7 +101,7 @@
      catch (Exception e)
      {
        // e.printStackTrace();
-       infoMessage ="Your message can't be sending at this time";
+       infoMessage ="Your message can't be sent at this time";
        //isSuccess =   "false";
      }
    

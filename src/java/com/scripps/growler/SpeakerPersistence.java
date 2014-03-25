@@ -521,7 +521,8 @@ public class SpeakerPersistence extends GrowlerPersistence {
         try 
         {
               initializeJDBC();
-              String preparedSQL = "SELECT * FROM speaker ";
+              String preparedSQL = "SELECT * FROM speaker " +
+                                   "WHERE speaker.visible = 1 ";
               statement = connection.prepareStatement(preparedSQL);
               result = statement.executeQuery();
               ArrayList<Speaker> speakers = new ArrayList<Speaker>();
