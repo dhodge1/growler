@@ -96,6 +96,52 @@
                 if(request.getAttribute("speakerIList")!= null)
                  {
           %>
+          
+          <form class="form">
+             <div class="form-group"> 
+                <table  class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
+                  <thead>
+                    <tr>
+                      <th>Speaker Id</th>
+                      <th>Last Name</th>
+                      <th>First Name</th>
+                      <th>Session Name</th>
+                      <th>Session Key</th>
+                      <th>Valid Email Address</th>
+                    </tr>
+                  </thead>
+                  <tr>
+                    <td>97324</td>
+                    <td>To</td>
+                    <td>Thuy</td>
+                    <td>dkfkddkfjdkfjkjfk kfjkdjf  kdjfkdj  kdjfkdjf kj fkdjf</td>
+                    <td>8bt2</td>
+                    <td><input type="text" name="email" autofocus="true" required="required"/></td>      
+                  </tr>
+                  <tr>
+                    <td>97765</td>
+                    <td>Huynh</td>
+                    <td>Adam</td>
+                    <td>dkfkddkfjdkfjkjfk kfjkdjf  kdjfkdj  kdjfkdjf kj fkdjf</td>
+                    <td>89e3</td>
+                    <td><input type="text" name="email" autofocus="true" required="required"/></td>      
+                  </tr>             
+                </table>    
+             </div>
+              <input type="submit" id="send" class="button button-primary, pull-right"
+                                    value="Re-send the session key and update email address" />
+          </form>
+          
+          
+          
+          
+        
+          
+          
+          
+          
+          
+          
             <div class="feedbackMessage-warning">
              <h3 style="font-weight:normal;">
                  <p style ="text-align: center"><b> session key could not be sent to the list of presenter(s) below<br>

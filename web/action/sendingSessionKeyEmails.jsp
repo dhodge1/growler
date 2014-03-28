@@ -1,7 +1,8 @@
+<%--
 //Thuy To
 //03/21/14
 //Email session key to presenters
-
+--%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.io.*,java.util.*, javax.mail.*"%>
@@ -49,7 +50,7 @@ while(speakerRS.next())
      (strSpeakerEmail.indexOf("@")!= -1))
   {
     subject = "The " + strSessionName + " Session Key";
-    content = "Dear " + strFirstName + " " + strLastName + ", \n\n"
+    content = "Dear " + strLastName + " " + strFirstName + ", \n\n"
 	      + "Here is the session key for your presentation, "
 	      + strSessionName +": "+ strSessionKey + ". \n\n"
 	      + "Please give this only to the people in your room, "
@@ -61,7 +62,7 @@ while(speakerRS.next())
      {
        //perform the send email task
         EmailUtilSMTPScripps.sendMail(strSpeakerEmail, subject, content, isContentHTML);
-	speakerVList.append(strFirstName + ", " + strLastName + " " +
+	speakerVList.append(strLastName + ", " + strFirstName + " " +
                             strSessionName + ": " + strSessionKey + "<br>");
 					   
        //infoMessage = "Your message has been sent!";
@@ -87,7 +88,7 @@ while(speakerRS.next())
   else
   {
     //invalid email address
-    speakerIList.append(strFirstName + ", " + strLastName + " " +
+    speakerIList.append(strLastName + ", " + strFirstName + " " +
                         strSessionName + ": " + strSessionKey + "<br>");
 	                  
 
