@@ -67,7 +67,7 @@
         
         <script>
         function filter (term, _id, cellNr){
-                var termLC = term.value.toLowerCase();
+                var termLC = term;
                 var table = document.getElementById(_id);
                 var ele;
                 for (var r = 1; r < table.rows.length; r++){
