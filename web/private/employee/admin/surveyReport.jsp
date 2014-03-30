@@ -64,6 +64,23 @@
                 cursor: pointer;
             }
         </style>
+        
+        <script>
+        function filter (term, _id, cellNr){
+                var termLC = term.value.toLowerCase();
+                var table = document.getElementById(_id);
+                var ele;
+                for (var r = 1; r < table.rows.length; r++){
+                        ele = table.rows[r].cells[cellNr].innerHTML.replace(/<[^>]+>/g,"");
+                        if (ele.toLowerCase().indexOf(termLC)>=0 )
+			table.rows[r].style.display = '';
+                        else table.rows[r].style.display = 'none';
+	}
+}
+            
+            
+        </script>
+        
     </head>
     <body id="growler1">
         <%
@@ -128,8 +145,13 @@
                                 out.print(" selected ");
                             }%> >10/11/2013</option>
                     </select>
+                    <div class="toolbar">
+                        <a class="button" id="filterButton" href="#" title="View All" data-content="Displays all results."><i class="icon16-view"></i></a>
+                        <a class="button" id="filterButton2" href="#" title="Filter Contractors" data-content="Displays only contractors."><i class="icon16-filter"></i></a>
+                        <a class="button" id="filterButton3" href="#" title="Filter Employees" data-content="Displays only employees."><i class="icon16-filter"></i></a>
+                    </div>
                     <span style='float: right; position: relative;'>Total per day: <%= surveys.size()%></span>
-                    <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
+                    <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder" id="surveyTable">
                         <thead>
                             <tr>
                                 <th>Survey Submitted</th>
@@ -231,6 +253,8 @@
         <script src="${pageContext.request.contextPath}/js/libs/jquery.wijmo-open.all.2.3.1.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/libs/jquery.wijmo-open.all.2.3.2.min.js"></script>
         <script src="http://growler.elasticbeanstalk.com/js/libs/bootstrap-dropdown.2.0.4.min.js"></script>
+        <script src="http://growler.elasticbeanstalk.com/js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"> </script>
+        <script src="http://growler.elasticbeanstalk.com/js/libs/sniui.tool-tip.3.0.0.min.js" type="text/javascript"> </script>
         <script src="http://growler.elasticbeanstalk.com/js/libs/sniui.dialog.1.2.0.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/pagination.js"></script>
         <script>
@@ -255,6 +279,22 @@
                         }
                         unActive();
                         $("#page1").addClass("active");
+                        
+                        $("#filterButton").on("click", function(event) {
+                           event.preventDefault();
+                           var all = /^[0-9]/;
+                           filter(all, 'surveyTable', 1);
+                        });
+                        $("#filterButton2").on("click", function(event) {
+                           event.preventDefault();
+                           var con = /^[9]/;
+                           filter(con, 'surveyTable', 1);
+                        });
+                        $("#filterButton3").on("click", function(event) {
+                           event.preventDefault();
+                           var emp = /^(1|8)/;
+                           filter(emp, 'surveyTable', 1);
+                        });
 
 
                     });
