@@ -63,6 +63,12 @@
                 text-decoration: underline;
                 cursor: pointer;
             }
+            .toolbar {
+                display: inline-table;
+                margin: 0px;
+                padding-left: 10px;
+                margin-top: 9px;
+            }
         </style>
         
         <script>
