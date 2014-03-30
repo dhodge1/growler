@@ -552,4 +552,25 @@ public class SpeakerPersistence extends GrowlerPersistence {
         }
         return null;
     }
+    
+    /*
+     * Thuy
+     * 03/30/2014
+     * update email address by speaker id
+     */
+    
+     public void updateEmailBySpeakerId(int speakerId, String validEmail)
+     {
+        try 
+        {
+            initializeJDBC();
+            statement = connection.prepareStatement("update speaker "
+                                                  + "set email = validEmail "
+                                                  + "where id = speakerId");
+            success = statement.execute();
+            closeJDBC();
+        } 
+        catch (Exception e){
+        }
+     }   
 }

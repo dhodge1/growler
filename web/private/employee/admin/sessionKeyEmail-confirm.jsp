@@ -105,7 +105,7 @@
                         </p>
                             
            
-                      <form class="form">
+                      <form  id="action" action="reEmailSKnCUpdate" method="POST">
                        <fieldset>  
                         <div class="form-group"> 
                            <table  class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
@@ -135,7 +135,7 @@
                                  <td><%=eachRec[2]%></td>
                                  <td><%=eachRec[3]%></td>
                                  <td><%=eachRec[4]%></td>
-                                 <td><input type="text" name="email" autofocus="true" required="required"/></td>      
+                                 <td><input type="text" name<%=eachRec[0]%> autofocus="true" required="required"/></td>      
                               </tr>
                   
            <%               
