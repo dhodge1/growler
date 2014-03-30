@@ -62,7 +62,7 @@ while(speakerRS.next())
      {
        //perform the send email task
         EmailUtilSMTPScripps.sendMail(strSpeakerEmail, subject, content, isContentHTML);
-	speakerVList.append(strLastName + ", " + strFirstName + " " +
+	speakerVList.append(strSessionId + ", " + strLastName + ", " + strFirstName + " " +
                             strSessionName + ": " + strSessionKey + "<br>");
 					   
        //infoMessage = "Your message has been sent!";
@@ -88,10 +88,9 @@ while(speakerRS.next())
   else
   {
     //invalid email address
-    speakerIList.append(strLastName + ", " + strFirstName + " " +
-                        strSessionName + ": " + strSessionKey + "<br>");
+    speakerIList.append(strSessionId + ", " + strLastName + ", " + strFirstName + ", " +
+                            strSessionName + ", " + strSessionKey + ";");;
 	                  
-
     invalidEmailNum ++;
 	//**********************************
   }  

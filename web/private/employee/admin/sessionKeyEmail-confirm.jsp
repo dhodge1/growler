@@ -68,97 +68,101 @@
            </div>
            <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
            
-          <%
+           <%
                  if(request.getAttribute("infoMessage")!= null)
                  {
                      
            %>
 
-              <div class="feedbackMessage-success row">
-                 <p style="text-align: center"><%=request.getAttribute("infoMessage")%></p>
-              </div>
+                   <div class="feedbackMessage-success row">
+                     <p style="text-align: center"><%=request.getAttribute("infoMessage")%></p>
+                   </div>
               
            <%
                  }
                  if(request.getAttribute("speakerVList")!= null)
                  {
            %>         
-          
-           <div class="feedbackMessage-success">
-             <h3 style="font-weight:normal;">
-                 <p style ="text-align: center"> <b>session key has been sent to the list of presenter(s) below</b><p>
-                 <p style="text-align: center" ><%=request.getAttribute("speakerVList")%></p>
-             </h3>
-           </div>
-          <%
-                 }
-              
-                if(request.getAttribute("speakerIList")!= null)
+                    <div class="feedbackMessage-success"> 
+                       <p style ="text-align: center"> <b>session key has been sent to the list of presenter(s) below</b></p>
+                       <p style="text-align: center" ><%=request.getAttribute("speakerVList")%></p>
+                    </div><br>
+            <%
+                 }            
+                 if(request.getAttribute("speakerIList")!= null)
                  {
-          %>
-          
-          <form class="form">
-             <div class="form-group"> 
-                <table  class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
-                  <thead>
-                    <tr>
-                      <th>Speaker Id</th>
-                      <th>Last Name</th>
-                      <th>First Name</th>
-                      <th>Session Name</th>
-                      <th>Session Key</th>
-                      <th>Valid Email Address</th>
-                    </tr>
-                  </thead>
-                  <tr>
-                    <td>97324</td>
-                    <td>To</td>
-                    <td>Thuy</td>
-                    <td>dkfkddkfjdkfjkjfk kfjkdjf  kdjfkdj  kdjfkdjf kj fkdjf</td>
-                    <td>8bt2</td>
-                    <td><input type="text" name="email" autofocus="true" required="required"/></td>      
-                  </tr>
-                  <tr>
-                    <td>97765</td>
-                    <td>Huynh</td>
-                    <td>Adam</td>
-                    <td>dkfkddkfjdkfjkjfk kfjkdjf  kdjfkdj  kdjfkdjf kj fkdjf</td>
-                    <td>89e3</td>
-                    <td><input type="text" name="email" autofocus="true" required="required"/></td>      
-                  </tr>             
-                </table>    
-             </div>
-              <input type="submit" id="send" class="button button-primary, pull-right"
-                                    value="Re-send the session key and update email address" />
-          </form>
-          
-          
-          
-          
-        
-          
-          
-          
-          
-          
-          
-            <div class="feedbackMessage-warning">
-             <h3 style="font-weight:normal;">
-                 <p style ="text-align: center"><b> session key could not be sent to the list of presenter(s) below<br>
-                                                 due to invalid email address information</b><br>
-                 <p>
-                 <p style="text-align: center" ><%=request.getAttribute("speakerIList")%></p>
-             </h3>
-           </div>            
+                     String strThuy = request.getAttribute("speakerIList").toString();
+                   
+                    
+           %>
+           
+                     <div class="feedbackMessage-warning">
+                        <p style ="text-align: center"><b> session key could not be sent to the list of presenter(s) below
+                                                 due to invalid email address information. If you would like, you could
+                                                  update the presenter(s) contact information and re-send the session
+                                                  key email.
+                                                 </b>
+                        </p>
+                            
+           
+                      <form class="form">
+                       <fieldset>  
+                        <div class="form-group"> 
+                           <table  class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
+                              <thead>
+                                <tr>
+                                   <th>Speaker Id</th>
+                                   <th>Last Name</th>
+                                   <th>First Name</th>
+                                   <th>Session Name</th>
+                                   <th>Session Key</th>
+                                   <th>Valid Email Address</th>
+                                </tr>
+                              </thead>           
+           
+           <%
              
+                     String [] records = strThuy.split(";");
+                     for(int i=0; i<records.length; i++)
+                     {
+                        String[] eachRec = records[i].split(",");   
+                  
+          %>
+
+                              <tr>
+                                 <td><%=eachRec[0]%></td>
+                                 <td><%=eachRec[1]%></td>
+                                 <td><%=eachRec[2]%></td>
+                                 <td><%=eachRec[3]%></td>
+                                 <td><%=eachRec[4]%></td>
+                                 <td><input type="text" name="email" autofocus="true" required="required"/></td>      
+                              </tr>
+                  
+           <%               
+                     }             
+           %>
+                        
+                           </table>    
+                         </div><!-- Form_group-->
+                         <input type="hidden" name="hiddenString"
+                                 value=<%=request.getAttribute("speakerIList").toString()%>/>
+                         <input type="submit" id="update" class="button button-primary"
+                                value="Re-Send and Update Email Info" />
+                      </fieldset>    
+                     </form>
+                    </div><br>
+          
           <%
-                 }
-                     request.removeAttribute("infoMessage");
-                     request.removeAttribute("speakerIList");
-                     request.removeAttribute("speakerVList");
+                 }//END OF IF INVALID LIST
+                 //*************************************
+                 //**remove all the request attributes**
+                 //*************************************
+                 request.removeAttribute("infoMessage");
+                 request.removeAttribute("speakerIList");
+                 request.removeAttribute("speakerVList");
           %>
         </div> <%--END THE CONTAINER-FIXED div tag--%>
-      
+    </div>
        <%@ include file="../../../includes/footer.jsp" %> 
        <%@ include file="../../../includes/scriptlist.jsp" %>
     </body>
