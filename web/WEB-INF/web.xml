@@ -208,6 +208,14 @@
     <servlet-name>facilitiesReport</servlet-name>
     <url-pattern>/facilitiesReport</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>likedSessions</servlet-name>
+    <jsp-file>/private/employee/likedSessions.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>likedSessions</servlet-name>
+    <url-pattern>/likedSessions</url-pattern>
+  </servlet-mapping>
  
  
    <servlet>
