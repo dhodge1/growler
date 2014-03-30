@@ -71,22 +71,6 @@
             }
         </style>
         
-        <script>
-        function filter (term, _id, cellNr){
-                var termLC = term;
-                var table = document.getElementById(_id);
-                var ele;
-                for (var r = 1; r < table.rows.length; r++){
-                        ele = table.rows[r].cells[cellNr].innerHTML.replace(/<[^>]+>/g,"");
-                        if (ele.toLowerCase().indexOf(termLC)>=0 )
-			table.rows[r].style.display = '';
-                        else table.rows[r].style.display = 'none';
-	}
-}
-            
-            
-        </script>
-        
     </head>
     <body id="growler1">
         <%
@@ -151,11 +135,11 @@
                                 out.print(" selected ");
                             }%> >10/11/2013</option>
                     </select>
-                    <div class="toolbar">
+                    <%--<div class="toolbar">
                         <a class="button" id="filterButton" href="#" title="View All" data-content="Displays all results."><i class="icon16-view"></i></a>
                         <a class="button" id="filterButton2" href="#" title="Filter Contractors" data-content="Displays only contractors."><i class="icon16-filter"></i></a>
                         <a class="button" id="filterButton3" href="#" title="Filter Employees" data-content="Displays only employees."><i class="icon16-filter"></i></a>
-                    </div>
+                    </div>--%>
                     <span style='float: right; position: relative;'>Total per day: <%= surveys.size()%></span>
                     <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder" id="surveyTable">
                         <thead>
@@ -274,6 +258,18 @@
                         var date = $('#date').val();
                         window.location = 'surveyReport?date=' + date;
                     }
+                    
+                    function filter(term, _id, cellNr) {
+                        var termLC = term;
+                        var table = document.getElementById(_id);
+                        var ele;
+                        for (var r = 1; r < table.rows.length; r++){
+                                ele = table.rows[r].cells[cellNr].innerHTML.replace(/<[^>]+>/g,"");
+                                if (ele.toLowerCase().indexOf(termLC)>=0 )
+                                table.rows[r].style.display = '';
+                                else table.rows[r].style.display = 'none';
+                        }   
+                    }
 
                     $(document).ready(function() {
                         var page = 1;
@@ -286,21 +282,27 @@
                         unActive();
                         $("#page1").addClass("active");
                         
-                        $("#filterButton").on("click", function(event) {
+                        /*$("#filterButton").on("click", function(event) {
                            event.preventDefault();
-                           var all = /^[0-9]/;
-                           filter(all, 'surveyTable', 1);
+                           var all = /^[0-9]{6}$/;
+                           var tab = $('#surveyTable').text();
+                           var term1 = all.exec(tab);
+                           filter(term1, 'surveyTable', 1);
                         });
                         $("#filterButton2").on("click", function(event) {
                            event.preventDefault();
-                           var con = /^[9]/;
-                           filter(con, 'surveyTable', 1);
+                           var con = /^[9]{1}[0-9]{5}$/;
+                           var tab2 = $('#surveyTable').text();
+                           var term2 = con.exec(tab2);
+                           filter(term2, 'surveyTable', 1);
                         });
                         $("#filterButton3").on("click", function(event) {
                            event.preventDefault();
-                           var emp = /^(1|8)/;
-                           filter(emp, 'surveyTable', 1);
-                        });
+                           var emp = /^(1|8){1}[0-9]{5}$/;
+                           var tab3 = $('#surveyTable').text();
+                           var term3 = emp.exec(tab3);
+                           filter(term3, 'surveyTable', 1);
+                        });*/
 
 
                     });
