@@ -571,6 +571,37 @@ public class SessionPersistence extends GrowlerPersistence {
         return sessions;
     }
     
+    public ArrayList<Session> getThisYearLikedActiveSessions(int year, String sort, boolean state, int user) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select id, name, description, session_date, start_time, location, track, duration, session_key, active from session, registration where session.id = registration.session_id and registration.user_id = ? and extract(YEAR FROM session_date) = ? and active = ? and extract(MONTH FROM session_date) = '10' " + sort);
+            statement.setInt(1, user);
+            statement.setInt(2, year);
+            statement.setBoolean(3, state);
+            result = statement.executeQuery();
+            sessions = new ArrayList<Session>();
+            while (result.next()) {
+                Session s = new Session();
+                s.setId(result.getInt("id"));
+                s.setName(result.getString("name"));
+                s.setDescription(result.getString("description"));
+                s.setSessionDate(result.getDate("session_date"));
+                s.setStartTime(result.getTime("start_time"));
+                s.setLocation(result.getString("location"));
+                s.setTrack(result.getString("track"));
+                s.setDuration(result.getTime("duration"));
+                s.setKey(result.getString("session_key"));
+                s.setActive(result.getBoolean("active"));
+                sessions.add(s);
+            }
+            return sessions;
+        } catch (Exception e) {
+        } finally {
+            closeJDBC();
+        }
+        return sessions;
+    }
+    
     public void setSessionState(int sessionID, boolean state) {
         try {
             initializeJDBC();

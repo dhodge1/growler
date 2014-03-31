@@ -63,7 +63,14 @@
                 text-decoration: underline;
                 cursor: pointer;
             }
+            .toolbar {
+                display: inline-table;
+                margin: 0px;
+                padding-left: 10px;
+                margin-top: 9px;
+            }
         </style>
+        
     </head>
     <body id="growler1">
         <%
@@ -128,8 +135,13 @@
                                 out.print(" selected ");
                             }%> >10/11/2013</option>
                     </select>
+                    <div class="toolbar">
+                        <a class="button" id="filterButton" href="#" title="View All" data-content="Displays all results."><i class="icon16-view"></i></a>
+                        <a class="button" id="filterButton2" href="#" title="Filter Contractors" data-content="Displays only contractors."><i class="icon16-filter"></i></a>
+                        <a class="button" id="filterButton3" href="#" title="Filter Employees" data-content="Displays only employees."><i class="icon16-filter"></i></a>
+                    </div>
                     <span style='float: right; position: relative;'>Total per day: <%= surveys.size()%></span>
-                    <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
+                    <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder" id="surveyTable">
                         <thead>
                             <tr>
                                 <th>Survey Submitted</th>
@@ -231,6 +243,8 @@
         <script src="${pageContext.request.contextPath}/js/libs/jquery.wijmo-open.all.2.3.1.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/libs/jquery.wijmo-open.all.2.3.2.min.js"></script>
         <script src="http://growler.elasticbeanstalk.com/js/libs/bootstrap-dropdown.2.0.4.min.js"></script>
+        <script src="http://growler.elasticbeanstalk.com/js/libs/bootstrap-popover.2.1.1.min.js" type="text/javascript"> </script>
+        <script src="http://growler.elasticbeanstalk.com/js/libs/sniui.tool-tip.3.0.0.min.js" type="text/javascript"> </script>
         <script src="http://growler.elasticbeanstalk.com/js/libs/sniui.dialog.1.2.0.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/pagination.js"></script>
         <script>
@@ -244,6 +258,45 @@
                         var date = $('#date').val();
                         window.location = 'surveyReport?date=' + date;
                     }
+                    
+                    function filter(term, _id, cellNr) {
+                        var termLC = term;
+                        var table = document.getElementById(_id);
+                        var ele;
+                        for (var r = 1; r < table.rows.length; r++){
+                                //ele = table.rows[r].cells[cellNr].innerHTML.replace(/<[^>]+>/g,"");
+                                //if (ele.toLowerCase().indexOf(termLC)>=0 )
+                                table.rows[r].style.display = '';
+                                //else table.rows[r].style.display = 'none';
+                        }   
+                    }
+                    
+                    function filter2(term, _id, cellNr) {
+                        var termLC = term;
+                        var table = document.getElementById(_id);
+                        var ele;
+                        for (var r = 1; r < table.rows.length; r++){
+                                ele = table.rows[r].cells[cellNr].innerHTML.replace(/<[^>]+>/g,"");
+                                if (ele.toLowerCase().indexOf(termLC)===0 )
+                                table.rows[r].style.display = '';
+                                else table.rows[r].style.display = 'none';
+                        }   
+                    }
+                    
+                    function filter3(term, _id, cellNr) {
+                        var termLC = term;
+                        var term2LC = 8;
+                        var table = document.getElementById(_id);
+                        var ele;
+                        for (var r = 1; r < table.rows.length; r++){
+                                ele = table.rows[r].cells[cellNr].innerHTML.replace(/<[^>]+>/g,"");
+                                if (ele.toLowerCase().indexOf(termLC)===0 || ele.toLowerCase().indexOf(term2LC)===0)
+                                table.rows[r].style.display = '';
+                                else table.rows[r].style.display = 'none';
+                        }   
+                    }
+                    
+                    //change string.indexOF(termLC) to be if == 0 then display
 
                     $(document).ready(function() {
                         var page = 1;
@@ -255,6 +308,31 @@
                         }
                         unActive();
                         $("#page1").addClass("active");
+                        
+                        $("#filterButton").on("click", function(event) {
+                           event.preventDefault();
+                           /*var all = /^[0-9]{6}$/;
+                           var tab = $('#surveyTable').text();
+                           var term1 = all.exec(tab);*/
+                           var term1 = 0;
+                           filter(term1, 'surveyTable', 1);
+                        });
+                        $("#filterButton2").on("click", function(event) {
+                           event.preventDefault();
+                           /*var con = /^[9]{1}[0-9]{5}$/;
+                           var tab2 = $('#surveyTable').text();
+                           var term2 = con.exec(tab2);*/
+                           var term2 = 9;
+                           filter2(term2, 'surveyTable', 1);
+                        });
+                        $("#filterButton3").on("click", function(event) {
+                           event.preventDefault();
+                           /*var emp = /^(1|8){1}[0-9]{5}$/;
+                           var tab3 = $('#surveyTable').text();
+                           var term3 = emp.exec(tab3);*/
+                           var term3 = 1;
+                           filter3(term3, 'surveyTable', 1);
+                        });
 
 
                     });

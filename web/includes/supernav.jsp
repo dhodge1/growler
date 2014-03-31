@@ -97,6 +97,7 @@
             <li class="brand_nav <%= sessionTab%>"><a href="#"><span class="nav_drop">Sessions</span><em></em></a>
                 <ul class="child-menu child-menu-ul">
                     <%--<li><a href="${pageContext.request.contextPath}/private/employee/sessionschedule.jsp">View Session Schedule</a></li>--%>
+                    <li><a href="${pageContext.request.contextPath}/likedSessions">My Sessions</a></li> 
                     <% if (scheduleSession.getFeatureState()) { %>
                         <%@ include file="../../includes/superSessionSchedule.jsp" %>
                     <% } %>
