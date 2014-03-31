@@ -183,7 +183,7 @@
                                 else                 
                                 { 
                          %> 
-                                  <option value = "46">No Section is available at this time</option>
+                                  <option value = <%=sessionStr%>>No Section is available at this time</option>
                                 
                          <%  
                                 } //END ELSE STMT--end of populating disable combo box with a info message 

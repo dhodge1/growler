@@ -230,6 +230,16 @@
  
  
   <servlet>
+    <servlet-name>reEmailSKnCUpdate</servlet-name>
+    <jsp-file>/action/reEmailSKnCUpdate.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>reEmailSKnCUpdate</servlet-name>
+    <url-pattern>/reEmailSKnCUpdate</url-pattern>
+  </servlet-mapping>
+ 
+
+  <servlet>
     <servlet-name>callOutAction</servlet-name>
     <jsp-file>/private/employee/admin/callOutAction.jsp</jsp-file>
   </servlet>

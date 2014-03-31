@@ -564,9 +564,9 @@ public class SpeakerPersistence extends GrowlerPersistence {
         try 
         {
             initializeJDBC();
-            statement = connection.prepareStatement("update speaker "
-                                                  + "set email = validEmail "
-                                                  + "where id = speakerId");
+            statement = connection.prepareStatement("UPDATE speaker "
+                                                  + "SET email = validEmail "
+                                                  + "WHERE id = speakerId");
             success = statement.execute();
             closeJDBC();
         } 

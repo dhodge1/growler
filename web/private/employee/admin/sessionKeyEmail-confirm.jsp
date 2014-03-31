@@ -68,10 +68,21 @@
            </div>
            <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
            
+           
            <%
-                 if(request.getAttribute("infoMessage")!= null)
-                 {
-                     
+                 if((request.getAttribute("infoMessage")!= null)&&
+                    (request.getAttribute("notSuccess")!= null))
+                 {          
+           %>
+
+                   <div class="feedbackMessage-warning row">
+                     <p style="text-align: center"><%=request.getAttribute("infoMessage")%></p>
+                   </div>
+                      
+           <%
+                }
+                if(request.getAttribute("infoMessage")!= null)
+                {          
            %>
 
                    <div class="feedbackMessage-success row">
@@ -91,10 +102,8 @@
                  }            
                  if(request.getAttribute("speakerIList")!= null)
                  {
-                     String strThuy = request.getAttribute("speakerIList").toString();
-                   
-                    
-           %>
+                     String strThuy = request.getAttribute("speakerIList").toString();  
+            %>
            
                      <div class="feedbackMessage-warning">
                         <p style ="text-align: center"><b> session key could not be sent to the list of presenter(s) below
@@ -135,7 +144,7 @@
                                  <td><%=eachRec[2]%></td>
                                  <td><%=eachRec[3]%></td>
                                  <td><%=eachRec[4]%></td>
-                                 <td><input type="text" name<%=eachRec[0]%> autofocus="true" required="required"/></td>      
+                                 <td><input type="text"  autofocus="true" required="required" name="<%=eachRec[0]%>" /></td>      
                               </tr>
                   
            <%               
@@ -145,7 +154,7 @@
                            </table>    
                          </div><!-- Form_group-->
                          <input type="hidden" name="hiddenString"
-                                 value=<%=request.getAttribute("speakerIList").toString()%>/>
+                                value="<%=request.getAttribute("speakerIList").toString()%>"/>
                          <input type="submit" id="update" class="button button-primary"
                                 value="Re-Send and Update Email Info" />
                       </fieldset>    
