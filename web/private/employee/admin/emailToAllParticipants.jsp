@@ -106,7 +106,7 @@
 
            
                 <div class="feedbackMessage-warning row">
-                     <p style="text-align: center">No participants have used the system in 2014.</p>
+                     <p style="text-align: center;">No participants have used the system in 2014.</p>
                 </div>
            
            <%
@@ -119,7 +119,7 @@
                     {
            %>     
                        <div class="feedbackMessage-success row">
-                          <p style="text-align: center"><%=request.getAttribute("infoMessage")%></p>
+                          <p style="text-align: center;"><%=request.getAttribute("infoMessage")%></p>
                        </div>
            <%
                     }
@@ -128,7 +128,7 @@
            %>
            
                        <div class="feedbackMessage-warning row">
-                          <p style="text-align: center"><%=request.getAttribute("infoMessage")%></p>
+                          <p style="text-align: center;"><%=request.getAttribute("infoMessage")%></p>
                        </div>                  
            
             <%

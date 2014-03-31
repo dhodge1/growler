@@ -68,25 +68,32 @@
            </div>
            <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
            
+           <div class="row mediumBottomMargin">
+               <label><span style="color: red;">*</span>Required field</label>
+           </div>           
+           
+           
            
            <%
-                 if((request.getAttribute("infoMessage")!= null)&&
-                    (request.getAttribute("notSuccess")!= null))
-                 {          
+              if((request.getAttribute("infoMessage")!= null)&&
+                 (request.getAttribute("notSuccess")!= null))
+              {          
            %>
 
                    <div class="feedbackMessage-warning row">
-                     <p style="text-align: center"><%=request.getAttribute("infoMessage")%></p>
+                     <p style="text-align: center;"><%=request.getAttribute("infoMessage")%></p>
                    </div>
                       
            <%
-                }
-                if(request.getAttribute("infoMessage")!= null)
-                {          
+              }
+              else
+              {
+                 if(request.getAttribute("infoMessage")!= null)
+                 {          
            %>
 
                    <div class="feedbackMessage-success row">
-                     <p style="text-align: center"><%=request.getAttribute("infoMessage")%></p>
+                     <p style="text-align: center;"><%=request.getAttribute("infoMessage")%></p>
                    </div>
               
            <%
@@ -95,8 +102,8 @@
                  {
            %>         
                     <div class="feedbackMessage-success"> 
-                       <p style ="text-align: center"> <b>session key has been sent to the list of presenter(s) below</b></p>
-                       <p style="text-align: center" ><%=request.getAttribute("speakerVList")%></p>
+                       <p style ="text-align: center;"> <b>session key has been sent to the list of presenter(s) below</b></p>
+                       <p style="text-align: center;" ><%=request.getAttribute("speakerVList")%></p>
                     </div><br>
             <%
                  }            
@@ -105,12 +112,13 @@
                      String strThuy = request.getAttribute("speakerIList").toString();  
             %>
            
-                     <div class="feedbackMessage-warning">
-                        <p style ="text-align: center"><b> session key could not be sent to the list of presenter(s) below
-                                                 due to invalid email address information. If you would like, you could
-                                                  update the presenter(s) contact information and re-send the session
-                                                  key email.
-                                                 </b>
+                  <div class="feedbackMessage-warning">
+                        <p style ="text-align: center;">
+                            <b> session key could not be sent to the list of presenter(s) below
+                                due to invalid email address information. If you would like, you could
+                                update the presenter(s) contact information and re-send the session
+                                key email.
+                            </b>
                         </p>
                             
            
@@ -125,7 +133,7 @@
                                    <th>First Name</th>
                                    <th>Session Name</th>
                                    <th>Session Key</th>
-                                   <th>Valid Email Address</th>
+                                   <th><label class="required">Valid Email Address</label></th>
                                 </tr>
                               </thead>           
            
@@ -144,7 +152,7 @@
                                  <td><%=eachRec[2]%></td>
                                  <td><%=eachRec[3]%></td>
                                  <td><%=eachRec[4]%></td>
-                                 <td><input type="text"  autofocus="true" required="required" name="<%=eachRec[0]%>" /></td>      
+                                 <td><input type="email"   autofocus="true" required="required" name="<%=eachRec[0]%>" /></td>      
                               </tr>
                   
            <%               
@@ -163,15 +171,16 @@
           
           <%
                  }//END OF IF INVALID LIST
+                }//END OF ELSE OF notSuccess is null
                  //*************************************
                  //**remove all the request attributes**
                  //*************************************
                  request.removeAttribute("infoMessage");
                  request.removeAttribute("speakerIList");
                  request.removeAttribute("speakerVList");
+                 request.removeAttribute("notSuccess");
           %>
         </div> <%--END THE CONTAINER-FIXED div tag--%>
-    </div>
        <%@ include file="../../../includes/footer.jsp" %> 
        <%@ include file="../../../includes/scriptlist.jsp" %>
     </body>

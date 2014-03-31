@@ -104,7 +104,7 @@
            %>           
            
                 <div class="feedbackMessage-warning row">
-                     <p style="text-align: center">No participants have liked any session in 2014.</p>
+                     <p style="text-align:center;">No participants have liked any session in 2014.</p>
                 </div>
            
            <%
@@ -117,7 +117,7 @@
                     {
            %>     
                        <div class="feedbackMessage-success row">
-                          <p style="text-align: center"><%=request.getAttribute("infoMessage")%></p>
+                          <p style="text-align:center;"><%=request.getAttribute("infoMessage")%></p>
                        </div>
            <%
                     }
@@ -126,7 +126,7 @@
            %>
            
                        <div class="feedbackMessage-warning row">
-                          <p style="text-align: center"><%=request.getAttribute("infoMessage")%></p>
+                          <p style="text-align:center;"><%=request.getAttribute("infoMessage")%></p>
                        </div>                  
            
             <%
@@ -175,7 +175,7 @@
                                     String infoStr = sessionArrayList.get(i).getName(); 
                                     String sessionStr = sessionArrayList.get(i).getId().toString();
                         %>
-                                    <option value = <%=sessionStr%>><b><%=infoStr%></b></option>
+                                    <option value ="<%=sessionStr%>"><b><%=infoStr%></b></option>
                             
                          <% 
                                   }//END FOR LOOP
@@ -183,7 +183,7 @@
                                 else                 
                                 { 
                          %> 
-                                  <option value = <%=sessionStr%>>No Section is available at this time</option>
+                                  <option value ="none">No Section is available at this time</option>
                                 
                          <%  
                                 } //END ELSE STMT--end of populating disable combo box with a info message 

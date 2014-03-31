@@ -106,7 +106,7 @@
 
            
                 <div class="feedbackMessage-warning row">
-                     <p style="text-align: center">No speakers have added to the system at this time.</p>
+                     <p style="text-align: center;">No speakers have added to the system at this time.</p>
                 </div>
            
            <%
@@ -119,7 +119,7 @@
                     {
            %>     
                        <div class="feedbackMessage-success row">
-                          <p style="text-align: center"><%=request.getAttribute("infoMessage")%></p>
+                          <p style="text-align: center;"><%=request.getAttribute("infoMessage")%></p>
                        </div>
            <%
                     }
@@ -128,7 +128,7 @@
            %>
            
                        <div class="feedbackMessage-warning row">
-                          <p style="text-align: center"><%=request.getAttribute("infoMessage")%></p>
+                          <p style="text-align: center;"><%=request.getAttribute("infoMessage")%></p>
                        </div>                  
            
             <%
