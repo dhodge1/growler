@@ -5,6 +5,7 @@
     Purpose    : The log-in area for the application.  Users are redirected here
                 if their sessions expire, and also can create new accounts from 
                 this page.  The final link will take a user to reset a password.
+test4
 --%>   
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
