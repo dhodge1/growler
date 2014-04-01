@@ -552,7 +552,7 @@ public class SpeakerPersistence extends GrowlerPersistence {
         }
         return null;
     }
-    
+  
     /*
      * Thuy
      * 03/30/2014
@@ -573,5 +573,44 @@ public class SpeakerPersistence extends GrowlerPersistence {
         } 
         catch (Exception e){
         }
-     }   
+     }  
+     
+     /**
+      * 
+      **/
+     public ArrayList<Speaker> getSpeakersEmailListBySessionId(int sessionId)
+    {
+        try 
+        {
+              initializeJDBC();
+              String preparedSQL =   "SELECT r.email "
+	                           + "FROM speaker_team k, speaker r "
+			           + "WHERE k.session_id = ? "
+                                   + "AND r.id = k.speaker_id "
+                                   + "AND r.visible = 1 ";
+                                           
+              statement = connection.prepareStatement(preparedSQL);
+              statement.setInt(1, sessionId);
+              result = statement.executeQuery();
+              ArrayList<Speaker> speakers = new ArrayList<Speaker>();
+              while (result.next()) 
+              {
+                Speaker s = new Speaker();
+                s.setEmail(result.getString("email"));
+                speakers.add(s);
+              }
+            closeJDBC();
+            return speakers;
+        }
+        catch (Exception e) {
+        }
+        return null;
+    }    
+     
+     
+     
+     
+     
+     
+     
 }

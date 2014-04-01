@@ -708,6 +708,36 @@ public class SessionPersistence extends GrowlerPersistence {
         return sessions;
     }
 
+        
+/**
+ * 
+ **/        
+public double getAvgByQuestionCategory(int sessionId, int questionNum)
+{      
+   String lclTemp = new String(); 
+   try 
+   {
+      initializeJDBC();
+      String preparedSQL =   "SELECT AVG(COALESCE(ranking, 0)) AS AVG "
+	                   + "FROM session_ranking r"
+			   + "WHERE r.session_id = ? "
+                           + "AND r.question_id = ? ";
+                                   
+      statement = connection.prepareStatement(preparedSQL);
+      statement.setInt(1, sessionId);
+      statement.setInt(1, questionNum);
+      result = statement.executeQuery();        
+      while (result.next()) 
+      {       
+         lclTemp = result.getString("AVG");        
+      }
+      closeJDBC();  
+   }
+   catch (Exception e) {
+   }
+   return Double.parseDouble(lclTemp);
+}            
+       
     //*********************ADDED CODE END HERE*********************************
     
     
