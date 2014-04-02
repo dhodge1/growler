@@ -64,26 +64,23 @@
 
 
 <%
-StringBuffer speakerIList = new StringBuffer();
-StringBuffer speakerVList = new StringBuffer();
 
 StringBuffer emailList = new StringBuffer();
+StringBuffer commentList = new StringBuffer();
 String subject = new String();
 String content = new String();
 boolean isContentHTML = false;
-int validEmailNum = 0;
-int invalidEmailNum = 0;
-StringBuffer commentList = new StringBuffer(); 
 int sessionId;
 String infoMessage = new String();//for email sending status info message
 //String isSuccess = new String(); //for error checking purpose
    
+//get an arraylist() of this year active sessions
 SessionPersistence sessionPer = new SessionPersistence();
-ArrayList<Session> sessionArrayList = sessionPer.getThisYearActiveSessions(2014,"SORT_BY_ID_ASC" , true);
-int arraySize = sessionArrayList.size();
-if(arraySize==0)
+ArrayList<Session> sessionArrayList = sessionPer.getThisYearActiveSessionId(2014,"SORT_BY_ID_ASC" , true);
+int sessionSize = sessionArrayList.size();
+if(sessionSize==0)
 {
-   infoMessage =   "No active sessions have listed in the system.";
+   infoMessage =   "No active sessions have been listed in the system.";
    request.setAttribute("infoMessage", infoMessage);
    RequestDispatcher dispatcher = request.getRequestDispatcher("emailBySurvey");      
    if (dispatcher != null)
@@ -93,7 +90,7 @@ if(arraySize==0)
 }
 else
 {
-  for(int i=0; i<arraySize; i++)
+  for(int i=0; i<sessionSize; i++)
   {
     sessionId  = sessionArrayList.get(i).getId();
     SpeakerPersistence speakerPer = new SpeakerPersistence();
@@ -101,7 +98,7 @@ else
     int speakerSize = speakerArrayList.size();
     if(speakerSize > 0)
     {
-      for (int j = 0; j < arraySize; j++)
+      for (int j = 0; j < speakerSize; j++)
       {  
         if((speakerArrayList.get(j).getEmail() != null) &&
            (speakerArrayList.get(j).getEmail().indexOf("@")!= -1))  
@@ -114,10 +111,14 @@ else
         }//END OF GOOD EMAILS    
       }//END OF J LOOP
     } //END OF BUILDING EMAIL LIST
+
+    //gets the ranking average base on each question category
     double lclAvg1 = sessionPer.getAvgByQuestionCategory(sessionId, 1);
     double lclAvg2 = sessionPer.getAvgByQuestionCategory(sessionId, 2);
     double lclAvg3 = sessionPer.getAvgByQuestionCategory(sessionId, 3);
     double lclAvg4 = sessionPer.getAvgByQuestionCategory(sessionId, 4);
+
+    //gets an arraylist()of comments that related to the given session id
     CommentPersistence commentPer = new CommentPersistence();
     ArrayList<Comment>commentArrayList = commentPer.getCommentsBySession(sessionId);
     int commentSize = commentArrayList.size();
@@ -126,10 +127,7 @@ else
       for(int k=0; k <commentSize; k++)
       {
          commentList.append(commentArrayList.get(k).getDescription());
-         if(k < (commentSize-1))
-         {
-            commentList.append("\n");
-         }  
+         commentList.append("\n");  
       }
     } 
     //**************************************************************

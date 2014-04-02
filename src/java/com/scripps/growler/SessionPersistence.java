@@ -708,9 +708,45 @@ public class SessionPersistence extends GrowlerPersistence {
         return sessions;
     }
 
+    /***
+     * Thuy To
+     * This method returns a arraylist() of session objects. However, it gets
+     * only the id field of each session object.
+     ***/
+     public ArrayList<Session> getThisYearActiveSessionId(int year, String sort, boolean state)
+     {
+        try 
+        {
+            String preparedQuery =  "SELECT id FROM session "                     
+                                   +"AND EXTRACT(YEAR FROM session_date) = ? "
+                                   +"WHERE active = ? " 
+                                   +"AND EXTRACT(MONTH FROM session_date) = '10' " + sort;
+            initializeJDBC();
+            statement = connection.prepareStatement(preparedQuery);
+            statement.setInt(1, year);
+            statement.setBoolean(2, state);
+            result = statement.executeQuery();
+            sessions = new ArrayList<Session>();
+            while (result.next())
+            {
+                Session s = new Session();
+                s.setId(result.getInt("id"));
+                sessions.add(s);
+            }
+            return sessions;
+        } 
+        catch (Exception e) {
+        } finally {
+            closeJDBC();
+        }
+        return sessions;
         
+    }//END OF METHOD      
+        
+      
 /**
- * 
+ * Thuy
+ * gets a session ranking average base on a given question category
  **/        
 public double getAvgByQuestionCategory(int sessionId, int questionNum)
 {      
@@ -725,18 +761,19 @@ public double getAvgByQuestionCategory(int sessionId, int questionNum)
                                    
       statement = connection.prepareStatement(preparedSQL);
       statement.setInt(1, sessionId);
-      statement.setInt(1, questionNum);
+      statement.setInt(2, questionNum);
       result = statement.executeQuery();        
       while (result.next()) 
       {       
          lclTemp = result.getString("AVG");        
       }
-      closeJDBC();  
+      closeJDBC();
+      return Double.parseDouble(lclTemp);
    }
    catch (Exception e) {
    }
-   return Double.parseDouble(lclTemp);
-}            
+   return(0);
+}//END OF METHOD            
        
     //*********************ADDED CODE END HERE*********************************
     

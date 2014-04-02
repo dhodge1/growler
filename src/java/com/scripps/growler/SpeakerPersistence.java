@@ -576,19 +576,21 @@ public class SpeakerPersistence extends GrowlerPersistence {
      }  
      
      /**
-      * 
+      * Thuy To
+      * This method returns an arrayList of Speaker objects. However, it only 
+      * grabs the email field of each speaker object.
       **/
      public ArrayList<Speaker> getSpeakersEmailListBySessionId(int sessionId)
     {
         try 
         {
-              initializeJDBC();
+              initializeJDBC();  
               String preparedSQL =   "SELECT r.email "
 	                           + "FROM speaker_team k, speaker r "
 			           + "WHERE k.session_id = ? "
                                    + "AND r.id = k.speaker_id "
                                    + "AND r.visible = 1 ";
-                                           
+                                         
               statement = connection.prepareStatement(preparedSQL);
               statement.setInt(1, sessionId);
               result = statement.executeQuery();

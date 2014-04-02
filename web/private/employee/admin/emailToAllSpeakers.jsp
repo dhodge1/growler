@@ -106,7 +106,7 @@
 
            
                 <div class="feedbackMessage-warning row">
-                     <p style="text-align: center;">No speakers have added to the system at this time.</p>
+                     <p style="text-align: center;">No speakers have been added to the system at this time.</p>
                 </div>
            
            <%
