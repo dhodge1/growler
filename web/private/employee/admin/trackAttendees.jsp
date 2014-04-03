@@ -41,8 +41,8 @@
             }
 
 
-            var x = document.getElementById("session").selectedIndex;
-            var sessionName = document.getElementsByTagName("option")[x].value;
+            int x = document.getElementById("session").selectedIndex;
+            String sessionName = document.getElementsByTagName("option")[x].value;
             session.setAttribute("sessionName", sessionName);
             
             Session ses = sp.getSessionByName(sessionName);
