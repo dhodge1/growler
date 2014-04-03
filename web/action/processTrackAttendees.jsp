@@ -11,9 +11,9 @@
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
 <%@page import="com.scripps.growler.*" %>
-<jsp:useBean id="persist" class="com.scripps.growler.SessionPersistence" scope="page" />
+<%-- <jsp:useBean id="persist" class="com.scripps.growler.SessionPersistence" scope="page" />
 <jsp:useBean id="dataConnection" class="com.scripps.growler.DataConnection" scope="page" />
-<jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page" />
+<jsp:useBean id="queries" class="com.scripps.growler.GrowlerQueries" scope="page" />--%>
 <%
     int user = 0;
     if (null == session.getAttribute("id")) {
@@ -34,7 +34,7 @@
     int localAttendees = Integer.parseInt(String.valueOf(request.getParameter("localAttendees")));
     int remoteAttendees = Integer.parseInt(String.valueOf(request.getParameter("remoteAttendees")));
     //String sessionName = request.getParameter("session");
-    String sessionName = String.valueOf(session.getAttribute("sessionName"));
+    int sessionId = Integer.valueOf(request.getParameter("sessionChosen"));
     //int sessionId = Integer.parseInt(String.valueOf(session.getAttribute("sessionId")));
     //int localAttendees = Integer.parseInt(String.valueOf(session.getAttribute("localAttendees")));
     //int remoteAttendees = Integer.parseInt(String.valueOf(session.getAttribute("remoteAttendees")));
@@ -42,13 +42,14 @@
     
     SessionPersistence sp = new SessionPersistence();
     
-    Session ses = sp.getSessionByName(sessionName);
-    int session_Id = ses.getId();
+    //Session ses = sp.getSessionByName(sessionName);
+    //already have session id
+    //int session_Id = ses.getId();
     
     
    
     
-    sp.addAttendees(session_Id, localAttendees, remoteAttendees);
+    sp.addAttendees(sessionId, localAttendees, remoteAttendees);
     
 
 

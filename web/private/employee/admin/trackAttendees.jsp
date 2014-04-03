@@ -111,7 +111,7 @@
   ---------------------------------------->
                                 <div class="form-group">
                                     <label class="required">What session are you entering attendees for?</label>
-                                    <select name='session' id='session' class='input x-large'>
+                                    <select name='sessionChosen' id='sessionChosen' class='input x-large'>
                                         <option value='0'> Please select a session </option>
                                         <%
                                         SessionPersistence sessionPersist = new SessionPersistence();
