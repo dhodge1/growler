@@ -129,7 +129,7 @@
                     <li><a href="${pageContext.request.contextPath}/surveyReport">Surveys</a></li>
                     <li><a href="${pageContext.request.contextPath}/surveyCompleters">Completed Survey Names</a></li>
                     <li><a href="${pageContext.request.contextPath}/facilitiesReport">Facilities Report</a></li>
-                    
+                    <li><a href="${pageContext.request.contextPath}/mealReport">Meal Report</a></li>
                 </ul>
             </li>
             

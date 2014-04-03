@@ -18,6 +18,7 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <title>Track Attendees</title><!-- Title -->
+        <link rel="shortcut icon" type="image/png" href="http://growler.elasticbeanstalk.com/images/scripps_favicon-32.ico">
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
@@ -38,6 +39,23 @@
                 String name = String.valueOf(session.getAttribute("user"));
             } catch (Exception e) {
             }
+
+
+            /*
+            int x = request.getElementById("session").selectedIndex;
+            String sessionName = request.getElementsByTagName("option")[x].value;
+            session.setAttribute("sessionName", sessionName);
+            
+            Session ses = sp.getSessionByName(sessionName);
+            int sessionId = ses.getId(); 
+            session.setAttribute("sessionId", sessionId);
+
+            int localAttendees = Integer.parseInt(String.valueOf(request.getParameter("localAttendees")));
+            int remoteAttendees = Integer.parseInt(String.valueOf(request.getParameter("remoteAttendees")));
+            session.setAttribute("localAttendees", localAttendees);
+            session.setAttribute("remoteAttendees", remoteAttendees);
+            */
+
         %>
         <%@ include file="../../../includes/adminheader.jsp" %>
         <% if (String.valueOf(session.getAttribute("role")).equals("admin")) { %>

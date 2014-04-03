@@ -216,6 +216,14 @@
     <servlet-name>likedSessions</servlet-name>
     <url-pattern>/likedSessions</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>mealReport</servlet-name>
+    <jsp-file>/private/employee/admin/mealReport.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>mealReport</servlet-name>
+    <url-pattern>/mealReport</url-pattern>
+  </servlet-mapping>
  
  
    <servlet>

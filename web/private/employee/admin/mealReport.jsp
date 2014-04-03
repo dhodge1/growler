@@ -1,7 +1,7 @@
 <%-- 
-    Document   : commentsreport
-    Created on : Mar 18, 2014, 9:56:34 PM
-    Author     : Shaun
+    Document   : mealReport
+    Created on : Apr 2, 2014, 9:59:52 PM
+    Author     : David
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -18,7 +18,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Comments by Session</title>
+        <title>Meal/Happy Hour Survey Report</title>
         <link rel="shortcut icon" type="image/png" href="http://growler.elasticbeanstalk.com/images/scripps_favicon-32.ico">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
@@ -85,25 +85,25 @@
             <%--<jsp:include page="../../includes/adminnav.jsp" flush="true"/>--%>
             <%@ include file="../../../includes/adminnav.jsp" %>
         <% } %>
-        <%--<%@ include file="../../../includes/adminnav.jsp" %>--%>  
+        <%--<%@ include file="../../../includes/adminnav.jsp" %>--%>
         <div class="container-fixed">
             <div class="row mediumBottomMargin"></div>
             <div class="row">
                 <ul class="breadcrumb">
-                    <li><a href="${pageContext.request.contextPath}/home.jsp">Home</a></li>
-                    <li class='ieFix'>Comments by Session</li>
+                    <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
+                    <li class='ieFix'>Meal/Happy Hour Survey Report</li>
                 </ul>
             </div>
             <div class="row mediumBottomMargin">
-                <h1>Comments by Session</h1>
+                <h1>Best Overall Session Report</h1>
             </div>
             <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
             <div class="row largeBottomMargin">
-                <h3>The table below displays comments for each session</h3>
+                <h3>The table below displays a average ratings of each question on the meal survey.</h3>
             </div>
             <!--<div class='row largeBottomMargin'></div>-->
             <div class="row mediumBottomMargin">
-                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='${pageContext.request.contextPath}/images/Techtoberfest2013small.png'/><span style="padding-left: 12px;">Report Details</span><span class='pullRight'><a id='print' onclick='window.print();'>Print</a></span></h2>
+                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='${pageContext.request.contextPath}/images/Techtoberfest2013small.png'/><span style="padding-left: 12px;">Report Details</span></h2>
             </div>
             <div class='row largeBottomMargin'>
                 <form onsubmit="return false;">
@@ -112,50 +112,44 @@
                     <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
                         <thead>
                             <tr>
-                                <th>Session Name</th>
-                                <th>Session Presenters</th>
-                                <th>Comment</th>
+                                <th>Avg Quality</th>
+                                <th>Avg Selection</th>
+                                <th>Avg Room Score</th>
                             </tr>
                         </thead>
                         <tbody>
                             <%
                                 ReportGenerator rg = new ReportGenerator();
-                                ArrayList<CommentsReport> commentsrep = rg.generateCommentsReport();
-                                if (commentsrep.size() == 0) {
+                                ArrayList<MealReport> questions = rg.generateMealReport();
+                                if (questions.size() == 0) {
                                     out.print("<tr>");
                                     out.print("<td>");
                                     out.print("No data is available at this time.");
                                     out.print("</td>");
                                     out.print("</tr>");
                                 }
-                                for (int i = 0; i < commentsrep.size(); i++) {
+                                for (int i = 0; i < questions.size(); i++) {
                                     out.print("<tr id='row" + i + "'>");
                                     out.print("<td>");
-                                    out.print(commentsrep.get(i).getSessionName());
+                                    out.print(questions.get(i).getQuality());
                                     out.print("</td>");
                                     out.print("<td>");
-                                    for (int j = 0; j < commentsrep.get(i).getSpeakers().size(); j++){
-                                        out.print(commentsrep.get(i).getSpeakers().get(j).getFullName() + "<br/>");
-                                    }
+                                    out.print(questions.get(i).getSelection());
                                     out.print("</td>");
                                     out.print("<td>");
-                                    try{
-                                    out.print(commentsrep.get(i).getComment());
-                                    }catch (Exception e){
-                                        out.print("Error retrieving comment");
-                                    }
+                                    out.print(questions.get(i).getRoom());
                                     out.print("</td>");
                                     out.print("</tr>");
                                 }
                             %>
                         </tbody>
                     </table>
-                        <input type='hidden' id='total' value='<%= commentsrep.size()%>'/>
+                        <input type='hidden' id='total' value='<%= questions.size()%>'/>
                     <div class="pager">
                         <ul>
                             <li class="pager-arrow"><a onclick="first();"><i class="icon12-first"></i></a></li>
                             <li class="pager-arrow"><a onclick="prev();"><i class="icon12-previous"></i></a></li>
-                                    <% int rows = commentsrep.size();
+                                    <% int rows = questions.size();
                                         int pages = 0;
                                         if (rows % 15 == 0) {
                                             pages = (rows / 15);
@@ -206,4 +200,3 @@
         </script>
     </body>
 </html>
-

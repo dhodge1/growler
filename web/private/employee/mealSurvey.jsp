@@ -103,29 +103,29 @@
                     <table class="table" style="margin-left: -8px;">
 
                         <tr>
-                            <td><label>How was the quality of the food and drink?</label></td>
+                            <td><label>The quality of the food and drink served met my expectations.</label></td>
                             <td><div class="form-group inline">
-                                    <input type="radio" value="1"  name="q1"><span class="checkbox inline divider" >Awful</span>
-                                    <input type="radio" value="3"  name="q1" checked><span class="checkbox inline divider" >Ok</span>
-                                    <input type="radio" value="5"  name="q1"><span class="checkbox inline" >Great</span>
+                                    <input type="radio" value="1"  name="q1"><span class="checkbox inline divider" >Strongly Disagree</span>
+                                    <input type="radio" value="3"  name="q1" checked><span class="checkbox inline divider" >Neutral</span>
+                                    <input type="radio" value="5"  name="q1"><span class="checkbox inline" >Strongly Agree</span>
                                 </div></td>
                         </tr>
 
                         <tr>
-                            <td><label>How was the selection of the food and drink?</label></td>
+                            <td><label>The selection of food and drink available met my expectations.</label></td>
                             <td><div class="form-group inline">
-                                    <input type="radio" value="1"  name="q2"><span class="checkbox inline divider" >Awful</span>
-                                    <input type="radio" value="3"  name="q2" checked><span class="checkbox inline divider" >Ok</span>
-                                    <input type="radio" value="5"  name="q2"><span class="checkbox inline" >Great</span>
+                                    <input type="radio" value="1"  name="q2"><span class="checkbox inline divider" >Strongly Disagree</span>
+                                    <input type="radio" value="3"  name="q2" checked><span class="checkbox inline divider" >Neutral</span>
+                                    <input type="radio" value="5"  name="q2"><span class="checkbox inline" >Strongly Agree</span>
                                 </div></td>
                         </tr>
 
                         <tr>
-                            <td><label>Please rate the appropriateness of the room for the meal/happy hour?</label></td>
+                            <td><label>The room for the meal/happy hour was appropriate.</label></td>
                             <td><div class="form-group inline">
-                                    <input type="radio" value="1"  name="q3"><span class="checkbox inline divider" >Awful</span>
-                                    <input type="radio" value="3"  name="q3" checked><span class="checkbox inline divider" >Ok</span>
-                                    <input type="radio" value="5"  name="q3"><span class="checkbox inline" >Great</span>
+                                    <input type="radio" value="1"  name="q3"><span class="checkbox inline divider" >Strongly Disagree</span>
+                                    <input type="radio" value="3"  name="q3" checked><span class="checkbox inline divider" >Neutral</span>
+                                    <input type="radio" value="5"  name="q3"><span class="checkbox inline" >Strongly Agree</span>
                                 </div></td>
                         </tr>
                     </table>
@@ -136,5 +136,6 @@
                 </form>
             </div>
         </div>
+        <%@ include file="../../includes/footer.jsp" %>
     </body>
 </html>
