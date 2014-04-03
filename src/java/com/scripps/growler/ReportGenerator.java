@@ -237,10 +237,31 @@ public class ReportGenerator extends GrowlerPersistence {
         return null;
     }
     
+    public ArrayList<MealReport> generateMealReport() {
+        try{
+            initializeJDBC();
+            statement = connection.prepareStatement("select round(avg(quality), 1) as avgQuality, round(avg(selection), 1) as avgSelection, round(avg(room), 1) as avgRoom from mealSurvey;");
+            result = statement.executeQuery();
+            ArrayList<MealReport> meals = new ArrayList<MealReport>();
+            while (result.next()) {
+                MealReport m = new MealReport();
+                m.setQuality(result.getFloat("avgQuality"));
+                m.setSelection(result.getFloat("avgSelection"));
+                m.setRoom(result.getFloat("avgRoom"));
+                meals.add(m);
+            }
+            return meals;
+        } catch (Exception e) {
+        } finally {
+            closeJDBC();
+        }
+        return null;
+    }
+    
     public ArrayList<FacilityReport> generateFacilityReport() {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select distinct location.description as room, (select round(avg(local_Attendees + remote_Attendees), 2) from attendees, session, location l where attendees.session_id = session.id and session.location = l.id and l.description = room) as avg_att, (select sum(local_Attendees + remote_Attendees) from attendees, session, location lo where attendees.session_id = session.id and session.location = lo.id and lo.description = room) as tot_att, (select round(avg(ranking), 2) from attendees, session, location loc, session_ranking where session_ranking.session_id = attendees.session_id and attendees.session_id = session.id and session.location = loc.id and loc.description = room) as avg_rat from location, session, attendees where location.id = session.location and session.id = attendees.session_id order by avg_rat desc;");
+            statement = connection.prepareStatement("select distinct location.description as room, (select round(avg(local_Attendees + remote_Attendees)) from attendees, session, location l where attendees.session_id = session.id and session.location = l.id and l.description = room) as avg_att, (select sum(local_Attendees + remote_Attendees) from attendees, session, location lo where attendees.session_id = session.id and session.location = lo.id and lo.description = room) as tot_att, (select round(avg(ranking), 2) from attendees, session, location loc, session_ranking where session_ranking.session_id = attendees.session_id and attendees.session_id = session.id and session.location = loc.id and loc.description = room) as avg_rat from location, session, attendees where location.id = session.location and session.id = attendees.session_id order by avg_rat desc;");
             result = statement.executeQuery();
             ArrayList<FacilityReport> fac = new ArrayList<FacilityReport>();
             while (result.next()) {
