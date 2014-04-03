@@ -29,27 +29,36 @@
 
 
 <% 
-    Integer localAttendees = Integer.parseInt(String.valueOf(request.getParameter("localAttendees")));
-    Integer remoteAttendees = Integer.parseInt(String.valueOf(request.getParameter("remoteAttendees")));
-    String sessionName = request.getParameter("session");
+    Session s = new Session();
+    
+    //int localAttendees = Integer.parseInt(String.valueOf(request.getParameter("localAttendees")));
+    //int remoteAttendees = Integer.parseInt(String.valueOf(request.getParameter("remoteAttendees")));
+    //String sessionName = request.getParameter("session");
+    //String sessionName = String.valueOf(session.getAttribute("sessionName"));
+    int sessionId = Integer.parseInt(String.valueOf(session.getAttribute("sessionId")));
+    int localAttendees = Integer.parseInt(String.valueOf(session.getAttribute("localAttendees")));
+    int remoteAttendees = Integer.parseInt(String.valueOf(session.getAttribute("remoteAttendees")));
+
     
     SessionPersistence sp = new SessionPersistence();
     
- 
+    //Session ses = sp.getSessionByName(sessionName);
+    //int session_Id = ses.getId();
     
-    Session s = new Session();   
     
-    sp.addAttendees(s);
+   
     
-    Session ses = sp.getSessionByName(sessionName);
+    sp.addAttendees(sessionId, localAttendees, remoteAttendees);
+    
+
 
     //session.setAttribute("session_id", ses.getId());
     //session.setAttribute("local_Attendees", localAttendees);
     //session.setAttribute("remote_Attendees", remoteAttendees);
  
-    s.setId(ses.getId());
+    /*s.setId(ses.getId());
     s.setLocalAttendees(localAttendees);
-    s.setRemoteAttendees(remoteAttendees);
+    s.setRemoteAttendees(remoteAttendees);*/
     
     //persist.addAttendees(s);
     
