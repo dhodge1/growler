@@ -1225,15 +1225,13 @@ public double getAvgByQuestionCategory(int sessionId, int questionNum)
      * 18 March 2014
      * Adds # of attendees to attendee table
      */
-    public void addAttendees(Session s) {
+    public void addAttendees(int session, int localAttendees, int remoteAttendees) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("insert into attendees "
-                    + "(session_id, local_attendees, remote_attendees) "
-                    + "values (?, ?, ?)");
-            statement.setInt(1, s.getId());
-            statement.setInt(2, s.getLocalAttendees());
-            statement.setInt(3, s.getRemoteAttendees());
+            statement = connection.prepareStatement("insert into attendees (session_id, local_attendees, remote_attendees) values (?, ?, ?)");
+            statement.setInt(1, session);
+            statement.setInt(2, localAttendees);
+            statement.setInt(3, remoteAttendees);
             statement.execute();
             closeJDBC();
         } catch (Exception e) {
