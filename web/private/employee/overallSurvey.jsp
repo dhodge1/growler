@@ -103,38 +103,38 @@
                     <table class="table" style="margin-left: -8px;">
 
                         <tr>
-                            <td><label>How would you rate the overall quality of the speakers at this year's event?</label></td>
+                            <td><label>The overall quality of the speakers at this year's event met my expectations.</label></td>
                             <td><div class="form-group inline">
-                                    <input type="radio" value="1"  name="q1"><span class="checkbox inline divider" >Awful</span>
-                                    <input type="radio" value="3"  name="q1" checked><span class="checkbox inline divider" >Ok</span>
-                                    <input type="radio" value="5"  name="q1"><span class="checkbox inline" >Great</span>
+                                    <input type="radio" value="1"  name="q1"><span class="checkbox inline divider" >Strongly Disagree</span>
+                                    <input type="radio" value="3"  name="q1" checked><span class="checkbox inline divider" >Neutral</span>
+                                    <input type="radio" value="5"  name="q1"><span class="checkbox inline" >Strongly Agree</span>
                                 </div></td>
                         </tr>
 
                         <tr>
-                            <td><label>How would you rate your interest in the topics presented at this year's event?</label></td>
+                            <td><label>I was interested in the topics presented at this year's event.</label></td>
                             <td><div class="form-group inline">
-                                    <input type="radio" value="1"  name="q2"><span class="checkbox inline divider" >Awful</span>
-                                    <input type="radio" value="3"  name="q2" checked><span class="checkbox inline divider" >Ok</span>
-                                    <input type="radio" value="5"  name="q2"><span class="checkbox inline" >Great</span>
+                                    <input type="radio" value="1"  name="q2"><span class="checkbox inline divider" >Strongly Disagree</span>
+                                    <input type="radio" value="3"  name="q2" checked><span class="checkbox inline divider" >Neutral</span>
+                                    <input type="radio" value="5"  name="q2"><span class="checkbox inline" >Strongly Agree</span>
                                 </div></td>
                         </tr>
 
                         <tr>
-                            <td><label>How would you rate the rooms in which the presentations were held?</label></td>
+                            <td><label>The rooms in which the presentations were held were appropriate.</label></td>
                             <td><div class="form-group inline">
-                                    <input type="radio" value="1"  name="q3"><span class="checkbox inline divider" >Awful</span>
-                                    <input type="radio" value="3"  name="q3" checked><span class="checkbox inline divider" >Ok</span>
-                                    <input type="radio" value="5"  name="q3"><span class="checkbox inline" >Great</span>
+                                    <input type="radio" value="1"  name="q3"><span class="checkbox inline divider" >Strongly Disagree</span>
+                                    <input type="radio" value="3"  name="q3" checked><span class="checkbox inline divider" >Neutral</span>
+                                    <input type="radio" value="5"  name="q3"><span class="checkbox inline" >Strongly Agree</span>
                                 </div></td>
                         </tr>
 
                         <tr>
-                            <td><label>If you attended via WebEx, how would you rate your presentation experience even though they were online?</label></td>
+                            <td><label>Remote attendees - The presentation experience met expectations despite attending online.</label></td>
                             <td><div class="form-group inline">
-                                    <input type="radio" value="1"  name="q4"><span class="checkbox inline divider" >Awful</span>
-                                    <input type="radio" value="3"  name="q4"><span class="checkbox inline divider" >Ok</span>
-                                    <input type="radio" value="5"  name="q4"><span class="checkbox inline" >Great</span>
+                                    <input type="radio" value="1"  name="q4"><span class="checkbox inline divider" >Strongly Disagree</span>
+                                    <input type="radio" value="3"  name="q4"><span class="checkbox inline divider" >Neutral</span>
+                                    <input type="radio" value="5"  name="q4"><span class="checkbox inline" >Strongly Agree</span>
                                 </div></td>
                         </tr>
 
