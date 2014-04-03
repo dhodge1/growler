@@ -114,7 +114,7 @@
                             <tr>
                                 <th>Session Name</th>
                                 <th>Session Presenters</th>
-                                <th>Session Key</th>
+                                <th>Comment</th>
                             </tr>
                         </thead>
                         <tbody>
