@@ -713,14 +713,14 @@ public class SessionPersistence extends GrowlerPersistence {
      * This method returns a arraylist() of session objects. However, it gets
      * only the id field of each session object.
      ***/
-     public ArrayList<Session> getThisYearActiveSessionId(int year, String sort, boolean state)
+     public ArrayList<Session> getThisYearActiveSessionId(int year, boolean state)
      {
         try 
         {
             String preparedQuery =  "SELECT id FROM session "                     
-                                   +"AND EXTRACT(YEAR FROM session_date) = ? "
-                                   +"WHERE active = ? " 
-                                   +"AND EXTRACT(MONTH FROM session_date) = '10' " + sort;
+                                   +"WHERE EXTRACT(YEAR FROM session_date) = ? "
+                                   +"AND active = ? " 
+                                   +"AND EXTRACT(MONTH FROM session_date) = '10' ";
             initializeJDBC();
             statement = connection.prepareStatement(preparedQuery);
             statement.setInt(1, year);
@@ -750,11 +750,12 @@ public class SessionPersistence extends GrowlerPersistence {
  **/        
 public double getAvgByQuestionCategory(int sessionId, int questionNum)
 {      
-   String lclTemp = new String(); 
+   String lclTemp = new String("0");
+    
    try 
    {
       initializeJDBC();
-      String preparedSQL =   "SELECT AVG(COALESCE(ranking, 0)) AS AVG "
+      String preparedSQL =   "SELECT AVG(ranking) AS AVG "
 	                   + "FROM session_ranking r"
 			   + "WHERE r.session_id = ? "
                            + "AND r.question_id = ? ";
@@ -772,7 +773,7 @@ public double getAvgByQuestionCategory(int sessionId, int questionNum)
    }
    catch (Exception e) {
    }
-   return(0);
+   return Double.parseDouble(lclTemp);
 }//END OF METHOD            
        
     //*********************ADDED CODE END HERE*********************************

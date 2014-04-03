@@ -248,6 +248,15 @@
  
 
   <servlet>
+    <servlet-name>sendingFeedbackEmail</servlet-name>
+    <jsp-file>/action/sendingFeedbackEmail.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>sendingFeedbackEmail</servlet-name>
+    <url-pattern>/sendingFeedbackEmail</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>callOutAction</servlet-name>
     <jsp-file>/private/employee/admin/callOutAction.jsp</jsp-file>
   </servlet>

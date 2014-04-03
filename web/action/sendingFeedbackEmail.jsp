@@ -76,10 +76,16 @@ String infoMessage = new String();//for email sending status info message
    
 //get an arraylist() of this year active sessions
 SessionPersistence sessionPer = new SessionPersistence();
-ArrayList<Session> sessionArrayList = sessionPer.getThisYearActiveSessionId(2014,"SORT_BY_ID_ASC" , true);
+ArrayList<Session> sessionArrayList = sessionPer.getThisYearActiveSessionId(2014, true);
 int sessionSize = sessionArrayList.size();
+%>
+
+<div><p><%=sessionArrayList.size()%></p></div>
+
+        <%
 if(sessionSize==0)
 {
+/*
    infoMessage =   "No active sessions have been listed in the system.";
    request.setAttribute("infoMessage", infoMessage);
    RequestDispatcher dispatcher = request.getRequestDispatcher("emailBySurvey");      
@@ -87,9 +93,15 @@ if(sessionSize==0)
    {
      dispatcher.forward(request, response);
    } 
+*/
 }
 else
 {
+
+%>
+
+<div><p>HOHOHO</p></div>
+<%
   for(int i=0; i<sessionSize; i++)
   {
     sessionId  = sessionArrayList.get(i).getId();
@@ -137,10 +149,10 @@ else
     subject =  "The feedback of sessesion.......";
     content = "Dear Presenter(s) \n\n"
 	      + "Here is your session feedback\n" 
-	      + lclAvg1 
-              + lclAvg2
-              + lclAvg3
-              + lclAvg4
+	      + lclAvg1 +"<br>"
+              + lclAvg2 +"<br>"
+              + lclAvg3 +"<br>"
+              + lclAvg4 +"<br>"
               + commentList.toString()
 	      + "\nThanks\n"
 	      + "Techtoberfest Adminstration\n";	   
@@ -150,8 +162,12 @@ else
     
    try
    {
-       //perform the send email task
-        EmailUtilSMTPScripps.sendMail(emailList.toString(), subject, content, isContentHTML);
+   %>
+   <div><p><%=lclAvg1%></p></div>
+   <div><p><%=content%></p></div>
+   
+    <%   //perform the send email task
+     //   EmailUtilSMTPScripps.sendMail(emailList.toString(), subject, content, isContentHTML);
 
    }
    catch (Exception e)
