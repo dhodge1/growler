@@ -41,8 +41,9 @@
             }
 
 
-            int x = document.getElementById("session").selectedIndex;
-            String sessionName = document.getElementsByTagName("option")[x].value;
+            /*
+            int x = request.getElementById("session").selectedIndex;
+            String sessionName = request.getElementsByTagName("option")[x].value;
             session.setAttribute("sessionName", sessionName);
             
             Session ses = sp.getSessionByName(sessionName);
@@ -53,6 +54,7 @@
             int remoteAttendees = Integer.parseInt(String.valueOf(request.getParameter("remoteAttendees")));
             session.setAttribute("localAttendees", localAttendees);
             session.setAttribute("remoteAttendees", remoteAttendees);
+            */
 
         %>
         <%@ include file="../../../includes/adminheader.jsp" %>
