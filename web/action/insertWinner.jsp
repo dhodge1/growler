@@ -8,7 +8,7 @@
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
 <%@page import="com.scripps.growler.*" %>
-<%@page import="com.google.gson.Gson;" %>
+<%@page import="com.google.gson.Gson" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
