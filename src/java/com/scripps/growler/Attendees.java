@@ -80,4 +80,4 @@ public class Attendees {
         this.remoteAttendees = remoteAttendees;
     }    
     
-  
+}  
