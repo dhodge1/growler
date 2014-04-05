@@ -480,9 +480,9 @@ public class ReportGenerator extends GrowlerPersistence {
     }
     
     
-    public ArrayList<AttendeeReport> generateAttendeeReport() {
+    public ArrayList<AttendeeReport> generateAttendeeReport2() {
         AttendeePersistence ap = new AttendeePersistence();
-        ArrayList<Attendees> attendees = ap.getAllSessions(" order by session.name asc");
+        ArrayList<Attendees> attendees = ap.getAllSessions();
         ListIterator<Attendees> iterator = attendees.listIterator();
         ArrayList<AttendeeReport> report = new ArrayList<AttendeeReport>();
         SessionPersistence sp = new SessionPersistence();
@@ -502,7 +502,32 @@ public class ReportGenerator extends GrowlerPersistence {
         closeJDBC();
         return report;
     }
-
+    
+    
+    public ArrayList<AttendeeReport> generateAttendeeReport() {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select s.name, s.id, a.session_id, a.local_Attendees, a.remote_Attendees from session s, attendees a where s.id=a.session_id");
+            result = statement.executeQuery();
+            ArrayList<AttendeeReport> report = new ArrayList<AttendeeReport>();
+            while (result.next()) {
+                AttendeeReport r = new AttendeeReport();
+                r.setSessionName(result.getString("s.name"));
+                r.setLocalAttendees(result.getInt("a.local_Attendees"));
+                r.setRemoteAttendees(result.getInt("a.remote_Attendees"));
+                report.add(r);
+                        
+            }
+            return report;
+        } catch (Exception e) {
+        } finally {
+            closeJDBC();
+        }
+        return null;
+       
+    }
+    
+ 
 
     
 }
