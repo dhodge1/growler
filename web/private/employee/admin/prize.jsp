@@ -138,23 +138,27 @@
         <script src="http://growler.elasticbeanstalk.com/js/libs/sniui.dialog.1.2.0.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/jquery.shuffleLetters.js"></script>
         <script>
-            var container = $("#recessed");
-            var winne;
-            
-            $("#draw").on("click", function() {
-               $.get("../../../action/getWinner.jsp", function(data) {
-                   winne = JSON.parse(data);
-               }, "json"); 
-               container.shuffleLetters({
-                   "text": winne.name
-               });
-               $.post("../../../action/insertWinner.jsp", {winner: JSON.stringify(winne)});
-            });
-            
-            $("#claim").on("click", function() {
-                $.post("../../../action/claimPrize.jsp", {winner: JSON.stringify(winne)});
-                container.shuffleLetters({
-                   "text": winne.name + " prize claimed."
+            $(function() {
+                var container = $("#recessed");
+                var _winner;
+                
+                container.shuffleLetters();
+
+                $("#draw").on("click", function() {
+                   $.get("../../../action/getWinner.jsp", function(data) {
+                       _winner = JSON.parse(data);
+                   }, "json"); 
+                   container.shuffleLetters({
+                       "text": _winner.name
+                   });
+                   $.post("../../../action/insertWinner.jsp", {winner: JSON.stringify(_winner)});
+                });
+
+                $("#claim").on("click", function() {
+                    $.post("../../../action/claimPrize.jsp", {winner: JSON.stringify(_winner)});
+                    container.shuffleLetters({
+                       "text": _winner.name + " prize claimed."
+                    });
                 });
             });
         </script>
