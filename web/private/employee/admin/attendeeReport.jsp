@@ -1,5 +1,5 @@
 <%-- 
-    Document   : attendeeReport
+    Document   : attendeesReport
     Created on : Apr 5, 2014, 3:31:02 PM
     Author     : Chelsea Grindstaff
     Purpose    : Report to show the # of attendees/session
@@ -117,25 +117,26 @@
                         <tbody>
                             <%
                                 ReportGenerator rg = new ReportGenerator();
-                                ArrayList<AttendeeReport> attendees = rg.generateAttendeeReport();
-                                if (attendees.size() == 0) {
+                                ArrayList<AttendeeReport> questions = rg.generateAttendeeReport();
+                                if (questions.size() == 0) {
                                     out.print("<tr>");
                                     out.print("<td>");
                                     out.print("No data is available at this time.");
                                     out.print("</td>");
                                     out.print("</tr>");
                                 }
-                                for (int i = 0; i <attendees.size(); i++) {
+                                for (int i = 0; i <questions.size(); i++) {
                                     out.print("<tr id='row" + i + "'>");
                                     out.print("<td>");
-                                    out.print(attendees.get(i).getSessionName());
+                                    out.print(questions.get(i).getSessionName());
                                     out.print("</td>");
                                     out.print("<td>");
-                                    out.print(attendees.get(i).getLocalAttendees());
-                                    out.print("</td>");
-                                    out.print(attendees.get(i).getRemoteAttendees());
+                                    out.print(questions.get(i).getLocalAttendees());
                                     out.print("</td>");
                                     out.print("<td>");
+                                    out.print(questions.get(i).getRemoteAttendees());
+                                    out.print("</td>");
+                                    out.print("</tr>");
                                 }
                             %>
                         </tbody>
@@ -145,7 +146,7 @@
                         <ul>
                             <li class="pager-arrow"><a onclick="first();"><i class="icon12-first"></i></a></li>
                             <li class="pager-arrow"><a onclick="prev();"><i class="icon12-previous"></i></a></li>
-                                    <% int rows = attendees.size();
+                                    <% int rows = questions.size();
                                         int pages = 0;
                                         if (rows % 15 == 0) {
                                             pages = (rows / 15);
