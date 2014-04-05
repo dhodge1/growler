@@ -58,14 +58,26 @@
             .pager li {
                 cursor: pointer;
             }
-            .recessed {
-                border: 1px inset #ddd;
-                border-bottom: 1px inset #eee;
-                padding: 4px 4px;
-                background-color: #fff;
-                border-radius:15px;
-                box-shadow: inset 0 1.5px 4px #ccc;
-                font-size: 76px;
+            #recessed{
+                    color: #555;
+                    font-size: 58px;
+                    margin: 0 auto;
+                    padding: 200px 0 100px;
+                    width: 650px;
+                    position:relative;
+                    min-height: 90px;
+
+                    text-shadow:1px 1px 0 rgba(255,255,255,0.5);
+            }
+
+            #recessed:before{
+                    content: ">";
+                    font-size: 50px;
+                    left: -40px;
+                    opacity: 0.25;
+                    position: absolute;
+                    text-shadow: 1px 1px 0 white;
+                    top: 210px;
             }
             
             .buttons {
@@ -75,7 +87,7 @@
             .buttons button {
                 width: 150px;
                 height: 50px;
-                margin: 0 5px;
+                margin: 10px 5px;
             }
             .modalCloser, #print {
                 margin-left: 12px;
@@ -107,7 +119,7 @@
         <% } %>
         <%--<%@ include file="../../../includes/adminnav.jsp" %>--%>  
         <div class="container-fixed">
-            <div class="recessed">
+            <div id="recessed">
                 And the winner is...
             </div>
             <div class="buttons">
@@ -126,7 +138,7 @@
         <script src="http://growler.elasticbeanstalk.com/js/libs/sniui.dialog.1.2.0.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/jquery.shuffleLetters.js"></script>
         <script>
-            var container = $(".recessed");
+            var container = $("#recessed");
             var winne;
             
             $("#draw").on("click", function() {
