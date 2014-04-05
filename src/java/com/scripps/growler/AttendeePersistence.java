@@ -1,19 +1,12 @@
 package com.scripps.growler;
 
 import java.util.*;
-import java.sql.*;
 
 
 public class AttendeePersistence extends GrowlerPersistence {
     
-    /**
-     * Sorts queries by name ascending
-     */
-    final String SORT_BY_NAME_ASC = " order by session.name asc";
-    
-    
-    // An array list object for each method to use
-    ArrayList<Attendees> attendees = new ArrayList<Attendees>();
+
+    private ArrayList<Attendees> attendeesList = new ArrayList<Attendees>();
     
 
 
@@ -27,33 +20,32 @@ public class AttendeePersistence extends GrowlerPersistence {
     /**
      * Gets a list of all sessions in the database
      *
-     * @param sort the criteria to sort the sessions
-     * @return A list of sessions in the database, sorted
+     * @return A list of sessions in the database
      */
-    public ArrayList<Attendees> getAllSessions(String sort) {
+    public ArrayList<Attendees> getAllSessions() {
+        ArrayList<Attendees> attendeeList = new ArrayList<Attendees>();
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select * from session " + sort);
+            statement = connection.prepareStatement("select * from attendees ");
             result = statement.executeQuery();
-            attendees = new ArrayList<Attendees>();
+
             while (result.next()) {
-                //Create a new Session and add all data about the session to it
                 Attendees a = new Attendees();
                 a.setId(result.getInt("session_id"));
                 a.setLocalAttendees(result.getInt("local_Attendees"));
                 a.setRemoteAttendees(result.getInt("remote_Attendees"));
 
                 //Add the session to the list
-                attendees.add(a);
+                attendeeList.add(a);
             }
             closeJDBC();
-            return attendees;
+            return attendeeList;
         } catch (Exception e) {
         }
         finally {
             closeJDBC();
         }
-        return attendees;
+        return attendeeList;
     }
     
     
