@@ -127,12 +127,23 @@
         <script src="${pageContext.request.contextPath}/js/jquery.shuffleLetters.js"></script>
         <script>
             var container = $(".recessed");
-            var text, winner;
+            var winne;
             
             $("#draw").on("click", function() {
                $.get("../../../action/getWinner.jsp", function(data) {
-                   winner = JSON.parse(data);
+                   winne = JSON.parse(data);
                }, "json"); 
+               container.shuffleLetters({
+                   "text": winne.name
+               });
+               $.post("../../../action/insertWinner.jsp", {winner: JSON.stringify(winne)});
+            });
+            
+            $("#claim").on("click", function() {
+                $.post("../../../action/claimPrize.jsp", {winner: JSON.stringify(winne)});
+                container.shuffleLetters({
+                   "text": winne.name + " prize claimed."
+                });
             });
         </script>
     </body>
