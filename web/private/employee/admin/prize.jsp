@@ -166,10 +166,10 @@
         <script src="${pageContext.request.contextPath}/js/jquery.shuffleLetters.js"></script>
         <script>
             var container = $("#recessed");
-            var _winner = '';
-            var url1 = "../../../action/getWinner.jsp";
-            var url2 = "../../../action/insertWinner.jsp";
-            var url3 = "../../../action/claimPrize.jsp";
+            _winner = '';
+            url1 = "../../../action/getWinner.jsp";
+            url2 = "../../../action/insertWinner.jsp";
+            url3 = "../../../action/claimPrize.jsp";
     
             $(function() {
                 
@@ -190,15 +190,19 @@
                       type: 'GET'
                     });
                 }
-                draw().done(function(data){
+                /*draw().done(function(data){
                     _winner = data;
-                });
+                });*/
                 
-                container.shuffleLetters();
+                //container.shuffleLetters();
 
                 $("#draw").on("click", function(event) {
                    event.preventDefault();
-                   draw();
+                   
+                   draw().done(function(data){
+                       _winner = data;
+                   });
+                   //draw();
                    container.shuffleLetters({
                        "text": _winner.name
                    });
