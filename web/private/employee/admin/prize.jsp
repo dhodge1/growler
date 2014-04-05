@@ -77,7 +77,7 @@
                     opacity: 0.25;
                     position: absolute;
                     text-shadow: 1px 1px 0 white;
-                    top: 210px;
+                    top: 200px;
             }
             
             .buttons {
@@ -138,24 +138,37 @@
         <script src="http://growler.elasticbeanstalk.com/js/libs/sniui.dialog.1.2.0.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/jquery.shuffleLetters.js"></script>
         <script>
+            var container = $("#recessed");
+            _winner = '';
+            url1 = "../../../action/getWinner.jsp";
+            url2 = "../../../action/insertWinner.jsp";
+            url3 = "../../../action/claimPrize.jsp";
+    
             $(function() {
-                var container = $("#recessed");
-                var _winner;
                 
-                container.shuffleLetters();
+                function draw(){
+                    return $.ajax({
+                      url: url1,
+                      dataType:'json',
+                      type: 'GET'
+                    });
+                }
+                draw().done(function(data){
+                    _winner = data;
+                });
 
-                $("#draw").on("click", function() {
-                   $.get("../../../action/getWinner.jsp", function(data) {
-                       _winner = JSON.parse(data);
-                   }, "json"); 
+                $("#draw").on("click", function(event) {
+                   event.preventDefault();
+                   draw();
                    container.shuffleLetters({
                        "text": _winner.name
                    });
-                   $.post("../../../action/insertWinner.jsp", {winner: JSON.stringify(_winner)});
+                   $.post(url2, {winner: JSON.stringify(_winner)});
                 });
 
-                $("#claim").on("click", function() {
-                    $.post("../../../action/claimPrize.jsp", {winner: JSON.stringify(_winner)});
+                $("#claim").on("click", function(event) {
+                    event.preventDefault();
+                    $.post(url3, {winner: JSON.stringify(_winner)});
                     container.shuffleLetters({
                        "text": _winner.name + " prize claimed."
                     });

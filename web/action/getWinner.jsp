@@ -20,6 +20,7 @@
     
     String json = gson.toJson(win);
     
-    System.out.println(json);
+    //System.out.println(json);
+    out.print(json);
       
 %>
