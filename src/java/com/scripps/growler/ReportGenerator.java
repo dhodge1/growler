@@ -221,7 +221,7 @@ public class ReportGenerator extends GrowlerPersistence {
     public ArrayList<SurveyCompleterReport> generateSurveyCompleterReport() {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select name from user u, attendance a where a.user_id = u.id;");
+            statement = connection.prepareStatement("select name from user u, attendance a where a.user_id = u.id and a.isSurveyTaken = 1;");
             result = statement.executeQuery();
             ArrayList<SurveyCompleterReport> completers = new ArrayList<SurveyCompleterReport>();
             while (result.next()) {
