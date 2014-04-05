@@ -36,6 +36,28 @@ public class WinnerPersistence extends GrowlerPersistence {
         return null;
     }
     
+    public ArrayList<Winner> getAllWinners() {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select * from winner");
+            result = statement.executeQuery();
+            ArrayList<Winner> allWinners = new ArrayList<Winner>();
+            while (result.next()) {
+                Winner w = new Winner();
+                w.setId(result.getInt("winnerID"));
+                w.setName(result.getString("name"));
+                w.setClaimed(result.getBoolean("claimed"));
+                w.setTimeDrawn(result.getString("timeDrawn"));
+                allWinners.add(w);
+            }
+            return allWinners;
+        } catch (Exception e) {
+        } finally {
+            closeJDBC();
+        }
+        return null;
+    }
+    
     public void insertWinner(Winner w) {
         try{
             initializeJDBC();

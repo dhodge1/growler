@@ -1,6 +1,6 @@
 <%-- 
-    Document   : prize
-    Created on : Apr 5, 2014, 5:40:26 AM
+    Document   : prizeAudit
+    Created on : Apr 5, 2014, 2:43:52 PM
     Author     : David
 --%>
 
@@ -19,7 +19,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Prize Drawing</title>
+        <title>Prize Audit</title>
         <link rel="shortcut icon" type="image/png" href="http://growler.elasticbeanstalk.com/images/scripps_favicon-32.ico">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery-ui/jquery-ui-1.9.2.custom.min.css" />
         <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
@@ -76,16 +76,6 @@
                     text-align: center;
             }
 
-            /*#recessed:before{
-                    content: ">";
-                    font-size: 50px;
-                    left: -40px;
-                    opacity: 0.25;
-                    position: absolute;
-                    text-shadow: 1px 1px 0 white;
-                    top: 200px;
-            }*/
-            
             .buttons {
                 text-align: center;
             }
@@ -115,6 +105,8 @@
                 String name = String.valueOf(session.getAttribute("user"));
             } catch (Exception e) {
             }
+            WinnerPersistence wp = new WinnerPersistence();
+            ArrayList<Winner> allWinners = wp.getAllWinners();
         %>
         <%@ include file="../../../includes/adminheader.jsp" %> 
         <% if (String.valueOf(session.getAttribute("role")).equals("admin")) { %>
@@ -130,29 +122,89 @@
             <div class="row">
                 <ul class="breadcrumb">
                     <li><a href="${pageContext.request.contextPath}/home.jsp">Home</a></li>
-                    <li class='ieFix'>Prize Drawing</li>
+                    <li class='ieFix'>Prize Audit</li>
                 </ul>
             </div>
             <div class="row mediumBottomMargin">
-                <h1>Prize Drawing</h1>
+                <h1>Prize Audit</h1>
             </div>
             <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
             <div class="row largeBottomMargin">
-                <h3>Randomly select an eligible prize winner by clicking draw below. Administrators can also marked prizes as claimed and view the audit trail.</h3>
+                <h3>View all individuals who have been randomly selected as prize winners.</h3>
             </div>
             <!--<div class='row largeBottomMargin'></div>-->
             <div class="row mediumBottomMargin">
-                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='${pageContext.request.contextPath}/images/Techtoberfest2013small.png'/><span style="padding-left: 12px;">Select a Winner at Random</span></h2>
+                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='${pageContext.request.contextPath}/images/Techtoberfest2013small.png'/><span style="padding-left: 12px;">Audit Details</span></h2>
             </div>
-            <div class="dynamic">
-                <div id="recessed">
-                    And the winner is...
-                </div>
-                <div class="buttons">
-                    <button class="button button-primary" id="claim">Claim</button>
-                    <button class="button button-primary" id="draw">Draw</button>
-                    <button class="button button-primary" id="audit">Audit</button>
-                </div>
+            <div id="auditTable" class='row largeBottomMargin'>
+                <form onsubmit="return false;">
+                    <input type='hidden' id='current_page' value="1" />
+                    <input type='hidden' id='show_per_page' value='15' />
+                    <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
+                        <thead>
+                            <tr>
+                                <th>Employee ID</th>
+                                <th>Name</th>
+                                <th>Claimed</th>
+                                <th>Time Drawn</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%
+                                if (allWinners.size() == 0) {
+                                    out.print("<tr>");
+                                    out.print("<td>");
+                                    out.print("No data is available at this time.");
+                                    out.print("</td>");
+                                    out.print("</tr>");
+                                }
+                                for (int i = 0; i < allWinners.size(); i++) {
+                                    out.print("<tr id='row" + i + "'>");
+                                    out.print("<td>");
+                                    out.print(allWinners.get(i).getId());
+                                    out.print("</td>");
+                                    out.print("<td>");
+                                    out.print(allWinners.get(i).getName());
+                                    out.print("</td>");
+                                    out.print("<td>");
+                                    if (allWinners.get(i).getClaimed()) {
+                                        out.print("<i class='icon16-check'></i>");
+                                    } else {
+                                        out.print("");
+                                    }
+                                    out.print("</td>");
+                                    out.print("<td>");
+                                    out.print(allWinners.get(i).getTimeDrawn());
+                                    out.print("</td>");
+                                    out.print("</tr>");
+                                }
+                            %>
+                        </tbody>
+                    </table>
+                        <input type='hidden' id='total' value='<%= allWinners.size()%>'/>
+                    <div class="pager">
+                        <ul>
+                            <li class="pager-arrow"><a onclick="first();"><i class="icon12-first"></i></a></li>
+                            <li class="pager-arrow"><a onclick="prev();"><i class="icon12-previous"></i></a></li>
+                                    <% int rows = allWinners.size();
+                                        int pages = 0;
+                                        if (rows % 15 == 0) {
+                                            pages = (rows / 15);
+                                        } else {
+                                            pages = (rows / 15) + 1;
+                                        }
+                                        for (int i = 0; i < pages; i++) {
+                                            out.print("<li id=\"page" + (i + 1) + "\"><a onclick='page(" + (i + 1) + ");'>" + (i + 1) + "</a></li>");
+                                        }
+                                    %>
+                            <li class="pager-arrow"><a onclick="next();"><i class="icon12-next"></i></a></li>
+                            <li class="pager-arrow"><a onclick="last();"><i class="icon12-last"></i></a></li>
+                        </ul>
+                        <div class="pager-pageJump">
+                            <span>Page <input class="input-mini" type="text" id="pagejump"/> of <%= pages%></span>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
         <%@ include file="../../../includes/footer.jsp" %> 
@@ -163,63 +215,24 @@
         <script src="${pageContext.request.contextPath}/js/libs/jquery.wijmo-open.all.2.3.2.min.js"></script>
         <script src="http://growler.elasticbeanstalk.com/js/libs/bootstrap-dropdown.2.0.4.min.js"></script>
         <script src="http://growler.elasticbeanstalk.com/js/libs/sniui.dialog.1.2.0.min.js"></script>
-        <script src="${pageContext.request.contextPath}/js/jquery.shuffleLetters.js"></script>
+        <script src="${pageContext.request.contextPath}/js/pagination.js"></script>
         <script>
-            var container = $("#recessed");
-            var _winner = '';
-            var url1 = "../../../action/getWinner.jsp";
-            var url2 = "../../../action/insertWinner.jsp";
-            var url3 = "../../../action/claimPrize.jsp";
-    
-            $(function() {
-                
-                jQuery.fn.extend({
-                    disable: function(state) {
-                        return this.each(function() {
-                            this.disabled = state;
-                        });
-                    }
-                });
-                
-                $('#claim').disable(true);
-                
-                function draw(){
-                    return $.ajax({
-                      url: url1,
-                      dataType:'json',
-                      type: 'GET'
-                    });
-                }
-                draw().done(function(data){
-                    _winner = data;
-                });
-                
-                container.shuffleLetters();
-
-                $("#draw").on("click", function(event) {
-                   event.preventDefault();
-                   draw();
-                   container.shuffleLetters({
-                       "text": _winner.name
-                   });
-                   $.post(url2, {winner: JSON.stringify(_winner)});
-                   $('#claim').disable(false);
+                $('form').submit(function(event) {
+                        pageJump();
+                        return false;
                 });
 
-                $("#claim").on("click", function(event) {
-                    event.preventDefault();
-                    $.post(url3, {winner: JSON.stringify(_winner)});
-                    container.shuffleLetters({
-                       "text": _winner.name + " prize claimed."
-                    });
+                $(document).ready(function() {
+                        var page = 1;
+                        $("#current_page").val(page);
+                        var total = parseInt($("#total").val());
+                        var pages = Math.floor((total / parseInt($("#show_per_page").val())) + 1);
+                        for (var i = 20; i < total + 1; i++) {
+                            $("#row" + i).hide();
+                        }
+                        unActive();
+                        $("#page1").addClass("active");
                 });
-                
-                $("#audit").on("click", function(event) {
-                    event.preventDefault();
-                    window.location = "./prizeAudit.jsp";
-                });
-
-            });
         </script>
     </body>
 </html>
