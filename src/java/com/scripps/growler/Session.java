@@ -240,11 +240,7 @@ public class Session {
         this.userRegistered = userRegistered;
     }
     
-/*  --------------------------------------------------------------------------------
-    Added by Chelsea Grindstaff
-    18 March 2014
-    Used with processTrackAttendees
-    */    
+  
     
     /**
      * Gets the # of local attendees
