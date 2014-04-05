@@ -1,6 +1,6 @@
 <%-- 
-    Document   : getWinner
-    Created on : Apr 5, 2014, 5:11:35 AM
+    Document   : insertWinner
+    Created on : Apr 5, 2014, 5:29:30 AM
     Author     : David
 --%>
 
@@ -13,13 +13,11 @@
 
 <%
     WinnerPersistence wp = new WinnerPersistence();
-    ArrayList<Winner> winners = wp.getWinner();
-    
-    Winner win = winners.get(0);
     Gson gson = new Gson();
     
-    String json = gson.toJson(win);
+    String winner = request.getParameter("winner");
     
-    System.out.println(json);
-      
+    Winner win = gson.fromJson(winner, Winner.class);
+    
+    wp.insertWinner(win);
 %>

@@ -52,8 +52,7 @@ public class Winner {
     
     @Override
     public String toString() {
-        return "Winner [id=" + id + ", name=" + name + ", claimed="
-            + claimed + ", timeDrawn=" + timeDrawn + "]";
+        return "Winner [id=" + id + ", name=" + name + ", timeDrawn=" + timeDrawn + "]";
     }
     
     
