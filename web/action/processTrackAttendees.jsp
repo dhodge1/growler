@@ -27,17 +27,17 @@
 
 
 <% 
-    Session s = new Session();
+    Attendees s = new Attendees();
     
     int localAttendees = Integer.parseInt(String.valueOf(request.getParameter("localAttendees")));
     int remoteAttendees = Integer.parseInt(String.valueOf(request.getParameter("remoteAttendees")));
     int sessionId = Integer.valueOf(request.getParameter("sessionChosen"));
 
     
-    SessionPersistence sp = new SessionPersistence();
+    AttendeePersistence ap = new AttendeePersistence();
 
     
-    sp.addAttendees(sessionId, localAttendees, remoteAttendees);
+    ap.addAttendees(sessionId, localAttendees, remoteAttendees);
     
     
     session.setAttribute("message", "Success: The number of attendees has been submitted successfully!");
