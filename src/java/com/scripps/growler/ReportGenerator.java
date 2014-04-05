@@ -480,5 +480,29 @@ public class ReportGenerator extends GrowlerPersistence {
     }
     
     
+    public ArrayList<AttendeeReport> generateAttendeeReport() {
+        AttendeePersistence ap = new AttendeePersistence();
+        ArrayList<Attendees> attendees = ap.getAllSessions(" order by session.name asc");
+        ListIterator<Attendees> iterator = attendees.listIterator();
+        ArrayList<AttendeeReport> report = new ArrayList<AttendeeReport>();
+        SessionPersistence sp = new SessionPersistence();
+        
+        while (iterator.hasNext()) {
+            AttendeeReport r = new AttendeeReport();
+            Integer sessionId = r.getId();
+            Integer localAttendees = r.getLocalAttendees();
+            Integer remoteAttendees = r.getRemoteAttendees();
+            Session sessionInfo = sp.getSessionByID(sessionId);
+            String sessionName = sessionInfo.getName();
+            r.setSessionName(sessionName);
+            r.setLocalAttendees(localAttendees);
+            r.setRemoteAttendees(remoteAttendees);
+            report.add(r);
+        }
+        closeJDBC();
+        return report;
+    }
+
+
     
 }
