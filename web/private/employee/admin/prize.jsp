@@ -59,18 +59,23 @@
                 cursor: pointer;
             }
             #recessed{
-                    color: #555;
-                    font-size: 58px;
-                    margin: 0 auto;
-                    padding: 200px 0 100px;
+                    //color: #555;
+                    font-size: 38px;
+                    margin: 25px auto;
+                    padding: 100px 0 100px;
                     width: 650px;
                     position:relative;
                     min-height: 90px;
-
                     text-shadow:1px 1px 0 rgba(255,255,255,0.5);
+                    border: 1px inset #ddd;
+                    border-bottom: 1px inset #eee;
+                    background-color: #fff;
+                    border-radius:15px;
+                    box-shadow: inset 0 1.5px 4px #ccc;
+                    text-align: center;
             }
 
-            #recessed:before{
+            /*#recessed:before{
                     content: ">";
                     font-size: 50px;
                     left: -40px;
@@ -78,7 +83,7 @@
                     position: absolute;
                     text-shadow: 1px 1px 0 white;
                     top: 200px;
-            }
+            }*/
             
             .buttons {
                 text-align: center;
@@ -88,6 +93,7 @@
                 width: 150px;
                 height: 50px;
                 margin: 10px 5px;
+                margin-bottom: 40px;
             }
             .modalCloser, #print {
                 margin-left: 12px;
@@ -146,6 +152,16 @@
     
             $(function() {
                 
+                jQuery.fn.extend({
+                    disable: function(state) {
+                        return this.each(function() {
+                            this.disabled = state;
+                        });
+                    }
+                });
+                
+                $('#claim').disable(true);
+                
                 function draw(){
                     return $.ajax({
                       url: url1,
@@ -164,6 +180,7 @@
                        "text": _winner.name
                    });
                    $.post(url2, {winner: JSON.stringify(_winner)});
+                   $('#claim').disable(false);
                 });
 
                 $("#claim").on("click", function(event) {
