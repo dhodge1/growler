@@ -3,10 +3,10 @@ package com.scripps.growler;
 import java.util.*;
 
 /**
- * Handles the sessions or "events" of Techtoberfest
+ * Handles the # of attendees for each session of Techtoberfest
  *
  * @see com.scripps.growler.SessionPersistence
- * @author "Justin Bauguess"
+ * @author Chelsea
  */
 public class Attendees {
 
