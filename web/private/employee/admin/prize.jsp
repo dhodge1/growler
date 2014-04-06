@@ -166,7 +166,7 @@
         <script src="${pageContext.request.contextPath}/js/jquery.shuffleLetters.js"></script>
         <script>
             var container = $("#recessed");
-            _winner = '';
+            _winner = {};
             url1 = "../../../action/getWinner.jsp";
             url2 = "../../../action/insertWinner.jsp";
             url3 = "../../../action/claimPrize.jsp";
@@ -202,11 +202,13 @@
                    draw().done(function(data){
                        _winner = data;
                    });
+                   alert(_winner.name);
                    //draw();
                    container.shuffleLetters({
                        "text": _winner.name
                    });
                    $.post(url2, {winner: JSON.stringify(_winner)});
+                   alert(_winner.name)
                    $('#claim').disable(false);
                 });
 
