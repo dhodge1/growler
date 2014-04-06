@@ -140,7 +140,13 @@
                                     out.print("</td>");
                                     out.print("<td>");
                                     try{
-                                    out.print(commentsrep.get(i).getComment());
+                                        String temp = commentsrep.get(i).getComment();
+                                        if(temp == null)
+                                        {
+                                            //print nothing
+                                        }else{
+                                            out.print(temp);
+                                        }
                                     }catch (Exception e){
                                         out.print("Error retrieving comment");
                                     }
