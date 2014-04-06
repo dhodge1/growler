@@ -202,6 +202,9 @@
                    draw().done(function(data){
                        _winner = data;
                    });
+                   draw().done(function(data){
+                       _winner = data;
+                   });
                    //alert(_winner.name);
                    //draw();
                    container.shuffleLetters({
