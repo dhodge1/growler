@@ -73,7 +73,7 @@
             if (null == session.getAttribute("id")) {
                 response.sendRedirect("http://sniforms.scrippsnetworks.com/siteminderagent/sniforms/logout.html");
             } else if (!session.getAttribute("role").equals("admin")) {
-                response.sendRedirect("../../../index.jsp");
+                response.sendRedirect("http://sniforms.scrippsnetworks.com/siteminderagent/sniforms/logout.html");
             }
             try {
                 user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
