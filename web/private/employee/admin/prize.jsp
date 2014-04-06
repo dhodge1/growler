@@ -198,10 +198,7 @@
 
                 $("#draw").on("click", function(event) {
                    //event.preventDefault();
-                   
-                   draw().done(function(data){
-                       _winner = data;
-                   });
+                   draw();
                    draw().done(function(data){
                        _winner = data;
                    });
