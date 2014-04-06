@@ -197,18 +197,18 @@
                 //container.shuffleLetters();
 
                 $("#draw").on("click", function(event) {
-                   event.preventDefault();
+                   //event.preventDefault();
                    
                    draw().done(function(data){
                        _winner = data;
                    });
-                   alert(_winner.name);
+                   //alert(_winner.name);
                    //draw();
                    container.shuffleLetters({
                        "text": _winner.name
                    });
                    $.post(url2, {winner: JSON.stringify(_winner)});
-                   alert(_winner.name)
+                   //alert(_winner.name)
                    $('#claim').disable(false);
                 });
 
