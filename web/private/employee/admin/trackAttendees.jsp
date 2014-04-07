@@ -41,21 +41,6 @@
             }
 
 
-            /*
-            int x = request.getElementById("session").selectedIndex;
-            String sessionName = request.getElementsByTagName("option")[x].value;
-            session.setAttribute("sessionName", sessionName);
-            
-            Session ses = sp.getSessionByName(sessionName);
-            int sessionId = ses.getId(); 
-            session.setAttribute("sessionId", sessionId);
-
-            int localAttendees = Integer.parseInt(String.valueOf(request.getParameter("localAttendees")));
-            int remoteAttendees = Integer.parseInt(String.valueOf(request.getParameter("remoteAttendees")));
-            session.setAttribute("localAttendees", localAttendees);
-            session.setAttribute("remoteAttendees", remoteAttendees);
-            */
-
         %>
         <%@ include file="../../../includes/adminheader.jsp" %>
         <% if (String.valueOf(session.getAttribute("role")).equals("admin")) { %>
@@ -111,7 +96,7 @@
   ---------------------------------------->
                                 <div class="form-group">
                                     <label class="required">What session are you entering attendees for?</label>
-                                    <select name='session' id='session' class='input x-large'>
+                                    <select name='sessionChosen' id='sessionChosen' class='input x-large'>
                                         <option value='0'> Please select a session </option>
                                         <%
                                         SessionPersistence sessionPersist = new SessionPersistence();

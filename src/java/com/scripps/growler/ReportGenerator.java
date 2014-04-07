@@ -221,7 +221,7 @@ public class ReportGenerator extends GrowlerPersistence {
     public ArrayList<SurveyCompleterReport> generateSurveyCompleterReport() {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select name from user u, attendance a where a.user_id = u.id;");
+            statement = connection.prepareStatement("select name from user u, attendance a where a.user_id = u.id and a.isSurveyTaken = 1");
             result = statement.executeQuery();
             ArrayList<SurveyCompleterReport> completers = new ArrayList<SurveyCompleterReport>();
             while (result.next()) {
@@ -240,7 +240,7 @@ public class ReportGenerator extends GrowlerPersistence {
     public ArrayList<MealReport> generateMealReport() {
         try{
             initializeJDBC();
-            statement = connection.prepareStatement("select round(avg(quality), 1) as avgQuality, round(avg(selection), 1) as avgSelection, round(avg(room), 1) as avgRoom from mealSurvey;");
+            statement = connection.prepareStatement("select round(avg(quality), 1) as avgQuality, round(avg(selection), 1) as avgSelection, round(avg(room), 1) as avgRoom from mealSurvey");
             result = statement.executeQuery();
             ArrayList<MealReport> meals = new ArrayList<MealReport>();
             while (result.next()) {
@@ -261,7 +261,7 @@ public class ReportGenerator extends GrowlerPersistence {
     public ArrayList<FacilityReport> generateFacilityReport() {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select distinct location.description as room, (select round(avg(local_Attendees + remote_Attendees)) from attendees, session, location l where attendees.session_id = session.id and session.location = l.id and l.description = room) as avg_att, (select sum(local_Attendees + remote_Attendees) from attendees, session, location lo where attendees.session_id = session.id and session.location = lo.id and lo.description = room) as tot_att, (select round(avg(ranking), 2) from attendees, session, location loc, session_ranking where session_ranking.session_id = attendees.session_id and attendees.session_id = session.id and session.location = loc.id and loc.description = room) as avg_rat from location, session, attendees where location.id = session.location and session.id = attendees.session_id order by avg_rat desc;");
+            statement = connection.prepareStatement("select distinct location.description as room, (select round(avg(local_Attendees + remote_Attendees)) from attendees, session, location l where attendees.session_id = session.id and session.location = l.id and l.description = room) as avg_att, (select sum(local_Attendees + remote_Attendees) from attendees, session, location lo where attendees.session_id = session.id and session.location = lo.id and lo.description = room) as tot_att, (select round(avg(ranking), 2) from attendees, session, location loc, session_ranking where session_ranking.session_id = attendees.session_id and attendees.session_id = session.id and session.location = loc.id and loc.description = room) as avg_rat from location, session, attendees where location.id = session.location and session.id = attendees.session_id order by avg_rat desc");
             result = statement.executeQuery();
             ArrayList<FacilityReport> fac = new ArrayList<FacilityReport>();
             while (result.next()) {
@@ -283,7 +283,7 @@ public class ReportGenerator extends GrowlerPersistence {
     public ArrayList<SurveyCompleterReport> generateSurveyCompleterReport2() {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("SET @serial=0; select @serial := @serial+1 AS `Number`, name from user u, attendance a where a.user_id = u.id;");
+            statement = connection.prepareStatement("SET @serial=0; select @serial := @serial+1 AS `Number`, name from user u, attendance a where a.user_id = u.id");
             result = statement.executeQuery();
             ArrayList<SurveyCompleterReport> completers = new ArrayList<SurveyCompleterReport>();
             while (result.next()) {
@@ -480,5 +480,54 @@ public class ReportGenerator extends GrowlerPersistence {
     }
     
     
+    public ArrayList<AttendeeReport> generateAttendeeReport2() {
+        AttendeePersistence ap = new AttendeePersistence();
+        ArrayList<Attendees> attendees = ap.getAllSessions();
+        ListIterator<Attendees> iterator = attendees.listIterator();
+        ArrayList<AttendeeReport> report = new ArrayList<AttendeeReport>();
+        SessionPersistence sp = new SessionPersistence();
+        
+        while (iterator.hasNext()) {
+            AttendeeReport r = new AttendeeReport();
+            Integer sessionId = r.getId();
+            Integer localAttendees = r.getLocalAttendees();
+            Integer remoteAttendees = r.getRemoteAttendees();
+            Session sessionInfo = sp.getSessionByID(sessionId);
+            String sessionName = sessionInfo.getName();
+            r.setSessionName(sessionName);
+            r.setLocalAttendees(localAttendees);
+            r.setRemoteAttendees(remoteAttendees);
+            report.add(r);
+        }
+        closeJDBC();
+        return report;
+    }
+    
+    
+    public ArrayList<AttendeeReport> generateAttendeeReport() {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select s.name, s.id, a.session_id, a.local_Attendees, a.remote_Attendees from session s, attendees a where s.id=a.session_id");
+            result = statement.executeQuery();
+            ArrayList<AttendeeReport> report = new ArrayList<AttendeeReport>();
+            while (result.next()) {
+                AttendeeReport r = new AttendeeReport();
+                r.setSessionName(result.getString("s.name"));
+                r.setLocalAttendees(result.getInt("a.local_Attendees"));
+                r.setRemoteAttendees(result.getInt("a.remote_Attendees"));
+                report.add(r);
+                        
+            }
+            return report;
+        } catch (Exception e) {
+        } finally {
+            closeJDBC();
+        }
+        return null;
+       
+    }
+    
+ 
+
     
 }

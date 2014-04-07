@@ -375,4 +375,13 @@
     <url-pattern>/trackAttendees</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>attendeeReport</servlet-name>
+    <jsp-file>/private/employee/admin/attendeeReport.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>attendeeReport</servlet-name>
+    <url-pattern>/attendeeReport</url-pattern>
+  </servlet-mapping>
+
 </web-app>
