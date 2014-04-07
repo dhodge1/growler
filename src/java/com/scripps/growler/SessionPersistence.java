@@ -717,7 +717,7 @@ public class SessionPersistence extends GrowlerPersistence {
      {
         try 
         {
-            String preparedQuery =  "SELECT id FROM session "                     
+            String preparedQuery =  "SELECT id, name FROM session "                     
                                    +"WHERE EXTRACT(YEAR FROM session_date) = ? "
                                    +"AND active = ? " 
                                    +"AND EXTRACT(MONTH FROM session_date) = '10' ";
@@ -731,6 +731,7 @@ public class SessionPersistence extends GrowlerPersistence {
             {
                 Session s = new Session();
                 s.setId(result.getInt("id"));
+                s.setName(result.getString("name"));
                 sessions.add(s);
             }
             return sessions;
@@ -748,15 +749,15 @@ public class SessionPersistence extends GrowlerPersistence {
  * Thuy
  * gets a session ranking average base on a given question category
  **/        
-public double getAvgByQuestionCategory(int sessionId, int questionNum)
+public String getAvgByQuestionCategory(int sessionId, int questionNum)
 {      
-   String lclTemp = new String("0");
+   String lclTemp = new String();
     
    try 
    {
       initializeJDBC();
       String preparedSQL =   "SELECT AVG(ranking) AS AVG "
-	                   + "FROM session_ranking r"
+	                   + "FROM session_ranking r "
 			   + "WHERE r.session_id = ? "
                            + "AND r.question_id = ? ";
                                    
@@ -769,11 +770,11 @@ public double getAvgByQuestionCategory(int sessionId, int questionNum)
          lclTemp = result.getString("AVG");        
       }
       closeJDBC();
-      return Double.parseDouble(lclTemp);
+      return(lclTemp);
    }
    catch (Exception e) {
    }
-   return Double.parseDouble(lclTemp);
+   return ("0.00");
 }//END OF METHOD            
        
     //*********************ADDED CODE END HERE*********************************

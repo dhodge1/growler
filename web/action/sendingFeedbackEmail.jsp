@@ -10,104 +10,54 @@
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ page import="com.scripps.growler.*, java.sql.*" %>
 <%@ page import="com.scripps.growler.Session" %>
-
-
-
-<!doctype html>
-<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
-<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
-<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <meta name="description" content="" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-        <title>Session Key Email Confirm</title><!-- Title -->
-
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> 
-        <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/bootstrap.1.2.0.css" /><!--Using bootstrap 1.2.0-->
-        <link rel="stylesheet" href="http://growler.elasticbeanstalk.com/css/bootstrap/responsive.1.2.0.css" /><!--Basic responsive layout enabled-->
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/demo.css" />  
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/general.css" /><!--General CSS-->
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/speaker.css" /><!--Survey CSS-->
-        <link rel="stylesheet" href="/resources/demos/style.css" />
-        <script src="http://growler.elasticbeanstalk.com/js/libs/modernizr.2.6.2.custom.min.js"></script><!--Modernizer-->
-    </head>
-    <body id="growler1">
-        <%
-            int user = 0;
-            if (null == session.getAttribute("id")) {
-                response.sendRedirect("http://sniforms.scrippsnetworks.com/siteminderagent/sniforms/logout.html");
-            } else if (!session.getAttribute("role").equals("admin")) {
-                response.sendRedirect("../../../index.jsp");
-            }
-            try {
-                user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
-                String name = String.valueOf(session.getAttribute("user"));
-            } catch (Exception e) {
-            }
-        %>
-        <%@ include file="../../../includes/adminheader.jsp" %>
-        <% if (String.valueOf(session.getAttribute("role")).equals("admin")) { %>
-            <%--<jsp:include page="../../includes/supernav.jsp" flush="true"/>--%>
-            <%@ include file="../../../includes/supernav.jsp" %>
-        <% } else {%>
-            <%--<jsp:include page="../../includes/adminnav.jsp" flush="true"/>--%>
-            <%@ include file="../../../includes/adminnav.jsp" %>
-        <% } %>
-        <%--<%@ include file="../../../includes/adminnav.jsp" %>--%>
-        
-
-
+<%@ page import="com.scripps.growler.Comment" %>
+<%@ page import="com.scripps.growler.CommentPersistence" %>
 
 
 <%
 
-StringBuffer emailList = new StringBuffer();
-StringBuffer commentList = new StringBuffer();
 String subject = new String();
 String content = new String();
 boolean isContentHTML = false;
 int sessionId;
+int emailSent = 0;
+String sessionName = new String();
 String infoMessage = new String();//for email sending status info message
-//String isSuccess = new String(); //for error checking purpose
-   
+String isSuccess = new String(); //for error checking purpose
+String avg1 = new String();
+String avg2 = new String();
+String avg3 = new String();
+String avg4 = new String();   
 //get an arraylist() of this year active sessions
 SessionPersistence sessionPer = new SessionPersistence();
 ArrayList<Session> sessionArrayList = sessionPer.getThisYearActiveSessionId(2014, true);
 int sessionSize = sessionArrayList.size();
-%>
 
-<div><p><%=sessionArrayList.size()%></p></div>
-
-        <%
+//*****************************************************************************
+//** If no session available then flag the warning feedback message and 
+//** redirect back to the confirming page.
+//   Else then generate an email list for that particular session speaker team.
+//******************************************************************************
 if(sessionSize==0)
 {
-/*
    infoMessage =   "No active sessions have been listed in the system.";
    request.setAttribute("infoMessage", infoMessage);
-   RequestDispatcher dispatcher = request.getRequestDispatcher("emailBySurvey");      
+   RequestDispatcher dispatcher = request.getRequestDispatcher("sessionKeyEmail-confirm");      
    if (dispatcher != null)
    {
      dispatcher.forward(request, response);
    } 
-*/
 }
 else
 {
-
-%>
-
-<div><p>HOHOHO</p></div>
-<%
   for(int i=0; i<sessionSize; i++)
   {
+    sessionName = sessionArrayList.get(i).getName();
     sessionId  = sessionArrayList.get(i).getId();
     SpeakerPersistence speakerPer = new SpeakerPersistence();
     ArrayList<Speaker>speakerArrayList = speakerPer.getSpeakersEmailListBySessionId(sessionId);
     int speakerSize = speakerArrayList.size();
+    StringBuffer emailList = new StringBuffer();
     if(speakerSize > 0)
     {
       for (int j = 0; j < speakerSize; j++)
@@ -123,74 +73,108 @@ else
         }//END OF GOOD EMAILS    
       }//END OF J LOOP
     } //END OF BUILDING EMAIL LIST
-
-    //gets the ranking average base on each question category
-    double lclAvg1 = sessionPer.getAvgByQuestionCategory(sessionId, 1);
-    double lclAvg2 = sessionPer.getAvgByQuestionCategory(sessionId, 2);
-    double lclAvg3 = sessionPer.getAvgByQuestionCategory(sessionId, 3);
-    double lclAvg4 = sessionPer.getAvgByQuestionCategory(sessionId, 4);
-
-    //gets an arraylist()of comments that related to the given session id
-    CommentPersistence commentPer = new CommentPersistence();
-    ArrayList<Comment>commentArrayList = commentPer.getCommentsBySession(sessionId);
-    int commentSize = commentArrayList.size();
-    if(commentSize > 0)
+    
+    //************************************
+    //**Error check for empty email list *
+    //************************************
+    if(emailList.length()!=0)
     {
-      for(int k=0; k <commentSize; k++)
-      {
-         commentList.append(commentArrayList.get(k).getDescription());
-         commentList.append("\n");  
-      }
-    } 
-    //**************************************************************
-    //**Everything is ready for hard coding the email content for **
-    //**team of speakers                                          **
-    //**************************************************************
-    subject =  "The feedback of sessesion.......";
-    content = "Dear Presenter(s) \n\n"
-	      + "Here is your session feedback\n" 
-	      + lclAvg1 +"<br>"
-              + lclAvg2 +"<br>"
-              + lclAvg3 +"<br>"
-              + lclAvg4 +"<br>"
-              + commentList.toString()
-	      + "\nThanks\n"
+        //gets the ranking average base on each question category
+        avg1 = sessionPer.getAvgByQuestionCategory(sessionId, 1);
+        //****************************************************
+        //** First,check if the question survey is available**
+        //** for a particular given session                 **
+        //****************************************************   
+        if(avg1 != null)
+        {
+          avg2 = sessionPer.getAvgByQuestionCategory(sessionId, 2);
+          avg3 = sessionPer.getAvgByQuestionCategory(sessionId, 3);
+          avg4 = sessionPer.getAvgByQuestionCategory(sessionId, 4);
+        }
+        else
+        { 
+          avg1 = "Not available";
+          avg2 = "Not available";
+          avg3 = "Not available";
+          avg4 = "Not available";
+        }
+        //gets an arraylist()of comments that related to the given session id
+        CommentPersistence commentPer = new CommentPersistence();
+        ArrayList<Comment>commentArrayList = commentPer.getCommentBySessionIdForFeedback(sessionId);
+        int commentSize = commentArrayList.size();
+        StringBuffer commentList = new StringBuffer();
+        //checks if any comment is available for the given session
+        if(commentSize > 0)
+        {
+          for(int k=0; k <commentSize; k++)
+          {
+            commentList.append(commentArrayList.get(k).getDescription());
+            commentList.append("\n");  
+          }
+        } 
+        else
+        {
+          commentList.append("Not available");
+        }
+        
+        if((!(avg1.equals("Not available"))) ||
+            (commentSize > 0))
+        {
+           //**************************************************************
+           //**Everything is ready for hard coding the email content for **
+           //**the given team of speakers                                **
+           //**************************************************************
+           subject =  "The feedback of session: " + sessionName;
+           content = "Dear Presenter(s) \n\n"
+              + "Here is the feedback for your presentation,\n\n" 
+              + "1. Average scores in each question category\n"
+	      + "\tQuestion 1: "+ avg1 + " (out of 5.00)\n"
+              + "\tQuestion 2: "+ avg2 + " (out of 5.00)\n"
+              + "\tQuestion 3: "+ avg3 + " (out of 5.00)\n"
+              + "\tQuestion 4: "+ avg4 + " (out of 5.00)\n\n"
+              + "2. Below are all the comments that relate to your presentation \n"
+              + "\t" + commentList.toString() 
+	      + "\n\nThanks\n\n"
 	      + "Techtoberfest Adminstration\n";	   
     
     
-   //**************************************************************
+           //**************************************************************
     
-   try
-   {
-   %>
-   <div><p><%=lclAvg1%></p></div>
-   <div><p><%=content%></p></div>
+           try
+           { 
    
-    <%   //perform the send email task
-     //   EmailUtilSMTPScripps.sendMail(emailList.toString(), subject, content, isContentHTML);
+            //perform the send email task
+            EmailUtilSMTPScripps.sendMail(emailList.toString(), subject, content, isContentHTML);
+            emailSent++;
+           }
+           catch (Exception e)
+           {
+             infoMessage ="Your message can't be sent at this time";
+             request.setAttribute("infoMessage", infoMessage); 
+             RequestDispatcher dispatcher = request.getRequestDispatcher("sessionKeyEmail-confirm");      
+             if (dispatcher != null)
+             {
+               dispatcher.forward(request, response);
+             }
+           } //End of catch      
+        } //READY TO EMAIL OUT 
+        
+    }//END OF EMAIL LIST AVAILABLE
+  }//END OF SESSION FOR LOOP
 
-   }
-   catch (Exception e)
-   {
-       infoMessage ="Your message can't be sent at this time";
+  if(emailSent > 0)
+  {
+       infoMessage = "Your message has been sent!";
+       isSuccess =   "true";
+       request.setAttribute("isSuccess", isSuccess);
        request.setAttribute("infoMessage", infoMessage); 
-	   
        RequestDispatcher dispatcher = request.getRequestDispatcher("sessionKeyEmail-confirm");      
        if (dispatcher != null)
        {
          dispatcher.forward(request, response);
-       }
-   
-     } //End of catch	  
-  }//END OF SESSION FOR LOOP
-}//END OF ELSE THERE SESSIONS IN 2014
+       } 
+  }
 
-
-   
+}//END OF ELSE THERE SESSIONS IN 2014   
    %>
    
-   
-          <%@ include file="../../../includes/footer.jsp" %> 
-       <%@ include file="../../../includes/scriptlist.jsp" %>
-    </body>
-</html>

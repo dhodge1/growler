@@ -12,6 +12,7 @@ import java.util.ArrayList;
  */
 public class CommentPersistence extends GrowlerPersistence {
     
+    ArrayList<Comment> comments = new ArrayList<Comment>();
     /**
      * Adds a comment to the database
      * @param c The Comment object
@@ -43,7 +44,7 @@ public class CommentPersistence extends GrowlerPersistence {
             statement = connection.prepareStatement("select session_id, comment from comments where session_id = ? order by comment");
             statement.setInt(1, id);
             result = statement.executeQuery();
-            ArrayList<Comment> comments = new ArrayList<Comment>();
+            //ArrayList<Comment> comments = new ArrayList<Comment>();
             while (result.next()) {
                 Comment c = new Comment(result.getInt("session_id"), result.getString("comments"));
                 comments.add(c);
@@ -67,7 +68,7 @@ public class CommentPersistence extends GrowlerPersistence {
             initializeJDBC();
             statement = connection.prepareStatement("select session_id, comment from comments order by session_id, comment");
             result = statement.executeQuery();
-            ArrayList<Comment> comments = new ArrayList<Comment>();
+            //ArrayList<Comment> comments = new ArrayList<Comment>();
             while (result.next()) {
                 Comment c = new Comment(result.getInt("session_id"), result.getString("comment"));
                 comments.add(c);
@@ -82,4 +83,39 @@ public class CommentPersistence extends GrowlerPersistence {
         }
         return null;
     }
+    //*************************************************************************
+    //**********************ADDED CODE START HERE******************************
+    /**************************************************************************
+     * Thuy To
+     * 04/07/2014
+     **************************************************************************/
+    
+    public ArrayList<Comment> getCommentBySessionIdForFeedback(int id)
+    {
+       try 
+       {
+           String preparedQuery =  "SELECT session_id, comment FROM comments  "                     
+                                   +"WHERE session_id = ? ";
+                                         
+           initializeJDBC();
+           statement = connection.prepareStatement(preparedQuery);
+           statement.setInt(1, id );
+           result = statement.executeQuery();
+           while (result.next()) 
+           {
+               Comment c = new Comment();
+               c.setSession_id(result.getInt("session_id"));
+               c.setDescription(result.getString("comment"));
+               comments.add(c);
+           }
+           return comments;
+       } 
+       catch (Exception e) {
+       }
+       finally 
+       {
+           closeJDBC();
+       }
+       return comments;
+    } 
 }
