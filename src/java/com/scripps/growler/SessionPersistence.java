@@ -756,7 +756,7 @@ public String getAvgByQuestionCategory(int sessionId, int questionNum)
    try 
    {
       initializeJDBC();
-      String preparedSQL =   "SELECT AVG(ranking) AS AVG "
+      String preparedSQL =   "SELECT ROUND(AVG(ranking),2) AS AVG "
 	                   + "FROM session_ranking r "
 			   + "WHERE r.session_id = ? "
                            + "AND r.question_id = ? ";

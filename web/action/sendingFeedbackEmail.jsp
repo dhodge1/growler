@@ -140,7 +140,7 @@ else
               + "B. Below are all the comments that relate to your presentation \n"
               +  commentList.toString() 
 	      + "\n\nThanks\n"
-	      + "Techtoberfest Adminstration\n";	   
+	      + "Techtoberfest Administration\n";	   
            //**************************************************************
     
            try
