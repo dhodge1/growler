@@ -46,7 +46,7 @@ if(sessionSize==0)
 {
    infoMessage =   "No active sessions have been listed in the system.";
    request.setAttribute("infoMessage", infoMessage);
-   RequestDispatcher dispatcher = request.getRequestDispatcher("sessionKeyEmail-confirm");      
+   RequestDispatcher dispatcher = request.getRequestDispatcher("sessionFeedbackEmail-confirm");      
    if (dispatcher != null)
    {
      dispatcher.forward(request, response);
@@ -154,7 +154,7 @@ else
            {
              infoMessage ="Your message can't be sent at this time";
              request.setAttribute("infoMessage", infoMessage); 
-             RequestDispatcher dispatcher = request.getRequestDispatcher("sessionKeyEmail-confirm");      
+             RequestDispatcher dispatcher = request.getRequestDispatcher("sessionFeedbackEmail-confirm");      
              if (dispatcher != null)
              {
                dispatcher.forward(request, response);
@@ -171,11 +171,21 @@ else
        isSuccess =   "true";
        request.setAttribute("isSuccess", isSuccess);
        request.setAttribute("infoMessage", infoMessage); 
-       RequestDispatcher dispatcher = request.getRequestDispatcher("sessionKeyEmail-confirm");      
+       RequestDispatcher dispatcher = request.getRequestDispatcher("sessionFeedbackEmail-confirm");      
        if (dispatcher != null)
        {
          dispatcher.forward(request, response);
        } 
+  }
+  else
+  {
+       infoMessage ="No valid email address or session feedback is not available at this time";
+       request.setAttribute("infoMessage", infoMessage); 
+       RequestDispatcher dispatcher = request.getRequestDispatcher("sessionFeedbackEmail-confirm");      
+       if (dispatcher != null)
+       {
+          dispatcher.forward(request, response);
+       }
   }
 
 }//END OF ELSE THERE SESSIONS IN 2014   

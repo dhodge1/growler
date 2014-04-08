@@ -254,7 +254,15 @@
     <url-pattern>/reEmailSKnCUpdate</url-pattern>
   </servlet-mapping>
  
-
+  <servlet>
+    <servlet-name>sessionFeedbackEmail-confirm</servlet-name>
+    <jsp-file>/private/employee/admin/sessionFeedbackEmail-confirm.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>sessionFeedbackEmail-confirm</servlet-name>
+    <url-pattern>/sessionFeedbackEmail-confirm</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
     <servlet-name>sendingFeedbackEmail</servlet-name>
     <jsp-file>/action/sendingFeedbackEmail.jsp</jsp-file>
