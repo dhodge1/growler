@@ -15,6 +15,10 @@
 
 
 <%
+String question1 = new String("This session met my expectations: ");
+String question2 = new String("The speaker was knowledgable on the topic: ");
+String question3 = new String("The speaker's presentation skills were good: ");
+String question4 = new String("The facility was appropriate for the presentation: ");
 
 String subject = new String();
 String content = new String();
@@ -93,10 +97,10 @@ else
         }
         else
         { 
-          avg1 = "Not available";
-          avg2 = "Not available";
-          avg3 = "Not available";
-          avg4 = "Not available";
+          avg1 = "(NOT AVAILABLE)";
+          avg2 = "(NOT AVAILABLE)";
+          avg3 = "(NOT AVAILABLE)";
+          avg4 = "(NOT AVAILABLE)";
         }
         //gets an arraylist()of comments that related to the given session id
         CommentPersistence commentPer = new CommentPersistence();
@@ -108,36 +112,35 @@ else
         {
           for(int k=0; k <commentSize; k++)
           {
-            commentList.append(commentArrayList.get(k).getDescription());
+            commentList.append("\t"+ (k+1) +")");
+            commentList.append(commentArrayList.get(k).getDescription().trim());
             commentList.append("\n");  
           }
         } 
         else
         {
-          commentList.append("Not available");
+          commentList.append("\t" +"(NOT AVAILABLE)");
         }
         
-        if((!(avg1.equals("Not available"))) ||
+        if((!(avg1.equals("(NOT AVAILABLE)"))) ||
             (commentSize > 0))
         {
            //**************************************************************
            //**Everything is ready for hard coding the email content for **
            //**the given team of speakers                                **
            //**************************************************************
-           subject =  "The feedback of session: " + sessionName;
+           subject =  "Session Feedback: " + sessionName;
            content = "Dear Presenter(s) \n\n"
-              + "Here is the feedback for your presentation,\n\n" 
-              + "1. Average scores in each question category\n"
-	      + "\tQuestion 1: "+ avg1 + " (out of 5.00)\n"
-              + "\tQuestion 2: "+ avg2 + " (out of 5.00)\n"
-              + "\tQuestion 3: "+ avg3 + " (out of 5.00)\n"
-              + "\tQuestion 4: "+ avg4 + " (out of 5.00)\n\n"
-              + "2. Below are all the comments that relate to your presentation \n"
-              + "\t" + commentList.toString() 
-	      + "\n\nThanks\n\n"
+              + "Here is the feedback for your presentation:\n\n" 
+              + "A. Average score for each question(out of 5.00)\n"
+	      + "\t1)"+ question1 + avg1 + "\n"
+              + "\t2)"+ question2 + avg2 + "\n"
+              + "\t3)"+ question3 + avg3 + "\n"
+              + "\t4)"+ question4 + avg4 + "\n\n"
+              + "B. Below are all the comments that relate to your presentation \n"
+              +  commentList.toString() 
+	      + "\n\nThanks\n"
 	      + "Techtoberfest Adminstration\n";	   
-    
-    
            //**************************************************************
     
            try
