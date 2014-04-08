@@ -224,6 +224,14 @@
     <servlet-name>mealReport</servlet-name>
     <url-pattern>/mealReport</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>overallSurveyReport</servlet-name>
+    <jsp-file>/private/employee/admin/overallSurveyReport.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>overallSurveyReport</servlet-name>
+    <url-pattern>/overallSurveyReport</url-pattern>
+  </servlet-mapping>
  
  
    <servlet>
@@ -254,6 +262,23 @@
     <url-pattern>/reEmailSKnCUpdate</url-pattern>
   </servlet-mapping>
  
+  <servlet>
+    <servlet-name>sessionFeedbackEmail-confirm</servlet-name>
+    <jsp-file>/private/employee/admin/sessionFeedbackEmail-confirm.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>sessionFeedbackEmail-confirm</servlet-name>
+    <url-pattern>/sessionFeedbackEmail-confirm</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>sendingFeedbackEmail</servlet-name>
+    <jsp-file>/action/sendingFeedbackEmail.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>sendingFeedbackEmail</servlet-name>
+    <url-pattern>/sendingFeedbackEmail</url-pattern>
+  </servlet-mapping>
 
   <servlet>
     <servlet-name>callOutAction</servlet-name>

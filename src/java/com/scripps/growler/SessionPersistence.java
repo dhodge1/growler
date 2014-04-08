@@ -713,14 +713,14 @@ public class SessionPersistence extends GrowlerPersistence {
      * This method returns a arraylist() of session objects. However, it gets
      * only the id field of each session object.
      ***/
-     public ArrayList<Session> getThisYearActiveSessionId(int year, String sort, boolean state)
+     public ArrayList<Session> getThisYearActiveSessionId(int year, boolean state)
      {
         try 
         {
-            String preparedQuery =  "SELECT id FROM session "                     
-                                   +"AND EXTRACT(YEAR FROM session_date) = ? "
-                                   +"WHERE active = ? " 
-                                   +"AND EXTRACT(MONTH FROM session_date) = '10' " + sort;
+            String preparedQuery =  "SELECT id, name FROM session "                     
+                                   +"WHERE EXTRACT(YEAR FROM session_date) = ? "
+                                   +"AND active = ? " 
+                                   +"AND EXTRACT(MONTH FROM session_date) = '10' ";
             initializeJDBC();
             statement = connection.prepareStatement(preparedQuery);
             statement.setInt(1, year);
@@ -731,6 +731,7 @@ public class SessionPersistence extends GrowlerPersistence {
             {
                 Session s = new Session();
                 s.setId(result.getInt("id"));
+                s.setName(result.getString("name"));
                 sessions.add(s);
             }
             return sessions;
@@ -748,14 +749,15 @@ public class SessionPersistence extends GrowlerPersistence {
  * Thuy
  * gets a session ranking average base on a given question category
  **/        
-public double getAvgByQuestionCategory(int sessionId, int questionNum)
+public String getAvgByQuestionCategory(int sessionId, int questionNum)
 {      
-   String lclTemp = new String(); 
+   String lclTemp = new String();
+    
    try 
    {
       initializeJDBC();
-      String preparedSQL =   "SELECT AVG(COALESCE(ranking, 0)) AS AVG "
-	                   + "FROM session_ranking r"
+      String preparedSQL =   "SELECT ROUND(AVG(ranking),2) AS AVG "
+	                   + "FROM session_ranking r "
 			   + "WHERE r.session_id = ? "
                            + "AND r.question_id = ? ";
                                    
@@ -768,11 +770,11 @@ public double getAvgByQuestionCategory(int sessionId, int questionNum)
          lclTemp = result.getString("AVG");        
       }
       closeJDBC();
-      return Double.parseDouble(lclTemp);
+      return(lclTemp);
    }
    catch (Exception e) {
    }
-   return(0);
+   return ("0.00");
 }//END OF METHOD            
        
     //*********************ADDED CODE END HERE*********************************
