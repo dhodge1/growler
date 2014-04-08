@@ -197,8 +197,7 @@
                 //container.shuffleLetters();
 
                 $("#draw").on("click", function(event) {
-                   //event.preventDefault();
-                   draw();
+                   event.preventDefault();
                    draw().done(function(data){
                        _winner = data;
                    });
