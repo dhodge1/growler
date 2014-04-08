@@ -224,6 +224,14 @@
     <servlet-name>mealReport</servlet-name>
     <url-pattern>/mealReport</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>overallSurveyReport</servlet-name>
+    <jsp-file>/private/employee/admin/overallSurveyReport.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>overallSurveyReport</servlet-name>
+    <url-pattern>/overallSurveyReport</url-pattern>
+  </servlet-mapping>
  
  
    <servlet>
