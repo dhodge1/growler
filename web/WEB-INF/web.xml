@@ -232,6 +232,14 @@
     <servlet-name>overallSurveyReport</servlet-name>
     <url-pattern>/overallSurveyReport</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>prize</servlet-name>
+    <jsp-file>/private/employee/admin/prize.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>prize</servlet-name>
+    <url-pattern>/prize</url-pattern>
+  </servlet-mapping>
  
  
    <servlet>
