@@ -157,6 +157,7 @@
             <li class="brand_nav <%= adminTab%>"><a href="#"><span class="nav_drop">System Admin</span><em></em></a>
                 <ul class="child-menu child-menu-ul">
                     <li><a href="${pageContext.request.contextPath}/features">System Features</a></li>
+                    <li><a href="${pageContext.request.contextPath}/prize">Prize Drawing</a></li>
                 </ul>
             </li>
             
