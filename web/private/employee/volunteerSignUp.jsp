@@ -103,14 +103,14 @@
                 <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='${pageContext.request.contextPath}/images/Techtoberfest2013small.png'/><span style="padding-left: 12px;">Volunteer Survey</span></h2>
             </div>
             <div id="survey" class="largeBottomMargin row">
-                <form method="post" action="${pageContext.request.contextPath}/need_to_enter_real_page_here.jsp">
+                <form method="post" action="${pageContext.request.contextPath}/action/processVolSignUp.jsp">
                     <table class="table" style="margin-left: -8px;">
                         <tr>
                             <td><label>What tasks can you help with?</label>
                             <p>We need: room hosts, room volunteers, hallway monitors, plants, volunteers to clean up, volunteers to setup, & event planners</p></td>
                         </tr>
                         <tr>
-                            <td><textarea maxlength="250" cols="100" rows="5" name="comment" id="commentbox"></textarea></td>
+                            <td><textarea maxlength="250" cols="100" rows="5" name="tasks" id="comment"></textarea></td>
                         </tr>
                         
                         <tr>
@@ -118,7 +118,7 @@
                                 <p>Event runs between 8AM-6PM October 10th-11th </p></td>
                         </tr>
                         <tr>
-                            <td><textarea maxlength="250" cols="100" rows="5" name="comment" id="commentbox"></textarea></td>
+                            <td><textarea maxlength="250" cols="100" rows="5" name="times" id="comment"></textarea></td>
                         </tr>
                     </table>
                     <div class="form-actions" style="padding-top: 12px;">
