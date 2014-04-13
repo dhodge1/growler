@@ -117,12 +117,14 @@
                     <% } %>
                     <li><a href="${pageContext.request.contextPath}/manageSessions">Manage Session Schedule</a></li>
                     <li><a href="${pageContext.request.contextPath}/trackAttendees">Track Attendees for a Session</a></li>
-                    <li><a href="${pageContext.request.contextPath}/sendingSessionKeyEmails">Email Session Key</a></li>                    
+                    <li><a href="${pageContext.request.contextPath}/sendingSessionKeyEmails">Email Session Key</a></li>  
+                    <li><a href="${pageContext.request.contextPath}/sendingFeedbackEmail">Email Session Feedback</a></li>
                 </ul>
             </li> 
             <li class="brand_nav <%= reportTab%>"><a href="#"><span class="nav_drop">Reports</span><em></em></a>
                 <ul class="child-menu child-menu-ul">
                     <li><a href="${pageContext.request.contextPath}/overallReport">Best Overall Session</a></li>
+                    <li><a href="${pageContext.request.contextPath}/overallSurveyReport">Overall Survey Report</a></li>
                     <li><a href="${pageContext.request.contextPath}/presentationReport">Best Presentation Skills</a></li>
                     <li><a href="${pageContext.request.contextPath}/commentsReport">Comments by Session</a></li>
                     <li><a href="${pageContext.request.contextPath}/confirmationReport">Confirmed Attendance</a></li>
@@ -166,6 +168,7 @@
             <li class="brand_nav <%= adminTab%>"><a href="#"><span class="nav_drop">System Admin</span><em></em></a>
                 <ul class="child-menu child-menu-ul">
                     <li><a href="${pageContext.request.contextPath}/features">System Features</a></li>
+                    <li><a href="${pageContext.request.contextPath}/prize">Prize Drawing</a></li>
                 </ul>
             </li>
             

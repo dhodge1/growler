@@ -156,6 +156,27 @@ public class SurveyPersistence extends GrowlerPersistence {
         } catch (Exception e) {
         }
     }
+    
+    public ArrayList<OverallSurvey> getOverallSurveys() {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("select round(avg(overallQuality), 2) as aQ, round(avg(topics), 2) as aT, round(avg(rooms), 2) as aR, round(avg(webEx), 2) as aW from overallSurvey");
+            result = statement.executeQuery();
+            ArrayList<OverallSurvey> overalls = new ArrayList<OverallSurvey>();
+            while (result.next()) {
+                OverallSurvey o = new OverallSurvey();
+                o.setOverallQuality(result.getFloat("aQ"));
+                o.setTopics(result.getFloat("aT"));
+                o.setRooms(result.getFloat("aR"));
+                o.setWebEx(result.getFloat("aW"));
+                overalls.add(o);
+            }
+            closeJDBC();
+            return overalls;
+        } catch (Exception e) {
+        }
+        return null;
+    }
 
     public ArrayList<Survey> getAllSurveys() {
         try {

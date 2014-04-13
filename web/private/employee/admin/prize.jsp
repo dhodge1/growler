@@ -166,7 +166,7 @@
         <script src="${pageContext.request.contextPath}/js/jquery.shuffleLetters.js"></script>
         <script>
             var container = $("#recessed");
-            _winner = '';
+            _winner = {};
             url1 = "../../../action/getWinner.jsp";
             url2 = "../../../action/insertWinner.jsp";
             url3 = "../../../action/claimPrize.jsp";
@@ -183,14 +183,14 @@
                 
                 $('#claim').disable(true);
                 
-                function draw(){
+                /*function draw(){
                     return $.ajax({
                       url: url1,
                       dataType:'json',
                       type: 'GET'
                     });
                 }
-                /*draw().done(function(data){
+                draw().done(function(data){
                     _winner = data;
                 });*/
                 
@@ -198,15 +198,30 @@
 
                 $("#draw").on("click", function(event) {
                    event.preventDefault();
-                   
-                   draw().done(function(data){
+                   /*draw().done(function(data){
                        _winner = data;
                    });
-                   //draw();
+                   alert(_winner.name);
+                   draw();*/
+                   _winner = function () {
+                        var tmp = null;
+                        $.ajax({
+                            'async': false,
+                            'type': "GET",
+                            'global': false,
+                            'dataType': 'json',
+                            'url': "../../../action/getWinner.jsp",
+                            'success': function (data) {
+                                tmp = data;
+                            }
+                        });
+                        return tmp;
+                    }();
                    container.shuffleLetters({
                        "text": _winner.name
                    });
                    $.post(url2, {winner: JSON.stringify(_winner)});
+                   //alert(_winner.name)
                    $('#claim').disable(false);
                 });
 
