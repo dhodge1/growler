@@ -12,12 +12,15 @@
     String speakerTab = "";
     String sessionTab = "";
     String blogTab = "";
+    String volunteerTab = "";
     if (pageURI.contains("theme")) {
         themeTab = active;
     } else if (pageURI.contains("speaker")) {
         speakerTab = active;
     } else if (pageURI.contains("session") || pageURI.contains("attendance") || pageURI.contains("survey")) {
         sessionTab = active;
+    } else if (pageURI.contains("volunteer")){
+        volunteerTab = active;
     } else if (pageURI.contains("home")) {
         home = " selected ";
     }
@@ -90,6 +93,14 @@
                         
 
                         
+                    </ul>
+                <!-- Added Volunteer tab temporarily: awaiting approval -Shaun -->
+                </li> 
+                <li class="brand_nav <%= volunteerTab%>"><a href="#" style='padding-left:8px;'><span class="nav_drop">Volunteers</span><em></em></a>
+                    <ul class="child-menu child-menu-ul">
+                        <%-- if (volunteerSignUp.getFeatureState()) { --%>
+                            <%@ include file="../../includes/regVolunteerSignUp.jsp" %>
+                        <%-- } --%>
                     </ul>
                 </li>             
                 

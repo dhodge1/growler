@@ -232,6 +232,14 @@
     <servlet-name>overallSurveyReport</servlet-name>
     <url-pattern>/overallSurveyReport</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>prize</servlet-name>
+    <jsp-file>/private/employee/admin/prize.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>prize</servlet-name>
+    <url-pattern>/prize</url-pattern>
+  </servlet-mapping>
  
  
    <servlet>
@@ -398,6 +406,15 @@
   <servlet-mapping>
     <servlet-name>attendeeReport</servlet-name>
     <url-pattern>/attendeeReport</url-pattern>
+  </servlet-mapping>
+  
+    <servlet>
+    <servlet-name>volunteerSignUp</servlet-name>
+    <jsp-file>/private/employee/volunteerSignUp.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>volunteerSignUp</servlet-name>
+    <url-pattern>/volunteerSignUp</url-pattern>
   </servlet-mapping>
 
 </web-app>

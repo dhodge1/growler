@@ -24,6 +24,7 @@
     String blogTab = "";
     String emailTab =""; //Thuy: added code for the email tab
     String adminTab = "";
+    String volunteerTab ="";
     
     if (pageURI.contains("theme")) {
         themeTab = active;
@@ -36,6 +37,8 @@
     } else if (pageURI.contains("room")) {
         roomTab = active;
     } else if (pageURI.contains("email")){
+        emailTab = active;
+    } else if (pageURI.contains("volunteer")){
         emailTab = active;
     } else if (pageURI.contains("admin")) {
         adminTab = active;
@@ -53,6 +56,7 @@
     Feature scheduleSession = fp.getFeatureState(5);
     Feature overallSurvey = fp.getFeatureState(8);
     Feature mealSurvey = fp.getFeatureState(9);
+    //Note: need to add feature state for Volunteer
 %>
 <nav class="topnav">
     <nav class="globalNavigation modify-pages" id="navigation">
@@ -154,9 +158,17 @@
             END OF ADDED CODE
             ---------------------------------------------%>  
             
+            <%--Added Volunteers tab. Awaiting Approval -Shaun --%>
+            <li class="brand_nav <%= volunteerTab%>"><a href="#"><span class="nav_drop">Volunteers</span><em></em></a>
+                <ul class="child-menu child-menu-ul">
+                    <li><a href="${pageContext.request.contextPath}/volunteerSignUp">Volunteer Sign-up</a></li>
+                </ul>
+            </li>
+            
             <li class="brand_nav <%= adminTab%>"><a href="#"><span class="nav_drop">System Admin</span><em></em></a>
                 <ul class="child-menu child-menu-ul">
                     <li><a href="${pageContext.request.contextPath}/features">System Features</a></li>
+                    <li><a href="${pageContext.request.contextPath}/prize">Prize Drawing</a></li>
                 </ul>
             </li>
             

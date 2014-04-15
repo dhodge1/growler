@@ -143,6 +143,19 @@ public class SurveyPersistence extends GrowlerPersistence {
         }
     }
     
+    public void submitVolSignUpSurvey(int uid, String tasks, String times) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("insert into volunteers (uid, tasks, times) values (?, ?, ?)");
+            statement.setInt(1, uid);
+            statement.setString(2, tasks);
+            statement.setString(3, times);
+            statement.execute();
+            closeJDBC();
+        } catch (Exception e) {
+        }
+    }
+    
     public void submitOverallSurvey(int q1, int q2, int q3, int q4) {
         try {
             initializeJDBC();

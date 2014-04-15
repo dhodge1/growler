@@ -1,9 +1,8 @@
 <%-- 
-    Document   : mealSurvey
-    Created on : Mar 22, 2014, 1:44:05 AM
-    Author     : David
+    Document   : volunteerSignUp.jsp
+    Created on : Apr 5, 2014, 11:01:09 PM
+    Author     : Shaun
 --%>
-
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
 <%@page import="com.scripps.growler.*" %>
@@ -13,7 +12,7 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <title>Submit Overall Feedback</title><!-- Title -->
+        <title>Volunteer Sign-up</title><!-- Title -->
         <meta name="description" content="Growler Project Tentative Layout" /><!-- Description -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="shortcut icon" type="image/png" href="${pageContext.request.contextPath}/images/scripps_favicon-32.ico">
@@ -53,6 +52,7 @@
     </head>
     <body id="growler1">
         <%
+            
             int user = 0;
             if (null == session.getAttribute("id")) {
                 response.sendRedirect("http://sniforms.scrippsnetworks.com/siteminderagent/sniforms/logout.html");
@@ -62,11 +62,15 @@
                 String name = String.valueOf(session.getAttribute("user"));
             } catch (Exception e) {
             }
+            
+            /**
+             * Need to add my own check here for Volunteer sign up
             SurveyPersistence survP = new SurveyPersistence();
             int surveyCheck = survP.mealSurveyCheck(Integer.parseInt(String.valueOf(session.getAttribute("id"))));
             if (surveyCheck == 1) {
                 response.sendRedirect("mealTaken");
             }
+            **/
         %>
         <%@ include file="../../includes/header.jsp" %> 
         <% if (String.valueOf(session.getAttribute("role")).equals("admin")) { %>
@@ -82,54 +86,41 @@
             <div class="row">
                 <ul class="breadcrumb">
                     <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
-                    <li class='ieFix'>Submit Feedback for Meals and Happy Hour</li>
+                    <li class='ieFix'>Submit Volunteer Interest</li>
                 </ul>
             </div>
             <div class="row mediumBottomMargin">
-                <h1 style="margin-top:0px;font-weight: normal;">Add A Survey</h1>
+                <h1 style="margin-top:0px;font-weight: normal;">Volunteer Sign-Up</h1>
             </div>
             <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
             <div class="row largeBottomMargin">
-                <h3>We appreciate your feedback and want to know what you thought of the meals and happy hours. Please let us know below!</h3>
+                <h3>Use this form to express interest in volunteering to help with preparation and operation of Techtoberfest events.</h3>
             </div>
             <div class="row mediumBottomMargin">
                 <label><span style="color: red;">*</span>Required field</label>
             </div>
             <div class="row mediumBottomMargin">
-                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='${pageContext.request.contextPath}/images/Techtoberfest2013small.png'/><span style="padding-left: 12px;">Overall Conference Feedback</span></h2>
+                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='${pageContext.request.contextPath}/images/Techtoberfest2013small.png'/><span style="padding-left: 12px;">Volunteer Survey</span></h2>
             </div>
             <div id="survey" class="largeBottomMargin row">
-                <form method="post" action="${pageContext.request.contextPath}/action/processMealSurvey.jsp">
+                <form method="post" action="${pageContext.request.contextPath}/action/processVolSignUp.jsp">
                     <table class="table" style="margin-left: -8px;">
-
                         <tr>
-                            <td><label>The quality of the food and drink served met my expectations.</label></td>
-                            <td><div class="form-group inline">
-                                    <input type="radio" value="1"  name="q1"><span class="checkbox inline divider" >Strongly Disagree</span>
-                                    <input type="radio" value="3"  name="q1" checked><span class="checkbox inline divider" >Neutral</span>
-                                    <input type="radio" value="5"  name="q1"><span class="checkbox inline" >Strongly Agree</span>
-                                </div></td>
+                            <td><label>What tasks can you help with?</label>
+                            <p>We need: room hosts, room volunteers, hallway monitors, plants, volunteers to clean up, volunteers to setup, & event planners</p></td>
                         </tr>
-
                         <tr>
-                            <td><label>The selection of food and drink available met my expectations.</label></td>
-                            <td><div class="form-group inline">
-                                    <input type="radio" value="1"  name="q2"><span class="checkbox inline divider" >Strongly Disagree</span>
-                                    <input type="radio" value="3"  name="q2" checked><span class="checkbox inline divider" >Neutral</span>
-                                    <input type="radio" value="5"  name="q2"><span class="checkbox inline" >Strongly Agree</span>
-                                </div></td>
+                            <td><textarea maxlength="250" cols="100" rows="5" name="tasks" id="comment"></textarea></td>
                         </tr>
-
+                        
                         <tr>
-                            <td><label>The room for the meal/happy hour was appropriate.</label></td>
-                            <td><div class="form-group inline">
-                                    <input type="radio" value="1"  name="q3"><span class="checkbox inline divider" >Strongly Disagree</span>
-                                    <input type="radio" value="3"  name="q3" checked><span class="checkbox inline divider" >Neutral</span>
-                                    <input type="radio" value="5"  name="q3"><span class="checkbox inline" >Strongly Agree</span>
-                                </div></td>
+                            <td><label>What times are you available?</label>
+                                <p>Event runs between 8AM-6PM October 10th-11th </p></td>
+                        </tr>
+                        <tr>
+                            <td><textarea maxlength="250" cols="100" rows="5" name="times" id="comment"></textarea></td>
                         </tr>
                     </table>
-                    <label>Comments:</label><textarea maxlength="250" cols="50" rows="5" name="comment" id="commentbox"></textarea>
                     <div class="form-actions" style="padding-top: 12px;">
                         <input class="button button-primary" type="submit" id="send" value="Submit"/>
                     </div>

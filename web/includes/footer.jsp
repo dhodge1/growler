@@ -8,4 +8,5 @@
     <hr />
     <p>SNI Techtoberfest.<!-- Application name --></p>
     <p>Copyright &copy; 2014 Scripps Networks.</p>
+    <p id="version" style="color: white;">Version 2.0.0</p>
   </footer><!-- /.pageFooter -->
