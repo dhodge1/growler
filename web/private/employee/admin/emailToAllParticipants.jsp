@@ -142,10 +142,14 @@
                }//END ELSE STMT
            %>
             
-                                       
-           <div class="row">
-                   
-              <form  id="action" action="eAllParticipants" method="POST">
+            
+                <div id="myAjaxDiv">
+                    <p style="text-align: center;" id="feedbackSuccess"></p>
+                </div>
+                
+           
+           <div class="row">           
+              <form  id="action">
                  <fieldset>
                     <div class="form-group">
                         <label class="required">Subject</label>
@@ -157,15 +161,15 @@
                            if(strStatus.compareTo("disabled") == 0)
                            {
                         %>   
-                               <input type="text" required="required" name="emailSubject" 
+                               <input id ="es" type="text" required="required" name="emailSubject" 
                                       class="input-xlarge" disabled />        
                         <%   
                            }//END OF IF
                            else
                            {
                         %> 
-                        <input type="text" required="required" name="emailSubject" 
-                               class="input-xlarge"/>        
+                               <input id ="es" type="text" required="required" name="emailSubject" 
+                                  class="input-xlarge"/>        
                         
                         <%
                             }//END OF ELSE
@@ -186,7 +190,7 @@
                            {
                          %>   
                        
-                              <textarea cols='75' rows='20' required="required" 
+                              <textarea id="ec" cols='75' rows='20' required="required" 
                                         name="emailContent" disabled>  
                               </textarea>  
                          <%   
@@ -195,7 +199,7 @@
                            {
                          %> 
                          
-                              <textarea cols='75' rows='20' required="required" 
+                              <textarea id="ec" cols='75' rows='20' required="required" 
                                         name="emailContent">   
                               </textarea>  
                         <%
@@ -217,16 +221,15 @@
                            {
                          %>   
                        
-                              <input type="submit" id="send" class="button button-primary"
-                                     value="Send" disabled/>
+                              <button id="send" class="button button-primary" disabled>Send</button>
                          <%   
                            }//END OF IF
                            else
                            {
                          %> 
                          
-                              <input type="submit" id="send" class="button button-primary"
-                                     value="Send" />
+                              <button id="send" class="button button-primary">Send</button>
+                              
                         <%
                             }//END OF ELSE
                              //*********************************************
@@ -237,10 +240,102 @@
                          <a id="cancel" href="${pageContext.request.contextPath}/home">Cancel</a>
                     </div>  
                  </fieldset> 
-              </form>	  
+              </form>
            </div> <%--END THE FORM'S div tag--%>                   
            
        </div> <%--END THE CONTAINER-FIXED div tag--%>
+       
+       <!---------------------------------------------------------------------
+       adds Ajax calls to display feedback messages
+       ---------------------------------------------------------------------->
+       <!-- include the jquery library-->
+       <script src="${pageContext.request.contextPath}/js/libs/jquery-1.8.3.min.js"></script>
+       <script>
+            var thuy = {};   //initialize variable thuy as an empty object
+            url1 = "eAllParticipants";  //see xml for the actual path
+            $("#send").on("click", function(event){
+                event.preventDefault();  
+               $("#myAjaxDiv").removeClass();
+               $("#myAjaxDiv").addClass("feedbackMessage-success row");
+               $("#feedbackSuccess").html("<b>Sending...</b>");
+                        thuy = function () {
+                            var tmp = null;
+                            $.ajax({
+                                'async': false,
+                                'type': "POST",
+                                'global': false,
+                                'dataType': 'json',
+                                //attachs the data from the input fields
+                                'data':{'emailSubject':$("#es").val(), 'emailContent':$("#ec").val()},
+                                'url': "eAllParticipants",
+                                'success': function (data) {
+                                    tmp = data;
+                                }
+                            });
+                            return tmp;
+                        }();
+                   
+                   //thuy = JSON.parse(thuy);
+                   //alert($("#es").val());
+                   //********************************************************************************
+                   //whenever we receive the json object back from the eAllParticipants.jsp,
+                   //we check the success field of thuy object. If it is true then that mean all the
+                   //email messages sent. Otherwise, we will get other feedback message back
+                   //********************************************************************************
+                   if(thuy.success)
+                   {  
+                      $("#myAjaxDiv").removeClass();
+                      $("#myAjaxDiv").addClass("feedbackMessage-success row");
+                      $("#feedbackSuccess").html(thuy.feedbackMessage);       
+                   }
+                   else
+                   {
+                      $("#myAjaxDiv").removeClass();
+                      $("#myAjaxDiv").addClass("feedbackMessage-warning row");
+                      $("#feedbackSuccess").html(thuy.feedbackMessage);  
+                   }
+        
+            });
+    
+      /*            
+                $("#feedback").on("click", function(event) {
+                   //event.preventDefault();
+                   feedback();
+                   feedback().done(function(data){
+                       _feedback = data;
+                   });
+                   
+                   container.shuffleLetters({
+                       "text": _feedback
+                   });
+                   $.post(url2, {winner: JSON.stringify(_winner)});
+                   //alert(_winner.name)
+                   $('#claim').disable(false);
+                });
+
+                $("#claim").on("click", function(event) {
+                    event.preventDefault();
+                    $.post(url3, {winner: JSON.stringify(_winner)});
+                    container.shuffleLetters({
+                       "text": _winner.name + " prize claimed."
+                    });
+                });
+                
+                $("#audit").on("click", function(event) {
+                    event.preventDefault();
+                    window.location = "./prizeAudit.jsp";
+                });
+
+        */    
+            
+        </script>
+       
+       
+       
+       
+       
+       
+       
        <%@ include file="../../../includes/footer.jsp" %> 
        <%@ include file="../../../includes/scriptlist.jsp" %>
     </body>

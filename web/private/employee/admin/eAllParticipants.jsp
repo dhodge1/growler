@@ -21,7 +21,10 @@
 <%@ page import="javax.mail.internet.*,javax.activation.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ page import="com.scripps.growler.*, java.sql.*" %>
+<%@ page import="com.scripps.growler.Feedback"%>
 <%@ page import="javax.mail.MessagingException"%>
+<%@page import="com.google.gson.Gson" %>
+
 
 
  <%
@@ -32,12 +35,21 @@
    boolean isContentHTML = false;
    
    String infoMessage = new String();//for email sending status info message
-   String isSuccess = new String(); //for error checking purpose
+   //String isSuccess = new String(); //for error checking purpose
+   boolean lclSuccess;
+   String jsonStr = new String();
+   Feedback emailFeedback; 
+   Gson gson = new Gson();  
+   //***************
+   //add gson object
+   //***************
+   //Gson gson = new Gson();
    
    
      //get info from the emailform.jsp     
    subject = request.getParameter("emailSubject");
    content = request.getParameter("emailContent");
+   
    //get the email list from all the users
    UserPersistence uPersistence = new UserPersistence();
    ArrayList<User> userArrayList = uPersistence.getUsersLikedASessionORSubmittedSurveys();
@@ -63,12 +75,24 @@
    if(emailList.length()==0)
    {
      infoMessage =   "No participants have valid email address info listed in the system.";
+     emailFeedback= new Feedback(infoMessage);
+     //calls the Ajax function
+     jsonStr = gson.toJson(emailFeedback);
+     //send the json object back to the browser
+     out.print(jsonStr);
+     //String json = Gson.toJson(infoMessage);
+     //out.print(json);
+     //String respond ="{'isSuccess':'false', 'infoMessage': 'No participants have valid email address info listed in the system.'}";
+     //out.print(respond);   
+  /*   
      request.setAttribute("infoMessage", infoMessage);
      RequestDispatcher dispatcher = request.getRequestDispatcher("emailToAllParticipants");      
      if (dispatcher != null)
      {
        dispatcher.forward(request, response);
-     } 
+     }
+  */
+     
    }
    else
    {    
@@ -76,22 +100,41 @@
      {
        //perform the send email task
        EmailUtilSMTPScripps.sendMail((emailList.toString()), subject, content, isContentHTML);
+      // String respond ="{\"isSuccess\":\"true\", \"infoMessage\": \"Your message has been sent!\"}";
+       //out.print(respond);
+       
        infoMessage = "Your message has been sent!";
-       isSuccess =   "true";
-       request.setAttribute("isSuccess", isSuccess);
+       lclSuccess = true;
+       
+       emailFeedback= new Feedback(infoMessage, lclSuccess);
+       //calls the Ajax function
+       jsonStr = gson.toJson(emailFeedback);
+       //send the json object back to the browser
+       out.print(jsonStr);
+       //request.setAttribute("isSuccess", isSuccess);
      }
      catch (Exception e)
      {
+       
+       //String respond ="{'isSuccess':'false', 'infoMessage': 'Your message can't be sent at this time.'}";
+       //out.print(respond);
+         
        infoMessage ="Your message can't be sent at this time";
+       emailFeedback= new Feedback(infoMessage);
+       //calls the Ajax function
+       jsonStr = gson.toJson(emailFeedback);
+       //send the json object back to the browser
+       out.print(jsonStr);
+      
      }
      finally 
      {
-       request.setAttribute("infoMessage", infoMessage); 
-       RequestDispatcher dispatcher = request.getRequestDispatcher("emailToAllParticipants");      
-       if (dispatcher != null)
-       {
-         dispatcher.forward(request, response);
-       } 
+       //request.setAttribute("infoMessage", infoMessage); 
+       //RequestDispatcher dispatcher = request.getRequestDispatcher("emailToAllParticipants");      
+       //if (dispatcher != null)
+      // {
+        // dispatcher.forward(request, response);
+       //} 
      }
    }    
    
