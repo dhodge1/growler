@@ -1,8 +1,13 @@
 
 <%-- 
-    Document   : emailToAllParticipants
+    Document   : emailToAllParticipants 
+                 The user-interface page that send email to all the participants
+                 that have liked a session or submitted survey. The eAllParticipants.jsp
+                 is the action jsp of this page and it also locates in the admin
+                 folder.
     Created on : Feb 21, 2014, 12:49:14 PM
     Author     : Thuy
+    
 --%>
 
 
@@ -104,50 +109,21 @@
              //END                
            %>                       
 
-           
                 <div class="feedbackMessage-warning row">
                      <p style="text-align: center;">No participants have used the system in 2014.</p>
                 </div>
            
            <%
               }//END IF STMT
-              else
-              {
-                 if(request.getAttribute("infoMessage")!= null)
-                 {
-                    if(request.getAttribute("isSuccess")!= null)
-                    {
-           %>     
-                       <div class="feedbackMessage-success row">
-                          <p style="text-align: center;"><%=request.getAttribute("infoMessage")%></p>
-                       </div>
-           <%
-                    }
-                    else
-                    {  
-           %>
-           
-                       <div class="feedbackMessage-warning row">
-                          <p style="text-align: center;"><%=request.getAttribute("infoMessage")%></p>
-                       </div>                  
-           
-            <%
-                     }//END ELSE isSuccess STMT
-                     //**************************
-                     //** clear the attributes **
-                     //**************************  
-                     request.removeAttribute("infoMessage");
-                     request.removeAttribute("isSuccess");    
-                 }//END IF (infoMessage!=null) STMT
-               }//END ELSE STMT
-           %>
-            
-            
-                <div id="myAjaxDiv">
-                    <p style="text-align: center;" id="feedbackSuccess"></p>
-                </div>
+           %>   
+           <!-- The div below is for displaying the email sending progress 
+                message or error feedback message
+           -->
+           <div id="myAjaxDiv">
+              <p style="text-align: center;" id="feedbackSuccess"></p>
+           </div>
                 
-           
+           <!-- The form starts here  -->
            <div class="row">           
               <form  id="action">
                  <fieldset>
@@ -161,14 +137,14 @@
                            if(strStatus.compareTo("disabled") == 0)
                            {
                         %>   
-                               <input id ="es" type="text" required="required" name="emailSubject" 
+                               <input id ="es" type="text" name="emailSubject" 
                                       class="input-xlarge" disabled />        
                         <%   
                            }//END OF IF
                            else
                            {
                         %> 
-                               <input id ="es" type="text" required="required" name="emailSubject" 
+                               <input id ="es" type="text" name="emailSubject" 
                                   class="input-xlarge"/>        
                         
                         <%
@@ -190,7 +166,7 @@
                            {
                          %>   
                        
-                              <textarea id="ec" cols='75' rows='20' required="required" 
+                              <textarea id="ec" cols='75' rows='20'  
                                         name="emailContent" disabled>  
                               </textarea>  
                          <%   
@@ -199,7 +175,7 @@
                            {
                          %> 
                          
-                              <textarea id="ec" cols='75' rows='20' required="required" 
+                              <textarea id="ec" cols='75' rows='20'  
                                         name="emailContent">   
                               </textarea>  
                         <%
@@ -254,12 +230,18 @@
             var thuy = {};   //initialize variable thuy as an empty object
             url1 = "eAllParticipants";  //see xml for the actual path
             $("#send").on("click", function(event){
-                event.preventDefault();  
-               $("#myAjaxDiv").removeClass();
-               $("#myAjaxDiv").addClass("feedbackMessage-success row");
-               $("#feedbackSuccess").html("<b>Sending...</b>");
-                        thuy = function () {
+                 if(($("#es").val() !== "") &&
+                    ($("#ec").val() !== ""))     
+                 {   
+                    event.preventDefault();  
+                    $("#myAjaxDiv").removeClass();
+                    $("#myAjaxDiv").addClass("feedbackMessage-success row");
+                    $("#feedbackSuccess").html("<b>Sending...</b>");
+                    thuy = function () {
                             var tmp = null;
+                            //****************
+                            //** Ajax called
+                            //****************
                             $.ajax({
                                 'async': false,
                                 'type': "POST",
@@ -273,7 +255,7 @@
                                 }
                             });
                             return tmp;
-                        }();
+                    }();
                    
                    //thuy = JSON.parse(thuy);
                    //alert($("#es").val());
@@ -286,15 +268,24 @@
                    {  
                       $("#myAjaxDiv").removeClass();
                       $("#myAjaxDiv").addClass("feedbackMessage-success row");
-                      $("#feedbackSuccess").html(thuy.feedbackMessage);       
-                   }
-                   else
-                   {
+                      $("#feedbackSuccess").html(thuy.feedbackMessage);
+                      $("#es").val('');
+                      $("#ec").val('');
+                  }
+                  else
+                  {
                       $("#myAjaxDiv").removeClass();
                       $("#myAjaxDiv").addClass("feedbackMessage-warning row");
                       $("#feedbackSuccess").html(thuy.feedbackMessage);  
-                   }
-        
+                  } 
+                } //END OF IF STMT (BOTH SUBJECT AND CONTENT ARE NOT EMPTY)
+                else
+                {
+                  $("#myAjaxDiv").removeClass();
+                  $("#myAjaxDiv").addClass("feedbackMessage-warning row");
+                  $("#feedbackSuccess").html("Subject and email content can't be empty!");  
+		  event.preventDefault();
+                }
             });
     
       /*            
