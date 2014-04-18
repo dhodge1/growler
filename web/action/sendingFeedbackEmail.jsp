@@ -97,10 +97,10 @@ else
         }
         else
         { 
-          avg1 = "(NOT AVAILABLE)";
-          avg2 = "(NOT AVAILABLE)";
-          avg3 = "(NOT AVAILABLE)";
-          avg4 = "(NOT AVAILABLE)";
+          avg1 = "(NO RATINGS HAVE BEEN SUBMITTED)";
+          avg2 = "(NO RATINGS HAVE BEEN SUBMITTED)";
+          avg3 = "(NO RATINGS HAVE BEEN SUBMITTED)";
+          avg4 = "(NO RATINGS HAVE BEEN SUBMITTED)";
         }
         //gets an arraylist()of comments that related to the given session id
         CommentPersistence commentPer = new CommentPersistence();
@@ -119,7 +119,7 @@ else
         } 
         else
         {
-          commentList.append("\t" +"(NOT AVAILABLE)");
+          commentList.append("\t" +"(NO COMMENT SUBMITTED)");
         }
         
         if((!(avg1.equals("(NOT AVAILABLE)"))) ||
@@ -140,7 +140,7 @@ else
               + "B. Below are all the comments that relate to your presentation \n"
               +  commentList.toString() 
 	      + "\n\nThanks\n"
-	      + "Techtoberfest Administration\n";	   
+	      + "Techtoberfest Team\n";	   
            //**************************************************************
     
            try
