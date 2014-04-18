@@ -5,6 +5,7 @@
                  that have liked a session or submitted survey. The eAllParticipants.jsp
                  is the action jsp of this page and it also locates in the admin
                  folder.
+                 
     Created on : Feb 21, 2014, 12:49:14 PM
     Author     : Thuy
     
@@ -287,45 +288,8 @@
 		  event.preventDefault();
                 }
             });
-    
-      /*            
-                $("#feedback").on("click", function(event) {
-                   //event.preventDefault();
-                   feedback();
-                   feedback().done(function(data){
-                       _feedback = data;
-                   });
-                   
-                   container.shuffleLetters({
-                       "text": _feedback
-                   });
-                   $.post(url2, {winner: JSON.stringify(_winner)});
-                   //alert(_winner.name)
-                   $('#claim').disable(false);
-                });
-
-                $("#claim").on("click", function(event) {
-                    event.preventDefault();
-                    $.post(url3, {winner: JSON.stringify(_winner)});
-                    container.shuffleLetters({
-                       "text": _winner.name + " prize claimed."
-                    });
-                });
-                
-                $("#audit").on("click", function(event) {
-                    event.preventDefault();
-                    window.location = "./prizeAudit.jsp";
-                });
-
-        */    
-            
+          
         </script>
-       
-       
-       
-       
-       
-       
        
        <%@ include file="../../../includes/footer.jsp" %> 
        <%@ include file="../../../includes/scriptlist.jsp" %>

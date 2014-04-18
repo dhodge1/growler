@@ -7,6 +7,8 @@
                  JSP concatenates all of the User's email address into a long 
                  string called emailList. Lastly, it calls the sendmail()method
                  of the EmailUtilSMTPLocal class to perform the emailing task. 
+                 ** Instead of dispatch the request, we returns the json object
+                    back to the Ajax called.
     
     Resources  : Murach's Java Servlets and JSP 
                  www.codejava.net
