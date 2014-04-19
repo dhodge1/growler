@@ -251,7 +251,7 @@
                                 'dataType': 'json',
                                 //attachs the data from the input fields
                                 'data':{'emailSubject':$("#es").val(), 'emailContent':$("#ec").val()},
-                                'url': "eAllParticipants",
+                                'url': "callOutAction",
                                 'success': function (data) {
                                     tmp = data;
                                 }

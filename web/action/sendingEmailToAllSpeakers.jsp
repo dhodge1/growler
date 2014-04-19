@@ -16,7 +16,7 @@
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ page import="com.scripps.growler.*, java.sql.*" %>
 <%@ page import="javax.mail.MessagingException"%>
-
+<%@page import="com.google.gson.Gson" %>
 
  <%
   
@@ -26,7 +26,10 @@
    boolean isContentHTML = false;
    
    String infoMessage = new String();//for email sending status info message
-   String isSuccess = new String(); //for error checking purpose
+   boolean lclSuccess;
+   String jsonStr = new String();
+   Feedback emailFeedback; 
+   Gson gson = new Gson();
    
      //get info from the emailform.jsp     
    subject = request.getParameter("emailSubject");
@@ -54,13 +57,16 @@
    //*******************************************************
    if(emailList.length()==0)
    {
-     infoMessage =   "No presenters have valid email address info listed in the system.";
-     request.setAttribute("infoMessage", infoMessage);
-     RequestDispatcher dispatcher = request.getRequestDispatcher("emailToAllSpeakers");      
-     if (dispatcher != null)
-     {
-       dispatcher.forward(request, response);
-     } 
+     infoMessage =   "No participants have valid email address info listed in the system.";
+     //*************************************************************************
+     //calls Feedback 1 arg-constructor because the success field set to false 
+     //by default. Therefore we don't need to call the 2arg constructor.
+     //*************************************************************************
+     emailFeedback= new Feedback(infoMessage);
+     //calls the Ajax function
+     jsonStr = gson.toJson(emailFeedback);
+     //send the json object back to the browser
+     out.print(jsonStr);
    }
    else
    {    
@@ -68,23 +74,24 @@
      {
        //perform the send email task
        EmailUtilSMTPScripps.sendMail((emailList.toString()), subject, content, isContentHTML);
+       
        infoMessage = "Your message has been sent!";
-       isSuccess =   "true";
-       request.setAttribute("isSuccess", isSuccess);
+       lclSuccess = true;
+       //since the lclSuccess  is true therefore we need to call the 2-arg constructor
+       emailFeedback= new Feedback(infoMessage, lclSuccess);
+       //turns the Feedback object type to the json object
+       jsonStr = gson.toJson(emailFeedback);
+       //send the json object back to the browser
+       out.print(jsonStr);
      }
      catch (Exception e)
      {
        infoMessage ="Your message can't be sent at this time";
-     }
-   
-     finally 
-     {
-       request.setAttribute("infoMessage", infoMessage); 
-       RequestDispatcher dispatcher = request.getRequestDispatcher("emailToAllSpeakers");      
-       if (dispatcher != null)
-       {
-         dispatcher.forward(request, response);
-       } 
+       emailFeedback= new Feedback(infoMessage);
+       //calls the Ajax function
+       jsonStr = gson.toJson(emailFeedback);
+       //send the json object back to the browser
+       out.print(jsonStr);
      }
    } 
 %>                      
