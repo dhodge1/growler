@@ -2,7 +2,8 @@
     Document   : trackAttendeesForm
     Created on : Mar 10, 2014, 9:03:26 PM
     Author     : Chelsea Grindstaff
-    Purpose    : Allow admin to track attendees, both at local and remote locations
+    Purpose    : Allow admin to track attendees, both at local and remote locations. 
+                Meant for initially adding # of attendees. Don't update # of attendees here. 
 --%>
 
 <%@page import="java.util.*"%>

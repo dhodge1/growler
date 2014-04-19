@@ -3,7 +3,7 @@
 
     Author     : Chelsea Grindstaff
     Purpose    : The purpose of processTrackAttendees is to allow speakers to 
-                enter the # of attendees into the database.  
+                update the # of attendees into the database.  
                 It uses the attendees table, and the fields session_id, 
                 local_Attendees, and remote_Atendees
 --%>

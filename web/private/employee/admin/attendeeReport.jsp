@@ -99,7 +99,6 @@
             <div class="row largeBottomMargin">
                 <h3>The table below displays a listing of local and remote attendees for each session.</h3>
             </div>
-            <!--<div class='row largeBottomMargin'></div>-->
             <div class="row mediumBottomMargin">
                 <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='${pageContext.request.contextPath}/images/Techtoberfest2013small.png'/><span style="padding-left: 12px;">Report Details</span><span class='pullRight'><a id='print' onclick='window.print();'>Print</a></span></h2>
             </div>

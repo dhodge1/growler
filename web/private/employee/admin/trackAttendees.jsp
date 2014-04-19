@@ -3,6 +3,8 @@
     Created on : Mar 10, 2014, 9:03:26 PM
     Author     : Chelsea Grindstaff
     Purpose    : Allow admin to track attendees, both at local and remote locations
+                Lists all sessions, including those which haven't had # of attendees entered yet
+                Action links to add or edit the # of attendees
 --%>
 
 <%@page import="java.util.*"%>
@@ -105,7 +107,6 @@
             <div class="row largeBottomMargin">
                 <h3>Use the table below to add or edit the number of attendees per session.</h3>
             </div>
-            <!--<div class='row largeBottomMargin'></div>-->
             <div class="row mediumBottomMargin">
             </div>
             <div class="row largeBottomMargin">

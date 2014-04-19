@@ -2,6 +2,7 @@
     Document   : trackAttendeesFormEdit
     Author     : Chelsea Grindstaff
     Purpose    : Allow admin to track attendees, both at local and remote locations
+                Meant for updating # of attendees. Can't add initial # here. 
 --%>
 
 <%@page import="java.util.*"%>

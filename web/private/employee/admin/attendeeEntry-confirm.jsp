@@ -2,6 +2,7 @@
     Document   : attendeeEntry-confirm
     Created on : 18 March 2014
     Author     : Chelsea Grindstaff
+    Purpose    : Page confirming that admin entered or updated # of attendees
 --%>
 
 

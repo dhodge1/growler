@@ -80,7 +80,7 @@ public class AttendeePersistence extends GrowlerPersistence {
                                                   + session + "'");
             statement.execute();
             closeJDBC();
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
         finally {
             closeJDBC();
