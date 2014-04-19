@@ -143,10 +143,10 @@
                                     out.print("<div class='actionMenu'><a class='actionMenu-toggle' data-toggle='dropdown' href='#'>Actions<b class='caret'></b></a>");
                                     out.print("<ul class='actionMenu-menu' role='menu'>");
                                     if (attendees.get(i).getLocalAttendees() == 0) {
-                                        out.print("<li><a href='" + request.getContextPath() + "/private/employee/admin/trackAttendeesForm.jsp?sessionId=" + attendees.get(i).getId() + "'><i class='icon16-edit'></i>Add</a></li>");
+                                        out.print("<li><a href='" + request.getContextPath() + "/private/employee/admin/trackAttendeesAdd.jsp?sessionId=" + attendees.get(i).getId() + "'><i class='icon16-edit'></i>Add</a></li>");
                                     }
                                     else {
-                                        out.print("<li><a href='" + request.getContextPath() + "/private/employee/admin/trackAttendeesFormEdit.jsp?sessionId=" + attendees.get(i).getId() + "'><i class='icon16-edit'></i>Edit</a></li>");
+                                        out.print("<li><a href='" + request.getContextPath() + "/private/employee/admin/trackAttendeesEdit.jsp?sessionId=" + attendees.get(i).getId() + "'><i class='icon16-edit'></i>Edit</a></li>");
                                     }
                                     out.print("</td>");
                                     out.print("</tr>");
