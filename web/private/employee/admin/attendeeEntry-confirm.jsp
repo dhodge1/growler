@@ -74,7 +74,7 @@
             </div>
             <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
             <div class="row">
-                <span>Thank you for entering the number of attendees!</span>
+                <span>Thank you for updating the number of attendees!</span>
             </div>
             <div style='margin-bottom:17px;'></div>
 

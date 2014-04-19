@@ -1,5 +1,6 @@
 package com.scripps.growler;
 
+import java.sql.SQLException;
 import java.util.*;
 
 
@@ -20,63 +21,63 @@ public class AttendeePersistence extends GrowlerPersistence {
     /**
      * Gets a list of all sessions in the database
      *
+     * @param sessionId
      * @return A list of sessions in the database
      * */
     
-    public ArrayList<Attendees> getAttendeesBySessionId(int sessionId) {
-        ArrayList<Attendees> attendeeList = new ArrayList<Attendees>();
-        try {
+    public Attendees getAttendeesBySessionId(int sessionId) {
+        //ArrayList<Attendees> attendeeList = new ArrayList<Attendees>();
+            try {
             initializeJDBC();
-            statement = connection.prepareStatement("select * from attendees where session_id = ?");
+            statement = connection.prepareStatement("select local_Attendees, remote_Attendees from attendees where session_id = ?");
+            statement.setInt(1, sessionId);
             result = statement.executeQuery();
 
-            while (result.next()) {
-                Attendees a = new Attendees();
-                a.setLocalAttendees(result.getString("local_Attendees"));
-                a.setRemoteAttendees(result.getString("remote_Attendees"));
 
-                //Add the session to the list
-                attendeeList.add(a);
+            Attendees a = new Attendees();
+            if (result.next()) {
+                a.setLocalAttendees(result.getInt("local_Attendees"));
+                a.setRemoteAttendees(result.getInt("remote_Attendees"));
+
             }
             closeJDBC();
-            return attendeeList;
-        } catch (Exception e) {
+            return (a);
+        } catch (SQLException e) {
         }
         finally {
             closeJDBC();
         }
-        return attendeeList;
+        return null;
     }
     
     
-   
+ 
 
-    public void addAttendees(int session, String localAttendees, String remoteAttendees) {
+    public void addAttendees(int session, int localAttendees, int remoteAttendees) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("insert into attendees (session_id, local_attendees, remote_attendees) values (?, ?, ?)");
+            statement = connection.prepareStatement("insert into attendees (session_id, local_Attendees, remote_Attendees) values (?, ?, ?)");
             statement.setInt(1, session);
-            statement.setString(2, localAttendees);
-            statement.setString(3, remoteAttendees);
+            statement.setInt(2, localAttendees);
+            statement.setInt(3, remoteAttendees);
             statement.execute();
             closeJDBC();
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
         finally {
             closeJDBC();
         }
     }
 
-    public void editAttendees(String localAttendees, String remoteAttendees, int session) {
+    public void editAttendees(int localAttendees, int remoteAttendees, int session) {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("update attendees set"
-                    + "local_attendees = ?, "
-                    + "remote_attendees = ? "
-                    + "where session_id = ?" );
-            statement.setString(1, localAttendees);
-            statement.setString(2, remoteAttendees);
-            statement.setInt(3, session);
+            statement = connection.prepareStatement("UPDATE attendees SET local_Attendees = '"
+                                                  +  localAttendees   
+                                                  + "', remote_Attendees = '"
+                                                  + remoteAttendees
+                                                  + "'WHERE session_id = '"
+                                                  + session + "'");
             statement.execute();
             closeJDBC();
         } catch (Exception e) {
@@ -103,8 +104,8 @@ public class AttendeePersistence extends GrowlerPersistence {
                 Attendees a = new Attendees();
                 a.setId(result.getInt("s.id"));
                 a.setSessionName(result.getString("s.name"));
-                a.setLocalAttendees(result.getString("b.local_Attendees"));
-                a.setRemoteAttendees(result.getString("b.remote_Attendees"));
+                a.setLocalAttendees(result.getInt("b.local_Attendees"));
+                a.setRemoteAttendees(result.getInt("b.remote_Attendees"));
                 
 
                 //Add the session to the list
@@ -112,7 +113,7 @@ public class AttendeePersistence extends GrowlerPersistence {
             }
             closeJDBC();
             return attendeeList;
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
         finally {
             closeJDBC();

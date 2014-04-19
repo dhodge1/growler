@@ -36,17 +36,14 @@
             }
             try {
                 user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
-                String name = String.valueOf(session.getAttribute("user"));
+                String name = String.valueOf(session.getAttribute("user"));  
                 sessionId = Integer.parseInt(request.getParameter("sessionId"));
             } catch (Exception e) {
             }
 
             AttendeePersistence ap = new AttendeePersistence();
-            ArrayList<Attendees> attendeesBySessionId = ap.getAttendeesBySessionId(sessionId);
-            String localAttendees = String.valueOf(request.getParameter("localAttendees"));
-            String remoteAttendees = String.valueOf(request.getParameter("remoteAttendees"));
-    
-    
+            Attendees a = ap.getAttendeesBySessionId(sessionId);
+
         %>
         <%@ include file="../../../includes/adminheader.jsp" %>
         <% if (String.valueOf(session.getAttribute("role")).equals("admin")) { %>
@@ -85,27 +82,25 @@
                         <fieldset>
                             <div class="form-group">
                                 <label class="required">Local Attendees</label>
-                                <input required="required" name="localAttendees" class="input-xlarge" type="text" id="localAttendees" data-content="" maxlength="3"/><%= localAttendees%>
+                                <input required="required" name="localAttendees" class="input-xlarge" type="text" id="localAttendees" data-content="" maxlength="3" />
                                 <br/><span id="error_last" class="message_container">
-                                    <span>Please enter the number of local attendees</span>
+                                    <span>Please update the number of local attendees. </br> Number is currently set to <% out.print(a.getLocalAttendees());%>.</span>
                                 </span>
                             </div>
                             <div class="form-group">
                                 <label class="required">Remote Attendees</label>
-                                <input required="required" name="remoteAttendees" class="input-xlarge" type="text" id="remoteAttendees" data-content="" maxlength="3"/><%= remoteAttendees%>
+                                <input required="required" name="remoteAttendees" class="input-xlarge" type="text" id="remoteAttendees" data-content="" maxlength="3"  />
                                 <br/><span id="error_last" class="message_container">
-                                    <span>Please enter the number of remote attendees</span>
+                                    <span>Please update the number of remote attendees. </br> Number is currently set to <% out.print(a.getRemoteAttendees());%>.</span>
                                 </span>
                             </div>
                          <% 
                             out.print("<input type='hidden' id='sessionId' name='sessionId' value='" + sessionId + "'/>");
                         %>
 
-  <!--------------------------------------------------------
-Submit action needs to add to database
-  ---------------------------------------->
+
                             <div class="form-actions">
-                                <input type="submit" id="send" class="button button-primary" value="Submit Attendees"/>
+                                <input type="submit" id="send" class="button button-primary" value="Update Attendees"/>
                                 <a id="cancel" href="${pageContext.request.contextPath}/home">Cancel</a>
                             </div>
                         </fieldset>

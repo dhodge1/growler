@@ -3,7 +3,7 @@
     Created on : March 18, 2013
     Author     : Chelsea Grindstaff
     Purpose    : The purpose of processTrackAttendees is to allow speakers to 
-                enter the # of attendees into the database.  
+                update the # of attendees into the database.  
                 It uses the attendees table, and the fields session_id, 
                 local_Attendees, and remote_Atendees
 --%>
@@ -14,9 +14,7 @@
 
 <%
     int user = 0;
-    if (null == session.getAttribute("id")) {
-        response.sendRedirect("../index.jsp");
-    }
+
     try {
         user = Integer.parseInt(String.valueOf(session.getAttribute("id")));
         String name = String.valueOf(session.getAttribute("user"));
@@ -29,9 +27,9 @@
 <% 
     Attendees s = new Attendees();
     
-    String localAttendees = String.valueOf(request.getParameter("localAttendees"));
-    String remoteAttendees = String.valueOf(request.getParameter("remoteAttendees"));
-    int sessionId = Integer.valueOf(request.getParameter("sessionId"));
+    int localAttendees = Integer.parseInt(request.getParameter("localAttendees"));
+    int remoteAttendees = Integer.parseInt(request.getParameter("remoteAttendees"));
+    int sessionId = Integer.parseInt(request.getParameter("sessionId"));
 
     
     AttendeePersistence ap = new AttendeePersistence();
@@ -42,6 +40,7 @@
     
     session.setAttribute("message", "Success: The number of attendees has been submitted successfully!");
     response.sendRedirect("../private/employee/admin/attendeeEntry-confirm.jsp");
+    
     
     %>
     

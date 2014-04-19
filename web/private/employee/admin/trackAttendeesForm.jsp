@@ -83,25 +83,22 @@
                         <fieldset>
                             <div class="form-group">
                                 <label class="required">Local Attendees</label>
-                                <input required="required" name="localAttendees" class="input-xlarge" type="text" id="localAttendees" data-content="" maxlength="3"/>
+                                <input required="required" name="localAttendees" class="input-xlarge" type="text" id="localAttendees" data-content="" maxlength="3" />
                                 <br/><span id="error_last" class="message_container">
-                                    <span>Please enter the number of local attendees</span>
+                                    <span>Please enter the number of local attendees.</span>
                                 </span>
                             </div>
                             <div class="form-group">
                                 <label class="required">Remote Attendees</label>
-                                <input required="required" name="remoteAttendees" class="input-xlarge" type="text" id="remoteAttendees" data-content="" maxlength="3"/>
+                                <input required="required" name="remoteAttendees" class="input-xlarge" type="text" id="remoteAttendees" data-content="" maxlength="3" />
                                 <br/><span id="error_last" class="message_container">
-                                    <span>Please enter the number of remote attendees</span>
+                                    <span>Please enter the number of remote attendees.</span>
                                 </span>
                             </div>
                          <% 
                             out.print("<input type='hidden' id='sessionId' name='sessionId' value='" + sessionId + "'/>");
                         %>
 
-  <!--------------------------------------------------------
-Submit action needs to add to database
-  ---------------------------------------->
                             <div class="form-actions">
                                 <input type="submit" id="send" class="button button-primary" value="Submit Attendees"/>
                                 <a id="cancel" href="${pageContext.request.contextPath}/home">Cancel</a>
