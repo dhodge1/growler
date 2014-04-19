@@ -12,8 +12,8 @@ public class Attendees {
 
 
     private Integer id;
-    private Integer localAttendees;
-    private Integer remoteAttendees;
+    private String localAttendees;
+    private String remoteAttendees;
     private String sessionName;
 
     public Attendees() {
@@ -30,19 +30,19 @@ public class Attendees {
     }
     
 
-    public Integer getLocalAttendees() {
+    public String getLocalAttendees() {
         return localAttendees;
     }
 
-    public void setLocalAttendees(Integer localAttendees) {
+    public void setLocalAttendees(String localAttendees) {
         this.localAttendees = localAttendees;
     }    
     
-    public Integer getRemoteAttendees() {
+    public String getRemoteAttendees() {
         return remoteAttendees;
     }
 
-    public void setRemoteAttendees(Integer remoteAttendees) {
+    public void setRemoteAttendees(String remoteAttendees) {
         this.remoteAttendees = remoteAttendees;
     }    
     

@@ -4,7 +4,7 @@
     Author     : Chelsea Grindstaff
     Purpose    : The purpose of processTrackAttendees is to allow speakers to 
                 enter the # of attendees into the database.  
-                It uses the attendees table, and the fields session_id, user_id,
+                It uses the attendees table, and the fields session_id, 
                 local_Attendees, and remote_Atendees
 --%>
 
@@ -29,9 +29,9 @@
 <% 
     Attendees s = new Attendees();
     
-    int localAttendees = Integer.parseInt(String.valueOf(request.getParameter("localAttendees")));
-    int remoteAttendees = Integer.parseInt(String.valueOf(request.getParameter("remoteAttendees")));
-    int sessionId = Integer.valueOf(request.getParameter("sessionChosen"));
+    String localAttendees = String.valueOf(request.getParameter("localAttendees"));
+    String remoteAttendees = String.valueOf(request.getParameter("remoteAttendees"));
+    int sessionId = Integer.valueOf(request.getParameter("sessionId"));
 
     
     AttendeePersistence ap = new AttendeePersistence();

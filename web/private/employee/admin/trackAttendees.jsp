@@ -79,6 +79,7 @@
             ArrayList<Attendees> attendees = ap.getAllSessions();
 
 
+
         %>
         <%@ include file="../../../includes/adminheader.jsp" %> 
         <% if (String.valueOf(session.getAttribute("role")).equals("admin")) { %>
@@ -124,6 +125,8 @@
                         <tbody>
                             <%
                                 for (int i = 0; i < attendees.size(); i++) {
+                                    ArrayList<Attendees> attendeesBySessionId = ap.getAttendeesBySessionId(attendees.get(i).getId());
+                                    
                                     out.print("<tr id='row" + i + "'>");
                                     out.print("<input type='hidden' id='rowfor" + attendees.get(i).getId() + "'/>");
                                     out.print("<td>");
@@ -136,11 +139,15 @@
                                     out.print(attendees.get(i).getRemoteAttendees());
                                     out.print("</td>");
                                     out.print("<td>");        
-
                                     out.print("<div class='actionMenu'><a class='actionMenu-toggle' data-toggle='dropdown' href='#'>Actions<b class='caret'></b></a>");
                                     out.print("<ul class='actionMenu-menu' role='menu'>");
-                                    out.print("<li><a href='" + request.getContextPath() + "/private/employee/admin/trackAttendeesForm.jsp?sessionId=" + attendees.get(i).getId() + "'><i class='icon16-reconcile'></i>Add</a></li>");
-                                    out.print("<li><a href='" + request.getContextPath() + "/private/employee/admin/trackAttendeesForm.jsp?sessionId=" + attendees.get(i).getId() + "'><i class='icon16-edit'></i>Edit</a></li>");
+                                    
+                                    if (attendeesBySessionId.isEmpty()){
+                                        out.print("<li><a href='" + request.getContextPath() + "/private/employee/admin/trackAttendeesForm.jsp?sessionId=" + attendees.get(i).getId() + "'><i class='icon16-reconcile'></i>Add</a></li>");
+                                        }
+                                    else {
+                                        out.print("<li><a href='" + request.getContextPath() + "/private/employee/admin/trackAttendeesFormEdit.jsp?sessionId=" + attendees.get(i).getId() + "'><i class='icon16-edit'></i>Edit</a></li>");
+                                        }
                                     out.print("</td>");
                                     out.print("</tr>");
                                 }
