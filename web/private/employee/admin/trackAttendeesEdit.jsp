@@ -1,5 +1,5 @@
 <%-- 
-    Document   : trackAttendeesFormEdit
+    Document   : trackAttendeesEdit
     Author     : Chelsea Grindstaff
     Purpose    : Allow admin to track attendees, both at local and remote locations
                 Meant for updating # of attendees. Can't add initial # here. 
@@ -79,7 +79,7 @@
                 <h2 class="bordered"><img style="padding-left:0px;padding-bottom:0px;" src="${pageContext.request.contextPath}/images/Techtoberfest2013small.png"/><span class="titlespan">Number of Attendees</span></h2>
             </div>
             <div class="row">
-                    <form method="POST" id="action" action="${pageContext.request.contextPath}/action/processTrackAttendeesEdit.jsp">
+                    <form method="POST" id="action" action="${pageContext.request.contextPath}/action/processAttendeesEdit.jsp">
                         <fieldset>
                             <div class="form-group">
                                 <label class="required">Local Attendees</label>

@@ -1,5 +1,5 @@
 <%-- 
-    Document   : processTrackAttendeesEdit
+    Document   : processAttendeesEdit
 
     Author     : Chelsea Grindstaff
     Purpose    : The purpose of processTrackAttendees is to allow speakers to 

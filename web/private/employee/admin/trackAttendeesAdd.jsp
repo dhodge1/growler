@@ -1,5 +1,5 @@
 <%-- 
-    Document   : trackAttendeesForm
+    Document   : trackAttendeesAdd
     Created on : Mar 10, 2014, 9:03:26 PM
     Author     : Chelsea Grindstaff
     Purpose    : Allow admin to track attendees, both at local and remote locations. 
@@ -80,7 +80,7 @@
                 <h2 class="bordered"><img style="padding-left:0px;padding-bottom:0px;" src="${pageContext.request.contextPath}/images/Techtoberfest2013small.png"/><span class="titlespan">Number of Attendees</span></h2>
             </div>
             <div class="row">
-                    <form method="POST" id="action" action="${pageContext.request.contextPath}/action/processTrackAttendees.jsp">
+                    <form method="POST" id="action" action="${pageContext.request.contextPath}/action/processAttendeesAdd.jsp">
                         <fieldset>
                             <div class="form-group">
                                 <label class="required">Local Attendees</label>
