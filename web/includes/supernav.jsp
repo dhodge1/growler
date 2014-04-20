@@ -66,6 +66,7 @@
     Feature reports = fp.getFeatureState(17);
     Feature trackAttendees = fp.getFeatureState(18);
     Feature sessionKey = fp.getFeatureState(19);
+    Feature sessionFeedback = fp.getFeatureState(20);
 %>
 <nav class="topnav">
     <nav class="globalNavigation modify-pages" id="navigation">
@@ -130,9 +131,11 @@
                             out.print("<li><a href='" + request.getContextPath() + "/trackAttendees'>Track Attendees for a Session</a></li>");
                         }
                         if (sessionKey.getFeatureState()) {
-                            out.print("<li><a href='" + ${pageContext.request.contextPath} + "/sendingSessionKeyEmails'>Email Session Key</a></li>");
+                            out.print("<li><a href='" + request.getContextPath() + "/sendingSessionKeyEmails'>Email Session Key</a></li>");
                         }
-                        <li><a href="${pageContext.request.contextPath}/sendingFeedbackEmail">Email Session Feedback</a></li>
+                        if (sessionFeedback.getFeatureState()) {
+                            out.print("<li><a href='" + request.getContextPath() + "/sendingFeedbackEmail'>Email Session Feedback</a></li>");
+                        }
                     %>
                 </ul>
             </li> 
