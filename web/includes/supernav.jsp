@@ -63,6 +63,7 @@
     Feature emailSurvey = fp.getFeatureState(14);
     Feature emailCurrent = fp.getFeatureState(15);
     Feature emailSpeakers = fp.getFeatureState(16);
+    Feature reports = fp.getFeatureState(17);
 %>
 <nav class="topnav">
     <nav class="globalNavigation modify-pages" id="navigation">
@@ -127,23 +128,27 @@
                     <li><a href="${pageContext.request.contextPath}/sendingFeedbackEmail">Email Session Feedback</a></li>
                 </ul>
             </li> 
-            <li class="brand_nav <%= reportTab%>"><a href="#"><span class="nav_drop">Reports</span><em></em></a>
-                <ul class="child-menu child-menu-ul">
-                    <li><a href="${pageContext.request.contextPath}/overallReport">Best Overall Session</a></li>
-                    <li><a href="${pageContext.request.contextPath}/overallSurveyReport">Overall Survey Report</a></li>
-                    <li><a href="${pageContext.request.contextPath}/presentationReport">Best Presentation Skills</a></li>
-                    <li><a href="${pageContext.request.contextPath}/commentsReport">Comments by Session</a></li>
-                    <li><a href="${pageContext.request.contextPath}/confirmationReport">Confirmed Attendance</a></li>
-                    <li><a href="${pageContext.request.contextPath}/interestReport">Session Interest</a></li>
-                    <li><a href="${pageContext.request.contextPath}/sessionKeys">Session Keys</a></li>
-                    <li><a href="${pageContext.request.contextPath}/expectationReport">Session Met Expectations</a></li>
-                    <li><a href="${pageContext.request.contextPath}/surveyReport">Surveys</a></li>
-                    <li><a href="${pageContext.request.contextPath}/surveyCompleters">Completed Survey Names</a></li>
-                    <li><a href="${pageContext.request.contextPath}/facilitiesReport">Facilities Report</a></li>
-                    <li><a href="${pageContext.request.contextPath}/mealReport">Meal Report</a></li>
-                    <li><a href="${pageContext.request.contextPath}/attendeeReport">Attendee Report</a></li>
-                </ul>
-            </li>
+            <%
+                if(reports.getFeatureState()) {
+                    out.print("<li class='brand_nav" + reportTab + "'><a href='#'><span class='nav_drop'>Reports</span><em></em></a>");
+                        out.print("<ul class='child-menu child-menu-ul'>");
+                            out.print("<li><a href='" + request.getContextPath() + "/overallReport'>Best Overall Session</a></li>");
+                            out.print("<li><a href='" + request.getContextPath() + "/overallSurveyReport'>Overall Survey Report</a></li>");
+                            out.print("<li><a href='" + request.getContextPath() + "/presentationReport'>Best Presentation Skills</a></li>");
+                            out.print("<li><a href='" + request.getContextPath() + "/commentsReport'>Comments by Session</a></li>");
+                            out.print("<li><a href='" + request.getContextPath() + "/confirmationReport'>Confirmed Attendance</a></li>");
+                            out.print("<li><a href='" + request.getContextPath() + "/interestReport'>Session Interest</a></li>");
+                            out.print("<li><a href='" + request.getContextPath() + "/sessionKeys'>Session Keys</a></li>");
+                            out.print("<li><a href='" + request.getContextPath() + "/expectationReport'>Session Met Expectations</a></li>");
+                            out.print("<li><a href='" + request.getContextPath() + "/surveyReport'>Surveys</a></li>");
+                            out.print("<li><a href='" + request.getContextPath() + "/surveyCompleters'>Completed Survey Names</a></li>");
+                            out.print("<li><a href='" + request.getContextPath() + "/facilitiesReport'>Facilities Report</a></li>");
+                            out.print("<li><a href='" + request.getContextPath() + "/mealReport'>Meal Report</a></li>");
+                            out.print("<li><a href='" + request.getContextPath() + "/attendeeReport'>Attendee Report</a></li>");
+                        out.print("</ul>");
+                    out.print("</li>");
+                }
+            %>
             
             <%--------------------------------------
             THUY: ADDED CODE FOR THE COMMUNICATION THEME
