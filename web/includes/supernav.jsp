@@ -59,6 +59,7 @@
     Feature volunteers = fp.getFeatureState(10);
     Feature prize = fp.getFeatureState(11);
     Feature callToAction = fp.getFeatureState(12);
+    Feature emailParticipants = fp.getFeatureState(13);
 %>
 <nav class="topnav">
     <nav class="globalNavigation modify-pages" id="navigation">
@@ -151,11 +152,13 @@
                         if (volunteers.getFeatureState()) {   
                             out.print("<li><a href='" + request.getContextPath() + "/email'>Call To Action</a></li>");
                         } 
+                        if (emailParticipants.getFeatureState()) {
+                            out.print("<li><a href='" + request.getContextPath() + "/emailFormOfParticipants'>Participants 'Liked' a Session</a></li>");
+                        }
+                        <li><a href="${pageContext.request.contextPath}/emailBySurvey">Participants 'Submitted' Survey</a></li>
+                        <li><a href="${pageContext.request.contextPath}/emailToAllParticipants">Participants of the Current Year</a></li>
+                        <li><a href="${pageContext.request.contextPath}/emailToAllSpeakers">Speakers of the Current Year</a></li>
                     %>
-                    <li><a href="${pageContext.request.contextPath}/emailFormOfParticipants">Participants "Liked" a Session</a></li>
-                    <li><a href="${pageContext.request.contextPath}/emailBySurvey">Participants "Submitted" Survey</a></li>
-                    <li><a href="${pageContext.request.contextPath}/emailToAllParticipants">Participants of the Current Year</a></li>
-                    <li><a href="${pageContext.request.contextPath}/emailToAllSpeakers">Speakers of the Current Year</a></li>
                  </ul> <!--END OF THE child-menu child-menu-ul div -->
             </li> <!--END OF THE email tab li -->
             
