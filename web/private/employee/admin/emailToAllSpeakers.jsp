@@ -1,5 +1,10 @@
 <%-- 
     Document   : emailToAllSpeakers
+                 The user-interface page that sends email to all the participants
+                 in the system. The sendingEmailToAllSpeaker.jsp is the action jsp of this
+                 page and it also locates in the admin folder.
+                 **Ajax also integrated in this page
+                 
     Created on : March 17, 2014, 12:49:14 PM
     Author     : Thuy
 --%>
@@ -218,6 +223,8 @@
        
        <!---------------------------------------------------------------------
        adds Ajax calls to display feedback messages
+       **Resources: David Hodge, Zach Guzman and the "JQuery and JavaScript 
+                    Phrasebook"  by Brad DayLey
        ---------------------------------------------------------------------->
        <!-- include the jquery library-->
        <script src="${pageContext.request.contextPath}/js/libs/jquery-1.8.3.min.js"></script>

@@ -224,6 +224,8 @@
        
        <!---------------------------------------------------------------------
        adds Ajax calls to display feedback messages
+       **Resources: David Hodge, Zach Guzman and the "JQuery and JavaScript 
+                  Phrasebook"  by Brad DayLey
        ---------------------------------------------------------------------->
        <!-- include the jquery library-->
        <script src="${pageContext.request.contextPath}/js/libs/jquery-1.8.3.min.js"></script>
