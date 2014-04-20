@@ -60,6 +60,7 @@
     Feature prize = fp.getFeatureState(11);
     Feature callToAction = fp.getFeatureState(12);
     Feature emailParticipants = fp.getFeatureState(13);
+    Feature emailSurvey = fp.getFeatureState(14);
 %>
 <nav class="topnav">
     <nav class="globalNavigation modify-pages" id="navigation">
@@ -155,7 +156,9 @@
                         if (emailParticipants.getFeatureState()) {
                             out.print("<li><a href='" + request.getContextPath() + "/emailFormOfParticipants'>Participants 'Liked' a Session</a></li>");
                         }
-                        <li><a href="${pageContext.request.contextPath}/emailBySurvey">Participants 'Submitted' Survey</a></li>
+                        if (emailSurvey.getFeatureState()) {
+                            out.print("<li><a href='" + request.getContextPath() + "/emailBySurvey'>Participants 'Submitted' Survey</a></li>");
+                        }
                         <li><a href="${pageContext.request.contextPath}/emailToAllParticipants">Participants of the Current Year</a></li>
                         <li><a href="${pageContext.request.contextPath}/emailToAllSpeakers">Speakers of the Current Year</a></li>
                     %>
