@@ -58,7 +58,7 @@
     Feature mealSurvey = fp.getFeatureState(9);
     Feature volunteers = fp.getFeatureState(10);
     Feature prize = fp.getFeatureState(11);
-    //Note: need to add feature state for Volunteer
+    Feature callToAction = fp.getFeatureState(12);
 %>
 <nav class="topnav">
     <nav class="globalNavigation modify-pages" id="navigation">
@@ -147,8 +147,11 @@
             
             <li class="brand_nav <%= emailTab%>"><a href="#"><span class="nav_drop">Emails</span><em></em></a>
                 <ul class="child-menu child-menu-ul">
-                      
-                    <li><a href="${pageContext.request.contextPath}/email">Call To Action</a></li>
+                    <% 
+                        if (volunteers.getFeatureState()) {   
+                            out.print("<li><a href='" + request.getContextPath() + "/email'>Call To Action</a></li>");
+                        } 
+                    %>
                     <li><a href="${pageContext.request.contextPath}/emailFormOfParticipants">Participants "Liked" a Session</a></li>
                     <li><a href="${pageContext.request.contextPath}/emailBySurvey">Participants "Submitted" Survey</a></li>
                     <li><a href="${pageContext.request.contextPath}/emailToAllParticipants">Participants of the Current Year</a></li>
