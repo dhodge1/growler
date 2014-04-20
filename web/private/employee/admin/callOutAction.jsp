@@ -7,7 +7,9 @@
                  User's email address into a long string called emailList. 
                  Lastly, it calls the sendmail()method of the EmailUtilSMTPLocal
                  class to perform the emailing task. 
-    
+                 **This page is an action jsp of the emailForm.jsp and both are
+                   located in admin folder.
+
     Resources  : Murach's Java Servlets and JSP 
                  www.codejava.net
                  
