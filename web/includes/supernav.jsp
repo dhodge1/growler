@@ -56,6 +56,7 @@
     Feature scheduleSession = fp.getFeatureState(5);
     Feature overallSurvey = fp.getFeatureState(8);
     Feature mealSurvey = fp.getFeatureState(9);
+    Feature volunteers = fp.getFeatureState(10);
     //Note: need to add feature state for Volunteer
 %>
 <nav class="topnav">
@@ -157,13 +158,16 @@
             <%--------------------------------------------
             END OF ADDED CODE
             ---------------------------------------------%>  
-            
+            <% if (volunteers.getFeatureState()) { %>                  
             <%--Added Volunteers tab. Awaiting Approval -Shaun --%>
-            <li class="brand_nav <%= volunteerTab%>"><a href="#"><span class="nav_drop">Volunteers</span><em></em></a>
-                <ul class="child-menu child-menu-ul">
-                    <li><a href="${pageContext.request.contextPath}/volunteerSignUp">Volunteer Sign-up</a></li>
-                </ul>
-            </li>
+            <%
+                out.print("<li class='brand_nav  " + volunteerTab + "'><a href='#'><span class='nav_drop'>Volunteers</span><em></em></a>");
+                out.print("<ul class='child-menu child-menu-ul'>");
+                out.print("<li><a href='" + request.getContextPath() + "/volunteerSignUp'>Volunteer Sign-up</a></li>");
+                out.print("</ul>");
+                out.print("</li>");
+            %>
+            <% } %>
             
             <li class="brand_nav <%= adminTab%>"><a href="#"><span class="nav_drop">System Admin</span><em></em></a>
                 <ul class="child-menu child-menu-ul">

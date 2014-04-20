@@ -36,7 +36,7 @@
     Feature scheduleSession = fp.getFeatureState(5);
     Feature overallSurvey = fp.getFeatureState(8);
     Feature mealSurvey = fp.getFeatureState(9);
- 
+    Feature volunteers = fp.getFeatureState(10);
 
 
  
@@ -94,15 +94,16 @@
 
                         
                     </ul>
-                <!-- Added Volunteer tab temporarily: awaiting approval -Shaun -->
-                </li> 
-                <li class="brand_nav <%= volunteerTab%>"><a href="#" style='padding-left:8px;'><span class="nav_drop">Volunteers</span><em></em></a>
-                    <ul class="child-menu child-menu-ul">
-                        <%-- if (volunteerSignUp.getFeatureState()) { --%>
-                            <%@ include file="../../includes/regVolunteerSignUp.jsp" %>
-                        <%-- } --%>
-                    </ul>
-                </li>             
+                <% if (volunteers.getFeatureState()) { %>                  
+                <%--Added Volunteers tab. Awaiting Approval -Shaun --%>
+                <%
+                    out.print("<li class='brand_nav  " + volunteerTab + "'><a href='#' style='padding-left:8px;'><span class='nav_drop'>Volunteers</span><em></em></a>");
+                    out.print("<ul class='child-menu child-menu-ul'>");
+                    out.print("<li><a href='" + request.getContextPath() + "/volunteerSignUp'>Volunteer Sign-up</a></li>");
+                    out.print("</ul>");
+                    out.print("</li>");
+                %>
+                <% } %>
                 
             </ul>
         </nav>
