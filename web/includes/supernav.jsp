@@ -65,6 +65,7 @@
     Feature emailSpeakers = fp.getFeatureState(16);
     Feature reports = fp.getFeatureState(17);
     Feature trackAttendees = fp.getFeatureState(18);
+    Feature sessionKey = fp.getFeatureState(19);
 %>
 <nav class="topnav">
     <nav class="globalNavigation modify-pages" id="navigation">
@@ -123,14 +124,16 @@
                     <% if (mealSurvey.getFeatureState()) { %>
                             <%@ include file="../../includes/superMealSurvey.jsp" %>
                     <% } %>
+                    <li><a href="${pageContext.request.contextPath}/manageSessions">Manage Session Schedule</a></li>
                     <%
                         if (trackAttendees.getFeatureState()) {
-                            out.print("<li><a href='" + request.getContextPath() + "/manageSessions'>Manage Session Schedule</a></li>");
+                            out.print("<li><a href='" + request.getContextPath() + "/trackAttendees'>Track Attendees for a Session</a></li>");
                         }
+                        if (sessionKey.getFeatureState()) {
+                            out.print("<li><a href='" + ${pageContext.request.contextPath} + "/sendingSessionKeyEmails'>Email Session Key</a></li>");
+                        }
+                        <li><a href="${pageContext.request.contextPath}/sendingFeedbackEmail">Email Session Feedback</a></li>
                     %>
-                    <li><a href="${pageContext.request.contextPath}/trackAttendees">Track Attendees for a Session</a></li>
-                    <li><a href="${pageContext.request.contextPath}/sendingSessionKeyEmails">Email Session Key</a></li>  
-                    <li><a href="${pageContext.request.contextPath}/sendingFeedbackEmail">Email Session Feedback</a></li>
                 </ul>
             </li> 
             <%
