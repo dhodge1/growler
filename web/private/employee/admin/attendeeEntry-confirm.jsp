@@ -2,6 +2,7 @@
     Document   : attendeeEntry-confirm
     Created on : 18 March 2014
     Author     : Chelsea Grindstaff
+    Purpose    : Page confirming that admin entered or updated # of attendees
 --%>
 
 
@@ -74,7 +75,7 @@
             </div>
             <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
             <div class="row">
-                <span>Thank you for entering the number of attendees!</span>
+                <span>Thank you for updating the number of attendees!</span>
             </div>
             <div style='margin-bottom:17px;'></div>
 

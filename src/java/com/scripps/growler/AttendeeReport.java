@@ -23,7 +23,7 @@ public class AttendeeReport {
     }
 
 
-    public void setId(Integer id) {
+    public void setId(int sessionId) {
         this.sessionId = sessionId;
     }
     
@@ -34,7 +34,7 @@ public class AttendeeReport {
     }
 
 
-    public void setLocalAttendees(Integer localAttendees) {
+    public void setLocalAttendees(int localAttendees) {
         this.localAttendees = localAttendees;
     }    
     
@@ -44,7 +44,7 @@ public class AttendeeReport {
     }
 
 
-    public void setRemoteAttendees(Integer remoteAttendees) {
+    public void setRemoteAttendees(int remoteAttendees) {
         this.remoteAttendees = remoteAttendees;
     }    
     

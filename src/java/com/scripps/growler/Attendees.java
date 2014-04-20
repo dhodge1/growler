@@ -25,24 +25,24 @@ public class Attendees {
     }
 
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
     
 
-    public Integer getLocalAttendees() {
+    public int getLocalAttendees() {
         return localAttendees;
     }
 
-    public void setLocalAttendees(Integer localAttendees) {
+    public void setLocalAttendees(int localAttendees) {
         this.localAttendees = localAttendees;
     }    
     
-    public Integer getRemoteAttendees() {
+    public int getRemoteAttendees() {
         return remoteAttendees;
     }
 
-    public void setRemoteAttendees(Integer remoteAttendees) {
+    public void setRemoteAttendees(int remoteAttendees) {
         this.remoteAttendees = remoteAttendees;
     }    
     
