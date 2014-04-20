@@ -2,7 +2,7 @@
     Document   : emailToAllSpeakers
                  The user-interface page that sends email to all the participants
                  in the system. The sendingEmailToAllSpeaker.jsp is the action jsp of this
-                 page and it also locates in the admin folder.
+                 page.
                  **Ajax also integrated in this page
                  
     Created on : March 17, 2014, 12:49:14 PM
