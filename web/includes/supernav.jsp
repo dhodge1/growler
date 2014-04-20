@@ -39,7 +39,7 @@
     } else if (pageURI.contains("email")){
         emailTab = active;
     } else if (pageURI.contains("volunteer")){
-        emailTab = active;
+        volunteerTab = active;
     } else if (pageURI.contains("admin")) {
         adminTab = active;
     } else if (pageURI.contains("home")) {
@@ -57,6 +57,7 @@
     Feature overallSurvey = fp.getFeatureState(8);
     Feature mealSurvey = fp.getFeatureState(9);
     Feature volunteers = fp.getFeatureState(10);
+    Feature prize = fp.getFeatureState(11);
     //Note: need to add feature state for Volunteer
 %>
 <nav class="topnav">
@@ -172,7 +173,11 @@
             <li class="brand_nav <%= adminTab%>"><a href="#"><span class="nav_drop">System Admin</span><em></em></a>
                 <ul class="child-menu child-menu-ul">
                     <li><a href="${pageContext.request.contextPath}/features">System Features</a></li>
-                    <li><a href="${pageContext.request.contextPath}/prize">Prize Drawing</a></li>
+                    <% 
+                        if (prize.getFeatureState()) {  
+                            out.print("<li><a href='" + request.getContextPath() + "/prize'>Prize Drawing</a></li>");
+                        } 
+                    %>
                 </ul>
             </li>
             
