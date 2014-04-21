@@ -134,7 +134,7 @@
                             out.print("<li><a href='" + request.getContextPath() + "/sendingSessionKeyEmails'>Email Session Key</a></li>");
                         }
                         if (sessionFeedback.getFeatureState()) {
-                            out.print("<li><a href='" + request.getContextPath() + "/sendingFeedbackEmail'>Email Session Feedback</a></li>");
+                            out.print("<li><a href='" + request.getContextPath() + "/sessionFeedbackEmail-confirm'>Email Session Feedback</a></li>");
                         }
                     %>
                 </ul>
