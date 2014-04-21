@@ -127,6 +127,20 @@ public class SessionPersistence extends GrowlerPersistence {
             closeJDBC();
         }
     }
+    
+    public void removeThemeMapping(Session s) {
+        try {
+            initializeJDBC();
+            statement = connection.prepareStatement("delete from themeOfSession where sessionID = ?");
+            statement.setInt(1, s.getId());
+            statement.execute();
+            closeJDBC();
+        } catch (Exception e) {
+        }
+        finally {
+            closeJDBC();
+        }
+    }
 
     /**
      * Updates a session

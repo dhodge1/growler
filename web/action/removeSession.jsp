@@ -26,4 +26,5 @@
             SessionPersistence sp = new SessionPersistence();
             Session s = sp.getSessionByID(Integer.parseInt(idString));
             sp.deleteSession(s);
+            sp.removeThemeMapping(s);
             %>
