@@ -14,7 +14,7 @@
     SimpleDateFormat dates = new SimpleDateFormat("MM/dd/yyyy");
     SimpleDateFormat fmt = new SimpleDateFormat("h:mm a");
     SimpleDateFormat fmt2 = new SimpleDateFormat("mm 'minutes'");
-    ArrayList<Session> sessions = sp.getThisYearSessions(2013, " order by session_date, start_time, name ", pageNo);
+    ArrayList<Session> sessions = sp.getThisYearSessions(2014, " order by session_date, start_time, name ", pageNo);
     for (int i = 0; i < sessions.size(); i++) {
         response.getWriter().write("<tr>");
         response.getWriter().write("<td>");

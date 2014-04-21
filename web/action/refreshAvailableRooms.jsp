@@ -13,7 +13,7 @@
     SessionPersistence sessionPersist = new SessionPersistence();
     LocationPersistence locationPersist = new LocationPersistence();
     Location location = locationPersist.getLocationById(roomPassed);
-    ArrayList<Session> sessions = sessionPersist.getThisYearSessions(2013, " order by session_date, start_time");
+    ArrayList<Session> sessions = sessionPersist.getThisYearSessions(2014, " order by session_date, start_time");
 
     SimpleDateFormat fmt = new SimpleDateFormat("h:mm a");
     SimpleDateFormat dates = new SimpleDateFormat("MM/dd");

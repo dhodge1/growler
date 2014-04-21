@@ -101,7 +101,7 @@
         %>
         <%
             //Get the year
-            int year = 2013; //!will need to be changed to 2014
+            int year = 2014; 
             try {
                 year = Integer.parseInt(request.getParameter("year"));
             } catch (Exception e) {
@@ -140,7 +140,7 @@
                 <span>Below is your personalized session schedule for this years Techtoberfest!</span>
             </div>
             <div class="row mediumBottomMargin">
-                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='${pageContext.request.contextPath}/images/Techtoberfest2013small.png'/><span class="titlespan">Schedule Details</span><span class="pullRight"><a id="makePDF" href='../../public/Techtoberfest_Schedule2013.pdf' target='blank'>View as PDF</a></span></h2>
+                <h2 class="bordered"><img style="padding-bottom:0;padding-left:0;" src='${pageContext.request.contextPath}/images/Techtoberfest2013small.png'/><span class="titlespan">Schedule Details</span><span class="pullRight"><a id="makePDF" href='../../public/Techtoberfest_Schedule2014.pdf' target='blank'>View as PDF</a></span></h2>
             </div>
             <div id="schedule" class="row largeBottomMargin">
                 <form onsubmit="return false;">

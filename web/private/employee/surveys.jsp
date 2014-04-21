@@ -30,37 +30,37 @@
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
         <script>
             $(document).ready(function() {
-                $('td').filter('.2013-10-10morning').show();
-                $('td').filter('.2013-10-10afternoon').hide();
-                $('td').filter('.2013-10-11morning').hide();
-                $('td').filter('.2013-10-11afternoon').hide();
+                $('td').filter('.2014-10-10morning').show();
+                $('td').filter('.2014-10-10afternoon').hide();
+                $('td').filter('.2014-10-11morning').hide();
+                $('td').filter('.2014-10-11afternoon').hide();
                 $("#survey").hide();
                 $("#code").hide();
                 $("#confirm").hide();
                 $("#date").change(function() {
                     if ($("#date").val() === "1") {
-                        $('td').filter('.2013-10-10morning').show();
-                        $('td').filter('.2013-10-10afternoon').hide();
-                        $('td').filter('.2013-10-11morning').hide();
-                        $('td').filter('.2013-10-11afternoon').hide();
+                        $('td').filter('.2014-10-10morning').show();
+                        $('td').filter('.2014-10-10afternoon').hide();
+                        $('td').filter('.2014-10-11morning').hide();
+                        $('td').filter('.2014-10-11afternoon').hide();
                     }
                     else if ($("#date").val() === "2") {
-                        $('td').filter('.2013-10-10morning').hide();
-                        $('td').filter('.2013-10-10afternoon').show();
-                        $('td').filter('.2013-10-11morning').hide();
-                        $('td').filter('.2013-10-11afternoon').hide();
+                        $('td').filter('.2014-10-10morning').hide();
+                        $('td').filter('.2014-10-10afternoon').show();
+                        $('td').filter('.2014-10-11morning').hide();
+                        $('td').filter('.2014-10-11afternoon').hide();
                     }
                     else if ($("#date").val() === "3") {
-                        $('td').filter('.2013-10-10morning').hide();
-                        $('td').filter('.2013-10-10afternoon').hide();
-                        $('td').filter('.2013-10-11morning').show();
-                        $('td').filter('.2013-10-11afternoon').hide();
+                        $('td').filter('.2014-10-10morning').hide();
+                        $('td').filter('.2014-10-10afternoon').hide();
+                        $('td').filter('.2014-10-11morning').show();
+                        $('td').filter('.2014-10-11afternoon').hide();
                     }
                     else if ($("#date").val() === "4") {
-                        $('td').filter('.2013-10-10morning').hide();
-                        $('td').filter('.2013-10-10afternoon').hide();
-                        $('td').filter('.2013-10-11morning').hide();
-                        $('td').filter('.2013-10-11afternoon').show();
+                        $('td').filter('.2014-10-10morning').hide();
+                        $('td').filter('.2014-10-10afternoon').hide();
+                        $('td').filter('.2014-10-11morning').hide();
+                        $('td').filter('.2014-10-11afternoon').show();
                     }
                 });
                 $("#keyvalidate").click(function() {
@@ -271,7 +271,7 @@
             } catch (Exception e) {
             }
             SessionPersistence sp = new SessionPersistence();
-            sp.createThisYearSessions(2013);
+            sp.createThisYearSessions(2014);
         %>
         <%@ include file="../../includes/header.jsp" %> 
         <% if (String.valueOf(session.getAttribute("role")).equals("admin")) { %>
@@ -436,7 +436,7 @@
             <div id="confirm" class="row">
                 <p class="feedbackMessage-success">Your survey has been submitted successfully!</p>
                 <div class="mediumBottomMargin">
-                    <p>The Techtoberfest committee appreciates your feedback and thanks you for attending Tecthoberfest 2013!</p>
+                    <p>The Techtoberfest committee appreciates your feedback and thanks you for attending Tecthoberfest 2014!</p>
                 </div>
                 <div class="form-actions">
                     <a href="${pageContext.request.contextPath}/private/employee/surveys.jsp">Submit another survey</a>

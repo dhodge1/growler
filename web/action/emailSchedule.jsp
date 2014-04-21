@@ -40,7 +40,7 @@
                                new InternetAddress(to));
 
       // Set Subject: header field
-      message.setSubject("The 2013 Techtoberfest Schedule");
+      message.setSubject("The 2014 Techtoberfest Schedule");
 
       // Create the message part 
       BodyPart messageBodyPart = new MimeBodyPart();
@@ -56,7 +56,7 @@
 
       // Part two is attachment
       messageBodyPart = new MimeBodyPart();
-      String filename = "../public/Techtoberfest_Schedule2013.pdf";
+      String filename = "../public/Techtoberfest_Schedule2014.pdf";
       DataSource source = new FileDataSource(filename);
       messageBodyPart.setDataHandler(new DataHandler(source));
       messageBodyPart.setFileName(filename);

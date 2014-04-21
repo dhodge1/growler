@@ -112,7 +112,7 @@
                     SpeakerPersistence speakerPersist = new SpeakerPersistence();
                     Speaker speaker = speakerPersist.getSpeakerByID(speakerPassed);
                     ArrayList<Speaker> speakers = speakerPersist.getAllSpeakers(" order by last_name, first_name");
-                    ArrayList<Session> sessions = sessionPersist.getThisYearSessions(2013, " order by session_date");
+                    ArrayList<Session> sessions = sessionPersist.getThisYearSessions(2014, " order by session_date");
                 %>
                 <form id="action" action="${pageContext.request.contextPath}/action/processSessionAssign.jsp" method="post">
                     <div class="form-group"><% out.print("<span id='list'>" + speaker.getLastName() + ", " + speaker.getFirstName() + "<strong> | Current ranking: </strong>" + speakerPersist.getSpeakersRank(speaker.getId()) + "</span>"

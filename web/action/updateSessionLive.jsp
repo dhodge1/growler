@@ -24,7 +24,7 @@
     } //If it's 0, someone put NO SESSION in place of an existing session
     else {
         Session removal = sp.getSessionByDateAndTime(date, time, " ");
-        removal.setSessionDate(java.sql.Date.valueOf("2013-10-10"));
+        removal.setSessionDate(java.sql.Date.valueOf("2014-10-10"));
         removal.setStartTime(null);
         removal.setLocation(null);
         sp.updateSession(removal);

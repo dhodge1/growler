@@ -91,14 +91,14 @@
                         <table class="table table-alternatingRow table-border table-columnBorder table-rowBorder">
                             <tr>
                                 <th>Time</th>
-                                <th>10/10/2013: E130</th>
-                                <th>10/10/2013: D304</th>
-                                <th>10/11/2013: E130</th>
-                                <th>10/11/2013: D304</th>
+                                <th>10/10/2014: E130</th>
+                                <th>10/10/2014: D304</th>
+                                <th>10/11/2014: E130</th>
+                                <th>10/11/2014: D304</th>
                             </tr>
                             <%
                                 java.sql.Time start = java.sql.Time.valueOf("07:00:00");
-                                ArrayList<Session> sessions = sp.getThisYearSessions(2013, "");
+                                ArrayList<Session> sessions = sp.getThisYearSessions(2014, "");
 
                                 for (int i = 0; i < 11; i++) {
                                     out.print("<tr>");
@@ -109,7 +109,7 @@
                                     out.print("<td>");
                                     out.print("<select name=\"list1\" title=\"" + start + "\" onChange=\"updateSessionList(this)\">");
                                     out.print("<option value=\"0\">NO SESSION</option>");
-                                    Session current = sp.getSessionByDateAndTime(java.sql.Date.valueOf("2013-10-10"), start, "");
+                                    Session current = sp.getSessionByDateAndTime(java.sql.Date.valueOf("2014-10-10"), start, "");
                                     for (int j = 0; j < sessions.size(); j++) {
                                         out.print("<option  value=\"" + sessions.get(j).getId() + "\"");
                                         if ((sessions.get(j).getId() == current.getId()) && (sessions.get(j).getLocation().equals("E130"))) {
@@ -124,7 +124,7 @@
                                     out.print("<td>");
                                     out.print("<select name=\"list2\" title=\"" + start + "\" onChange=\"updateSessionList(this)\">");
                                     out.print("<option value=\"0\">NO SESSION</option>");
-                                    current = sp.getSessionByDateAndTime(java.sql.Date.valueOf("2013-10-10"), start, " ");
+                                    current = sp.getSessionByDateAndTime(java.sql.Date.valueOf("2014-10-10"), start, " ");
                                     for (int j = 0; j < sessions.size(); j++) {
                                         out.print("<option value=\"" + sessions.get(j).getId() + "\"");
                                         if ((sessions.get(j).getId() == current.getId()) && (sessions.get(j).getLocation().equals("D304"))) {
@@ -139,7 +139,7 @@
                                     out.print("<td>");
                                     out.print("<select name=\"list3\" title=\"" + start + "\" onChange=\"updateSessionList(this)\">");
                                     out.print("<option value=\"0\">NO SESSION</option>");
-                                    current = sp.getSessionByDateAndTime(java.sql.Date.valueOf("2013-10-11"), start, " ");
+                                    current = sp.getSessionByDateAndTime(java.sql.Date.valueOf("2014-10-11"), start, " ");
                                     for (int j = 0; j < sessions.size(); j++) {
                                         out.print("<option value=\"" + sessions.get(j).getId() + "\"");
                                         if ((sessions.get(j).getId() == current.getId()) && (sessions.get(j).getLocation().equals("E130"))) {
@@ -154,7 +154,7 @@
                                     out.print("<td>");
                                     out.print("<select name=\"list4\" title=\"" + start + "\" onChange=\"updateSessionList(this)\">");
                                     out.print("<option value=\"0\">NO SESSION</option>");
-                                    current = sp.getSessionByDateAndTime(java.sql.Date.valueOf("2013-10-11"), start, " ");
+                                    current = sp.getSessionByDateAndTime(java.sql.Date.valueOf("2014-10-11"), start, " ");
                                     for (int j = 0; j < sessions.size(); j++) {
                                         out.print("<option value=\"" + sessions.get(j).getId() + "\"");
                                         if ((sessions.get(j).getId() == current.getId()) && (sessions.get(j).getLocation().equals("D304"))) {

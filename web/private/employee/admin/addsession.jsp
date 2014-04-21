@@ -315,8 +315,8 @@
             $(function() {
                 $("#datepicker").datepicker({
                     dateFormat: 'yy-mm-dd',
-                    minDate: new Date(2013, 9, 10),
-                    maxDate: new Date(2013, 9, 11)
+                    minDate: new Date(2014, 9, 10),
+                    maxDate: new Date(2014, 9, 11)
                 });
                 $(".modals").dialog({autoOpen: false, dialogClass: "no-close",width: 400,
                     buttons: {

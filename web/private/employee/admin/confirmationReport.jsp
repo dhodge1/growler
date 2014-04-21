@@ -80,7 +80,7 @@
                 String name = String.valueOf(session.getAttribute("user"));
             } catch (Exception e) {
             }
-            java.sql.Date date = java.sql.Date.valueOf("2013-10-10");
+            java.sql.Date date = java.sql.Date.valueOf("2014-10-10");
             try {
                 date = java.sql.Date.valueOf(request.getParameter("date"));
             } catch (Exception e) {
@@ -123,12 +123,12 @@
                     <input type='hidden' id='total' value='<%= report.size() %>'/>
                     <span><strong>Session Dates:</strong></span>
                     <select name='date' id='date' style='margin-bottom: 6px;' onchange='switchDate();'>
-                        <option value='2013-10-10' <% if (date.getDate() == 10) {
+                        <option value='2014-10-10' <% if (date.getDate() == 10) {
                                 out.print(" selected ");
-                            }%> >10/10/2013</option>
-                        <option value='2013-10-11' <% if (date.getDate() == 11) {
+                            }%> >10/10/2014</option>
+                        <option value='2014-10-11' <% if (date.getDate() == 11) {
                                 out.print(" selected ");
-                            }%> >10/11/2013</option>
+                            }%> >10/11/2014</option>
                     </select>
                     
                     <table class="tablesorter table table-alternatingRow table-border table-columnBorder table-rowBorder" id="reportTable">

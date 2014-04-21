@@ -110,7 +110,7 @@
                     <%
                         SessionPersistence sessionPersist = new SessionPersistence();
                         SpeakerPersistence speakerPersist = new SpeakerPersistence();
-                        ArrayList<Session> sessions = sessionPersist.getThisYearSessions(2013, " order by session_date");
+                        ArrayList<Session> sessions = sessionPersist.getThisYearSessions(2014, " order by session_date");
                         ArrayList<Speaker> speakers = speakerPersist.getNonDefaultSpeakers();
                     %>
                     <form id="action" action="${pageContext.request.contextPath}/action/processSessionAssign.jsp" method="post" onsubmit="return validateForm();">

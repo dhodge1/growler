@@ -75,7 +75,7 @@
             } catch (Exception e) {
             }
             //Get the year
-            int year = 2013;
+            int year = 2014;
             try {
                 year = Integer.parseInt(request.getParameter("year"));
             } catch (Exception e) {

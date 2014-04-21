@@ -10,8 +10,8 @@
         <% 
             SessionPersistence sp = new SessionPersistence();
             java.sql.Time start = java.sql.Time.valueOf("08:00:00");
-            java.sql.Date day1 = java.sql.Date.valueOf("2013-10-17");
-            java.sql.Date day2 = java.sql.Date.valueOf("2013-10-18");
+            java.sql.Date day1 = java.sql.Date.valueOf("2014-10-17");
+            java.sql.Date day2 = java.sql.Date.valueOf("2014-10-18");
             String[] list1 = request.getParameterValues("list1");
             for (int i = 0; i < list1.length; i++) {
                 if (!list1[i].equals(0)) {
@@ -61,5 +61,5 @@
                 }
             }
             session.setAttribute("message", "Success: Schedule changes made!");
-            response.sendRedirect("../private/employee/admin/session.jsp?year=2013");
+            response.sendRedirect("../private/employee/admin/session.jsp?year=2014");
         %>
