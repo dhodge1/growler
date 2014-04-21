@@ -273,12 +273,12 @@ public class SessionPersistence extends GrowlerPersistence {
             statement = connection.prepareStatement("select id, name, description, "
                     + "session_date, start_time, duration, location, track from session "
                     + "where session_date = ? ?");
-            String date = ("2013-10-20");
+            String date = ("2014-10-20");
             if (day == 1) {
-                date = ("2013-10-17");
+                date = ("2014-10-17");
             }
             else if (day == 2) {
-                date = ("2013-10-18");
+                date = ("2014-10-18");
             }
             statement.setString(1, date);
             statement.setString(2, sort);
@@ -818,7 +818,7 @@ public String getAvgByQuestionCategory(int sessionId, int questionNum)
     public ArrayList<Session> getUnscheduledSessions() {
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select * from session where extract(YEAR FROM session_date) = 2013 and extract(MONTH FROM session_date) = '10' and location not in ('E130', 'D304') order by session_date, start_time, name");
+            statement = connection.prepareStatement("select * from session where extract(YEAR FROM session_date) = 2014 and extract(MONTH FROM session_date) = '10' and location not in ('E130', 'D304') order by session_date, start_time, name");
             result = statement.executeQuery();
             sessions.clear();
             while (result.next()) {

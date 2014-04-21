@@ -179,7 +179,7 @@ public class LocationPersistence extends GrowlerPersistence {
         ArrayList<Session> sessions = new ArrayList<Session>();
         try {
             initializeJDBC();
-            statement = connection.prepareStatement("select id, name, session_date, start_time, duration from session where location = ? and extract(year from session_date) = 2013 ");
+            statement = connection.prepareStatement("select id, name, session_date, start_time, duration from session where location = ? and extract(year from session_date) = 2014 ");
             statement.setString(1, location);
             result = statement.executeQuery();
             while (result.next()){
