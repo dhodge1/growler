@@ -67,38 +67,82 @@
              <h1 style="font-weight:normal;">Session Feedback Confirmation</h1>
            </div>
            <div class="row mediumBottomMargin" style="border:1px dotted #ddd"></div>
+  
+          
            
-                    
-           <% 
-                 if(request.getAttribute("infoMessage")!= null)
-                 {
-                    if(request.getAttribute("isSuccess")!= null)
-                    {
-           %>     
-                       <div class="feedbackMessage-success row">
-                          <p style="text-align: center"><%=request.getAttribute("infoMessage")%></p>
-                       </div>
-           <%
-                    }
-                    else
-                    {  
-           %>
-           
-                       <div class="feedbackMessage-warning row">
-                          <p style="text-align: center"><%=request.getAttribute("infoMessage")%></p>
-                       </div>                  
-           
-            <%
-                     }//END ELSE isSuccess STMT
-                     //**************************
-                     //** clear the attributes **
-                     //**************************  
-                     request.removeAttribute("infoMessage");
-                     request.removeAttribute("isSuccess");    
-                 }//END IF (infoMessage!=null) STMT
-               
-           %>
+       
+           <!-- The div below is for displaying the email sending progress 
+                message or error feedback message
+           -->
+           <div id="myAjaxDiv">
+              <p style="text-align: center;" id="feedbackSuccess"></p>
+           </div>
+                   
         </div>
+       
+       <!---------------------------------------------------------------------
+       adds Ajax calls to display feedback messages
+       **Resources: David Hodge, Zach Guzman and the "JQuery and JavaScript 
+                    Phrasebook"  by Brad DayLey
+       ---------------------------------------------------------------------->
+       <!-- include the jquery library-->
+       <script src="${pageContext.request.contextPath}/js/libs/jquery-1.8.3.min.js"></script>
+       <script>
+            var thuy = {};   //initialize variable thuy as an empty object
+            //url1 = "eAllParticipants";  //see xml for the actual path
+            $("document").ready(function(event){
+                    
+                    //event.preventDefault();  
+                    $("#myAjaxDiv").removeClass();
+                    $("#myAjaxDiv").addClass("feedbackMessage-success row");
+                    $("#feedbackSuccess").html("<b>Session feedback email messages are sending...</b>");
+                    
+                    thuy = function () {
+                            var tmp = null;
+                            //****************
+                            //** Ajax called
+                            //****************
+                            $.ajax({
+                                'async': false,
+                                'type': "GET",
+                                'global': false,
+                                'dataType': 'json',
+                                //attachs the data from the input fields
+                                'url': "sendingFeedbackEmail",
+                                'success': function (data) {
+                                    tmp = data;
+                                }
+                            });
+                            return tmp;
+                    }();
+                   
+                   //thuy = JSON.parse(thuy);
+                   //alert($("#es").val());
+                   //********************************************************************************
+                   //whenever we receive the json object back from the eAllParticipants.jsp,
+                   //we check the success field of thuy object. If it is true then that mean all the
+                   //email messages sent. Otherwise, we will get other feedback message back
+                   //********************************************************************************
+                   if(thuy.success)
+                   {  
+                      $("#myAjaxDiv").removeClass();
+                      $("#myAjaxDiv").addClass("feedbackMessage-success row");
+                      $("#feedbackSuccess").html(thuy.feedbackMessage);
+                      $("#es").val('');
+                      $("#ec").val('');
+                  }
+                  else
+                  {
+                      $("#myAjaxDiv").removeClass();
+                      $("#myAjaxDiv").addClass("feedbackMessage-warning row");
+                      $("#feedbackSuccess").html(thuy.feedbackMessage);  
+                  } 
+                
+            });
+          
+        </script>  
+        
+        
        <%@ include file="../../../includes/footer.jsp" %> 
        <%@ include file="../../../includes/scriptlist.jsp" %>
     </body>

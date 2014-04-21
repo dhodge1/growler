@@ -1,7 +1,14 @@
-<%--
-//Thuy To
-//03/21/14
-//Email session key to presenters
+<%-- 
+    Document   : sendingFeedbackEmail
+                 The Ajax calls from the sessioFeedbackEmail-confirm.jsp called 
+                 this page. We send the feedback email message to each speaker 
+                 team of each current year active sessions. The feedback message 
+                 consists of the average of each survey question and all the 
+                 comments that related to that particular session.
+                 
+                 
+    Created on : Mar 31, 2014, 8:21:36 PM
+    Author     : ThuyTo
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -9,154 +16,190 @@
 <%@ page import="javax.mail.internet.*,javax.activation.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ page import="com.scripps.growler.*, java.sql.*" %>
-
-
+<%@ page import="com.scripps.growler.Session" %>
+<%@ page import="com.scripps.growler.Comment" %>
+<%@ page import="com.scripps.growler.CommentPersistence" %>
+<%@page import="com.google.gson.Gson" %>
 
 <%
-StringBuffer speakerIList = new StringBuffer();
-StringBuffer speakerVList = new StringBuffer();
+String question1 = new String("This session met my expectations: ");
+String question2 = new String("The speaker was knowledgable on the topic: ");
+String question3 = new String("The speaker's presentation skills were good: ");
+String question4 = new String("The facility was appropriate for the presentation: ");
+
 String subject = new String();
 String content = new String();
 boolean isContentHTML = false;
-int validEmailNum = 0;
-int invalidEmailNum = 0;
-   
-String infoMessage = new String();//for email sending status info message
-//String isSuccess = new String(); //for error checking purpose
-   
-DataConnection data = new DataConnection();
-Connection connection = data.sendConnection();
-Statement statement = connection.createStatement();
-ResultSet speakerRS = statement.executeQuery("SELECT s.id, s.name, s.session_key, " 
-                                           + "k.speaker_id, r.first_name, r.last_name, r.email "
-	                                   + "FROM session s, speaker_team k, speaker r "
-					   + "WHERE s.id = k.session_id "
-                                           + "AND r.id = k.speaker_id "
-                                           + "AND r.visible = 1 "
-                                           + "AND EXTRACT(YEAR FROM s.session_date)='2014'");
-											 
-while(speakerRS.next())
-{ 
-  String strSessionId = speakerRS.getString("id");
-  String strSessionName = speakerRS.getString("name");
-  String strSessionKey = speakerRS.getString("session_key");
-  String strSpeakerId = speakerRS.getString("speaker_id");
-  String strFirstName = speakerRS.getString("first_name");
-  String strLastName = speakerRS.getString("last_name");
-  String strSpeakerEmail = speakerRS.getString("email");
-  
-  
-  if((strSpeakerEmail!= null) &&
-     (strSpeakerEmail.indexOf("@")!= -1))
+int sessionId;
+int emailSent = 0;
+String sessionName = new String();
+
+   String infoMessage = new String();//for email sending status info message
+   boolean lclSuccess; 
+   String jsonStr = new String();
+   Feedback emailFeedback; 
+   Gson gson = new Gson();
+
+String avg1 = new String();
+String avg2 = new String();
+String avg3 = new String();
+String avg4 = new String();   
+//get an arraylist() of this year active sessions
+SessionPersistence sessionPer = new SessionPersistence();
+ArrayList<Session> sessionArrayList = sessionPer.getThisYearActiveSessionId(2014, true);
+int sessionSize = sessionArrayList.size();
+
+//*****************************************************************************
+//** If no session available then flag the warning feedback message and 
+//** redirect back to the confirming page.
+//   Else then generate an email list for that particular session speaker team.
+//******************************************************************************
+if(sessionSize==0)
+{
+     infoMessage =   "No active sessions have been listed in the system.";
+     //*************************************************************************
+     //calls Feedback 1 arg-constructor because the success field set to false 
+     //by default. Therefore we don't need to call the 2arg constructor.
+     //*************************************************************************
+     emailFeedback= new Feedback(infoMessage);
+     //calls the Ajax function
+     jsonStr = gson.toJson(emailFeedback);
+     //send the json object back to the browser
+     out.print(jsonStr);
+}
+else
+{
+  for(int i=0; i<sessionSize; i++)
   {
-    subject = "The " + strSessionName + " Session Key";
-    content = "Dear " + strLastName + " " + strFirstName + ", \n\n"
-	      + "Here is the session key for your presentation, "
-	      + strSessionName +": "+ strSessionKey + ". \n\n"
-	      + "Please give this only to the people in your room, "
-              + "and only during your scheduled session. \n\n"
-	      + "Thanks\n"
-	      + "Techtoberfest Adminstration\n";	 
-	//*************************************************************************				 
-	 try
-     {
-       //perform the send email task
-        EmailUtilSMTPScripps.sendMail(strSpeakerEmail, subject, content, isContentHTML);
-	speakerVList.append(strLastName + ", " + strFirstName + " " +
-                            strSessionName + ": " + strSessionKey + "<br>");
-					   
-       //infoMessage = "Your message has been sent!";
-       //isSuccess =   "true";
-       //request.setAttribute("isSuccess", isSuccess);
-	   
-	   
-     }
-     catch (Exception e)
-     {
-       infoMessage ="Your message can't be sent at this time";
-       request.setAttribute("infoMessage", infoMessage); 
-	   
-       RequestDispatcher dispatcher = request.getRequestDispatcher("sessionKeyEmail-confirm");      
-       if (dispatcher != null)
-       {
-         dispatcher.forward(request, response);
-       } 
-     } //End of catch				 				 
-	//*************************************************************************				 					 					 
-	validEmailNum++;				 
- }  
+    sessionName = sessionArrayList.get(i).getName();
+    sessionId  = sessionArrayList.get(i).getId();
+    SpeakerPersistence speakerPer = new SpeakerPersistence();
+    ArrayList<Speaker>speakerArrayList = speakerPer.getSpeakersEmailListBySessionId(sessionId);
+    int speakerSize = speakerArrayList.size();
+    StringBuffer emailList = new StringBuffer();
+    if(speakerSize > 0)
+    {
+      for (int j = 0; j < speakerSize; j++)
+      {  
+        if((speakerArrayList.get(j).getEmail() != null) &&
+           (speakerArrayList.get(j).getEmail().indexOf("@")!= -1))  
+        {
+           emailList.append(speakerArrayList.get(j).getEmail());
+           if(j < (speakerSize-1))
+           {
+             emailList.append(", ");
+           }       
+        }//END OF GOOD EMAILS    
+      }//END OF J LOOP
+    } //END OF BUILDING EMAIL LIST
+    
+    //************************************
+    //**Error check for empty email list *
+    //************************************
+    if(emailList.length()!=0)
+    {
+        //gets the ranking average base on each question category
+        avg1 = sessionPer.getAvgByQuestionCategory(sessionId, 1);
+        //****************************************************
+        //** First,check if the question survey is available**
+        //** for a particular given session                 **
+        //****************************************************   
+        if(avg1 != null)
+        {
+          avg2 = sessionPer.getAvgByQuestionCategory(sessionId, 2);
+          avg3 = sessionPer.getAvgByQuestionCategory(sessionId, 3);
+          avg4 = sessionPer.getAvgByQuestionCategory(sessionId, 4);
+        }
+        else
+        { 
+          avg1 = "(NO RATINGS HAVE BEEN SUBMITTED)";
+          avg2 = "(NO RATINGS HAVE BEEN SUBMITTED)";
+          avg3 = "(NO RATINGS HAVE BEEN SUBMITTED)";
+          avg4 = "(NO RATINGS HAVE BEEN SUBMITTED)";
+        }
+        //gets an arraylist()of comments that related to the given session id
+        CommentPersistence commentPer = new CommentPersistence();
+        ArrayList<Comment>commentArrayList = commentPer.getCommentBySessionIdForFeedback(sessionId);
+        int commentSize = commentArrayList.size();
+        StringBuffer commentList = new StringBuffer();
+        //checks if any comment is available for the given session
+        if(commentSize > 0)
+        {
+          for(int k=0; k <commentSize; k++)
+          {
+            commentList.append("\t"+ (k+1) +")");
+            commentList.append(commentArrayList.get(k).getDescription().trim());
+            commentList.append("\n");  
+          }
+        } 
+        else
+        {
+          commentList.append("\t" +"(NO COMMENT SUBMITTED)");
+        }
+        
+        if((!(avg1.equals("(NOT AVAILABLE)"))) ||
+            (commentSize > 0))
+        {
+           //**************************************************************
+           //**Everything is ready for hard coding the email content for **
+           //**the given team of speakers                                **
+           //**************************************************************
+           subject =  "Session Feedback: " + sessionName;
+           content = "Dear Presenter(s) \n\n"
+              + "Here is the feedback for your presentation:\n\n" 
+              + "A. Average score for each question(out of 5.00)\n"
+	      + "\t1)"+ question1 + avg1 + "\n"
+              + "\t2)"+ question2 + avg2 + "\n"
+              + "\t3)"+ question3 + avg3 + "\n"
+              + "\t4)"+ question4 + avg4 + "\n\n"
+              + "B. Below are all the comments that relate to your presentation \n"
+              +  commentList.toString() 
+	      + "\n\nThanks\n"
+	      + "Techtoberfest Team\n";	   
+           //**************************************************************
+    
+           try
+           { 
+   
+            //perform the send email task
+            EmailUtilSMTPScripps.sendMail(emailList.toString(), subject, content, isContentHTML);
+            emailSent++;
+           }
+           catch (Exception e)
+           {
+              infoMessage ="Your messages can't be sent at this time";
+              emailFeedback= new Feedback(infoMessage);
+              //calls the Ajax function
+              jsonStr = gson.toJson(emailFeedback);
+              //send the json object back to the browser
+              out.print(jsonStr);
+           } //End of catch      
+       } //READY TO EMAIL OUT 
+        
+    }//END OF EMAIL LIST AVAILABLE
+  }//END OF SESSION FOR LOOP
+
+  if(emailSent > 0)
+  {
+       infoMessage = "Your messages have been sent!";
+       lclSuccess = true;
+       //since the lclSuccess  is true therefore we need to call the 2-arg constructor
+       emailFeedback= new Feedback(infoMessage, lclSuccess);
+       //turns the Feedback object type to the json object
+       jsonStr = gson.toJson(emailFeedback);
+       //send the json object back to the browser
+       out.print(jsonStr);
+  }
   else
   {
-    //invalid email address
-    speakerIList.append(strSpeakerId + ", " + strLastName + ", " + strFirstName + ", " +
-                            strSessionName + ", " + strSessionKey + ";");;
-	                  
-    invalidEmailNum ++;
-	//**********************************
-  }  
-} //End of while loop									 
-											
-   
-   //*******************************************************
-   //error checking for no valid email listed in the system
-   //*******************************************************
-   
-   if((validEmailNum == 0) && (invalidEmailNum == 0))
-   {
-     infoMessage =   "No presenters have been assigned to any session in 2014.";
-     request.setAttribute("infoMessage", infoMessage);
-	 //also return the list of presenters don't have valid email addresses
-	 
-	 //********************************************************************
-     RequestDispatcher dispatcher = request.getRequestDispatcher("sessionKeyEmail-confirm");      
-     if (dispatcher != null)
-     {
-       dispatcher.forward(request, response);
-     } 
-   }
-   else if(validEmailNum == 0)
-   {
-     //infoMessage ="No presenters have valid email address info listed in the system.";
-     //request.setAttribute("infoMessage", infoMessage);
-     request.setAttribute("speakerIList", speakerIList);
-	 //also return the list of presenters don't have valid email addresses
-	 
-	 //********************************************************************
-     RequestDispatcher dispatcher = request.getRequestDispatcher("sessionKeyEmail-confirm");      
-     if (dispatcher != null)
-     {
-       dispatcher.forward(request, response);
-     } 
-   }
-   else if(invalidEmailNum == 0)
-   {
-     //infoMessage ="Your message has been sent!";
-     //request.setAttribute("infoMessage", infoMessage);
-     request.setAttribute("speakerVList", speakerVList);
-     //isSuccess =   "true";
-    // request.setAttribute("isSuccess", isSuccess);
-     RequestDispatcher dispatcher = request.getRequestDispatcher("sessionKeyEmail-confirm");      
-     if (dispatcher != null)
-     {
-       dispatcher.forward(request, response);
-     } 
-   
-     //************************************************************************
-   }
-   else
-   {
-   
-     //infoMessage ="Some are able to send out while others are not";
-     //request.setAttribute("infoMessage", infoMessage);
-     request.setAttribute("speakerVList", speakerVList);
-     request.setAttribute("speakerIList", speakerIList);
-     RequestDispatcher dispatcher = request.getRequestDispatcher("sessionKeyEmail-confirm");      
-     if (dispatcher != null)
-     {
-       dispatcher.forward(request, response);
-     } 
-     //***********************************************************************
-   }
- 
-   
+       infoMessage ="No valid email address or session feedback is submitted at this time";
+       emailFeedback= new Feedback(infoMessage);
+       //calls the Ajax function
+       jsonStr = gson.toJson(emailFeedback);
+       //send the json object back to the browser
+       out.print(jsonStr);
+  }
+
+}//END OF ELSE THERE SESSIONS IN 2014   
    %>
+   
