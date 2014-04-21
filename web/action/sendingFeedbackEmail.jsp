@@ -1,5 +1,12 @@
 <%-- 
     Document   : sendingFeedbackEmail
+                 The Ajax calls from the sessioFeedbackEmail-confirm.jsp called 
+                 this page. We send the feedback email message to each speaker 
+                 team of each current year active sessions. The feedback message 
+                 consists of the average of each survey question and all the 
+                 comments that related to that particular session.
+                 
+                 
     Created on : Mar 31, 2014, 8:21:36 PM
     Author     : ThuyTo
 --%>
@@ -12,7 +19,7 @@
 <%@ page import="com.scripps.growler.Session" %>
 <%@ page import="com.scripps.growler.Comment" %>
 <%@ page import="com.scripps.growler.CommentPersistence" %>
-
+<%@page import="com.google.gson.Gson" %>
 
 <%
 String question1 = new String("This session met my expectations: ");
@@ -26,8 +33,13 @@ boolean isContentHTML = false;
 int sessionId;
 int emailSent = 0;
 String sessionName = new String();
-String infoMessage = new String();//for email sending status info message
-String isSuccess = new String(); //for error checking purpose
+
+   String infoMessage = new String();//for email sending status info message
+   boolean lclSuccess; 
+   String jsonStr = new String();
+   Feedback emailFeedback; 
+   Gson gson = new Gson();
+
 String avg1 = new String();
 String avg2 = new String();
 String avg3 = new String();
@@ -44,13 +56,16 @@ int sessionSize = sessionArrayList.size();
 //******************************************************************************
 if(sessionSize==0)
 {
-   infoMessage =   "No active sessions have been listed in the system.";
-   request.setAttribute("infoMessage", infoMessage);
-   RequestDispatcher dispatcher = request.getRequestDispatcher("sessionFeedbackEmail-confirm");      
-   if (dispatcher != null)
-   {
-     dispatcher.forward(request, response);
-   } 
+     infoMessage =   "No active sessions have been listed in the system.";
+     //*************************************************************************
+     //calls Feedback 1 arg-constructor because the success field set to false 
+     //by default. Therefore we don't need to call the 2arg constructor.
+     //*************************************************************************
+     emailFeedback= new Feedback(infoMessage);
+     //calls the Ajax function
+     jsonStr = gson.toJson(emailFeedback);
+     //send the json object back to the browser
+     out.print(jsonStr);
 }
 else
 {
@@ -152,40 +167,37 @@ else
            }
            catch (Exception e)
            {
-             infoMessage ="Your message can't be sent at this time";
-             request.setAttribute("infoMessage", infoMessage); 
-             RequestDispatcher dispatcher = request.getRequestDispatcher("sessionFeedbackEmail-confirm");      
-             if (dispatcher != null)
-             {
-               dispatcher.forward(request, response);
-             }
+              infoMessage ="Your messages can't be sent at this time";
+              emailFeedback= new Feedback(infoMessage);
+              //calls the Ajax function
+              jsonStr = gson.toJson(emailFeedback);
+              //send the json object back to the browser
+              out.print(jsonStr);
            } //End of catch      
-        } //READY TO EMAIL OUT 
+       } //READY TO EMAIL OUT 
         
     }//END OF EMAIL LIST AVAILABLE
   }//END OF SESSION FOR LOOP
 
   if(emailSent > 0)
   {
-       infoMessage = "Your message has been sent!";
-       isSuccess =   "true";
-       request.setAttribute("isSuccess", isSuccess);
-       request.setAttribute("infoMessage", infoMessage); 
-       RequestDispatcher dispatcher = request.getRequestDispatcher("sessionFeedbackEmail-confirm");      
-       if (dispatcher != null)
-       {
-         dispatcher.forward(request, response);
-       } 
+       infoMessage = "Your messages have been sent!";
+       lclSuccess = true;
+       //since the lclSuccess  is true therefore we need to call the 2-arg constructor
+       emailFeedback= new Feedback(infoMessage, lclSuccess);
+       //turns the Feedback object type to the json object
+       jsonStr = gson.toJson(emailFeedback);
+       //send the json object back to the browser
+       out.print(jsonStr);
   }
   else
   {
-       infoMessage ="No valid email address or session feedback is not available at this time";
-       request.setAttribute("infoMessage", infoMessage); 
-       RequestDispatcher dispatcher = request.getRequestDispatcher("sessionFeedbackEmail-confirm");      
-       if (dispatcher != null)
-       {
-          dispatcher.forward(request, response);
-       }
+       infoMessage ="No valid email address or session feedback is submitted at this time";
+       emailFeedback= new Feedback(infoMessage);
+       //calls the Ajax function
+       jsonStr = gson.toJson(emailFeedback);
+       //send the json object back to the browser
+       out.print(jsonStr);
   }
 
 }//END OF ELSE THERE SESSIONS IN 2014   
