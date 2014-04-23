@@ -41,7 +41,7 @@ test4
                     session.setAttribute("user", newUser.getUserName());
                     session.setAttribute("id", newUser.getCorporateId());
                     session.setAttribute("email", newUser.getEmail());
-                    if (id.equals("160240") || id.equals("160445") || id.equals("162107") || id.equals("161301")) { //if it's Ian R. or Brian S.
+                    if (id.equals("160240") || id.equals("160445") || id.equals("162107") || id.equals("161301") || id.equals("905192") || id.equals("905186") || id.equals("905189")) { //if it's Ian R. or Brian S.
                         session.setAttribute("role", "admin");
                     }
                 }
@@ -102,8 +102,8 @@ test4
                 <p id="error_global" class="message_container feedbackMessage-error">
                     <span style="color: #000">An Employee ID and Password are required.</span>
                 </p>
-                <form action="action/login.jsp" method="post" id="form">
-                <!--<form action="https://sniforms-qa.scrippsnetworks.com/siteminderagent/portal/login.fcc" method="post" id="form">-->
+                <!--<form action="action/login.jsp" method="post" id="form">-->
+                <form action="https://sniforms-qa.scrippsnetworks.com/siteminderagent/portal/login.fcc" method="post" id="form">
                     <div class="form-group">
                         <label>Employee ID</label>
                         <input type="text" name="USER" id="tip" data-content="Enter your Employee ID"/><br/>
