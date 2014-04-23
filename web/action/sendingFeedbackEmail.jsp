@@ -14,6 +14,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.io.*,java.util.*, javax.mail.*"%>
 <%@ page import="javax.mail.internet.*,javax.activation.*"%>
+<%@ page import="javax.mail.MessagingException"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ page import="com.scripps.growler.*, java.sql.*" %>
 <%@ page import="com.scripps.growler.Session" %>
@@ -161,19 +162,19 @@ else
            try
            { 
    
-            //perform the send email task
-            EmailUtilSMTPScripps.sendMail(emailList.toString(), subject, content, isContentHTML);
-            emailSent++;
+              //perform the send email task
+              EmailUtilSMTPScripps.sendMail((emailList.toString()), subject, content, isContentHTML);
+              emailSent++;
            }
            catch (Exception e)
            {
-              infoMessage ="Your messages can't be sent at this time";
+              infoMessage ="Your message can't be sent at this time";
               emailFeedback= new Feedback(infoMessage);
               //calls the Ajax function
               jsonStr = gson.toJson(emailFeedback);
               //send the json object back to the browser
               out.print(jsonStr);
-           } //End of catch      
+          }
        } //READY TO EMAIL OUT 
         
     }//END OF EMAIL LIST AVAILABLE

@@ -128,8 +128,7 @@
                       $("#myAjaxDiv").removeClass();
                       $("#myAjaxDiv").addClass("feedbackMessage-success row");
                       $("#feedbackSuccess").html(thuy.feedbackMessage);
-                      $("#es").val('');
-                      $("#ec").val('');
+                      
                   }
                   else
                   {

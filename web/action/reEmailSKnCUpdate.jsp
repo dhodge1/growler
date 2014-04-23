@@ -77,7 +77,7 @@ for(int i=0; i<strRecords.length; i++)
    {
        infoMessage ="Your message can't be sent at this time";
        notSuccess =   "true";
-       request.setAttribute("isSuccess", notSuccess);	
+       request.setAttribute("notSuccess", notSuccess);	
        request.setAttribute("infoMessage", infoMessage);
        RequestDispatcher dispatcher = request.getRequestDispatcher("sessionKeyEmail-confirm");      
        if (dispatcher != null)

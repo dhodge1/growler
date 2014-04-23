@@ -44,7 +44,7 @@ public class EmailUtilSMTPScripps
      //** address as a FROM address for this class.      **
      //****************************************************
      final String username = "Thuy.To@scrippsnetworks.com";
-     final String password = "xotujevA2";
+     final String password = "xotujevA14";
      final String from = "sni-techtoberfest-help@scrippsnetworks.com";
      //sets environment properties
      Properties props = new Properties();   
