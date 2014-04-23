@@ -112,7 +112,7 @@
                      String strThuy = request.getAttribute("speakerIList").toString();  
             %>
            
-                  <div class="feedbackMessage-warning">
+                 <div class="feedbackMessage-warning">
                         <p style ="text-align: center;">
                             <b> session key could not be sent to the list of presenter(s) below
                                 due to invalid email address information. If you would like, you could

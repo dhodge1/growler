@@ -26,7 +26,7 @@ int validEmailNum = 0;
 int invalidEmailNum = 0;
    
 String infoMessage = new String();//for email sending status info message
-//String isSuccess = new String(); //for error checking purpose
+String notSuccess = new String(); //for error checking purpose
    
 DataConnection data = new DataConnection();
 Connection connection = data.sendConnection();
@@ -82,8 +82,9 @@ while(speakerRS.next())
      catch (Exception e)
      {
        infoMessage ="Your message can't be sent at this time";
+       notSuccess = "true";
        request.setAttribute("infoMessage", infoMessage); 
-	   
+       request.setAttribute("notSuccess", notSuccess);
        RequestDispatcher dispatcher = request.getRequestDispatcher("sessionKeyEmail-confirm");      
        if (dispatcher != null)
        {
@@ -112,7 +113,9 @@ while(speakerRS.next())
    if((validEmailNum == 0) && (invalidEmailNum == 0))
    {
      infoMessage =   "No presenters have been assigned to any session in 2014.";
+     notSuccess = "true";
      request.setAttribute("infoMessage", infoMessage);
+     request.setAttribute("notSuccess", notSuccess);
 	 //also return the list of presenters don't have valid email addresses
 	 
 	 //********************************************************************
