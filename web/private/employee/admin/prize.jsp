@@ -235,7 +235,7 @@
                 
                 $("#audit").on("click", function(event) {
                     event.preventDefault();
-                    window.location = "./prizeAudit.jsp";
+                    window.location = "./private/employee/admin/prizeAudit.jsp";
                 });
 
             });
