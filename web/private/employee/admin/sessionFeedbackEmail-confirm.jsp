@@ -88,15 +88,17 @@
        <!-- include the jquery library-->
        <script src="${pageContext.request.contextPath}/js/libs/jquery-1.8.3.min.js"></script>
        <script>
-            var thuy = {};   //initialize variable thuy as an empty object
-            //url1 = "eAllParticipants";  //see xml for the actual path
+            var thuy = {};   
+            //funciton(event) is the parameter of the .ready function
+            //However, the Jquery function is returning itself(ex: this key word)
+            //this.ready(....)
             $("document").ready(function(event){
                     
                     //event.preventDefault();  
                     $("#myAjaxDiv").removeClass();
                     $("#myAjaxDiv").addClass("feedbackMessage-success row");
                     $("#feedbackSuccess").html("<b>Session feedback email messages are sending...</b>");
-                    
+                    //anonymous function
                     thuy = function () {
                             var tmp = null;
                             //****************
@@ -109,12 +111,12 @@
                                 'dataType': 'json',
                                 //attachs the data from the input fields
                                 'url': "sendingFeedbackEmail",
-                                'success': function (data) {
-                                    tmp = data;
-                                }
+                                'error': function (data) {tmp = data;},
+//                                  'error': function (data) {return data;},
+                                'success': function (data) {tmp = data;}
                             });
                             return tmp;
-                    }();
+                    }();//()executed now(defining it and calling it the same time)
                    
                    //thuy = JSON.parse(thuy);
                    //alert($("#es").val());
@@ -125,6 +127,7 @@
                    //********************************************************************************
                    if(thuy.success)
                    {  
+                        
                       $("#myAjaxDiv").removeClass();
                       $("#myAjaxDiv").addClass("feedbackMessage-success row");
                       $("#feedbackSuccess").html(thuy.feedbackMessage);
@@ -132,6 +135,7 @@
                   }
                   else
                   {
+                       
                       $("#myAjaxDiv").removeClass();
                       $("#myAjaxDiv").addClass("feedbackMessage-warning row");
                       $("#feedbackSuccess").html(thuy.feedbackMessage);  

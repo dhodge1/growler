@@ -165,15 +165,19 @@ else
               //perform the send email task
               EmailUtilSMTPScripps.sendMail((emailList.toString()), subject, content, isContentHTML);
               emailSent++;
+              
            }
            catch (Exception e)
-           {
+           { 
+              //e.getMessage();
+              //infoMessage = e.getMessage().toString();
               infoMessage ="Your message can't be sent at this time";
-              emailFeedback= new Feedback(infoMessage);
+              emailFeedback= new Feedback(infoMessage, false);
               //calls the Ajax function
               jsonStr = gson.toJson(emailFeedback);
               //send the json object back to the browser
               out.print(jsonStr);
+              return; //needs this return stmt to get back the ajax function called page.
           }
        } //READY TO EMAIL OUT 
         
