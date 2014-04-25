@@ -21,7 +21,9 @@
 <%
 
     int speakerId = Integer.parseInt(request.getParameter("speaker"));
-    int sessionId = Integer.parseInt(request.getParameter("sessionId"));
+    //Thuy** changes from sessionId to session 
+    int sessionId = Integer.parseInt(request.getParameter("session"));
+   // int sessionId = Integer.parseInt(request.getParameter("sessionId"));
 
 
     DataConnection dc = new DataConnection();

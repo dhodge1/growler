@@ -245,6 +245,8 @@
                             var tmp = null;
                             //****************
                             //** Ajax called
+                            //** Ajax function takes one set of key value pair
+                            //** can be called a hash map, hash table or a dictionary
                             //****************
                             $.ajax({
                                 'async': false,
@@ -254,6 +256,9 @@
                                 //attachs the data from the input fields
                                 'data':{'emailSubject':$("#es").val(), 'emailContent':$("#ec").val()},
                                 'url': "callOutAction",
+                                //the parameter that name data that pass in the function is 
+                                //dif from the form data above.  So data is actually (body of)the  respond
+                                //from the server. It treats like a return value from a function called
                                 'success': function (data) {
                                     tmp = data;
                                 }
