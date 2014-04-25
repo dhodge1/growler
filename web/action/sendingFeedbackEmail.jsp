@@ -138,7 +138,7 @@ else
           commentList.append("\t" +"(NO COMMENT SUBMITTED)");
         }
         
-        if((!(avg1.equals("(NOT AVAILABLE)"))) ||
+        if((!(avg1.equals("(NO RATINGS HAVE BEEN SUBMITTED)"))) ||
             (commentSize > 0))
         {
            //**************************************************************
