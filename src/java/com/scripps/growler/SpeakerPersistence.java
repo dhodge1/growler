@@ -534,16 +534,16 @@ public class SpeakerPersistence extends GrowlerPersistence {
               ArrayList<Speaker> speakers = new ArrayList<Speaker>();
               while (result.next()) 
               {
-                Speaker s = new Speaker();
-                s.setId(result.getInt("id"));
-                s.setFirstName(result.getString("first_name"));
-                s.setLastName(result.getString("last_name"));
-                s.setSuggestedBy(result.getInt("suggested_by"));
-                s.setVisible(result.getBoolean("visible"));
-                s.setType(result.getString("type"));
-                s.setReason(result.getString("reason"));
-                s.setEmail(result.getString("email"));
-                speakers.add(s);
+                //Speaker s = new Speaker();
+                //s.setId(result.getInt("id"));
+                //s.setFirstName(result.getString("first_name"));
+                //s.setLastName(result.getString("last_name"));
+                //s.setSuggestedBy(result.getInt("suggested_by"));
+                //s.setVisible(result.getBoolean("visible"));
+                //s.setType(result.getString("type"));
+                //s.setReason(result.getString("reason"));
+                //s.setEmail(result.getString("email"));
+                //speakers.add(s);
               }
             closeJDBC();
             return speakers;
