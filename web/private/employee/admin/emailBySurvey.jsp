@@ -233,8 +233,18 @@
             var thuy = {};   //initialize variable thuy as an empty object
             url1 = "eAllParticipants";  //see xml for the actual path
             $("#send").on("click", function(event){
-                 if(($("#es").val() !== "") &&
-                    ($("#ec").val() !== ""))     
+                //**************************************
+                //4/27/10
+                //validates user-input, the subject and 
+                //content text area can't not be empty.
+                //uses the Jquery trim() to trim out the 
+                //characters (ex:\n,\t..)***************                
+                var str1 = $("#es").val();
+                var str2 = $("#ec").val();
+                if(($.trim(str1)!== "")&&
+                    ($.trim(str2)!== ""))
+                // if(($("#es").val() !== "") &&
+                //    ($("#ec").val() !== ""))     
                  {   
                     event.preventDefault();  
                     $("#myAjaxDiv").removeClass();
