@@ -116,7 +116,7 @@
                     </div>
                     <div class="form-group">
                         <label class="required">Session Theme </label>
-                        <select id="speaker" name="theme">
+                        <select id="theme" name="theme">
                             <option value="0"> Select a Theme </option>
                             <% for (int g = 0; g < themes.size(); g++) {
                                     out.print("<option value='" + themes.get(g).getId() + "'>");
@@ -124,6 +124,9 @@
                                     out.print("</option>");
                                 }%>
                         </select>
+                        <br/><span id="error_theme" class="message_container">
+                            <span>Please select a theme</span>
+                        </span>
                     </div>
                     <div class="form-group">
                         <label class="required">Session Description </label>
@@ -359,6 +362,7 @@
             $("#send").click(function(event) {
 
                 $("#name").css("border", "1px solid #CCC");
+                $("#theme").css("border", "1px solid #CCC");
                 $("#description").css("border", "1px solid #CCC");
                 $("#speaker").css("border", "1px solid #CCC");
                 $("#speaker2").css("border", "1px solid #CCC");
@@ -369,6 +373,7 @@
                 $("#datepicker").css("border", "1px solid #CCC");
                 $("#time").css("border", "1px solid #CCC");
                 $("#error_name").hide();
+                $("#error_theme").hide();
                 $("#error_description").hide();
                 $("#error_speaker").hide();
                 $("#error_speaker2").hide();
@@ -394,9 +399,15 @@
                 var str8 = $("#speaker4").val();
                 var str9 = $("#speaker5").val();
                 var str10 = $("#speaker6").val();
+                var str11 = $("#theme").val();
                 if ((str1) === emptyString) {
                     $("#name").css("border", "1px solid red");
                     $("#error_name").show();
+                    event.preventDefault();
+                }
+                if (str11 === "0") {
+                    $("#theme").css("border", "1px solid red");
+                    $("#error_theme").show();
                     event.preventDefault();
                 }
                 if ((str2) === emptyString) {

@@ -76,8 +76,9 @@ public class WinnerPersistence extends GrowlerPersistence {
     public void claimPrize(Winner w) {
         try{
             initializeJDBC();
-            statement = connection.prepareStatement("update winner set claimed = 1 where winnerID = ?");
+            statement = connection.prepareStatement("update winner set claimed = 1 where winnerID = ? and timeDrawn = ?");
             statement.setInt(1, w.getId());
+            statement.setString(2, w.getTimeDrawn());
             statement.execute();
             closeJDBC();
         } catch (Exception e) {

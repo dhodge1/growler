@@ -74,7 +74,7 @@
            <!-- The div below is for displaying the email sending progress 
                 message or error feedback message
            -->
-           <div id="myAjaxDiv">
+           <div id="myAjaxDiv" class="largeBottomMargin">
               <p style="text-align: center;" id="feedbackSuccess"></p>
            </div>
                    
