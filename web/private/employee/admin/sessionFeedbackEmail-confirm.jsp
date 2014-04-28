@@ -55,7 +55,7 @@
         <% } %>
         <%--<%@ include file="../../../includes/adminnav.jsp" %>--%>
         
-        <div class="container-fixed">  
+        <div class="container-fixed largeBottomMargin ">  
            <div class="row mediumBottomMargin"></div>
            <div class="row">         
              <ul class="breadcrumb">

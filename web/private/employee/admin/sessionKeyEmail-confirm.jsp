@@ -55,7 +55,7 @@
         <% } %>
         <%--<%@ include file="../../../includes/adminnav.jsp" %>--%>
         
-        <div class="container-fixed">  
+        <div class="container-fixed largeBottomMargin">  
            <div class="row mediumBottomMargin"></div>
            <div class="row">         
              <ul class="breadcrumb">
@@ -101,10 +101,11 @@
                  if(request.getAttribute("speakerVList")!= null)
                  {
            %>         
-                    <div class="feedbackMessage-success"> 
+                    <div class="feedbackMessage-success row"> 
                        <p style ="text-align: center;"> <b>session key has been sent to the list of presenter(s) below</b></p>
                        <p style="text-align: center;" ><%=request.getAttribute("speakerVList")%></p>
-                    </div><br>
+                    </div>
+                    
             <%
                  }            
                  if(request.getAttribute("speakerIList")!= null)
@@ -112,7 +113,7 @@
                      String strThuy = request.getAttribute("speakerIList").toString();  
             %>
            
-                 <div class="feedbackMessage-warning">
+                 <div class="feedbackMessage-warning row">
                         <p style ="text-align: center;">
                             <b> session key could not be sent to the list of presenter(s) below
                                 due to invalid email address information. If you would like, you could
@@ -167,7 +168,7 @@
                                 value="Re-Send and Update Email Info" />
                       </fieldset>    
                      </form>
-                    </div><br>
+                    </div>
           
           <%
                  }//END OF IF INVALID LIST

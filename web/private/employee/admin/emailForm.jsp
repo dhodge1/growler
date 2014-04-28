@@ -239,10 +239,10 @@
                 //content text area can't not be empty.
                 //uses the Jquery trim() to trim out the 
                 //characters (ex:\n,\t..)***************                
-                var str1 = $("#es").val();
-                var str2 = $("#ec").val();
-                if(($.trim(str1)!== "")&&
-                    ($.trim(str2)!== ""))
+                //var str1 = $("#es").val();
+                //var str2 = $("#ec").val();
+                if(($.trim($("#es").val())!== "")&&
+                    ($.trim($("#ec").val())!== ""))
                  //if(($("#es").val() !== "") &&
                    // ($("#ec").val() !== ""))     
                  {   
