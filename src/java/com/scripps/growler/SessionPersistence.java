@@ -691,6 +691,7 @@ public class SessionPersistence extends GrowlerPersistence {
                                   + "FROM session s "
                                   + "WHERE EXTRACT(YEAR FROM session_date) = ? "
                                   + "AND EXTRACT(MONTH FROM session_date) = '10' "
+                                  + "AND s.active = 1 "
                                   + "AND EXISTS(SELECT NULL "
                                                 + "FROM registration r "
                                                 + "WHERE s.id = r.session_id) "
