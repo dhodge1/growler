@@ -41,6 +41,7 @@ ResultSet speakerRS = statement.executeQuery("SELECT s.id, s.name, s.session_key
 					   + "WHERE s.id = k.session_id "
                                            + "AND r.id = k.speaker_id "
                                            + "AND r.visible = 1 "
+                                           + "AND s.active = 1 "
                                            + "AND EXTRACT(YEAR FROM s.session_date)='2014'");
 											 
 while(speakerRS.next())
